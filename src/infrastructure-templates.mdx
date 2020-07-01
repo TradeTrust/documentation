@@ -5,12 +5,12 @@ route: /infra-templates
 
 ## Introduction
 
-As TradeTrust is an open ecosystem, we have developed a template that can be used to quickly deploy your own infrastructure.
+As TradeTrust is an open ecosystem, we have developed some templates that can be used to quickly deploy your own infrastructure.
 These templates are available at [the Github repository](https://github.com/Open-Attestation/oa-functions).
 
 Usage of these templates presume knowledge of Amazon Web Services, and users are liable for their own costs and infrastructure security.
 
-These templates are Open Source have been written using the [Serverless Framework](https://www.serverless.com/framework/docs/).
+These templates are Open Source and have been written using the [Serverless Framework](https://www.serverless.com/framework/docs/).
 
 ## AWS Credentials Setup
 
@@ -18,8 +18,6 @@ You will need one IAM user with an access key and a secret key. The user must be
   - create lambda function.
   - manage api gateway.
   - manage domains.
-
-The templates also have the ability to set up custom domain names for the endpoints. To use this functionality you must have the root domain managed and hosted in AWS Route53.
 
 To input the credentials, you will need to put them into environmental variables like this:
 
@@ -43,13 +41,15 @@ npm install
 
 ## Creating Domain
 
-To use the domain manager functionality you need to first set it up:
+The templates also have the ability to set up custom domain names for the endpoints. To use this functionality you must have the root domain managed and hosted in AWS Route53.
+
+If you wish to use the domain manager functionality you need to first set it up:
 
 ```bash
 npm run create-domain:verify
 ```
 
-If you do not wish to use the domain manager functionality, you can configure it like this:
+Otherwise, if you do not wish to use the domain manager functionality, you must perform the following commands to disable it:
 
 ```bash
 export DISABLE_DOMAIN=true
