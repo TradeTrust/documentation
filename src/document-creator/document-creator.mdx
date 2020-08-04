@@ -1,0 +1,183 @@
+---
+name: Document Creator
+route: /document-creator
+---
+
+# Using TradeTrust Document Creator
+
+You can use the [document creator](https://creator.tradetrust.io) to create and issue your document.
+
+To use this functionality, you will need a configuration file(`.json` file) and some pre-requisite informations.
+
+## What is document creator about?
+
+It's to provide a UI to the staffs that are involved with the daily operations who do not need to know anything about blockchain.
+
+## Why do we do this?
+
+Mainly because we want to cater to small firms or companies that doesn't really have the capabilities to build deep integration with their existing softwares or workflows.
+
+## How is this document creator helping small firms and companies?
+
+One way is for the IT department or someone who is tech savvy enough, can set up the configuration file and clerks or staffs can use this document creator to create the documents.
+
+## Pre-requisite
+
+Before you construct your configuration file(`.json` file), please ensure you have these:
+
+- [Etherum Wallet (`.json` file)](./deploying-store)
+- [Document Store (for verifiable document)](./deploying-store)
+- [Token Registry (for transferable document)](./token-registry)
+- [Configured DNS](/dns-txt#how-to-create-dns-txt-record)
+- [Custom Renderer](./custom-template)
+
+Please refer to the approprate links to prepare them.
+
+## Configuration file
+
+The configuration file is a JSON file that contains information to configure the application to suit your business needs.
+
+### Config file structure
+
+```json
+{
+  "network": "ropsten",
+  "wallet": "{\"address\":\"6a36c563a5350d7be66c801f901a67...\", ...}}",
+  "forms": [{...}]
+}
+```
+
+### `"network"` field
+
+The `network` field is a string that refers to the network in which the document is created in.
+
+### `"wallet"` field
+
+The `wallet` field is a string that refers to your etherum wallet.
+
+To convert the wallet to a string like the above use this [online tool](https://tools.knowledgewalls.com/jsontostring).
+
+### Forms structure
+
+The `forms` field is an array of form object which expect `name`, `type`, `defaults` and `schema`. `attachments` can also be added.
+
+```json
+{
+  "name": "Demo Bill of Lading",
+  "type": "TRANSFERABLE_RECORD",
+  "defaults": {...},
+  "schema": {...},
+  "attachments": {...}
+}
+```
+
+### `"name"` field
+
+The `name` field is a string that refers to the name of the form that will display when creating the document, as shown in the image below.
+
+![name](./form-name.png)
+
+### `"type"` field
+
+The `type` field is a string that reters to the type of the document, either `"TRANSFERABLE_RECORD"` or `"VERIFIABLE_DOCUMENT"`.
+
+### `"defaults"` field
+
+The `defaults` field is an object that contains the settings that you have that are constant among the different documents of the same kind of file.
+
+Usually the document store address, token registry address, template, issuers, company logo, signatures, etc. are stored here, since they are a constant in the different documents of the same kind.
+
+Default value of the form should also be stored here.
+
+For example, you can store a default value for a `"title"` field here, this value will be used in the form shema as the value for the `"title"` field.
+
+An example of the `"defaults"` field:
+
+```json
+"defaults": {
+  "$template": {
+    "type": "EMBEDDED_RENDERER",
+    "name": "BILL_OF_LADING",
+    "url": "https://demo-cnm.openattestation.com"
+  },
+  "issuers": [
+    {
+      "identityProof": {
+        "type": "DNS-TXT",
+        "location": "isaactest.xyz"
+      },
+      "name": "Demo Issuer",
+      "tokenRegistry": "0x6D489a6A2cbcB76FcEeA26102d1273cd4d3B6b10"
+    }
+  ],
+  "name": "Demo bill of lading"
+}
+```
+
+#### `"$template"` field
+
+The `$template` field is an object that refers to the custom renderer, please refer to [creating document renderer](https://openattestation.com/docs/advanced/custom-renderer).
+
+#### `"issuers"` field
+
+The `issuers` is an array of the issuer object. The required fields for each issuer are `name`, `identityProof` and one of `documentStore` OR `tokenRegistry`.
+
+Transferrable document requires a [`tokenRegistry`](./token-registry), where as, a verifiable document requires a `documentStore`.
+
+The `name` field is a string, please refer to [token registry](./token-registry-store) for transferable document or [deploying document store](./deploying-store) for verifiable document, for more information.
+
+The `tokenRegistry` field is a string, please refer to [token registry](./token-registry-store) for more information.
+
+The `documentStore` field is a string, please refer to [deploying document store](./deploying-store) for more information.
+
+The `identityProof` field is an object that refers to the issuer identity, please refer to [open attestation's identity Proof](https://openattestation.com/docs/advanced/identity-proofs) for more information.
+
+### `"schema"` field
+
+The `"schema"` field is an object used to generate a form. It follows [JSON schema format.](https://json-schema.org/)
+
+The structure of the schema will be derived from the structure of the document you expect to build.
+
+It will probably be a subset of an already existing schema without the data that you expect to be constants accross your document.
+
+An example of the `"schema"` field:
+
+```json
+"schema": {
+  "type": "object",
+  "required": ["blNumber"],
+  "properties": {
+    "blNumber": {
+      "type": "string",
+      "title": "BL number"
+    },
+    "item": {
+      "type": "string",
+      "title": "Goods"
+    }
+  }
+}
+```
+
+### `"Attachments"` field
+
+The `"attachments"` field contains the information about the required attachments for this document.
+
+If there are no attachment for the particular form that you are creating, please set `"allow"` field to false.
+
+An example of the `"attachments"` field:
+
+```
+"attachments": {
+  "allow": true,
+  "accept": [".pdf", ".tt", ".json", ".jpg"]
+}
+```
+
+The `"allow"` accepts a boolean value(true or false) and it will display the attachment section based on this value.
+
+The `"accept"` accepts an array of string, that are file types, which will set the accepted file types for the attachments.
+
+If you want to accept all file types, remove the entire `"accept"` line from `"attachments"` object.
+
+---
