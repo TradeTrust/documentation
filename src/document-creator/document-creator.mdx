@@ -1,17 +1,17 @@
 ---
-name: Using Document Creator
-route: /using-document-creator
+name: Document Creator
+route: /document-creator
 ---
 
 # Using TradeTrust Document Creator
 
-You can use the [document creator](https://creator.tradetrust.io) to create your document.
+You can use the [document creator](https://creator.tradetrust.io) to create and issue your document.
 
 To use this functionality, you will need a configuration file(`.json` file) and some pre-requisite informations.
 
 ## What is document creator about?
 
-It's to provide a UI to the staffs that are involve with the daily operations who do not need to know anything about blockchain.
+It's to provide a UI to the staffs that are involved with the daily operations who do not need to know anything about blockchain.
 
 ## Why do we do this?
 
@@ -25,7 +25,7 @@ One way is for the IT department or someone who is tech savvy enough, can set up
 
 Before you construct your configuration file(`.json` file), please ensure you have these:
 
-- [Etherum Wallet](./deploying-store)
+- [Etherum Wallet (`.json` file)](./deploying-store)
 - [Document Store (for verifiable document)](./deploying-store)
 - [Token Registry (for transferable document)](./token-registry)
 - [Configured DNS](/dns-txt#how-to-create-dns-txt-record)
@@ -35,14 +35,14 @@ Please refer to the approprate links to prepare them.
 
 ## Configuration file
 
-This configuration file is a JSON file that contains information to configure the application to suit your business needs.
+The configuration file is a JSON file that contains information to configure the application to suit your business needs.
 
 ### Config file structure
 
 ```json
 {
   "network": "ropsten",
-  "wallet": "{\"address\":\"6a36c563a5350d7be66c801f901a67e413adbdfa\",\"id\":\"9e2d12d0-fb5b-49d4-9aa4-a0eb5b665233\",\"version\":3,\"Crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"127c21b337a16bc24621e24e73614378\"},\"ciphertext\":\"a78db406835261f59394397b2682088eb2ada80552908bd5cfd92c915def4c54\",\"kdf\":\"scrypt\",\"kdfparams\":{\"salt\":\"8bb0ac10564a4297c6f934fd6a08c25cd3f7958b31dd13eb6e0e30eebd8fcaba\",\"n\":131072,\"dklen\":32,\"p\":1,\"r\":8},\"mac\":\"1b1821d6f4186ce34952196142602ffacffff6f3a5a603c7cd02d301c47ab697\"},\"x-ethers\":{\"client\":\"ethers.js\",\"gethFilename\":\"UTC--2020-07-24T03-18-04.0Z--6a36c563a5350d7be66c801f901a67e413adbdfa\",\"mnemonicCounter\":\"8cf993a436e09d6f06d81dec993c6fec\",\"mnemonicCiphertext\":\"56a1a1d07a1d856514fc7fb03c553a77\",\"path\":\"m/44'/60'/0'/0/0\",\"version\":\"0.1\"}}",
+  "wallet": "{\"address\":\"6a36c563a5350d7be66c801f901a67...\", ...}}",
   "forms": [{...}]
 }
 ```
@@ -59,11 +59,11 @@ To convert the wallet to a string like the above use this [online tool](https://
 
 ### Forms structure
 
-The `forms` field is an array of form object. The required fields for each form is `name`, `type`, `defaults` and `schema`. Other field such as `attachments` is also recognised.
+The `forms` field is an array of form object which expect `name`, `type`, `defaults` and `schema`. `attachments` can also be added.
 
 ```json
 {
-  "name": "Bill of Lading",
+  "name": "Demo Bill of Lading",
   "type": "TRANSFERABLE_RECORD",
   "defaults": {...},
   "schema": {...},
@@ -73,7 +73,9 @@ The `forms` field is an array of form object. The required fields for each form 
 
 ### `"name"` field
 
-The `name` field is a string that refers to the name of the document.
+The `name` field is a string that refers to the name of the form that will display when creating the document, as shown in the image below.
+
+![name](./form-name.png)
 
 ### `"type"` field
 
@@ -84,6 +86,10 @@ The `type` field is a string that reters to the type of the document, either `"T
 The `defaults` field is an object that contains the settings that you have that are constant among the different documents of the same kind of file.
 
 Usually the document store address, token registry address, template, issuers, company logo, signatures, etc. are stored here, since they are a constant in the different documents of the same kind.
+
+Default value of the form should also be stored here.
+
+For example, you can store a default value for a `"title"` field here, this value will be used in the form shema as the value for the `"title"` field.
 
 An example of the `"defaults"` field:
 
@@ -110,7 +116,7 @@ An example of the `"defaults"` field:
 
 #### `"$template"` field
 
-The `$tempalte` field is an object that contains information about the [custom rendering template](./custom-template).
+The `$template` field is an object that refers to the custom renderer, please refer to [creating document renderer](https://openattestation.com/docs/advanced/custom-renderer).
 
 #### `"issuers"` field
 
@@ -124,21 +130,15 @@ The `tokenRegistry` field is a string that refers to the address in which you de
 
 The `documentStore` field is a string that refers to the address in which you deploy the document store.
 
-The `identityProof` field is an object that requires the field `type` and `location`.
-
-The `type` field is a string that refers to the type of configuration you have set up.
-
-The `location` field is a string that refers to the domain url in which you have set up the configured DNS.
+The `identityProof` field is an object that refers to the issuer identity, please refer to [open attestation's identity Proof](https://openattestation.com/docs/advanced/identity-proofs) fro more information.
 
 ### `"schema"` field
 
-For the schema we are using JSON schema to populate the form.
+The `"schema"` field is an object used to generate a form. It follows [JSON schema format.](https://json-schema.org/)
 
-The construction of the schema is defived from when you are constructing your custom renderer.
+The structure of the schema will be derived from the structure of the document you expect to build.
 
-The fields in here must match the one in your specific custom renderer.
-
-If not it will now display on the custom renderer.
+It will probably be a subset of an already existing schema without the data that you expect to be constants accross your document.
 
 An example of the `"schema"` field:
 
@@ -161,19 +161,21 @@ An example of the `"schema"` field:
 
 ### `"Attachments"` field
 
-This `"attachments"` field contains the information about the required attachments for this document.
+This `"attachments"` field, which is a optional field, contains the information about the required attachments for this document.
 
 An example of the `"attachments"` field:
 
 ```
 "attachments": {
   "allow": true,
-  "accept": ".pdf, .tt, .json, .jpg"
+  "accept": [".pdf", ".tt", ".json", ".jpg"]
 }
 ```
 
 The `"allow"` accepts a boolean value(true or false) and it will display the attachment section based on this value.
 
-The `"accept"` set the accepted file types. If you want to accept all file types, remove the entire `"accept"` from `"attachments"`.
+The `"accept"` accepts an array of string, that are file types, which will set the accepted file types for the attachments.
+
+If you want to accept all file types, remove the entire `"accept"` line from `"attachments"` object.
 
 ---
