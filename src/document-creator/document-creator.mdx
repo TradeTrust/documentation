@@ -122,15 +122,15 @@ The `$template` field is an object that refers to the custom renderer, please re
 
 The `issuers` is an array of the issuer object. The required fields for each issuer are `name`, `identityProof` and one of `documentStore` OR `tokenRegistry`.
 
-Transferrable document will use a [`tokenRegistry`](./token-registry), where as, a verifiable document will use a `documentStore`.
+Transferrable document requires a [`tokenRegistry`](./token-registry), where as, a verifiable document requires a `documentStore`.
 
-The `name` field is a string that refers to the name of the issuer.
+The `name` field is a string, please refer to [token registry](./token-registry-store) for transferable document or [deploying document store](./deploying-store) for verifiable document, for more information.
 
-The `tokenRegistry` field is a string that refers to the address in which you deploy the token registry.
+The `tokenRegistry` field is a string, please refer to [token registry](./token-registry-store) for more information.
 
-The `documentStore` field is a string that refers to the address in which you deploy the document store.
+The `documentStore` field is a string, please refer to [deploying document store](./deploying-store) for more information.
 
-The `identityProof` field is an object that refers to the issuer identity, please refer to [open attestation's identity Proof](https://openattestation.com/docs/advanced/identity-proofs) fro more information.
+The `identityProof` field is an object that refers to the issuer identity, please refer to [open attestation's identity Proof](https://openattestation.com/docs/advanced/identity-proofs) for more information.
 
 ### `"schema"` field
 
@@ -161,7 +161,9 @@ An example of the `"schema"` field:
 
 ### `"Attachments"` field
 
-This `"attachments"` field, which is a optional field, contains the information about the required attachments for this document.
+The `"attachments"` field contains the information about the required attachments for this document.
+
+If there are no attachment for the particular form that you are creating, please set `"allow"` field to false.
 
 An example of the `"attachments"` field:
 
