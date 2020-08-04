@@ -7,6 +7,36 @@ route: /deploying-store
 
 The document store is a smart contract on the Ethereum network that records the issuance and revocation status of TT documents. In this guide, we will deploy a document store smart contract on the Ethereum `ropsten` network, which is a test network that does not require actual ethers for transactions.
 
+### Using OA-CLI tool
+
+In this guide we will make use of a Open Attestation wallet.
+
+##### Prerequisites
+- [Open Attestation CLI tool](https://openattestation.com/docs/component/open-attestation-cli)
+- [Open Attestation Wallet](https://openattestation.com/docs/verifiable-document/wallet)
+
+Run the following line using the OA CLI tool.
+
+```bash
+open-attestation deploy document-store "My first document store" --network ropsten --encrypted-wallet-path wallet.json
+```
+
+You will be prompted for the password that you used while creating the wallet. Once your document store smart contract has been successfully deployed, you will see the success message with the document store address.
+
+```text
+ℹ  info      Deploying document store My first document store
+? Wallet password [hidden]
+…  awaiting  Decrypting Wallet [====================] [100/100%]
+ℹ  info      Wallet successfully decrypted
+...
+✔  success   Document store My first document store deployed at 0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b
+ℹ  info      Find more details at https://ropsten.etherscan.io/address/0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b
+```
+
+In the example above, the document store address is `0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b`, please do **NOT** use the Transaction ID.
+
+**Save the document store address somewhere.**
+
 ### Using the Admin site:
 
 This guide will help you to deploy a document store using the [admin site](https://admin.tradetrust.io).
@@ -34,8 +64,6 @@ Once your document store smart contract has been successfully deployed, you will
 
 ![Success](./success.png)
 
-In the example above, the document store address is `0xED2E50434Ac3623bAD763a35213DAD79b43208E4`, please do NOT use the Transaction ID.
+In the example above, the document store address is `0xED2E50434Ac3623bAD763a35213DAD79b43208E4`, please do **NOT** use the Transaction ID.
 
-*Save the document store address somewhere as the web app does not keep track of your document store addresses.*
-
-Stay tuned for some upcoming tooling improvements for deploying stores, documentation will be updated then.
+**Save the document store address somewhere as the web app does not keep track of your document store addresses.**
