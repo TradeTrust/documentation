@@ -25,7 +25,7 @@ One way is for the IT department or someone who is tech savvy enough, can set up
 
 Before you construct your configuration file(`.json` file), please ensure you have these:
 
-- [Etherum Wallet (`.json` file)](./deploying-store)
+- [Wallet (`.json` file)](https://openattestation.com/docs/verifiable-document/wallet)
 - [Document Store (for verifiable document)](./deploying-store)
 - [Token Registry (for transferable document)](./token-registry)
 - [Configured DNS](/dns-txt#how-to-create-dns-txt-record)
@@ -55,7 +55,7 @@ The `network` field is a string that refers to the network in which the document
 
 The `wallet` field is a string that refers to your etherum wallet.
 
-To convert the wallet to a string like the above use this [online tool](https://tools.knowledgewalls.com/jsontostring).
+To convert the wallet into a string like the above example, please use this [online tool](https://tools.knowledgewalls.com/jsontostring).
 
 ### Forms structure
 
@@ -122,7 +122,7 @@ The `$template` field is an object that refers to the custom renderer, please re
 
 The `issuers` is an array of the issuer object. The required fields for each issuer are `name`, `identityProof` and one of `documentStore` OR `tokenRegistry`.
 
-Transferrable document requires a [`tokenRegistry`](./token-registry), where as, a verifiable document requires a `documentStore`.
+Transferrable document requires a [`tokenRegistry`](./token-registry), where as, a verifiable document requires a [`documentStore`](./deploying-store).
 
 The `name` field is a string, please refer to [token registry](./token-registry-store) for transferable document or [deploying document store](./deploying-store) for verifiable document, for more information.
 
@@ -136,7 +136,7 @@ The `identityProof` field is an object that refers to the issuer identity, pleas
 
 The `"schema"` field is an object used to generate a form. It follows [JSON schema format.](https://json-schema.org/)
 
-The structure of the schema will be derived from the structure of the document you expect to build.
+The structure of the schema will derived from the structure of the document you expect to build and will be inline with the custom renderer that you have built for this document.
 
 It will probably be a subset of an already existing schema without the data that you expect to be constants accross your document.
 
@@ -150,10 +150,6 @@ An example of the `"schema"` field:
     "blNumber": {
       "type": "string",
       "title": "BL number"
-    },
-    "item": {
-      "type": "string",
-      "title": "Goods"
     }
   }
 }
