@@ -8,16 +8,16 @@ route: /quickstart
 ### Quick Start (only pdf bundle issuance):
 
 1. Install Metamask, procure Ethers (1 eth from [faucet](https://faucet.metamask.io/) will be enough for a long time)
-1. Deploy document store at https://admin.tradetrust.io
+1. Install the [Open-Attestation CLI tool](https://openattestation.com/docs/component/open-attestation-cli)
+1. Deploy a [document store](../deploying-store)
 1. [Create DNS-TXT Record](../dns-txt) for document store
-1. [TradeTrust - Admin Panel](https://admin.tradetrust.io/generate-document/)
+1. [Use the document creator to generate trade documents](../document-creator)
 
 
 ### Creating Custom Templates:
 
 1. Complete Quick Start steps above first
 1. Fork and customize [GitHub - TradeTrust/document-renderer](https://github.com/TradeTrust/document-renderer)
-1. Author a JSON file according to [Creating Documents](../creating-documents)
-1. Use [tradetrust-cli](https://github.com/tradetrust/tradetrust-cli) to generate hash
-1. Issue using [TradeTrust - Admin Panel](https://admin.tradetrust.io/)
+1. Add `$template` field the config for the document creator 
+1. Issue using [the document creator](../document-creator)
 
