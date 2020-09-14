@@ -21,6 +21,8 @@ Mainly because we want to cater to small firms or companies that doesn't really 
 
 One way is for the IT department or someone who is tech savvy enough, can set up the configuration file and clerks or staffs can use this document creator to create the documents.
 
+---
+
 ## Pre-requisite
 
 Before you construct your configuration file(`.json` file), please ensure you have these:
@@ -34,11 +36,15 @@ Before you construct your configuration file(`.json` file), please ensure you ha
 
 Please refer to the approprate links to prepare them.
 
+---
+
 ## Configuration file
 
 The configuration file is a JSON file that contains information to configure the application to suit your business needs.
 
 ### Config file structure
+
+Below is an example of the configuration file.
 
 ```json
 {
@@ -112,8 +118,8 @@ The `"forms"` field is an array of form object which expect `name`, `type`, `def
 
 ```json
 {
-  "name": "Demo Bill of Lading",
-  "type": "TRANSFERABLE_RECORD",
+  "name": "Cover Letter",
+  "type": "VERIFIABLE_DOCUMENT",
   "defaults": {...},
   "schema": {...},
   "attachments": {...}
@@ -140,27 +146,35 @@ Default value of the form should also be stored here.
 
 For example, you can store a default value for a `"title"` field here, this value will be used in the form shema as the value for the `"title"` field.
 
-An example of the `"defaults"` field:
+Below is an example of the `"defaults"` field:
 
 ```json
 "defaults": {
   "$template": {
     "type": "EMBEDDED_RENDERER",
-    "name": "BILL_OF_LADING",
-    "url": "https://demo-cnm.openattestation.com"
+    "name": "COVERING_LETTER",
+    "url": "https://generic-templates.openattestation.com"
   },
   "issuers": [
     {
+      "name": "Demo Issuer",
+      "documentStore": "0x8bA63EAB43342AAc3AdBB4B827b68Cf4aAE5Caca",
       "identityProof": {
         "type": "DNS-TXT",
-        "location": "isaactest.xyz"
-      },
-      "name": "Demo Issuer",
-      "tokenRegistry": "0x6D489a6A2cbcB76FcEeA26102d1273cd4d3B6b10"
+        "location": "demo-tradetrust.openattestation.com"
+      }
     }
   ],
-  "name": "Demo bill of lading"
-}
+  "name": "Covering Letter",
+  "logo": "https://www.aretese.com/images/govtech-animated-logo.gif",
+  "title": "Documents Bundle",
+  "remarks": "Some very important documents in here for some submission",
+  "uiSchema": {
+    "remarks": {
+      "ui:widget": "textarea"
+    }
+  }
+},
 ```
 
 #### `"$template"` field
@@ -173,11 +187,12 @@ The `"issuers"` is an array of the issuer object. The required fields for each i
 
 Transferrable document requires a [`tokenRegistry`](./token-registry), where as, a verifiable document requires a [`documentStore`](./deploying-store).
 
-The `"name"` field is a string, please refer to [token registry](./token-registry-store) for transferable document or [deploying document store](./deploying-store) for verifiable document, for more information.
+The `"name"` field in the `"issuers"` section is a string, which refers to the name of the token registry or the name of the document store.
+Please refer to [token registry](./token-registry-store) for transferable document or [deploying document store](./deploying-store) for verifiable document, for more information.
 
-The `"tokenRegistry"` field is a string, please refer to [token registry](./token-registry-store) for more information.
+The `"tokenRegistry"` field is a string that is the address for the token registry, please refer to [token registry](./token-registry-store) for more information.
 
-The `"documentStore"` field is a string, please refer to [deploying document store](./deploying-store) for more information.
+The `"documentStore"` field is a string that is the address for the document store, please refer to [deploying document store](./deploying-store) for more information.
 
 The `"identityProof"` field is an object that refers to the issuer identity, please refer to [open attestation's identity Proof](https://openattestation.com/docs/advanced/identity-proofs) for more information.
 
@@ -196,14 +211,17 @@ An example of the `"schema"` field:
 ```json
 "schema": {
   "type": "object",
-  "required": ["blNumber"],
   "properties": {
-    "blNumber": {
+    "title": {
       "type": "string",
-      "title": "BL number"
+      "title": "Document Title"
+    },
+    "remarks": {
+      "type": "string",
+      "title": "Remarks"
     }
   }
-}
+},
 ```
 
 ### `"Attachments"` field
@@ -214,7 +232,7 @@ If there are no attachment for the particular form that you are creating, please
 
 An example of the `"attachments"` field:
 
-```
+```json
 "attachments": {
   "allow": true,
   "accept": [".pdf", ".tt", ".json", ".jpg"]
@@ -280,7 +298,7 @@ This development purpose document storage endpoint currently is implemented for 
 
 To use the default document storage endpoints, please use the correct url stated above for your network.
 
-The API key is omitted for these development endpoints.
+The API key is omitted for both these development endpoints.
 
 _Note: Because these document storage endpoints are just development purposes, there are some house keeping rules involved, uploaded documents will be deleted after some time._
 
