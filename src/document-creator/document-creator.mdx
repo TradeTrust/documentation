@@ -21,6 +21,8 @@ Mainly because we want to cater to small firms or companies that doesn't really 
 
 One way is for the IT department or someone who is tech savvy enough, can set up the configuration file and clerks or staffs can use this document creator to create the documents.
 
+---
+
 ## Pre-requisite
 
 Before you construct your configuration file(`.json` file), please ensure you have these:
@@ -30,8 +32,11 @@ Before you construct your configuration file(`.json` file), please ensure you ha
 - [Token Registry (for transferable document)](./token-registry)
 - [Configured DNS](/dns-txt#how-to-create-dns-txt-record)
 - [Custom Renderer](./custom-template)
+- [Document Storage](/infra-templates#storage)
 
 Please refer to the approprate links to prepare them.
+
+---
 
 ## Configuration file
 
@@ -39,32 +44,73 @@ The configuration file is a JSON file that contains information to configure the
 
 ### Config file structure
 
+Below is an example of the configuration file.
+
 ```json
 {
   "network": "ropsten",
   "wallet": "{\"address\":\"6a36c563a5350d7be66c801f901a67...\", ...}}",
-  "forms": [{...}]
+  "forms": [{...}],
+  "documentStorage": {
+    "apiKey": "kNb15YYZ6N1zBlYd25cjj8PLgK6YAuvN9Gf7fPM1",
+    "url": "https://api-ropsten.tradetrust.io/storage"
+  }
 }
 ```
 
-### `"network"` field
+Let's break down the required fields for this config file.
 
-The `network` field is a string that refers to the network in which the document is created in.
+We will need:
 
-### `"wallet"` field
+- [Network field](#network-field)
+- [Wallet field](#wallet-field)
+- [Forms field](#forms-field)
+- [Document Storage field](#document-storage-field)
 
-The `wallet` field is a string that refers to your etherum wallet.
+---
 
-To convert the wallet into a string like the above example, please use this [online tool](https://tools.knowledgewalls.com/jsontostring).
+## Network field
 
-### Forms structure
+The `"network"` field is a string that refers to the network in which the document is created in.
 
-The `forms` field is an array of form object which expect `name`, `type`, `defaults` and `schema`. `attachments` can also be added.
+As of now, we only cater to 3 networks.
+
+- Mainnet : `"homestead"`
+- Ropsten testnet : `"ropsten"`
+- Rinkeby testnet : `"rinkeby"`
+
+---
+
+## Wallet field
+
+The `"wallet"` field is a string that refers to your ethereum wallet.
+
+If you already have an existing wallet.json, the only thing you need to do is to run JSON.stringify over the contents in order to serialise it into a string.
+
+This can be achieved using either the NodeJS console or the browser console, using the command JSON.stringify({wallet}) where {wallet} is the contents of your wallet.json file.
+
+For example:
+
+```javascript
+w = { "address ": "6a36c563a5350d7be66c801f901a67...", ... }
+JSON.stringify(w)
+
+// result: "{\"address\":\"6a36c563a5350d7be66c801f901a67...\", ...}",
+```
+
+Alternatively, you can refer to [Open Attestation's documentation](https://github.com/Open-Attestation/open-attestation-cli#wallet) to create your wallet.
+_Note: you will need to have Open Attestation Cli installed_
+
+---
+
+## Forms field
+
+The `"forms"` field is an array of form object which expect `name`, `type`, `defaults` and `schema`. `attachments` can also be added.
 
 ```json
 {
-  "name": "Demo Bill of Lading",
-  "type": "TRANSFERABLE_RECORD",
+  "name": "Cover Letter",
+  "type": "VERIFIABLE_DOCUMENT",
   "defaults": {...},
   "schema": {...},
   "attachments": {...}
@@ -73,17 +119,17 @@ The `forms` field is an array of form object which expect `name`, `type`, `defau
 
 ### `"name"` field
 
-The `name` field is a string that refers to the name of the form that will display when creating the document, as shown in the image below.
+The `"name"` field is a string that refers to the name of the form that will display when creating the document, as shown in the image below.
 
 ![name](./form-name.png)
 
 ### `"type"` field
 
-The `type` field is a string that reters to the type of the document, either `"TRANSFERABLE_RECORD"` or `"VERIFIABLE_DOCUMENT"`.
+The `"type"` field is a string that reters to the type of the document, either `"TRANSFERABLE_RECORD"` or `"VERIFIABLE_DOCUMENT"`.
 
 ### `"defaults"` field
 
-The `defaults` field is an object that contains the settings that you have that are constant among the different documents of the same kind of file.
+The `"defaults"` field is an object that contains the settings that you have that are constant among the different documents of the same kind of file.
 
 Usually the document store address, token registry address, template, issuers, company logo, signatures, etc. are stored here, since they are a constant in the different documents of the same kind.
 
@@ -91,46 +137,57 @@ Default value of the form should also be stored here.
 
 For example, you can store a default value for a `"title"` field here, this value will be used in the form shema as the value for the `"title"` field.
 
-An example of the `"defaults"` field:
+Below is an example of the `"defaults"` field:
 
 ```json
 "defaults": {
   "$template": {
     "type": "EMBEDDED_RENDERER",
-    "name": "BILL_OF_LADING",
-    "url": "https://demo-cnm.openattestation.com"
+    "name": "COVERING_LETTER",
+    "url": "https://generic-templates.openattestation.com"
   },
   "issuers": [
     {
+      "name": "Demo Issuer",
+      "documentStore": "0x8bA63EAB43342AAc3AdBB4B827b68Cf4aAE5Caca",
       "identityProof": {
         "type": "DNS-TXT",
-        "location": "isaactest.xyz"
-      },
-      "name": "Demo Issuer",
-      "tokenRegistry": "0x6D489a6A2cbcB76FcEeA26102d1273cd4d3B6b10"
+        "location": "demo-tradetrust.openattestation.com"
+      }
     }
   ],
-  "name": "Demo bill of lading"
-}
+  "name": "Covering Letter",
+  "logo": "https://www.aretese.com/images/govtech-animated-logo.gif",
+  "title": "Documents Bundle",
+  "remarks": "Some very important documents in here for some submission",
+  "uiSchema": {
+    "remarks": {
+      "ui:widget": "textarea"
+    }
+  }
+},
 ```
 
 #### `"$template"` field
 
-The `$template` field is an object that refers to the custom renderer, please refer to [creating document renderer](https://openattestation.com/docs/advanced/custom-renderer).
+The `"$template"` field is an object that refers to the custom renderer, please refer to [creating document renderer](https://openattestation.com/docs/advanced/custom-renderer).
 
 #### `"issuers"` field
 
-The `issuers` is an array of the issuer object. The required fields for each issuer are `name`, `identityProof` and one of `documentStore` OR `tokenRegistry`.
+The `"issuers"` is an array of the issuer object. The required fields for each issuer are `name`, `identityProof` and one of `documentStore` OR `tokenRegistry`.
 
-Transferrable document requires a [`tokenRegistry`](./token-registry), where as, a verifiable document requires a [`documentStore`](./deploying-store).
+Transferrable document requires a [`tokenRegistry`](./token-registry), whereas, a verifiable document requires a [`documentStore`](./deploying-store).
 
-The `name` field is a string, please refer to [token registry](./token-registry-store) for transferable document or [deploying document store](./deploying-store) for verifiable document, for more information.
+The `"name"` field in the `"issuers"` section is a string, which refers to the name of the token registry or the name of the document store.
+Please refer to [token registry](./token-registry-store) for transferable document or [deploying document store](./deploying-store) for verifiable document, for more information.
 
-The `tokenRegistry` field is a string, please refer to [token registry](./token-registry-store) for more information.
+The `"tokenRegistry"` field is a string that is the address for the token registry, please refer to [token registry](./token-registry-store) for more information.
 
-The `documentStore` field is a string, please refer to [deploying document store](./deploying-store) for more information.
+The `"documentStore"` field is a string that is the address for the document store, please refer to [deploying document store](./deploying-store) for more information.
 
-The `identityProof` field is an object that refers to the issuer identity, please refer to [open attestation's identity Proof](https://openattestation.com/docs/advanced/identity-proofs) for more information.
+The `"identityProof"` field is an object that refers to the issuer identity, please refer to [open attestation's identity Proof](https://openattestation.com/docs/advanced/identity-proofs) for more information.
+
+_Note: any UI schema should be included under defaults as `"uiSchema"` field_
 
 ### `"schema"` field
 
@@ -138,21 +195,24 @@ The `"schema"` field is an object used to generate a form. It follows [JSON sche
 
 The structure of the schema will derived from the structure of the document you expect to build and will be inline with the custom renderer that you have built for this document.
 
-It will probably be a subset of an already existing schema without the data that you expect to be constants accross your document.
+It will probably be a subset of an already existing schema without the data that you expect to be constants across your document.
 
 An example of the `"schema"` field:
 
 ```json
 "schema": {
   "type": "object",
-  "required": ["blNumber"],
   "properties": {
-    "blNumber": {
+    "title": {
       "type": "string",
-      "title": "BL number"
+      "title": "Document Title"
+    },
+    "remarks": {
+      "type": "string",
+      "title": "Remarks"
     }
   }
-}
+},
 ```
 
 ### `"Attachments"` field
@@ -163,7 +223,7 @@ If there are no attachment for the particular form that you are creating, please
 
 An example of the `"attachments"` field:
 
-```
+```json
 "attachments": {
   "allow": true,
   "accept": [".pdf", ".tt", ".json", ".jpg"]
@@ -175,5 +235,62 @@ The `"allow"` accepts a boolean value(true or false) and it will display the att
 The `"accept"` accepts an array of string, that are file types, which will set the accepted file types for the attachments.
 
 If you want to accept all file types, remove the entire `"accept"` line from `"attachments"` object.
+
+---
+
+## Document Storage field
+
+```json
+"documentStorage": {
+  "apiKey": "kNb15YYZ6N1zBlYd25cjj8PLgK6YAuvN9Gf7fPM1",
+  "url": "https://api-ropsten.tradetrust.io/storage"
+}
+```
+
+_Note: This document storage field is optional. Only add this section in if you want to generate a QRcode for easy sharing._
+
+##### If you do not want to upload your documents to a document storage endpoint you can omit this in the config file.
+
+To use a document storage endpoint, you will have to have the endpoint infrastructure already set up and configured.
+
+You can refer to [infra template's storage section](/infra-templates#storage) for more information.
+
+The `"documentStorage"` field is an object which expects an `"url"` field. `"apiKey"` can also be added.
+
+### `"apikey"` field
+
+The `"apikey"` field is optional, it accepts a string as the API key.
+
+If your document storage endpoint does not requires an API key, you should omit this field.
+
+### `"url"` field
+
+The `"url"` field accepts a string which will be the endpoint of the document storage.
+
+_Note: please ensure that this document storage endpoint has a path `"/storage/queue"` that will return the queue number for storing your document in the document storage endpoint._
+
+For the convenience of developers, we provide the below document storage endpoints for the Ropsten and Rinkeby testnets.
+
+### Ropsten document storage endpoint
+
+```
+"url": "https://api-ropsten.tradetrust.io/storage"
+
+```
+
+### Rinkeby document storage endpoint
+
+```
+"url": "https://api-rinkeby.tradetrust.io/storage"
+
+```
+
+These endpoints may only be used for valid and issued documents on the respective test networks, and may not be mixed.
+
+For example, a valid Ropsten document will fail validation and fail to be uploaded if the Rinkeby endpoint is specified.
+
+An API key is not required to be provided for these endpoints as they will accept unauthenticated requests.
+
+_Note: **The testnet endpoints do not retain documents permanently and any stored documents will be removed after a period of time**._
 
 ---
