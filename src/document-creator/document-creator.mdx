@@ -85,26 +85,17 @@ As of now, we only cater to 3 networks.
 
 The `"wallet"` field is a string that refers to your ethereum wallet.
 
-If you have the wallet you can convert the wallet into a string by following these steps:
+If you already have an existing wallet.json, the only thing you need to do is to run JSON.stringify over the contents in order to serialise it into a string.
 
-1. open your browser. (preferably mozella firefox)
+This can be achieved using either the NodeJS console or the browser console, using the command JSON.stringify({wallet}) where {wallet} is the contents of your wallet.json file.
 
-2. open inspect element on any page.
+For example:
 
-3. go to the console tab.
+```javascript
+w = { "address ": "6a36c563a5350d7be66c801f901a67...", ... }
+JSON.stringify(w)
 
-4. type: "Node", and press enter.
-
-5. type: "JSON.stringify({wallet})".
-
-6. replace {wallet} with your wallet json object, and press enter.
-
-7. you will then have your wallet as a string that you can use in the config file.
-
-End result that you should have:
-
-```json
-"{\"address\":\"6a36c563a5350d7be66c801f901a67...\", ...}}",
+// result: "{\"address\":\"6a36c563a5350d7be66c801f901a67...\", ...}",
 ```
 
 Alternatively, you can refer to [Open Attestation's documentation](https://github.com/Open-Attestation/open-attestation-cli#wallet) to create your wallet.
@@ -185,7 +176,7 @@ The `"$template"` field is an object that refers to the custom renderer, please 
 
 The `"issuers"` is an array of the issuer object. The required fields for each issuer are `name`, `identityProof` and one of `documentStore` OR `tokenRegistry`.
 
-Transferrable document requires a [`tokenRegistry`](./token-registry), where as, a verifiable document requires a [`documentStore`](./deploying-store).
+Transferrable document requires a [`tokenRegistry`](./token-registry), whereas, a verifiable document requires a [`documentStore`](./deploying-store).
 
 The `"name"` field in the `"issuers"` section is a string, which refers to the name of the token registry or the name of the document store.
 Please refer to [token registry](./token-registry-store) for transferable document or [deploying document store](./deploying-store) for verifiable document, for more information.
@@ -256,7 +247,7 @@ If you want to accept all file types, remove the entire `"accept"` line from `"a
 }
 ```
 
-_Note: This document storage field is optional._
+_Note: This document storage field is optional. Only add this section in if you want to generate a QRcode for easy sharing._
 
 ##### If you do not want to upload your documents to a document storage endpoint you can omit this in the config file.
 
@@ -270,7 +261,7 @@ The `"documentStorage"` field is an object which expects an `"url"` field. `"api
 
 The `"apikey"` field is optional, it accepts a string as the API key.
 
-If your document storage endpoint does not requires any API key, you should omit this field.
+If your document storage endpoint does not requires an API key, you should omit this field.
 
 ### `"url"` field
 
@@ -278,9 +269,7 @@ The `"url"` field accepts a string which will be the endpoint of the document st
 
 _Note: please ensure that this document storage endpoint has a path `"/storage/queue"` that will return the queue number for storing your document in the document storage endpoint._
 
-Alternatively, for development purposes, we have set up a document storage endpoint.
-
-This development purpose document storage endpoint currently is implemented for both ropsten testnet and rinkeby testnet only.
+For the convenience of developers, we provide the below document storage endpoints for the Ropsten and Rinkeby testnets.
 
 ### Ropsten document storage endpoint
 
@@ -296,10 +285,12 @@ This development purpose document storage endpoint currently is implemented for 
 
 ```
 
-To use the default document storage endpoints, please use the correct url stated above for your network.
+These endpoints may only be used for valid and issued documents on the respective test networks, and may not be mixed.
 
-The API key is omitted for both these development endpoints.
+For example, a valid Ropsten document will fail validation and fail to be uploaded if the Rinkeby endpoint is specified.
 
-_Note: Because these document storage endpoints are just development purposes, there are some house keeping rules involved, uploaded documents will be deleted after some time._
+An API key is not required to be provided for these endpoints as they will accept unauthenticated requests.
+
+_Note: **The testnet endpoints do not retain documents permanently and any stored documents will be removed after a period of time**._
 
 ---
