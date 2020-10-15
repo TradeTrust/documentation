@@ -3,11 +3,15 @@ name: Document Creator
 route: /document-creator
 ---
 
+import genericTemplate from "./generic-template.json";
+
 # Using TradeTrust Document Creator
 
 You can use the [document creator](https://creator.tradetrust.io) to create and issue your document.
 
 To use this functionality, you will need a configuration file(`.json` file) and some pre-requisite informations.
+
+---
 
 ## What is document creator about?
 
@@ -292,5 +296,91 @@ For example, a valid Ropsten document will fail validation and fail to be upload
 An API key is not required to be provided for these endpoints as they will accept unauthenticated requests.
 
 _Note: **The testnet endpoints do not retain documents permanently and any stored documents will be removed after a period of time**._
+
+---
+
+## Generic Template (Cover Letter)
+
+We have designed and created a simple generic template (Cover Letter) config file for you to use.
+
+<div>
+  Click
+  <a
+    href={`data:text/json;charset=utf-8,${encodeURIComponent(
+      JSON.stringify(genericTemplate, null, 2)
+    )}`}
+    download="config-file.json"
+  >
+    {" "}
+    here{" "}
+  </a>
+  to download a config file.
+</div>
+
+![Generic Template](generic-template.png)
+
+Above is an example of how the cover letter will look like.
+
+To make full use of this generic template (cover letter), please update the config file as following.
+
+### Fields to update:
+
+_Note: **Please replace all the placeholder "<...>" with your values.**_
+
+```json
+"network": "<Your network>",
+"wallet": "<Your wallet string>",
+```
+
+- `"network"` - Update with the desired network. For more information, click [here](/document-creator#network-field).
+- `"wallet"` - Update with your wallet string. For more infomation, click [here](/document-creator#wallet-field).
+
+```json
+"defaults": {
+  "$template": { ... },
+  "issuers": [
+    {
+      "name": "Demo Issuer",
+      "documentStore": "<Your document store>",
+      "identityProof": {
+        "type": "DNS-TXT",
+        "location": "<Issuer's domain>"
+      }
+    }
+  ],
+  "name": "Covering Letter",
+  "logo": "<Logo URL>",
+  "backgroundColor": "<Background color>",
+  "titleColor": "<Title text color>",
+  "descriptionColor": "<Remarks text color>",
+  "title": "<Default title for the document>",
+  "remarks": "<Default remarks for the document>",
+  "uiSchema": {
+    "remarks": {
+      "ui:widget": "textarea"
+    }
+  }
+},
+
+```
+
+- `"documentStore"` - Update with your document store. For more infomation, click [here](./deploying-store).
+- `"location"` - Update with the Issuer's domain. For more information, click [here](https://openattestation.com/docs/advanced/identity-proofs).
+- `"logo"` - Update with the Logo's URL, to be displayed accordingly as the image above.
+- `"backgroundColor"` - Update with the desired background color. The default color will be used if color is not stated here. e.g. "#000000", "black"
+- `"titleColor"` - Update with the desired title text color. The default color will be used if color is not stated here. e.g. "#ffffff", "white"
+- `"descriptionColor"` - Update with the desired description text color. The default color will be used if color is not stated here. e.g. "#ffffff", "white"
+- `"title"` - Update with the default title for the document.
+- `"remarks"` - Update with the default remarks for the document.
+
+```json
+"documentStorage": {
+  "apiKey": "<Document storage API Key>",
+  "url": "<Document storage URL>"
+}
+```
+
+- `"apiKey"` - Update with the document storage API key. For more infomation, click [here](//document-creator#document-storage-field).
+- `"url"` - Update with the document storage URL. For more infomation, click [here](//document-creator#document-storage-field).
 
 ---
