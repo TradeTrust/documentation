@@ -83,9 +83,30 @@ As of now, we only cater to 3 networks.
 
 ## Wallet field
 
-The `"wallet"` field is a string that refers to your ethereum wallet.
+The `"wallet"` field is a string that refers to your ethereum wallet. 
 
-If you already have an existing wallet.json, the only thing you need to do is to run JSON.stringify over the contents in order to serialise it into a string.
+If you don't have a wallet, you can refer to [Open Attestation's documentation](https://github.com/Open-Attestation/open-attestation-cli#wallet) to create a wallet.
+_Note: you will need to have Open Attestation Cli installed._ This will give you a wallet.json.
+
+Alternatively, you can also generate a wallet.json from an existing account created in Metamask using the OpenAttestation Cli. _Note: you will need to have Open Attestation Cli installed._ 
+You will have to input your wallet's private key which can be found when you go to your account in Metamask, click on the menu icon, go to 
+"Account Details" and click "Export Private Key". You will be prompted to input your Metamask password. Once you have your private key,
+you can key in the following command to generate a wallet.json:
+
+```javascript
+open-attestation wallet encrypt -k 0x<privatekey> --of ./wallet.json
+```
+You will then be prompted to key in your wallet password. Once entered, you will see a success message with the path to your wallet.json:
+
+```javascript
+ℹ  info      Encrypting a wallet
+? Wallet password [hidden]
+…  awaiting  Encrypting Wallet [====================] [100/100%]
+ℹ  info      Wallet with public address 0xcE16E13045363a4aFb1f4dc6b584256cCb0DDd15 successfully created. Find more details:
+✔  success   Wallet successfully saved into /<path>/wallet.json
+```
+
+Once you have your wallet.json, the only thing you need to do is to run JSON.stringify over the contents in order to serialise it into a string.
 
 This can be achieved using either the NodeJS console or the browser console, using the command JSON.stringify({wallet}) where {wallet} is the contents of your wallet.json file.
 
@@ -97,16 +118,7 @@ JSON.stringify(w)
 
 // result: "{\"address\":\"6a36c563a5350d7be66c801f901a67...\", ...}",
 ```
-You can also generate a wallet.json from an existing account created in Metamask using the OpenAttestation Cli. _Note: you will need to have Open Attestation Cli installed._
-
-For example:
-```javascript
-open-attestation wallet encrypt -k 0x<privatekey> --of ./wallet.json
-```
-You will then be prompted to key in your account password. Once verified, your wallet.json will be created.
-
-Alternatively, you can refer to [Open Attestation's documentation](https://github.com/Open-Attestation/open-attestation-cli#wallet) to create your wallet.
-_Note: you will need to have Open Attestation Cli installed_
+This result can now be entered into the `"wallet"` field in the config file.
 
 ---
 
