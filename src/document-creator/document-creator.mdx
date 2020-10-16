@@ -86,17 +86,18 @@ As of now, we only cater to 3 networks.
 The `"wallet"` field is a string that refers to your ethereum wallet. 
 
 If you don't have a wallet, you can refer to [Open Attestation's documentation](https://github.com/Open-Attestation/open-attestation-cli#wallet) to create a wallet.
-_Note: you will need to have Open Attestation Cli installed._ This will give you a wallet.json.
+_Note: you will need to have Open Attestation Cli installed._ After running OA CLI `wallet create` command, this will give you a wallet.json.
 
 Alternatively, you can also generate a wallet.json from an existing account created in Metamask using the OpenAttestation Cli. _Note: you will need to have Open Attestation Cli installed._ 
 You will have to input your wallet's private key which can be found when you go to your account in Metamask, click on the menu icon, go to 
-"Account Details" and click "Export Private Key". You will be prompted to input your Metamask password. Once you have your private key,
+"Account Details" and click "Export Private Key". You can refer to the [Metamask Support Page](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key)
+for a guided walkthrough. You will be prompted to input your Metamask password. Once you have your private key,
 you can key in the following command to generate a wallet.json:
 
 ```javascript
 open-attestation wallet encrypt -k 0x<privatekey> --of ./wallet.json
 ```
-You will then be prompted to key in your wallet password. Once entered, you will see a success message with the path to your wallet.json:
+You will then be prompted to set your wallet password. Once entered, you will see a success message with the path to your wallet.json:
 
 ```javascript
 ℹ  info      Encrypting a wallet
@@ -118,7 +119,7 @@ JSON.stringify(w)
 
 // result: "{\"address\":\"6a36c563a5350d7be66c801f901a67...\", ...}",
 ```
-This result can now be entered into the `"wallet"` field in the config file.
+This result can now be entered into the `"wallet"` field in the [config file](/document-creator#configuration-file).
 
 ---
 
