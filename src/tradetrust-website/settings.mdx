@@ -19,8 +19,25 @@ look like the following:
 
 [Address-resolved](./address-resolved.png)
 
-You can see that the entity's name, resolver details and remarks will also be displayed above the resolved Ethereum 
+You can see that the entity's name, resolver details and source will also be displayed above the resolved Ethereum 
 address.
+
+_Note: There is a difference between "Resolved by" and "Source" parameters. Resolved by refers to the naming of the 3rd 
+party resolver that the user has set in the settings page. Source (an optional field) refers to information that is 
+verified by another party. For example, in NDI Myinfo, they have verified information from different agencies._
+
+## How to setup an Address Resolver:
+
+We will need to specify the following fields in the API:
+
+-Identifier (The ethereum address of the entity)
+-Name (The name of the entity)
+-Remarks (_Optional:The source of the information_)
+
+A detailed explanation can be found at https://github.com/Open-Attestation/adr/blob/master/identifier_resolution_api.md.
+
+A reference implementation of this service can be found at 
+https://github.com/Open-Attestation/demo-identifier-resolver.
 
 ## How to add an Address Resolver:
 
