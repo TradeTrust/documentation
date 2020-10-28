@@ -83,9 +83,25 @@ As of now, we only cater to 3 networks.
 
 ## Wallet field
 
-The `"wallet"` field is a string that refers to your ethereum wallet.
+The `"wallet"` field is a string that refers to your ethereum wallet. You can derive it from either one of these methods:
 
-If you already have an existing wallet.json, the only thing you need to do is to run JSON.stringify over the contents in order to serialise it into a string.
+1. If you already have an existing wallet.json, this is how you can serialise it into a string:
+
+Using [this website](https://tools.knowledgewalls.com/jsontostring), copy the contents of your wallet.json and paste it in the field before clicking on the "Convert" button.
+You should see a serialised version of your wallet.json in the output.
+![tools-wallet-string](./tools-wallet-string.png)
+
+2. If you have an existing Metamask account, you can get your wallet string using your private key:
+
+    1. Open your terminal
+    2. Navigate to a repository that has `ether.js`
+    3. Type these commands in the terminal:
+        - node
+        - e = require("ethers")
+        - key="<Enter private key here>"
+3. 
+
+Using the NodeJS console 
 
 This can be achieved using either the NodeJS console or the browser console, using the command JSON.stringify({wallet}) where {wallet} is the contents of your wallet.json file.
 
