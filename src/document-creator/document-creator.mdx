@@ -87,12 +87,12 @@ As of now, we only cater to 3 networks.
 
 ## Wallet field
 
-The `"wallet"` field is a string that refers to your ethereum wallet. 
+The `"wallet"` field is a string that refers to your ethereum wallet. You can derive it from either one of these methods:
 
-If you don't have a wallet, you can refer to [Open Attestation's documentation](https://github.com/Open-Attestation/open-attestation-cli#wallet) to create a wallet.
+1. If you don't have a wallet, you can refer to [Open Attestation's documentation](https://github.com/Open-Attestation/open-attestation-cli#wallet) to create a wallet.
 _Note: you will need to have Open Attestation Cli installed._ After running OA CLI `wallet create` command, this will give you a wallet.json.
 
-Alternatively, you can also generate a wallet.json from an existing account created in Metamask using the OpenAttestation Cli. _Note: you will need to have Open Attestation Cli installed._ 
+2. Alternatively, you can also generate a wallet.json from an existing account created in Metamask using the OpenAttestation Cli. _Note: you will need to have Open Attestation Cli installed._ 
 You will have to input your wallet's private key which can be found when you go to your account in Metamask, click on the menu icon, go to 
 "Account Details" and click "Export Private Key". You can refer to the [Metamask Support Page](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key)
 for a guided walkthrough. You will be prompted to input your Metamask password. Once you have your private key,
@@ -111,18 +111,30 @@ You will then be prompted to set your wallet password. Once entered, you will se
 ✔  success   Wallet successfully saved into /<path>/wallet.json
 ```
 
-Once you have your wallet.json, the only thing you need to do is to run JSON.stringify over the contents in order to serialise it into a string.
+Once you have an existing wallet.json, this is how you can serialise it into a string:
 
-This can be achieved using either the NodeJS console or the browser console, using the command JSON.stringify({wallet}) where {wallet} is the contents of your wallet.json file.
+Using [this website](https://tools.knowledgewalls.com/jsontostring), copy the contents of your wallet.json and paste it in the field before clicking on the "Convert" button.
+You should see a serialised version of your wallet.json in the output.
 
-For example:
+![tools-wallet-string](./tools-wallet-string.png)
+
+3. If you have an existing Metamask account but don't want to use the Open Attestation Cli, you can still get your wallet string doing this:
+    
+    1. Get your private key from Metamask (_See option 2 if unsure_)
+    2. Open your terminal
+    3. Navigate to a repository that has `ether.js`
+    4. Type these commands line by line in the terminal:
 
 ```javascript
-w = { "address ": "6a36c563a5350d7be66c801f901a67...", ... }
-JSON.stringify(w)
-
-// result: "{\"address\":\"6a36c563a5350d7be66c801f901a67...\", ...}",
+  node
+  e = require("ethers")
+  key="<Enter private key here>"
+  wallet = new e.Wallet(key)
+  wallet.encrypt("<Enter a password of your choice here>").then(str => console.log(JSON.stringify(str)))
 ```
+
+(_Note: you can watch a tutorial on this [here](https://www.youtube.com/watch?v=z3l9OSVGHH8&feature=youtu.be&t=577) at 7:29 onwards_)
+
 This result can now be entered into the `"wallet"` field in the [config file](/document-creator#configuration-file).
 
 ---
