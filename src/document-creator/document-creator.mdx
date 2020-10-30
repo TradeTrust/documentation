@@ -111,6 +111,14 @@ You will then be prompted to set your wallet password. Once entered, you will se
 ✔  success   Wallet successfully saved into /<path>/wallet.json
 ```
 
+Once you have an existing wallet.json, enter the following command to serialise it into a string:
+
+```
+node -r fs -e 'console.log(JSON.stringify(JSON.stringify(JSON.parse(fs.readFileSync("./wallet.json", "utf-8")))));'
+```
+
+The wallet string should be displayed on your terminal and you can enter it into the `"wallet"` field in the [config file](/document-creator#configuration-file).
+
 3. If you have an existing Metamask account but don't want to use the Open Attestation Cli, you can still get your wallet string doing this:
     
     1. Get your private key from Metamask (_See option 2 if unsure_)
