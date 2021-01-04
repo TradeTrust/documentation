@@ -6,13 +6,14 @@ route: /title-transfer
 # Title Transfer
 
 ### Background
-Legal asset ownership is typically conferred upon an entity by a document termed as a **Title**, or **Title Deed**. The party who holds this ownership is known as the **Beneficiary**.
+
+Legal asset ownership is typically conferred upon an entity by a document termed as a **Title**, or **Title Deed**. The party who holds this ownership is known as the **Owner**.
 
 In the physical world, an original print of the physical Title can be held by various parties at points in its' life cycle. This is termed **Possession**, or **Holdership**. There are no restrictions on who can have possession of a title, subject to the physical constraints of an existing holder passing holdership to the next holder.
 
-A Title that can have its' Beneficiary changed after issuance, is known as a **Negotiable Title**. Conversely, a Title that has a fixed Beneficiary for the rest of its' lifetime is known as a **Non-negotiable Title**.
+A Title that can have its' Owner changed after issuance, is known as a **Negotiable Title**. Conversely, a Title that has a fixed Owner for the rest of its' lifetime is known as a **Non-negotiable Title**.
 
-In the case where a **Negotiable Title** has its' Beneficiary changed, this procedure is termed **Endorsement**. This change of ownership is only allowed by its' current Beneficiary. 
+In the case where a **Negotiable Title** has its' Owner changed, this procedure is termed **Endorsement**. This change of ownership is only allowed by its' current Owner.
 
 ### TradeTrust Contribution
 
@@ -26,21 +27,21 @@ In order to properly represent this, we introduce the **Title Escrow** smart con
 
 The Title Escrow has two notable fields:
 
-1) The Beneficiary
+1. The Owner
 
-2) The Holder
+2. The Holder
 
-#### Beneficiary
-The Beneficiary field in every instance of the Title Escrow is determined at time of initialisation and immutable. This means that in order for a Negotiable Title to have a change in Beneficiary, a new Title Escrow instance must be created and have the Token transferred to it.
+#### Owner
+
+The Owner field in every instance of the Title Escrow is determined at time of initialisation and immutable. This means that in order for a Negotiable Title to have a change in Owner, a new Title Escrow instance must be created and have the Token transferred to it.
 
 There are two scenarios in which this can occur.
 
-Firstly, if Beneficiary and Holder are the same party - he can directly effect a transfer of the Token. This is termed **Immediate Endorsement**.
+Firstly, if Owner and Holder are the same party - he can directly effect a transfer of the Token. This is termed **Immediate Endorsement**.
 
-Secondly, if Beneficiary and Holder are different parties - this is a novel scenario not possible in the current physical model, as physical Endorsement requires the Title be physically signed upon by the Beneficiary and thus making him also the holder.
+Secondly, if Owner and Holder are different parties - this is a novel scenario not possible in the current physical model, as physical Endorsement requires the Title be physically signed upon by the Owner and thus making him also the holder.
 
-In this scenario, we allow the Beneficiary to prepare a **Remote Endorsement**, but for it to take effect the holder has to subsequently execute it.
-
+In this scenario, we allow the Owner to prepare a **Remote Endorsement**, but for it to take effect the holder has to subsequently execute it.
 
 #### Holder
 
@@ -48,9 +49,9 @@ The Holder field is much simpler, and similarly to the physical world - an exist
 
 #### Surrender
 
-At the end of its' life cycle, a Title is surrendered back to the Issuer. This is effected by transferring the Token back to the Issuer. 
+At the end of its' life cycle, a Title is surrendered back to the Issuer. This is effected by transferring the Token back to the Issuer.
 
-The Title Escrow makes an allowance for this action to be performed by the beneficiary, only when he is also the holder. This action is termed **Surrender**.
+The Title Escrow makes an allowance for this action to be performed by the Owner, only when he is also the holder. This action is termed **Surrender**.
 
 ### Summary Table of Actions
 
