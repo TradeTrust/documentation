@@ -1,2 +1,4 @@
 node_modules
-.docz
+.docusaurus
+build
+src/css/tailwind.css

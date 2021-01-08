@@ -1,0 +1,68 @@
+{
+  "docs": {
+    "Overview": ["getting-started", "faq"],
+    "Verifiable Document": [
+      "verifiable-document/overview",
+      "verifiable-document/prerequisites",
+      {
+        "label": "Ethereum",
+        "type": "category",
+        "items": [
+          "verifiable-document/overview-document-store",
+          "verifiable-document/wallet",
+          "verifiable-document/document-store",
+          "verifiable-document/dns-proof",
+          "verifiable-document/raw-document",
+          "verifiable-document/wrapping-document",
+          "verifiable-document/issuing-document",
+          "verifiable-document/revoking-document",
+          "verifiable-document/going-further"
+        ]
+      },
+      {
+        "label": "DID",
+        "type": "category",
+        "items": [
+          "verifiable-document/did/create",
+          "verifiable-document/did/dns",
+          "verifiable-document/did/raw-document",
+          "verifiable-document/did/wrapping-document",
+          "verifiable-document/did/signing-document",
+          "verifiable-document/did/revoking-document"
+        ]
+      },
+      "verifiable-document/comparison"
+    ],
+    "Transferable Record": [
+      "transferable-record/overview",
+      "transferable-record/token-registry",
+      "transferable-record/preparing-transferable-record",
+      "transferable-record/title-escrow",
+      "transferable-record/issuing-transferable-record",
+      "transferable-record/going-further"
+    ],
+    "Components": [
+      "component/overview",
+      "component/open-attestation-cli",
+      "component/open-attestation",
+      "component/oa-verify",
+      "component/decentralized-renderer-react-components",
+      "component/oa-encryption"
+    ],
+    "Advanced": [
+      "advanced/overview",
+      "advanced/how-does-it-work",
+      "advanced/verification-methods",
+      "advanced/identity-proofs",
+      "advanced/custom-renderer",
+      "advanced/configuring-dns"
+    ],
+    "Appendix": [
+      "appendix/glossary",
+      "appendix/ropsten-setup",
+      "appendix/identity-wallet",
+      "appendix/document-store-webapp",
+      "appendix/issuing-webapp"
+    ]
+  }
+}
