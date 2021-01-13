@@ -22,7 +22,10 @@ const Home = () => {
                 <img className="mb-4" src={useBaseUrl("img/home/home-getting-started.png")} alt="Getting started" />
                 <h3 className="mb-2">Getting Started</h3>
                 <p>A step-by-step guide to setup TradeTrust according to your application’s requirements.</p>
-                <Link className="btn bg-blue text-white hover:text-white my-4" to={useBaseUrl("docs/getting-started")}>
+                <Link
+                  className="btn bg-blue text-white hover:text-white my-4"
+                  to={useBaseUrl("docs/introduction/what-is-tradetrust")}
+                >
                   Learn more
                 </Link>
               </div>

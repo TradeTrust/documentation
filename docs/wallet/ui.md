@@ -1,7 +1,7 @@
 ---
-id: ropsten-setup
-title: Setting up Test Account on Etherem Test Network (Ropsten)
-sidebar_label: Test Account Setup
+id: via-ui
+title: Via UI
+sidebar_label: Via UI
 ---
 
 This guide will set you up on the Ethereum Test Network (Ropsten) so that you may interact with our web applications using the metamask plugin.

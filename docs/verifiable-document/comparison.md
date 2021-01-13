@@ -25,13 +25,13 @@ You will need ethers in order to use Ethereum Smart Contracts. The following act
 - Issuing a merkle root,
 - Revoking a merkle root.
 
-More information in the [FAQ](/docs/faq). Other actions (typically reading what is in the smart contract) are free.
+More information in the [FAQ](/docs/introduction/faq). Other actions (typically reading what is in the smart contract) are free.
 
 With DID, you don't need money of any sort. It works out of the box.
 
 ## Privacy
 
-When using Ethereum Smart Contracts, all issuance and revocation events will be publicly viewable. As long as someone knows your document store contract address, they will be able to see how many times you issued, revoked, etc. 
+When using Ethereum Smart Contracts, all issuance and revocation events will be publicly viewable. As long as someone knows your document store contract address, they will be able to see how many times you issued, revoked, etc.
 
 For DID, it's the opposite, everything is private.
 

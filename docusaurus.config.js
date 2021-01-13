@@ -31,7 +31,10 @@ const siteConfig = {
         src: "img/logo/logo-tt.svg",
         srcDark: "img/logo/logo-tt.svg",
       },
-      items: [{ to: "docs/getting-started", label: "Docs" }, { to: "https://github.com/TradeTrust", label: "Github" }],
+      items: [
+        { to: "docs/introduction/what-is-tradetrust", label: "Docs" },
+        { to: "https://github.com/TradeTrust", label: "Github" },
+      ],
     },
     footer: {
       links: [
@@ -46,8 +49,8 @@ const siteConfig = {
           title: "Docs",
           items: [
             {
+              to: "docs/introduction/what-is-tradetrust",
               label: "Getting Started",
-              to: "docs/getting-started",
             },
           ],
         },
@@ -55,8 +58,8 @@ const siteConfig = {
           title: "Source Code",
           items: [
             {
-              label: "Github",
               href: "https://github.com/TradeTrust",
+              label: "Github",
             },
           ],
         },

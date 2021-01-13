@@ -1,7 +1,7 @@
 ---
 id: prerequisites
-title: Prerequisites
-sidebar_label: Prerequisites
+title: Open Attestation CLI
+sidebar_label: Open Attestation CLI
 ---
 
 Before we start, you will need the OpenAttestation CLI correctly setup. Head to the [intallation page](/docs/component/open-attestation-cli), and make sure the following command works:

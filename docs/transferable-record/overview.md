@@ -44,3 +44,9 @@ In the overview above, we can see 3 different states of documents:
 There are instances where a single document will have multiple owners, with clearly defined roles to protect one from another. In the case of trade finance, we observe that there are usually a `beneficiary` and a `holder` to a given document. The two role corresponds to the legally owner of the BL and the entity holding the physical BL respectively.
 
 In this case, we have created the Title Escrow Smart Contract to reflect the rules of engagement between these two parties on-chain.
+
+## More info
+
+Webinar: <a href="https://youtu.be/4xTyPTyUU_U" target="_blank" rel="noopener noreferrer">Creation of Transferable Documents</a>
+
+Pdf slides: <a href="/docs/transferable-record/overview/tradetrust-tech-webinar-3.pdf" target="_blank" rel="noopener noreferrer">TradeTrust Tech Webinar 3.pdf</a>

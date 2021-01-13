@@ -30,6 +30,8 @@ The `network-id` corresponds to the [network ID for the different Ethereum netwo
 | `3`        | Ethereum Testnet Ropsten | `ropsten` |
 | `4`        | Ethereum Testnet Rinkeby | `rinkeby` |
 
+#### Created with expiry
+
 Once the DNS TXT record has been successfully deployed, you will see the success message with the bound location.
 
 ```text
@@ -53,3 +55,5 @@ which will display to you the list of the DNS TXT records associated to that loc
 ```
 
 > Note that it can take some time for the record to be correctly propagated to the DNS, even though it usually takes 10 to 15s.
+
+> Temporary domains created has a limited duration before expiry. Always take note of the [expiry](#created-with-expiry) in cli. An expired domain will not pass verification of documents.

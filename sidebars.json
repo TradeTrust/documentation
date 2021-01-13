@@ -1,15 +1,15 @@
 {
   "docs": {
-    "Overview": ["getting-started", "faq"],
+    "Introduction": ["introduction/what-is-tradetrust"],
+    "Prerequisites": ["prerequisites"],
+    "Creating a wallet": ["wallet/via-cli", "wallet/via-ui"],
     "Verifiable Document": [
       "verifiable-document/overview",
-      "verifiable-document/prerequisites",
       {
         "label": "Ethereum",
         "type": "category",
         "items": [
           "verifiable-document/overview-document-store",
-          "verifiable-document/wallet",
           "verifiable-document/document-store",
           "verifiable-document/dns-proof",
           "verifiable-document/raw-document",
@@ -50,7 +50,6 @@
       "component/oa-encryption"
     ],
     "Advanced": [
-      "advanced/overview",
       "advanced/how-does-it-work",
       "advanced/verification-methods",
       "advanced/identity-proofs",
@@ -59,10 +58,18 @@
     ],
     "Appendix": [
       "appendix/glossary",
-      "appendix/ropsten-setup",
       "appendix/identity-wallet",
       "appendix/document-store-webapp",
       "appendix/issuing-webapp"
+    ],
+    "Additional": [
+      "additional/tradetrust-use-case",
+      "additional/document-creator",
+      "additional/title-transfer",
+      "additional/sdk-overview",
+      "additional/tradetrust-api",
+      "additional/custom-template",
+      "additional/infrastructure-template"
     ]
   }
 }

@@ -1,7 +1,7 @@
 ---
-id: wallet
-title: Creating a wallet
-sidebar_label: Creating a wallet
+id: via-cli
+title: Via CLI
+sidebar_label: Via CLI
 ---
 
 The first step that we will need to go through, is the [wallet](/docs/appendix/glossary#wallet) creation:

@@ -29,6 +29,22 @@
   h6 {
     font-size: 16px;
   }
+
+  a {
+    color: #007bff;
+  }
+
+  ol,
+  ul {
+    list-style: initial;
+    padding-left: 1rem;
+  }
+
+  blockquote {
+    color: #6a737d;
+    border-left: 6px solid #fcd34d;
+    background-color: #fffbeb;
+  }
 }
 
 @layer components {
