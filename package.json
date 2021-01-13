@@ -3,7 +3,7 @@
     "docusaurus": "docusaurus",
     "start": "npm run start:css && docusaurus start",
     "start:css": "postcss src/css/styles.css -o src/css/tailwind.css",
-    "build": "npm run build:css && docusaurus build",
+    "build": "npm run build:css && sleep 2 && docusaurus build",
     "build:css": "NODE_ENV=production postcss src/css/styles.css -o src/css/tailwind.css",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
