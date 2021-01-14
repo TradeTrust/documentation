@@ -69,7 +69,7 @@ const siteConfig = {
       copyright: `Copyright © ${new Date().getFullYear()} TradeTrust`,
     },
     algolia: {
-      apiKey: "1c7e0f08161cfc504494cff933eb8a37",
+      apiKey: process.env.ALGOLIA_API_KEY,
       indexName: "openattestation",
       algoliaOptions: {}, // Optional, if provided by Algolia
     },
