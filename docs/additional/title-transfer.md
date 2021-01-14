@@ -52,6 +52,12 @@ At the end of its' life cycle, a Title is surrendered back to the Issuer. This i
 
 The Title Escrow makes an allowance for this action to be performed by the Owner, only when he is also the holder. This action is termed **Surrender**.
 
-### Summary Table of Actions
+## Manage Assets
+
+User interface of how EBL is transfered/endorsed/surrendered using Manage Assets. (Note that this only appears for Transferable Record type of documents)
+
+![Manage Asset](/docs/additional/title-transfer/manage-asset.png)
+
+## Summary Table of Actions
 
 ![title-escrow-summary.png](/docs/additional/title-transfer/title-escrow-summary.png)

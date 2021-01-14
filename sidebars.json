@@ -69,7 +69,11 @@
       "additional/sdk-overview",
       "additional/tradetrust-api",
       "additional/custom-template",
-      "additional/infrastructure-template"
+      "additional/infrastructure-template",
+      "additional/dns-txt-record",
+      "additional/settings",
+      "additional/token-registry",
+      "additional/endorsement-chain"
     ]
   }
 }
