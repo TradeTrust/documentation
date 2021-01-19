@@ -64,7 +64,7 @@
       "appendix/token-registry",
       "appendix/document-creator",
       "appendix/endorsement-chain",
-      "appendix/address-resolution",
+      "appendix/identity-resolution",
       "appendix/infrastructure-template",
       "appendix/tradetrust-api"
     ]

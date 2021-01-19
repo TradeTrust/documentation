@@ -32,8 +32,8 @@ Before you construct your configuration file(`.json` file), please ensure you ha
 - [Document Store (for verifiable document)](/docs/verifiable-document/document-store)
 - [Token Registry (for transferable document)](/docs/transferable-record/token-registry)
 - [Configured DNS](/docs/advanced/configuring-dns)
-- [Custom Renderer](/docs/additional/custom-template)
-- [Document Storage](/docs/additional/infrastructure-template)
+- [Decentralized Renderer](/docs/component/decentralized-renderer-react-components)
+- [Document Storage](/docs/appendix/infrastructure-template#storage)
 
 Please refer to the approprate links to prepare them.
 
@@ -288,7 +288,7 @@ _Note: This document storage field is optional. Only add this section in if you 
 
 To use a document storage endpoint, you will have to have the endpoint infrastructure already set up and configured.
 
-You can refer to [infra template's storage section](/docs/additional/infrastructure-template) for more information.
+You can refer to [infra template's storage section](/docs/appendix/infrastructure-template#storage) for more information.
 
 The `"documentStorage"` field is an object which expects an `"url"` field. `"apiKey"` can also be added.
 
