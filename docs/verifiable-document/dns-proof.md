@@ -30,8 +30,6 @@ The `network-id` corresponds to the [network ID for the different Ethereum netwo
 | `3`        | Ethereum Testnet Ropsten | `ropsten` |
 | `4`        | Ethereum Testnet Rinkeby | `rinkeby` |
 
-#### Created with expiry
-
 Once the DNS TXT record has been successfully deployed, you will see the success message with the bound location.
 
 ```text

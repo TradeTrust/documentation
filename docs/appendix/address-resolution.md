@@ -1,7 +1,7 @@
 ---
-id: settings
-title: Settings
-sidebar_label: Settings
+id: address-resolution
+title: Address Resolution
+sidebar_label: Address Resolution
 ---
 
 The TradeTrust website allows you to create and verify documents, view resources and contact the team should

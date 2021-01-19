@@ -38,15 +38,13 @@
       "transferable-record/token-registry",
       "transferable-record/preparing-transferable-record",
       "transferable-record/title-escrow",
-      "transferable-record/issuing-transferable-record",
-      "transferable-record/going-further"
+      "transferable-record/issuing-transferable-record"
     ],
     "Components": [
       "component/overview",
       "component/open-attestation-cli",
       "component/open-attestation",
       "component/oa-verify",
-      "component/decentralized-renderer-react-components",
       "component/oa-encryption"
     ],
     "Advanced": [
@@ -60,20 +58,15 @@
       "appendix/glossary",
       "appendix/identity-wallet",
       "appendix/document-store-webapp",
-      "appendix/issuing-webapp"
-    ],
-    "Additional": [
-      "additional/tradetrust-use-case",
-      "additional/document-creator",
-      "additional/title-transfer",
-      "additional/sdk-overview",
-      "additional/tradetrust-api",
-      "additional/custom-template",
-      "additional/infrastructure-template",
-      "additional/dns-txt-record",
-      "additional/settings",
-      "additional/token-registry",
-      "additional/endorsement-chain"
+      "appendix/issuing-webapp",
+      "appendix/title-transfer",
+      "appendix/dns-txt-record",
+      "appendix/token-registry",
+      "appendix/document-creator",
+      "appendix/endorsement-chain",
+      "appendix/address-resolution",
+      "appendix/infrastructure-template",
+      "appendix/tradetrust-api"
     ]
   }
 }
