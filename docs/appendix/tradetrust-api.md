@@ -10,13 +10,13 @@ Currently there is an API endpoint for verifying documents issued on ropsten net
 
 ## Axios example
 
-`axios.post("https://verify-ropsten.tradetrust.io", WRAPPED_DOCUMENT)`
+`axios.post("https://verify-ropsten.tradetrust.io", ISSUED_DOCUMENT)`
 
 Example usage:
 
 ```
 axios
-  .post("https://verify-ropsten.tradetrust.io", WRAPPED_DOCUMENT)
+  .post("https://verify-ropsten.tradetrust.io", ISSUED_DOCUMENT)
   .then(function (response) {
     console.log(response.data.summary); // should return { all: true, documentStatus: true, documentIntegrity: true, issuerIdentity: true }
   })
@@ -27,7 +27,7 @@ axios
 
 ## Curl example
 
-`curl --location 'https://verify-ropsten.tradetrust.io' --request POST --data 'WRAPPED_DOCUMENT'`
+`curl --location 'https://verify-ropsten.tradetrust.io' --request POST --data 'ISSUED_DOCUMENT'`
 
 Return response of a verified document:
 
@@ -95,3 +95,5 @@ Return response of a verified document:
    ]
 }
 ```
+
+Remember to replace `ISSUED_DOCUMENT` with your own document json object in the above examples.
