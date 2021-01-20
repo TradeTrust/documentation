@@ -1,7 +1,7 @@
 ---
-id: dns-txt-record
-title: DNS Txt Record
-sidebar_label: DNS Txt Record
+id: issuer-dns-txt-record
+title: Issuer DNS Txt Record
+sidebar_label: Issuer DNS Txt Record
 ---
 
 In the current implementation of TradeTrust, we are using the Domain Name System (DNS) as the method of issuer identity verification.

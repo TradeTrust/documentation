@@ -59,14 +59,15 @@
       "appendix/identity-wallet",
       "appendix/document-store-webapp",
       "appendix/issuing-webapp",
-      "appendix/title-transfer",
-      "appendix/dns-txt-record",
-      "appendix/token-registry",
       "appendix/document-creator",
       "appendix/endorsement-chain",
       "appendix/identity-resolution",
       "appendix/infrastructure-template",
-      "appendix/tradetrust-api"
+      "appendix/issuer-dns-txt-record",
+      "appendix/title-transfer",
+      "appendix/token-registry",
+      "appendix/tradetrust-api",
+      "appendix/tradetrust-layer-boundaries"
     ]
   }
 }
