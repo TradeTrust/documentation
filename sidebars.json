@@ -1,0 +1,73 @@
+{
+  "docs": {
+    "Introduction": ["introduction/what-is-tradetrust"],
+    "Prerequisites": ["prerequisites"],
+    "Creating a wallet": ["wallet/via-cli", "wallet/via-ui"],
+    "Verifiable Document": [
+      "verifiable-document/overview",
+      {
+        "label": "Ethereum",
+        "type": "category",
+        "items": [
+          "verifiable-document/overview-document-store",
+          "verifiable-document/document-store",
+          "verifiable-document/dns-proof",
+          "verifiable-document/raw-document",
+          "verifiable-document/wrapping-document",
+          "verifiable-document/issuing-document",
+          "verifiable-document/revoking-document",
+          "verifiable-document/going-further"
+        ]
+      },
+      {
+        "label": "DID",
+        "type": "category",
+        "items": [
+          "verifiable-document/did/create",
+          "verifiable-document/did/dns",
+          "verifiable-document/did/raw-document",
+          "verifiable-document/did/wrapping-document",
+          "verifiable-document/did/signing-document",
+          "verifiable-document/did/revoking-document"
+        ]
+      },
+      "verifiable-document/comparison"
+    ],
+    "Transferable Record": [
+      "transferable-record/overview",
+      "transferable-record/token-registry",
+      "transferable-record/preparing-transferable-record",
+      "transferable-record/title-escrow",
+      "transferable-record/issuing-transferable-record"
+    ],
+    "Components": [
+      "component/overview",
+      "component/open-attestation-cli",
+      "component/open-attestation",
+      "component/oa-verify",
+      "component/oa-encryption"
+    ],
+    "Advanced": [
+      "advanced/how-does-it-work",
+      "advanced/verification-methods",
+      "advanced/identity-proofs",
+      "advanced/custom-renderer",
+      "advanced/configuring-dns"
+    ],
+    "Appendix": [
+      "appendix/glossary",
+      "appendix/identity-wallet",
+      "appendix/document-store-webapp",
+      "appendix/issuing-webapp",
+      "appendix/document-creator",
+      "appendix/endorsement-chain",
+      "appendix/identity-resolution",
+      "appendix/infrastructure-template",
+      "appendix/issuer-dns-txt-record",
+      "appendix/title-transfer",
+      "appendix/token-registry",
+      "appendix/tradetrust-api",
+      "appendix/tradetrust-layer-boundaries"
+    ]
+  }
+}

@@ -1,19 +1,47 @@
 {
-  "name": "docs",
-  "version": "1.0.0",
-  "description": "Documentation for Tradetrust",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run docz:dev",
-    "docz:dev": "docz dev",
-    "docz:build": "docz build"
+    "docusaurus": "docusaurus",
+    "start": "npm run start:css && docusaurus start",
+    "start:css": "postcss src/css/styles.css -o src/css/tailwind.css",
+    "build": "npm run build:css && docusaurus build",
+    "build:css": "NODE_ENV=production postcss src/css/styles.css -o src/css/tailwind.css",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "serve": "docusaurus serve",
+    "clear": "docusaurus clear"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "docz": "^2.0.0-rc.66",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0"
+    "@docusaurus/core": "^2.0.0-alpha.70",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.70",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "prettier": {
+    "printWidth": 120
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "^2.0.0-alpha.70",
+    "@tsconfig/docusaurus": "^1.0.2",
+    "@types/react": "^17.0.0",
+    "@types/react-helmet": "^6.1.0",
+    "@types/react-router-dom": "^5.1.7",
+    "autoprefixer": "^10.2.1",
+    "postcss": "^8.2.3",
+    "postcss-cli": "^8.3.1",
+    "prettier": "^2.2.1",
+    "tailwindcss": "^2.0.2",
+    "typescript": "^4.1.3"
   }
 }

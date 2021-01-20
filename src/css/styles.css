@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Ubuntu", sans-serif;
+    @apply text-gray-600;
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  h3 {
+    font-size: 24px;
+  }
+
+  h6 {
+    font-size: 16px;
+  }
+
+  a {
+    color: #007bff;
+  }
+
+  ol,
+  ul {
+    list-style: initial;
+    padding-left: 1rem;
+  }
+
+  blockquote {
+    color: #6a737d;
+    border-left: 6px solid #fcd34d;
+    background-color: #fffbeb;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply transition-colors;
+    @apply duration-200;
+    @apply ease-out;
+    @apply inline-block;
+    @apply rounded-lg;
+    @apply px-8;
+    @apply py-2;
+  }
+
+  .btn:hover {
+    @apply bg-opacity-80;
+    @apply no-underline;
+  }
+}
+
+/* any addon custom styles to docusaurus */
+.navbar__inner {
+  @apply container;
+  @apply mx-auto;
+}
+
+.footer__bottom {
+  @apply mt-16;
+  @apply text-gray-400;
+}
