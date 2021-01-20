@@ -15,7 +15,7 @@ const siteConfig = {
         docs: {
           path: "./docs",
           sidebarPath: require.resolve("./sidebars.json"),
-          editUrl: "https://github.com/Open-Attestation/documentation-website/tree/master/website",
+          editUrl: "https://github.com/TradeTrust/documentation/tree/master",
         },
         theme: {
           customCss: [require.resolve("./src/css/tailwind.css")],
@@ -41,7 +41,7 @@ const siteConfig = {
         {
           items: [
             {
-              html: `<a href="https://www.tradetrust.io" target="_blank" rel="noreferrer noopener"><img src="img/logo/logo-tt-full.svg" alt="TradeTrust Logo" style="max-width: 140px;" /></a>`,
+              html: `<a href="https://www.tradetrust.io" target="_blank" rel="noreferrer noopener"><img src="/static/img/logo/logo-tt-full.svg" alt="TradeTrust Logo" style="max-width: 140px;" /></a>`,
             },
           ],
         },

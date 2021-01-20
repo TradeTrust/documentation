@@ -220,7 +220,7 @@ The `"tokenRegistry"` field is a string that is the address for the token regist
 
 The `"documentStore"` field is a string that is the address for the document store, please refer to [deploying document store](/docs/verifiable-document/document-store) for more information.
 
-The `"identityProof"` field is an object that refers to the issuer identity, please refer to [open attestation's identity Proof](https://openattestation.com/docsadditional/identity-proofs) for more information.
+The `"identityProof"` field is an object that refers to the issuer identity, please refer to [identity Proof](/docs/advanced/identity-proofs) for more information.
 
 _Note: any UI schema should be included under defaults as `"uiSchema"` field_
 
