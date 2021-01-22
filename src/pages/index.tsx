@@ -18,29 +18,75 @@ const Home = () => {
               <p>{siteConfig.tagline}</p>
             </header>
             <div className="flex flex-wrap justify-center">
-              <div className="w-full lg:w-1/4 xl:w-1/5 lg:mx-16 px-4 mb-8 lg:mb-0">
-                <img className="mb-4" src={useBaseUrl("img/home/home-getting-started.png")} alt="Getting started" />
-                <h3 className="mb-2">Getting Started</h3>
-                <p>A step-by-step guide to setup TradeTrust according to your application’s requirements.</p>
-                <Link
-                  className="btn bg-blue text-white hover:text-white my-4"
-                  to={useBaseUrl("docs/introduction/what-is-tradetrust")}
-                >
-                  Learn more
-                </Link>
+              <div className="w-full lg:w-1/5 lg:mx-8 px-4 mb-8 lg:mb-0">
+                <div className="flex flex-col h-full">
+                  <div className="flex-grow mb-2">
+                    <img
+                      className="mx-auto mb-8"
+                      style={{ maxHeight: "150px" }}
+                      src={useBaseUrl("img/home/home-getting-started.png")}
+                      alt="Getting started"
+                    />
+                    <h3 className="mb-2">Getting Started</h3>
+                    <p>A step-by-step guide to setup TradeTrust according to your application’s requirements.</p>
+                  </div>
+                  <div className="flex-shrink-0">
+                    <Link
+                      className="btn bg-blue text-white hover:text-white my-4"
+                      to={useBaseUrl("docs/introduction/what-is-tradetrust")}
+                    >
+                      Get Started
+                    </Link>
+                  </div>
+                </div>
               </div>
-              <div className="w-full lg:w-1/4 xl:w-1/5 lg:mx-16 px-4 mb-8 lg:mb-0">
-                <img className="mb-4" src={useBaseUrl("img/home/home-tools.png")} alt="Tools" />
-                <h3 className="mb-2">Tools</h3>
-                <p>Explore additional tools you can build into TradeTrust applications to improve your workflow. </p>
-                <a
-                  className="btn bg-blue text-white hover:text-white my-4"
-                  href="https://toolkit.openattestation.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Learn more
-                </a>
+              <div className="w-full lg:w-1/5 lg:mx-8 px-4 mb-8 lg:mb-0">
+                <div className="flex flex-col h-full">
+                  <div className="flex-grow mb-2">
+                    <img
+                      className="mx-auto mb-8"
+                      style={{ maxHeight: "150px" }}
+                      src={useBaseUrl("img/home/home-gallery.png")}
+                      alt="Gallery"
+                    />
+                    <h3 className="mb-2">Gallery</h3>
+                    <p>TradeTrust documents and create yours today!</p>
+                  </div>
+                  <div className="flex-shrink-0">
+                    <a
+                      className="btn bg-blue text-white hover:text-white my-4"
+                      href="https://gallery.openattestation.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Explore
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="w-full lg:w-1/5 lg:mx-8 px-4 mb-8 lg:mb-0">
+                <div className="flex flex-col h-full">
+                  <div className="flex-grow mb-2">
+                    <img
+                      className="mx-auto mb-8"
+                      style={{ maxHeight: "150px" }}
+                      src={useBaseUrl("img/home/home-tools.png")}
+                      alt="Tools"
+                    />
+                    <h3 className="mb-2">Tools</h3>
+                    <p>Additional tools you can build into TradeTrust applications to improve your workflow. </p>
+                  </div>
+                  <div className="flex-shrink-0">
+                    <a
+                      className="btn bg-blue text-white hover:text-white my-4"
+                      href="https://toolkit.openattestation.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Explore
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
