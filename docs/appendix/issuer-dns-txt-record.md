@@ -15,7 +15,7 @@ By allowing the DNS system to be used as an identity registry, we let domain nam
 ## Rationale
 
 The DNS system is a key part of Internet infrastructure, and is a decentralised system - this means that there is a low barrier to entry and does not have a single point of failure.
-It allows issuers to simply tie their issuance to their domain name, (e.g `example.openattestation.com`). When a user views a certificate issued under this model, they will see "Document issued by `example.openattestation.com`".
+It allows issuers to simply tie their issuance to their domain name, (e.g `example.openattestation.com`). When a user views a document issued under this model, they will see "Document issued by `example.openattestation.com`".
 
 ## How it works
 
