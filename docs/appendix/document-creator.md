@@ -156,7 +156,7 @@ The `"forms"` field is an array of form object which expect `name`, `type`, `def
 
 The `"name"` field is a string that refers to the name of the form that will display when creating the document, as shown in the image below.
 
-![name](/docs/additional/document-creator/form-name.png)
+![name](/docs/appendix/document-creator/form-name.png)
 
 ### `"type"` field
 
@@ -334,9 +334,9 @@ _Note: **The testnet endpoints do not retain documents permanently and any store
 
 We have designed and created a simple generic template (Cover Letter) config file for you to use.
 
-Click <a href="/docs/additional/document-creator/generic-template.json" download="config-file.json">here</a> to download a config file.
+Click <a href="/docs/appendix/document-creator/generic-template.json" target="_blank" rel="noopener noreferrer" download="config-file.json">here</a> to download a config file.
 
-![Generic Template](/docs/additional/document-creator/generic-template.png)
+![Generic Template](/docs/appendix/document-creator/generic-template.png)
 
 Above is an example of how the cover letter will look like.
 
@@ -384,7 +384,7 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
 ```
 
 - `"documentStore"` - Update with your document store. For more infomation, click [here](/docs/verifiable-document/document-store).
-- `"location"` - Update with the Issuer's domain. For more information, click [here](https://openattestation.com/docs/additional/identity-proofs).
+- `"location"` - Update with the Issuer's domain. For more information, click [here](https://openattestation.com/docs/appendix/identity-proofs).
 - `"logo"` - Update with the Logo's URL, to be displayed accordingly as the image above.
 - `"backgroundColor"` - Update with the desired background color. The default color(#ffffff) will be used if color is not stated here. i.e. values for this field "#000000", "black"
 - `"titleColor"` - Update with the desired title text color. The default color(#4e4e50) will be used if color is not stated here. i.e. values for this field "#ffffff", "white"

@@ -8,7 +8,7 @@ sidebar_label: Endorsement Chain
 
 The endorsement chain provides an overview of the EBL's transaction history, showing which wallet is currently the EBL's ownership/holdership.
 
-![Endorsement Chain](/docs/additional/endorsement-chain/endorsement-chain.png)
+![Endorsement Chain](/docs/appendix/endorsement-chain/endorsement-chain.png)
 
 **Document has been issued** -> Document is created by issuer with Owner and Holder being empty at the start. Owner and Holder will be then be specified by issuer during issuance.
 
