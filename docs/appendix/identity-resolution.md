@@ -31,7 +31,7 @@ will act as a digital "yellow pages", allowing end users to see familiar identif
 Address Resolver endpoint has been added, when you verify a document with an identifiable Ethereum address, it will
 look like the following:
 
-![Address-resolved](/docs/additional/settings/address-resolved.png)
+![Address-resolved](/docs/appendix/settings/address-resolved.png)
 
 You can see that the entity's name, resolver details and source will also be displayed above the resolved Ethereum
 address.
@@ -55,7 +55,7 @@ https://github.com/Open-Attestation/demo-identifier-resolver.
 
 Clicking the "+ Add" button in the settings page will show you following:
 
-![Settings](/docs/additional/settings/settings.png)
+![Settings](/docs/appendix/settings/settings.png)
 
 We will need:
 

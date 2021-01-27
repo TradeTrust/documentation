@@ -8,7 +8,7 @@ TradeTrust supports the construct of assets which can have ownership assigned to
 
 An asset is simply defined as the contents of an Electronic Bill of Lading (EBL). It is important to note the distinction between the data contained within a Document describing an asset, and the actual ownership of the asset.
 
-![singularity](/docs/additional/token-registry/token-registry-singularity.svg)
+![singularity](/docs/appendix/token-registry/token-registry-singularity.svg)
 
 ## ERC721 Implementation
 
