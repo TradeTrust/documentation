@@ -332,13 +332,13 @@ _Note: **The testnet endpoints do not retain documents permanently and any store
 
 ## Generic Template (Cover Letter)
 
-We have designed and created a simple generic template (Cover Letter) config file for you to use.
+We have designed and created a simple generic template (cover letter) config file for you to use.
 
 Click <a href="/docs/appendix/document-creator/cover-letter/cover-letter-generic-template-config-file.json" target="_blank" rel="noopener noreferrer" download="cover-letter-generic-template-config-file.json">here</a> to download a config file.
 
 ![Generic Template - Cover Letter](/docs/appendix/document-creator/cover-letter/cover-letter-generic-template.png)
 
-Above is an example of how the cover letter will look like.
+Above is an example of how the generic cover letter will look like.
 
 To make full use of this generic template (cover letter), please update the config file as following.
 
@@ -408,15 +408,15 @@ _Note: **The "documentStorage" field is optional, if you do not have any documen
 
 ## Generic Template (Bill of Lading)
 
-We have designed and created a simple generic template (Bill of Lading) config file for you to use.
+We have designed and created a simple generic template (bill of lading) config file for you to use.
 
 Click <a href="/docs/appendix/document-creator/bill-of-lading/ebl-generic-template-config-file.json" target="_blank" rel="noopener noreferrer" download="ebl-generic-template-config-file.json">here</a> to download a config file.
 
 ![Generic Template - Bill of Lading](/docs/appendix/document-creator/bill-of-lading/ebl-generic-template.png)
 
-Above is an example of how the bill of lading will look like.
+Above is an example of how the generic bill of lading will look like.
 
-To make full use of this generic template (Bill of Lading), please update the config file as following.
+To make full use of this generic template (bill of lading), please update the config file as following.
 
 ### Fields to update
 
@@ -443,7 +443,7 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
         "type": "DNS-TXT",
         "location": "<Issuer's domain>"
       },
-      "name": "DEMO STORE",
+      "name": "DEMO TOKEN REGISTRY",
       "tokenRegistry": "<Your token registry>"
     }
   ],
