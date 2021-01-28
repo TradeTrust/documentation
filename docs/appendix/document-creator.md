@@ -336,7 +336,7 @@ We have designed and created a simple generic template (Cover Letter) config fil
 
 Click <a href="/docs/appendix/document-creator/cover-letter/cover-letter-generic-template-config-file.json" target="_blank" rel="noopener noreferrer" download="cover-letter-generic-template-config-file.json">here</a> to download a config file.
 
-![Generic Template](/docs/appendix/document-creator/cover-letter/cover-letter-generic-template.png)
+![Generic Template - Cover Letter](/docs/appendix/document-creator/cover-letter/cover-letter-generic-template.png)
 
 Above is an example of how the cover letter will look like.
 
@@ -384,7 +384,7 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
 ```
 
 - `"documentStore"` - Update with your document store. For more infomation, click [here](/docs/verifiable-document/document-store).
-- `"location"` - Update with the Issuer's domain. For more information, click [here](https://openattestation.com/docs/advanced/identity-proofs).
+- `"location"` - Update with the Issuer's domain. For more information, click [here](/docs/advanced/identity-proofs).
 - `"logo"` - Update with the Logo's URL, to be displayed accordingly as the image above.
 - `"backgroundColor"` - Update with the desired background color. The default color(#ffffff) will be used if color is not stated here. i.e. values for this field "#000000", "black"
 - `"titleColor"` - Update with the desired title text color. The default color(#4e4e50) will be used if color is not stated here. i.e. values for this field "#ffffff", "white"
@@ -412,7 +412,7 @@ We have designed and created a simple generic template (Bill of Lading) config f
 
 Click <a href="/docs/appendix/document-creator/bill-of-lading/ebl-generic-template-config-file.json" target="_blank" rel="noopener noreferrer" download="ebl-generic-template-config-file.json">here</a> to download a config file.
 
-![Generic Template](/docs/appendix/document-creator/bill-of-lading/ebl-generic-template.png)
+![Generic Template - Bill of Lading](/docs/appendix/document-creator/bill-of-lading/ebl-generic-template.png)
 
 Above is an example of how the bill of lading will look like.
 
@@ -468,7 +468,7 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
 ```
 
 - `"tokenRegistry"` - Update with your token registry. For more infomation, click [here](/docs/transferable-record/token-registry).
-- `"location"` - Update with the Issuer's domain. For more information, click [here](https://openattestation.com/docs/advanced/identity-proofs).
+- `"location"` - Update with the Issuer's domain. For more information, click [here](/docs/advanced/identity-proofs).
 - `"blNumber"` - Update with the BL Number, to be displayed accordingly as the image above.
 - `"companyName"` - Update with the Company Name, to be displayed accordingly as the image above.
 - `"field#"` - Update with the Field content, to be displayed accordingly as the image above.
