@@ -406,7 +406,7 @@ _Note: **The "documentStorage" field is optional, if you do not have any documen
 
 ---
 
-## Generic Template (Bill of Lading)
+## Generic Template (Transferable Record)
 
 We have designed and created a simple generic template (bill of lading) config file for you to use.
 
