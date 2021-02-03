@@ -1,6 +1,6 @@
 {
   "docs": {
-    "Introduction": ["introduction/what-is-tradetrust"],
+    "Introduction": ["introduction/what-is-tradetrust", "introduction/tradetrust-layer-boundaries"],
     "Prerequisites": ["prerequisites"],
     "Creating a wallet": ["wallet/via-cli", "wallet/via-ui"],
     "Verifiable Document": [
@@ -52,7 +52,8 @@
       "advanced/verification-methods",
       "advanced/identity-proofs",
       "advanced/custom-renderer",
-      "advanced/configuring-dns"
+      "advanced/configuring-dns",
+      "advanced/non-ethereum-usage"
     ],
     "Appendix": [
       "appendix/glossary",
@@ -66,8 +67,7 @@
       "appendix/issuer-dns-txt-record",
       "appendix/title-transfer",
       "appendix/token-registry",
-      "appendix/tradetrust-api",
-      "appendix/tradetrust-layer-boundaries"
+      "appendix/tradetrust-api"
     ]
   }
 }
