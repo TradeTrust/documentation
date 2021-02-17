@@ -6,6 +6,19 @@ sidebar_label: TradeTrust Layer Boundaries
 
 This document serves to document the layer boundaries of TradeTrust, helping to illustrate clearly the points at which a 3rd party TradeTrust development effort might span.
 
+## Summary Table
+&nbsp;
+
+|                             What you get for using each level                            | L-0 | L-1 | L-2 | L-3 | L-4 |
+|:----------------------------------------------------------------------------------------:|:---:|:---:|:---:|:---:|:---:|
+| .tt (OpenAttestation) file structure for<br />building your own ledger infrastructure with | Y   | Y   | Y   | Y   | Y   |
+| Documents that can be verified on TradeTrust.io*                                         | N   | Y   | Y   | Y   | Y   |
+| MLTER compliant smart contracts out of the box                                           | N   | N   | Y   | Y   | Y   |
+| Libraries and tooling for ease of interactions <br />with Ethereum network                 | N   | N   | N   | Y   | Y   |
+| Browser applications for document verification <br />and issuance workflows                | N   | N   | N   | N   | Y   |
+
+&nbsp;
+
 ### L(-1): Document Format
 
 The basic primitive in TradeTrust is the OpenAttestation document format. This format serves to provide a basis for all documents in TradeTrust to have both verifiable integrity and provenance.
@@ -31,7 +44,7 @@ For a parallel universe integration, documents and assets issued on the alternat
 
 ### L1: Protocol Integration
 
-Reference Implementation: [OpenAttestation/TradeTrust Solidity (Ethereum) Contracts](https://github.com/Open-Attestation/oa-token/tree/master/contracts)
+Reference Implementations: [OpenAttestation/TradeTrust Document Store library](https://github.com/Open-Attestation/document-store) and [OpenAttestation/Tradetrust Token Registry Library](https://github.com/open-attestation/token-registry)
 
 L1 provides for an implementation of the TradeTrust protocol on Ethereum, based on the combination of a ERC721-compliant non-fungible token registry smart contract and our own Title Escrow smart contract. This layer provides the assurance that the MLETR requires for compliance.
 
@@ -39,11 +52,11 @@ An example of an alternative implementation here could be a Viper port of the sm
 
 ### L2: Library Level Integration
 
-Reference Implementation: [GitHub - Open-Attestation/oa-verify](https://github.com/Open-Attestation/oa-verify), [OpenAttestation/TradeTrust Document Store library](https://github.com/Open-Attestation/document-store) and [OpenAttestation/Tradetrust Token Registry Library](https://github.com/open-attestation/token-registry).
+Reference Implementation: [GitHub - Open-Attestation/oa-verify](https://github.com/Open-Attestation/oa-verify), .
 
 L2 provides for implementations of userland libraries that interact with the Ethereum smart contracts in L1 as well as OpenAttestation documents in L(-1). These libraries are for ease of interaction, abstracting out the state and wallet management functionalities that require a lot of integration work.
 
-Example of alternative implementation: Java port of oa-token library, open-attestation-cli, or any other such libraries.
+Example of alternative implementation: Java or rust port of [open-attestation](https://github.com/Open-Attestation/open-attestation), oa-verify, [open-attestation-cli](https://github.com/Open-Attestation/open-attestation-cli), or any other such libraries.
 
 ### L3: System Level Integration
 
