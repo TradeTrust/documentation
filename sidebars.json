@@ -1,6 +1,6 @@
 {
   "docs": {
-    "Introduction": ["introduction/what-is-tradetrust", "introduction/tradetrust-layer-boundaries"],
+    "Introduction": ["introduction/what-is-tradetrust", "introduction/tradetrust-layer-boundaries", "introduction/faq"],
     "Prerequisites": ["prerequisites"],
     "Creating a wallet": ["wallet/via-cli", "wallet/via-ui"],
     "Verifiable Document": [

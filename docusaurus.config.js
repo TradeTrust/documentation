@@ -68,8 +68,8 @@ const siteConfig = {
       copyright: `Copyright © ${new Date().getFullYear()} TradeTrust`,
     },
     algolia: {
-      apiKey: "1c7e0f08161cfc504494cff933eb8a37",
-      indexName: "openattestation",
+      apiKey: "2c96d58935843a5e1a0f4e53ea18300e",
+      indexName: "tradetrust",
       algoliaOptions: {},
     },
     prism: {
