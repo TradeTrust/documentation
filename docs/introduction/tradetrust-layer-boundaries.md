@@ -7,15 +7,16 @@ sidebar_label: TradeTrust Layer Boundaries
 This document serves to document the layer boundaries of TradeTrust, helping to illustrate clearly the points at which a 3rd party TradeTrust development effort might span.
 
 ## Summary Table
+
 &nbsp;
 
-|                             What you get for using each level                            | L-0 | L-1 | L-2 | L-3 | L-4 |
-|:----------------------------------------------------------------------------------------:|:---:|:---:|:---:|:---:|:---:|
-| .tt (OpenAttestation) file structure for<br />building your own ledger infrastructure with | Y   | Y   | Y   | Y   | Y   |
-| Documents that can be verified on TradeTrust.io*                                         | N   | Y   | Y   | Y   | Y   |
-| MLTER compliant smart contracts out of the box                                           | N   | N   | Y   | Y   | Y   |
-| Libraries and tooling for ease of interactions <br />with Ethereum network                 | N   | N   | N   | Y   | Y   |
-| Browser applications for document verification <br />and issuance workflows                | N   | N   | N   | N   | Y   |
+|                             What you get for using each level                              | L-0 | L-1 | L-2 | L-3 | L-4 |
+| :----------------------------------------------------------------------------------------: | :-: | :-: | :-: | :-: | :-: |
+| .tt (OpenAttestation) file structure for<br />building your own ledger infrastructure with |  Y  |  Y  |  Y  |  Y  |  Y  |
+|                     Documents that can be verified on TradeTrust.io\*                      |  N  |  Y  |  Y  |  Y  |  Y  |
+|                       MLTER compliant smart contracts out of the box                       |  N  |  N  |  Y  |  Y  |  Y  |
+|         Libraries and tooling for ease of interactions <br />with Ethereum network         |  N  |  N  |  N  |  Y  |  Y  |
+|        Browser applications for document verification <br />and issuance workflows         |  N  |  N  |  N  |  N  |  Y  |
 
 &nbsp;
 
@@ -36,11 +37,11 @@ The layer here provides for alternative ledger interoperation with the TradeTrus
 There are two different categories of integration at this level:
 
 - Shared universe integration, in which atomic swaps are required - in the sense that it must not be possible to create the same asset on both ledgers.
-- Parallel universe integration, in which the alternative implementation exists on its own with no dependence on TradeTrust(Ethereum). This means that any issuer that wishes to transfer an asset between the two ledgers should ensure that the asset document on the originating ledger is completely destroyed or invalidated before issuance occurs on the destination ledger. 
+- Parallel universe integration, in which the alternative implementation exists on its own with no dependence on TradeTrust(Ethereum). This means that any issuer that wishes to transfer an asset between the two ledgers should ensure that the asset document on the originating ledger is completely destroyed or invalidated before issuance occurs on the destination ledger.
 
 In the event that a shared universe integration is proposed, it has to be a public, permissionless network similar to TradeTrust (Ethereum). This means that no entity should be able to exclude another entity from participating on the network. The network has to also be trustlessly verifiable by both participants, and the ledger state should be accessible publicly.
 
-For a parallel universe integration, documents and assets issued on the alternative ledger will not be verifiable on [TradeTrust.io](https://tradetrust.io), but implementers are welcome to create their own stack spanning L0 to L4. They may wish to rely on some of the work already done by TradeTrust/OpenAttestation to reduce the amount of bespoke work required. For example, [oa-verify](https://github.com/Open-Attestation/oa-verify) is very [easily modified](/docs/advanced/verification-methods) to support [alternative verification methods](/docs/advanced/non-ethereum-usage).
+For a parallel universe integration, documents and assets issued on the alternative ledger will not be verifiable on [TradeTrust.io](https://tradetrust.io), but implementers are welcome to create their own stack spanning L0 to L4. They may wish to rely on some of the work already done by TradeTrust/OpenAttestation to reduce the amount of bespoke work required. For example, [oa-verify](https://github.com/Open-Attestation/oa-verify) is very [easily modified](https://www.openattestation.com/docs/advanced/verification-methods) to support [alternative verification methods](/docs/advanced/alternative-ledgers).
 
 ### L1: Protocol Integration
 
