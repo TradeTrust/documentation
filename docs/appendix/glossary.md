@@ -10,18 +10,6 @@ This page details the terminologies commonly used in the documentation.
 
 Ether is the cryptocurrency used in the Ethereum blockchain network. Ethers are used to create and interact with smart contracts. They can either be mined or bought via fiat currency (e.g. Singapore Dollars).
 
-### Sign
-
-Placeholder
-
-### Signature
-
-Placeholder
-
-### Smart contract
-
-Placeholder
-
 ### Wallet
 
 [Ethereum Wallets](https://ethereum.org/en/wallets/#:~:text=Ethereum%20wallets%20are%20applications%20that,funds%20and%20manage%20your%20ETH%20)

@@ -1,5 +1,5 @@
 ---
-id: non-ethereum-usage
+id: alternative-ledgers
 title: Using TradeTrust and OpenAttestation with non-Ethereum ledgers
 sidebar_label: Alternative Ledgers
 ---

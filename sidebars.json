@@ -1,73 +1,20 @@
 {
   "docs": {
-    "Introduction": ["introduction/what-is-tradetrust", "introduction/tradetrust-layer-boundaries", "introduction/faq"],
-    "Prerequisites": ["prerequisites"],
-    "Creating a wallet": ["wallet/via-cli", "wallet/via-ui"],
-    "Verifiable Document": [
-      "verifiable-document/overview",
-      {
-        "label": "Ethereum",
-        "type": "category",
-        "items": [
-          "verifiable-document/overview-document-store",
-          "verifiable-document/document-store",
-          "verifiable-document/dns-proof",
-          "verifiable-document/raw-document",
-          "verifiable-document/wrapping-document",
-          "verifiable-document/issuing-document",
-          "verifiable-document/revoking-document",
-          "verifiable-document/going-further"
-        ]
-      },
-      {
-        "label": "DID",
-        "type": "category",
-        "items": [
-          "verifiable-document/did/create",
-          "verifiable-document/did/dns",
-          "verifiable-document/did/raw-document",
-          "verifiable-document/did/wrapping-document",
-          "verifiable-document/did/signing-document",
-          "verifiable-document/did/revoking-document"
-        ]
-      },
-      "verifiable-document/comparison"
+    "Introduction": ["introduction/what-is-tradetrust", "introduction/tradetrust-layer-boundaries"],
+    "Overview": ["overview/issuer-dns-txt-record", "overview/token-registry", "overview/title-transfer"],
+    "Technical": ["technical/open-attestation"],
+    "TradeTrust Website": [
+      "tradetrust-website/overview",
+      "tradetrust-website/endorsement-chain",
+      "tradetrust-website/identity-resolution"
     ],
-    "Transferable Record": [
-      "transferable-record/overview",
-      "transferable-record/token-registry",
-      "transferable-record/preparing-transferable-record",
-      "transferable-record/title-escrow",
-      "transferable-record/issuing-transferable-record"
+    "Document Creator": [
+      "document-creator/overview",
+      "document-creator/prerequisites",
+      "document-creator/config-file",
+      "document-creator/generic-templates"
     ],
-    "Components": [
-      "component/overview",
-      "component/open-attestation-cli",
-      "component/open-attestation",
-      "component/oa-verify",
-      "component/oa-encryption"
-    ],
-    "Advanced": [
-      "advanced/how-does-it-work",
-      "advanced/verification-methods",
-      "advanced/identity-proofs",
-      "advanced/custom-renderer",
-      "advanced/configuring-dns",
-      "advanced/non-ethereum-usage"
-    ],
-    "Appendix": [
-      "appendix/glossary",
-      "appendix/identity-wallet",
-      "appendix/document-store-webapp",
-      "appendix/issuing-webapp",
-      "appendix/document-creator",
-      "appendix/endorsement-chain",
-      "appendix/identity-resolution",
-      "appendix/infrastructure-template",
-      "appendix/issuer-dns-txt-record",
-      "appendix/title-transfer",
-      "appendix/token-registry",
-      "appendix/tradetrust-api"
-    ]
+    "Advanced": ["advanced/alternative-ledgers"],
+    "Appendix": ["appendix/glossary", "appendix/infrastructure-template", "appendix/tradetrust-api"]
   }
 }
