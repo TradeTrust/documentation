@@ -5,6 +5,7 @@
     "Technical": ["technical/open-attestation"],
     "TradeTrust Website": [
       "tradetrust-website/overview",
+      "tradetrust-website/network-bar",
       "tradetrust-website/endorsement-chain",
       "tradetrust-website/identity-resolution"
     ],
@@ -12,7 +13,12 @@
       "document-creator/overview",
       "document-creator/prerequisites",
       "document-creator/config-file",
-      "document-creator/generic-templates"
+      "document-creator/data-file"
+    ],
+    "Generic Templates": [
+      "generic-templates/overview",
+      "generic-templates/cover-letter",
+      "generic-templates/bill-of-lading"
     ],
     "Advanced": ["advanced/alternative-ledgers"],
     "Appendix": ["appendix/glossary", "appendix/infrastructure-template", "appendix/tradetrust-api"]

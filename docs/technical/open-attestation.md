@@ -8,6 +8,6 @@ OpenAttestation is an open-sourced framework to notarise documents using the blo
 
 TradeTrust uses OpenAttestation under the hood.
 
-#### For Developers:
-
-Refer to the technical [documentation](https://www.openattestation.com/docs/getting-started) to get started.
+> #### For Developers:
+>
+> Refer to the technical [documentation](https://www.openattestation.com/docs/getting-started) to get started.

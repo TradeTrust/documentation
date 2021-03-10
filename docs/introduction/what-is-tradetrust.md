@@ -12,7 +12,7 @@ This notarisation foundation is provided by another project, the [OpenAttestatio
 
 ### Verification Documents
 
-![simple signing flow](/docs/introduction/simple-signing.svg)
+![simple signing flow](/docs/introduction/what-is-tradetrust/simple-signing.svg)
 
 The fingerprint of the signed TradeTrust file is then committed to a `Document Store` smart contract on the Ethereum Blockchain, which serves as an immutable ledger.
 
