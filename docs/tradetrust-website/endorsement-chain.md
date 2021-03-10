@@ -4,11 +4,9 @@ title: Endorsement Chain
 sidebar_label: Endorsement Chain
 ---
 
-## History of transactions
-
 The endorsement chain provides an overview of the EBL's transaction history, showing which wallet is currently the EBL's ownership/holdership.
 
-![Endorsement Chain](/docs/appendix/endorsement-chain/endorsement-chain.png)
+![Endorsement Chain](/docs/tradetrust-website/endorsement-chain/endorsement-chain.png)
 
 **Document has been issued** -> Document is created by issuer with Owner and Holder being empty at the start. Owner and Holder will be then be specified by issuer during issuance.
 
@@ -21,3 +19,5 @@ The endorsement chain provides an overview of the EBL's transaction history, sho
 **Surrender of Document** -> When Owner and Holder are the same, the current Owner/Holder can surrender the document to issuer. Once the document is surrendered, both Owner and Holder values will be empty because it is no longer in circulation.
 
 **Surrender of document accepted** -> Document is shredded and destroyed.
+
+> The endorsement chain is only viewable for Transferable Record documents.

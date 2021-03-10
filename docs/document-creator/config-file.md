@@ -4,8 +4,6 @@ title: Config File
 sidebar_label: Config File
 ---
 
-## Configuration file
-
 The configuration file is a JSON file that contains information to configure the application to suit your business needs.
 
 ### Config file structure
@@ -121,7 +119,7 @@ The `"forms"` field is an array of form object which expect `name`, `type`, `def
 
 The `"name"` field is a string that refers to the name of the form that will display when creating the document, as shown in the image below.
 
-![name](/docs/appendix/document-creator/form-name.png)
+![name](/docs/document-creator/config-file/form-name.png)
 
 ### `"type"` field
 

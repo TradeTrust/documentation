@@ -10,7 +10,7 @@ Different entities may choose to use different pseudonyms (in our case Ethereum 
 
 For TradeTrust, currently there are 2 ways of resolving identities, 1 is through a local address book, the other is via 3rd party resolver API. These are accessible from the gear icon on the far right of the top navigation bar on TradeTrust website.
 
-![Setting](/docs/appendix/identity-resolution/settings.png)
+![Setting](/docs/tradetrust-website/identity-resolution/settings.png)
 
 ## Address Book (Local)
 
@@ -19,7 +19,7 @@ Address Book is like a local phone book. The data is in a csv/excel format, wher
 - `identifier` (refers to the ethereum address)
 - `name` (refers to the resolved name that the company defined in their csv/excel sheet).
 
-![Addressbook](/docs/appendix/identity-resolution/address-book.png)
+![Addressbook](/docs/tradetrust-website/identity-resolution/address-book.png)
 
 After importing the csv/excel sheet, previously ethereum addresses (where resolvable) should now be resolved to recognizable identities as defined within the imported sheet.
 
@@ -31,7 +31,7 @@ will act as a digital "yellow pages", allowing end users to see familiar identif
 Address Resolver endpoint has been added, when you verify a document with an identifiable Ethereum address, it will
 look like the following:
 
-![Address-resolved](/docs/appendix/settings/address-resolved.png)
+![Address-resolved](/docs/tradetrust-website/identity-resolution/address-resolved.png)
 
 You can see that the entity's name, resolver details and source will also be displayed above the resolved Ethereum
 address.
@@ -55,7 +55,7 @@ https://github.com/Open-Attestation/demo-identifier-resolver.
 
 Clicking the "+ Add" button in the settings page will show you following:
 
-![Settings](/docs/appendix/settings/settings.png)
+![Settings](/docs/tradetrust-website/identity-resolution/address-resolver.png)
 
 We will need:
 
@@ -83,5 +83,3 @@ A hosted endpoint is available at [https://demo-resolver.tradetrust.io/identifie
 
 For the API to know that you are an authorised user, an API Key is required and you will need to pass it in through an
 API Header. An example would be `x-api-key` for the API Header and `DEMO` for the API Key.
-
----
