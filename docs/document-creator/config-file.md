@@ -41,7 +41,6 @@ As of now, we only cater to 3 networks.
 
 - Mainnet : `"homestead"`
 - Ropsten testnet : `"ropsten"`
-- Rinkeby testnet : `"rinkeby"`
 
 ---
 
@@ -267,7 +266,7 @@ The `"url"` field accepts a string which will be the endpoint of the document st
 
 _Note: please ensure that this document storage endpoint has a path `"/storage/queue"` that will return the queue number for storing your document in the document storage endpoint._
 
-For the convenience of developers, we provide the below document storage endpoints for the Ropsten and Rinkeby testnets.
+For the convenience of developers, we provide the below document storage endpoints for the Ropsten testnets.
 
 #### Ropsten document storage endpoint
 
@@ -276,16 +275,7 @@ For the convenience of developers, we provide the below document storage endpoin
 
 ```
 
-#### Rinkeby document storage endpoint
-
-```
-"url": "https://api-rinkeby.tradetrust.io/storage"
-
-```
-
-These endpoints may only be used for valid and issued documents on the respective test networks, and may not be mixed.
-
-For example, a valid Ropsten document will fail validation and fail to be uploaded if the Rinkeby endpoint is specified.
+These endpoints may only be used for valid and issued documents on the respective networks, and may not be mixed.
 
 An API key is not required to be provided for these endpoints as they will accept unauthenticated requests.
 
