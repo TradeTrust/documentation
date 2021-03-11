@@ -5,7 +5,7 @@
     "Technical": ["technical/open-attestation"],
     "TradeTrust Website": [
       "tradetrust-website/overview",
-      "tradetrust-website/network-bar",
+      "tradetrust-website/info-bar",
       "tradetrust-website/endorsement-chain",
       "tradetrust-website/identity-resolution"
     ],
