@@ -110,6 +110,12 @@ The `"forms"` field is an array of form object which expect `name`, `type`, `def
   "type": "VERIFIABLE_DOCUMENT",
   "defaults": {...},
   "schema": {...},
+  "uiSchema": {
+    "remarks": {
+      "ui:widget": "textarea"
+    }
+  },
+  "extension": "tt",
   "attachments": {...}
 }
 ```
@@ -157,11 +163,6 @@ Below is an example of the `"defaults"` field:
   "logo": "https://www.aretese.com/images/govtech-animated-logo.gif",
   "title": "Documents Bundle",
   "remarks": "Some very important documents in here for some submission",
-  "uiSchema": {
-    "remarks": {
-      "ui:widget": "textarea"
-    }
-  }
 },
 ```
 
@@ -183,8 +184,6 @@ The `"tokenRegistry"` field is a string that is the address for the token regist
 The `"documentStore"` field is a string that is the address for the document store, please refer to [deploying document store](https://www.openattestation.com/docs/verifiable-document/document-store) for more information.
 
 The `"identityProof"` field is an object that refers to the issuer identity, please refer to [identity Proof](https://www.openattestation.com/docs/advanced/identity-proofs) for more information.
-
-_Note: any UI schema should be included under defaults as `"uiSchema"` field_
 
 ### `"schema"` field
 
@@ -233,9 +232,39 @@ The `"accept"` accepts an array of string, that are file types, which will set t
 
 If you want to accept all file types, remove the entire `"accept"` line from `"attachments"` object.
 
+### `"UiSchema"` field
+
+```json
+"uiSchema": {
+    "remarks": {
+      "ui:widget": "textarea"
+    }
+  }
+```
+
+_Note: This uiSchema field is optional. Only add this section in if you want to provide information on how the selected field should be rendered._
+
+The `"uiSchema"` field is basically an object literal providing information on how the selected field should be rendered.
+
+For more information regarding the uiSchema field, please visit [react jsonschema form documents.](https://react-jsonschema-form.readthedocs.io/en/latest/api-reference/uiSchema/)
+
+### `"Extension"` field
+
+```json
+"extension": "tradetrust",
+```
+
+_Note: This extension field is optional. Only add this section in if you want to generate a document with the specific extension._
+
+The `"extension"` field is a string that refers to the extension of the created document.
+
+By default, if this field is not present, it will create the document with "tt" as the extension.
+
+_i.e. "document-1.tt"_
+
 ---
 
-### `"Document Storage"` field
+## Document Storage field
 
 ```json
 "documentStorage": {

@@ -27,11 +27,11 @@
         "titleColor": "<Title text color>",
         "descriptionColor": "<Remarks text color>",
         "title": "<Default title for the document>",
-        "remarks": "<Default remarks for the document>",
-        "uiSchema": {
-          "remarks": {
-            "ui:widget": "textarea"
-          }
+        "remarks": "<Default remarks for the document>"
+      },
+      "uiSchema": {
+        "remarks": {
+          "ui:widget": "textarea"
         }
       },
       "schema": {
