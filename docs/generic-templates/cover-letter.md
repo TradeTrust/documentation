@@ -46,11 +46,6 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
   "descriptionColor": "<Remarks text color>",
   "title": "<Default title for the document>",
   "remarks": "<Default remarks for the document>",
-  "uiSchema": {
-    "remarks": {
-      "ui:widget": "textarea"
-    }
-  }
 },
 
 ```

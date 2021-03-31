@@ -54,11 +54,6 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
   "field7": "<Field7 text>",
   "field8": "<Field8 text>",
   "field9": "<Field9 text>",
-      "uiSchema": {
-    "logo": {
-      "ui:widget": "file"
-    }
-  }
 },
 
 ```
