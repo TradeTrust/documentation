@@ -55,7 +55,7 @@ const Home = () => {
                   <div className="flex-shrink-0">
                     <a
                       className="btn bg-blue text-white hover:text-white my-4"
-                      href="https://gallery.openattestation.com/"
+                      href="https://gallery.openattestation.com/tag/trade-trust"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
