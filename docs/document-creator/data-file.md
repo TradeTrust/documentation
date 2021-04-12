@@ -48,7 +48,8 @@ As of today, you can:
         "weight": "20",
         "measurement": "100"
       }
-    ]
+    ],
+    "fileName" : "Demo Filename 1"
   },
   "ownership": {
     "beneficiaryAddress": "0xa61b056da0084a5f391ec137583073096880c2e3",
