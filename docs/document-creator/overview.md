@@ -4,7 +4,7 @@ title: Overview
 sidebar_label: Overview
 ---
 
-You can use the [document creator](https://creator.tradetrust.io) to create and issue your document. To use this functionality, you will need a configuration file(`.json` file) and some prerequisite information.
+You can use the [document creator](https://creator.tradetrust.io) to create and issue your document. To use this functionality, you will need a configuration file(`.json` file) and some [prerequisite information](/docs/document-creator/prerequisites).
 
 ## What is document creator about?
 
