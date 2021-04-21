@@ -4,7 +4,7 @@ title: Open Attestation
 sidebar_label: Open Attestation
 ---
 
-OpenAttestation is an open-sourced framework to notarise documents using the blockchain. Documents issued with this technology are cryptographically trustworthy and can be verified independently.
+OpenAttestation is an open-sourced framework to endorse and verify documents using the blockchain. Documents issued with this technology are cryptographically trustworthy and can be verified independently.
 
 TradeTrust uses OpenAttestation under the hood.
 

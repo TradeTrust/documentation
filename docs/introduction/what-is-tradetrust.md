@@ -8,7 +8,7 @@ TradeTrust is a set of Governance & Legal Frameworks, Standards and future-ready
 
 The foundation required to accomplish this is the ability to trace the provenance of digitally issued documents as well as verify their integrity.
 
-This notarisation foundation is provided by another project, the [OpenAttestation framework](https://github.com/Open-Attestation/open-attestation). The OpenAttestation framework provides a method to format data so that it can be fingerprinted, and then notarised on a trusted platform, such as the Ethereum blockchain.
+This document endorsement and verification foundation is provided by another project, the [OpenAttestation framework](https://github.com/Open-Attestation/open-attestation). The OpenAttestation framework provides a method to format data so that it can be fingerprinted, and then verified on a trusted platform, such as the Ethereum blockchain.
 
 ### Verification Documents
 
