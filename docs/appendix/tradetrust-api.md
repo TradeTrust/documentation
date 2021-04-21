@@ -6,17 +6,25 @@ sidebar_label: TradeTrust API
 
 ### Verify endpoint
 
-Currently there is an API endpoint for verifying documents issued on ropsten network at: https://verify-ropsten.tradetrust.io. However it is recommended that you setup your own, refer to the <a href="/docs/appendix/infrastructure-template#verify">guide</a> on how.
+Currently there is an API endpoint for verifying documents issued on both ropsten and rinkeby network:
+
+```
+ropsten: https://api-ropsten.tradetrust.io/verify
+rinkeby: https://api-rinkeby.tradetrust.io/verify
+
+```
+
+However it is recommended that you setup your own, refer to the <a href="/docs/appendix/infrastructure-template#verify">guide</a> on how.
 
 ## Axios example
 
-`axios.post("https://verify-ropsten.tradetrust.io", ISSUED_DOCUMENT)`
+`axios.post("https://api-ropsten.tradetrust.io/verify", { document: ISSUED_DOCUMENT })`
 
 Example usage:
 
 ```
 axios
-  .post("https://verify-ropsten.tradetrust.io", ISSUED_DOCUMENT)
+  .post("https://api-ropsten.tradetrust.io/verify", { document: ISSUED_DOCUMENT })
   .then(function (response) {
     console.log(response.data.summary); // should return { all: true, documentStatus: true, documentIntegrity: true, issuerIdentity: true }
   })
@@ -27,7 +35,7 @@ axios
 
 ## Curl example
 
-`curl --location 'https://verify-ropsten.tradetrust.io' --request POST --data 'ISSUED_DOCUMENT'`
+`curl -H "Content-Type: application/json" --request POST --data '{"document":"ISSUED_DOCUMENT"}' https://api-ropsten.opencerts.io/verify`
 
 Return response of a verified document:
 

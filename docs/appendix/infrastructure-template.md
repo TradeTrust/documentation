@@ -67,6 +67,12 @@ To deploy the Verify API to be used on Ropsten:
 NETWORK=ropsten npm run deploy:verify -- --stage stg
 ```
 
+To deploy the Verify API to be used on Rinkeby:
+
+```bash
+NETWORK=rinkeby npm run deploy:verify -- --stage stg
+```
+
 To deploy it for verifying against Main Net:
 
 ```bash
@@ -91,6 +97,12 @@ To deploy this endpoint for Ropsten documents:
 
 ```bash
 NETWORK=ropsten npm run deploy:storage -- --stage stg
+```
+
+To deploy this endpoint for Rinkeby documents:
+
+```bash
+NETWORK=rinkeby npm run deploy:storage -- --stage stg
 ```
 
 To deploy it for Main Net documents:
