@@ -49,4 +49,11 @@ The following is an example for
 openatts net=ethereum netId=3 addr=0x9db35C07350e9a16C828dAda37fd9c2923c75812
 ```
 
+1. `Rinkeby Test Net`
+1. Document Store address: `0x9db35C07350e9a16C828dAda37fd9c2923c75812`
+
+```javascript
+openatts net=ethereum netId=4 addr=0x9db35C07350e9a16C828dAda37fd9c2923c75812
+```
+
 Optionally, you may also publish an `A record` at the same address so that the if the user clicks on the URL, they can see a helpful website with your information on it.
