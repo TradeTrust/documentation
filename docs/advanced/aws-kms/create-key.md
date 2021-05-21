@@ -12,6 +12,6 @@ Look for key management service in AWS search and proceed to create a key.
 
 <img src="/docs/advanced/aws-kms/create-key-02.png" alt="configure key" width="800" class="my-4" />
 
-Configure key by selecting `Asymmetric` + `Sign and verify` option. Key specification to choose is `ECC_SECG_P256K1`. Thereafter, assign respective IAM rights to this key.
+Configure key by selecting `Asymmetric` + `Sign and verify` option. Key specification to choose is `ECC_SECG_P256K1`. Thereafter, assign respective IAM user(s) to this key.
 
 Once done, take note of the generated `Key ID`, you will need this later on.

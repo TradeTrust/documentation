@@ -65,7 +65,7 @@ const document = {
 };
 ```
 
-Then sign the document (make sure to wrap it first):
+Then sign the document (make sure to wrap document first):
 
 ```
 signDocument(
@@ -87,12 +87,14 @@ signDocument(
 
 require("dotenv").config();
 
+const fs = require("fs");
+
 const {
   wrapDocument,
   signDocument,
   SUPPORTED_SIGNING_ALGORITHM,
 } = require("@govtechsg/open-attestation");
-const fs = require("fs");
+
 const { AwsKmsSigner } = require("ethers-aws-kms-signer");
 
 const signer = new AwsKmsSigner({
@@ -102,7 +104,7 @@ const signer = new AwsKmsSigner({
   keyId: process.env.KMS_KEY_ID,
 });
 
-const demo = async () => {
+const didSignDemo = async () => {
   const address = await signer.getAddress();
 
   const document = {
@@ -136,10 +138,11 @@ const demo = async () => {
   ).then((response) => {
     const data = JSON.stringify(response, null, 2);
     fs.writeFileSync("./document.json", data);
+    console.log(data);
   });
 };
 
-demo();
+didSignDemo();
 ```
 
 ```
@@ -154,7 +157,7 @@ demo();
     "test": "echo \"Error: no test specified\" && exit 1",
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "dotenv": "^9.0.2"
   },
@@ -175,3 +178,5 @@ KMS_KEY_ID=<Key ID>
 ```
 
 Update the .env variables, `npm i` then `node index.js`. You should get a signed document.json that can be verified by DID method.
+
+<img src="/docs/advanced/aws-kms/did-signed.png" alt="did signed" class="my-4" />

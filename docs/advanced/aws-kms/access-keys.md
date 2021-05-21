@@ -4,7 +4,7 @@ title: Access keys
 sidebar_label: Access keys
 ---
 
-Before being able to interact with the created key in AWS, you will need to retrieve your account's access key ID and secret access key.
+Before being able to interact with the created key in AWS, you will need to retrieve both the `Access key ID` and `Secret access key` from your IAM user (with KMS access).
 
 At the top right of the AWS dashboard, look for your user account and go to `My Security Credentials`. Over here, you'll need to create access key.
 
