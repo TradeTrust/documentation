@@ -8,4 +8,5 @@ Amazon’s Key Management Services ([AWS KMS](https://aws.amazon.com/kms/)) help
 
 - Creating a [key](/docs/advanced/aws-kms/create-key) in AWS KMS.
 - Getting [access keys](/docs/advanced/aws-kms/access-keys) for CLI, SDK, & API access.
-- Signing a DID document [demo](/docs/advanced/aws-kms/demo).
+- Signing a DID document [demo](/docs/advanced/aws-kms/did-sign-demo).
+  
