@@ -4,7 +4,9 @@ title: DID sign demo
 sidebar_label: DID sign demo
 ---
 
-The following example will show how to sign a DID document with AWS KMS key.
+The following example will show how to sign a DID document with AWS KMS key. (demonstration only)
+
+> IMPORTANT: You must be careful on the way you expose the secret key and the access key. Always follow AWS security best practices.
 
 ### Tutorial
 
