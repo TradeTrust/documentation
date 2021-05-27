@@ -20,7 +20,20 @@
       "generic-templates/cover-letter",
       "generic-templates/bill-of-lading"
     ],
-    "Advanced": ["advanced/alternative-ledgers"],
+    "Advanced": [
+      "advanced/alternative-ledgers",
+      "advanced/wallet-management",
+      {
+        "label": "AWS KMS",
+        "type": "category",
+        "items": [
+          "advanced/aws-kms/overview",
+          "advanced/aws-kms/create-key",
+          "advanced/aws-kms/access-keys",
+          "advanced/aws-kms/did-sign-demo"
+        ]
+      }
+    ],
     "Appendix": ["appendix/glossary", "appendix/infrastructure-template", "appendix/tradetrust-api"]
   }
 }
