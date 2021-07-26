@@ -49,7 +49,9 @@
       },
       "attachments": {
         "allow": true
-      }
+      },
+      "extension":"tt",
+      "fileName":"cover-letter-<%= title %>"
     }
   ],
   "documentStorage": {
