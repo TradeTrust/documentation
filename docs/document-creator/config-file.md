@@ -272,7 +272,7 @@ _i.e. "document-1.tt"_
 
 _Note: This fileName field is optional. Only add this section in if you want to customise the file name to follow the form fields when uploading data file._
 
-The `"fileName"` field is a string that refers to the file name of the created document.
+The `"fileName"` field is a string that refers to the file name of the created document. The method uses interpolate delimiters to interpolate properties of data from data file. For further details on the implementation, you can reference : https://www.geeksforgeeks.org/lodash-_-template-method/
 
 By default, if this field is not present, The documents will follow the forms name with increment number.
 
