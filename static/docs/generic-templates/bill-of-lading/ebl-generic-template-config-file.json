@@ -94,7 +94,9 @@
       },
       "attachments": {
         "allow": true
-      }
+      },
+      "extension":"tt",
+      "fileName":"ebl-<%= blNumber %>"
     }
   ]
 }

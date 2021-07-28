@@ -116,8 +116,9 @@ The `"forms"` field is an array of form object which expect `name`, `type`, `def
       "ui:widget": "textarea"
     }
   },
+  "attachments": {...},
   "extension": "tt",
-  "attachments": {...}
+  "fileName":"demo-<%= field-properties %>"
 }
 ```
 
@@ -262,6 +263,34 @@ The `"extension"` field is a string that refers to the extension of the created 
 By default, if this field is not present, it will create the document with "tt" as the extension.
 
 _i.e. "document-1.tt"_
+
+### `"fileName"` field
+
+```json
+"fileName": "ebl-<%= ebl-number %>",
+```
+
+Example :
+
+// data.csv file
+ebl-number, data, ...
+demo-123, data, ...
+
+// config file
+{
+...,
+fileName: "ebl-<%= ebl-number=%>"
+}
+
+The output file name will be "ebl-demo-123".
+
+_Note: This fileName field is optional. Only add this section in if you want to customise the file name to follow the form fields when uploading data file._
+
+The `"fileName"` field is a string that refers to the file name of the created document. The method uses interpolate delimiters to interpolate properties of data from data file.
+
+By default, if this field is not present, The documents will follow the forms name with increment number.
+
+_i.e. "document-1"_
 
 ---
 
