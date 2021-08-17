@@ -8,12 +8,33 @@ The configuration file is a JSON file that contains information to configure the
 
 ### Config file structure
 
-Below is an example of the configuration file.
+Below is an example of the configuration files
 
+#### Encrypted JSON Wallet
 ```json
 {
   "network": "ropsten",
-  "wallet": "{\"address\":\"6a36c563a5350d7be66c801f901a67...\", ...}}",
+  "wallet": {
+    "type":"ENCRYPTED_JSON",
+    "encryptedJson": "{\"address\":\"6a36c563a5350d7be66c801f901a67...\", ...}}",
+  },
+  "forms": [{...}],
+  "documentStorage": {
+    "apiKey": "kNb15YYZ6N1zBlYd25cjj8PLgK6YAuvN9Gf7fPM1",
+    "url": "https://api-ropsten.tradetrust.io/storage"
+  }
+}
+```
+#### Aws Kms Wallet
+```json
+{
+  "network": "ropsten",
+  "wallet": {
+    "type":"AWS_KMS",
+    "accessKeyId": "<IAM Access Key ID>",
+    "region": "<Key Region>",
+    "kmsKeyId": "<KMS Key Identifier>",
+  },
   "forms": [{...}],
   "documentStorage": {
     "apiKey": "kNb15YYZ6N1zBlYd25cjj8PLgK6YAuvN9Gf7fPM1",
@@ -46,8 +67,14 @@ As of now, we only cater to 3 networks.
 ---
 
 ## Wallet field
+The `"wallet"` field is a string that refers to your ethereum wallet. The configuration file supports two types of wallet option.
 
-The `"wallet"` field is a string that refers to your ethereum wallet. You can derive it from either one of these methods:
+- ENCRYPTED_JSON
+- AWS_KMS
+
+#### ENCRYPTED_JSON Wallet
+
+The wallet field can be derived from either one of these methods:
 
 1. If you don't have a wallet, you can refer to [Open Attestation's documentation](https://github.com/Open-Attestation/open-attestation-cli#wallet) to create a wallet.
    _Note: you will need to have Open Attestation Cli installed._ After running OA CLI `wallet create` command, this will give you a wallet.json.
@@ -78,7 +105,7 @@ Once you have an existing wallet.json, enter the following command to serialise 
 node -r fs -e 'console.log(JSON.stringify(JSON.stringify(JSON.parse(fs.readFileSync("./wallet.json", "utf-8")))));'
 ```
 
-The wallet string should be displayed on your terminal and you can enter it into the `"wallet"` field in the [config file](#configuration-file).
+The wallet string should be displayed on your terminal and you can enter it into the `"encryptedJson"` field in the [config file](#encrypted-json-wallet).
 
 If you have an existing Metamask account but don't want to use the Open Attestation Cli, you can still get your wallet string doing this:
 
@@ -97,7 +124,18 @@ wallet.encrypt("<Enter a password of your choice here>").then((str) => console.l
 
 (_Note: you can watch a tutorial on this [here](https://www.youtube.com/watch?v=z3l9OSVGHH8&feature=youtu.be&t=577) at 7:29 onwards_)
 
-This result can now be entered into the `"wallet"` field in the [config file](#configuration-file).
+This result can now be entered into the `"wallet"` field in the [config file](#encrypted-json-wallet).
+
+#### AWS_KMS Wallet
+
+Ethereum uses Elliptic Curve Digital Signing Algorithm (ECDSA). More specifically, the elliptic curve being used for transaction signing is secp256k1
+
+1) If you don't have a Aws Kms Wallet, you can refer to [documentation](https://docs.tradetrust.io/docs/advanced/aws-kms/overview) to create a ECC_SECG_P256K1 Key.
+
+2) Connect the Aws Kms Key to an Aws Iam User and enable the signing access control.
+
+3) The IAM credential and KMS Key ID can now be entered into the `"wallet"` field in the [config file](#aws-kms-wallet).
+
 
 ---
 
