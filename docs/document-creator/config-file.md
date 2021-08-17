@@ -74,7 +74,7 @@ The `"wallet"` field is a string that refers to your ethereum wallet. The config
 
 #### ENCRYPTED_JSON Wallet
 
-The wallet field can be derive it from either one of these methods:
+The wallet field can be derived from either one of these methods:
 
 1. If you don't have a wallet, you can refer to [Open Attestation's documentation](https://github.com/Open-Attestation/open-attestation-cli#wallet) to create a wallet.
    _Note: you will need to have Open Attestation Cli installed._ After running OA CLI `wallet create` command, this will give you a wallet.json.
