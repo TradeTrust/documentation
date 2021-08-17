@@ -130,7 +130,7 @@ This result can now be entered into the `"wallet"` field in the [config file](#e
 
 Ethereum uses Elliptic Curve Digital Signing Algorithm (ECDSA). More specifically, the elliptic curve being used for transaction signing is secp256k1
 
-1) If you don't have a Aws Kms Wallet, you can refer to [documentation](https://luhenning.medium.com/the-dark-side-of-the-elliptic-curve-signing-ethereum-transactions-with-aws-kms-in-javascript-83610d9a6f81) to create a ECC_SECG_P256K1 Key.
+1) If you don't have a Aws Kms Wallet, you can refer to [documentation](https://docs.tradetrust.io/docs/advanced/aws-kms/overview) to create a ECC_SECG_P256K1 Key.
 
 2) Connect the Aws Kms Key to an Aws Iam User and enable the signing access control.
 
