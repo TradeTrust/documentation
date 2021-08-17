@@ -67,7 +67,7 @@ As of now, we only cater to 3 networks.
 ---
 
 ## Wallet field
-The `"wallet"` field is a string that refers to your ethereum wallet. The configuration file support two type of wallet option.
+The `"wallet"` field is a string that refers to your ethereum wallet. The configuration file supports two types of wallet option.
 
 - ENCRYPTED_JSON
 - AWS_KMS
