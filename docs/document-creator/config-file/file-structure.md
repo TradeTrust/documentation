@@ -1,16 +1,17 @@
 ---
-id: config-file
-title: Config File
-sidebar_label: Config File
+id: file-structure
+title: File Structure
+sidebar_label: File Structure
 ---
 
 The configuration file is a JSON file that contains information to configure the application to suit your business needs.
 
 ### Config file structure
 
-Below is an example of the configuration files
+Below is an example of a configuration file
 
 #### Encrypted JSON Wallet
+
 ```json
 {
   "network": "ropsten",
@@ -25,7 +26,9 @@ Below is an example of the configuration files
   }
 }
 ```
+
 #### Aws Kms Wallet
+
 ```json
 {
   "network": "ropsten",
@@ -43,14 +46,17 @@ Below is an example of the configuration files
 }
 ```
 
-Let's break down the required fields for this config file.
+Let's break down the fields that make up this config file.
 
-We will need:
+Required fields:
 
-- [Network field](#network-field)
-- [Wallet field](#wallet-field)
-- [Forms field](#forms-field)
-- [Document Storage field](#document-storage-field)
+- `"network"` - [Network field](#network-field)
+- `"wallet"` - [Wallet field](#wallet-field)
+- `"forms"` - [Forms field](#forms-field)
+
+Optional field:
+
+- `"documentStorage"` - [Document Storage field](#document-storage-field)
 
 ---
 
@@ -67,7 +73,8 @@ As of now, we only cater to 3 networks.
 ---
 
 ## Wallet field
-The `"wallet"` field is a string that refers to your ethereum wallet. The configuration file supports two types of wallet option.
+
+The `"wallet"` field is a string that refers to your ethereum wallet. We supports two types of wallet option.
 
 - ENCRYPTED_JSON
 - AWS_KMS
@@ -130,18 +137,17 @@ This result can now be entered into the `"wallet"` field in the [config file](#e
 
 Ethereum uses Elliptic Curve Digital Signing Algorithm (ECDSA). More specifically, the elliptic curve being used for transaction signing is secp256k1
 
-1) If you don't have a Aws Kms Wallet, you can refer to [documentation](https://docs.tradetrust.io/docs/advanced/aws-kms/overview) to create a ECC_SECG_P256K1 Key.
+1. If you don't have a Aws Kms Wallet, you can refer to [documentation](https://docs.tradetrust.io/docs/advanced/aws-kms/overview) to create a ECC_SECG_P256K1 Key.
 
-2) Connect the Aws Kms Key to an Aws Iam User and enable the signing access control.
+2. Connect the Aws Kms Key to an Aws Iam User and enable the signing access control.
 
-3) The IAM credential and KMS Key ID can now be entered into the `"wallet"` field in the [config file](#aws-kms-wallet).
-
+3. The IAM credential and KMS Key ID can now be entered into the `"wallet"` field in the [config file](#aws-kms-wallet).
 
 ---
 
 ## Forms field
 
-The `"forms"` field is an array of form object which expect `name`, `type`, `defaults` and `schema`. `attachments` can also be added.
+The `"forms"` field is an array of form object which expect `name`, `type`, `defaults` and `schema` as required fields. `uiSchema`, `extension`, `attachments` and `fileName` are optional fields which can also be added.
 
 ```json
 {
@@ -252,6 +258,8 @@ An example of the `"schema"` field:
 ```
 
 ### `"Attachments"` field
+
+_Note: This attachments field is optional._
 
 The `"attachments"` field contains the information about the required attachments for this document.
 
