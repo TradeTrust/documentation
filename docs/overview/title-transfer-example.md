@@ -98,7 +98,7 @@ The token is held by `Bob`, token is owned by `Charlie`
 2. Bob:
     - change holder
 3. Charlie:
-    - nominate change of ownership (approve new owner)
+    - nominate change of ownership 
 
 Next, we will do **nominate change of ownership** as we have already demonstrated **change holder**.
 
@@ -128,7 +128,7 @@ The token is held by `Bob`, token is owned by `Charlie`, no change in state from
     - change holder
     - endorse transfer of ownership
 3. Charlie:
-    - nominate change of ownership (approve new owner)
+    - nominate change of ownership
 
 Notice that `Bob` actions have increased, it can now endorse the suggested owner from the previous action.
 
@@ -149,7 +149,7 @@ The token is held by `Bob`, token is owned by `Alice`
 
 ### Actions:
 1. Alice:
-    - nominate change of ownership (approve new owner)
+    - nominate change of ownership
 2. Bob:
     - change holder
 3. Charlie:
