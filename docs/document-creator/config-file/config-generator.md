@@ -16,7 +16,7 @@ Firstly, we will need to acquire a wallet.json file, please refer [here](https:/
 
 If you already have a wallet.json file, you can skip this step and proceed to [step 2](#step-2).
 
-## Step 2: generate the config file
+## Step 2: Generate the config file
 
 Run this command to generate a config file that includes some generic template forms.
 
@@ -36,3 +36,5 @@ The option `--config-type` specifies which default template to use to create the
 Once the config file is generated, you can test it out on our [document creator website](https://creator.tradetrust.io/).
 
 To take it a step further, you can customise your config file by **replacing the forms in the forms section with your own customised forms**, so you can create and issue custom documents.
+
+_Please note that by using this method of generating a config file, the config file will only be usable in **ropsten testnet** environment and with a validity of **24 hours**._
