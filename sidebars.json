@@ -1,7 +1,15 @@
 {
   "docs": {
     "Introduction": ["introduction/what-is-tradetrust", "introduction/tradetrust-layer-boundaries"],
-    "Overview": ["overview/issuer-dns-txt-record", "overview/token-registry", "overview/title-transfer"],
+    "Overview": [
+      "overview/issuer-dns-txt-record",
+      "overview/token-registry",
+      {
+        "label": "Title Transfer",
+        "type": "category",
+        "items": ["overview/title-transfer", "overview/title-transfer-example"]
+      }
+    ],
     "Technical": ["technical/open-attestation"],
     "TradeTrust Website": [
       "tradetrust-website/overview",
