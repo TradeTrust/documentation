@@ -1,7 +1,7 @@
 ---
 id: title-transfer
-title: Title Transfer
-sidebar_label: Title Transfer
+title: Overview
+sidebar_label: Overview
 ---
 
 ### Background

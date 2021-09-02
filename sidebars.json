@@ -4,11 +4,10 @@
     "Overview": [
       "overview/issuer-dns-txt-record",
       "overview/token-registry",
-      "overview/title-transfer",
       {
-        "label": "Example",
+        "label": "Title Transfer",
         "type": "category",
-        "items": ["overview/title-transfer-example"]
+        "items": ["overview/title-transfer", "overview/title-transfer-example"]
       }
     ],
     "Technical": ["technical/open-attestation"],

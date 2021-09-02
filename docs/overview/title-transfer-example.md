@@ -1,7 +1,7 @@
 ---
 id: title-transfer-example
-title: Title Transfer Example
-sidebar_label: Title Transfer Example
+title: Example
+sidebar_label: Example
 ---
 
 For this particular document, we will go through the many actions that various parties will be allowed to do in atypical title transfer flow.
