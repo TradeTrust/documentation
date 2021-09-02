@@ -20,7 +20,11 @@
     "Document Creator": [
       "document-creator/overview",
       "document-creator/prerequisites",
-      "document-creator/config-file",
+      {
+        "label": "Config File",
+        "type": "category",
+        "items": ["document-creator/config-file/file-structure", "document-creator/config-file/config-generator"]
+      },
       "document-creator/data-file"
     ],
     "Generic Templates": [
