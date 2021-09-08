@@ -18,7 +18,7 @@ const Home = () => {
               <p>{siteConfig.tagline}</p>
             </header>
             <div className="flex flex-wrap justify-center">
-              <div className="w-full lg:w-1/5 lg:mx-8 px-4 mb-8 lg:mb-0">
+              <div className="w-full lg:w-1/5 lg:mx-8 mb-8 lg:mb-0">
                 <div className="flex flex-col h-full">
                   <div className="flex-grow mb-2">
                     <img
@@ -27,10 +27,12 @@ const Home = () => {
                       src={useBaseUrl("img/home/home-getting-started.png")}
                       alt="Getting started"
                     />
-                    <h3 className="mb-2">Getting Started</h3>
-                    <p>A step-by-step guide to setup TradeTrust according to your application’s requirements.</p>
+                    <h3 className="mb-2 title">Getting Started</h3>
+                    <p className="text-center">
+                      A step-by-step guide to setup TradeTrust according to your application’s requirements.
+                    </p>
                   </div>
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0 flex justify-center">
                     <Link
                       className="btn bg-blue text-white hover:text-white my-4"
                       to={useBaseUrl("docs/introduction/what-is-tradetrust")}
@@ -40,7 +42,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-full lg:w-1/5 lg:mx-8 px-4 mb-8 lg:mb-0">
+              <div className="w-full lg:w-1/5 lg:mx-8 mb-8 lg:mb-0">
                 <div className="flex flex-col h-full">
                   <div className="flex-grow mb-2">
                     <img
@@ -49,10 +51,10 @@ const Home = () => {
                       src={useBaseUrl("img/home/home-gallery.png")}
                       alt="Gallery"
                     />
-                    <h3 className="mb-2">Gallery</h3>
-                    <p>TradeTrust documents and create yours today!</p>
+                    <h3 className="mb-2 title">Gallery</h3>
+                    <p className="text-center">TradeTrust documents and create yours today!</p>
                   </div>
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0 flex justify-center">
                     <a
                       className="btn bg-blue text-white hover:text-white my-4"
                       href="https://gallery.openattestation.com/tag/trade-trust"
@@ -64,7 +66,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-full lg:w-1/5 lg:mx-8 px-4 mb-8 lg:mb-0">
+              <div className="w-full lg:w-1/5 lg:mx-8 mb-8 lg:mb-0">
                 <div className="flex flex-col h-full">
                   <div className="flex-grow mb-2">
                     <img
@@ -73,10 +75,12 @@ const Home = () => {
                       src={useBaseUrl("img/home/home-tools.png")}
                       alt="Tools"
                     />
-                    <h3 className="mb-2">Tools</h3>
-                    <p>Additional tools you can build into TradeTrust applications to improve your workflow. </p>
+                    <h3 className="mb-2 title">Tools</h3>
+                    <p className="text-center">
+                      Additional tools you can build into TradeTrust applications to improve your workflow.{" "}
+                    </p>
                   </div>
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0 flex justify-center">
                     <a
                       className="btn bg-blue text-white hover:text-white my-4"
                       href="https://toolkit.openattestation.com/"

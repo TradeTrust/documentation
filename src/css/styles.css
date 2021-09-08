@@ -33,6 +33,9 @@
   a {
     color: #007bff;
   }
+  p {
+    color: #454b50;
+  }
 
   ol,
   ul {
@@ -53,14 +56,23 @@
     @apply duration-200;
     @apply ease-out;
     @apply inline-block;
-    @apply rounded-lg;
-    @apply px-8;
-    @apply py-2;
+    @apply rounded-xl;
+    @apply font-bold;
+    @apply text-xl;
+    @apply py-3;
+    @apply px-4;
   }
 
   .btn:hover {
     @apply bg-opacity-80;
     @apply no-underline;
+  }
+
+  .title {
+    @apply font-bold;
+    @apply text-xl;
+    @apply text-center;
+    font-family: "Roboto", sans-serif;
   }
 }
 
