@@ -75,7 +75,9 @@ Ethereum address. For example, "BANKS.SG" could be the address resolver for all 
 #### Endpoint
 
 The "Endpoint" input refers to the endpoint that will be called to resolve an Ethereum Address.
-A hosted endpoint is available at [https://demo-resolver.tradetrust.io/identifier/](https://demo-resolver.tradetrust.io/identifier/).
+A demo hosted endpoint is available at [https://demo-resolver.tradetrust.io/identifier/](https://demo-resolver.tradetrust.io/identifier/).
+
+_Note: This demo endpoint is not suitable for production environment, please use it only in testing or staging environment._
 
 ---
 

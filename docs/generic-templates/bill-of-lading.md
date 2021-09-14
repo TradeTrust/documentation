@@ -23,8 +23,8 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
 "wallet": "<Your wallet string>",
 ```
 
-- `"network"` - Update with the desired network. For more information, click [here](#network-field).
-- `"wallet"` - Update with your wallet string. For more infomation, click [here](#wallet-field).
+- `"network"` - Update with the desired network. For more information, click [here](/docs/document-creator/config-file/file-structure#network-field).
+- `"wallet"` - Update with your wallet string. For more infomation, click [here](/docs/document-creator/config-file/file-structure#wallet-field).
 
 ```json
 "defaults": {

@@ -79,7 +79,7 @@ To deploy it for verifying against Main Net:
 NETWORK=homestead npm run deploy:verify -- --stage prd
 ```
 
-If you are using the domain manager, the API should then be available under https://some.domain.com/verify
+If you are using the domain manager, the API should then be available under `https://some.domain.com/verify`
 
 ## Storage
 
