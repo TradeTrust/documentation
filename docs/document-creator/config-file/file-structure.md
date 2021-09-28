@@ -21,8 +21,8 @@ Below is an example of a configuration file
   },
   "forms": [{...}],
   "documentStorage": {
-    "apiKey": "kNb15YYZ6N1zBlYd25cjj8PLgK6YAuvN9Gf7fPM1",
-    "url": "https://api-ropsten.tradetrust.io/storage"
+    "apiKey": "<Document storage API Key>",
+    "url": "<Document storage URL>"
   }
 }
 ```
@@ -40,8 +40,8 @@ Below is an example of a configuration file
   },
   "forms": [{...}],
   "documentStorage": {
-    "apiKey": "kNb15YYZ6N1zBlYd25cjj8PLgK6YAuvN9Gf7fPM1",
-    "url": "https://api-ropsten.tradetrust.io/storage"
+    "apiKey": "<Document storage API Key>",
+    "url": "<Document storage URL>"
   }
 }
 ```
@@ -344,8 +344,8 @@ _i.e. "document-1"_
 
 ```json
 "documentStorage": {
-  "apiKey": "kNb15YYZ6N1zBlYd25cjj8PLgK6YAuvN9Gf7fPM1",
-  "url": "https://api-ropsten.tradetrust.io/storage"
+  "apiKey": "<Document storage API Key>",
+  "url": "<Document storage URL>"
 }
 ```
 
