@@ -44,6 +44,7 @@
   ul {
     list-style: initial;
     padding-left: 1rem;
+    color: #454b50;
   }
 
   blockquote {
@@ -88,4 +89,10 @@
 .footer__bottom {
   @apply mt-16;
   @apply text-gray-400;
+}
+
+html[data-theme='dark'] p,
+html[data-theme='dark'] ol,
+html[data-theme='dark'] ul {
+  color: #B4BCC2;
 }

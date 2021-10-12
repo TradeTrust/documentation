@@ -40,7 +40,7 @@ _Note: There is a difference between "Resolved by" and "Source" parameters. Reso
 party resolver that the user has set in the settings page. Source (an optional field) refers to information that is
 verified by another party. For example, in NDI Myinfo, they have verified information from different agencies._
 
-### How to setup a 3rd party Address Resolver
+### How to set up a 3rd party Address Resolver
 
 We will need to specify the following fields in the API:
 

@@ -24,7 +24,7 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
 ```
 
 - `"network"` - Update with the desired network. For more information, click [here](/docs/document-creator/config-file/file-structure#network-field).
-- `"wallet"` - Update with your wallet string. For more infomation, click [here](/docs/document-creator/config-file/file-structure#wallet-field).
+- `"wallet"` - Update with your wallet string. For more information, click [here](/docs/document-creator/config-file/file-structure#wallet-field).
 
 ```json
 "defaults": {
@@ -50,7 +50,7 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
 
 ```
 
-- `"documentStore"` - Update with your document store. For more infomation, click [here](https://www.openattestation.com/docs/verifiable-document/document-store).
+- `"documentStore"` - Update with your document store. For more information, click [here](https://www.openattestation.com/docs/verifiable-document/document-store).
 - `"location"` - Update with the Issuer's domain. For more information, click [here](https://www.openattestation.com/docs/advanced/identity-proofs).
 - `"logo"` - Update with the Logo's URL, to be displayed accordingly as the image above.
 - `"backgroundColor"` - Update with the desired background color. The default color(#ffffff) will be used if color is not stated here. i.e. values for this field "#000000", "black"
@@ -66,7 +66,7 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
 }
 ```
 
-- `"apiKey"` - Update with the document storage API key. For more infomation, click [here](/docs/document-creator/config-file/file-structure#apikey-field).
-- `"url"` - Update with the document storage URL. For more infomation, click [here](/docs/document-creator/config-file/file-structure#url-field).
+- `"apiKey"` - Update with the document storage API key. For more information, click [here](/docs/document-creator/config-file/file-structure#apikey-field).
+- `"url"` - Update with the document storage URL. For more information, click [here](/docs/document-creator/config-file/file-structure#url-field).
 
 _Note: **The "documentStorage" field is optional, if you do not have any document storage endpoint setup, you can omit this entire section.**._

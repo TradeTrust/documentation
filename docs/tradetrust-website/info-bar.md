@@ -10,7 +10,7 @@ TradeTrust has 2 environments, each connecting to different ethereum networks:
 - Ropsten (testnet) = http://dev.tradetrust.io
 - Rinkeby (testnet) = http://rinkeby.tradetrust.io
 
-The environment is being indicated on a info bar that sits on top of the sites.
+The environment is being indicated on an info bar that sits on top of the sites.
 
 ![Network Bar](/docs/tradetrust-website/info-bar/info-bar.png)
 

@@ -13,4 +13,4 @@ Before you construct your configuration file(`.json` file), please ensure you ha
 - [Decentralized Document Renderer](https://www.openattestation.com/docs/advanced/custom-renderer)
 - [Document Storage](/docs/appendix/infrastructure-template#storage)
 
-Please refer to the approprate links to prepare them.
+Please refer to the appropriate links to prepare them.
