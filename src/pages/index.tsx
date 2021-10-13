@@ -29,7 +29,7 @@ const Home = () => {
                     />
                     <h3 className="mb-2 title">Getting Started</h3>
                     <p className="text-center">
-                      A step-by-step guide to setup TradeTrust according to your application’s requirements.
+                      A step-by-step guide to set up TradeTrust according to your application’s requirements.
                     </p>
                   </div>
                   <div className="flex-shrink-0 flex justify-center">

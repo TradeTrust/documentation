@@ -24,7 +24,7 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
 ```
 
 - `"network"` - Update with the desired network. For more information, click [here](/docs/document-creator/config-file/file-structure#network-field).
-- `"wallet"` - Update with your wallet string. For more infomation, click [here](/docs/document-creator/config-file/file-structure#wallet-field).
+- `"wallet"` - Update with your wallet string. For more information, click [here](/docs/document-creator/config-file/file-structure#wallet-field).
 
 ```json
 "defaults": {
@@ -58,7 +58,7 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
 
 ```
 
-- `"tokenRegistry"` - Update with your token registry. For more infomation, click [here](https://www.openattestation.com/docs/transferable-record/token-registry).
+- `"tokenRegistry"` - Update with your token registry. For more information, click [here](https://www.openattestation.com/docs/transferable-record/token-registry).
 - `"location"` - Update with the Issuer's domain. For more information, click [here](https://www.openattestation.com/docs/advanced/identity-proofs).
 - `"blNumber"` - Update with the BL Number, to be displayed accordingly as the image above.
 - `"companyName"` - Update with the Company Name, to be displayed accordingly as the image above.

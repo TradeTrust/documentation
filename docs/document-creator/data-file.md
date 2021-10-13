@@ -4,7 +4,7 @@ title: Data File
 sidebar_label: Data File
 ---
 
-After setting up your on config file for TradeTrust Creator, you can now log in to access the create and issue functionalities. Upon picking a template, you will notice that there is a `Upload Data File` button.
+After setting up your own config file for TradeTrust Creator, you can now log in to access the create and issue functionalities. Upon picking a template, you will notice that there is an `Upload Data File` button.
 
 ## Upload Data file
 
@@ -13,7 +13,7 @@ The purpose of this upload button is to cater for users who wants a quick way to
 As of today, you can:
 
 - pre-populate a **single** transferable record document.
-- pre-populate **mulitple** verifiable documents.
+- pre-populate **multiple** verifiable documents.
 
 ### Example of a data file (bill of lading)
 

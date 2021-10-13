@@ -8,7 +8,7 @@ To generate a config file, you could start by downloading a copy of our generic 
 
 Alternatively, we have a tool to help generate the config file.
 
-Before we proceed, you will need to have Open Attestation CLI v1.39.3 or higher installed in your computer.
+Before we proceed, you will need to have Open Attestation CLI v1.39.3 or higher installed on your computer.
 
 ## Step 1: Acquiring a wallet.json file
 

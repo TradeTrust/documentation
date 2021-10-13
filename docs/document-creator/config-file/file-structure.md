@@ -74,14 +74,14 @@ As of now, we only cater to 3 networks.
 
 ## Wallet field
 
-The `"wallet"` field is a string that refers to your ethereum wallet. We supports two types of wallet option.
+The `"wallet"` field is a string that refers to your ethereum wallet. We support two types of wallet options.
 
 - ENCRYPTED_JSON
 - AWS_KMS
 
 #### ENCRYPTED_JSON Wallet
 
-The wallet field can be derived from either one of these methods:
+The wallet field can be derive from either one of these methods:
 
 1. If you don't have a wallet, you can refer to [Open Attestation's documentation](https://github.com/Open-Attestation/open-attestation-cli#wallet) to create a wallet.
    _Note: you will need to have Open Attestation Cli installed._ After running OA CLI `wallet create` command, this will give you a wallet.json.
@@ -137,7 +137,7 @@ This result can now be entered into the `"wallet"` field in the [config file](#e
 
 Ethereum uses Elliptic Curve Digital Signing Algorithm (ECDSA). More specifically, the elliptic curve being used for transaction signing is secp256k1
 
-1. If you don't have a Aws Kms Wallet, you can refer to [documentation](https://docs.tradetrust.io/docs/advanced/aws-kms/overview) to create a ECC_SECG_P256K1 Key.
+1. If you don't have an Aws Kms Wallet, you can refer to [documentation](https://docs.tradetrust.io/docs/advanced/aws-kms/overview) to create a ECC_SECG_P256K1 Key.
 
 2. Connect the Aws Kms Key to an Aws Iam User and enable the signing access control.
 
@@ -235,7 +235,7 @@ The `"identityProof"` field is an object that refers to the issuer identity, ple
 
 The `"schema"` field is an object used to generate a form. It follows [JSON schema format.](https://json-schema.org/)
 
-The structure of the schema will derived from the structure of the document you expect to build and will be inline with the custom renderer that you have built for this document.
+The structure of the schema will derive from the structure of the document you expect to build and will be inline with the custom renderer that you have built for this document.
 
 It will probably be a subset of an already existing schema without the data that you expect to be constants across your document.
 
@@ -263,7 +263,7 @@ _Note: This attachments field is optional._
 
 The `"attachments"` field contains the information about the required attachments for this document.
 
-If there are no attachment for the particular form that you are creating, please set `"allow"` field to false.
+If there is no attachment for the particular form that you are creating, please set `"allow"` field to false.
 
 An example of the `"attachments"` field:
 
@@ -363,7 +363,7 @@ The `"documentStorage"` field is an object which expects an `"url"` field. `"api
 
 The `"apikey"` field is optional, it accepts a string as the API key.
 
-If your document storage endpoint does not requires an API key, you should omit this field.
+If your document storage endpoint does not require an API key, you should omit this field.
 
 ### `"url"` field
 

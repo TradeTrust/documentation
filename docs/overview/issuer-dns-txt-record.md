@@ -23,7 +23,7 @@ Under [IETF RFC 1464](https://tools.ietf.org/html/rfc1464), it is possible to st
 
 Only domain name owners (and the registrar that they trust) have the authority to make changes to the records associated with that domain name. Thus when a DNS record endorses a certain fact, it transitively asserts that this fact is believed to be true by the domain name owner.
 
-In an OpenAttestation DNS-TXT identity proof, we record an Document Store address and the network (e.g Ethereum, Main Net) it is on. In the TradeTrust document itself, we declare the domain name to search for the record as well as the Document Store Ethereum address. This forms a bi-directional trust assertion, and if the Document's cryptographic proof is issued on that Document Store - we can say that the domain name owner has endorsed the issuance of this document.
+In an OpenAttestation DNS-TXT identity proof, we record a Document Store address and the network (e.g Ethereum, Main Net) it is on. In the TradeTrust document itself, we declare the domain name to search for the record as well as the Document Store Ethereum address. This forms a bi-directional trust assertion, and if the Document's cryptographic proof is issued on that Document Store - we can say that the domain name owner has endorsed the issuance of this document.
 
 A deeper technical discussion of this topic can be found at [OpenCerts 2.0 DNS-TXT Architecture Decision Record](https://github.com/OpenCerts/adr/blob/master/decentralized_identity_proof_DNS-TXT.md)
 
@@ -56,4 +56,4 @@ openatts net=ethereum netId=3 addr=0x9db35C07350e9a16C828dAda37fd9c2923c75812
 openatts net=ethereum netId=4 addr=0x9db35C07350e9a16C828dAda37fd9c2923c75812
 ```
 
-Optionally, you may also publish an `A record` at the same address so that the if the user clicks on the URL, they can see a helpful website with your information on it.
+Optionally, you may also publish an `A record` at the same address so that if the user clicks on the URL, they can see a helpful website with your information on it.

@@ -54,7 +54,7 @@ The Title Escrow makes an allowance for this action to be performed by the Owner
 
 ## Manage Assets
 
-User interface of how EBL is transfered/endorsed/surrendered using Manage Assets. (Note that this only appears for Transferable Record type of documents)
+User interface of how EBL is transferred/endorsed/surrendered using Manage Assets. (Note that this only appears for Transferable Record type of documents)
 
 ![Manage Asset](/docs/overview/title-transfer/manage-asset.png)
 

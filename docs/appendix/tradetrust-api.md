@@ -14,7 +14,7 @@ rinkeby: https://api-rinkeby.tradetrust.io/verify
 
 ```
 
-However it is recommended that you setup your own, refer to the <a href="/docs/appendix/infrastructure-template#verify">guide</a> on how.
+However, it is recommended that you set up your own, refer to the <a href="/docs/appendix/infrastructure-template#verify">guide</a> on how.
 
 ## Axios example
 

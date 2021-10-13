@@ -4,10 +4,10 @@ title: Example
 sidebar_label: Example
 ---
 
-For this particular document, we will go through the many actions that various parties will be allowed to do in atypical title transfer flow.
+For this particular document, we will go through the many actions that various parties will be allowed to do in a typical title transfer flow.
 In order to demonstrate it properly, we will be setting up some prerequisites before we begin. Note that this is not intended to be a tutorial, but just a demonstration of the various capabilities of each state change of the transferable record.
 
-For this demonstrations we will have 3 players.
+For this demonstration we will have 3 players.
 1. Alice
 2. Bob
 3. Charlie
