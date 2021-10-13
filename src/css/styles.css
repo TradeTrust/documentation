@@ -93,6 +93,12 @@
 
 html[data-theme='dark'] p,
 html[data-theme='dark'] ol,
-html[data-theme='dark'] ul {
+html[data-theme='dark'] ul,
+html[data-theme='dark'] h1,
+html[data-theme='dark'] h2,
+html[data-theme='dark'] h3,
+html[data-theme='dark'] h4,
+html[data-theme='dark'] h5,
+html[data-theme='dark'] h6 {
   color: #B4BCC2;
 }
