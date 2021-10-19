@@ -75,7 +75,6 @@ const siteConfig = {
     prism: {
       theme: require("prism-react-renderer/themes/nightOwl"),
     },
-    sidebarCollapsible: true,
   },
 };
 

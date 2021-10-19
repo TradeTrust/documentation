@@ -2,6 +2,7 @@
 id: access-keys
 title: Access keys
 sidebar_label: Access keys
+sidebar_position: 3
 ---
 
 Before being able to interact with the created key in AWS, you will need to retrieve both the `Access key ID` and `Secret access key` from your IAM user (with KMS access).

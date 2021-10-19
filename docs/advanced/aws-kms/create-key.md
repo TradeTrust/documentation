@@ -2,6 +2,7 @@
 id: create-key
 title: Create key
 sidebar_label: Create key
+sidebar_position: 2
 ---
 
 Sign up for an AWS account if you have not done so. Login to the dashboard.

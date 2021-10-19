@@ -2,6 +2,7 @@
 id: overview
 title: Overview
 sidebar_label: Overview
+sidebar_position: 1
 ---
 
 We have hosted a basic document renderer to handle various generic templates that we have prepared, in order to render out the UI of the respective documents.

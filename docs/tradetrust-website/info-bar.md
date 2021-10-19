@@ -2,6 +2,7 @@
 id: info-bar
 title: Info Bar
 sidebar_label: Info Bar
+sidebar_position: 2
 ---
 
 TradeTrust has 2 environments, each connecting to different ethereum networks:

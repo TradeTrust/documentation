@@ -2,6 +2,7 @@
 id: tradetrust-layer-boundaries
 title: TradeTrust Layer Boundaries
 sidebar_label: TradeTrust Layer Boundaries
+sidebar_position: 2
 ---
 
 This document serves to document the layer boundaries of TradeTrust, helping to illustrate clearly the points at which a 3rd party TradeTrust development effort might span.

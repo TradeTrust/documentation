@@ -2,6 +2,7 @@
 id: file-structure
 title: File Structure
 sidebar_label: File Structure
+sidebar_position: 1
 ---
 
 The configuration file is a JSON file that contains information to configure the application to suit your business needs.

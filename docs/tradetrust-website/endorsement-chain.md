@@ -2,6 +2,7 @@
 id: endorsement-chain
 title: Endorsement Chain
 sidebar_label: Endorsement Chain
+sidebar_position: 3
 ---
 
 The endorsement chain provides an overview of the EBL's transaction history, showing which wallet is currently the EBL's ownership/holdership.

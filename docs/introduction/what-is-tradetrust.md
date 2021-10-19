@@ -2,6 +2,7 @@
 id: what-is-tradetrust
 title: What is TradeTrust?
 sidebar_label: What is TradeTrust
+sidebar_position: 1
 ---
 
 TradeTrust is a set of Governance & Legal Frameworks, Standards and future-ready Digital Infrastructure, all of which facilitates the interoperability of electronic trade documents exchanged between different digital ecosystems.
