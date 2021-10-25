@@ -33,6 +33,8 @@ open-attestation config create --output-dir ./example-configs --encrypted-wallet
 
 This method will generate a copy of your existing config file with the updated sandbox DNS, document store and token registry.
 
+**Note: The structure of the config.json file that is being used as the template will have to conform with the our standards of config.json file, [click here](./file-structure) for more information.**
+
 ```
 open-attestation config create --output-dir ./example-configs --encrypted-wallet-path </path/to>/wallet.json --config-template-path </path/to>/config.json
 ```
