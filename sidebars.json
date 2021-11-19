@@ -15,7 +15,8 @@
       "tradetrust-website/overview",
       "tradetrust-website/info-bar",
       "tradetrust-website/endorsement-chain",
-      "tradetrust-website/identity-resolution"
+      "tradetrust-website/identity-resolution",
+      "tradetrust-website/qr-code"
     ],
     "Document Creator": [
       "document-creator/overview",
