@@ -4,7 +4,7 @@ title: QR code
 sidebar_label: QR code
 ---
 
-Upon verification of document, you might notice that there is a QR code available to scan. This allows users to share the viewing of documents easily across devices with camera.
+Upon verification of document, you might notice that there is a QR code available to scan. This allows users to share the viewing of documents easily across devices with camera. Read more on the adr [here](https://github.com/Open-Attestation/adr/blob/master/universal_actions.md).
 
 For our reference implementation, we have the following:
 
