@@ -34,9 +34,9 @@ An example of NFT would be an artwork digitally drawn and painted by an artist (
 
 ## How are NFTs used?
 
-NFTs are used primarily as a way to identify the owner of unique digital items, which include drawings, songs, items in video games, etc. For someone to own the original item, the ownership of it could be transferred with the use of the associated NFT through buying and selling in the NFT marketplace [3].
+NFTs are used primarily as a way to identify the owner of unique digital items, which include drawings, songs, items in video games, etc. For someone to own the original item, the ownership of it could be transferred with the use of the associated NFT through buying and selling in the NFT marketplace [4].
 
-Just to provide an example to put everything into context, let us go back to the flying cat mentioned at the beginning of this article. The creator, Chris Torres, believes NFT could provide creators like himself, with recognition over the artwork they create and be compensated for them directly, which was why he created an NFT for his animated flying cat and listed it for sale on a crypto art platform called Foundation. The NFT acts as a form of identification that proves the original creator has verified and signed on, which establishes its credibility and authenticity. The NFT created was then tagged to Chris Torres’s unique Ethereum wallet address which proves that he was the sole owner. Upon successful sales of the Nyan Cat’s NFT, the ownership would then be transferred to the wallet address of the corresponding buyer. This way, it makes sure that there is only a one-of-a-kind edition of the artwork, created by the original creator, listed for sale.
+Just to provide an example to put everything into context, let us go back to the flying cat mentioned at the beginning of this article. The creator, Chris Torres, believes NFT could provide creators like himself, with recognition over the artwork they create and be compensated for them directly, which was why he created an NFT for his animated flying cat and listed it for sale on a crypto art platform called Foundation [3]. The NFT acts as a form of identification that proves the original creator has verified and signed on, which establishes its credibility and authenticity. The NFT created was then tagged to Chris Torres’s unique Ethereum wallet address which proves that he was the sole owner. Upon successful sales of the Nyan Cat’s NFT, the ownership would then be transferred to the wallet address of the corresponding buyer. This way, it makes sure that there is only a one-of-a-kind edition of the artwork, created by the original creator, listed for sale.
 
 ## How is NFT used in TradeTrust?
 
@@ -79,4 +79,5 @@ By using this standardized interface, allows every single NFT to contain the sam
 
 [1] https://ethereum.org/en/developers/docs/standards/tokens/erc-721/ <br />
 [2] https://www.nytimes.com/2021/02/22/business/nft-nba-top-shot-crypto.html <br />
-[3] https://www.theverge.com/22310188/nft-explainer-what-is-blockchain-crypto-art-faq
+[3] https://www.theverge.com/2021/2/18/22287956/nyan-cat-crypto-art-foundation-nft-sale-chris-torres <br />
+[4] https://www.theverge.com/22310188/nft-explainer-what-is-blockchain-crypto-art-faq
