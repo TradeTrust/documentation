@@ -10,4 +10,4 @@ TradeTrust uses OpenAttestation under the hood.
 
 > #### For Developers:
 >
-> Refer to the technical [documentation](https://www.openattestation.com/docs/getting-started) to get started.
+> Refer to the technical [documentation](https://www.openattestation.com/docs/integrator-section/verifiable-document/overview) to get started.

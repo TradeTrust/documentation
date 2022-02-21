@@ -58,8 +58,8 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
 
 ```
 
-- `"tokenRegistry"` - Update with your token registry. For more information, click [here](https://www.openattestation.com/docs/transferable-record/token-registry).
-- `"location"` - Update with the Issuer's domain. For more information, click [here](https://www.openattestation.com/docs/advanced/identity-proofs).
+- `"tokenRegistry"` - Update with your token registry. For more information, click [here](https://www.openattestation.com/docs/integrator-section/transferable-record/token-registry).
+- `"location"` - Update with the Issuer's domain. For more information, click [here](https://www.openattestation.com/docs/developer-section/quickstart/configure-dns).
 - `"blNumber"` - Update with the BL Number, to be displayed accordingly as the image above.
 - `"companyName"` - Update with the Company Name, to be displayed accordingly as the image above.
 - `"field#"` - Update with the Field content, to be displayed accordingly as the image above.

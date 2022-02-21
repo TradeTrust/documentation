@@ -214,22 +214,22 @@ Below is an example of the `"defaults"` field:
 
 #### `"$template"` field
 
-The `"$template"` field is an object that refers to the custom renderer, please refer to [creating document renderer](https://www.openattestation.com/docs/advanced/custom-renderer).
+The `"$template"` field is an object that refers to the custom renderer, please refer to [creating document renderer](https://www.openattestation.com/docs/developer-section/quickstart/create-custom-renderer).
 
 #### `"issuers"` field
 
 The `"issuers"` is an array of the issuer object. The required fields for each issuer are `name`, `identityProof` and one of `documentStore` OR `tokenRegistry`.
 
-Transferrable document requires a [`tokenRegistry`](https://www.openattestation.com/docs/transferable-record/token-registry), whereas, a verifiable document requires a [`documentStore`](https://www.openattestation.com/docs/verifiable-document/document-store).
+Transferrable document requires a [`tokenRegistry`](https://www.openattestation.com/docs/integrator-section/transferable-record/token-registry), whereas, a verifiable document requires a [`documentStore`](https://www.openattestation.com/docs/integrator-section/verifiable-document/ethereum/document-store).
 
 The `"name"` field in the `"issuers"` section is a string, which refers to the name of the token registry or the name of the document store.
-Please refer to [token registry](https://www.openattestation.com/docs/transferable-record/token-registry) for transferable document or [deploying document store](https://www.openattestation.com/docs/verifiable-document/document-store) for verifiable document, for more information.
+Please refer to [token registry](https://www.openattestation.com/docs/integrator-section/transferable-record/token-registry) for transferable document or [deploying document store](https://www.openattestation.com/docs/integrator-section/verifiable-document/ethereum/document-store) for verifiable document, for more information.
 
-The `"tokenRegistry"` field is a string that is the address for the token registry, please refer to [token registry](https://www.openattestation.com/docs/transferable-record/token-registry) for more information.
+The `"tokenRegistry"` field is a string that is the address for the token registry, please refer to [token registry](https://www.openattestation.com/docs/integrator-section/transferable-record/token-registry) for more information.
 
-The `"documentStore"` field is a string that is the address for the document store, please refer to [deploying document store](https://www.openattestation.com/docs/verifiable-document/document-store) for more information.
+The `"documentStore"` field is a string that is the address for the document store, please refer to [deploying document store](https://www.openattestation.com/docs/integrator-section/verifiable-document/ethereum/document-store/) for more information.
 
-The `"identityProof"` field is an object that refers to the issuer identity, please refer to [identity Proof](https://www.openattestation.com/docs/advanced/identity-proofs) for more information.
+The `"identityProof"` field is an object that refers to the issuer identity, please refer to [identity Proof](https://www.openattestation.com/docs/developer-section/quickstart/configure-dns/) for more information.
 
 ### `"schema"` field
 

@@ -50,8 +50,8 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
 
 ```
 
-- `"documentStore"` - Update with your document store. For more information, click [here](https://www.openattestation.com/docs/verifiable-document/document-store).
-- `"location"` - Update with the Issuer's domain. For more information, click [here](https://www.openattestation.com/docs/advanced/identity-proofs).
+- `"documentStore"` - Update with your document store. For more information, click [here](https://www.openattestation.com/docs/integrator-section/verifiable-document/ethereum/document-store).
+- `"location"` - Update with the Issuer's domain. For more information, click [here](https://www.openattestation.com/docs/developer-section/quickstart/configure-dns).
 - `"logo"` - Update with the Logo's URL, to be displayed accordingly as the image above.
 - `"backgroundColor"` - Update with the desired background color. The default color(#ffffff) will be used if color is not stated here. i.e. values for this field "#000000", "black"
 - `"titleColor"` - Update with the desired title text color. The default color(#4e4e50) will be used if color is not stated here. i.e. values for this field "#ffffff", "white"
