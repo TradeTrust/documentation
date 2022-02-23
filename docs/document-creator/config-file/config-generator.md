@@ -13,7 +13,7 @@ Before we proceed, you will need to have Open Attestation CLI v1.45.3 or higher 
 
 ## Step 1: Acquiring a wallet.json file
 
-Firstly, we will need to acquire a wallet.json file, please refer [here](https://www.openattestation.com/docs/verifiable-document/wallet) on how to create the wallet.json file.
+Firstly, we will need to acquire a wallet.json file, please refer [here](https://www.openattestation.com/docs/integrator-section/verifiable-document/ethereum/wallet) on how to create the wallet.json file.
 
 If you already have a wallet.json file, you can skip this step and proceed to [step 2](#step-2-generate-the-config-file).
 

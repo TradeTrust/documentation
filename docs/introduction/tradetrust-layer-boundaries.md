@@ -41,7 +41,7 @@ There are two different categories of integration at this level:
 
 In the event that a shared universe integration is proposed, it has to be a public, permissionless network similar to TradeTrust (Ethereum). This means that no entity should be able to exclude another entity from participating on the network. The network has to also be trustlessly verifiable by both participants, and the ledger state should be accessible publicly.
 
-For a parallel universe integration, documents and assets issued on the alternative ledger will not be verifiable on [TradeTrust.io](https://tradetrust.io), but implementers are welcome to create their own stack spanning L0 to L4. They may wish to rely on some of the work already done by TradeTrust/OpenAttestation to reduce the amount of bespoke work required. For example, [oa-verify](https://github.com/Open-Attestation/oa-verify) is very [easily modified](https://www.openattestation.com/docs/advanced/verification-methods) to support [alternative verification methods](/docs/advanced/alternative-ledgers).
+For a parallel universe integration, documents and assets issued on the alternative ledger will not be verifiable on [TradeTrust.io](https://tradetrust.io), but implementers are welcome to create their own stack spanning L0 to L4. They may wish to rely on some of the work already done by TradeTrust/OpenAttestation to reduce the amount of bespoke work required. For example, [oa-verify](https://github.com/Open-Attestation/oa-verify) is very [easily modified](https://www.openattestation.com/docs/developer-section/libraries/remote-files/open-attestation-verify/#verification-method) to support [alternative verification methods](/docs/advanced/alternative-ledgers).
 
 ### L1: Protocol Integration
 

@@ -37,7 +37,7 @@ const signer = new AwsKmsSigner({
 });
 ```
 
-Prepare an example document (can refer to [this](https://www.openattestation.com/docs/verifiable-document/did/raw-document)) that is to be signed:
+Prepare an example document (can refer to [this](https://www.openattestation.com/docs/integrator-section/verifiable-document/did/raw-document)) that is to be signed:
 
 ```
 const address = await signer.getAddress();
