@@ -72,6 +72,10 @@ const siteConfig = {
       indexName: "tradetrust",
       algoliaOptions: {},
     },
+    gtag: {
+      trackingID: 'G-7YL3CX08LM',
+      anonymizeIP: true,
+    },
     prism: {
       theme: require("prism-react-renderer/themes/nightOwl"),
     },
