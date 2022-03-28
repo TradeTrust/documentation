@@ -15,9 +15,13 @@ const siteConfig = {
         docs: {
           path: "./docs",
           sidebarPath: require.resolve("./sidebars.json"),
+          sidebarCollapsible: true,
         },
         theme: {
           customCss: [require.resolve("./src/css/tailwind.css")],
+        },
+        gtag: {
+          trackingID: "G-7YL3CX08LM",
         },
       },
     ],
@@ -68,17 +72,14 @@ const siteConfig = {
       copyright: `Copyright © ${new Date().getFullYear()} TradeTrust`,
     },
     algolia: {
+      appId: "BH4D9OD16A",
       apiKey: "2c96d58935843a5e1a0f4e53ea18300e",
       indexName: "tradetrust",
       algoliaOptions: {},
     },
-    gtag: {
-      trackingID: 'G-7YL3CX08LM'
-    },
     prism: {
       theme: require("prism-react-renderer/themes/nightOwl"),
     },
-    sidebarCollapsible: true,
   },
 };
 
