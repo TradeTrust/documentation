@@ -21,7 +21,7 @@ const siteConfig = {
           customCss: [require.resolve("./src/css/tailwind.css")],
         },
         gtag: {
-          trackingID: "G-7YL3CX08LM",
+          trackingID: "G-Z4JTBB0GN7",
         },
       },
     ],
