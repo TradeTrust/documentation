@@ -1,3 +1,5 @@
+const GA_MEASUREMENT_ID = "G-Z4JTBB0GN7";
+
 const siteConfig = {
   title: "TradeTrust Developer Hub",
   tagline:
@@ -21,7 +23,7 @@ const siteConfig = {
           customCss: [require.resolve("./src/css/tailwind.css")],
         },
         gtag: {
-          trackingID: "G-Z4JTBB0GN7",
+          trackingID: GA_MEASUREMENT_ID,
         },
       },
     ],
@@ -80,6 +82,9 @@ const siteConfig = {
     prism: {
       theme: require("prism-react-renderer/themes/nightOwl"),
     },
+  },
+  customFields: {
+    GA_MEASUREMENT_ID,
   },
 };
 

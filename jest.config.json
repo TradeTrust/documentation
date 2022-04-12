@@ -1,0 +1,9 @@
+{
+  "preset": "ts-jest",
+  "moduleNameMapper": {
+    "@docusaurus/BrowserOnly": "<rootDir>/__mocks__/BrowserOnly.tsx"
+  },
+  "testEnvironment": "jsdom",
+  "testPathIgnorePatterns": ["/node_modules/", "/integration/"],
+  "setupFilesAfterEnv": ["<rootDir>/jest-setup.ts"]
+}
