@@ -43,22 +43,18 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.4",
     "@tsconfig/docusaurus": "^1.0.5",
-    "@types/gtag.js": "0.0.10",
     "@types/jest": "^27.4.1",
     "@types/react": "^17.0.43",
     "@types/react-helmet": "^6.1.5",
     "@types/react-router-dom": "^5.3.3",
     "autoprefixer": "^10.4.4",
-    "crypto-browserify": "^3.12.0",
     "jest": "^27.5.1",
     "lodash": "^4.17.21",
     "postcss": "^8.4.12",
     "postcss-cli": "^9.1.0",
     "prettier": "^2.6.1",
-    "stream-browserify": "^3.0.0",
     "tailwindcss": "^3.0.23",
     "ts-jest": "^27.1.4",
-    "ts-loader": "^9.2.8",
     "typescript": "^4.6.3"
   }
 }
