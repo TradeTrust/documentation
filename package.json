@@ -15,6 +15,8 @@
   "dependencies": {
     "@docusaurus/core": "^2.0.0-beta.18",
     "@docusaurus/preset-classic": "^2.0.0-beta.18",
+    "@govtechsg/tradetrust-ui-components": "^2.16.0",
+    "@govtechsg/tradetrust-utils": "^1.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -47,12 +49,16 @@
     "@types/react-helmet": "^6.1.5",
     "@types/react-router-dom": "^5.3.3",
     "autoprefixer": "^10.4.4",
+    "crypto-browserify": "^3.12.0",
     "jest": "^27.5.1",
+    "lodash": "^4.17.21",
     "postcss": "^8.4.12",
     "postcss-cli": "^9.1.0",
     "prettier": "^2.6.1",
+    "stream-browserify": "^3.0.0",
     "tailwindcss": "^3.0.23",
     "ts-jest": "^27.1.4",
+    "ts-loader": "^9.2.8",
     "typescript": "^4.6.3"
   }
 }
