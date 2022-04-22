@@ -1,3 +1,5 @@
+const GA_MEASUREMENT_ID = "G-Z4JTBB0GN7";
+
 const siteConfig = {
   title: "TradeTrust Developer Hub",
   tagline:
@@ -8,6 +10,7 @@ const siteConfig = {
   organizationName: "IMDA",
   favicon: "img/favicon.svg",
   stylesheets: ["https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu:wght@700&display=swap"],
+  plugins: [require.resolve("./docusaurus-plugin/src")], // monkey patch webpack config -> https://docusaurus.io/docs/next/api/plugin-methods/lifecycle-apis#configureWebpack
   presets: [
     [
       "@docusaurus/preset-classic",
@@ -21,7 +24,7 @@ const siteConfig = {
           customCss: [require.resolve("./src/css/tailwind.css")],
         },
         gtag: {
-          trackingID: "G-Z4JTBB0GN7",
+          trackingID: GA_MEASUREMENT_ID,
         },
       },
     ],
@@ -80,6 +83,9 @@ const siteConfig = {
     prism: {
       theme: require("prism-react-renderer/themes/nightOwl"),
     },
+  },
+  customFields: {
+    GA_MEASUREMENT_ID,
   },
 };
 
