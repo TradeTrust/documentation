@@ -11,7 +11,7 @@ module.exports = merge(commonUiConfig, {
     extend: {
       colors: {
         blue: {
-          DEFAULT: "#3B8CC5",
+          DEFAULT: "#2D5FAA",
         },
       },
     },

@@ -31,11 +31,10 @@ const siteConfig = {
   ],
   themeConfig: {
     navbar: {
-      title: "TradeTrust",
       logo: {
         alt: "TradeTrust Logo",
-        src: "img/logo/logo-tt.svg",
-        srcDark: "img/logo/logo-tt.svg",
+        src: "img/logo/logo-tt-full.svg",
+        srcDark: "img/logo/logo-tt-full.svg",
       },
       items: [
         { to: "docs/introduction/what-is-tradetrust", label: "Docs" },
