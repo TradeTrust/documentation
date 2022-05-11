@@ -27,14 +27,14 @@ const Home = () => {
                       src={useBaseUrl("img/home/home-getting-started.png")}
                       alt="Getting started"
                     />
-                    <h3 className="mb-2 title">Getting Started</h3>
+                    <h4 className="mb-2 title">Getting Started</h4>
                     <p className="text-center">
                       A step-by-step guide to set up TradeTrust according to your application’s requirements.
                     </p>
                   </div>
                   <div className="flex-shrink-0 flex justify-center">
                     <Link
-                      className="btn bg-blue text-white hover:text-white my-4"
+                      className="btn bg-blue text-white hover:text-white my-4 py-3 px-4"
                       to={useBaseUrl("docs/introduction/what-is-tradetrust")}
                     >
                       Get Started
@@ -51,12 +51,12 @@ const Home = () => {
                       src={useBaseUrl("img/home/home-gallery.png")}
                       alt="Gallery"
                     />
-                    <h3 className="mb-2 title">Gallery</h3>
+                    <h4 className="mb-2 title">Gallery</h4>
                     <p className="text-center">TradeTrust documents and create yours today!</p>
                   </div>
                   <div className="flex-shrink-0 flex justify-center">
                     <a
-                      className="btn bg-blue text-white hover:text-white my-4"
+                      className="btn bg-blue text-white hover:text-white my-4 py-3 px-4"
                       href="https://gallery.openattestation.com/tag/trade-trust"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -75,14 +75,14 @@ const Home = () => {
                       src={useBaseUrl("img/home/home-tools.png")}
                       alt="Tools"
                     />
-                    <h3 className="mb-2 title">Tools</h3>
+                    <h4 className="mb-2 title">Tools</h4>
                     <p className="text-center">
                       Additional tools you can build into TradeTrust applications to improve your workflow.{" "}
                     </p>
                   </div>
                   <div className="flex-shrink-0 flex justify-center">
                     <a
-                      className="btn bg-blue text-white hover:text-white my-4"
+                      className="btn bg-blue text-white hover:text-white my-4 py-3 px-4"
                       href="https://toolkit.openattestation.com/"
                       target="_blank"
                       rel="noopener noreferrer"
