@@ -4,26 +4,26 @@
 
 @font-face {
   font-family: "Gilroy-Light";
-  src: url("../../node_modules//@govtechsg/tradetrust-ui-components/src/static/fonts/GilroyLight/font.woff2") format('woff2'),
-    url("../../node_modules//@govtechsg/tradetrust-ui-components/src/static/fonts/GilroyLight/font.woff") format('woff');
+  src: url("https://ui.tradetrust.io/static/fonts/GilroyLight/font.woff2") format('woff2'),
+    url("https://ui.tradetrust.io/static/fonts/GilroyLight/font.woff") format('woff');
 }
 
 @font-face {
   font-family: "Gilroy-Medium";
-  src: url("../../node_modules//@govtechsg/tradetrust-ui-components/src/static/fonts/GilroyMedium/font.woff2") format('woff2'),
-    url("../../node_modules//@govtechsg/tradetrust-ui-components/src/static/fonts/GilroyMedium/font.woff") format('woff');
+  src: url("https://ui.tradetrust.io/static/fonts/GilroyMedium/font.woff2") format('woff2'),
+    url("https://ui.tradetrust.io/static/fonts/GilroyMedium/font.woff") format('woff');
 }
 
 @font-face {
   font-family: "Gilroy-Bold";
-  src: url("../../node_modules//@govtechsg/tradetrust-ui-components/src/static/fonts/GilroyBold/font.woff2") format('woff2'),
-    url('../../node_modules//@govtechsg/tradetrust-ui-components/src/static/fonts/GilroyBold/font.woff') format('woff');
+  src: url("https://ui.tradetrust.io/static/fonts/GilroyBold/font.woff2") format('woff2'),
+    url('https://ui.tradetrust.io/static/fonts/GilroyBold/font.woff') format('woff');
 }
 
 @font-face {
   font-family: "Gilroy-ExtraBold";
-  src: url('../../node_modules//@govtechsg/tradetrust-ui-components/src/static/fonts/GilroyExtraBold/font.woff2') format('woff2'),
-    url('../../node_modules//@govtechsg/tradetrust-ui-components/src/static/fonts/GilroyExtraBold/font.woff') format('woff');
+  src: url('https://ui.tradetrust.io/static/fonts/GilroyExtraBold/font.woff2') format('woff2'),
+    url('https://ui.tradetrust.io/static/fonts/GilroyExtraBold/font.woff') format('woff');
 }
 
 @layer base {
@@ -37,7 +37,7 @@
   h4,
   h5,
   h6 {
-    @apply text-cloud-900;
+    @apply text-cloud-800;
     @apply text-inherit;
   }
 

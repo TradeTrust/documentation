@@ -13,13 +13,6 @@ module.exports = merge(commonUiConfig, {
       display: ["Gilroy-Medium", "sans-serif"],
       body: ["Gilroy-Medium", "sans-serif"],
     },
-    extend: {
-      colors: {
-        blue: {
-          DEFAULT: "#2D5FAA",
-        },
-      },
-    },
   },
   variants: {
     extend: {},
