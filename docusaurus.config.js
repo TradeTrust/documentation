@@ -9,7 +9,7 @@ const siteConfig = {
   projectName: "website",
   organizationName: "IMDA",
   favicon: "img/favicon.svg",
-  stylesheets: ["https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap"],
+  stylesheets: ["https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap"],
   plugins: [require.resolve("./docusaurus-plugin/src")], // monkey patch webpack config -> https://docusaurus.io/docs/next/api/plugin-methods/lifecycle-apis#configureWebpack
   presets: [
     [
