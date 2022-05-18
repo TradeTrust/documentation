@@ -12,7 +12,11 @@ This document endorsement and verification foundation is provided by another pro
 
 ### Verification Documents
 
-![simple signing flow](/docs/introduction/what-is-tradetrust/simple-signing.svg)
+<p align="center" width="100%">
+  <figure>
+      <img src='/docs/introduction/what-is-tradetrust/simple-signing.svg' />
+  </figure>
+</p>
 
 The fingerprint of the signed TradeTrust file is then committed to a `Document Store` smart contract on the Ethereum Blockchain, which serves as an immutable ledger.
 

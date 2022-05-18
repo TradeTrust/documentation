@@ -2,9 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Gilroy-Light";
+  src: url("https://ui.tradetrust.io/static/fonts/GilroyLight/font.woff2") format('woff2'),
+    url("https://ui.tradetrust.io/static/fonts/GilroyLight/font.woff") format('woff');
+}
+
+@font-face {
+  font-family: "Gilroy-Medium";
+  src: url("https://ui.tradetrust.io/static/fonts/GilroyMedium/font.woff2") format('woff2'),
+    url("https://ui.tradetrust.io/static/fonts/GilroyMedium/font.woff") format('woff');
+}
+
+@font-face {
+  font-family: "Gilroy-Bold";
+  src: url("https://ui.tradetrust.io/static/fonts/GilroyBold/font.woff2") format('woff2'),
+    url('https://ui.tradetrust.io/static/fonts/GilroyBold/font.woff') format('woff');
+}
+
+@font-face {
+  font-family: "Gilroy-ExtraBold";
+  src: url('https://ui.tradetrust.io/static/fonts/GilroyExtraBold/font.woff2') format('woff2'),
+    url('https://ui.tradetrust.io/static/fonts/GilroyExtraBold/font.woff') format('woff');
+}
+
 @layer base {
   body {
-    font-family: "Roboto", sans-serif;
     font-size: 16px;
   }
 
@@ -14,23 +37,43 @@
   h4,
   h5,
   h6 {
-    font-family: "Ubuntu", sans-serif;
-    @apply text-gray-600;
+    @apply text-cloud-800;
     @apply text-inherit;
   }
 
-  h1 {
-    font-size: 48px;
+  h1 {    
+    font-family: "Ubuntu", sans-serif;
+    font-size: 52px;
+    @apply font-bold;
   }
   h2 {
-    font-size: 32px;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 40px;
+    @apply font-bold;
   }
 
   h3 {
-    font-size: 24px;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 26px;
+  }
+
+  h4 {
+    font-family: "Gilroy-Bold", sans-serif;
+    font-size: 20px;
+  }
+
+  h5 {
+    font-family: "Gilroy-Bold", sans-serif;
+    font-size: 16px;
   }
 
   h6 {
+    font-family: "Gilroy-Medium", sans-serif;
+    font-size: 14px;
+  }
+
+  p {
+    font-family: "Gilroy-Medium", sans-serif;
     font-size: 16px;
   }
 
@@ -73,7 +116,6 @@
     @apply font-bold;
     @apply text-xl;
     @apply text-center;
-    font-family: "Roboto", sans-serif;
   }
 }
 

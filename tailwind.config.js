@@ -8,12 +8,10 @@ module.exports = merge(commonUiConfig, {
       center: true,
       padding: theme("spacing.4"),
     }),
-    extend: {
-      colors: {
-        blue: {
-          DEFAULT: "#3B8CC5",
-        },
-      },
+    fontFamily: {
+      sans: ["Gilroy-Medium", "sans-serif"],
+      display: ["Gilroy-Medium", "sans-serif"],
+      body: ["Gilroy-Medium", "sans-serif"],
     },
   },
   variants: {

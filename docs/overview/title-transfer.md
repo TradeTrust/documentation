@@ -60,4 +60,8 @@ User interface of how EBL is transferred/endorsed/surrendered using Manage Asset
 
 ## Summary Table of Actions
 
-![title-escrow-summary.png](/docs/overview/title-transfer/title-escrow-summary.png)
+<p align="center" width="100%">
+  <figure>
+      <img src='/docs/overview/title-transfer/title-escrow-summary.png' />
+  </figure>
+</p>
