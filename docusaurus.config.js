@@ -35,6 +35,8 @@ const siteConfig = {
         alt: "TradeTrust Logo",
         src: "img/logo/logo-tt-full.svg",
         srcDark: "img/logo/logo-tt-full.svg",
+        width: 168,
+        height: 50,
       },
       items: [
         { to: "docs/introduction/what-is-tradetrust", label: "Docs" },
@@ -46,7 +48,7 @@ const siteConfig = {
         {
           items: [
             {
-              html: `<a href="https://www.tradetrust.io" target="_blank" rel="noreferrer noopener"><img src="/img/logo/logo-tt-full.svg" alt="TradeTrust Logo" style="max-width: 140px;" /></a>`,
+              html: `<a href="https://www.tradetrust.io" target="_blank" rel="noreferrer noopener"><img src="/img/logo/logo-tt-full.svg" alt="TradeTrust Logo" style="max-width: 142px;" /></a>`,
             },
           ],
         },

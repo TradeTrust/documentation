@@ -130,6 +130,12 @@
   @apply text-gray-400;
 }
 
+.navbar__logo img {
+  @apply w-[168px];
+  @apply h-10;
+  @apply -mt-2;
+}
+
 html[data-theme='dark'] p,
 html[data-theme='dark'] ol,
 html[data-theme='dark'] ul,
