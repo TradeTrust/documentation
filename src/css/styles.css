@@ -130,10 +130,13 @@
   @apply text-gray-400;
 }
 
-.navbar__logo img {
+.navbar__brand {
+  @apply h-full;
+}
+
+.navbar__logo {
   @apply w-[168px];
-  @apply h-10;
-  @apply -mt-2;
+  @apply h-full;
 }
 
 html[data-theme='dark'] p,
