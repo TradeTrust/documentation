@@ -1,6 +1,9 @@
 {
   "network": "<Your network>",
-  "wallet": "<Your wallet string>",
+  "wallet": {
+    "type": "ENCRYPTED_JSON",
+    "encryptedJson": "<Your Wallet String>"
+  },
   "forms": [
     {
       "name": "Bill of Lading",
@@ -95,8 +98,8 @@
       "attachments": {
         "allow": true
       },
-      "extension":"tt",
-      "fileName":"ebl-<%= blNumber %>"
+      "extension": "tt",
+      "fileName": "ebl-<%= blNumber %>"
     }
   ]
 }
