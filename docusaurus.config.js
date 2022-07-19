@@ -75,7 +75,7 @@ const siteConfig = {
     },
     algolia: {
       appId: "6DNGPTCB04",
-      apiKey: "b9f61a840ac1b411fdc83e7a06e76343",
+      apiKey: process.env.ALGOLIA_SEARCH_API_KEY,
       indexName: "tradetrust",
       algoliaOptions: {},
     },
