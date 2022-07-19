@@ -74,8 +74,8 @@ const siteConfig = {
       copyright: `Copyright © ${new Date().getFullYear()} TradeTrust`,
     },
     algolia: {
-      appId: "BH4D9OD16A",
-      apiKey: "2c96d58935843a5e1a0f4e53ea18300e",
+      appId: "6DNGPTCB04",
+      apiKey: "b9f61a840ac1b411fdc83e7a06e76343",
       indexName: "tradetrust",
       algoliaOptions: {},
     },
