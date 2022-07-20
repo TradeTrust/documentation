@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const GA_MEASUREMENT_ID = "G-Z4JTBB0GN7";
 
 const siteConfig = {
@@ -74,8 +76,8 @@ const siteConfig = {
       copyright: `Copyright © ${new Date().getFullYear()} TradeTrust`,
     },
     algolia: {
-      appId: "BH4D9OD16A",
-      apiKey: "2c96d58935843a5e1a0f4e53ea18300e",
+      appId: "6DNGPTCB04",
+      apiKey: process.env.ALGOLIA_SEARCH_API_KEY || "dummykey",
       indexName: "tradetrust",
       algoliaOptions: {},
     },
