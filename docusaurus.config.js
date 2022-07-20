@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const GA_MEASUREMENT_ID = "G-Z4JTBB0GN7";
 
 const siteConfig = {
@@ -75,7 +77,7 @@ const siteConfig = {
     },
     algolia: {
       appId: "6DNGPTCB04",
-      apiKey: process.env.ALGOLIA_SEARCH_API_KEY,
+      apiKey: process.env.ALGOLIA_SEARCH_API_KEY || "dummykey",
       indexName: "tradetrust",
       algoliaOptions: {},
     },
