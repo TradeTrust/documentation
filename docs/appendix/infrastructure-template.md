@@ -61,18 +61,6 @@ export DISABLE_DOMAIN=true
 
 The Verify API creates an endpoint that accepts a TradeTrust document and returns the results of the verification according to the [@govtechsg/oa-verify](https://www.npmjs.com/package/@govtechsg/oa-verify) library.
 
-To deploy the Verify API to be used on Ropsten:
-
-```bash
-NETWORK=ropsten npm run deploy:verify -- --stage stg
-```
-
-To deploy the Verify API to be used on Rinkeby:
-
-```bash
-NETWORK=rinkeby npm run deploy:verify -- --stage stg
-```
-
 To deploy it for verifying against Main Net:
 
 ```bash
@@ -91,18 +79,6 @@ This endpoint can optionally be access controlled with an API key, to enable thi
 
 ```bash
 export ENABLE_STORAGE_UPLOAD_API_KEY=true
-```
-
-To deploy this endpoint for Ropsten documents:
-
-```bash
-NETWORK=ropsten npm run deploy:storage -- --stage stg
-```
-
-To deploy this endpoint for Rinkeby documents:
-
-```bash
-NETWORK=rinkeby npm run deploy:storage -- --stage stg
 ```
 
 To deploy it for Main Net documents:

@@ -26,7 +26,7 @@ There are 2 ways of using this command to generate a config file, both in which,
 This method will generate the most basic config file with a sandbox DNS, document store and token registry.
 
 ```
-open-attestation config create --output-dir ./example-configs --encrypted-wallet-path </path/to>/wallet.json --config-type tradetrust
+open-attestation config create --output-dir ./example-configs --encrypted-wallet-path </path/to>/wallet.json --config-template-url <remote url>
 ```
 
 ### Method 2: Using config-template-path option
@@ -53,4 +53,4 @@ Once the config file is generated, you can start using it on our [document creat
 
 To take it a step further, you can customise your config file by **replacing the forms in the forms section with your own customised forms**, so you can create and issue your own custom documents.
 
-_Please note that by using any of these methods of generating a config file, the config file will only be usable in **ropsten testnet** environment and with a validity of **30 days**._
+_Please note that by using any of these methods of generating a config file, the config file will only be usable in **goerli testnet** environment and with a validity of **30 days**._
