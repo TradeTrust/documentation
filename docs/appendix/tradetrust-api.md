@@ -6,13 +6,13 @@ sidebar_label: TradeTrust API
 
 ### Verify endpoint
 
-Currently there is a reference API endpoint for verifying documents on Etheruem network:
+Currently there is a reference API endpoint for verifying documents on Ethereum network:
 
 ```
 https://tradetrust-functions.netlify.app/.netlify/functions/verify
 ```
 
-Read more about it [here](https://github.com/TradeTrust/tradetrust-functions#verify).
+⚠️ Read more about it [here](https://github.com/TradeTrust/tradetrust-functions#verify).
 
 ### Curl example
 
