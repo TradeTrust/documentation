@@ -6,102 +6,114 @@ sidebar_label: TradeTrust API
 
 ### Verify endpoint
 
-Currently there is an API endpoint for verifying documents issued on both ropsten and rinkeby network:
+Currently there is a reference API endpoint for verifying documents on Ethereum network:
 
 ```
-ropsten: https://api-ropsten.tradetrust.io/verify
-rinkeby: https://api-rinkeby.tradetrust.io/verify
-
+https://tradetrust-functions.netlify.app/.netlify/functions/verify
 ```
 
-However, it is recommended that you set up your own, refer to the <a href="/docs/appendix/infrastructure-template#verify">guide</a> on how.
+⚠️ Read more about it [here](https://github.com/TradeTrust/tradetrust-functions#verify).
 
-## Axios example
-
-`axios.post("https://api-ropsten.tradetrust.io/verify", { document: ISSUED_DOCUMENT })`
-
-Example usage:
+### Curl example
 
 ```
-axios
-  .post("https://api-ropsten.tradetrust.io/verify", { document: ISSUED_DOCUMENT })
-  .then(function (response) {
-    console.log(response.data.summary); // should return { all: true, documentStatus: true, documentIntegrity: true, issuerIdentity: true }
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+curl --header "Content-Type: application/json" --request POST --data '{ "document" : WRAPPED_ISSUED_DOCUMENT }' https://tradetrust-functions.netlify.app/.netlify/functions/verify
 ```
 
-## Curl example
-
-`curl -H "Content-Type: application/json" --request POST --data '{"document":"ISSUED_DOCUMENT"}' https://api-ropsten.opencerts.io/verify`
-
-Return response of a verified document:
+Remember to replace `WRAPPED_ISSUED_DOCUMENT` with your own stringified document json object in the above example.
 
 ```
+// Return response of a verified document:
+
 {
-   "summary":{
-      "all":true,
-      "documentStatus":true,
-      "documentIntegrity":true,
-      "issuerIdentity":true
-   },
-   "data":[
-      {
-         "type":"DOCUMENT_INTEGRITY",
-         "name":"OpenAttestationHash",
-         "data":true,
-         "status":"VALID"
-      },
-      {
-         "status":"SKIPPED",
-         "type":"DOCUMENT_STATUS",
-         "name":"OpenAttestationEthereumDocumentStoreIssued",
-         "reason":{
-            "code":4,
-            "codeString":"SKIPPED",
-            "message":"Document issuers doesn't have \"documentStore\" or \"certificateStore\" property or DOCUMENT_STORE method"
-         }
-      },
-      {
-         "name":"OpenAttestationEthereumTokenRegistryMinted",
-         "type":"DOCUMENT_STATUS",
-         "data":{
-            "mintedOnAll":true,
-            "details":[
-               {
-                  "minted":true,
-                  "address":"0x13249BA1Ec6B957Eb35D34D7b9fE5D91dF225B5B"
-               }
-            ]
-         },
-         "status":"VALID"
-      },
-      {
-         "status":"SKIPPED",
-         "type":"DOCUMENT_STATUS",
-         "name":"OpenAttestationEthereumDocumentStoreRevoked",
-         "reason":{
-            "code":4,
-            "codeString":"SKIPPED",
-            "message":"Document issuers doesn't have \"documentStore\" or \"certificateStore\" property or DOCUMENT_STORE method"
-         }
-      },
-      {
-         "name":"OpenAttestationDnsTxt",
-         "type":"ISSUER_IDENTITY",
-         "data":[
-            {
-               "status":"VALID",
-               "location":"demo-tradetrust.openattestation.com",
-               "value":"0x13249BA1Ec6B957Eb35D34D7b9fE5D91dF225B5B"
-            }
-         ],
-         "status":"VALID"
+  "summary": {
+    "all": true,
+    "documentStatus": true,
+    "documentIntegrity": true,
+    "issuerIdentity": true
+  },
+  "fragments": [
+    {
+      "type": "DOCUMENT_INTEGRITY",
+      "name": "OpenAttestationHash",
+      "data": true,
+      "status": "VALID"
+    },
+    {
+      "status": "SKIPPED",
+      "type": "DOCUMENT_STATUS",
+      "name": "OpenAttestationEthereumTokenRegistryStatus",
+      "reason": {
+        "code": 4,
+        "codeString": "SKIPPED",
+        "message": "Document issuers doesn't have \"tokenRegistry\" property or TOKEN_REGISTRY method"
       }
-   ]
+    },
+    {
+      "name": "OpenAttestationEthereumDocumentStoreStatus",
+      "type": "DOCUMENT_STATUS",
+      "data": {
+        "issuedOnAll": true,
+        "revokedOnAny": false,
+        "details": {
+          "issuance": [
+            {
+              "issued": true,
+              "address": "0x49b2969bF0E4aa822023a9eA2293b24E4518C1DD"
+            }
+          ],
+          "revocation": [
+            {
+              "revoked": false,
+              "address": "0x49b2969bF0E4aa822023a9eA2293b24E4518C1DD"
+            }
+          ]
+        }
+      },
+      "status": "VALID"
+    },
+    {
+      "status": "SKIPPED",
+      "type": "DOCUMENT_STATUS",
+      "name": "OpenAttestationDidSignedDocumentStatus",
+      "reason": {
+        "code": 0,
+        "codeString": "SKIPPED",
+        "message": "Document was not signed by DID directly"
+      }
+    },
+    {
+      "name": "OpenAttestationDnsTxtIdentityProof",
+      "type": "ISSUER_IDENTITY",
+      "data": [
+        {
+          "status": "VALID",
+          "location": "demo-tradetrust.openattestation.com",
+          "value": "0x49b2969bF0E4aa822023a9eA2293b24E4518C1DD"
+        }
+      ],
+      "status": "VALID"
+    },
+    {
+      "status": "SKIPPED",
+      "type": "ISSUER_IDENTITY",
+      "name": "OpenAttestationDnsDidIdentityProof",
+      "reason": {
+        "code": 0,
+        "codeString": "SKIPPED",
+        "message": "Document was not issued using DNS-DID"
+      }
+    },
+    {
+      "status": "SKIPPED",
+      "type": "ISSUER_IDENTITY",
+      "name": "OpenAttestationDidIdentityProof",
+      "reason": {
+        "code": 0,
+        "codeString": "SKIPPED",
+        "message": "Document is not using DID as top level identifier or has not been wrapped"
+      }
+    }
+  ]
 }
 ```
-
-Remember to replace `ISSUED_DOCUMENT` with your own document json object in the above examples.
