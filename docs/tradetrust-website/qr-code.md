@@ -30,7 +30,7 @@ For our reference implementation of document storage service, it does the follow
 {
   "type":"DOCUMENT",
   "payload": {
-    "uri":"https://api-ropsten.tradetrust.io/storage/95524c85-c1b4-44e3-ad91-3971f90e43cb","key":"1a8d6113d08210a2dbb91a3240216eefcf0de7601d87264ac2dd831c19853547",
+    "uri":"https://tradetrust-functions.netlify.app/.netlify/functions/storage/95524c85-c1b4-44e3-ad91-3971f90e43cb","key":"1a8d6113d08210a2dbb91a3240216eefcf0de7601d87264ac2dd831c19853547",
     "permittedActions":["STORE"],
     "redirect":"https://dev.tradetrust.io/"
   }

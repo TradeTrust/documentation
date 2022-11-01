@@ -8,13 +8,15 @@ The configuration file is a JSON file that contains information to configure the
 
 ### Config file structure
 
-Below is an example of a configuration file
+A reference of a configuration file can be found [here](https://raw.githubusercontent.com/TradeTrust/tradetrust-config/master/build/config-reference-v3.json).
+
+Below are examples of a configuration file
 
 #### Encrypted JSON Wallet
 
 ```json
 {
-  "network": "ropsten",
+  "network": "goerli",
   "wallet": {
     "type":"ENCRYPTED_JSON",
     "encryptedJson": "{\"address\":\"6a36c563a5350d7be66c801f901a67...\", ...}}",
@@ -31,7 +33,7 @@ Below is an example of a configuration file
 
 ```json
 {
-  "network": "ropsten",
+  "network": "goerli",
   "wallet": {
     "type":"AWS_KMS",
     "accessKeyId": "<IAM Access Key ID>",
@@ -46,42 +48,44 @@ Below is an example of a configuration file
 }
 ```
 
-Let's break down the fields that make up this config file.
+Let's break down the properties that make up this config file.
 
-Required fields:
+Required properties:
 
-- `"network"` - [Network field](#network-field)
-- `"wallet"` - [Wallet field](#wallet-field)
-- `"forms"` - [Forms field](#forms-field)
+- `"network"` - [Network property](#network-property)
+- `"wallet"` - [Wallet property](#wallet-property)
+- `"forms"` - [Forms property](#forms-property)
 
-Optional field:
+Optional property:
 
-- `"documentStorage"` - [Document Storage field](#document-storage-field)
-
----
-
-## Network field
-
-The `"network"` field is a string that refers to the network in which the document is created in.
-
-As of now, we only cater to 3 networks.
-
-- Mainnet : `"homestead"`
-- Ropsten testnet : `"ropsten"`
-- Rinkeby testnet : `"rinkeby"`
+- `"documentStorage"` - [Document Storage property](#document-storage-property)
 
 ---
 
-## Wallet field
+## Network property
 
-The `"wallet"` field is a string that refers to your ethereum wallet. We support two types of wallet options.
+The value of `"network"` property is a string that refers to the network in which the document is created in.
+
+Currently, we only support to 5 networks.
+
+- Ethereum Mainnet : `"homestead"`
+- Goerli Testnet : `"goerli"`
+- Sepolia Testnet : `"sepolia"`
+- Polygon Mainnet: `"matic"`
+- Mumbai Testnet: `"maticmum"`
+
+---
+
+## Wallet property
+
+The `"wallet"` property is a string that refers to your ethereum wallet. We support two types of wallet options.
 
 - ENCRYPTED_JSON
 - AWS_KMS
 
 #### ENCRYPTED_JSON Wallet
 
-The wallet field can be derive from either one of these methods:
+The wallet property can be derive from either one of these methods:
 
 1. If you don't have a wallet, you can refer to [Open Attestation's documentation](https://github.com/Open-Attestation/open-attestation-cli#wallet) to create a wallet.
    _Note: you will need to have Open Attestation Cli installed._ After running OA CLI `wallet create` command, this will give you a wallet.json.
@@ -112,7 +116,7 @@ Once you have an existing wallet.json, enter the following command to serialise 
 node -r fs -e 'console.log(JSON.stringify(JSON.stringify(JSON.parse(fs.readFileSync("./wallet.json", "utf-8")))));'
 ```
 
-The wallet string should be displayed on your terminal and you can enter it into the `"encryptedJson"` field in the [config file](#encrypted-json-wallet).
+The wallet string should be displayed on your terminal and you can enter it into the `"encryptedJson"` property in the [config file](#encrypted-json-wallet).
 
 If you have an existing Metamask account but don't want to use the Open Attestation Cli, you can still get your wallet string doing this:
 
@@ -131,7 +135,7 @@ wallet.encrypt("<Enter a password of your choice here>").then((str) => console.l
 
 (_Note: you can watch a tutorial on this [here](https://www.youtube.com/watch?v=z3l9OSVGHH8&feature=youtu.be&t=577) at 7:29 onwards_)
 
-This result can now be entered into the `"wallet"` field in the [config file](#encrypted-json-wallet).
+This result can now be entered into the `"wallet"` property in the [config file](#encrypted-json-wallet).
 
 #### AWS_KMS Wallet
 
@@ -141,17 +145,19 @@ Ethereum uses Elliptic Curve Digital Signing Algorithm (ECDSA). More specificall
 
 2. Connect the Aws Kms Key to an Aws Iam User and enable the signing access control.
 
-3. The IAM credential and KMS Key ID can now be entered into the `"wallet"` field in the [config file](#aws-kms-wallet).
+3. The IAM credential and KMS Key ID can now be entered into the `"wallet"` property in the [config file](#aws-kms-wallet).
 
 ---
 
-## Forms field
+## Forms property
 
-The `"forms"` field is an array of form object which expect `name`, `type`, `defaults` and `schema` as required fields. `uiSchema`, `extension`, `attachments` and `fileName` are optional fields which can also be added.
+The value of `"forms"` property is an array of form object which expect `name`, `type`, `defaults` and `schema` as required properties. `uiSchema`, `extension`, `attachments` and `fileName` are optional properties which can be added.
+
+example of the `"forms"` properties:
 
 ```json
 {
-  "name": "Cover Letter",
+  "name": "TradeTrust Invoice",
   "type": "VERIFIABLE_DOCUMENT",
   "defaults": {...},
   "schema": {...},
@@ -166,27 +172,17 @@ The `"forms"` field is an array of form object which expect `name`, `type`, `def
 }
 ```
 
-### `"name"` field
-
-The `"name"` field is a string that refers to the name of the form that will display when creating the document, as shown in the image below.
+- The value of `"name"` property is a string that refers to the name of the form that will display when creating the document, as shown in the image below.
 
 ![name](/docs/document-creator/config-file/form-name.png)
 
-### `"type"` field
+- The value of `"type"` property is a string that refers to the type of the document, either `"TRANSFERABLE_RECORD"` or `"VERIFIABLE_DOCUMENT"`.
 
-The `"type"` field is a string that reters to the type of the document, either `"TRANSFERABLE_RECORD"` or `"VERIFIABLE_DOCUMENT"`.
+- The value of `"defaults"` property is an object that contains the settings that you have that are constant among the different documents of the same kind of file. You can use either version 2 or version 3 document in this section. Some examples of default values are the document store address, token registry address, template, issuers, company logo, signatures, etc. are stored here, since they are a constant in the different documents of the same kind. Default values of the form should also be stored here. For example, you can store a default value for a `"title"` property here, this value will be used in the form schema as the value for the `"title"` property in the document.
 
-### `"defaults"` field
+#### V2 document defaults
 
-The `"defaults"` field is an object that contains the settings that you have that are constant among the different documents of the same kind of file.
-
-Usually the document store address, token registry address, template, issuers, company logo, signatures, etc. are stored here, since they are a constant in the different documents of the same kind.
-
-Default value of the form should also be stored here.
-
-For example, you can store a default value for a `"title"` field here, this value will be used in the form shema as the value for the `"title"` field.
-
-Below is an example of the `"defaults"` field:
+Below is an example of the `"defaults"` property:
 
 ```json
 "defaults": {
@@ -212,34 +208,95 @@ Below is an example of the `"defaults"` field:
 },
 ```
 
-#### `"$template"` field
+- The value of `"$template"` property contains an object that refers to the custom renderer, please refer to [creating document renderer](https://www.openattestation.com/docs/developer-section/quickstart/create-custom-renderer).
 
-The `"$template"` field is an object that refers to the custom renderer, please refer to [creating document renderer](https://www.openattestation.com/docs/developer-section/quickstart/create-custom-renderer).
+- The value of `"issuers"` property contains an array of the issuer object. The required properties for each issuer are `name`, `identityProof` and one of `documentStore` OR `tokenRegistry`.
 
-#### `"issuers"` field
+_Transferrable document requires a [`tokenRegistry`](https://www.openattestation.com/docs/integrator-section/transferable-record/token-registry), whereas, a verifiable document requires a [`documentStore`](https://www.openattestation.com/docs/integrator-section/verifiable-document/ethereum/document-store)._
 
-The `"issuers"` is an array of the issuer object. The required fields for each issuer are `name`, `identityProof` and one of `documentStore` OR `tokenRegistry`.
+- The `"name"` property in the `"issuers"` section is a string, which refers to the name of the token registry or the name of the document store.
+  Please refer to [token registry](https://www.openattestation.com/docs/integrator-section/transferable-record/token-registry) for transferable document or [deploying document store](https://www.openattestation.com/docs/integrator-section/verifiable-document/ethereum/document-store) for verifiable document, for more information.
 
-Transferrable document requires a [`tokenRegistry`](https://www.openattestation.com/docs/integrator-section/transferable-record/token-registry), whereas, a verifiable document requires a [`documentStore`](https://www.openattestation.com/docs/integrator-section/verifiable-document/ethereum/document-store).
+- The `"tokenRegistry"` property is a string that is the address for the token registry, please refer to [token registry](https://www.openattestation.com/docs/integrator-section/transferable-record/token-registry) for more information.
 
-The `"name"` field in the `"issuers"` section is a string, which refers to the name of the token registry or the name of the document store.
-Please refer to [token registry](https://www.openattestation.com/docs/integrator-section/transferable-record/token-registry) for transferable document or [deploying document store](https://www.openattestation.com/docs/integrator-section/verifiable-document/ethereum/document-store) for verifiable document, for more information.
+- The `"documentStore"` property is a string that is the address for the document store, please refer to [deploying document store](https://www.openattestation.com/docs/integrator-section/verifiable-document/ethereum/document-store/) for more information.
 
-The `"tokenRegistry"` field is a string that is the address for the token registry, please refer to [token registry](https://www.openattestation.com/docs/integrator-section/transferable-record/token-registry) for more information.
+- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](https://www.openattestation.com/docs/developer-section/quickstart/configure-dns/) for more information.
 
-The `"documentStore"` field is a string that is the address for the document store, please refer to [deploying document store](https://www.openattestation.com/docs/integrator-section/verifiable-document/ethereum/document-store/) for more information.
+#### V3 document defaults
 
-The `"identityProof"` field is an object that refers to the issuer identity, please refer to [identity Proof](https://www.openattestation.com/docs/developer-section/quickstart/configure-dns/) for more information.
+```json
+"defaults": {
+  "version": "https://schema.openattestation.com/3.0/schema.json",
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://schemata.openattestation.com/io/tradetrust/Invoice/1.0/invoice-context.json",
+    "https://schemata.openattestation.com/com/openattestation/1.0/OpenAttestation.v3.json"
+  ],
+  "type": [
+    "VerifiableCredential",
+    "OpenAttestationCredential"
+  ],
+  "issuanceDate": "2010-01-01T19:23:24Z",
+  "openAttestationMetadata": {
+    "template": {
+      "type": "EMBEDDED_RENDERER",
+      "name": "INVOICE",
+      "url": "https://generic-templates.tradetrust.io"
+    },
+    "proof": {
+      "type": "OpenAttestationProofMethod",
+      "method": "DOCUMENT_STORE",
+      "value": "0x49b2969bF0E4aa822023a9eA2293b24E4518C1DD",
+      "revocation": {
+        "type": "NONE"
+      }
+    },
+    "identityProof": {
+      "type": "DNS-TXT",
+      "identifier": "demo-tradetrust.openattestation.com"
+    }
+  },
+  "credentialSubject": {},
+  "issuer": {
+    "id": "https://example.com",
+    "name": "DEMO DOCUMENT STORE",
+    "type": "OpenAttestationIssuer"
+  }
+},
+```
 
-### `"schema"` field
+- The value of the `"version"` property contains information about the version of the document to be created.
 
-The `"schema"` field is an object used to generate a form. It follows [JSON schema format.](https://json-schema.org/)
+- The value of the `"@context"` property contain value that MUST be an ordered set where the first item is a URI with the value https://www.w3.org/2018/credentials/v1. Subsequent items in the array MUST express context information and be composed of any combination of URIs or objects. It is RECOMMENDED that each URI in the @context be one which, if dereferenced, results in a document containing machine-readable information about the @context.
+
+- The value of the `"type"` property contains value that MUST be, or map to (through interpretation of the @context property), one or more URIs. If more than one URI is provided, the URIs MUST be interpreted as an unordered set.
+
+- The value of the `"issuanceDate"` property MUST be a string value of a combined date-time string representing the date and time the credential becomes valid. Note that this value represents the earliest point in time at which the information associated with the credentialSubject property becomes valid.
+
+- The value of the `"openAttestationMetadata"` properties contains information about the `"template"` and `"proof"`.
+
+- The value of `"template"` property contains an object that refers to the custom renderer, please refer to [creating document renderer](https://www.openattestation.com/docs/developer-section/quickstart/create-custom-renderer).
+
+- The value `"proof"` property contains an object with the necessary information about the `"type"` of proof, `"method"` of proof, `"value"` of the proof method and the `"revocation"` type and status of the document.
+
+- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](https://www.openattestation.com/docs/developer-section/quickstart/configure-dns/) for more information.
+
+- The value of the `"credentialSubject"` property is defined as a set of objects that contain one or more properties that are each related to a subject of the verifiable credential.
+
+- The value of the `"issuer"` property MUST be either a URI or an object containing an id property. It is RECOMMENDED that the URI in the issuer or its id be one which, if dereferenced, results in a document containing machine-readable information about the issuer that can be used to verify the information expressed in the credential.
+
+---
+
+### `"schema"` property
+
+The value of `"schema"` property is an object that is used to generate a document. It follows [JSON schema format.](https://json-schema.org/)
 
 The structure of the schema will derive from the structure of the document you expect to build and will be inline with the custom renderer that you have built for this document.
 
 It will probably be a subset of an already existing schema without the data that you expect to be constants across your document.
 
-An example of the `"schema"` field:
+An example of the `"schema"` property:
 
 ```json
 "schema": {
@@ -257,15 +314,15 @@ An example of the `"schema"` field:
 },
 ```
 
-### `"Attachments"` field
+### `"Attachments"` property
 
-_Note: This attachments field is optional._
+_Note: This attachments property is optional._
 
-The `"attachments"` field contains the information about the required attachments for this document.
+The value of `"attachments"` property contains the information about the required attachments for this document.
 
-If there is no attachment for the particular form that you are creating, please set `"allow"` field to false.
+_If there is no attachment for the particular form that you are creating, please set `"allow"` property to false._
 
-An example of the `"attachments"` field:
+An example of the `"attachments"` property:
 
 ```json
 "attachments": {
@@ -274,13 +331,13 @@ An example of the `"attachments"` field:
 }
 ```
 
-The `"allow"` accepts a boolean value(true or false) and it will display the attachment section based on this value.
+- The value of `"allow"` property accepts a boolean value(true or false) and it will display the attachment section based on this value.
 
-The `"accept"` accepts an array of string, that are file types, which will set the accepted file types for the attachments.
+- The value of `"accept"` property accepts an array of string, that are file types, which will set the accepted file types for the attachments.
 
-If you want to accept all file types, remove the entire `"accept"` line from `"attachments"` object.
+_If you want to accept all file types, remove the entire `"accept"` property from `"attachments"` object._
 
-### `"UiSchema"` field
+### `"UiSchema"` property
 
 ```json
 "uiSchema": {
@@ -290,27 +347,27 @@ If you want to accept all file types, remove the entire `"accept"` line from `"a
   }
 ```
 
-_Note: This uiSchema field is optional. Only add this section in if you want to provide information on how the selected field should be rendered._
+_Note: This uiSchema property is optional. Only add this section in if you want to provide information on how the selected property should be rendered._
 
-The `"uiSchema"` field is basically an object literal providing information on how the selected field should be rendered.
+The value of `"uiSchema"` property is basically an object literal providing information on how the selected property should be rendered.
 
-For more information regarding the uiSchema field, please visit [react jsonschema form documents.](https://react-jsonschema-form.readthedocs.io/en/latest/api-reference/uiSchema/)
+For more information regarding the uiSchema property, please visit [react jsonschema form documents.](https://react-jsonschema-form.readthedocs.io/en/latest/api-reference/uiSchema/)
 
-### `"Extension"` field
+### `"Extension"` property
 
 ```json
 "extension": "tradetrust",
 ```
 
-_Note: This extension field is optional. Only add this section in if you want to generate a document with the specific extension._
+_Note: This extension property is optional. Only add this section in if you want to generate a document with the specific extension._
 
-The `"extension"` field is a string that refers to the extension of the created document.
+The value of `"extension"` property is a string that refers to the extension of the created document.
 
-By default, if this field is not present, it will create the document with "tt" as the extension.
+By default, if this property is not present, it will create the document with ".tt" as the extension.
 
 _i.e. "document-1.tt"_
 
-### `"fileName"` field
+### `"fileName"` property
 
 ```json
 "fileName": "ebl-<%= ebl-number %>",
@@ -318,6 +375,7 @@ _i.e. "document-1.tt"_
 
 Example :
 
+```json
 // data.csv file
 ebl-number, data, ...
 demo-123, data, ...
@@ -325,22 +383,23 @@ demo-123, data, ...
 // config file
 {
 ...,
-fileName: "ebl-<%= ebl-number=%>"
+"fileName": "ebl-<%= ebl-number=%>"
 }
 
 The output file name will be "ebl-demo-123".
+```
 
-_Note: This fileName field is optional. Only add this section in if you want to customise the file name to follow the form fields when uploading data file._
+_Note: This fileName property is optional. Only add this section in if you want to customise the file name to follow the form properties when uploading data file._
 
-The `"fileName"` field is a string that refers to the file name of the created document. The method uses interpolate delimiters to interpolate properties of data from data file.
+The `"fileName"` property is a string that refers to the file name of the created document. The method uses interpolate delimiters to interpolate properties of data from data file.
 
-By default, if this field is not present, The documents will follow the forms name with increment number.
+By default, if this property is not present, The documents will follow the forms name with increment number.
 
 _i.e. "document-1"_
 
 ---
 
-## Document Storage field
+## Document Storage property
 
 ```json
 "documentStorage": {
@@ -349,7 +408,7 @@ _i.e. "document-1"_
 }
 ```
 
-_Note: This document storage field is optional. Only add this section in if you want to generate a QRcode for easy sharing._
+_Note: This document storage property is optional. Only add this section in if you want to generate a QRcode for easy sharing._
 
 ##### If you do not want to upload your documents to a document storage endpoint you can omit this in the config file.
 
@@ -357,31 +416,23 @@ To use a document storage endpoint, you will have to have the endpoint infrastru
 
 You can refer to [infra template's storage section](/docs/appendix/infrastructure-template#storage) for more information.
 
-The `"documentStorage"` field is an object which expects an `"url"` field. `"apiKey"` can also be added.
+The value of `"documentStorage"` property is an object which expects an `"url"` property. `"apiKey"` can also be added.
 
-### `"apikey"` field
+- The value of `"apikey"` property it accepts a string as the API key.
 
-The `"apikey"` field is optional, it accepts a string as the API key.
+_If your document storage endpoint does not require an API key, you can omit this property._
 
-If your document storage endpoint does not require an API key, you should omit this field.
-
-### `"url"` field
-
-The `"url"` field accepts a string which will be the endpoint of the document storage.
+- The value of `"url"` property accepts a string which will be the endpoint of the document storage.
 
 _Note: please ensure that this document storage endpoint has a path `"/storage/queue"` that will return the queue number for storing your document in the document storage endpoint._
 
-For the convenience of developers, we provide a testing environment endpoints that will work for Ropsten and Rinkeby testnets.
+For the convenience of developers, we provide a testing environment endpoints that will work for Goerli testnets.
 
-#### Document storage endpoints:
+##### Document storage endpoints:
 
-```
-Ropsten url: "https://api-ropsten.tradetrust.io/storage"
-Rinkeby url: "https://api-rinkeby.tradetrust.io/storage"
+Goerli endpoint: `https://tradetrust-functions.netlify.app/.netlify/functions/storage`
 
-```
-
-These endpoints may only be used for valid and issued documents on the respective networks, and may not be mixed.
+These endpoint may only be used for valid and issued documents on the respective networks, and may not be mixed.
 
 An API key is not required for these endpoints.
 
