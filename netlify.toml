@@ -1,3 +1,8 @@
+# feel free to remove this redirect some time later
+[[redirects]]
+  from = "/docs/appendix/infrastructure-template"
+  to = "/docs/appendix/tradetrust-api"
+
 [[redirects]]
   from = "/*"
   to = "/"
