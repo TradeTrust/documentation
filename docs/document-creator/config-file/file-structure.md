@@ -414,8 +414,6 @@ _Note: This document storage property is optional. Only add this section in if y
 
 To use a document storage endpoint, you will have to have the endpoint infrastructure already set up and configured.
 
-You can refer to [infra template's storage section](/docs/appendix/infrastructure-template#storage) for more information.
-
 The value of `"documentStorage"` property is an object which expects an `"url"` property. `"apiKey"` can also be added.
 
 - The value of `"apikey"` property it accepts a string as the API key.

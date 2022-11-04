@@ -47,11 +47,6 @@
         ]
       }
     ],
-    "Appendix": [
-      "appendix/glossary",
-      "appendix/infrastructure-template",
-      "appendix/tradetrust-api",
-      "appendix/non-fungible-token"
-    ]
+    "Appendix": ["appendix/glossary", "appendix/tradetrust-api", "appendix/non-fungible-token"]
   }
 }

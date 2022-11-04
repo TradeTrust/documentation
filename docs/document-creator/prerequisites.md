@@ -11,6 +11,6 @@ Before you construct your configuration file(`.json` file), please ensure you ha
 - [Token Registry (for transferable document)](https://www.openattestation.com/docs/integrator-section/transferable-record/token-registry)
 - [Configured DNS](https://www.openattestation.com/docs/developer-section/quickstart/configure-dns)
 - [Decentralized Document Renderer](https://www.openattestation.com/docs/developer-section/quickstart/create-custom-renderer)
-- [Document Storage](/docs/appendix/infrastructure-template#storage)
+- [Document Storage](/docs/appendix/tradetrust-api#document-storage-endpoint)
 
 Please refer to the appropriate links to prepare them.
