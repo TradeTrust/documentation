@@ -83,6 +83,8 @@ The `"wallet"` property is a string that refers to your ethereum wallet. We supp
 - ENCRYPTED_JSON
 - AWS_KMS
 
+> **!!! WARNING !!!** This wallet value is highly sensitive. **Do not share** with anyone unless you know what you are doing.
+
 #### ENCRYPTED_JSON Wallet
 
 The wallet property can be derive from either one of these methods:
