@@ -20,6 +20,6 @@ The endorsement chain provides an overview of the EBL's transaction history, sho
 
 **Surrender of document accepted** -> Document is shredded and destroyed.
 
-_Note: Please follow this [guide](/docs/advanced/polygon-testnet-on-metamask.md) if you are having trouble setting up Polygon Mumbai testnet RPC URL or loading the endorsement chain on polygon testnet._
+_Note: Please follow this [guide](/docs/advanced/polygon-testnet-on-metamask) if you are having trouble setting up Polygon Mumbai testnet RPC URL or loading the endorsement chain on polygon testnet._
 
 > The endorsement chain is only viewable for Transferable Record documents.
