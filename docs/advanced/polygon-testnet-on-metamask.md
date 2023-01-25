@@ -1,7 +1,7 @@
 ---
 id: polygon-testnet-on-metamask
-title: Setup Polygon Testnet on metamask
-sidebar_label: Setup Polygon Testnet on metamask
+title: Setup Polygon Testnet on Metamask
+sidebar_label: Setup Polygon Testnet on Metamask
 ---
 
 > _NOTE: Please make sure you have already installed Metamask!_
