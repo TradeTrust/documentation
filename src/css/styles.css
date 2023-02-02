@@ -4,26 +4,26 @@
 
 @font-face {
   font-family: "Gilroy-Light";
-  src: url("https://ui.tradetrust.io/static/fonts/GilroyLight/font.woff2") format('woff2'),
-    url("https://ui.tradetrust.io/static/fonts/GilroyLight/font.woff") format('woff');
+  src: url("https://ui.tradetrust.io/static/fonts/GilroyLight/font.woff2") format("woff2"),
+    url("https://ui.tradetrust.io/static/fonts/GilroyLight/font.woff") format("woff");
 }
 
 @font-face {
   font-family: "Gilroy-Medium";
-  src: url("https://ui.tradetrust.io/static/fonts/GilroyMedium/font.woff2") format('woff2'),
-    url("https://ui.tradetrust.io/static/fonts/GilroyMedium/font.woff") format('woff');
+  src: url("https://ui.tradetrust.io/static/fonts/GilroyMedium/font.woff2") format("woff2"),
+    url("https://ui.tradetrust.io/static/fonts/GilroyMedium/font.woff") format("woff");
 }
 
 @font-face {
   font-family: "Gilroy-Bold";
-  src: url("https://ui.tradetrust.io/static/fonts/GilroyBold/font.woff2") format('woff2'),
-    url('https://ui.tradetrust.io/static/fonts/GilroyBold/font.woff') format('woff');
+  src: url("https://ui.tradetrust.io/static/fonts/GilroyBold/font.woff2") format("woff2"),
+    url("https://ui.tradetrust.io/static/fonts/GilroyBold/font.woff") format("woff");
 }
 
 @font-face {
   font-family: "Gilroy-ExtraBold";
-  src: url('https://ui.tradetrust.io/static/fonts/GilroyExtraBold/font.woff2') format('woff2'),
-    url('https://ui.tradetrust.io/static/fonts/GilroyExtraBold/font.woff') format('woff');
+  src: url("https://ui.tradetrust.io/static/fonts/GilroyExtraBold/font.woff2") format("woff2"),
+    url("https://ui.tradetrust.io/static/fonts/GilroyExtraBold/font.woff") format("woff");
 }
 
 @layer base {
@@ -41,7 +41,7 @@
     @apply text-inherit;
   }
 
-  h1 {    
+  h1 {
     font-family: "Ubuntu", sans-serif;
     font-size: 52px;
     @apply font-bold;
@@ -92,6 +92,10 @@
     border-left: 6px solid #fcd34d;
     background-color: #fffbeb;
   }
+  .triangle {
+    display: inline;
+    vertical-align: baseline;
+  }
 }
 
 @layer components {
@@ -139,14 +143,49 @@
   @apply h-full;
 }
 
-html[data-theme='dark'] p,
-html[data-theme='dark'] ol,
-html[data-theme='dark'] ul,
-html[data-theme='dark'] h1,
-html[data-theme='dark'] h2,
-html[data-theme='dark'] h3,
-html[data-theme='dark'] h4,
-html[data-theme='dark'] h5,
-html[data-theme='dark'] h6 {
-  color: #B4BCC2;
+.deploymentTypeContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.deploymentTypeDNS {
+  background-color: #2d5faa;
+  width: fit-content;
+  padding: 2px 8px;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.deploymentTypeDID {
+  background-color: #3aaf86;
+  width: fit-content;
+  padding: 2px 8px;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 700;
+  margin-left: 12px;
+}
+
+.deploymentTypeRemark {
+  color: #89969f;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+}
+
+html[data-theme="dark"] p,
+html[data-theme="dark"] ol,
+html[data-theme="dark"] ul,
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 {
+  color: #b4bcc2;
 }
