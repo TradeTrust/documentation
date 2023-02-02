@@ -11,10 +11,11 @@
     "clear": "docusaurus clear"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-beta.20",
-    "@docusaurus/preset-classic": "^2.0.0-beta.20",
+    "@docusaurus/core": "^2.3.0",
+    "@docusaurus/preset-classic": "^2.3.0",
     "@govtechsg/tradetrust-ui-components": "^2.18.11",
     "@govtechsg/tradetrust-utils": "^1.2.1",
+    "docusaurus-plugin-remote-content": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -31,13 +32,13 @@
     ]
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=16.14.0"
   },
   "prettier": {
     "printWidth": 120
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^2.0.0-beta.20",
+    "@docusaurus/module-type-aliases": "^2.3.0",
     "@tsconfig/docusaurus": "^1.0.6",
     "@types/react": "^18.0.14",
     "@types/react-helmet": "^6.1.5",

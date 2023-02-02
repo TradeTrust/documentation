@@ -33,6 +33,10 @@
       "generic-templates/cover-letter",
       "generic-templates/bill-of-lading"
     ],
+    "Estimated Costs": [
+      "estimated-costs/remote-files/contract-costs",
+      "estimated-costs/remote-files/savings-comparisons"
+    ],
     "Advanced": [
       "advanced/alternative-ledgers",
       "advanced/wallet-management",

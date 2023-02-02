@@ -12,7 +12,19 @@ const siteConfig = {
   organizationName: "IMDA",
   favicon: "img/favicon.svg",
   stylesheets: ["https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap"],
-  plugins: [require.resolve("./docusaurus-plugin/src")], // monkey patch webpack config -> https://docusaurus.io/docs/next/api/plugin-methods/lifecycle-apis#configureWebpack
+  plugins: [
+    require.resolve("./docusaurus-plugin/src"), // monkey patch webpack config -> https://docusaurus.io/docs/next/api/plugin-methods/lifecycle-apis#configureWebpack
+    [
+      "docusaurus-plugin-remote-content",
+      {
+        name: "Open Attestation Documentation",
+        sourceBaseUrl:
+          "https://raw.githubusercontent.com/Open-Attestation/documentation-website/master/website/docs/docs-section/appendix/",
+        outDir: "docs/estimated-costs/remote-files/",
+        documents: ["contract-costs.mdx", "savings-comparisons.mdx"],
+      },
+    ],
+  ],
   presets: [
     [
       "@docusaurus/preset-classic",
