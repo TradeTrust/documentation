@@ -35,7 +35,7 @@
     ],
     "Advanced": [
       "advanced/alternative-ledgers",
-      "advanced/polygon-testnet-on-metamask",
+      "advanced/add-polygon-networks-to-metamask-wallet",
       "advanced/wallet-management",
       {
         "label": "AWS KMS",

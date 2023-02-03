@@ -1,0 +1,126 @@
+---
+id: add-polygon-networks-to-metamask-wallet
+title: Add Polygon Networks to MetaMask Wallet
+sidebar_label: Add Polygon Networks to MetaMask Wallet
+---
+
+> This guide covers configuring the MetaMask wallet to support both Polygon mainnet and testnet (Mumbai) networks.
+>
+> This process requires the use of the MetaMask browser extension.
+
+### Step 1: Open MetaMask Network settings
+
+Navigate to the `Settings` tab in MetaMask:
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/advanced/add-polygon-networks-to-metamask-wallet/metamask-settings.png"}
+  alt="MetaMask Settings"
+/>
+
+Next, navigate to the `Networks` tab and click on `Add a network`:
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/advanced/add-polygon-networks-to-metamask-wallet/metamask-add-network.png"}
+  alt="MetaMask Add Network"
+/>
+
+### Step 2: Add the Polygon Network Details
+
+Click on `Add a network manually`:
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/advanced/add-polygon-networks-to-metamask-wallet/metamask-add-network-manually.png"}
+  alt="MetaMask Add Network Manually"
+/>
+
+Fill the network configuration for the Polygon network you want to add into the fields displayed in MetaMask.
+
+| Field Name         | Polygon Mainnet                   | Polygon Testnet (Mumbai)                                     |
+| ------------------ | --------------------------------- | ------------------------------------------------------------ |
+| Network Name       | Polygon                           | Mumbai                                                       |
+| RPC URL            | https://polygon-rpc.com           | https://polygon-mumbai.g.alchemy.com/v2/your-alchemy-api-key |
+| Public RPC URL     | https://rpc-mainnet.matic.network | https://polygon-mumbai.g.alchemy.com/v2/demo                 |
+| Chain ID           | 137                               | 80001                                                        |
+| Currency Symbol    | Matic                             | Matic                                                        |
+| Block Explorer URL | https://polygonscan.com           | https://mumbai.polygonscan.com                               |
+
+> #### Note on Public RPC URL
+>
+> You can use either RPC URL or Public RPC URL from the table above to fill in for `New RPC Url` field in MetaMask. Note that Public RPC URL are good for testing purposes but not good for development or production environments. They are publicly known and often go down, so it's better to get your own API keys to interact with the blockchains.
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/advanced/add-polygon-networks-to-metamask-wallet/network-detail.png"}
+  alt="Network Details"
+/>
+
+### Step 3: Save the Settings
+
+Click the `Save` button at the bottom of the screen to add the Polygon network to MetaMask:
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/advanced/add-polygon-networks-to-metamask-wallet/successful-metamask-network-added.png"}
+  alt="Save Network Details"
+/>
+
+---
+
+## How to get API key from Alchemy
+
+### Step 1: Create an app in Alchemy
+
+Navigate to [alchemy.com](https://www.alchemy.com/).
+
+And Sign up for a free account or log in to your existing account.
+
+Click on Create App:
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/advanced/add-polygon-networks-to-metamask-wallet/create-app.png"}
+  alt="Create App"
+/>
+
+Fill up the App information accordingly.
+
+Select `Polygon` as the **Chain**.
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/advanced/add-polygon-networks-to-metamask-wallet/select-chain.png"}
+  alt="Select Chain"
+/>
+
+Select either `Polygon Mainnet` or `Polygon Mumbai` for the **Network**.
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/advanced/add-polygon-networks-to-metamask-wallet/select-network.png"}
+  alt="Select Network"
+/>
+
+Click on `Create App`
+
+### Step 2: Retrieve the API key
+
+Go to the application on Alchemy website and click on `View Key`:
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/advanced/add-polygon-networks-to-metamask-wallet/select-view-key.png"}
+  alt="View Key"
+/>
+
+Copy the URL under `HTTPS`:
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/advanced/add-polygon-networks-to-metamask-wallet/api-key.png"}
+  alt="API Key"
+/>
+
+Now that you have the **API Key**, you can add it into your MetaMask. You can refer to the [guide](#step-1-open-metamask-network-settings) above.
