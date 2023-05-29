@@ -16,7 +16,7 @@ Below are examples of a configuration file
 
 ```json
 {
-  "network": "goerli",
+  "network": "sepolia",
   "wallet": {
     "type":"ENCRYPTED_JSON",
     "encryptedJson": "{\"address\":\"6a36c563a5350d7be66c801f901a67...\", ...}}",
@@ -33,7 +33,7 @@ Below are examples of a configuration file
 
 ```json
 {
-  "network": "goerli",
+  "network": "sepolia",
   "wallet": {
     "type":"AWS_KMS",
     "accessKeyId": "<IAM Access Key ID>",
@@ -414,26 +414,18 @@ _Note: This document storage property is optional. Only add this section in if y
 
 ##### If you do not want to upload your documents to a document storage endpoint you can omit this in the config file.
 
-To use a document storage endpoint, you will have to have the endpoint infrastructure already set up and configured.
-
-The value of `"documentStorage"` property is an object which expects an `"url"` property. `"apiKey"` can also be added.
+To use a document storage endpoint, you will have to have the endpoint infrastructure already set up and configured. The value of `"documentStorage"` property is an object which expects an `"url"` property. `"apiKey"` can also be added.
 
 - The value of `"apikey"` property it accepts a string as the API key.
-
-_If your document storage endpoint does not require an API key, you can omit this property._
-
+  - If your document storage endpoint does not require an API key, you can omit this property.
 - The value of `"url"` property accepts a string which will be the endpoint of the document storage.
 
-_Note: please ensure that this document storage endpoint has a path `"/storage/queue"` that will return the queue number for storing your document in the document storage endpoint._
+##### Document storage endpoint
 
-For the convenience of developers, we provide a testing environment endpoints that will work for Goerli testnets.
+For the convenience of developers, we provide a [testing environment endpoint](https://github.com/TradeTrust/tradetrust-functions#document-storage) that will work for testnets:
 
-##### Document storage endpoints:
+`https://tradetrust-functions.netlify.app/.netlify/functions/storage`
 
-Goerli endpoint: `https://tradetrust-functions.netlify.app/.netlify/functions/storage`
+This endpoint may only be used for valid and issued documents on the respective networks, and may not be mixed. An API key has been handled and not required for this example endpoint.
 
-These endpoint may only be used for valid and issued documents on the respective networks, and may not be mixed.
-
-An API key is not required for these endpoints.
-
-_Note: **The testnet endpoints do not retain documents permanently and any stored documents will be removed after a period of time(30 days)**._
+> This API endpoint is a reference on how you would implement such microservices for your own business requirements. It is NOT to be relied on, for any of your production related needs. We reserve the right to change or shutdown the API anytime. We do not retain documents permanently and any stored documents will be removed after a period of time (30 days).
