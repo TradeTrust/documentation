@@ -42,11 +42,11 @@ openatts net=ethereum netId=1 addr=0x9178F546D3FF57D7A6352bD61B80cCCD46199C2d
 
 The following is an example for
 
-1. `Goerli Test Net`
+1. `Sepolia Test Net`
 1. Document Store address: `0x9db35C07350e9a16C828dAda37fd9c2923c75812`
 
 ```javascript
-openatts net=ethereum netId=5 addr=0x9db35C07350e9a16C828dAda37fd9c2923c75812
+openatts net=ethereum netId=11155111 addr=0x9db35C07350e9a16C828dAda37fd9c2923c75812
 ```
 
 Optionally, you may also publish an `A record` at the same address so that if the user clicks on the URL, they can see a helpful website with your information on it.

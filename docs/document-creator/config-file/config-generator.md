@@ -45,6 +45,7 @@ Reference templates
 ? Using a config template URL? y
 ? Please enter the config template URL
 ```
+
 ### Method 2: Using config template path
 
 This method will generate the most basic config file with a sandbox DNS, document store and token registry.
@@ -58,13 +59,10 @@ This method will generate the most basic config file with a sandbox DNS, documen
 ## Step 3: Select network
 
 ```
-? Select Network 
+? Select Network
   maticmum
-  local 
-❯ mainnet 
-  goerli 
-  sepolia 
-  matic
+  local
+❯ sepolia
 ```
 
 ## Completion

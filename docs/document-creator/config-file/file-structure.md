@@ -69,7 +69,6 @@ The value of `"network"` property is a string that refers to the network in whic
 Currently, we only support to 5 networks.
 
 - Ethereum Mainnet : `"homestead"`
-- Goerli Testnet : `"goerli"`
 - Sepolia Testnet : `"sepolia"`
 - Polygon Mainnet: `"matic"`
 - Mumbai Testnet: `"maticmum"`
