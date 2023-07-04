@@ -7,7 +7,7 @@ sidebar_label: Info Bar
 TradeTrust has 2 environments, each connecting to different ethereum networks:
 
 - Mainnets (Ethereum, Polygon) = http://tradetrust.io
-- Testnets (Goerli, Sepolia, Polygon Mumbai) = http://dev.tradetrust.io
+- Testnets (Sepolia, Polygon Mumbai) = http://dev.tradetrust.io
 
 The environment is being indicated on an info bar that sits on top of the [document creator site](https://creator.tradetrust.io/).
 
