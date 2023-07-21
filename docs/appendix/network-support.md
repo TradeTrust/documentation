@@ -4,8 +4,6 @@ title: Network Support
 sidebar_label: Network Support
 ---
 
-## Supported Networks
-
 ### TradeTrust Supported Networks
 
 | Id | Network Name     | Blockchain  |  Type | Status  |
