@@ -23,5 +23,5 @@ Disclaimer: Community supported networks are not maintained by tradetrust and up
 
 | Id | Network Name     | Blockchain  |  Type   |
 |----|------------------|---|---|
-| 1  | XDC Mainnet | [XDC](https://xdc.org/) |  L1 Mainnet  |
-| 5  | XDC Apothem | XDC |  L1 Testnet  | 
+| 50  | XDC Mainnet | [XDC](https://xdc.org/) |  L1 Mainnet  |
+| 51  | XDC Apothem | XDC |  L1 Testnet  | 
