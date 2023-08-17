@@ -3,3 +3,4 @@ node_modules
 build
 src/css/tailwind.css
 .env
+.DS_Store
