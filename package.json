@@ -11,10 +11,10 @@
     "clear": "docusaurus clear"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-beta.20",
-    "@docusaurus/preset-classic": "^2.0.0-beta.20",
-    "@govtechsg/tradetrust-ui-components": "^2.18.11",
-    "@govtechsg/tradetrust-utils": "^1.2.1",
+    "@docusaurus/core": "^2.4.1",
+    "@docusaurus/preset-classic": "^2.4.1",
+    "@govtechsg/tradetrust-ui-components": "^2.20.0",
+    "@govtechsg/tradetrust-utils": "^1.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -37,8 +37,8 @@
     "printWidth": 120
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^2.0.0-beta.20",
-    "@tsconfig/docusaurus": "^1.0.6",
+    "@docusaurus/module-type-aliases": "^2.4.1",
+    "@tsconfig/docusaurus": "^2.0.0",
     "@types/react": "^18.0.14",
     "@types/react-helmet": "^6.1.5",
     "@types/react-router-dom": "^5.3.3",
