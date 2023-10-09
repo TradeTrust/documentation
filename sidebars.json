@@ -61,7 +61,6 @@
       },
       "topics/introduction/tradetrust-document-schema"
     ],
-    "Issuer DNS-TXT Record": ["topics/issuer-dns-txt-record"],
     "Transferable Records": [
       "topics/transferable-records/token-registry",
       {
