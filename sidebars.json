@@ -1,53 +1,144 @@
 {
-  "docs": {
-    "Introduction": ["introduction/what-is-tradetrust", "introduction/tradetrust-layer-boundaries"],
-    "Overview": [
-      "overview/issuer-dns-txt-record",
-      "overview/token-registry",
+  "tutorial": [
+    "tutorial/introduction",
+    "tutorial/prerequisites",
+    {
+      "type": "category",
+      "label": "Verifiable Documents",
+      "items": [
+        "tutorial/verifiable-documents/overview",
+        {
+          "type": "category",
+          "label": "Ethereum",
+          "items": [
+            "tutorial/verifiable-documents/ethereum/document-store-overview",
+            "tutorial/verifiable-documents/ethereum/wallet",
+            "tutorial/verifiable-documents/ethereum/document-store",
+            "tutorial/verifiable-documents/ethereum/dns-proof",
+            "tutorial/verifiable-documents/ethereum/raw-document",
+            "tutorial/verifiable-documents/ethereum/wrapping-document",
+            "tutorial/verifiable-documents/ethereum/issuing-document",
+            "tutorial/verifiable-documents/ethereum/revoking-document",
+            "tutorial/verifiable-documents/ethereum/going-further"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "DID",
+          "items": [
+            "tutorial/verifiable-documents/did/create",
+            "tutorial/verifiable-documents/did/dns",
+            "tutorial/verifiable-documents/did/raw-document",
+            "tutorial/verifiable-documents/did/wrapping-document",
+            "tutorial/verifiable-documents/did/signing-document",
+            "tutorial/verifiable-documents/did/revoking-document-ocsp",
+            "tutorial/verifiable-documents/did/revoking-document"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Transferable Records",
+      "items": [
+        "tutorial/transferable-records/overview",
+        "tutorial/transferable-records/token-registry",
+        "tutorial/transferable-records/preparing-transferable-record",
+        "tutorial/transferable-records/issuing-transferable-record",
+        "tutorial/transferable-records/going-further"
+      ]
+    }
+  ],
+  "topics": {
+    "Introduction": ["topics/introduction/what-is-tradetrust", "topics/introduction/tradetrust-layer-boundaries"],
+    "Issuer DNS-TXT Record": ["topics/issuer-dns-txt-record"],
+    "Transferable Records": [
+      "topics/transferable-records/token-registry",
       {
         "label": "Title Transfer",
         "type": "category",
-        "items": ["overview/title-transfer", "overview/title-transfer-example"]
+        "items": ["topics/transferable-records/title-transfer", "topics/transferable-records/title-transfer-example"]
       }
     ],
-    "Technical": ["technical/open-attestation"],
+    "Verifiable Documents": [
+      "topics/verifiable-documents/overview",
+      {
+        "type": "category",
+        "label": "Ethereum",
+        "items": [
+          "topics/verifiable-documents/ethereum/document-store-overview",
+          "topics/verifiable-documents/ethereum/wallet",
+          "topics/verifiable-documents/ethereum/document-store",
+          "topics/verifiable-documents/ethereum/dns-proof",
+          "topics/verifiable-documents/ethereum/raw-document",
+          "topics/verifiable-documents/ethereum/wrapping-document",
+          "topics/verifiable-documents/ethereum/issuing-document",
+          "topics/verifiable-documents/ethereum/revoking-document",
+          "topics/verifiable-documents/ethereum/going-further"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "DID",
+        "items": [
+          "topics/verifiable-documents/did/create",
+          "topics/verifiable-documents/did/dns",
+          "topics/verifiable-documents/did/raw-document",
+          "topics/verifiable-documents/did/wrapping-document",
+          "topics/verifiable-documents/did/signing-document",
+          "topics/verifiable-documents/did/revoking-document-ocsp",
+          "topics/verifiable-documents/did/revoking-document"
+        ]
+      }
+    ],
     "TradeTrust Website": [
-      "tradetrust-website/overview",
-      "tradetrust-website/info-bar",
-      "tradetrust-website/endorsement-chain",
-      "tradetrust-website/identity-resolution",
-      "tradetrust-website/qr-code"
+      "topics/tradetrust-website/overview",
+      "topics/tradetrust-website/info-bar",
+      "topics/tradetrust-website/endorsement-chain",
+      "topics/tradetrust-website/identity-resolution",
+      "topics/tradetrust-website/qr-code"
     ],
     "Document Creator": [
-      "document-creator/overview",
-      "document-creator/prerequisites",
+      "topics/document-creator/overview",
+      "topics/document-creator/prerequisites",
       {
         "label": "Config File",
         "type": "category",
-        "items": ["document-creator/config-file/file-structure", "document-creator/config-file/config-generator"]
+        "items": [
+          "topics/document-creator/config-file/file-structure",
+          "topics/document-creator/config-file/config-generator"
+        ]
       },
-      "document-creator/data-file"
+      "topics/document-creator/data-file"
     ],
     "Generic Templates": [
-      "generic-templates/overview",
-      "generic-templates/cover-letter",
-      "generic-templates/bill-of-lading"
-    ],
+      "topics/generic-templates/overview",
+      "topics/generic-templates/cover-letter",
+      "topics/generic-templates/bill-of-lading"
+    ]
+  },
+  "reference": {
     "Advanced": [
-      "advanced/alternative-ledgers",
-      "advanced/add-polygon-networks-to-metamask-wallet",
-      "advanced/wallet-management",
+      "reference/alternative-ledgers",
+      "reference/add-polygon-networks-to-metamask-wallet",
+      "reference/wallet-management",
       {
         "label": "AWS KMS",
         "type": "category",
         "items": [
-          "advanced/aws-kms/overview",
-          "advanced/aws-kms/create-key",
-          "advanced/aws-kms/access-keys",
-          "advanced/aws-kms/did-sign-demo"
+          "reference/aws-kms/overview",
+          "reference/aws-kms/create-key",
+          "reference/aws-kms/access-keys",
+          "reference/aws-kms/did-sign-demo"
         ]
       }
     ],
-    "Appendix": ["appendix/glossary", "appendix/tradetrust-api", "appendix/non-fungible-token", "appendix/network-support"]
+    "Appendix": [
+      "reference/appendix/glossary",
+      "reference/appendix/tradetrust-api",
+      "reference/appendix/non-fungible-token",
+      "reference/appendix/network-support"
+    ],
+    "Open-Attestation": ["reference/open-attestation"]
   }
 }

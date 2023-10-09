@@ -21,6 +21,7 @@ const siteConfig = {
           path: "./docs",
           sidebarPath: require.resolve("./sidebars.json"),
           sidebarCollapsible: true,
+          editUrl: "https://github.com/tradetrust/documentation/edit/master/",
         },
         theme: {
           customCss: [require.resolve("./src/css/tailwind.css")],
@@ -39,8 +40,10 @@ const siteConfig = {
         srcDark: "img/logo/logo-tt-full.svg",
       },
       items: [
-        { to: "docs/introduction/what-is-tradetrust", label: "Docs" },
-        { to: "https://github.com/TradeTrust", label: "Github" },
+        { to: "docs/getting-started", label: "Getting Started" },
+        { to: "docs/tutorial/introduction", label: "Tutorial" },
+        { to: "docs/topics/introduction/what-is-tradetrust", label: "Topics" },
+        { to: "docs/reference/open-attestation", label: "References" },
       ],
     },
     footer: {
@@ -56,7 +59,7 @@ const siteConfig = {
           title: "Docs",
           items: [
             {
-              to: "docs/introduction/what-is-tradetrust",
+              to: "docs/getting-started",
               label: "Getting Started",
             },
           ],
