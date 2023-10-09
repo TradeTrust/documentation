@@ -50,7 +50,17 @@
     }
   ],
   "topics": {
-    "Introduction": ["topics/introduction/what-is-tradetrust", "topics/introduction/tradetrust-layer-boundaries"],
+    "Introduction": [
+      "topics/introduction/what-is-tradetrust",
+      "topics/introduction/tradetrust-layer-boundaries",
+      "topics/introduction/network-support",
+      {
+        "label": "Identifying the Issuer",
+        "type": "category",
+        "items": ["topics/introduction/issuer-method-dns-txt", "topics/introduction/issuer-method-dns-did"]
+      },
+      "topics/introduction/tradetrust-document-schema"
+    ],
     "Issuer DNS-TXT Record": ["topics/issuer-dns-txt-record"],
     "Transferable Records": [
       "topics/transferable-records/token-registry",
@@ -136,8 +146,7 @@
     "Appendix": [
       "reference/appendix/glossary",
       "reference/appendix/tradetrust-api",
-      "reference/appendix/non-fungible-token",
-      "reference/appendix/network-support"
+      "reference/appendix/non-fungible-token"
     ],
     "Open-Attestation": ["reference/open-attestation"]
   }
