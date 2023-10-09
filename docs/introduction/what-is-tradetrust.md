@@ -4,11 +4,25 @@ title: What is TradeTrust?
 sidebar_label: What is TradeTrust
 ---
 
-TradeTrust is a set of Governance & Legal Frameworks, Standards and future-ready Digital Infrastructure, all of which facilitates the interoperability of electronic trade documents exchanged between different digital ecosystems.
+TradeTrust is a framework that comprises globally-accepted standards that connect governments and businesses to a public blockchain to enable trusted interoperability of electronic trade documents across digital platforms AND it is offered as a digital utility.
 
-The foundation required to accomplish this is the ability to trace the provenance of digitally issued documents as well as verify their integrity.
+<figure style={{ maxWidth: "960px", margin: "0 auto" }}>
+  <img src='/docs/introduction/what-is-tradetrust/key-components-tradetrust.jpeg' />
+</figure>
 
-This document endorsement and verification foundation is provided by another project, the [OpenAttestation framework](https://github.com/Open-Attestation/open-attestation). The OpenAttestation framework provides a method to format data so that it can be fingerprinted, and then verified on a trusted platform, such as the Ethereum blockchain.
+### TradeTrust's 3 Key Functionalities: Authenticity, Source & Title Ownership for Trade Documents
+
+TradeTrust is designed to provide industry the means to verify the authenticity and source of a document, as well as to create Electronic Transferable Records (ETRs) that are functionally equivalent to their paper versions (e.g. able to effect title transfers)
+
+<figure style={{ maxWidth: "800px", margin: "0 auto" }}>
+  <img src='/docs/introduction/what-is-tradetrust/3-functionalities.png' />
+</figure>
+
+### TradeTrust Design Principles
+
+<figure style={{ maxWidth: "800px", margin: "0 auto" }}>
+  <img src='/docs/introduction/what-is-tradetrust/tradetrust-design-principles.png' />
+</figure>
 
 ### Verifiable Documents
 
