@@ -53,7 +53,7 @@ This method concept is the same as `DNS-TXT` method. So we tie our etheruem wall
 
 ## How to create DNS-DID Record
 
-Make sure you have a wallet, we are only interested in the wallet address. If you do not have an existing wallet, create 1 by:
+Make sure you have a wallet, we are only interested in the wallet address. If you do not have an existing wallet, create one by:
 
 ```bash
 open-attestation wallet create --of wallet.json

@@ -4,7 +4,7 @@ title: TradeTrust document schema
 sidebar_label: TradeTrust document schema
 ---
 
-To explain on document schema, we will use an sample document. For this example, an invoice document scenario.
+To explain on document schema, we will use a sample document. For this example, an invoice document scenario.
 
 ## Raw document
 
@@ -88,7 +88,7 @@ Key fields to note:
 - issuers
 - network
 
-> The remaining data values is dependant on the type of document you want to render. They will differ accordingly.
+> The remaining data values are dependant on the type of document you want to render. They will differ accordingly.
 
 ### $template
 
