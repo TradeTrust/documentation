@@ -4,7 +4,7 @@ title: What is TradeTrust?
 sidebar_label: What is TradeTrust
 ---
 
-TradeTrust is a framework that comprises globally-accepted standards that connect governments and businesses to a public blockchain to enable trusted interoperability of electronic trade documents across digital platforms AND it is offered as a digital utility.
+TradeTrust is a framework that comprises globally-accepted standards that connect governments and businesses to a public blockchain to enable trusted interoperability of electronic trade documents across digital platforms and it is offered as a digital utility.
 
 <figure style={{ maxWidth: "960px", margin: "0 auto" }}>
   <img src='/docs/introduction/what-is-tradetrust/key-components-tradetrust.jpeg' />
