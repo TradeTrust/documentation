@@ -91,7 +91,6 @@ const siteConfig = {
   },
   customFields: {
     GA_MEASUREMENT_ID,
-    blockNativeApiKey: process.env.BLOCK_NATIVE_API_KEY || "DummyKey",
   },
 };
 

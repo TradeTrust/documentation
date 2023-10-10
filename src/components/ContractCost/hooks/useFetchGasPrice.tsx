@@ -1,19 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useRefresh } from "./useRefresh";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 const gasApi = {
   ethereum: "https://api.blocknative.com/gasprices/blockprices",
   polygon: "https://api.blocknative.com/gasprices/blockprices?chainid=137",
-};
-
-const gasApiOptions = () => {
-  const { siteConfig } = useDocusaurusContext();
-  return {
-    headers: {
-      Authorization: siteConfig.customFields.blockNativeApiKey,
-    },
-  };
 };
 
 const parseGasRes = (res) => {
@@ -30,9 +20,8 @@ const priceApi = {
 };
 
 const fetchGasCostData = async (chain) => {
-  console.log(chain, "chain !!!");
   try {
-    const [ethReq, gweiReq] = await Promise.all([fetch(priceApi[chain]), fetch(gasApi[chain], gasApiOptions as any)]);
+    const [ethReq, gweiReq] = await Promise.all([fetch(priceApi[chain]), fetch(gasApi[chain])]);
     const [ethRes, gweiRes] = await Promise.all([ethReq.json(), gweiReq.json()]);
     return {
       price: ethRes.USD,
