@@ -11,7 +11,7 @@
     "clear": "docusaurus clear"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.4.1",
+    "@docusaurus/core": "^2.4.3",
     "@docusaurus/preset-classic": "^2.4.1",
     "@govtechsg/tradetrust-ui-components": "^2.20.0",
     "@govtechsg/tradetrust-utils": "^1.6.0",
