@@ -283,3 +283,7 @@ Note that the website will be an empty page when viewed directly. **This is norm
 It is recommended to use a custom domain you own for the document renderer website in production. This prevents locking in to any specific third party hosting provider.
 
 If you are using Netlify, we recommend you to check out [how to enable custom domains](https://docs.netlify.com/domains-https/custom-domains/).
+
+## See Also
+
+[Generic Templates by TradeTrust](/docs/topics/generic-templates/overview)

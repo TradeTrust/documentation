@@ -8,7 +8,7 @@ Every OA document's provenance can be verified and traced back to its creator or
 
 ![Example Issuer Identity](/docs/tutorial/verifiable-documents/ethereum/dns-proof/example.png)
 
-In this example above, the document's issuer is bound to `demo.openattestation.com`.
+In this example above, the document's issuer is bound to `example.tradetrust.io`.
 
 In this guide, we will bind the document issuer's identity to a valid domain name. This domain will be displayed as issuer every time the document is rendered in an OA-compliant decentralized renderer.
 

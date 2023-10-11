@@ -9,7 +9,7 @@ sidebar_label: Overview
 TradeTrust supports Verifiable Documents in two forms:
 
 - Ethereum
-- DNS-DID and;
+- DNS-DID
 
 ### Commonalities
 
@@ -28,7 +28,7 @@ For further explanation, refer to their respective sections [DNS-TXT](/docs/topi
 
   - Ethereum issued document are revoked directly on the document store
   - DID issued document are revoked through alternative channels
-    - A document store can be specified on the verifiable document, relying on the blockchain
+    - A Document Store can be specified on the verifiable document, relying on the blockchain
     - A OCSP Responder can be specified on the verifiable document, relying on the web
 
 ### See Alse

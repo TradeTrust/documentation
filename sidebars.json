@@ -89,7 +89,7 @@
       {
         "type": "category",
         "label": "DID",
-        "items": ["topics/verifiable-documents/document-store"]
+        "items": ["topics/verifiable-documents/ocsp-responder"]
       }
     ],
     "TradeTrust Website": [

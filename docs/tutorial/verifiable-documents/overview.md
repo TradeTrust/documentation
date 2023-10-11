@@ -11,3 +11,7 @@ By the end of this guide, you would be able to create your 📜 Certificate of C
 
 - Use OpenAttestation with [Ethereum Smart Contract](/docs/tutorial/verifiable-documents/ethereum/document-store-overview)
 - Use OpenAttestation with [DID](/docs/tutorial/verifiable-documents/did/create)
+
+### See Also
+
+[Verifiable Document - Overview](/docs/topics/verifiable-documents/overview)

@@ -17,6 +17,7 @@ Tutorials helps you on getting a reference setup working.
 
 - Use TradeTrust with [Verifiable Documents](/docs/tutorial/verifiable-documents/overview)
 - Use TradeTrust with [Transferable Records](/docs/tutorial/transferable-records/overview)
+- Use TradeTrust with [Config Generator](/docs/tutorial/document-creator/overview)
 
 ### Topics
 

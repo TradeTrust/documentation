@@ -49,3 +49,7 @@ To view your transferable record, simply head over the https://dev.tradetrust.io
 ![Completed Transferable Record](/docs/tutorial/transferable-records/issuing-transferable-record/completed.png)
 
 Notice you are able to click on `Connect Wallet` when logged in to either the beneficiary or holder to gain access to actions to change the ownership of the transferable record.
+
+### See Also
+
+[TradeTrust Website - Overview](/docs/topics/tradetrust-website/overview)
