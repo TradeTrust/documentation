@@ -4,18 +4,9 @@ title: Prerequisites
 sidebar_label: Prerequisites
 ---
 
----
-
-id: open-attestation-cli
-title: Open Attestation (CLI)
-hide_title: true
-sidebar_label: Open Attestation (CLI)
-
----
-
 Before we start, you will need the OpenAttestation CLI correctly setup.
 
-# Open Attestation CLI (Command Line Interface)
+## What it does
 
 The [Open Attestation CLI](https://github.com/Open-Attestation/open-attestation-cli) tool allows users to deploy, mint, wrap and other operation on their documents. It can be used for both Verifiable Documents and Transferable Records.
 

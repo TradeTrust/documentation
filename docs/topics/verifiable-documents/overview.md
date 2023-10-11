@@ -1,17 +1,37 @@
 ---
-title: Overview
+id: overview
+title: Verifiable Document Overview
 sidebar_label: Overview
 ---
 
-Verifiable documents form the core of the OpenAttestation (OA) framework. In this quick start guide, you will be deploying your first verifiable document.
+## Supported types of Verifiable Document
 
-## Goal
+TradeTrust supports Verifiable Documents in two forms:
 
-By the end of this guide, you would be able to create your 📜 Certificate of Completion that is valid on any compatible OA Viewer. The following guides are available:
+- Ethereum
+- DNS-DID and;
 
-- Use OpenAttestation with [Ethereum Smart Contract](/docs/topics/verifiable-documents/ethereum/document-store-overview)
-- Use OpenAttestation with [DID](/docs/topics/verifiable-documents/did/create)
+### Commonalities
 
-## Additional Feature
+Both forms of Verifiable Documents rely on a common trust anchor, which is the use of DNS-TXT. Since DNS records are often considered an authoritative source for a domain name, the DNS-TXT entry represents the entity.
 
-Depending on your use case, you may wish to find out more about [embedding verifiable document into an HTML file](/docs/developer-section/quickstart/oa-embedded-html).
+For further explanation, refer to their respective sections [DNS-TXT](/docs/topics/introduction/issuer-method-dns-txt) AND [DNS-DID](/docs/topics/introduction/issuer-method-dns-did)
+
+### Differences
+
+- Tracking the issuance status of a Verifiable Document
+
+  - Ethereum issued document are issued directly on the document store
+  - DID issued document relies the integrity and signature of the document
+
+- Tracking the revocation status of a Verifiable Document
+
+  - Ethereum issued document are revoked directly on the document store
+  - DID issued document are revoked through alternative channels
+    - A document store can be specified on the verifiable document, relying on the blockchain
+    - A OCSP Responder can be specified on the verifiable document, relying on the web
+
+### See Alse
+
+[Document Store](/docs/topics/verifiable-documents/document-store)
+[OCSP Responder](/docs/topics/verifiable-documents/ocsp-responder)

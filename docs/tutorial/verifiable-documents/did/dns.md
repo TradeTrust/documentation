@@ -3,13 +3,13 @@ title: Configuring DNS
 sidebar_label: Configuring DNS
 ---
 
-The explanation about why we need to configure the DNS are available [in the Ethereum tutorial](/docs/topics/verifiable-documents/ethereum/dns-proof).
+The explanation about why we need to configure the DNS are available [in the Ethereum tutorial](/docs/tutorial/verifiable-documents/ethereum/dns-proof).
 
 The principles are similar, but we will only use the wallet address as signing credentials and bind it to a domain.
 
 ## Creating Temporary DNS Proof with CLI
 
-With your [wallet address](/docs/topics/verifiable-documents/did/create), run the following command:
+With your [wallet address](/docs/tutorial/verifiable-documents/did/create), run the following command:
 
 ```bash
 open-attestation dns txt-record create --public-key did:ethr:0xaCc51f664D647C9928196c4e33D46fd98FDaA91D#controller

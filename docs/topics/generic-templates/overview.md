@@ -17,4 +17,4 @@ Currently the generic templates renderer handles these templates:
 
 Refer to github [source code](https://github.com/TradeTrust/generic-templates/tree/master/src/templates) for more information.
 
-> Do note that this generic template renderer is for demo purposes, it is required for user to set up their own document renderer for anything production-ready needs. To find out more on how to set up your own document renderer, do visit the topic on [Decentralized Document Renderer](https://www.openattestation.com/docs/developer-section/quickstart/create-custom-renderer).
+> Do note that this generic template renderer is for demo purposes, it is required for user to set up their own document renderer for anything production-ready needs. To find out more on how to set up your own document renderer, do visit the topic on [Decentralized Document Renderer](/docs/reference/configuration/create-custom-renderer).

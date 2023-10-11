@@ -4,4 +4,9 @@ title: Going Further
 sidebar_label: Going Further
 ---
 
-Head to [https://docs.tradetrust.io/](https://docs.tradetrust.io/) to find more about transferable records.
+Now that you have completed the getting started guide to create your own `Transferable Documents`, here you will find list of topic that you might be interested on to discover more
+
+- [Transferable Documents Overview](/docs/topics/transferable-records/token-registry)
+- [How does the verification work?](/docs/topics/verification/introduction)
+- [Configuring DNS](/docs/reference/configuration/configure-dns)
+- [Creating a Custom Renderer](/docs/reference/configuration/create-custom-renderer)

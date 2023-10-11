@@ -24,7 +24,7 @@ If you like to use our sandbox DNS for the purpose of the exercise, you may inst
 open-attestation dns txt-record create --address 0x8431012Bc040942B59e3C5bf428221eab0b2f723 --network-id 3
 ```
 
-If you like more detailed setup instructions, you may refer to the [documentation for configuring DNS](/docs/developer-section/quickstart/configure-dns).
+If you like more detailed setup instructions, you may refer to the [documentation for configuring DNS](/docs/reference/configuration/configure-dns).
 
 > Take note of the domain you are inserting the records on, you will need this later
 

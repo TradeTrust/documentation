@@ -6,7 +6,7 @@ sidebar_label: Overview
 
 ## Overview of Components
 
-![Overview of Components](/docs/topics/verifiable-documents/ethereum/overview/overview.png)
+![Overview of Components](/docs/tutorial/verifiable-documents/ethereum/overview/overview.png)
 
 ### Document Store Smart Contract
 

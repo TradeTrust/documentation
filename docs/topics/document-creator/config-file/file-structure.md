@@ -142,7 +142,7 @@ This result can now be entered into the `"wallet"` property in the [config file]
 
 Ethereum uses Elliptic Curve Digital Signing Algorithm (ECDSA). More specifically, the elliptic curve being used for transaction signing is secp256k1
 
-1. If you don't have an Aws Kms Wallet, you can refer to [documentation](https://docs.tradetrust.io/docs/reference/aws-kms/overview) to create a ECC_SECG_P256K1 Key.
+1. If you don't have an Aws Kms Wallet, you can refer to [documentation](/docs/reference/aws-kms/overview) to create a ECC_SECG_P256K1 Key.
 
 2. Connect the Aws Kms Key to an Aws Iam User and enable the signing access control.
 
@@ -209,7 +209,7 @@ Below is an example of the `"defaults"` property:
 },
 ```
 
-- The value of `"$template"` property contains an object that refers to the custom renderer, please refer to [creating document renderer](https://www.openattestation.com/docs/developer-section/quickstart/create-custom-renderer).
+- The value of `"$template"` property contains an object that refers to the custom renderer, please refer to [creating document renderer](/docs/reference/configuration/create-custom-renderer).
 
 - The value of `"issuers"` property contains an array of the issuer object. The required properties for each issuer are `name`, `identityProof` and one of `documentStore` OR `tokenRegistry`.
 
@@ -222,7 +222,7 @@ _Transferrable document requires a [`tokenRegistry`](/docs/tutorial/transferable
 
 - The `"documentStore"` property is a string that is the address for the document store, please refer to [deploying document store](/docs/tutorial/verifiable-documents/ethereum/document-store/) for more information.
 
-- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](https://www.openattestation.com/docs/developer-section/quickstart/configure-dns/) for more information.
+- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](/docs/reference/configuration/configure-dns/) for more information.
 
 #### V3 document defaults
 
@@ -277,11 +277,11 @@ _Transferrable document requires a [`tokenRegistry`](/docs/tutorial/transferable
 
 - The value of the `"openAttestationMetadata"` properties contains information about the `"template"` and `"proof"`.
 
-- The value of `"template"` property contains an object that refers to the custom renderer, please refer to [creating document renderer](https://www.openattestation.com/docs/developer-section/quickstart/create-custom-renderer).
+- The value of `"template"` property contains an object that refers to the custom renderer, please refer to [creating document renderer](/docs/reference/configuration/create-custom-renderer).
 
 - The value `"proof"` property contains an object with the necessary information about the `"type"` of proof, `"method"` of proof, `"value"` of the proof method and the `"revocation"` type and status of the document.
 
-- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](https://www.openattestation.com/docs/developer-section/quickstart/configure-dns/) for more information.
+- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](/docs/reference/configuration/configure-dns/) for more information.
 
 - The value of the `"credentialSubject"` property is defined as a set of objects that contain one or more properties that are each related to a subject of the verifiable credential.
 

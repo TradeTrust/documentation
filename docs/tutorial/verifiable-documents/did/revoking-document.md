@@ -11,7 +11,7 @@ It's possible to revoke a signed document only if you fulfill certain **prerequi
 - some kind of DID documents:
   1. base DID document (`ISSUER_IDENTITY`: `identityProof.identifier` against `ethr` DID)
   2. DID-DNS document (`ISSUER_IDENTITY`: `identityProof.identifier` against a [DNS-TXT](/docs/docs-section/how-does-it-work/issuance-identity))
-- a deployed `documentStore`, click [here](/docs/topics/verifiable-documents/ethereum/document-store) for how to do so.
+- a deployed `documentStore`, click [here](/docs/tutorial/verifiable-documents/ethereum/document-store) for how to do so.
 - before you wrap your document with the wrapper SDK, add a `revocation` block with these keys:
 
 ```json

@@ -18,4 +18,4 @@ Before you start, do ensure that open-attestation-cli tool is correctly setup ba
 
 ## Additional Feature
 
-For technical overview and details on the implementation of TradeTrust, do refer to the [topics](/docs/topics/verifiable-documents/ethereum/document-store-overview) and [references](/docs/topics/verifiable-documents/ethereum/document-store-overview) section accordingly.
+For technical overview and details on the implementation of TradeTrust, do refer to the [getting started](/docs/getting-started) guide on where to look for the relevant information.

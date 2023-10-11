@@ -59,7 +59,7 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
 ```
 
 - `"tokenRegistry"` - Update with your token registry. For more information, click [here](/docs/tutorial/transferable-records/token-registry).
-- `"location"` - Update with the Issuer's domain. For more information, click [here](https://www.openattestation.com/docs/developer-section/quickstart/configure-dns).
+- `"location"` - Update with the Issuer's domain. For more information, click [here](/docs/reference/configuration/configure-dns).
 - `"blNumber"` - Update with the BL Number, to be displayed accordingly as the image above.
 - `"companyName"` - Update with the Company Name, to be displayed accordingly as the image above.
 - `"field#"` - Update with the Field content, to be displayed accordingly as the image above.

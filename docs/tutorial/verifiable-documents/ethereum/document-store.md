@@ -6,7 +6,7 @@ sidebar_label: Deploying Document Store
 
 The document store is a smart contract on the Ethereum network that records the issuance and revocation status of OA documents. In this guide, we will deploy a document store smart contract on the Ethereum `goerli` network, which is a test network that does not require actual [ethers](/docs/reference/appendix/glossary#ether) for transactions.
 
-In this guide we will make use of the wallet that we created in the [previous step](/docs/topics/verifiable-documents/ethereum/wallet)
+In this guide we will make use of the wallet that we created in the [previous step](/docs/tutorial/verifiable-documents/ethereum/wallet)
 
 ```bash
 open-attestation deploy document-store "My first document store" --network goerli --encrypted-wallet-path wallet.json

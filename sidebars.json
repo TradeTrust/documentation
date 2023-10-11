@@ -47,6 +47,16 @@
         "tutorial/transferable-records/issuing-transferable-record",
         "tutorial/transferable-records/going-further"
       ]
+    },
+    {
+      "type": "category",
+      "label": "Document Creator",
+      "items": [
+        "tutorial/document-creator/overview",
+        "tutorial/document-creator/config-generator",
+        "tutorial/document-creator/document-creator-website",
+        "tutorial/document-creator/going-further"
+      ]
     }
   ],
   "topics": {
@@ -74,30 +84,12 @@
       {
         "type": "category",
         "label": "Ethereum",
-        "items": [
-          "topics/verifiable-documents/ethereum/document-store-overview",
-          "topics/verifiable-documents/ethereum/wallet",
-          "topics/verifiable-documents/ethereum/document-store",
-          "topics/verifiable-documents/ethereum/dns-proof",
-          "topics/verifiable-documents/ethereum/raw-document",
-          "topics/verifiable-documents/ethereum/wrapping-document",
-          "topics/verifiable-documents/ethereum/issuing-document",
-          "topics/verifiable-documents/ethereum/revoking-document",
-          "topics/verifiable-documents/ethereum/going-further"
-        ]
+        "items": ["topics/verifiable-documents/document-store"]
       },
       {
         "type": "category",
         "label": "DID",
-        "items": [
-          "topics/verifiable-documents/did/create",
-          "topics/verifiable-documents/did/dns",
-          "topics/verifiable-documents/did/raw-document",
-          "topics/verifiable-documents/did/wrapping-document",
-          "topics/verifiable-documents/did/signing-document",
-          "topics/verifiable-documents/did/revoking-document-ocsp",
-          "topics/verifiable-documents/did/revoking-document"
-        ]
+        "items": ["topics/verifiable-documents/document-store"]
       }
     ],
     "TradeTrust Website": [
@@ -113,10 +105,7 @@
       {
         "label": "Config File",
         "type": "category",
-        "items": [
-          "topics/document-creator/config-file/file-structure",
-          "topics/document-creator/config-file/config-generator"
-        ]
+        "items": ["topics/document-creator/config-file/file-structure"]
       },
       "topics/document-creator/data-file"
     ],
@@ -127,6 +116,12 @@
     ]
   },
   "reference": {
+    "Configuration": [
+      "reference/configuration/create-verifiable-document-issuer",
+      "reference/configuration/create-custom-renderer",
+      "reference/configuration/create-custom-schema",
+      "reference/configuration/configure-dns"
+    ],
     "Advanced": [
       "reference/alternative-ledgers",
       "reference/add-polygon-networks-to-metamask-wallet",

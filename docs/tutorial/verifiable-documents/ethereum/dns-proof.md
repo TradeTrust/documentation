@@ -6,17 +6,17 @@ sidebar_label: Configuring DNS
 
 Every OA document's provenance can be verified and traced back to its creator or issuer. This is achieved by embedding an `identityProof` property in the document, which serves as a claim for identity. During the verification phase, the claim is checked against external records.
 
-![Example Issuer Identity](/docs/topics/verifiable-documents/ethereum/dns-proof/example.png)
+![Example Issuer Identity](/docs/tutorial/verifiable-documents/ethereum/dns-proof/example.png)
 
 In this example above, the document's issuer is bound to `demo.openattestation.com`.
 
 In this guide, we will bind the document issuer's identity to a valid domain name. This domain will be displayed as issuer every time the document is rendered in an OA-compliant decentralized renderer.
 
-We will be inserting a temporary DNS record on our DNS at `sandbox.openattestation.com` so you do not need your own domain to follow the guide. If you prefer to use your own domain name for the identity, you may skip the steps involving the CLI and instead read the [DNS Configuration Guide](/docs/developer-section/quickstart/configure-dns).
+We will be inserting a temporary DNS record on our DNS at `sandbox.openattestation.com` so you do not need your own domain to follow the guide. If you prefer to use your own domain name for the identity, you may skip the steps involving the CLI and instead read the [DNS Configuration Guide](/docs/reference/configuration/configure-dns).
 
 ## Creating Temporary DNS Proof with CLI
 
-With your [document store](/docs/topics/verifiable-documents/ethereum/document-store), run the following command:
+With your [document store](/docs/tutorial/verifiable-documents/ethereum/document-store), run the following command:
 
 ```bash
 open-attestation dns txt-record create --address 0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b --network-id 3
@@ -53,3 +53,5 @@ which will display to you the list of the DNS TXT records associated to that loc
 ```
 
 > Note that it can take some time for the record to be correctly propagated to the DNS, even though it usually takes 10 to 15s.
+
+> Take note that the dns entry is temporary and will be wiped out within a few days
