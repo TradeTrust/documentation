@@ -66,6 +66,12 @@
         "items": ["introduction/contract-cost", "introduction/token-registry-v4"]
       }
     ],
+    "Verifying of Documents": [
+      "topics/verifying-documents/overview",
+      "topics/verifying-documents/issuance-identity",
+      "topics/verifying-documents/issuance-status",
+      "topics/verifying-documents/document-integrity"
+    ],
     "Transferable Records": [
       "topics/transferable-records/token-registry",
       {
