@@ -17,6 +17,10 @@ For our reference implementation, we have the following:
 
 > Document storage is an external service, it is **highly recommended** you set up your own hosting for the documents.
 
+### TradeTrust functions
+
+TBD
+
 ### Document storage
 
 For our reference implementation of document storage service, it does the following:
