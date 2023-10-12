@@ -59,7 +59,12 @@
         "type": "category",
         "items": ["topics/introduction/issuer-method-dns-txt", "topics/introduction/issuer-method-dns-did"]
       },
-      "topics/introduction/tradetrust-document-schema"
+      "topics/introduction/tradetrust-document-schema",
+      {
+        "label": "Pricing",
+        "type": "category",
+        "items": ["introduction/contract-cost", "introduction/token-registry-v4"]
+      }
     ],
     "Transferable Records": [
       "topics/transferable-records/token-registry",
