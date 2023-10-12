@@ -39,7 +39,7 @@ Reference templates
 - [v3 config template](https://raw.githubusercontent.com/TradeTrust/tradetrust-config/master/build/reference/config-v3.json).
 
 > If you are using the reference templates, take note to replace the `documentStorage.apiKey` with your own. Alternatively, you can remove the `documentStorage` section if unused.
-> For information on what documentStorage does, see [topics/document-creator-website](/docs/topics/document-creator/config-file/file-structure)
+> For information on what documentStorage does, see [reference/document-creator/-creator-website](/docs/reference/document-creator/config-file/file-structure)
 
 ### Method 1: Using a config template url
 

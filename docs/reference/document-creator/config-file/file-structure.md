@@ -175,7 +175,7 @@ example of the `"forms"` properties:
 
 - The value of `"name"` property is a string that refers to the name of the form that will display when creating the document, as shown in the image below.
 
-![name](/docs/topics/document-creator/config-file/form-name.png)
+![name](/docs/reference/document-creator/config-file/form-name.png)
 
 - The value of `"type"` property is a string that refers to the type of the document, either `"TRANSFERABLE_RECORD"` or `"VERIFIABLE_DOCUMENT"`.
 

@@ -13,7 +13,6 @@ By the end of this guide, you would be able to create your Verifiable Document a
 
 - Use TradeTrust with [Verifiable Documents](/docs/tutorial/verifiable-documents/overview)
 - Use TradeTrust with [Transferable Records](/docs/tutorial/transferable-records/overview)
-- Use TradeTrust with [Config Generator](/docs/tutorial/document-creator/overview)
 
 Before you start, do ensure that open-attestation-cli tool is correctly setup based on the instructions in the [prerequisites](/docs/tutorial/prerequisites).
 

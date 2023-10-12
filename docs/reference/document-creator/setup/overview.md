@@ -18,4 +18,4 @@ The generated configuration file can be used to generate transferable records an
 
 ## Further Reading
 
-[topics/document-creator](/docs/topics/document-creator/overview)
+[reference/document-creator/-creator](/docs/reference/document-creator/overview)

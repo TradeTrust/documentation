@@ -47,16 +47,6 @@
         "tutorial/transferable-records/issuing-transferable-record",
         "tutorial/transferable-records/going-further"
       ]
-    },
-    {
-      "type": "category",
-      "label": "Document Creator",
-      "items": [
-        "tutorial/document-creator/overview",
-        "tutorial/document-creator/config-generator",
-        "tutorial/document-creator/document-creator-website",
-        "tutorial/document-creator/going-further"
-      ]
     }
   ],
   "topics": {
@@ -99,16 +89,6 @@
       "topics/tradetrust-website/identity-resolution",
       "topics/tradetrust-website/qr-code"
     ],
-    "Document Creator": [
-      "topics/document-creator/overview",
-      "topics/document-creator/prerequisites",
-      {
-        "label": "Config File",
-        "type": "category",
-        "items": ["topics/document-creator/config-file/file-structure"]
-      },
-      "topics/document-creator/data-file"
-    ],
     "Generic Templates": [
       "topics/generic-templates/overview",
       "topics/generic-templates/cover-letter",
@@ -142,6 +122,26 @@
       "reference/appendix/tradetrust-api",
       "reference/appendix/non-fungible-token"
     ],
-    "Open-Attestation": ["reference/open-attestation"]
+    "Open-Attestation": ["reference/open-attestation"],
+    "Document Creator": [
+      "reference/document-creator/overview",
+      "reference/document-creator/prerequisites",
+      {
+        "type": "category",
+        "label": "Setup",
+        "items": [
+          "reference/document-creator/setup/overview",
+          "reference/document-creator/setup/config-generator",
+          "reference/document-creator/setup/document-creator-website",
+          "reference/document-creator/setup/going-further"
+        ]
+      },
+      {
+        "label": "Config File",
+        "type": "category",
+        "items": ["reference/document-creator/config-file/file-structure"]
+      },
+      "reference/document-creator/data-file"
+    ]
   }
 }
