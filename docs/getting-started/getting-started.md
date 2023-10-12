@@ -17,7 +17,6 @@ Tutorials helps you on getting a reference setup working.
 
 - Use TradeTrust with [Verifiable Documents](/docs/tutorial/verifiable-documents/overview)
 - Use TradeTrust with [Transferable Records](/docs/tutorial/transferable-records/overview)
-- Use TradeTrust with [Config Generator](/docs/tutorial/document-creator/overview)
 
 ### Topics
 
@@ -27,7 +26,6 @@ Topics includes:
 
 - [Introduction](/docs/topics/introduction/what-is-tradetrust)
 - Components of TradeTrust Reference Implementation
-  - Document Creator
   - Tradetrust Website
   - etc...
 - Supported Types of Documents
@@ -40,4 +38,5 @@ Topics includes:
 References can be used during edge cases and when diving into the inner workings of TradeTrust.
 
 - [Open-Attestation](/docs/reference/open-attestation)
+- Document Creator
 - etc...

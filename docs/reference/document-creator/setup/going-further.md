@@ -8,7 +8,7 @@ Now that you have completed the getting started guide to create your own `Config
 
 Alternatively, you can read the following information to understand how the configuration file works:
 
-- [Document Creator Overview](/docs/topics/document-creator/overview)
+- [Document Creator Overview](/docs/reference/document-creator/overview)
 - [How does the verification work?](/docs/topics/verification/introduction)
 - [Configuring DNS](/docs/reference/configuration/configure-dns)
 - [Creating a Custom Renderer](/docs/reference/configuration/create-custom-renderer)

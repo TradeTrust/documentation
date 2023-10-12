@@ -23,8 +23,8 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
 "wallet": "<Your wallet string>",
 ```
 
-- `"network"` - Update with the desired network. For more information, click [here](/docs/topics/document-creator/config-file/file-structure#network-field).
-- `"wallet"` - Update with your wallet string. For more information, click [here](/docs/topics/document-creator/config-file/file-structure#wallet-field).
+- `"network"` - Update with the desired network. For more information, click [here](/docs/reference/document-creator/config-file/file-structure#network-field).
+- `"wallet"` - Update with your wallet string. For more information, click [here](/docs/reference/document-creator/config-file/file-structure#wallet-field).
 
 ```json
 "defaults": {
@@ -66,7 +66,7 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
 }
 ```
 
-- `"apiKey"` - Update with the document storage API key. For more information, click [here](/docs/topics/document-creator/config-file/file-structure#apikey-field).
-- `"url"` - Update with the document storage URL. For more information, click [here](/docs/topics/document-creator/config-file/file-structure#url-field).
+- `"apiKey"` - Update with the document storage API key. For more information, click [here](/docs/reference/document-creator/config-file/file-structure#apikey-field).
+- `"url"` - Update with the document storage URL. For more information, click [here](/docs/reference/document-creator/config-file/file-structure#url-field).
 
 _Note: **The "documentStorage" field is optional, if you do not have any document storage endpoint setup, you can omit this entire section.**._

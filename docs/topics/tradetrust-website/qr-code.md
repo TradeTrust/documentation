@@ -10,7 +10,7 @@ For our reference implementation, we have the following:
 
 - Document storage service
 
-  - Stores an **encrypted** document as URI, more information on how to use at [here](/docs/topics/document-creator/config-file/file-structure#document-storage-field).
+  - Stores an **encrypted** document as URI, more information on how to use at [here](/docs/reference/document-creator/config-file/file-structure#document-storage-field).
 
 - TradeTrust web application
   - Reads URI + **decrypts** the document from document storage.
