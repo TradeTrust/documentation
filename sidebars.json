@@ -97,7 +97,7 @@
       "topics/tradetrust-website/overview",
       "topics/tradetrust-website/info-bar",
       "topics/tradetrust-website/endorsement-chain",
-      "topics/tradetrust-website/identity-resolution",
+      "topics/tradetrust-website/address-resolver",
       "topics/tradetrust-website/qr-code"
     ],
     "Generic Templates": [

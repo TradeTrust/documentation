@@ -1,7 +1,7 @@
 ---
-id: identity-resolution
-title: Identity Resolution
-sidebar_label: Identity Resolution
+id: address-resolver
+title: Address Resolver
+sidebar_label: Address Resolver
 ---
 
 Different entities may choose to use different pseudonyms (in our case Ethereum addresses), some of these identifiers are reused and some are not. For those entities who chose to reuse a pseudonym, they may want wish for these resources to be identified. Examples of such resources could be a shipping line wallet, multi-sig wallet or eBL token registry. Read more about identifier resolution framework <a href="https://github.com/Open-Attestation/adr/blob/master/identifier_resolution_framework.md" target="_blank" rel="noopener noreferrer">here</a>.
@@ -10,7 +10,7 @@ Different entities may choose to use different pseudonyms (in our case Ethereum 
 
 For TradeTrust, currently there are 2 ways of resolving identities, 1 is through a local address book, the other is via 3rd party resolver API. These are accessible from the gear icon on the far right of the top navigation bar on TradeTrust website.
 
-![Setting](/docs/topics/tradetrust-website/identity-resolution/settings.png)
+![Setting](/docs/topics/tradetrust-website/address-resolver/settings.png)
 
 ## Address Book (Local)
 
@@ -19,7 +19,7 @@ Address Book is like a local phone book. The data is in a csv/excel format, wher
 - `identifier` (refers to the ethereum address)
 - `name` (refers to the resolved name that the company defined in their csv/excel sheet).
 
-![Addressbook](/docs/topics/tradetrust-website/identity-resolution/address-book.png)
+![Addressbook](/docs/topics/tradetrust-website/address-resolver/address-book.png)
 
 After importing the csv/excel sheet, previously ethereum addresses (where resolvable) should now be resolved to recognizable identities as defined within the imported sheet.
 
@@ -31,7 +31,7 @@ will act as a digital "yellow pages", allowing end users to see familiar identif
 Address Resolver endpoint has been added, when you verify a document with an identifiable Ethereum address, it will
 look like the following:
 
-![Address-resolved](/docs/topics/tradetrust-website/identity-resolution/address-resolved.png)
+![Address-resolved](/docs/topics/tradetrust-website/address-resolver/address-resolved.png)
 
 You can see that the entity's name, resolver details and source will also be displayed above the resolved Ethereum
 address.
@@ -55,7 +55,7 @@ https://github.com/Open-Attestation/demo-identifier-resolver.
 
 Clicking the "+ Add" button in the settings page will show you following:
 
-![Settings](/docs/topics/tradetrust-website/identity-resolution/address-resolver.png)
+![Settings](/docs/topics/tradetrust-website/address-resolver/address-resolver.png)
 
 We will need:
 
