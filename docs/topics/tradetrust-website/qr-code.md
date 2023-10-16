@@ -17,7 +17,9 @@ For our reference implementation, we have the following:
 
 ### TradeTrust functions
 
-This is a set of API endpoints for demonstration purposes only. Essentially you should have an endpoint service yourself to store your documents so to facilitate rendering of QR code in your web application later on. Let's focus on [document storage](https://github.com/TradeTrust/tradetrust-functions#document-storage) service below.
+_Prerequisite: [Netlify functions](https://docs.netlify.com/functions/overview/)._
+
+TradeTrust functions is built with Netlify functions. TradeTrust provides a set of API endpoints for demonstration purposes only. Essentially you should have an endpoint service yourself to store your documents so to facilitate rendering of QR code in your web application later on. Let's focus on [document storage](https://github.com/TradeTrust/tradetrust-functions#document-storage) service below.
 
 #### Document storage
 
@@ -41,7 +43,7 @@ For our reference implementation of document storage service, it does the follow
 
 - `key` 1a8d6... will be then be used to decrypt the document at `uri` with 95524... on TradeTrust web application end.
 
-> Note that the `key` value is up to integrators on how it should be managed. Do note that the process of encrypting the document is at your discretion.
+> Note that the `key` value is up to integrators on how it should be managed. Do note that the process of whether to encrypt your document is at your discretion.
 
 ### TradeTrust web application
 
