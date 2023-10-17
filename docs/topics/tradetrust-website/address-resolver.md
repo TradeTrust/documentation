@@ -12,6 +12,8 @@ For TradeTrust, currently there are 2 ways of resolving identities, 1 is through
 
 ![Setting](/docs/topics/tradetrust-website/address-resolver/settings.png)
 
+> You can refer to this [example](https://github.com/TradeTrust/address-identity-resolver) on how addresses get resolved on application end.
+
 ## Address Book (Local)
 
 Address Book is like a local phone book. The data is in a csv/excel format, where the minimal amount of columns are:
