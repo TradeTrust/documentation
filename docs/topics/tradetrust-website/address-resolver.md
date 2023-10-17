@@ -25,6 +25,10 @@ After importing the csv/excel sheet, previously ethereum addresses (where resolv
 
 ## Address Resolver (Third party)
 
+_Prerequisite: [Google sheets API](https://developers.google.com/sheets/api/reference/rest)._
+
+For our reference implementation, we are using Google Sheets as our "database" for demonstrating the third party address resolution concept conveniently. Similar to local address book, think of it as a list of records that map ethereum addresses to a defined label name within the google sheet columns.
+
 In the settings page you can add your third party address resolver. It enables you to add a third party's endpoint to resolve
 Ethereum addresses to their entity's name. With Ethereum addresses being cryptic to end users, this Address Resolver
 will act as a digital "yellow pages", allowing end users to see familiar identifiers such as `ABC Pte Ltd`. Once the
@@ -40,28 +44,26 @@ _Note: There is a difference between "Resolved by" and "Source" parameters. Reso
 party resolver that the user has set in the settings page. Source (an optional field) refers to information that is
 verified by another party. For example, in NDI Myinfo, they have verified information from different agencies._
 
-### How to set up a 3rd party Address Resolver
+> You are not restricted to Google Sheets approach and is free to use any other backend solutions.
 
-We will need to specify the following fields in the API:
+### How to set up a 3rd party Address Resolver (Google Sheet approach)
 
-- Identifier (The ethereum address of the entity)
-- Name (The name of the entity)
-- Source (_Optional:The source of the information_)
-
-A reference implementation of this service can be found at
-https://github.com/Open-Attestation/demo-identifier-resolver.
-
-### How to add a 3rd party Address Resolver
-
-Clicking the "+ Add" button in the settings page will show you following:
+- Get a Google Sheets API key.
+- Create and populate a sheet with columns of:
+  - `identifier` (The ethereum address of the entity)
+  - `name` (The name of the entity)
+  - `source`. (_Optional:The source of the information_)
+- Setup the third party resolution service by configuring it to access google sheets with the API key gotten from step 1.
+  - A reference implementation of this service can be found [here](https://github.com/Open-Attestation/demo-identifier-resolver).
+- Spin up this service and get a respective endpoint.
+- Go to the website application, clicking the "+ Add" button in the settings page will show you following:
 
 ![Settings](/docs/topics/tradetrust-website/address-resolver/address-resolver.png)
 
-We will need:
-
-- [Name](#name)
-- [Endpoint](#endpoint)
-- [API Header and API Key](#api-header-and-api-key)
+- Fill in the following:
+  - `name` (A label you want to name this endpoint, this will be reflected as the "Resolved by")
+  - `endpoint` (The third party resolution service endpoint that you've spinned up)
+  - `API Header and API Key` (The authentication handling on service that you've spinned up)
 
 ---
 
