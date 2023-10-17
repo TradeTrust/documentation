@@ -4,9 +4,9 @@ title: Prerequisites
 sidebar_label: Prerequisites
 ---
 
-Before we start, you will need the OpenAttestation CLI correctly setup.
+Before we start, you will need the an [ethereum wallet](https://ethereum.org/en/wallets/). They can be created with [ethersjs](https://docs.ethers.org/v5/api/signer/#Wallet) or via [metamask](https://support.metamask.io/hc/en-us/articles/360059952212-MetaMask-is-a-self-custodial-wallet) browser extension. For our tutorials, we will be using OpenAttestation CLI (OA CLI) to [generate](https://github.com/Open-Attestation/open-attestation-cli#wallet) our wallet.
 
-## What it does
+## What OA CLI does
 
 The [Open Attestation CLI](https://github.com/Open-Attestation/open-attestation-cli) tool allows users to deploy, mint, wrap and other operation on their documents. It can be used for both Verifiable Documents and Transferable Records.
 
