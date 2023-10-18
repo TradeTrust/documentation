@@ -8,66 +8,66 @@ const contractGasData = {
   verifiable: [
     {
       name: "Document Store Deployment (one time set-up)",
-      gas: 1040472,
+      gas: 1106320,
       remarks: "Only applicable to DID if require revocation.",
       deploymentType: ["DNS", "DID"],
     },
     {
       name: "Issuance of Document",
-      gas: 44956,
+      gas: 47886,
       remarks: "Applicable for batch Issue.",
       deploymentType: ["DNS"],
     },
     {
       name: "Revoke Document",
-      gas: 45052,
+      gas: 47980,
       deploymentType: ["DNS", "DID"],
     },
   ],
   transferable: [
     {
       name: "Token Registry Deployment (one time set-up)",
-      gas: 3714024,
+      gas: 301065,
       deploymentType: ["DNS"],
     },
     {
       name: "Issuance of Document",
-      gas: 239523,
+      gas: 250509,
       deploymentType: ["DNS"],
     },
     {
       name: "Transfer Ownership",
-      gas: 324688,
+      gas: 61333,
       deploymentType: ["DNS"],
     },
     {
       name: "Transfer Holdership",
-      gas: 43634,
+      gas: 47282,
       deploymentType: ["DNS"],
     },
     {
       name: "Nominate Ownership",
-      gas: 83225,
+      gas: 47320,
       deploymentType: ["DNS"],
     },
     {
       name: "Endorse Ownership",
-      gas: 241463,
+      gas: 52057,
       deploymentType: ["DNS"],
     },
     {
       name: "Surrender Document",
-      gas: 93435,
+      gas: 84586,
       deploymentType: ["DNS"],
     },
     {
       name: "Restore Document",
-      gas: 220780,
+      gas: 92043,
       deploymentType: ["DNS"],
     },
     {
       name: "Burn Document",
-      gas: 56532,
+      gas: 94795,
       deploymentType: ["DNS"],
     },
   ],
@@ -120,7 +120,7 @@ export const PriceTable = (props) => {
             <th style={tableHeaderStyle}>Estimated Gas</th>
             <th style={tableHeaderStyle}>Est. Fiat (USD) on Ethereum</th>
             <th style={tableHeaderStyle}>Est. Fiat (USD) on Polygon</th>
-            <th style={tableHeaderStyle}>Deployment Type</th>
+            <th style={tableHeaderStyle}>Issuer's Identity Method</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
