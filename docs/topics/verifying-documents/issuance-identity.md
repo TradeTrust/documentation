@@ -48,9 +48,9 @@ Select a domain name that you will like to associate with your documents. The do
 
 Within your domain registrar or DNS provider's web UI, insert a `TXT` record into the DNS in the following format:
 
-| Type | Name        | Value                                                           |
-| ---- | ----------- | --------------------------------------------------------------- |
-| TXT  | example.com | "openatts net=ethereum netId=3 addr=`<DOCUMENT_STORE_ADDRESS>`" |
+| Type | Name        | Value                                                                  |
+| ---- | ----------- | ---------------------------------------------------------------------- |
+| TXT  | example.com | "openatts net=ethereum netId=11155111 addr=`<DOCUMENT_STORE_ADDRESS>`" |
 
 The `<DOCUMENT_STORE_ADDRESS>` in the `Value` field above is the document store smart contract address obtained. Please note that the document store address needs to be prepended with `addr`.
 
@@ -58,16 +58,15 @@ The `<DOCUMENT_STORE_ADDRESS>` in the `Value` field above is the document store 
 
 An example of a valid DNS `TXT` record is as shown:
 
-| Type | Name                     | Value                                                                           |
-| ---- | ------------------------ | ------------------------------------------------------------------------------- |
-| TXT  | demo.openattestation.com | "openatts net=ethereum netId=3 addr=0xED2E50434Ac3623bAD763a35213DAD79b43208E4" |
+| Type | Name                     | Value                                                                                  |
+| ---- | ------------------------ | -------------------------------------------------------------------------------------- |
+| TXT  | demo.openattestation.com | "openatts net=ethereum netId=11155111 addr=0xED2E50434Ac3623bAD763a35213DAD79b43208E4" |
 
 The `netId` corresponds to the [network ID for the different Ethereum networks](https://chainid.network/). We generally use only the following networks:
 
 | Network ID | Name                     | Network   |
 | ---------- | ------------------------ | --------- |
 | `1`        | Ethereum Mainnet         | `mainnet` |
-| `5`        | Ethereum Testnet Goerli  | `goerli`  |
 | `11155111` | Ethereum Testnet Sepolia | `sepolia` |
 
 For more information on switching to production mode, refer to the [Additional Note for Identity Proof in Production](#additional-note-for-identity-proof-in-production) section below.
@@ -82,7 +81,7 @@ After adding the `TXT` record, we recommend you to check that the record has bee
 
 ### Additional Note for Identity Proof in Production
 
-The `TXT` record above is for use for documents issued on the Ethereum `goerli` network. To bind the identity in production where your documents are issued in the Ethereum `mainnet` network, you will have to change `netId` to `1`.
+The `TXT` record above is for use for documents issued on the Ethereum `sepolia` network. To bind the identity in production where your documents are issued in the Ethereum `mainnet` network, you will have to change `netId` to `1`.
 
 An example of a valid `TXT` record for Ethereum `mainnet` network is as shown:
 
