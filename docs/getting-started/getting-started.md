@@ -5,7 +5,7 @@ hide_title: false
 sidebar_label: Getting Started
 ---
 
-## The documentation is split into 3 sections
+The documentation is split into 3 sections
 
 - Tutorials
 - Topics
@@ -13,30 +13,19 @@ sidebar_label: Getting Started
 
 ### Tutorials
 
-Tutorials helps you on getting a reference setup working.
+These quick start tutorials will help you on getting a basic setup working.
 
-- Use TradeTrust with [Verifiable Documents](/docs/tutorial/verifiable-documents/overview)
-- Use TradeTrust with [Transferable Records](/docs/tutorial/transferable-records/overview)
+- Use TradeTrust with [Verifiable Documents](/docs/tutorial/verifiable-documents/overview).
+- Use TradeTrust with [Transferable Records](/docs/tutorial/transferable-records/overview).
 
 ### Topics
 
 Topics covers key concepts at a high level on background information relating to how TradeTrust is implemented.
 
-Topics includes:
-
-- [Introduction](/docs/topics/introduction/what-is-tradetrust)
-- Components of TradeTrust Reference Implementation
-  - Tradetrust Website
-  - etc...
-- Supported Types of Documents
-  - Verifiable Documents
-  - Transferable Records
-- etc...
+- What is TradeTrust [introduction](/docs/topics/introduction/what-is-tradetrust).
 
 ### References
 
-References can be used during edge cases and when diving into the inner workings of TradeTrust.
+References are TradeTrust related applications that you can refer to when designing your own implementation.
 
-- [Open-Attestation](/docs/reference/open-attestation)
-- Document Creator
-- etc...
+- TradeTrust [website](/docs/reference/tradetrust-website/overview).
