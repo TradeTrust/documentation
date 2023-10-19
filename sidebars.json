@@ -31,7 +31,6 @@
             "tutorial/verifiable-documents/did/raw-document",
             "tutorial/verifiable-documents/did/wrapping-document",
             "tutorial/verifiable-documents/did/signing-document",
-            "tutorial/verifiable-documents/did/revoking-document-ocsp",
             "tutorial/verifiable-documents/did/revoking-document"
           ]
         }
@@ -91,11 +90,6 @@
         "type": "category",
         "label": "Ethereum",
         "items": ["topics/verifiable-documents/document-store"]
-      },
-      {
-        "type": "category",
-        "label": "DID",
-        "items": ["topics/verifiable-documents/ocsp-responder"]
       }
     ],
     "TradeTrust Website": [

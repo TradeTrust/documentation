@@ -21,6 +21,4 @@ The hash can exist independently of the two mappings.
 
 ### See also
 
-[OCSP Responder](/docs/topics/verifiable-documents/ocsp-responder)
-
 [Github Repository](https://github.com/Open-Attestation/document-store/)
