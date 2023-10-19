@@ -44,7 +44,7 @@ const siteConfig = {
         { to: "docs/getting-started", label: "Getting Started" },
         { to: "docs/tutorial/introduction", label: "Tutorial" },
         { to: "docs/topics/introduction/what-is-tradetrust", label: "Topics" },
-        { to: "docs/reference/open-attestation", label: "References" },
+        { to: "docs/reference/tradetrust-website/overview", label: "References" },
       ],
     },
     footer: {

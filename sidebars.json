@@ -46,11 +46,6 @@
         "tutorial/transferable-records/issuing-transferable-record",
         "tutorial/transferable-records/going-further"
       ]
-    },
-    {
-      "label": "OA schemas",
-      "type": "category",
-      "items": ["tutorial/oa-schemas/version-2", "tutorial/oa-schemas/version-4"]
     }
   ],
   "topics": {
@@ -70,69 +65,74 @@
         "items": ["introduction/contract-cost", "introduction/token-registry-v4"]
       }
     ],
+    "Supported types of Documents": [
+      {
+        "label": "Verifiable Documents",
+        "type": "category",
+        "items": [
+          "topics/verifiable-documents/overview",
+          {
+            "type": "category",
+            "label": "Ethereum",
+            "items": ["topics/verifiable-documents/document-store"]
+          }
+        ]
+      },
+      {
+        "label": "Transferable Records",
+        "type": "category",
+        "items": [
+          "topics/transferable-records/token-registry",
+          {
+            "label": "Title Transfer",
+            "type": "category",
+            "items": [
+              "topics/transferable-records/title-transfer",
+              "topics/transferable-records/title-transfer-example"
+            ]
+          }
+        ]
+      }
+    ],
     "Verifying of Documents": [
       "topics/verifying-documents/overview",
       "topics/verifying-documents/issuance-identity",
       "topics/verifying-documents/issuance-status",
       "topics/verifying-documents/document-integrity"
     ],
-    "Transferable Records": [
-      "topics/transferable-records/token-registry",
+    "Technical": [
       {
-        "label": "Title Transfer",
+        "label": "OA schemas",
         "type": "category",
-        "items": ["topics/transferable-records/title-transfer", "topics/transferable-records/title-transfer-example"]
-      }
-    ],
-    "Verifiable Documents": [
-      "topics/verifiable-documents/overview",
-      {
-        "type": "category",
-        "label": "Ethereum",
-        "items": ["topics/verifiable-documents/document-store"]
-      }
-    ],
-    "TradeTrust Website": [
-      "topics/tradetrust-website/overview",
-      "topics/tradetrust-website/info-bar",
-      "topics/tradetrust-website/endorsement-chain",
-      "topics/tradetrust-website/address-resolver",
-      "topics/tradetrust-website/qr-code"
-    ],
-    "Generic Templates": [
-      "topics/generic-templates/overview",
-      "topics/generic-templates/cover-letter",
-      "topics/generic-templates/bill-of-lading"
-    ]
-  },
-  "reference": {
-    "Configuration": [
-      "reference/configuration/create-verifiable-document-issuer",
-      "reference/configuration/create-custom-renderer",
-      "reference/configuration/create-custom-schema",
-      "reference/configuration/configure-dns"
+        "items": ["topics/technical/oa-schemas/version-2", "topics/technical/oa-schemas/version-4"]
+      },
+      "topics/technical/decentralised-renderer"
     ],
     "Advanced": [
-      "reference/alternative-ledgers",
-      "reference/add-polygon-networks-to-metamask-wallet",
-      "reference/wallet-management",
+      "topics/advanced/alternative-ledgers",
+      "topics/advanced/add-polygon-networks-to-metamask-wallet",
+      "topics/advanced/wallet-management",
       {
         "label": "AWS KMS",
         "type": "category",
         "items": [
-          "reference/aws-kms/overview",
-          "reference/aws-kms/create-key",
-          "reference/aws-kms/access-keys",
-          "reference/aws-kms/did-sign-demo"
+          "topics/advanced/aws-kms/overview",
+          "topics/advanced/aws-kms/create-key",
+          "topics/advanced/aws-kms/access-keys",
+          "topics/advanced/aws-kms/did-sign-demo"
         ]
       }
     ],
-    "Appendix": [
-      "reference/appendix/glossary",
-      "reference/appendix/tradetrust-api",
-      "reference/appendix/non-fungible-token"
+    "Appendix": ["topics/appendix/glossary", "topics/appendix/tradetrust-api", "topics/appendix/non-fungible-token"]
+  },
+  "reference": {
+    "TradeTrust Website": [
+      "reference/tradetrust-website/overview",
+      "reference/tradetrust-website/info-bar",
+      "reference/tradetrust-website/endorsement-chain",
+      "reference/tradetrust-website/address-resolver",
+      "reference/tradetrust-website/qr-code"
     ],
-    "Open-Attestation": ["reference/open-attestation"],
     "Document Creator": [
       "reference/document-creator/overview",
       "reference/document-creator/prerequisites",
@@ -152,6 +152,11 @@
         "items": ["reference/document-creator/config-file/file-structure"]
       },
       "reference/document-creator/data-file"
+    ],
+    "Generic Templates": [
+      "reference/generic-templates/overview",
+      "reference/generic-templates/cover-letter",
+      "reference/generic-templates/bill-of-lading"
     ]
   }
 }
