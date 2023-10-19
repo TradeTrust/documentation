@@ -29,9 +29,7 @@ For further explanation, refer to their respective sections [DNS-TXT](/docs/topi
   - Ethereum issued document are revoked directly on the document store
   - DID issued document are revoked through alternative channels
     - A Document Store can be specified on the verifiable document, relying on the blockchain
-    - A OCSP Responder can be specified on the verifiable document, relying on the web
 
 ### See Alse
 
 [Document Store](/docs/topics/verifiable-documents/document-store)
-[OCSP Responder](/docs/topics/verifiable-documents/ocsp-responder)
