@@ -47,6 +47,11 @@
         "tutorial/transferable-records/issuing-transferable-record",
         "tutorial/transferable-records/going-further"
       ]
+    },
+    {
+      "label": "OA schemas",
+      "type": "category",
+      "items": ["tutorial/oa-schemas/version-2", "tutorial/oa-schemas/version-4"]
     }
   ],
   "topics": {
