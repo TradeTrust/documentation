@@ -70,27 +70,40 @@
         "items": ["introduction/contract-cost", "introduction/token-registry-v4"]
       }
     ],
+    "Supported types of Documents": [
+      {
+        "label": "Transferable Records",
+        "type": "category",
+        "items": [
+          "topics/transferable-records/token-registry",
+          {
+            "label": "Title Transfer",
+            "type": "category",
+            "items": [
+              "topics/transferable-records/title-transfer",
+              "topics/transferable-records/title-transfer-example"
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Verifiable Documents",
+        "type": "category",
+        "items": [
+          "topics/verifiable-documents/overview",
+          {
+            "type": "category",
+            "label": "Ethereum",
+            "items": ["topics/verifiable-documents/document-store"]
+          }
+        ]
+      }
+    ],
     "Verifying of Documents": [
       "topics/verifying-documents/overview",
       "topics/verifying-documents/issuance-identity",
       "topics/verifying-documents/issuance-status",
       "topics/verifying-documents/document-integrity"
-    ],
-    "Transferable Records": [
-      "topics/transferable-records/token-registry",
-      {
-        "label": "Title Transfer",
-        "type": "category",
-        "items": ["topics/transferable-records/title-transfer", "topics/transferable-records/title-transfer-example"]
-      }
-    ],
-    "Verifiable Documents": [
-      "topics/verifiable-documents/overview",
-      {
-        "type": "category",
-        "label": "Ethereum",
-        "items": ["topics/verifiable-documents/document-store"]
-      }
     ],
     "TradeTrust Website": [
       "topics/tradetrust-website/overview",
