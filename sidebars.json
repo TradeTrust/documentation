@@ -72,6 +72,18 @@
     ],
     "Supported types of Documents": [
       {
+        "label": "Verifiable Documents",
+        "type": "category",
+        "items": [
+          "topics/verifiable-documents/overview",
+          {
+            "type": "category",
+            "label": "Ethereum",
+            "items": ["topics/verifiable-documents/document-store"]
+          }
+        ]
+      },
+      {
         "label": "Transferable Records",
         "type": "category",
         "items": [
@@ -83,18 +95,6 @@
               "topics/transferable-records/title-transfer",
               "topics/transferable-records/title-transfer-example"
             ]
-          }
-        ]
-      },
-      {
-        "label": "Verifiable Documents",
-        "type": "category",
-        "items": [
-          "topics/verifiable-documents/overview",
-          {
-            "type": "category",
-            "label": "Ethereum",
-            "items": ["topics/verifiable-documents/document-store"]
           }
         ]
       }
