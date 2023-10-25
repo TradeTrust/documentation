@@ -157,6 +157,38 @@
       "reference/generic-templates/overview",
       "reference/generic-templates/cover-letter",
       "reference/generic-templates/bill-of-lading"
+    ],
+    "Development": [
+      "reference/development/getting-started",
+      "reference/development/prerequisites",
+      {
+        "type": "category",
+        "label": "Transferable Records",
+        "items": ["reference/development/transferable-record/issue", "reference/development/transferable-record/wrap"]
+      },
+      {
+        "type": "category",
+        "label": "Verifiable Documents",
+        "items": [
+          {
+            "type": "category",
+            "label": "Document Store",
+            "items": [
+              "reference/development/verifiable-document/document-store/issue",
+              "reference/development/verifiable-document/document-store/wrap"
+            ]
+          },
+          {
+            "type": "category",
+            "label": "DID",
+            "items": [
+              "reference/development/verifiable-document/did/wrap",
+              "reference/development/verifiable-document/did/sign"
+            ]
+          }
+        ]
+      },
+      "reference/development/common/wrap"
     ]
   }
 }
