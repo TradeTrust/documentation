@@ -1,10 +1,8 @@
 ---
-id: wrap
-title: Wrap
-sidebar_label: Wrap
+id: oa-verify
+title: Open Attestation (Verify)
+sidebar_label: Open Attestation (Verify)
 ---
-
-[![CircleCI](https://circleci.com/gh/Open-Attestation/oa-verify.svg?style=svg)](https://circleci.com/gh/Open-Attestation/oa-verify)
 
 # Open Attestation (Verify)
 

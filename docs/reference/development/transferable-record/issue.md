@@ -1,7 +1,7 @@
 ---
 id: issue
-title: issue
-sidebar_label: issue
+title: Issue
+sidebar_label: Issue
 ---
 
 ## Token Registry

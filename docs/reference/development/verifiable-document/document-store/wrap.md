@@ -79,7 +79,7 @@ In the above example that used wrapDocuments, the batched documents share the sa
 
 To extract the merkle root, refer to the example below
 
-```js
+```ts
 const merkleRoot: string = wrappedDocument[0].signature.merkleRoot;
 ```
 

@@ -174,8 +174,9 @@
             "type": "category",
             "label": "Document Store",
             "items": [
+              "reference/development/verifiable-document/document-store/wrap",
               "reference/development/verifiable-document/document-store/issue",
-              "reference/development/verifiable-document/document-store/wrap"
+              "reference/development/verifiable-document/document-store/revoke"
             ]
           },
           {
@@ -188,7 +189,12 @@
           }
         ]
       },
-      "reference/development/common/wrap"
+      {
+        "type": "category",
+        "label": "Libraries",
+        "items": ["reference/development/libraries/open-attestation", "reference/development/libraries/oa-verify"]
+      },
+      "reference/development/verifier/verify"
     ]
   }
 }
