@@ -31,6 +31,14 @@ Follow the guide as linked: [https://www.coindesk.com/learn/how-to-set-up-a-meta
 
 ## Provider
 
+> Take note that there's an issue on ethers-v5 on estimating gas prices.
+>
+> Utilize Gas Station or Oracles to estimate gas prices.
+>
+> A sample implementation is available on open-attestation-cli and document-creator-website.
+>
+> The issue does not occur on metamask, as gas prices is handled seperately
+
 ### Ethers.js
 
 Ethers provides multiple Provider class to access the blockchain networks, some of which provides provider specific information
