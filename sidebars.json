@@ -52,18 +52,14 @@
     "Introduction": [
       "topics/introduction/what-is-tradetrust",
       "topics/introduction/tradetrust-layer-boundaries",
-      "topics/introduction/network-support",
+      "topics/introduction/supported-network",
+      "topics/introduction/tradetrust-document-schema",
       {
         "label": "Identifying the Issuer",
         "type": "category",
         "items": ["topics/introduction/issuer-method-dns-txt", "topics/introduction/issuer-method-dns-did"]
       },
-      "topics/introduction/tradetrust-document-schema",
-      {
-        "label": "Pricing",
-        "type": "category",
-        "items": ["introduction/contract-cost", "introduction/token-registry-v4"]
-      }
+      "topics/introduction/estimated-cost-for-transactions"
     ],
     "Supported types of Documents": [
       {
