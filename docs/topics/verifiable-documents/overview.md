@@ -4,7 +4,17 @@ title: Verifiable Document Overview
 sidebar_label: Overview
 ---
 
-## Supported types of Verifiable Document
+<p align="center" width="100%">
+  <figure>
+      <img src='/docs/topics/introduction/what-is-tradetrust/simple-signing.svg' />
+  </figure>
+</p>
+
+The fingerprint of the signed TradeTrust file is then committed to a [Document Store](https://github.com/Open-Attestation/document-store) smart contract on the Ethereum Blockchain, which serves as an immutable ledger.
+
+This signed TradeTrust file is then distributed to recipients, who will be able to verify the file on https://tradetrust.io simply by dragging and dropping it into the Web interface.
+
+### Supported types of Verifiable Document
 
 TradeTrust supports Verifiable Documents in two forms:
 

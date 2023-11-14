@@ -4,11 +4,19 @@ title: Issuer method DID / DNS-DID
 sidebar_label: Issuer method DID / DNS-DID
 ---
 
+|                                   | DNS-TXT (recommended) | DNS-DID | DID     |
+| --------------------------------- | --------------------- | ------- | ------- |
+| Domain name needed?               | &check;               | &check; | &cross; |
+| Smart contract deployment needed? | &check;               | &cross; | &cross; |
+| Identifiable issuer?              | &check;               | &check; | &cross; |
+
 Alternatively, as an issuer one can use either `DID` or `DNS-DID` issuer method to verify that they indeed sign over the TradeTrust document.
+
+> This method currently only works for Verifiable Documents.
 
 ## Rationale
 
-Decentralized identifiers (DIDs) are a new type of identifier that enables verifiable, decentralized digital identity. DID document associated with DIDs contains a verification method. The owner of a DID can use the private key associated and anyone can verify that the owner control the public key.
+Decentralized identifiers (DIDs) are a new type of identifier that enables verifiable, decentralized digital identity. DID document associated with DIDs contains a verification method. The owner of a DID can use the private key associated and anyone can verify that the owner control the public key. DID is new, 1.0 specification is recommended in July 2022. One advantage is that this allows our document issuance flow to not rely on the need to write on blockchain, eliminating the need for gas fees. You can read more about DID on [wikipedia](https://en.wikipedia.org/wiki/Decentralized_identifier) or deep dive into [w3c specifications](https://www.w3.org/TR/did-core/).
 
 ## How it works
 
@@ -21,6 +29,16 @@ Let's look at the `did:ethr` method:
 - `did` is the DID method prefix.
 - `ethr` signifies the Ethereum-based DID method.
 - `<ethereum-address>` is the Ethereum address of the entity being identified.
+
+## Prerequisites
+
+- An etheruem wallet. (DID)
+- Domain name. (DND-DID)
+- Edit access to your domain's DNS records. (DND-DID)
+
+## Creation of wallet
+
+- Create a [wallet](/docs/tutorial/verifiable-documents/ethereum/wallet).
 
 ### DID
 
@@ -45,11 +63,13 @@ With an etheruem wallet address, you can go to `https://dev.uniresolver.io/1.0/i
 
 When we use our private key to sign over `merkleRoot` of our TradeTrust document, `proof.signature` is appended. This is the signature that will be verified against with later in [oa-verify](https://github.com/Open-Attestation/oa-verify) library. What happens at this end is the DID document will be resolved and retrieved, verify if the signed message hash equates back to etheruem wallet address, ensuring the document was indeed signed by it's private key.
 
-Using this issuer method enables you to not own a domain name. The downside is that your issuer will reflect as your public etheruem address, which can be cryptic to most common users.
+This method (DID) do not require you to own a domain name. However, please take note that when verifying a Document created from this method, the Issuer will reflect the wallet address which can be cryptic to most users. An example will look like this:
+
+![DID ethr](/docs/introduction/did-ethr.png)
 
 ### DNS-DID
 
-This method concept is the same as `DNS-TXT` method. So we tie our etheruem wallet address to a custom txt record that we created in a domain name we own. Refer to below on how to implement.
+This method concept is the same as `DNS-TXT` method but instead of using a document store or a token registry we tie our DID to a custom txt record that we created in a domain name we own. Refer to below on how to implement.
 
 ## How to create DNS-DID Record
 
@@ -89,6 +109,8 @@ Using the above example, the [DID document response for the wallet address](http
 
 As an issuer, you will need to add a custom TXT record to your domain name. The exact steps to achieve this can be confirmed with your domain name registrar, this is usually achieved through your domain administration web UI.
 
+## Inserting the DNS Record for DID
+
 The following is an example for an issuer:
 
 - Wallet address: `0xeB68fae40F796d6605d482773c4a7B266da87A0d`
@@ -97,7 +119,13 @@ The following is an example for an issuer:
 openatts a=dns-did; p=did:ethr:0xeB68fae40F796d6605d482773c4a7B266da87A0d#controller; v=1.0;
 ```
 
-Create a txt record and add the above value. Double check if the txt record exists by doing the following:
+Within your domain registrar or DNS provider's web UI, insert a `TXT` record into the DNS in the following format:
+
+| Type | Name        | Value                                   |
+| ---- | ----------- | --------------------------------------- |
+| TXT  | example.com | "openatts a=dns-did; p=`<DID>`; v=1.0;" |
+
+The `<DID>` value will be `did:ethr:0xeB68fae40F796d6605d482773c4a7B266da87A0d#controller` in this example. Double check if the txt record exists by doing the following:
 
 ```bash
 open-attestation dns txt-record get --location <YOUR_DOMAIN>
