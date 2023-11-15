@@ -4,7 +4,7 @@ title: Document Integrity
 sidebar_label: Document Integrity
 ---
 
-OpenAttestation ensures that the content of the document has not been modified since the document has been created, with exception of data removed using the built-in [obfuscation mechanism](/docs/developer-section/libraries/remote-files/open-attestation#obfuscating-data). Let's explore how it works.
+TradeTrust ensures that the content of the document has not been modified since the document has been created, with exception of data removed using the built-in [obfuscation mechanism](/docs/developer-section/libraries/remote-files/open-attestation#obfuscating-data). Let's explore how it works.
 
 In the tutorial, we have learnt how to [wrap a document](/docs/integrator-section/verifiable-document/ethereum/wrapping-document) and [issue it](/docs/integrator-section/verifiable-document/ethereum/issuing-document) into a document store. However, we didn't explain what these actions were doing and why they are necessary.
 
@@ -71,9 +71,9 @@ Once the `data` object has been computed we will be able to create an unique has
 
 Later on, during verification of the document, the same exact steps are performed again to assert that the contents of the document has not been tampered with. This works as the final `targetHash` will be completely different if any part of the wrapped document is different from the original.
 
-#### Data Obfuscation
+## Selective Redaction
 
-Due to the way we compute `targetHash`, OpenAttestation allows for one to obfuscate data they don't want to make public. For this we can simply compute the hash of a specific field and add it into the documents. Let's try it with the [CLI](/docs/developer-section/libraries/remote-files/open-attestation-cli) and the document above:
+Due to the way we compute `targetHash`, TradeTrust allows for one to obfuscate data they don't want to make public. For this we can simply compute the hash of a specific field and add it into the documents. Let's try it with the [CLI](/docs/developer-section/libraries/remote-files/open-attestation-cli) and the document above:
 
 ```bash
 open-attestation filter ./path/to/file.json ./output.json name
@@ -112,7 +112,7 @@ The `name` field is not available anymore in the `data` object, and the hash ass
 
 > More importantly, the document remains valid.
 
-The hash added into `privacy.obfuscatedData` is the one used when computing the [`targetHash`](#targethash). To verify that a document remained untouched, OpenAttestation computes the `targetHash` of the provided document and compare it to `signature.targetHash`. There is one subtle difference during verification. All the hashes available in `privacy.obfuscatedData` are added to the list of computed hashes. So for verification the steps are as follows:
+The hash added into `privacy.obfuscatedData` is the one used when computing the [`targetHash`](#targethash). To verify that a document remained untouched, the function computes the `targetHash` of the provided document and compare it to `signature.targetHash`. There is one subtle difference during verification. All the hashes available in `privacy.obfuscatedData` are added to the list of computed hashes. So for verification the steps are as follows:
 
 1. List each properties' path from the `data` object and associate its value.
 1. For each properties' path, compute a hash using the properties' path and value.
@@ -121,13 +121,11 @@ The hash added into `privacy.obfuscatedData` is the one used when computing the 
 
 The only difference with the [`targetHash`](#targethash) computation is the step 3.
 
-![Compute target hash with data obfuscation](/docs/how-does-it-work/target-hash-with-data-obfuscation.png)
+![Compute target hash with selective redaction](/docs/how-does-it-work/target-hash-with-data-obfuscation.png)
 
-With the help of data obfuscation a user can decide to selectively disclose a subset of data he wants to share.
+With the help of selective redaction a user can decide to selectively disclose a subset of data he wants to share.
 
-## Additional information
-
-### Data Obfuscation limitations
+### Selective Redaction limitations
 
 #### Empty objects
 
