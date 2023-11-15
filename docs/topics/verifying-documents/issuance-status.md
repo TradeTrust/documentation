@@ -4,11 +4,19 @@ title: Issuance Status
 sidebar_label: Issuance Status
 ---
 
-OpenAttestation checks that the document has been issued and that it's issuance status is in good standing (for instance, that it hasn't been revoked). As of today, OpenAttestation supports two ways to issue documents: DIDs and Ethereum Smart Contracts.
+TradeTrust checks that the document has been issued and that it's issuance status is in good standing (for instance, that it hasn't been revoked). As of today, TradeTrust supports two ways to issue documents: DIDs and Ethereum Smart Contracts.
 
 ## Ethereum Smart Contracts
 
-The [document store](/docs/integrator-section/verifiable-document/ethereum/document-store) is a smart contract on the Ethereum network that records the issuance and revocation status of OpenAttestation documents. It stores the hashes of wrapped documents, which are the records of the owner of the document store having issued the documents. Before we explain the verification process in detail, we need to introduce a new concept: the `merkleRoot`.
+### Token Registry
+
+The token registry smart contract is deployed by individual transferable records issuers such as the land title registry (for title deed) or shipping lines (for bill of lading). This smart contract replaces the document store smart contract in the previous section. similarly to document store contract, it also has it's identity bound to the issuer using DNS.
+
+The token registry stores the ownership state of the transferable records using a mapping from document ID to owner. The document ID is the target hash (and merkle root) of the individual OA document created. The owner will be either an externally owned account (EOA) or smart contract address.
+
+### Document Store
+
+The [document store](/docs/integrator-section/verifiable-document/ethereum/document-store) is a smart contract on the Ethereum network that records the issuance and revocation status of TradeTrust documents. It stores the hashes of wrapped documents, which are the records of the owner of the document store having issued the documents. Before we explain the verification process in detail, we need to introduce a new concept: the `merkleRoot`.
 
 Let's imagine that we need to wrap thousands of files and had to issue the `targetHash` for each of them. It would be extremely inefficient because Ethereum is slow, and we would have to pay for each transaction.
 
@@ -16,7 +24,7 @@ That's where the `merkleRoot` will come in handy.
 
 ### merkleRoot
 
-Once the `targetHash` of a document is computed, OpenAttestation will determine the `merkleRoot`. The `merkleRoot` value is the merkle root hash computed from the [merkle tree](https://en.wikipedia.org/wiki/Merkle_tree) using the `targetHash` of all the document wrapped together. Each `targetHash` is a leaf in the tree. After computing the merkle tree, the `merkleRoot` associated to a document will be added to it as well as the proofs (intermediate hashes) needed to ensure that the `targetHash` has been used to compute the `merkleRoot`. The proofs are added into the `proof` property.
+Once the `targetHash` of a document is computed, TradeTrust will determine the `merkleRoot`. The `merkleRoot` value is the merkle root hash computed from the [merkle tree](https://en.wikipedia.org/wiki/Merkle_tree) using the `targetHash` of all the document wrapped together. Each `targetHash` is a leaf in the tree. After computing the merkle tree, the `merkleRoot` associated to a document will be added to it as well as the proofs (intermediate hashes) needed to ensure that the `targetHash` has been used to compute the `merkleRoot`. The proofs are added into the `proof` property.
 
 On a side note, when we wrap only one document at a time, the `targetHash` and the `merkleRoot` are identical and the `proof` is empty. This is completely normal. When we wrap at least 2 documents at the same time, we will notice a difference between `targetHash` and the `merkleRoot`, and proofs appended.
 
@@ -42,22 +50,82 @@ To issue a document, an institution or individual :
 - Wraps a document (or a batch of documents) and get a `merkleRoot`. The wrapped documents can be shared to the recipients.
 - Issues the `merkleRoot` by calling the `issue` function from the document store contract.
 
-An OpenAttestation verifier:
+An TradeTrust verifier:
 
 - Checks the `merkleRoot` of the document has been issued:
+
   1. Gets back the document store contract address from the document itself.
-  1. Ensures that the `targetHash` and the `proof` matches the `merkleRoot`.
-  1. Checks the `merkleRoot` is in the document store provided, by calling the `isIssued` function from the deployed contract.
+  2. Ensures that the `targetHash` and the `proof` matches the `merkleRoot`.
+  3. Checks the `merkleRoot` is in the document store provided, by calling the `isIssued` function from the deployed contract.
+  4. A sample of `isIssued` function will look something like this:
+
+  ```js
+  import { providers } from "ethers";
+  import { DocumentStoreFactory } from "@govtechsg/document-store";
+
+  try {
+    const documentStore = "0xabc..."; // your document store address
+    const merkleRoot = "0x789..."; // your document signature merkleRoot
+    const documentStoreContract = await DocumentStoreFactory.connect(documentStore, providers.Provider);
+    const issued = await documentStoreContract.isIssued(merkleRoot);
+    return issued
+      ? {
+          issued: true,
+          address: documentStore,
+        }
+      : {
+          issued: false,
+          address: documentStore,
+          reason: {
+            message: `Document ${merkleRoot} has not been issued under contract ${documentStore}`,
+          },
+        };
+  } catch (error) {
+    // handle error accordingly
+  }
+  ```
+
 - Checks the `merkleRoot` of the document has been issued:
+
   1. Gets back the document store contract address from the document itself.
-  1. Checks the `targetHash` is **not** in the document store provided, by calling the `isRevoked` function from the deployed contract.
-  1. Checks the `merkleRoot` is **not** in the document store provided, by calling the `isRevoked` function from the deployed contract.
+  2. Checks the `targetHash` is **not** in the document store provided, by calling the `isRevoked` function from the deployed contract.
+  3. Checks the `merkleRoot` is **not** in the document store provided, by calling the `isRevoked` function from the deployed contract.
+  4. A sample of `isRevoked` function will look something like this:
+
+  ```js
+  import { providers } from "ethers";
+  import { DocumentStoreFactory } from "@govtechsg/document-store";
+
+  try {
+    const documentStore = "0xabc..."; // your document store address
+    const targetHash = "262939..."; // your document signature targetHash
+    const proofs = []; // your document signature proof
+    const documentStoreContract = await DocumentStoreFactory.connect(documentStore, providers.Provider);
+    const intermediateHashes = getIntermediateHashes(targetHash, proofs);
+    const revokedHash = await isAnyHashRevoked(documentStoreContract, intermediateHashes);
+
+    return revokedHash
+      ? {
+          revoked: true,
+          address: documentStore,
+          reason: {
+            message: `Document ${merkleRoot} has been revoked under contract ${documentStore}`,
+          },
+        }
+      : {
+          revoked: false,
+          address: documentStore,
+        };
+  } catch (error) {
+    // handle error accordingly
+  }
+  ```
 
 ## DIDs
 
 Decentralized identifiers (DIDs) are a new type of identifier that enables verifiable, decentralized digital identity. DID document associated with DIDs contains a verification method, often a public key. The owner of a DID can use the private key associated and anyone can verify that the owner control the public key.
 
-At the moment, OpenAttestation only supports one DID method: `ethr`.
+At the moment, TradeTrust only supports one DID method: `ethr`.
 
 ### Issuance
 
@@ -137,7 +205,7 @@ To issue a document, an institution or individual :
 - Sign the `merkleRoot` using the private key. The signature must be appended into the wrapped document.
 - The wrapped document can be shared to the recipients.
 
-An OpenAttestation verifier:
+An TradeTrust verifier:
 
 - Retrieves the ethereum address associated with the DID identifier and DID controller from the document.
 - Retrieves the ethereum used to sign the merkle root.

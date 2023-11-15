@@ -92,7 +92,7 @@
     ],
     "Verifying of Documents": [
       "topics/verifying-documents/overview",
-      "topics/verifying-documents/issuance-identity",
+      "topics/verifying-documents/issuer-identity",
       "topics/verifying-documents/issuance-status",
       "topics/verifying-documents/document-integrity"
     ],
