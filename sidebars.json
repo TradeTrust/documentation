@@ -190,7 +190,15 @@
         "label": "Libraries",
         "items": ["reference/development/libraries/open-attestation", "reference/development/libraries/oa-verify"]
       },
-      "reference/development/verifier/verify"
+      "reference/development/verifier/verify",
+      {
+        "type": "category",
+        "label": "Endorsement Chain",
+        "items": [
+          "reference/development/endorsement-chain/endorsement-chain-ethers",
+          "reference/development/endorsement-chain/endorsement-chain-subgraph"
+        ]
+      }
     ]
   }
 }
