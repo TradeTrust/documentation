@@ -58,6 +58,7 @@ So to recap the steps on setting your own local addressbook:
        });
        return addressBook;
      };
+     csvToAddressBook(readAsText);
      ```
 3. Finally, if local address tally, return identifier name as per defined in csv file previously.
    ```js
@@ -90,14 +91,32 @@ verified by another party. For example, in NDI Myinfo, they have verified inform
 
 ### How to set up a 3rd party Address Resolver (Google Sheet approach)
 
-- Get a Google Sheets API key.
-- Create and populate a sheet with columns of:
+- Go to [Google Console](https://console.cloud.google.com/apis/library) and create a new project.
+  ![create project](/docs/reference/tradetrust-website/create-project.png)
+- Enable Google Sheets API. Once enabled, it should be added to the list.
+  ![enable api](/docs/reference/tradetrust-website/enable-api.png)
+- Create an API key.
+  ![create key](/docs/reference/tradetrust-website/create-key.png)
+- Create and populate a Google Sheet with columns of:
   - `identifier` (The ethereum address of the company)
   - `name` (The name of the company)
   - `source`. (_Optional:The source of the information_)
-- Setup the third party resolution service by configuring it to access google sheets with the API key gotten from step 1.
-  - A reference implementation of this service can be found [here](https://github.com/Open-Attestation/demo-identifier-resolver).
-- Spin up this service and get a respective endpoint.
+- Set Google Sheet to public.
+- Setup the third party resolution service by configuring it to access Google Sheets with the API key gotten from step 1.
+  - Clone this [reference implementation](https://github.com/TradeTrust/demo-identifier-resolver).
+  - Define these environment variables in github repo secrets:
+    - SHEETS_API_KEY = Your created API key from Google Console.
+    - SHEETS_ID = Your google sheet ID.
+    - SHEETS_RANGE = Your google sheet cell range.
+    - STAGING_AWS_ACCESS_KEY_ID = Your AWS access key id.
+    - STAGING_AWS_SECRET_ACCESS_KEY = Your AWS access key secret.
+  - Spin up this service up by pushing to master, github actions will automate the deployment.
+  - Go to API Gateway in your AWS account. Create a custom domain name of your preference. Take note of API Gateway domain name.
+    ![api gateway](/docs/reference/tradetrust-website/api-gateway.png)
+  - Click API mappings and configure it by selecting `stg-demo-identifier-resolver` from dropdown list.
+  - Go to Route53 and create a new CNAME record. The value is your API Gateway domain name.
+    ![route53](/docs/reference/tradetrust-website/route53.png)
+  - Once set, wait for a few minutes and your API endpoint will be accessible in the custom domain name that you've created. This will be what we call the third party resolution service endpoint.
 - Go to the website application, clicking the "+ Add" button in the settings page will show you following:
 
 ![Settings](/docs/topics/tradetrust-website/address-resolver/address-resolver.png)
@@ -118,7 +137,9 @@ The "Name" input refers to the name of the address resolver that contains all th
 #### Endpoint
 
 The "Endpoint" input refers to the endpoint that will be called to resolve an Ethereum Address.
-A demo hosted endpoint is available at [https://demo-resolver.tradetrust.io/identifier/](https://demo-resolver.tradetrust.io/identifier/).
+A demo hosted endpoint is available at [https://demo-resolver.tradetrust.io/](https://demo-resolver.tradetrust.io/).
+
+![return-search](/docs/reference/tradetrust-website/return-search.png)
 
 _Note: This demo endpoint is not suitable for production environment, please use it only in testing or staging environment._
 
