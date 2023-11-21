@@ -98,9 +98,9 @@
     ],
     "Technical": [
       {
-        "label": "OA schemas",
+        "label": "Document schema",
         "type": "category",
-        "items": ["topics/technical/oa-schemas/version-2", "topics/technical/oa-schemas/version-4"]
+        "items": ["topics/technical/document-schema/version-2", "topics/technical/document-schema/version-4"]
       },
       "topics/technical/decentralised-renderer"
     ],

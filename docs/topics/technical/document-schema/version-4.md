@@ -4,7 +4,7 @@ title: Version 4 (Alpha)
 sidebar_label: Version 4 (Alpha)
 ---
 
-The OpenAttestation v4.0 follows [W3C VC data model](https://www.w3.org/TR/vc-data-model-2.0/). The OpenAttestation v4.0 alpha schema can be found at [here](https://schemata.openattestation.com/com/openattestation/4.0/alpha-schema.json). Do note that this is an **alpha version** and will be subjected to changes. Let's look at an OA v4 document example:
+The document schema v4.0 follows [W3C VC data model](https://www.w3.org/TR/vc-data-model-2.0/). Do note that this is an **alpha version** and will be subjected to changes. Let's look at an v4 document example:
 
 ```json
 {
