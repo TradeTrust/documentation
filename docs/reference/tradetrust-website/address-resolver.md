@@ -4,7 +4,7 @@ title: Address Resolver
 sidebar_label: Address Resolver
 ---
 
-Different companies may choose to use different pseudo-identity, some of these identifiers are reused and some are not. For those companies who chose to reuse a pseudo-identity, there is almost always a need to point to them again when doing transactions because it acts as an identifier to the user / company when doing transactions with them.. Examples of such resources could be a shipping line wallet, multi-sig wallet or eBL token registry. Read more about identifier resolution framework <a href="https://github.com/Open-Attestation/adr/blob/master/identifier_resolution_framework.md" target="_blank" rel="noopener noreferrer">here</a>.
+Different companies may choose to use different pseudo-identity, some of these identifiers are reused and some are not. For those companies who chose to reuse a pseudo-identity, there is almost always a need to point to them again when doing transactions because it acts as an identifier to the user / company when doing transactions with them. Examples of such resources could be a shipping line wallet, multi-sig wallet or eBL token registry. Read more about identifier resolution framework <a href="https://github.com/Open-Attestation/adr/blob/master/identifier_resolution_framework.md" target="_blank" rel="noopener noreferrer">here</a>.
 
 ## TradeTrust's address resolution
 
@@ -72,8 +72,6 @@ So to recap the steps on setting your own local addressbook:
 
 ## Address Resolver (Third party)
 
-_Prerequisite: [Google sheets API](https://developers.google.com/sheets/api/reference/rest)._
-
 For our reference implementation, we are using Google Sheets as our "database" for demonstrating the third party address resolution concept conveniently. Similar to local address book, think of it as a list of records that map ethereum addresses to a defined label name within the google sheet columns.
 
 In the settings page you can add your third party address resolver. It enables you to add a third party's endpoint to resolve Ethereum addresses to their company's name. With Ethereum addresses being cryptic to end users, this Address Resolver will act as a digital address book, think of it as your mobile phone contact list, we only remember names, not numbers. The address book allows end users to see familiar identifiers such as `ABC Pte Ltd`. Once the Address Resolver endpoint has been added, when you verify a document with an identifiable Ethereum address, it will look like the following:
@@ -91,9 +89,11 @@ verified by another party. For example, in NDI Myinfo, they have verified inform
 
 ### How to set up a 3rd party Address Resolver (Google Sheet approach)
 
+_Prerequisite: [Google sheets API](https://developers.google.com/sheets/api/reference/rest)._
+
 - Go to [Google Console](https://console.cloud.google.com/apis/library) and create a new project.
   ![create project](/docs/reference/tradetrust-website/create-project.png)
-- Enable Google Sheets API. Once enabled, it should be added to the list.
+- Enable Google Sheets API. Once enabled, it should be added to the enabled API list.
   ![enable api](/docs/reference/tradetrust-website/enable-api.png)
 - Create an API key.
   ![create key](/docs/reference/tradetrust-website/create-key.png)
@@ -103,7 +103,7 @@ verified by another party. For example, in NDI Myinfo, they have verified inform
   - `source`. (_Optional:The source of the information_)
 - Set Google Sheet to public.
 - Setup the third party resolution service by configuring it to access Google Sheets with the API key gotten from step 1.
-  - Clone this [reference implementation](https://github.com/TradeTrust/demo-identifier-resolver).
+  - Fork this [reference implementation](https://github.com/TradeTrust/demo-identifier-resolver).
   - Define these environment variables in github repo secrets:
     - SHEETS_API_KEY = Your created API key from Google Console.
     - SHEETS_ID = Your google sheet ID.

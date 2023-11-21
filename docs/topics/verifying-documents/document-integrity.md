@@ -42,6 +42,8 @@ A few interesting transformations happened that we will dive into below:
 - A `data` key has been created and its value holds the contents of the file previously provided when wrapping, along with some weird-looking extra (hexadecimal) data.
 - A `signature` object has been created.
 
+> The above example is a [V2 schema](/docs/topics/technical/document-schema/version-2) document. There is a [V4 alpha schema](/docs/topics/technical/document-schema/version-4) in the works too.
+
 ### The `data` object
 
 The first step of wrapping consists of transforming all the object properties provided as input using the following algorithm:
