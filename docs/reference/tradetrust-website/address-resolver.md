@@ -4,7 +4,7 @@ title: Address Resolver
 sidebar_label: Address Resolver
 ---
 
-Different companies may choose to use different pseudo-identity, some of these identifiers are reused and some are not. For those companies who chose to reuse a pseudo-identity, there is almost always a need to point to them again when doing transactions because it acts as an identifier to the user / company when doing transactions with them.. Examples of such resources could be a shipping line wallet, multi-sig wallet or eBL token registry. Read more about identifier resolution framework <a href="https://github.com/Open-Attestation/adr/blob/master/identifier_resolution_framework.md" target="_blank" rel="noopener noreferrer">here</a>.
+Different companies may choose to use different pseudo-identity, some of these identifiers are reused and some are not. For those companies who chose to reuse a pseudo-identity, there is almost always a need to point to them again when doing transactions because it acts as an identifier to the user / company when doing transactions with them. Examples of such resources could be a shipping line wallet, multi-sig wallet or eBL token registry. Read more about identifier resolution framework <a href="https://github.com/Open-Attestation/adr/blob/master/identifier_resolution_framework.md" target="_blank" rel="noopener noreferrer">here</a>.
 
 ## TradeTrust's address resolution
 
@@ -93,7 +93,7 @@ _Prerequisite: [Google sheets API](https://developers.google.com/sheets/api/refe
 
 - Go to [Google Console](https://console.cloud.google.com/apis/library) and create a new project.
   ![create project](/docs/reference/tradetrust-website/create-project.png)
-- Enable Google Sheets API. Once enabled, it should be added to the list.
+- Enable Google Sheets API. Once enabled, it should be added to the enabled API list.
   ![enable api](/docs/reference/tradetrust-website/enable-api.png)
 - Create an API key.
   ![create key](/docs/reference/tradetrust-website/create-key.png)
