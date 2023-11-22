@@ -1,7 +1,7 @@
 ---
-id: issuing-transferable-record
-title: Issuing Transferable Record
-sidebar_label: Issuing Transferable Record
+id: issuing-document-cli
+title: Issuing Document (CLI)
+sidebar_label: Issuing Document (CLI)
 ---
 
 In this final step, we will create the transferable record and initialize the first beneficiary and holder for the title escrow.

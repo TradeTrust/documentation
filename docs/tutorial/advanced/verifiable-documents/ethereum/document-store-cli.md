@@ -1,5 +1,5 @@
 ---
-id: document-store
+id: document-store-cli
 title: Deploying Document Store Smart Contract
 sidebar_label: Deploying Document Store
 ---
