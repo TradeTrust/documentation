@@ -35,7 +35,7 @@ Let's go through the steps:
 
 1. Sign up an account with [Netlify](https://app.netlify.com/signup).
 2. If you need document storage service, sign up an account with [AWS](https://aws.amazon.com/). Otherwise, this step **can be skipped**. Create an s3 bucket on AWS. Create access key ID and secret access key to access this resource. Take note of the bucket name, ID and secrets, we'll need them later.
-3. Clone tradetrust-functions [repo](https://github.com/TradeTrust/tradetrust-functions) on your github. Make sure to spin up a netlify site connected to the cloned github repo.
+3. Fork tradetrust-functions [repo](https://github.com/TradeTrust/tradetrust-functions) on your github. Make sure to spin up a netlify site connected to the forked github repo.
 4. You should have a random site name allocated to your netlify site. You can edit site name to whichever name you want. For our example, we have renamed it to `tradetrust-functions.netlify.app`.
    ![tt functions](/docs/reference/tradetrust-website/tt-functions.png)
 5. Populate your environment variables on netlify site settings.

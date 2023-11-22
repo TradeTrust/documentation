@@ -4,7 +4,7 @@ title: Version 2
 sidebar_label: Version 2
 ---
 
-The OpenAttestation v2.0 defines the shape of data for the `raw document` - the data before the wrapping process. It is defined in [JSON Schema](https://json-schema.org/) format. The official OpenAttestation v2.0 schema can be found [here](https://schema.openattestation.com/2.0/schema.json). Let's look at a simple OA v2 document example:
+The document schema v2.0 defines the shape of data for the `raw document` - the data before the wrapping process. It is defined in [JSON Schema](https://json-schema.org/) format. Let's look at a simple v2 document example:
 
 ```json
 {

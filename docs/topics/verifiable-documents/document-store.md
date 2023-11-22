@@ -12,6 +12,8 @@ The primary functions of the smart contract, but not limited to, include:
 - Revoke (revoke, bulkRevoke)
 - Check (isIssued, isRevoked)
 
+![name](/docs/topics/verifiable-documents/document-store.png)
+
 The document store holds 2 mappings, one for issuance and another for revocation.
 
 The issuance mapping holds the hash and the corresponding block number of the transaction.
