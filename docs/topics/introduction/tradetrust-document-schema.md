@@ -4,7 +4,7 @@ title: TradeTrust document schema
 sidebar_label: TradeTrust document schema
 ---
 
-To explain on document schema, we will use a sample document. For this example, an invoice document scenario. As of today we are using schema version 2, there is an alpha version 4 which is more aligned with w3c VC data model. Find out more from the links at bottom of the page.
+To explain on document schema, we will use a sample document. For this example, an invoice document scenario. As of today we are using schema version 2, there is an [alpha version 4](/docs/topics/technical/document-schema/version-4) which is more aligned with w3c VC data model. Find out more from the links at bottom of the page.
 
 ## Raw document
 

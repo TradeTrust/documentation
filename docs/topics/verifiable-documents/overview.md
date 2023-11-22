@@ -4,22 +4,18 @@ title: Verifiable Document Overview
 sidebar_label: Overview
 ---
 
-<p align="center" width="100%">
-  <figure>
-      <img src='/docs/topics/introduction/what-is-tradetrust/simple-signing.svg' />
-  </figure>
-</p>
+![name](/docs/topics/verifiable-documents/issuance-flow.png)
 
-The fingerprint of the signed TradeTrust file is then committed to a [Document Store](https://github.com/Open-Attestation/document-store) smart contract on the Ethereum Blockchain, which serves as an immutable ledger.
+There are 2 type of verifiable documents, a DNS-TXT issuer method and a DNS-DID/DID issuer method. For the DNS-TXT issuer method, the fingerprint of the wrapped TradeTrust file is then committed to a [Document Store](https://github.com/TradeTrust/document-store) smart contract on the Ethereum Blockchain, which serves as an immutable ledger. For the DNS-DID/DID issuer method, the document is signed instead of being committed to the blockchain.
 
-This signed TradeTrust file is then distributed to recipients, who will be able to verify the file on https://tradetrust.io simply by dragging and dropping it into the Web interface.
+Both the signed and committed TradeTrust file can then be distributed to recipients, who will be able to verify the file on https://tradetrust.io simply by dragging and dropping it into the Web interface.
 
 ### Supported types of Verifiable Document
 
-TradeTrust supports Verifiable Documents in two forms:
+Because of the different types of issuer methods, we have two forms of verifiable documents:
 
-- Ethereum
-- DNS-DID
+- Document Store (DNS-TXT)
+- DNS-DID/DID
 
 ### Commonalities
 

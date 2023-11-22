@@ -4,7 +4,7 @@ title: Issuer method DNS-TXT
 sidebar_label: Issuer method DNS-TXT
 ---
 
-|                                   | DNS-TXT (recommended) | DNS-DID | DID     |
+| Requirement                       | DNS-TXT (recommended) | DNS-DID | DID     |
 | --------------------------------- | --------------------- | ------- | ------- |
 | Domain name needed?               | &check;               | &check; | &cross; |
 | Smart contract deployment needed? | &check;               | &cross; | &cross; |
@@ -17,6 +17,11 @@ The most common records are 'A records', which resolve to IP addresses - this al
 For TradeTrust, we are using the `TXT` type of record, which simply allows us to store textual data. The textual data we store indicates the Document Store / Token Registry that the domain administrator trusts.
 
 By allowing the DNS system to be used as an identity registry, we let domain name owners claim ownership of a Document Store / Token Registry smart contract on the Ethereum / Polygon Blockchain.
+
+| Document type        | Supported |
+| -------------------- | --------- |
+| Verifiable Document  | &check;   |
+| Transferable Records | &check;   |
 
 ## Rationale
 
