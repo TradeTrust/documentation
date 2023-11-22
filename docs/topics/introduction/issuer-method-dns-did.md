@@ -10,9 +10,12 @@ sidebar_label: Issuer method DID / DNS-DID
 | Smart contract deployment needed? | &check;               | &cross; | &cross; |
 | Identifiable issuer?              | &check;               | &check; | &cross; |
 
-Alternatively, as an issuer one can use either `DID` or `DNS-DID` issuer method to verify that they indeed sign over the TradeTrust document.
+Alternatively to DNS-TXT method, as an issuer one can use either `DID` or `DNS-DID` issuer method to verify that they indeed sign over the TradeTrust document.
 
-> This method currently only works for Verifiable Documents.
+| Document type        | Supported |
+| -------------------- | --------- |
+| Verifiable Document  | &check;   |
+| Transferable Records | &cross;   |
 
 ## Rationale
 
@@ -20,7 +23,7 @@ Decentralized identifiers (DIDs) are a new type of identifier that enables verif
 
 ## How it works
 
-When an individual entity creates an etheruem wallet, it is nothing more than a private / public key pair. The public key can be derived from a wallet address and hence the ethereum wallet address becomes the basis for the DID verification.
+When an individual entity creates an etheruem wallet, it is nothing more than a private / public key pair. The public key can be derived from a wallet address and hence the ethereum wallet address becomes the basis for the DID verification. When we use our private key to sign over `merkleRoot` of our TradeTrust document, `proof.signature` is appended. This is the signature that will be verified against with later in [tt-verify](https://github.com/TradeTrust/tt-verify) library. What happens at this end is the DID document will be resolved and retrieved, verify if the signed message hash equates back to etheruem wallet address, ensuring the document was indeed signed by it's private key. This way we know that it is "issued".
 
 Let's look at the `did:ethr` method:
 
@@ -29,6 +32,53 @@ Let's look at the `did:ethr` method:
 - `did` is the DID method prefix.
 - `ethr` signifies the Ethereum-based DID method.
 - `<ethereum-address>` is the Ethereum address of the entity being identified.
+
+Example of a DNS-DID signed document:
+
+```json
+{
+  "version": "https://schema.openattestation.com/2.0/schema.json",
+  "data": {
+    "recipient": {
+      "name": "bf8e3911-c3fc-44af-828b-c3ca206e1f7e:string:John Doe"
+    },
+    "$template": {
+      "name": "a46be53b-a002-461c-a7cf-caaf7777e27b:string:main",
+      "type": "7200491e-c731-43b4-b7c1-74401df1efe0:string:EMBEDDED_RENDERER",
+      "url": "a3c6da71-0398-4925-88e4-8bbdc5bc034d:string:https://tutorial-renderer.openattestation.com"
+    },
+    "issuers": [
+      {
+        "id": "1bcba98a-90c2-4e84-9d78-7d367329423f:string:did:ethr:0x1245e5B64D785b25057f7438F715f4aA5D965733",
+        "name": "11fcbdbc-1937-4899-a9cc-2bfc6bdafa31:string:Demo Issuer",
+        "revocation": {
+          "type": "eb10f23d-4b65-4124-afcb-82b3309468ec:string:NONE"
+        },
+        "identityProof": {
+          "type": "98e739b6-1e5b-4f0e-a858-78e0d5206c3e:string:DNS-DID",
+          "location": "e06d6dbe-41c5-4030-ac28-49ec1edb305d:string:demo-tradetrust.openattestation.com",
+          "key": "c6df4c02-402c-418c-b8ff-5491d9e5f297:string:did:ethr:0x1245e5B64D785b25057f7438F715f4aA5D965733#controller"
+        }
+      }
+    ]
+  },
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash": "26293946d01299ca359ae40bbc3f6a9aef9654bb666331c604c8c1563faa655b",
+    "proof": [],
+    "merkleRoot": "26293946d01299ca359ae40bbc3f6a9aef9654bb666331c604c8c1563faa655b"
+  },
+  "proof": [
+    {
+      "type": "OpenAttestationSignature2018",
+      "created": "2022-10-26T06:19:33.540Z",
+      "proofPurpose": "assertionMethod",
+      "verificationMethod": "did:ethr:0x1245e5B64D785b25057f7438F715f4aA5D965733#controller",
+      "signature": "0x5c18263cc5194605080cffe77f934699d78d63711069cdf9917778ab0316aac1653e00b38537b482b48242bba5f0276f481c50845fce14cc91b4eada9e6a4e461c"
+    }
+  ]
+}
+```
 
 ## Prerequisites
 
@@ -61,9 +111,7 @@ With an etheruem wallet address, you can go to `https://dev.uniresolver.io/1.0/i
 }
 ```
 
-When we use our private key to sign over `merkleRoot` of our TradeTrust document, `proof.signature` is appended. This is the signature that will be verified against with later in [oa-verify](https://github.com/Open-Attestation/oa-verify) library. What happens at this end is the DID document will be resolved and retrieved, verify if the signed message hash equates back to etheruem wallet address, ensuring the document was indeed signed by it's private key.
-
-This method (DID) do not require you to own a domain name. However, please take note that when verifying a Document created from this method, the Issuer will reflect the wallet address which can be cryptic to most users. An example will look like this:
+This method (DID) do not require you to own a domain name. However, please take note that when verifying a document created from this method, the Issuer will reflect the wallet address which can be cryptic to most users. An example will look like this:
 
 ![DID ethr](/docs/introduction/did-ethr.png)
 

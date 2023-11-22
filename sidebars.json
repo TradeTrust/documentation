@@ -53,6 +53,33 @@
       "topics/introduction/what-is-tradetrust",
       "topics/introduction/tradetrust-layer-boundaries",
       "topics/introduction/supported-network",
+      {
+        "label": "Supported types of Documents",
+        "type": "category",
+        "items": [
+          {
+            "label": "Verifiable Documents",
+            "type": "category",
+            "items": ["topics/verifiable-documents/overview", "topics/verifiable-documents/document-store"]
+          },
+          {
+            "label": "Transferable Records",
+            "type": "category",
+            "items": [
+              "topics/transferable-records/overview",
+              "topics/transferable-records/token-registry",
+              {
+                "label": "Title Transfer",
+                "type": "category",
+                "items": [
+                  "topics/transferable-records/title-transfer",
+                  "topics/transferable-records/title-transfer-example"
+                ]
+              }
+            ]
+          }
+        ]
+      },
       "topics/introduction/tradetrust-document-schema",
       {
         "label": "Identifying the Issuer",
@@ -60,35 +87,6 @@
         "items": ["topics/introduction/issuer-method-dns-txt", "topics/introduction/issuer-method-dns-did"]
       },
       "topics/introduction/estimated-cost-for-transactions"
-    ],
-    "Supported types of Documents": [
-      {
-        "label": "Verifiable Documents",
-        "type": "category",
-        "items": [
-          "topics/verifiable-documents/overview",
-          {
-            "type": "category",
-            "label": "Ethereum",
-            "items": ["topics/verifiable-documents/document-store"]
-          }
-        ]
-      },
-      {
-        "label": "Transferable Records",
-        "type": "category",
-        "items": [
-          "topics/transferable-records/token-registry",
-          {
-            "label": "Title Transfer",
-            "type": "category",
-            "items": [
-              "topics/transferable-records/title-transfer",
-              "topics/transferable-records/title-transfer-example"
-            ]
-          }
-        ]
-      }
     ],
     "Verifying of Documents": [
       "topics/verifying-documents/overview",
