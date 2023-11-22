@@ -1,7 +1,7 @@
 ---
-id: revoking-document
-title: Revoking Documents
-sidebar_label: Revoking Documents
+id: revoking-document-cli
+title: Revoking Documents (CLI)
+sidebar_label: Revoking Documents (CLI)
 ---
 
 After issuing a document, you might want to revoke it for any reason:

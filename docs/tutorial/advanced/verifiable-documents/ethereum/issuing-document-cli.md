@@ -1,7 +1,7 @@
 ---
-id: issuing-document
-title: Issuing Documents
-sidebar_label: Issuing Documents
+id: issuing-document-cli
+title: Issuing Documents-cli
+sidebar_label: Issuing Documents (CLI)
 ---
 
 After wrapping the documents and obtaining a merkle root, the documents are ready to be issued on the document store smart contract. To issue a batch of documents, we will use the merkle root that will be appended to the list of issued documents on the document store. This issuance only needs to be done once for all documents in a batch.
