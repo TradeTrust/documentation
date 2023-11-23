@@ -4,6 +4,8 @@ title: Deploying Transferable Record Registry (CLI)
 sidebar_label: Deploying Transferable Record Registry (CLI)
 ---
 
+> For the current step, you can either opt to use the [CLI](/docs/tutorial/transferable-records/token-registry-code) or [Code](/docs/tutorial/transferable-records/token-registry-cli).
+
 The token registry is a smart contract on the Ethereum network that records the ownership information of a transferable record. It is compliant to the [ERC721 standards](https://eips.ethereum.org/EIPS/eip-721).
 
 In this guide, we will deploy a token registry smart contract on the Ethereum `sepolia` network which is a test network that does not require actual ethers for transactions.

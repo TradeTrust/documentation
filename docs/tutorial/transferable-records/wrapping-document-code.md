@@ -4,7 +4,13 @@ title: Wrapping Documents (Code)
 sidebar_label: Wrapping Documents (Code)
 ---
 
-> For the current step, you can either opt to use the [CLI](/docs/tutorial/advanced/verifiable-documents/ethereum/wrapping-document) or [Code](/docs/tutorial/advanced/verifiable-documents/ethereum/wrapping-document-code).
+> For the current step, you can either opt to use the [CLI](/docs/tutorial/transferable-records/wrapping-document-cli) or [Code](/docs/tutorial/transferable-records/wrapping-document-cli).
+
+Every OA document has a checksum that provides it a tamper-proof property. At the same time, because the checksum can be used to uniquely identify a document, the checksum (or its derived value) is stored onto the document store as evidence of issuance. To compute the checksum, a `raw document` goes through a process known as `wrapping` to become a `wrapped document`. Only then, the document is ready to be issued onto the blockchain.
+
+In this guide, we will learn how to generate the checksum by running the `wrapping` process.
+
+A `targetHash`, a 64 character long string prepended with `0x` will be generated. The `targetHash` is the only information that will be stored onto the Blockchain to verify the issuance status of an OA document.
 
 ## Installation
 
@@ -101,8 +107,10 @@ In the scenerio of `wrapDocument`, `signature.merkleRoot` will be the same as `s
 
 To extract the merkle root, refer to the example below
 
+> Save this value for future reference.
+
 ```ts
-const merkleRoot: string = wrappedDocument.signature.merkleRoot;
+const merkleRoot: string = wrappedDocument.signature.targetHash;
 ```
 
-You can now issue the merkle root (`signature.merkleRoot`) to create valid verifiable document.
+You can now issue the merkle root (`signature.merkleRoot`) to create valid transferable document.

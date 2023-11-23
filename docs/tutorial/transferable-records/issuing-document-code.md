@@ -4,192 +4,281 @@ title: Issuing Document (Code)
 sidebar_label: Issuing Document (Code)
 ---
 
-## Installation
+> For the current step, you can either opt to use the [CLI](/docs/tutorial/transferable-records/issuing-document-cli) or [Code](/docs/tutorial/transferable-records/issuing-document-code).
 
-```sh
-npm install --save @govtechsg/token-registry
-```
-
----
+In this final step, we will create the transferable record and initialize the first beneficiary and holder for the title escrow.
 
 ## Usage
 
 To use the package, you will need to provide your own Web3 [provider](https://docs.ethers.io/v5/api/providers/api-providers/) or [signer](https://docs.ethers.io/v5/api/signer/#Wallet) (if you are writing to the blockchain).
 
-Refer to the [pre-requisite](/docs/tutorial/prerequisites-code) on setup instructions.
-
-## Network Configuration
-
-Here's a list of network names currently pre-configured:
-
-- `mainnet` (Ethereum)
-- `sepolia`
-- `polygon` (Polygon Mainnet)
-- `mumbai` (Polygon Mumbai)
-- `xdc` (XDC Network Mainnet)
-- `xdcapothem` (XDC Apothem TestNet)
-
-For unconfigured networks, refer to the token-registry repository on instructions to setting it up, or deploy Token Registry using the Open-Attestation-CLI application
-
-### TradeTrustToken
-
-The `TradeTrustToken` is a Soulbound Token (SBT) tied to the Title Escrow. The SBT implementation is loosely based on OpenZeppelin's implementation of the [ERC721](http://erc721.org/) standard.
-An SBT is used in this case because the token, while can be transferred to the registry, is largely restricted to its designated Title Escrow contracts.
-See issue [#108](https://github.com/Open-Attestation/token-registry/issues/108) for more details.
-
-#### Deploy new token registry
-
-##### Hardhat
-
-To deploy using the Hardhat method, setup the token-registry repository and deploy using the following command.
-
-```
-Usage: hardhat [GLOBAL OPTIONS] deploy:token --factory <STRING> --name <STRING> [--standalone] --symbol <STRING> [--verify]
-
-OPTIONS:
-
-  --factory   	Address of Title Escrow factory (Optional)
-  --name      	Name of the token
-  --standalone	Deploy as standalone token contract
-  --symbol    	Symbol of token
-  --verify    	Verify on Etherscan
-
-deploy:token: Deploys the TradeTrust token
-```
-
-Example:
-
-```
-npx hardhat deploy:token --network mumbai --name "The Great Shipping Co." --symbol GSC
-```
-
-> 💡 Remember to supply the`--network` argument with the name of the network you wish to deploy on.
-> See [Network Configuration](#network-configuration) section for more info on the list of network names.
-
-##### Code Deployment
-
-```ts
-import { TDocDeployer__factory } from "@govtechsg/token-registry/contracts";
-import { constants as TokenRegistryConstants, utils as TokenRegistryUtils } from "@govtechsg/token-registry";
-import { DeploymentEvent } from "@govtechsg/token-registry/dist/contracts/contracts/utils/TDocDeployer";
-
-const privateKey = ""; // insert your private key as generated on wallet creation
-const registryName = "DemoTokenRegistry";
-const registrySymbol = "DTR";
-
-const unconnectedWallet = new Wallet(privateKey);
-const provider = ethers.getDefaultProvider("sepolia");
-const wallet = unconnectedWallet.connect(provider);
-const walletAddress = await wallet.getAddress();
-const chainId = await wallet.getChainId();
-
-const { TokenImplementation, Deployer } = TokenRegistryConstants.contractAddress;
-
-const deployerContract = TDocDeployer__factory.connect(Deployer[chainId], wallet);
-
-const initParam = TokenRegistryUtils.encodeInitParams({
-  name: registryName,
-  symbol: registrySymbol,
-  deployer: walletAddress,
-});
-
-const tx = await deployerContract.deploy(TokenImplementation[chainId], initParam);
-const receipt = await tx.wait();
-const registryAddress = TokenRegistryUtils.getEventFromReceipt<DeploymentEvent>(
-  receipt,
-  deployerContract.interface.getEventTopic("Deployment")
-).args.deployed;
-return { transaction: receipt, contractAddress: registryAddress };
-```
+Refer to the [pre-requisite](/docs/tutorial/transferable-records/token-registry-code) on token registry deployment.
 
 #### Connect to existing token registry
 
 ```ts
 import { TradeTrustToken__factory } from "@govtechsg/token-registry/contracts";
 
-const connectedRegistry = TradeTrustToken__factory.connect(tokenRegistryAddress, signer);
+const privateKey = "";
+const tokenRegistryAddress = "0x7Ae2aE35f66ACE6671CB2bfb985011b0a2d9cf72";
+
+const unconnectedWallet = new Wallet(privateKey);
+const provider = ethers.getDefaultProvider("sepolia");
+const wallet = unconnectedWallet.connect(provider);
+
+const connectedRegistry = TradeTrustToken__factory.connect(tokenRegistryAddress, wallet);
 ```
+
+## Issuing Transferable Records
+
+In the example, we will use 0x6FFeD6E6591b808130a9b248fEA32101b5220eca for as beneficiary and holder. You will need to replace this value with a wallet address you control to be able to perform different actions on the transferable records later.
+
+To issue the transferable record, simply run the following code:
 
 #### Issuing a Document
 
 ```ts
-await connectedRegistry.mint(beneficiaryAddress, holderAddress, tokenId);
+import { TradeTrustToken__factory } from "@govtechsg/token-registry/contracts";
+
+const privateKey = "";
+const tokenRegistryAddress = "0x7Ae2aE35f66ACE6671CB2bfb985011b0a2d9cf72";
+const beneficiary = "0x6FFeD6E6591b808130a9b248fEA32101b5220eca";
+const holder = "0x6FFeD6E6591b808130a9b248fEA32101b5220eca";
+const tokenId = "0x0d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ea";
+
+const unconnectedWallet = new Wallet(privateKey);
+const provider = ethers.getDefaultProvider("sepolia");
+const wallet = unconnectedWallet.connect(provider);
+
+const connectedRegistry = TradeTrustToken__factory.connect(tokenRegistryAddress, wallet);
+const tx = await connectedRegistry.mint(beneficiary, holder, tokenId);
+const receipt = await tx.wait();
+console.log(`Receipt: ${JSON.stringify(receipt)}`);
 ```
 
-#### Restoring a Document
+Note to replace the following values:
 
-```ts
-await connectedRegistry.restore(tokenId);
+- `0x8431012Bc040942B59e3C5bf428221eab0b2f723` with your token registry contract address
+- `0x0d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ea` with your merkle root (with a `0x` prefix)
+- `0x6FFeD6E6591b808130a9b248fEA32101b5220eca` with your beneficiary and holder addresses
+
+Once the document has been issued, you will be able to see an output similar to the following:
+
+```json
+{
+  "to": "0x7Ae2aE35f66ACE6671CB2bfb985011b0a2d9cf72",
+  "from": "0xE94E4f16ad40ADc90C29Dc85b42F1213E034947C",
+  "contractAddress": null,
+  "transactionIndex": 9,
+  "gasUsed": { "type": "BigNumber", "hex": "0x03fadd" },
+  "logsBloom": "0x08000000000000000880000000000000000000000004000000000000000000000000000020000000000000000000000000000000000000000000000000040820000000000000000000000008000000040008400020040000000000000201000008400000020000000000000000000800040000000000000000010010000000000000000040000000000000800000000000000040000000000000400880800000000000000100000400000000000420000000000000001000000000040000000400000002000000000000000000000020000000000000000000000000010060000010000000001000000000000000000000100000000000000000000000000000",
+  "blockHash": "0x0bb04ba3aad9f7e3812b9f2be6f60b1935853506c1bb6dd6aa1b4cd8cd84bdb0",
+  "transactionHash": "0x89e18892a03e3dd1f983a1e3eccaba65fd5b4938cb7926606d682fc7d6030fe6",
+  "logs": [
+    {
+      "transactionIndex": 9,
+      "blockNumber": 4748935,
+      "transactionHash": "0x89e18892a03e3dd1f983a1e3eccaba65fd5b4938cb7926606d682fc7d6030fe6",
+      "address": "0x5aA71Cc9559bC5e54E9504a81496d9F8454721F5",
+      "topics": [
+        "0xb0bd455d052e922edbbe2a529486dc0e6d64ed15f689ed2f018684d5dbfbf994",
+        "0x0000000000000000000000005d2de591aeef0cd3a9c1b73b31693d461d1ef16f",
+        "0x0000000000000000000000007ae2ae35f66ace6671cb2bfb985011b0a2d9cf72",
+        "0x0d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ea"
+      ],
+      "data": "0x",
+      "logIndex": 22,
+      "blockHash": "0x0bb04ba3aad9f7e3812b9f2be6f60b1935853506c1bb6dd6aa1b4cd8cd84bdb0"
+    },
+    {
+      "transactionIndex": 9,
+      "blockNumber": 4748935,
+      "transactionHash": "0x89e18892a03e3dd1f983a1e3eccaba65fd5b4938cb7926606d682fc7d6030fe6",
+      "address": "0x7Ae2aE35f66ACE6671CB2bfb985011b0a2d9cf72",
+      "topics": [
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+        "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "0x0000000000000000000000005d2de591aeef0cd3a9c1b73b31693d461d1ef16f",
+        "0x0d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ea"
+      ],
+      "data": "0x",
+      "logIndex": 23,
+      "blockHash": "0x0bb04ba3aad9f7e3812b9f2be6f60b1935853506c1bb6dd6aa1b4cd8cd84bdb0"
+    },
+    {
+      "transactionIndex": 9,
+      "blockNumber": 4748935,
+      "transactionHash": "0x89e18892a03e3dd1f983a1e3eccaba65fd5b4938cb7926606d682fc7d6030fe6",
+      "address": "0x5D2de591aEef0cd3a9c1b73B31693d461d1ef16F",
+      "topics": [
+        "0x07d0a1a2d5c465ecdf26fb8dda217b10270d8e11ff892df33f73ea690b8cd9b4",
+        "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "0x0000000000000000000000008d366250a96debe81c8619459a503a0eebe33ca6"
+      ],
+      "data": "0x0000000000000000000000007ae2ae35f66ace6671cb2bfb985011b0a2d9cf720d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ec",
+      "logIndex": 24,
+      "blockHash": "0x0bb04ba3aad9f7e3812b9f2be6f60b1935853506c1bb6dd6aa1b4cd8cd84bdb0"
+    },
+    {
+      "transactionIndex": 9,
+      "blockNumber": 4748935,
+      "transactionHash": "0x89e18892a03e3dd1f983a1e3eccaba65fd5b4938cb7926606d682fc7d6030fe6",
+      "address": "0x5D2de591aEef0cd3a9c1b73B31693d461d1ef16F",
+      "topics": [
+        "0x88a734f529b322845e21a8ea2512c4fd613d73ef43deb62d5c790a1b8037bd21",
+        "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "0x0000000000000000000000000000000000000000000000000000000000000000"
+      ],
+      "data": "0x0000000000000000000000007ae2ae35f66ace6671cb2bfb985011b0a2d9cf720d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ec",
+      "logIndex": 25,
+      "blockHash": "0x0bb04ba3aad9f7e3812b9f2be6f60b1935853506c1bb6dd6aa1b4cd8cd84bdb0"
+    },
+    {
+      "transactionIndex": 9,
+      "blockNumber": 4748935,
+      "transactionHash": "0x89e18892a03e3dd1f983a1e3eccaba65fd5b4938cb7926606d682fc7d6030fe6",
+      "address": "0x5D2de591aEef0cd3a9c1b73B31693d461d1ef16F",
+      "topics": [
+        "0xfebadd5e06bc3e2885248448caca94df39be7cf7fde139b4586ac7b92dfe70b2",
+        "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "0x0000000000000000000000008d366250a96debe81c8619459a503a0eebe33ca6"
+      ],
+      "data": "0x0000000000000000000000007ae2ae35f66ace6671cb2bfb985011b0a2d9cf720d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ec",
+      "logIndex": 26,
+      "blockHash": "0x0bb04ba3aad9f7e3812b9f2be6f60b1935853506c1bb6dd6aa1b4cd8cd84bdb0"
+    },
+    {
+      "transactionIndex": 9,
+      "blockNumber": 4748935,
+      "transactionHash": "0x89e18892a03e3dd1f983a1e3eccaba65fd5b4938cb7926606d682fc7d6030fe6",
+      "address": "0x5D2de591aEef0cd3a9c1b73B31693d461d1ef16F",
+      "topics": [
+        "0xeac1fdedeedd55f76e4c4a4b9a1b485e1f324cccf90f5aac11af3eb172876049",
+        "0x0000000000000000000000008d366250a96debe81c8619459a503a0eebe33ca6",
+        "0x0000000000000000000000008d366250a96debe81c8619459a503a0eebe33ca6",
+        "0x0000000000000000000000000000000000000000000000000000000000000001"
+      ],
+      "data": "0x0000000000000000000000007ae2ae35f66ace6671cb2bfb985011b0a2d9cf720d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ec",
+      "logIndex": 27,
+      "blockHash": "0x0bb04ba3aad9f7e3812b9f2be6f60b1935853506c1bb6dd6aa1b4cd8cd84bdb0"
+    }
+  ],
+  "blockNumber": 4748935,
+  "confirmations": 1,
+  "cumulativeGasUsed": { "type": "BigNumber", "hex": "0x153a51" },
+  "effectiveGasPrice": { "type": "BigNumber", "hex": "0x5e71b3ff" },
+  "status": 1,
+  "type": 2,
+  "byzantium": true,
+  "events": [
+    {
+      "transactionIndex": 9,
+      "blockNumber": 4748935,
+      "transactionHash": "0x89e18892a03e3dd1f983a1e3eccaba65fd5b4938cb7926606d682fc7d6030fe6",
+      "address": "0x5aA71Cc9559bC5e54E9504a81496d9F8454721F5",
+      "topics": [
+        "0xb0bd455d052e922edbbe2a529486dc0e6d64ed15f689ed2f018684d5dbfbf994",
+        "0x0000000000000000000000005d2de591aeef0cd3a9c1b73b31693d461d1ef16f",
+        "0x0000000000000000000000007ae2ae35f66ace6671cb2bfb985011b0a2d9cf72",
+        "0x0d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ea"
+      ],
+      "data": "0x",
+      "logIndex": 22,
+      "blockHash": "0x0bb04ba3aad9f7e3812b9f2be6f60b1935853506c1bb6dd6aa1b4cd8cd84bdb0"
+    },
+    {
+      "transactionIndex": 9,
+      "blockNumber": 4748935,
+      "transactionHash": "0x89e18892a03e3dd1f983a1e3eccaba65fd5b4938cb7926606d682fc7d6030fe6",
+      "address": "0x7Ae2aE35f66ACE6671CB2bfb985011b0a2d9cf72",
+      "topics": [
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+        "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "0x0000000000000000000000005d2de591aeef0cd3a9c1b73b31693d461d1ef16f",
+        "0x0d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ea"
+      ],
+      "data": "0x",
+      "logIndex": 23,
+      "blockHash": "0x0bb04ba3aad9f7e3812b9f2be6f60b1935853506c1bb6dd6aa1b4cd8cd84bdb0",
+      "args": [
+        "0x0000000000000000000000000000000000000000",
+        "0x5D2de591aEef0cd3a9c1b73B31693d461d1ef16F",
+        { "type": "BigNumber", "hex": "0x0d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ea" }
+      ],
+      "event": "Transfer",
+      "eventSignature": "Transfer(address,address,uint256)"
+    },
+    {
+      "transactionIndex": 9,
+      "blockNumber": 4748935,
+      "transactionHash": "0x89e18892a03e3dd1f983a1e3eccaba65fd5b4938cb7926606d682fc7d6030fe6",
+      "address": "0x5D2de591aEef0cd3a9c1b73B31693d461d1ef16F",
+      "topics": [
+        "0x07d0a1a2d5c465ecdf26fb8dda217b10270d8e11ff892df33f73ea690b8cd9b4",
+        "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "0x0000000000000000000000008d366250a96debe81c8619459a503a0eebe33ca6"
+      ],
+      "data": "0x0000000000000000000000007ae2ae35f66ace6671cb2bfb985011b0a2d9cf720d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ec",
+      "logIndex": 24,
+      "blockHash": "0x0bb04ba3aad9f7e3812b9f2be6f60b1935853506c1bb6dd6aa1b4cd8cd84bdb0"
+    },
+    {
+      "transactionIndex": 9,
+      "blockNumber": 4748935,
+      "transactionHash": "0x89e18892a03e3dd1f983a1e3eccaba65fd5b4938cb7926606d682fc7d6030fe6",
+      "address": "0x5D2de591aEef0cd3a9c1b73B31693d461d1ef16F",
+      "topics": [
+        "0x88a734f529b322845e21a8ea2512c4fd613d73ef43deb62d5c790a1b8037bd21",
+        "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "0x0000000000000000000000000000000000000000000000000000000000000000"
+      ],
+      "data": "0x0000000000000000000000007ae2ae35f66ace6671cb2bfb985011b0a2d9cf720d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ec",
+      "logIndex": 25,
+      "blockHash": "0x0bb04ba3aad9f7e3812b9f2be6f60b1935853506c1bb6dd6aa1b4cd8cd84bdb0"
+    },
+    {
+      "transactionIndex": 9,
+      "blockNumber": 4748935,
+      "transactionHash": "0x89e18892a03e3dd1f983a1e3eccaba65fd5b4938cb7926606d682fc7d6030fe6",
+      "address": "0x5D2de591aEef0cd3a9c1b73B31693d461d1ef16F",
+      "topics": [
+        "0xfebadd5e06bc3e2885248448caca94df39be7cf7fde139b4586ac7b92dfe70b2",
+        "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "0x0000000000000000000000008d366250a96debe81c8619459a503a0eebe33ca6"
+      ],
+      "data": "0x0000000000000000000000007ae2ae35f66ace6671cb2bfb985011b0a2d9cf720d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ec",
+      "logIndex": 26,
+      "blockHash": "0x0bb04ba3aad9f7e3812b9f2be6f60b1935853506c1bb6dd6aa1b4cd8cd84bdb0"
+    },
+    {
+      "transactionIndex": 9,
+      "blockNumber": 4748935,
+      "transactionHash": "0x89e18892a03e3dd1f983a1e3eccaba65fd5b4938cb7926606d682fc7d6030fe6",
+      "address": "0x5D2de591aEef0cd3a9c1b73B31693d461d1ef16F",
+      "topics": [
+        "0xeac1fdedeedd55f76e4c4a4b9a1b485e1f324cccf90f5aac11af3eb172876049",
+        "0x0000000000000000000000008d366250a96debe81c8619459a503a0eebe33ca6",
+        "0x0000000000000000000000008d366250a96debe81c8619459a503a0eebe33ca6",
+        "0x0000000000000000000000000000000000000000000000000000000000000001"
+      ],
+      "data": "0x0000000000000000000000007ae2ae35f66ace6671cb2bfb985011b0a2d9cf720d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ec",
+      "logIndex": 27,
+      "blockHash": "0x0bb04ba3aad9f7e3812b9f2be6f60b1935853506c1bb6dd6aa1b4cd8cd84bdb0"
+    }
+  ]
+}
 ```
 
-#### Accept/Burn a Document
+Congratulation, you have successfully created your first transferable record.
 
-```ts
-await connectedRegistry.burn(tokenId);
-```
+## Viewing your transferable record
 
-### Title Escrow
+To view your transferable record, simply head over the https://dev.tradetrust.io/ (or https://tradetrust.io/ if you've issued to the Ethereum mainnet). You will be able to drop your transferable record (found in `wrapped-documents` folder) into the dropzone and see something similar to the following:
 
-The Title Escrow contract is used to manage and represent the ownership of a token between a beneficiary and holder.
-During minting, the Token Registry will create and assign a Title Escrow as the owner of that token.
-The actual owners will use the Title Escrow contract to perform their ownership operations.
+![Completed Transferable Record](/docs/tutorial/transferable-records/issuing-transferable-record/completed.png)
 
-#### Connect to Title Escrow
+Notice you are able to click on `Connect Wallet` when logged in to either the beneficiary or holder to gain access to actions to change the ownership of the transferable record.
 
-```ts
-import { TitleEscrow__factory } from "@govtechsg/token-registry/contracts";
+### See Also
 
-const connectedEscrow = TitleEscrow__factory.connect(existingTitleEscrowAddress, signer);
-```
-
-#### Transfer of Beneficiary/Holder
-
-Transferring of beneficiary and holder within the Title Escrow relies on the following methods:
-
-```solidity
-function transferBeneficiary(address beneficiaryNominee) external;
-
-function transferHolder(address newHolder) external;
-
-function transferOwners(address beneficiaryNominee, address newHolder) external;
-
-function nominate(address beneficiaryNominee) external;
-
-```
-
-The `transferBeneficiary` transfers only the beneficiary and `transferHolder` transfers only the holder.
-To transfer both beneficiary and holder in a single transaction, use `transferOwners`. Transfer of beneficiary will require a nomination done through the `nominate` method.
-
-#### Surrendering/Burning a Document
-
-Use the `surrender` method in the Title Escrow.
-
-```solidity
-function surrender() external;
-
-```
-
-Example:
-
-```ts
-await connectedEscrow.surrender();
-```
-
-#### Accessing the Current Owners
-
-The addresses of the current owners can be retrieved from the `beneficiary`, `holder` and `nominee` methods.
-
-Example:
-
-```ts
-const currentBeneficiary = await connectedEscrow.beneficiary();
-
-const currentHolder = await connectedEscrow.holder();
-
-const nominatedBeneficiary = await connectedEscrow.nominee();
-```
-
-## Subgraph
-
-Check out our [Token Registry Subgraph](https://github.com/Open-Attestation/token-registry-subgraph) Github repository
-for more information on using and deploying your own subgraphs for the Token Registry contracts.
+[TradeTrust Website - Overview](/docs/topics/tradetrust-website/overview)

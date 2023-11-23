@@ -6,6 +6,14 @@ sidebar_label: Wrapping Documents (Code)
 
 > For the current step, you can either opt to use the [CLI](/docs/tutorial/verifiable-documents/did/wrapping-document-cli) or [Code](/docs/tutorial/verifiable-documents/did/wrapping-document-code).
 
+Every OA document has a checksum that provides it a tamper-proof property. At the same time, because the checksum can be used to uniquely identify a document, the checksum (or its derived value) is stored onto the document store as evidence of issuance. To compute the checksum, a `raw document` goes through a process known as `wrapping` to become a `wrapped document`. Only then, the document is ready to be issued onto the blockchain.
+
+Multiple documents can be wrapped at the same time in a single batch operation, creating a single checksum for the entire batch of raw documents. This is especially useful when using document store on the Ethereum blockchain to lower the transaction cost and time.
+
+In this guide, we will learn how to generate the checksum by running the `wrapping` process.
+
+At the end of the `wrapping` process, `merkleRoot`, a 64 character long string prepended with `0x` will be generated.
+
 ## Installation
 
 ```bash
@@ -94,7 +102,7 @@ In the scenerio of `wrapDocument`, `signature.merkleRoot` will be the same as `s
 To batch the documents into a single hash, the function `wrapDocuments` can be used.
 
 > Note:
-> Though `wrapDocument` and `wrapDocuments` are both identical but there is a slight difference.
+> Though `wrapDocument` and `wrapDocuments` are almost identical, there is a slight difference.
 >
 > wrapDocument:
 >

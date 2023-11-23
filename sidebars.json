@@ -38,6 +38,7 @@
         "tutorial/transferable-records/wrapping-document-code",
         "tutorial/transferable-records/issuing-document-cli",
         "tutorial/transferable-records/issuing-document-code",
+        "tutorial/transferable-records/title-escrow-code",
         "tutorial/transferable-records/going-further"
       ]
     },

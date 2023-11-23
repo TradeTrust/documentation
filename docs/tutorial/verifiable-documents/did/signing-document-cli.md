@@ -4,6 +4,8 @@ title: Signing Documents (CLI)
 sidebar_label: Signing Documents (CLI)
 ---
 
+> For the current step, you can either opt to use the [CLI](/docs/tutorial/verifiable-documents/did/signing-document-cli) or [Code](/docs/tutorial/verifiable-documents/did/signing-document-code).
+
 After wrapping the documents and obtaining a merkle root, the documents are ready to be signed on the document store smart contract. Each documents will be signed individually, and the proof of the signature will be appended into the signed documents.
 
 ## Signing the documents
