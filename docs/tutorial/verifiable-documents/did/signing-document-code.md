@@ -4,6 +4,10 @@ title: Signing Documents (Code)
 sidebar_label: Signing Documents (Code)
 ---
 
+> For the current step, you can either opt to use the [CLI](/docs/tutorial/verifiable-documents/did/signing-document-cli) or [Code](/docs/tutorial/verifiable-documents/did/signing-document-code).
+
+After wrapping the documents and obtaining a merkle root, the documents are ready to be signed on the document store smart contract. Each documents will be signed individually, and the proof of the signature will be appended into the signed documents.
+
 ## Installation
 
 ```bash
@@ -114,3 +118,15 @@ Signed Document:
   ]
 }
 ```
+
+## Verifying the documents
+
+Head to `dev.tradetrust.io` and drag and drop one of the issued /signed documents. The document will be verified, then displayed.
+
+![Successful verification](/docs/tutorial/verifiable-documents/ethereum/signing-document/verifying.png)
+
+🎉 Congratulations, you have completed the getting started guide to create your own Verifiable Document!
+
+### See Also
+
+[TradeTrust Website - Overview](/docs/topics/tradetrust-website/overview)

@@ -4,6 +4,8 @@ title: Issuing Document (CLI)
 sidebar_label: Issuing Document (CLI)
 ---
 
+> For the current step, you can either opt to use the [CLI](/docs/tutorial/transferable-records/issuing-document-cli) or [Code](/docs/tutorial/transferable-records/issuing-document-code).
+
 In this final step, we will create the transferable record and initialize the first beneficiary and holder for the title escrow.
 
 ## Prerequisite
