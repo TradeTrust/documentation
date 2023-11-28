@@ -24,7 +24,7 @@ In order to properly represent this, we introduce the **Title Escrow** smart con
 
 ### Title Escrow
 
-The Title Escrow has two notable fields:
+The Title Escrow is an immutable contract except for its fields. It has two notable fields:
 
 1. The Owner
 
@@ -32,7 +32,7 @@ The Title Escrow has two notable fields:
 
 #### Owner
 
-The Owner field in every instance of the Title Escrow is determined at time of initialisation and immutable. This means that in order for a Negotiable Title to have a change in Owner, a new Title Escrow instance must be created and have the Token transferred to it.
+Every instance of the Title Escrow consists of the Owner field that can be changed during a transfer.
 
 There are two scenarios in which this can occur.
 
