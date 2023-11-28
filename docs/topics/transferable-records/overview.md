@@ -31,7 +31,7 @@ With these knowledge you will be able to create transferable records according t
 
 The token registry smart contract is deployed by individual transferable records issuers such as the land title registry (for title deed) or shipping lines (for bill of lading). This smart contract replaces the document store smart contract in the previous section. similarly to document store contract, it also has it's identity bound to the issuer using DNS.
 
-The token registry stores the ownership state of the transferable records using a mapping from `document ID` to `owner`. The document ID is the target hash (and merkle root) of the individual OA document created. The owner will be either an externally owned account (EOA) or smart contract address.
+The token registry stores the ownership state of the transferable records using a mapping from `document ID` to `owner`. The document ID (also known as the token ID) is the target hash (and merkle root) of the individual OA document created. The owner will be either an externally owned account (EOA) or smart contract address.
 
 In the overview above, we can see 3 different states of documents:
 
