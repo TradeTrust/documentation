@@ -54,7 +54,7 @@ We will do **endorse change of ownership** first.
 What this command does is it sets the states (holder and owner) of the token to a given address, in this case we will endorse the change of ownership to Charlie.
 
 ```
-open-attestation title-escrow endorse-change-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --newOwner <CHARLIE_ADDRESS> --newHolder <CHARLIE_ADDRESS> -n sepolia --key <ALICE_PTE_KEY>
+tradetrust title-escrow endorse-change-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --newOwner <CHARLIE_ADDRESS> --newHolder <CHARLIE_ADDRESS> -n sepolia --key <ALICE_PTE_KEY>
 ```
 
 If this transaction is mined and successful, the state of the transferable record will be different.
@@ -87,7 +87,7 @@ What this command does is it just sets the holder state to a new address.
 In this case we will set the holder state to `Bob`, owner state remains as `Charlie` address
 
 ```bash
-open-attestation title-escrow change-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --to <TO> -n sepolia --key <CHARLIE_PTE_KEY>
+tradetrust title-escrow change-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --to <TO> -n sepolia --key <CHARLIE_PTE_KEY>
 ```
 
 Do take note that the private key supplied should be that of Charlie instead of Alice since Charlie currently holds and owns the token.
@@ -120,7 +120,7 @@ In this case we will suggest `Alice` to be the new owner.
 Does this lead to any change in state (holder, owner)? The answer is no, not yet.
 
 ```
-open-attestation title-escrow nominate-change-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --newOwner <NEW_OWNER_ADDRESS> -n sepolia --key <CHARLIE_PTE_KEY>
+tradetrust title-escrow nominate-change-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --newOwner <NEW_OWNER_ADDRESS> -n sepolia --key <CHARLIE_PTE_KEY>
 ```
 
 If this action is successful, then an additional action should be present on `Bob`.
@@ -150,7 +150,7 @@ That is what we will do, and we will now perform **endorse transfer of ownership
 What the command does is that it allows `Bob` to allow and complete the nominated change of ownership from `Charlie` to `Alice`.
 
 ```
-open-attestation title-escrow endorse-transfer-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <BOB_PTE_KEY>
+tradetrust title-escrow endorse-transfer-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <BOB_PTE_KEY>
 ```
 
 ---
@@ -175,7 +175,7 @@ If the prev command worked as intended, then the new owner state of the token wi
 we will wrap up this demonstration by changing the holder to `Alice` so we will come full circle.
 
 ```bash
-open-attestation title-escrow change-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --to <TO> -n sepolia --key <BOB_PTE_KEY>
+tradetrust title-escrow change-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --to <TO> -n sepolia --key <BOB_PTE_KEY>
 ```
 
 ---
