@@ -32,7 +32,7 @@ The Title Escrow is an immutable contract except for its fields. It has two nota
 
 #### Owner
 
-Every instance of the Title Escrow consists of the Owner field that can be changed during a transfer.
+Every instance of the Title Escrow consists of the Owner field that changes when a transfer takes place.
 
 There are two scenarios in which this can occur.
 
