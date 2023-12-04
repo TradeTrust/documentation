@@ -19,6 +19,6 @@ The live gas fees and prices on this page are updated every 15s. Data are retrie
 
 <PriceTable type="verifiable" priceFormatOptions={{ maximumSignificantDigits: 3, minimumFractionDigits: 2 }} />
 
-### Transferable Documents
+### Transferable Records
 
 <PriceTable type="transferable" priceFormatOptions={{ maximumSignificantDigits: 3, minimumFractionDigits: 2 }} />

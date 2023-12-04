@@ -1,6 +1,6 @@
 ---
 id: title-transfer
-title: Overview
+title: Title Transfer Overview
 sidebar_label: Overview
 ---
 
@@ -16,7 +16,7 @@ In the case where a **Negotiable Title** has its' Owner changed, this procedure 
 
 ### TradeTrust Contribution
 
-As previously documented under the Token Registry section, we can represent control of a TradeTrust document uniquely and singularly by registering its' hash with the Carrier's token registry. This hash is also known as a **Token ID**. This control will also be referred to as the **Token**.
+As previously documented under the Token Registry section, we can represent control of a TradeTrust document uniquely and singularly by registering its' hash with the Issuer's token registry. This hash is also known as a **Token ID**. This control will also be referred to as the **Token**.
 
 However, as the ERC721 standard only specifies a single mode of ownership, it cannot represent the duality of physical possession and legal ownership.
 
@@ -56,12 +56,12 @@ The Title Escrow makes an allowance for this action to be performed by the Owner
 
 User interface of how EBL is transferred/endorsed/surrendered using Manage Assets. (Note that this only appears for Transferable Record type of documents)
 
-![Manage Asset](/docs/topics/transferable-records/title-transfer/manage-asset.png)
+![Manage Asset](/docs/topics/introduction/transferable-records/title-transfer/manage-asset.png)
 
 ## Summary Table of Actions
 
 <p align="center" width="100%">
   <figure>
-      <img src='/docs/topics/transferable-records/title-transfer/title-escrow-summary.png' />
+      <img src='/docs/topics/introduction/transferable-records/title-transfer/title-escrow-summary.png' />
   </figure>
 </p>
