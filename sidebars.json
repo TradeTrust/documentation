@@ -1,8 +1,7 @@
 {
   "tutorial": [
     "tutorial/introduction",
-    "tutorial/prerequisites-cli",
-    "tutorial/prerequisites-code",
+    "tutorial/prerequisites",
     {
       "type": "category",
       "label": "Verifiable Documents",
@@ -16,10 +15,22 @@
             "tutorial/verifiable-documents/did/create",
             "tutorial/verifiable-documents/did/dns",
             "tutorial/verifiable-documents/did/raw-document",
-            "tutorial/verifiable-documents/did/wrapping-document-cli",
-            "tutorial/verifiable-documents/did/wrapping-document-code",
-            "tutorial/verifiable-documents/did/signing-document-cli",
-            "tutorial/verifiable-documents/did/signing-document-code",
+            {
+              "type": "category",
+              "label": "CLI",
+              "items": [
+                "tutorial/verifiable-documents/did/cli/wrapping-document-cli",
+                "tutorial/verifiable-documents/did/cli/signing-document-cli"
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Code",
+              "items": [
+                "tutorial/verifiable-documents/did/code/wrapping-document-code",
+                "tutorial/verifiable-documents/did/code/signing-document-code"
+              ]
+            },
             "tutorial/verifiable-documents/did/revoking-document"
           ]
         }
@@ -30,15 +41,35 @@
       "label": "Transferable Records",
       "items": [
         "tutorial/transferable-records/overview",
-        "tutorial/transferable-records/token-registry-cli",
-        "tutorial/transferable-records/token-registry-code",
+        {
+          "type": "category",
+          "label": "Deploying Transferable Records",
+          "items": [
+            "tutorial/transferable-records/cli/token-registry-cli",
+            "tutorial/transferable-records/code/token-registry-code"
+          ]
+        },
         "tutorial/transferable-records/dns",
         "tutorial/transferable-records/raw-document",
-        "tutorial/transferable-records/wrapping-document-cli",
-        "tutorial/transferable-records/wrapping-document-code",
-        "tutorial/transferable-records/issuing-document-cli",
-        "tutorial/transferable-records/issuing-document-code",
-        "tutorial/transferable-records/title-escrow-code",
+        {
+          "type": "category",
+          "label": "CLI",
+          "items": [
+            "tutorial/transferable-records/cli/wrapping-document-cli",
+            "tutorial/transferable-records/cli/issuing-document-cli"
+          ]
+        },
+
+        {
+          "type": "category",
+          "label": "Code",
+          "items": [
+            "tutorial/transferable-records/code/wrapping-document-code",
+            "tutorial/transferable-records/code/issuing-document-code",
+            "tutorial/transferable-records/code/title-escrow-code"
+          ]
+        },
+
         "tutorial/transferable-records/going-further"
       ]
     },

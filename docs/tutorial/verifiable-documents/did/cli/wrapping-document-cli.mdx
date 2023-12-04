@@ -4,15 +4,21 @@ title: Wrapping Documents (CLI)
 sidebar_label: Wrapping Documents (CLI)
 ---
 
-> For the current step, you can either opt to use the [CLI](/docs/tutorial/transferable-records/wrapping-document-cli) or [Code](/docs/tutorial/transferable-records/wrapping-document-cli).
+import Flow from "../flow.mdx";
+
+<Flow />
+
+> For the current step, you can either opt to use the [CLI](/docs/tutorial/verifiable-documents/did/cli/wrapping-document-cli) or [Code](/docs/tutorial/verifiable-documents/did/code/wrapping-document-code).
 
 Every OA document has a checksum that provides it a tamper-proof property. At the same time, because the checksum can be used to uniquely identify a document, the checksum (or its derived value) is stored onto the document store as evidence of issuance. To compute the checksum, a `raw document` goes through a process known as `wrapping` to become a `wrapped document`. Only then, the document is ready to be issued onto the blockchain.
+
+Multiple documents can be wrapped at the same time in a single batch operation, creating a single checksum for the entire batch of raw documents. This is especially useful when using document store on the Ethereum blockchain to lower the transaction cost and time.
 
 In this guide, we will learn how to generate the checksum by running the `wrapping` process.
 
 We will use the CLI tool to read all the files in the `raw-documents` folder, wrap them and then output the files in another directory `wrapped-documents`.
 
-A `merkleRoot`, a 64 character long string prepended with `0x` will be generated. The `merkleRoot` is the only information that will be stored onto the Blockchain to verify the issuance status of an OA document.
+A `merkleRoot`, a 64 character long string prepended with `0x` will be generated.
 
 From the folder containing the `raw-documents` folder, run:
 
@@ -31,8 +37,10 @@ At the same time, you will notice that another directory, `wrapped-document`, ha
 wallet.json
 raw-documents
   |-- certificate-1.json
+  |-- certificate-2.json
 wrapped-documents
   |-- certificate-1.json
+  |-- certificate-2.json
 ```
 
 In the `wrapped-document` directory, you will find the wrapped document which can be sent to the recipient later once the `merkleRoot` has been issued to the document store.

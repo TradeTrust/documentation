@@ -4,7 +4,11 @@ title: Wrapping Documents (Code)
 sidebar_label: Wrapping Documents (Code)
 ---
 
-> For the current step, you can either opt to use the [CLI](/docs/tutorial/verifiable-documents/did/wrapping-document-cli) or [Code](/docs/tutorial/verifiable-documents/did/wrapping-document-code).
+import Flow from "../flow.mdx";
+
+<Flow />
+
+> For the current step, you can either opt to use the [CLI](/docs/tutorial/verifiable-documents/did/cli/wrapping-document-cli) or [Code](/docs/tutorial/verifiable-documents/did/code/wrapping-document-code).
 
 Every OA document has a checksum that provides it a tamper-proof property. At the same time, because the checksum can be used to uniquely identify a document, the checksum (or its derived value) is stored onto the document store as evidence of issuance. To compute the checksum, a `raw document` goes through a process known as `wrapping` to become a `wrapped document`. Only then, the document is ready to be issued onto the blockchain.
 
