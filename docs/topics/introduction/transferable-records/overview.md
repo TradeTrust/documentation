@@ -19,12 +19,12 @@ Transferable Records consist of 2 smart contracts, a Token Registry and a Title 
 
 The token registry smart contract is deployed by individual transferable records issuers such as the land title registry (for title deed) or shipping lines (for bill of lading). This smart contract replaces the document store smart contract in the previous section. Similarly to the document store contract, it also has it's identity bound to the issuer using DNS.
 
-The Token Registry stores the ownership state of the transferable records using a mapping from `document ID` to `smart contract address`, where the `document ID` is the target hash (and merkle root) of the individual TradeTrust document and the `smart contract address` will be either an externally owned account (EOA) or a title escrow smart contract address.
+The Token Registry stores the ownership state of the transferable records using a mapping from `document ID` to `smart contract address`, where the `document ID` (also known as the token ID) is the target hash (and merkle root) of the individual TradeTrust document and the `smart contract address` will be a title escrow smart contract address.
 
 In the overview diagram above, we can see 3 different states of documents:
 
 1. An unissued document (`0xaaaa...aaaa`) will have a smart contract address `0x0000...0000`
-2. An issued document (`0xbbbb...bbbb`) will have a smart contract address which is either a EOA or a title escrow smart contract (ie `0x8888...8888`)
+2. An issued document (`0xbbbb...bbbb`) will have a title escrow smart contract (ie `0x8888...8888`)
 3. A surrendered document (`0xcccc...cccc`) will have a smart contract address which is the token registry's address (ie `0x5555...5555`)
 
 ### Title Escrow Smart Contract
