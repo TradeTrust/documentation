@@ -4,24 +4,35 @@ title: Issuer method DNS-TXT
 sidebar_label: Issuer method DNS-TXT
 ---
 
-| Requirement                       | DNS-TXT (recommended) | DNS-DID | DID     |
-| --------------------------------- | --------------------- | ------- | ------- |
-| Domain name needed?               | &check;               | &check; | &cross; |
-| Smart contract deployment needed? | &check;               | &cross; | &cross; |
-| Identifiable issuer?              | &check;               | &check; | &cross; |
+| Requirement                       | DNS-TXT | DNS-DID | DID     |
+| --------------------------------- | ------- | ------- | ------- |
+| Domain name needed?               | &check; | &check; | &cross; |
+| Smart contract deployment needed? | &check; | &cross; | &cross; |
+| Identifiable issuer?              | &check; | &check; | &cross; |
+
+> smart contract deployment is the deployment of either document store smart contract or token registry smart contracts.
 
 In the current implementation of TradeTrust, we are using the Domain Name System (DNS) as the method of issuer identity verification.
 A one-liner introduction to the DNS system can be summarised as: "Phonebook for the Internet". Its primary purpose is to resolve human readable names such as "google.com", or "tradetrust.io", etc. to a set of records.
 The most common records are 'A records', which resolve to IP addresses - this allows network routing to operate over the Internet.
 
-For TradeTrust, we are using the `TXT` type of record, which simply allows us to store textual data. The textual data we store indicates the Document Store / Token Registry that the domain administrator trusts.
+For TradeTrust, we are using the `TXT` type of record, which simply allows us to store textual data. The textual data we store indicates the deployed Document Store / Token Registry address that the domain administrator trusts.
 
 By allowing the DNS system to be used as an identity registry, we let domain name owners claim ownership of a Document Store / Token Registry smart contract on the Ethereum / Polygon Blockchain.
 
-| Document type        | Supported |
-| -------------------- | --------- |
-| Verifiable Document  | &check;   |
-| Transferable Records | &check;   |
+:::note
+
+Please take note of the document types that supports this method of identifying the issuer.
+
+| Document type        | Support DNS-TXT |
+| -------------------- | --------------- |
+| Verifiable Document  | &check;         |
+| Transferable Records | &check;         |
+
+Not sure which type of document to use?
+Have a better understanding about our different document types: [verifiable documents](/docs/topics/introduction/verifiable-documents/overview) and [Transferable Records](/docs/topics/introduction/transferable-records/overview).
+
+:::
 
 ## Rationale
 
@@ -43,8 +54,8 @@ A deeper technical discussion of this topic can be found at [OpenAttestation DNS
 
 ## Deployment of smart contracts
 
-- How to deploy [Document Store](/docs/tutorial/verifiable-documents/ethereum/document-store).
-- How to deploy [Token Registry](/docs/tutorial/transferable-records/token-registry).
+- How to deploy [Document Store](/docs/tutorial/advanced/verifiable-documents/ethereum/document-store-cli).
+- How to deploy [Token Registry](/docs/tutorial/transferable-records/token-registry-cli).
 
 ## How to create DNS TXT Record
 
@@ -84,12 +95,16 @@ An example of a valid `TXT` record for Ethereum `mainnet` network is as shown:
 | ---- | --------------------- | ------------------------------------------------------------------------------- |
 | TXT  | sandbox.tradetrust.io | "openatts net=ethereum netId=1 addr=0x9db35C07350e9a16C828dAda37fd9c2923c75812" |
 
-The `netId` corresponds to the [chain ID for the different Ethereum networks](https://chainid.network/). We generally use only the following networks:
+The `netId` corresponds to the [chain ID for the different Ethereum networks](https://chainid.network/). Here is a list of TradeTrust supported networks:
 
-| Chain ID   | Name                     | Network   |
-| ---------- | ------------------------ | --------- |
-| `1`        | Ethereum Mainnet         | `mainnet` |
-| `11155111` | Ethereum Testnet Sepolia | `sepolia` |
+| Chain ID   | netID      | Name                     | Network Name |
+| ---------- | ---------- | ------------------------ | ------------ |
+| `1`        | `1`        | Ethereum Mainnet         | `homestead`  |
+| `11155111` | `11155111` | Ethereum Sepolia Testnet | `sepolia`    |
+| `137`      | `137`      | Polygon Mainnet          | `matic`      |
+| `80001`    | `80001`    | Polygon Mumbai Testnet   | `maticmum`   |
+| `50`       | `50`       | XDC Mainnet              | `XDC`        |
+| `51`       | `51`       | XDC Apothem Testnet      | `xdcapothem` |
 
 ### Testing the DNS Record
 

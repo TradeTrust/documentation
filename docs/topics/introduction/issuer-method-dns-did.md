@@ -4,18 +4,29 @@ title: Issuer method DID / DNS-DID
 sidebar_label: Issuer method DID / DNS-DID
 ---
 
-|                                   | DNS-TXT (recommended) | DNS-DID | DID     |
-| --------------------------------- | --------------------- | ------- | ------- |
-| Domain name needed?               | &check;               | &check; | &cross; |
-| Smart contract deployment needed? | &check;               | &cross; | &cross; |
-| Identifiable issuer?              | &check;               | &check; | &cross; |
+| Requirement                       | DNS-TXT | DNS-DID | DID     |
+| --------------------------------- | ------- | ------- | ------- |
+| Domain name needed?               | &check; | &check; | &cross; |
+| Smart contract deployment needed? | &check; | &cross; | &cross; |
+| Identifiable issuer?              | &check; | &check; | &cross; |
+
+> smart contract deployment is the deployment of either document store smart contract or token registry smart contracts.
 
 Alternatively to DNS-TXT method, as an issuer one can use either `DID` or `DNS-DID` issuer method to verify that they indeed sign over the TradeTrust document.
 
-| Document type        | Supported |
-| -------------------- | --------- |
-| Verifiable Document  | &check;   |
-| Transferable Records | &cross;   |
+:::note
+
+Please take note of the document types that supports this method of identifying the issuer.
+
+| Document type        | Support DID / DNS-DID |
+| -------------------- | --------------------- |
+| Verifiable Document  | &check;               |
+| Transferable Records | &cross;               |
+
+Not sure which type of document to use?
+Have a better understanding about our different document types: [verifiable documents](/docs/topics/introduction/verifiable-documents/overview) and [Transferable Records](/docs/topics/introduction/transferable-records/overview).
+
+:::
 
 ## Rationale
 

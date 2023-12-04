@@ -80,20 +80,24 @@
           {
             "label": "Verifiable Documents",
             "type": "category",
-            "items": ["topics/verifiable-documents/overview", "topics/verifiable-documents/document-store"]
+            "items": [
+              "topics/introduction/verifiable-documents/overview",
+              "topics/introduction/verifiable-documents/document-store",
+              "topics/introduction/verifiable-documents/did"
+            ]
           },
           {
             "label": "Transferable Records",
             "type": "category",
             "items": [
-              "topics/transferable-records/overview",
-              "topics/transferable-records/token-registry",
+              "topics/introduction/transferable-records/overview",
+              "topics/introduction/transferable-records/token-registry",
               {
                 "label": "Title Transfer",
                 "type": "category",
                 "items": [
-                  "topics/transferable-records/title-transfer",
-                  "topics/transferable-records/title-transfer-example"
+                  "topics/introduction/transferable-records/title-transfer",
+                  "topics/introduction/transferable-records/title-transfer-example"
                 ]
               }
             ]

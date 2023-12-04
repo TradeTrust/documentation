@@ -3,7 +3,7 @@ require("dotenv").config();
 const GA_MEASUREMENT_ID = "G-Z4JTBB0GN7";
 
 const siteConfig = {
-  title: "TradeTrust Developer Hub",
+  title: "TradeTrust Documentation",
   tagline:
     "Integrate TradeTrust framework in your apps to future-ready your digital infrastructure for electronic trade documents.",
   url: "https://www.tradetrust.io",
