@@ -34,36 +34,29 @@ Have a better understanding about our different document types: [verifiable docu
 
 :::
 
-## Rationale
+## Hands-on Creating a DNS-TXT Record
 
-The DNS system is a key part of Internet infrastructure, and is a decentralised system - this means that there is a low barrier to entry and does not have a single point of failure. It allows issuers to simply tie their issuance to their domain name, (e.g `example.openattestation.com`). When a user views a document issued under this model, they will see "Document issued by `example.openattestation.com`". Only domain name owners (and the registrar that they trust) have the authority to make changes to the records associated with that domain name. Thus when a DNS record endorses a certain fact, it transitively asserts that this fact is believed to be true by the domain name owner.
+Before we start creating the DNS-TXT records, please take note that this method **requires** ethers/matic (cryptocurrency) to begin.
+Also, please make sure you have completed the prerequisites listed below.
 
-## How it works
-
-Under [IETF RFC 1464](https://tools.ietf.org/html/rfc1464), it is possible to store arbitrary string attributes as part of a domain's record set. This method is currently widely used for [email server authentication](https://en.wikipedia.org/wiki/Email_authentication) (SPF, DMARC, DKIM). Our DNS identity proof technique was largely inspired by [Keybase DNS proofs](https://github.com/keybase/keybase-issues/issues/367).
-
-In a OpenAttestation DNS-TXT identity proof, we record a Document Store / Token Registry address and the network (e.g Ethereum, Main Net) it is on. In the TradeTrust document itself, we declare the domain name to search for the record as well as the Document Store Ethereum address. This forms a bi-directional trust assertion, and if the Document's cryptographic proof is issued on that Document Store / Token Registry - we can say that the domain name owner has endorsed the issuance of this document.
-
-A deeper technical discussion of this topic can be found at [OpenAttestation DNS-TXT Architecture Decision Record](https://github.com/Open-Attestation/adr/blob/master/decentralized_identity_proof_DNS-TXT.md)
-
-## Prerequisites
+### Prerequisites
 
 - A deployed Document Store / Token Registry.
 - Domain name.
 - Edit access to your domain's DNS records.
 
-## Deployment of smart contracts
+#### Deployment of smart contracts
 
 - How to deploy [Document Store](/docs/tutorial/advanced/verifiable-documents/ethereum/document-store-cli).
 - How to deploy [Token Registry](/docs/tutorial/transferable-records/token-registry-cli).
 
-## How to create DNS TXT Record
+### How to create DNS-TXT Record
 
 As an issuer, you will need to add a DNS TXT record to your domain name. The exact steps to achieve this can be confirmed with your domain name registrar, this is usually achieved through your domain administration web UI.
 
 To bind the domain name to the issuer's identity, you must be able to change the DNS record of the domain name.
 
-## Inserting the DNS Record
+### Inserting the DNS Record
 
 You will need to add a DNS `TXT` record to your domain name. The exact steps to achieve this can be confirmed with your domain registrar, this is usually achieved through your domain registrar or DNS provider's web UI.
 
@@ -112,7 +105,7 @@ After adding the `TXT` record, we recommend you to check that the record has bee
 
 > The DNS propagation should take a few minutes, though in some cases you may need to wait up to 24 hours. Continue with the other parts of the guide while waiting for DNS to propagate.
 
-## Additional Note for Adding DNS `TXT` Records
+### Additional Note for Adding DNS `TXT` Records
 
 Below is a list of guides provided by some of the common domain registrars and DNS providers. This list is by no means comprehensive.
 

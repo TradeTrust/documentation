@@ -10,7 +10,7 @@ The hype over NFTs...
 
 <p align="center" width="100%">
   <figure>
-      <img src='/docs/reference/appendix/non-fungible-token/nyan-cat.jpeg' width="300" />
+      <img src='/docs/appendix/non-fungible-token/nyan-cat.jpeg' width="300" />
       <figcaption><i><a href="https://www.nytimes.com/2021/02/22/business/nft-nba-top-shot-crypto.html">Nyan Cat</a> sold for $580,000</i></figcaption>
   </figure>
 </p>
@@ -50,7 +50,7 @@ Two simple illustrations are shown below for a clearer representation of how the
 
 <p align="center" width="100%">
   <figure>
-      <img src='/docs/reference/appendix/non-fungible-token/tradetrust-nft-1.png' />
+      <img src='/docs/appendix/non-fungible-token/tradetrust-nft-1.png' />
       <figcaption><i>Illustration 1</i></figcaption>
   </figure>
 </p>
@@ -59,7 +59,7 @@ In _Illustration 1_, there are two documents, the bill of lading which indicates
 
 <p align="center" width="100%">
   <figure>
-      <img src='/docs/reference/appendix/non-fungible-token/tradetrust-nft-2.png' />
+      <img src='/docs/appendix/non-fungible-token/tradetrust-nft-2.png' />
       <figcaption><i>Illustration 2</i></figcaption>
   </figure>
 </p>

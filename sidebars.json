@@ -42,6 +42,7 @@
         "tutorial/transferable-records/going-further"
       ]
     },
+    "tutorial/decentralised-renderer/decentralised-renderer",
     {
       "type": "category",
       "label": "Advanced",
@@ -117,14 +118,6 @@
       "topics/verifying-documents/issuer-identity",
       "topics/verifying-documents/issuance-status",
       "topics/verifying-documents/document-integrity"
-    ],
-    "Technical": [
-      {
-        "label": "Document schema",
-        "type": "category",
-        "items": ["topics/technical/document-schema/version-2", "topics/technical/document-schema/version-4"]
-      },
-      "topics/technical/decentralised-renderer"
     ],
     "Advanced": [
       "topics/advanced/alternative-ledgers",

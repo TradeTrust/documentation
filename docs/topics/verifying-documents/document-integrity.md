@@ -4,11 +4,11 @@ title: Document Integrity
 sidebar_label: Document Integrity
 ---
 
-TradeTrust ensures that the content of the document has not been modified since the document has been created, with exception of data removed using the built-in [obfuscation mechanism](/docs/developer-section/libraries/remote-files/open-attestation#obfuscating-data). Let's explore how it works.
+TradeTrust ensures that the content of the document has not been modified since the document has been created, with exception of data removed using the built-in [obfuscation mechanism](#obfuscation-mechanism). Let's explore how it works.
 
-In the tutorial, we have learnt how to [wrap a document](/docs/integrator-section/verifiable-document/ethereum/wrapping-document) and [issue it](/docs/integrator-section/verifiable-document/ethereum/issuing-document) into a document store. However, we didn't explain what these actions were doing and why they are necessary.
+In the tutorial section, we have learnt how to [wrap a document](/docs/) and [issue it](/docs/) into a document store. However, we didn't explain what these actions were doing and why they are necessary.
 
-## Wrapping a document
+### Wrapping a document
 
 As a reminder, wrapping a document works on JSON object. A single wrapped document will look like this:
 
@@ -42,9 +42,9 @@ A few interesting transformations happened that we will dive into below:
 - A `data` key has been created and its value holds the contents of the file previously provided when wrapping, along with some weird-looking extra (hexadecimal) data.
 - A `signature` object has been created.
 
-> The above example is a [V2 schema](/docs/topics/technical/document-schema/version-2) document. There is a [V4 alpha schema](/docs/topics/technical/document-schema/version-4) in the works too.
+> The above example is a [V2 schema](/docs/) document. There is a [V4 alpha schema](/docs/) in the works too.
 
-### The `data` object
+#### The `data` object
 
 The first step of wrapping consists of transforming all the object properties provided as input using the following algorithm:
 
@@ -55,11 +55,9 @@ The first step of wrapping consists of transforming all the object properties pr
 
 > The shape of the input object remains untouched.
 
-### The `signature` object
+#### The `signature` object
 
-#### targetHash
-
-See [issuance status](/docs/docs-section/how-does-it-work/issuance-status#merkleroot).
+##### targetHash - see [issuance status](/docs/docs-section/how-does-it-work/issuance-status#merkleroot) for more information.
 
 Once the `data` object has been computed we will be able to create an unique hash for the document that we will set into `targetHash`:
 
@@ -73,12 +71,12 @@ Once the `data` object has been computed we will be able to create an unique has
 
 Later on, during verification of the document, the same exact steps are performed again to assert that the contents of the document has not been tampered with. This works as the final `targetHash` will be completely different if any part of the wrapped document is different from the original.
 
-## Selective Redaction
+## Obfuscation mechanism (a.k.a selective redaction)
 
-Due to the way we compute `targetHash`, TradeTrust allows for one to obfuscate data they don't want to make public. For this we can simply compute the hash of a specific field and add it into the documents. Let's try it with the [CLI](/docs/developer-section/libraries/remote-files/open-attestation-cli) and the document above:
+Due to the way we compute `targetHash`, TradeTrust allows for one to obfuscate data they don't want to make public, we call this selective redaction. For this we can simply compute the hash of a specific field and add it into the documents. Let's try it with the [CLI](/docs/) and the document above:
 
 ```bash
-open-attestation filter ./path/to/file.json ./output.json name
+tradetrust filter ./path/to/file.json ./output.json name
 ```
 
 The content of `output.json` will be:
@@ -117,9 +115,9 @@ The `name` field is not available anymore in the `data` object, and the hash ass
 The hash added into `privacy.obfuscatedData` is the one used when computing the [`targetHash`](#targethash). To verify that a document remained untouched, the function computes the `targetHash` of the provided document and compare it to `signature.targetHash`. There is one subtle difference during verification. All the hashes available in `privacy.obfuscatedData` are added to the list of computed hashes. So for verification the steps are as follows:
 
 1. List each properties' path from the `data` object and associate its value.
-1. For each properties' path, compute a hash using the properties' path and value.
-1. Append the hashes from `privacy.obfuscatedData` to the list of computed hashes from the previous step.
-1. Sort all the hashes from the previous step alphabetically and hash them all together: this will provide the `targetHash` of the document.
+2. For each properties' path, compute a hash using the properties' path and value.
+3. Append the hashes from `privacy.obfuscatedData` to the list of computed hashes from the previous step.
+4. Sort all the hashes from the previous step alphabetically and hash them all together: this will provide the `targetHash` of the document.
 
 The only difference with the [`targetHash`](#targethash) computation is the step 3.
 
@@ -127,7 +125,7 @@ The only difference with the [`targetHash`](#targethash) computation is the step
 
 With the help of selective redaction a user can decide to selectively disclose a subset of data he wants to share.
 
-### Selective Redaction limitations
+### Obfuscation limitations
 
 #### Empty objects
 

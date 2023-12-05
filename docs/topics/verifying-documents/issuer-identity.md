@@ -1,10 +1,10 @@
 ---
 id: issuer-identity
-title: Issuer Identity
-sidebar_label: Issuer Identity
+title: Issuer's Identity
+sidebar_label: Issuer's Identity
 ---
 
-TradeTrust uses the Domain Name System (DNS) as the method of issuer identity verification. A one-liner introduction to the DNS system can be summarised as: "Phonebook for the Internet". It's primary purpose is to resolve human readable names such as "google.com", or "tradetrust.com", etc. to a set of records. The most common records are 'A records', which resolve to IP addresses - this allows network routing to operate over the Internet.
+TradeTrust uses 2 methods to verify the issuer's ideneity, the DNS-TXT method and the DNS-DID method. Both methods uses the Domain Name System (DNS). A one-liner introduction to the DNS system can be summarised as: "Phonebook for the Internet". It's primary purpose is to resolve human readable names such as "google.com", or "tradetrust.com", etc. to a set of records. The most common records are 'A records', which resolve to IP addresses - this allows network routing to operate over the Internet.
 
 For TradeTrust, we are using the TXT type of record, which simply allows us to store textual data. The textual data we store indicates the Token Registry / Document Store that the domain administrator trusts.
 
@@ -23,91 +23,3 @@ Only domain name owners (and the registrar that they trust) have the authority t
 In an TradeTrust DNS-TXT identity proof, we record a Token Registry / Document Store address and the network (e.g Ethereum, Main Net) it is on. In the TradeTrust document itself, we declare the domain name to search for the record as well as the Token Registry / Document Store Ethereum address. This forms a bi-directional trust assertion, and if the Document's cryptographic proof is issued on that Token Registry / Document Store - we can say that the domain name owner has endorsed the issuance of this document.
 
 A deeper technical discussion of this topic can be found at [TradeTrust's Decentralised Identity Proof using DNS-TXT Architecture Decision Record](https://github.com/Open-Attestation/adr/blob/master/decentralized_identity_proof_DNS-TXT.md).
-
-## How to create DNS TXT Record
-
-Every OA document's provenance can be verified and traced back to its creator or issuer. This is achieved by embedding an `identityProof` property in the document, which serves as a claim for identity. During the verification phase, the claim is checked against external records.
-
-In this section, we will bind the document issuer's identity to a valid domain name. This domain will be displayed as issuer every time the document is rendered in an OA-compliant decentralized renderer.
-
-## Prerequisites
-
-- Domain name
-- Edit access to your domain's DNS records
-- A Token Registry / Document Store smart contract
-
-To bind the domain name to the issuer's identity, you must be able to change the DNS record of the domain name.
-
-## DNS Record for Ethereum Smart contracts
-
-You will need to add a DNS `TXT` record to your domain name. The exact steps to achieve this can be confirmed with your domain registrar, this is usually achieved through your domain registrar or DNS provider's web UI.
-
-While we have provided [links to guides](#additional-note-for-adding-dns-txt-records) on adding DNS `TXT` records for some common domain registrars and DNS providers, the steps below is a generic procedure for any DNS provider.
-
-### Inserting the DNS Record for DNS-TXT
-
-Select a domain name that you will like to associate with your documents. The domain can either be the root domain (e.g. `tradetrust.com`) or a subdomain (e.g. `issuer.tradetrust.com`). Using the root domain is recommended as it will be easier for viewers of your documents to recognize visually.
-
-Within your domain registrar or DNS provider's web UI, insert a `TXT` record into the DNS in the following format:
-
-| Type | Name        | Value                                                                                    |
-| ---- | ----------- | ---------------------------------------------------------------------------------------- |
-| TXT  | example.com | "openatts net=ethereum netId=11155111 addr=`<TOKEN_REGISTRY_OR_DOCUMENT_STORE_ADDRESS>`" |
-
-The `<TOKEN_REGISTRY_OR_DOCUMENT_STORE_ADDRESS>` in the `Value` field above is the Token Registry / Document Store smart contract address obtained. Please note that the Token Registry / Document Store address needs to be prepended with `addr`.
-
-> The quotes around the value are necessary. They are used to delimit each different records that you might have to be bound to the same domain.
-
-An example of a valid DNS `TXT` record is as shown:
-
-| Type | Name                | Value                                                                                  |
-| ---- | ------------------- | -------------------------------------------------------------------------------------- |
-| TXT  | demo.tradetrust.com | "openatts net=ethereum netId=11155111 addr=0xED2E50434Ac3623bAD763a35213DAD79b43208E4" |
-
-The `netId` corresponds to the [network ID for the different Ethereum networks](https://chainid.network/). We generally use only the following networks:
-
-| Network ID | Name                     | Network   |
-| ---------- | ------------------------ | --------- |
-| `1`        | Ethereum Mainnet         | `mainnet` |
-| `11155111` | Ethereum Testnet Sepolia | `sepolia` |
-
-For more information on switching to production mode, refer to the [Additional Note for Identity Proof in Production](#additional-note-for-identity-proof-in-production) section below.
-
-### Inserting the DNS Record for DID
-
-This is very similar to Ethereum Smart Contracts. Only the shape of the data change.
-Within your domain registrar or DNS provider's web UI, insert a `TXT` record into the DNS in the following format:
-
-| Type | Name        | Value                                   |
-| ---- | ----------- | --------------------------------------- |
-| TXT  | example.com | "openatts a=dns-did; p=`<DID>`; v=1.0;" |
-
-The `<DID>` in the `Value` field above is DID public key id, as resolved by your DID. For instance, check [this DID](https://dev.uniresolver.io/1.0/identifiers/did:ethr:0xaCc51f664D647C9928196c4e33D46fd98FDaA91D). The expected value is `did:ethr:0xaCc51f664D647C9928196c4e33D46fd98FDaA91D#controller`, similar to `didDocument.publicKey[0].id`.
-
-### Testing the DNS Record
-
-![Google DNS to Test](/docs/configuring-dns/google-dns.png)
-
-> The DNS propagation should take a few minutes, though in some cases you may need to wait up to 24 hours. Continue with the other parts of the guide while waiting for DNS to propagate.
-
-After adding the `TXT` record, we recommend you to check that the record has been inserted correctly by viewing with [Google DNS](https://dns.google.com/). Make sure to select `TXT` in the _RR Type_ dropdown.
-
-### Additional Note for Identity Proof in Production
-
-The `TXT` record above is for use for documents issued on the Ethereum `sepolia` network. To bind the identity in production where your documents are issued in the Ethereum `mainnet` network, you will have to change `netId` to `1`.
-
-An example of a valid `TXT` record for Ethereum `mainnet` network is as shown:
-
-| Type | Name                | Value                                                                           |
-| ---- | ------------------- | ------------------------------------------------------------------------------- |
-| TXT  | demo.tradetrust.com | "openatts net=ethereum netId=1 addr=0x9db35C07350e9a16C828dAda37fd9c2923c75812" |
-
-## Additional Note for Adding DNS `TXT` Records
-
-Below is a list of guides provided by some of the common domain registrars and DNS providers. This list is by no means comprehensive.
-
-- [Amazon Route 53](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/dns-txt-records.html)
-- [Cloudflare](https://support.cloudflare.com/hc/en-us/articles/360019093151-Managing-DNS-records-in-Cloudflare)
-- [Name.com](https://www.name.com/support/articles/115004972547-Adding-a-TXT-Record)
-- [Namecheap](https://www.namecheap.com/support/knowledgebase/article.aspx/317/2237/how-do-i-add-txtspfdkimdmarc-records-for-my-domain)
-- [GoDaddy](https://sg.godaddy.com/help/add-a-txt-record-19232)
