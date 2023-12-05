@@ -91,17 +91,22 @@ Example of a DNS-DID signed document:
 }
 ```
 
-## Prerequisites
+## Hands-on Creating a DNS-DID / DID
+
+Before we start creating the DNS-DID / DID, please take note that this method **does not require** any ethers/matic (cryptocurrency) to begin. Which means if you use this method, your verifiable document that you will generate will be free!
+Also, please make sure you have completed the prerequisites listed below.
+
+### Prerequisites
 
 - An etheruem wallet. (DID)
 - Domain name. (DND-DID)
 - Edit access to your domain's DNS records. (DND-DID)
 
-## Creation of wallet
+#### Creation of wallet
 
 - Create a [wallet](/docs/tutorial/verifiable-documents/ethereum/wallet).
 
-### DID
+### Creation of DID
 
 With an etheruem wallet address, you can go to `https://dev.uniresolver.io/1.0/identifiers/did:ethr:<YOUR_WALLET_ADDRESS>`. The returned response is an ethr DID document and it will look something like this:
 
@@ -130,7 +135,7 @@ This method (DID) do not require you to own a domain name. However, please take 
 
 This method concept is the same as `DNS-TXT` method but instead of using a document store or a token registry we tie our DID to a custom txt record that we created in a domain name we own. Refer to below on how to implement.
 
-## How to create DNS-DID Record
+### How to create DNS-DID Record
 
 Make sure you have a wallet, we are only interested in the wallet address. If you do not have an existing wallet, create one by:
 
@@ -168,7 +173,7 @@ Using the above example, the [DID document response for the wallet address](http
 
 As an issuer, you will need to add a custom TXT record to your domain name. The exact steps to achieve this can be confirmed with your domain name registrar, this is usually achieved through your domain administration web UI.
 
-## Inserting the DNS Record for DID
+### Inserting the DNS Record for DID
 
 The following is an example for an issuer:
 

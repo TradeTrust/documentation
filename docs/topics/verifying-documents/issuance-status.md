@@ -10,9 +10,9 @@ TradeTrust checks that the document has been issued and that it's issuance statu
 
 ### Token Registry
 
-The token registry smart contract is deployed by individual transferable records issuers such as the land title registry (for title deed) or shipping lines (for bill of lading). This smart contract replaces the document store smart contract in the previous section. similarly to document store contract, it also has it's identity bound to the issuer using DNS.
+The Token Registry smart contract is deployed by individual transferable records issuers such as the land title registry (for title deed) or shipping lines (for bill of lading). This smart contract replaces the document store smart contract in the previous section. similarly to document store contract, it also has it's identity bound to the issuer using DNS.
 
-The token registry stores the ownership state of the transferable records using a mapping from document ID to owner. The document ID is the target hash (and merkle root) of the individual OA document created. The owner will be either an externally owned account (EOA) or smart contract address.
+The Token Registry stores the ownership state of the transferable records using a mapping from document ID to smart contract address, where the document ID (also known as the token ID) is the target hash (and merkle root) of the individual TradeTrust document and the smart contract address will be a title escrow smart contract address.
 
 ### Document Store
 
@@ -41,16 +41,16 @@ As discussed above, issuance of documents can happen individually or by batch. I
 - `targetHash` will allow for the revocation of a specific document.
 - `merkleRoot` will allow for the revocation of the whole batch of documents.
 
-### Issuance process and verification
+### Issuance and verification process
 
 To issue a document, an institution or individual :
 
 - [Deploys a new document store](/docs/integrator-section/verifiable-document/ethereum/document-store) on Ethereum and get the address of the deployed contract. (this action needs to be performed only once)
 - Adds the address of the deployed contract into the document (before wrapping).
 - Wraps a document (or a batch of documents) and get a `merkleRoot`. The wrapped documents can be shared to the recipients.
-- Issues the `merkleRoot` by calling the `issue` function from the document store contract.
+- Issues the `merkleRoot` by calling the `issue` function from the document store contract, or `mint` function from the token registry contract.
 
-An TradeTrust verifier:
+A TradeTrust verifier:
 
 - Checks the `merkleRoot` of the document has been issued:
 
@@ -85,7 +85,7 @@ An TradeTrust verifier:
   }
   ```
 
-- Checks the `merkleRoot` of the document has been issued:
+- Checks the `merkleRoot` of the document has been revoked:
 
   1. Gets back the document store contract address from the document itself.
   2. Checks the `targetHash` is **not** in the document store provided, by calling the `isRevoked` function from the deployed contract.
@@ -129,13 +129,13 @@ At the moment, TradeTrust only supports one DID method: `ethr`.
 
 ### Issuance
 
-DIDs [are significantly faster and incur not costs](/docs/docs-section/how-does-it-work/comparison). They could directly use the `targetHash` of the document (which is unique) and sign it using the private key associated. However for consistency with our initial design, we sign the `merkleRoot`.
+DIDs are significantly faster and incur not costs. They could directly use the `targetHash` of the document (which is unique) and sign it using the private key associated. However for consistency with our initial design, we sign the `merkleRoot`.
 
 The information about the signature are added to the document, into the `proof` property. That's it, the document has been issued.
 
 Let's dig a bit more to understand how it works.
 
-An [`ethr` DID document](https://dev.uniresolver.io/1.0/identifiers/did:ethr:0x6813Eb9362372EEF6200f3b1dbC3f819671cBA69) looks like ::
+An [`ethr` DID document](https://dev.uniresolver.io/1.0/identifiers/did:ethr:0x6813Eb9362372EEF6200f3b1dbC3f819671cBA69) looks like:
 
 ```json
 {
@@ -191,15 +191,15 @@ If you want to dig more on ECDSA, you can read this guide from [Yos Riady](https
 
 ### Revocation
 
-It's possible to revoke a DID document if a document store has been declared in its revocation block. You can revoke a document [using a document store](/docs/integrator-section/verifiable-document/did/revoking-document).
+It's possible to revoke a DID document if a document store has been declared in its revocation block. You can revoke a document using a document store.
 
 Note that if you do use revocation for `DID`, you still need to have at least 1 transaction with the ethereum blockchain to deploy a `documentStore`, which means `DID` flow is not free anymore.
 
-### Issuance process and verification
+### Issuance and verification process
 
 To issue a document, an institution or individual :
 
-- [Creates a new ethr DID](/docs/integrator-section/verifiable-document/did/create) (this action needs to be performed only once) and get the private key and the public address.
+- Creates a new ethr DID (this action needs to be performed only once) and get the private key and the public address.
 - Adds the DID address and controller into the document (before wrapping).
 - Wraps a document and get a `merkleRoot`.
 - Sign the `merkleRoot` using the private key. The signature must be appended into the wrapped document.

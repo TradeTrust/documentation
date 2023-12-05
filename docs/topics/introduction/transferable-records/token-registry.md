@@ -6,7 +6,7 @@ sidebar_label: Token Registry
 
 The data flow is similar to in the `Verifiable Documents`, but instead of pointing to a [Document Store](https://github.com/Open-Attestation/document-store) smart contract, the TradeTrust document will point to a [Token Registry](https://github.com/Open-Attestation/token-registry) smart contract. This smart contract will follow the interface set forth by ERC721, which allows for the document ownership to be part of the immutable ledger.
 
-Since the fingerprint (merkleroot) of the wrapped TradeTrust file is globally uniquely identifying, the [Token Registry](https://github.com/Open-Attestation/token-registry) provides a mapping of these fingerprints (merkleroot) to either an externally owned account (EOA) or a title escrow smart contract address. Each fingerprint (merkleroot) can only be registered exactly once, and can have only one smart contract address mapped to it. As such, a pair of (Token Registry, Fingerprint) serves as a universally unique (singularity) registry of ownership for that TradeTrust deed.
+Since the fingerprint (merkleroot) of the wrapped TradeTrust file is globally uniquely identifying, the [Token Registry](https://github.com/Open-Attestation/token-registry) provides a mapping of these fingerprints (merkleroot) to a title escrow smart contract address. Each fingerprint (merkleroot) can only be registered exactly once, and can have only one smart contract address mapped to it. As such, a pair of (Token Registry, Fingerprint) serves as a universally unique (singularity) registry of ownership for that TradeTrust deed.
 
 Both of these values are mandatory in a valid, wrapped TradeTrust file and its' integrity is also guaranteed by the TradeTrust framework.
 
