@@ -1,0 +1,32 @@
+```mermaid
+graph TD;
+subgraph Z[" "]
+direction LR
+    A(Overview)-- CLI -->B(Deploying Document Store - CLI);
+    A(Overview)-- Code -->C(Deploying Document Store - Code);
+    B-->D(Configuring DNS);
+    C-->D(Configuring DNS);
+    D-->E(Creating Raw Document)
+    E -- CLI -->F(Wrapping Documents - CLI);
+    E -- Code -->G(Wrapping Documents - Code);
+    F-->H(Issuing Documents - CLI);
+    G-->I(Issuing Documents - Code);
+    H-->J(Revoking Documents - CLI);
+    I-->K(Revoking Documents - Code);
+    J-->L(Going Further);
+    K-->L(Going Further);
+
+    click A href "/docs/tutorial/advanced/verifiable-documents/ethereum/overview"
+    click B href "/docs/tutorial/advanced/verifiable-documents/ethereum/document-store/document-store-cli"
+    click C href "/docs/tutorial/advanced/verifiable-documents/ethereum/document-store/document-store-code"
+    click D href "/docs/tutorial/advanced/verifiable-documents/ethereum/dns-proof"
+    click E href "/docs/tutorial/advanced/verifiable-documents/ethereum/raw-document"
+    click F href "/docs/tutorial/advanced/verifiable-documents/ethereum/wrapping-document/wrapping-document-cli"
+    click G href "/docs/tutorial/advanced/verifiable-documents/ethereum/wrapping-document/wrapping-document-code"
+    click H href "/docs/tutorial/advanced/verifiable-documents/ethereum/issuing-document/issuing-document-cli"
+    click I href "/docs/tutorial/advanced/verifiable-documents/ethereum/issuing-document/issuing-document-code"
+    click J href "/docs/tutorial/advanced/verifiable-documents/ethereum/revoking-document/revoking-document-cli"
+    click K href "/docs/tutorial/advanced/verifiable-documents/ethereum/revoking-document/revoking-document-code"
+    click L href "/docs/tutorial/advanced/verifiable-documents/ethereum/going-further"
+end
+```

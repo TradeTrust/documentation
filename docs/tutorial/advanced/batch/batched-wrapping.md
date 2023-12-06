@@ -2,6 +2,7 @@
 id: batched-wrapping
 title: Batched Wrapping (Code)
 sidebar_label: Batched Wrapping (Code)
+pagination_next: null
 ---
 
 ## Installation

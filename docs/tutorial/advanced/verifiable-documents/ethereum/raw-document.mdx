@@ -2,7 +2,12 @@
 id: raw-document
 title: Creating Raw Document
 sidebar_label: Creating Raw Document
+pagination_next: null
 ---
+
+import Flow from "./flow.mdx";
+
+<Flow />
 
 Every OA document has a checksum that provides it a tamper-proof property. At the same time, because the checksum can be used to uniquely identify a document, the checksum (or its derived value) is stored onto the document store as evidence of issuance. To compute the checksum, a `raw document` goes through a process known as `wrapping` to become a `wrapped document`. Only then, the document is ready to be issued onto the blockchain.
 
@@ -87,3 +92,10 @@ raw-documents
 ```
 
 We are now ready to wrap the documents.
+
+The tutorial will now require you to choose between the following options:
+
+- [CLI](/docs/tutorial/advanced/verifiable-documents/ethereum/wrapping-document/wrapping-document-cli)
+- [Code](/docs/tutorial/advanced/verifiable-documents/ethereum/wrapping-document/wrapping-document-code)
+
+<Flow />
