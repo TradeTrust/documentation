@@ -58,8 +58,8 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
 
 ```
 
-- `"tokenRegistry"` - Update with your token registry. For more information, click [here](/docs/).
-- `"location"` - Update with the Issuer's domain. For more information, click [here](/docs/).
+- `"tokenRegistry"` - Update with your token registry. For more information, click [here](/docs/tutorial/transferable-records/token-registry/token-registry-cli).
+- `"location"` - Update with the Issuer's domain. For more information, click [here](/docs/tutorial/transferable-records/dns).
 - `"blNumber"` - Update with the BL Number, to be displayed accordingly as the image above.
 - `"companyName"` - Update with the Company Name, to be displayed accordingly as the image above.
 - `"field#"` - Update with the Field content, to be displayed accordingly as the image above.

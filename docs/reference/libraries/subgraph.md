@@ -1,12 +1,12 @@
 ---
-id: endorsement-chain-subgraph
-title: Endorsement Chain (Subgraph)
-sidebar_label: Endorsement Chain (Subgraph)
+id: subgraph
+title: Subgraph
+sidebar_label: Subgraph
 ---
 
 # Token Registry Subgraph
 
-> The following information is from the [token-registry-subgraph repository](https://github.com/Open-Attestation/token-registry-subgraph/), refer to the repository for the most recent changes.
+> The following information is from the [token-registry-subgraph repository](https://github.com/TradeTrust/token-registry-subgraph), refer to the repository for the most recent changes.
 
 This subgraph allows anyone to easily query the network for information about the records from and create opportunities for applications to build on top of your Token Registry contracts.
 
@@ -145,7 +145,7 @@ There are many interesting queries that can be made. Here are some example queri
   }
   ```
 - Can I have the complete token transfers (including holder transfers) and approval histories of the document ID `0x0ddba11`? I want to know the beneficiaries and holders that were transferred to and from.
-  > 💡 This query is useful (and also a much easier and elegant way) for building the [endorsement chain](https://docs.tradetrust.io/docs/tradetrust-website/endorsement-chain/) of a document or just trying to retrieve the ownership details of any documents.
+  > 💡 This query is useful (and also a much easier and elegant way) for building the [endorsement chain](/docs/reference/tradetrust-website/endorsement-chain) of a document or just trying to retrieve the ownership details of any documents.
   ```graphql
   {
     tokens(where: { documentId: "0x0ddba11" }) {

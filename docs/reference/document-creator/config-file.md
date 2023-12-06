@@ -212,20 +212,20 @@ Below is an example of the `"defaults"` property:
 },
 ```
 
-- The value of `"$template"` property contains an object that refers to the custom renderer, please refer to [creating document renderer](/docs/reference/configuration/create-custom-renderer).
+- The value of `"$template"` property contains an object that refers to the custom renderer, please refer to [creating document renderer](/docs/tutorial/decentralised-renderer/).
 
 - The value of `"issuers"` property contains an array of the issuer object. The required properties for each issuer are `name`, `identityProof` and one of `documentStore` OR `tokenRegistry`.
 
-_Transferrable document requires a [`tokenRegistry`](/docs/tutorial/transferable-records/token-registry), whereas, a verifiable document requires a [`documentStore`](/docs/tutorial/verifiable-documents/ethereum/document-store)._
+_Transferrable document requires a [`tokenRegistry`](/docs/tutorial/transferable-records/token-registry/token-registry-cli), whereas, a verifiable document requires a [`documentStore`](/docs/)._
 
 - The `"name"` property in the `"issuers"` section is a string, which refers to the name of the token registry or the name of the document store.
-  Please refer to [token registry](/docs/tutorial/transferable-records/token-registry) for transferable document or [deploying document store](/docs/tutorial/verifiable-documents/ethereum/document-store) for verifiable document, for more information.
+  Please refer to [token registry](/docs/tutorial/transferable-records/token-registry/token-registry-cli) for transferable document or [deploying document store](/docs/) for verifiable document, for more information.
 
-- The `"tokenRegistry"` property is a string that is the address for the token registry, please refer to [token registry](/docs/tutorial/transferable-records/token-registry) for more information.
+- The `"tokenRegistry"` property is a string that is the address for the token registry, please refer to [token registry](/docs/tutorial/transferable-records/token-registry/token-registry-cli) for more information.
 
-- The `"documentStore"` property is a string that is the address for the document store, please refer to [deploying document store](/docs/tutorial/verifiable-documents/ethereum/document-store/) for more information.
+- The `"documentStore"` property is a string that is the address for the document store, please refer to [deploying document store](/docs/) for more information.
 
-- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](/docs/reference/configuration/configure-dns/) for more information.
+- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](/docs/tutorial/transferable-records/dns) for more information.
 
 #### V3 document defaults
 
@@ -280,11 +280,11 @@ _Transferrable document requires a [`tokenRegistry`](/docs/tutorial/transferable
 
 - The value of the `"openAttestationMetadata"` properties contains information about the `"template"` and `"proof"`.
 
-- The value of `"template"` property contains an object that refers to the custom renderer, please refer to [creating document renderer](/docs/reference/configuration/create-custom-renderer).
+- The value of `"template"` property contains an object that refers to the custom renderer, please refer to [creating document renderer](/docs/tutorial/decentralised-renderer/).
 
 - The value `"proof"` property contains an object with the necessary information about the `"type"` of proof, `"method"` of proof, `"value"` of the proof method and the `"revocation"` type and status of the document.
 
-- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](/docs/reference/configuration/configure-dns/) for more information.
+- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](/docs/tutorial/transferable-records/dns) for more information.
 
 - The value of the `"credentialSubject"` property is defined as a set of objects that contain one or more properties that are each related to a subject of the verifiable credential.
 
