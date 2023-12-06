@@ -1,0 +1,57 @@
+---
+id: title-escrow-code
+title: Managing Title Escrows (Code)
+sidebar_label: Managing Title Escrows (Code)
+pagination_next: tutorial/transferable-records/going-further
+---
+
+import Flow from "../flow.mdx";
+
+<Flow />
+
+### Title Escrow
+
+The Title Escrow contract is used to manage and represent the ownership of a token between a beneficiary and holder.
+During minting, the Token Registry will create and assign a Title Escrow as the owner of that token.
+The actual owners will use the Title Escrow contract to perform their ownership operations.
+
+#### Retrieving Title Escrow address from Token Registry
+
+```ts
+const privateKey = "";
+const tokenRegistryAddress = "0x7Ae2aE35f66ACE6671CB2bfb985011b0a2d9cf72";
+const tokenId = "0x0d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ea";
+
+const unconnectedWallet = new Wallet(privateKey);
+const provider = ethers.getDefaultProvider("sepolia");
+const wallet = unconnectedWallet.connect(provider);
+
+const connectedRegistry = TradeTrustToken__factory.connect(tokenRegistryAddress, wallet);
+
+const titleEscrowAddress = await connectedRegistry.ownerOf(tokenId);
+console.log(`Title Escrow Address: ${titleEscrowAddress}`);
+
+const connectedEscrow = TitleEscrow__factory.connect(titleEscrowAddress, wallet);
+
+console.log(`isHoldingToken: ${await connectedEscrow.isHoldingToken()}`);
+console.log(`Token Registry: ${await connectedEscrow.registry()}`);
+console.log(`Beneficiary: ${await connectedEscrow.beneficiary()}`);
+console.log(`Holder: ${await connectedEscrow.holder()}`);
+```
+
+Output
+
+Title Escrow Address
+`0x5D2de591aEef0cd3a9c1b73B31693d461d1ef16F`
+
+isHoldingToken
+`true`
+
+Token Registry
+`0x7Ae2aE35f66ACE6671CB2bfb985011b0a2d9cf72`
+
+Beneficiary
+`0x6FFeD6E6591b808130a9b248fEA32101b5220eca`
+
+Holder
+`0x6FFeD6E6591b808130a9b248fEA32101b5220eca`

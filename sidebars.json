@@ -1,8 +1,7 @@
 {
   "tutorial": [
     "tutorial/introduction",
-    "tutorial/prerequisites-cli",
-    "tutorial/prerequisites-code",
+    "tutorial/prerequisites",
     {
       "type": "category",
       "label": "Verifiable Documents",
@@ -16,10 +15,22 @@
             "tutorial/verifiable-documents/did/create",
             "tutorial/verifiable-documents/did/dns",
             "tutorial/verifiable-documents/did/raw-document",
-            "tutorial/verifiable-documents/did/wrapping-document-cli",
-            "tutorial/verifiable-documents/did/wrapping-document-code",
-            "tutorial/verifiable-documents/did/signing-document-cli",
-            "tutorial/verifiable-documents/did/signing-document-code",
+            {
+              "type": "category",
+              "label": "Wrapping Document",
+              "items": [
+                "tutorial/verifiable-documents/did/wrapping-document/wrapping-document-cli",
+                "tutorial/verifiable-documents/did/wrapping-document/wrapping-document-code"
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Signing Document",
+              "items": [
+                "tutorial/verifiable-documents/did/signing-document/signing-document-cli",
+                "tutorial/verifiable-documents/did/signing-document/signing-document-code"
+              ]
+            },
             "tutorial/verifiable-documents/did/revoking-document"
           ]
         }
@@ -30,15 +41,38 @@
       "label": "Transferable Records",
       "items": [
         "tutorial/transferable-records/overview",
-        "tutorial/transferable-records/token-registry-cli",
-        "tutorial/transferable-records/token-registry-code",
+        {
+          "type": "category",
+          "label": "Deploying Transferable Records",
+          "items": [
+            "tutorial/transferable-records/token-registry/token-registry-cli",
+            "tutorial/transferable-records/token-registry/token-registry-code"
+          ]
+        },
         "tutorial/transferable-records/dns",
         "tutorial/transferable-records/raw-document",
-        "tutorial/transferable-records/wrapping-document-cli",
-        "tutorial/transferable-records/wrapping-document-code",
-        "tutorial/transferable-records/issuing-document-cli",
-        "tutorial/transferable-records/issuing-document-code",
-        "tutorial/transferable-records/title-escrow-code",
+
+        {
+          "type": "category",
+          "label": "Wrapping Document",
+          "items": [
+            "tutorial/transferable-records/wrapping-document/wrapping-document-cli",
+            "tutorial/transferable-records/wrapping-document/wrapping-document-code"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Issuing Document",
+          "items": [
+            "tutorial/transferable-records/issuing-document/issuing-document-cli",
+            "tutorial/transferable-records/issuing-document/issuing-document-code"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Title Escrow (Code)",
+          "items": ["tutorial/transferable-records/title-escrow/title-escrow-code"]
+        },
         "tutorial/transferable-records/going-further"
       ]
     },
@@ -52,17 +86,43 @@
           "type": "category",
           "label": "Verifiable Documents (Ethereum)",
           "items": [
-            "tutorial/advanced/verifiable-documents/ethereum/document-store-overview",
-            "tutorial/advanced/verifiable-documents/ethereum/document-store-cli",
-            "tutorial/advanced/verifiable-documents/ethereum/document-store-code",
+            "tutorial/advanced/verifiable-documents/ethereum/overview",
+            {
+              "type": "category",
+              "label": "Issuing Document",
+              "items": [
+                "tutorial/advanced/verifiable-documents/ethereum/document-store/document-store-cli",
+                "tutorial/advanced/verifiable-documents/ethereum/document-store/document-store-code"
+              ]
+            },
             "tutorial/advanced/verifiable-documents/ethereum/dns-proof",
             "tutorial/advanced/verifiable-documents/ethereum/raw-document",
-            "tutorial/advanced/verifiable-documents/ethereum/wrapping-document-cli",
-            "tutorial/advanced/verifiable-documents/ethereum/wrapping-document-code",
-            "tutorial/advanced/verifiable-documents/ethereum/issuing-document-cli",
-            "tutorial/advanced/verifiable-documents/ethereum/issuing-document-code",
-            "tutorial/advanced/verifiable-documents/ethereum/revoking-document-cli",
-            "tutorial/advanced/verifiable-documents/ethereum/revoking-document-code",
+            {
+              "type": "category",
+              "label": "Wrapping Document",
+              "items": [
+                "tutorial/advanced/verifiable-documents/ethereum/wrapping-document/wrapping-document-cli",
+                "tutorial/advanced/verifiable-documents/ethereum/wrapping-document/wrapping-document-code"
+              ]
+            },
+
+            {
+              "type": "category",
+              "label": "Issuing Document",
+              "items": [
+                "tutorial/advanced/verifiable-documents/ethereum/issuing-document/issuing-document-cli",
+                "tutorial/advanced/verifiable-documents/ethereum/issuing-document/issuing-document-code"
+              ]
+            },
+
+            {
+              "type": "category",
+              "label": "Revoking Document",
+              "items": [
+                "tutorial/advanced/verifiable-documents/ethereum/revoking-document/revoking-document-cli",
+                "tutorial/advanced/verifiable-documents/ethereum/revoking-document/revoking-document-code"
+              ]
+            },
             "tutorial/advanced/verifiable-documents/ethereum/going-further"
           ]
         }
