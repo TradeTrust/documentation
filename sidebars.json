@@ -229,51 +229,10 @@
       "reference/generic-templates/cover-letter",
       "reference/generic-templates/bill-of-lading"
     ],
-    "Development": [
-      "reference/development/getting-started",
-      "reference/development/prerequisites",
-      {
-        "type": "category",
-        "label": "Transferable Records",
-        "items": ["reference/development/transferable-record/issue", "reference/development/transferable-record/wrap"]
-      },
-      {
-        "type": "category",
-        "label": "Verifiable Documents",
-        "items": [
-          {
-            "type": "category",
-            "label": "Document Store",
-            "items": [
-              "reference/development/verifiable-document/document-store/wrap",
-              "reference/development/verifiable-document/document-store/issue",
-              "reference/development/verifiable-document/document-store/revoke"
-            ]
-          },
-          {
-            "type": "category",
-            "label": "DID",
-            "items": [
-              "reference/development/verifiable-document/did/wrap",
-              "reference/development/verifiable-document/did/sign"
-            ]
-          }
-        ]
-      },
-      {
-        "type": "category",
-        "label": "Libraries",
-        "items": ["reference/development/libraries/open-attestation", "reference/development/libraries/oa-verify"]
-      },
-      "reference/development/verifier/verify",
-      {
-        "type": "category",
-        "label": "Endorsement Chain",
-        "items": [
-          "reference/development/endorsement-chain/endorsement-chain-ethers",
-          "reference/development/endorsement-chain/endorsement-chain-subgraph"
-        ]
-      }
+    "Libraries": ["reference/libraries/open-attestation", "reference/libraries/oa-verify", "reference/verifier/verify"],
+    "Endorsement Chain": [
+      "reference/endorsement-chain/endorsement-chain-ethers",
+      "reference/endorsement-chain/endorsement-chain-subgraph"
     ]
   }
 }
