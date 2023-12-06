@@ -1,14 +1,14 @@
 ---
-id: file-structure
-title: File Structure
-sidebar_label: File Structure
+id: config-file
+title: Configuration File
+sidebar_label: Configuration File
 ---
 
 The configuration file is a JSON file that contains information to configure the application to suit your business needs.
 
 ### Config file structure
 
-A reference of a configuration file can be found [here](https://raw.githubusercontent.com/TradeTrust/tradetrust-config/master/build/config-reference-v3.json).
+A reference of a configuration file can be found [here](https://github.com/TradeTrust/tradetrust-config/blob/master/build/sepolia/config-v2.json).
 
 Below are examples of a configuration file
 
@@ -66,12 +66,14 @@ Optional property:
 
 The value of `"network"` property is a string that refers to the network in which the document is created in.
 
-Currently, we only support to 5 networks.
+Currently, we only support to 6 networks.
 
 - Ethereum Mainnet : `"homestead"`
 - Sepolia Testnet : `"sepolia"`
 - Polygon Mainnet: `"matic"`
 - Mumbai Testnet: `"maticmum"`
+- XDC Mainnet: `"xdc"`
+- XDC Apothem Testnet: `"xdcapothem"`
 
 ---
 
@@ -88,17 +90,17 @@ The `"wallet"` property is a string that refers to your ethereum wallet. We supp
 
 The wallet property can be derive from either one of these methods:
 
-1. If you don't have a wallet, you can refer to [Open Attestation's documentation](https://github.com/Open-Attestation/open-attestation-cli#wallet) to create a wallet.
-   _Note: you will need to have Open Attestation Cli installed._ After running OA CLI `wallet create` command, this will give you a wallet.json.
+1. If you don't have a wallet, you can refer to [TradeTrust's documentation](https://github.com/TradeTrust/tradetrust-cli#wallet) to create a wallet.
+   _Note: you will need to have TradeTrust Cli installed._ After running TT CLI `wallet create` command, this will give you a wallet.json.
 
-2. Alternatively, you can also generate a wallet.json from an existing account created in Metamask using the OpenAttestation Cli. _Note: you will need to have Open Attestation Cli installed._
+2. Alternatively, you can also generate a wallet.json from an existing account created in Metamask using the TradeTrust Cli. _Note: you will need to have TradeTrust Cli installed._
    You will have to input your wallet's private key which can be found when you go to your account in Metamask, click on the menu icon, go to
    "Account Details" and click "Export Private Key". You can refer to the [Metamask Support Page](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key)
    for a guided walkthrough. You will be prompted to input your Metamask password. Once you have your private key,
    you can key in the following command to generate a wallet.json:
 
 ```javascript
-open-attestation wallet encrypt -k 0x<privatekey> --of ./wallet.json
+tradetrust wallet encrypt -k 0x<privatekey> --of ./wallet.json
 ```
 
 You will then be prompted to set your wallet password. Once entered, you will see a success message with the path to your wallet.json:
@@ -107,7 +109,8 @@ You will then be prompted to set your wallet password. Once entered, you will se
 ℹ  info      Encrypting a wallet
 ? Wallet password [hidden]
 …  awaiting  Encrypting Wallet [====================] [100/100%]
-ℹ  info      Wallet with public address 0xcE16E13045363a4aFb1f4dc6b584256cCb0DDd15 successfully created. Find more details:
+ℹ  info      Wallet with public address 0xcE16E13045363a4aFb1f4dc6b584256cCb0DDd15 successfully created.
+ℹ  info      Find more details at https://etherscan.io/address/0xcE16E13045363a4aFb1f4dc6b584256cCb0DDd15
 ✔  success   Wallet successfully saved into /<path>/wallet.json
 ```
 
@@ -119,7 +122,7 @@ node -r fs -e 'console.log(JSON.stringify(JSON.stringify(JSON.parse(fs.readFileS
 
 The wallet string should be displayed on your terminal and you can enter it into the `"encryptedJson"` property in the [config file](#encrypted-json-wallet).
 
-If you have an existing Metamask account but don't want to use the Open Attestation Cli, you can still get your wallet string doing this:
+If you have an existing Metamask account but don't want to use the TradeTrust Cli, you can still get your wallet string doing this:
 
 - Get your private key from Metamask (_See option 2 if unsure_)
 - Open your terminal
@@ -142,7 +145,7 @@ This result can now be entered into the `"wallet"` property in the [config file]
 
 Ethereum uses Elliptic Curve Digital Signing Algorithm (ECDSA). More specifically, the elliptic curve being used for transaction signing is secp256k1
 
-1. If you don't have an Aws Kms Wallet, you can refer to [documentation](/docs/reference/aws-kms/overview) to create a ECC_SECG_P256K1 Key.
+1. If you don't have an Aws Kms Wallet, you can refer to [documentation](/docs/topics/advanced/aws-kms/overview) to create a ECC_SECG_P256K1 Key.
 
 2. Connect the Aws Kms Key to an Aws Iam User and enable the signing access control.
 
@@ -209,20 +212,20 @@ Below is an example of the `"defaults"` property:
 },
 ```
 
-- The value of `"$template"` property contains an object that refers to the custom renderer, please refer to [creating document renderer](/docs/reference/configuration/create-custom-renderer).
+- The value of `"$template"` property contains an object that refers to the custom renderer, please refer to [creating document renderer](/docs/tutorial/decentralised-renderer/).
 
 - The value of `"issuers"` property contains an array of the issuer object. The required properties for each issuer are `name`, `identityProof` and one of `documentStore` OR `tokenRegistry`.
 
-_Transferrable document requires a [`tokenRegistry`](/docs/tutorial/transferable-records/token-registry), whereas, a verifiable document requires a [`documentStore`](/docs/tutorial/verifiable-documents/ethereum/document-store)._
+_Transferrable document requires a [`tokenRegistry`](/docs/tutorial/transferable-records/token-registry/token-registry-cli), whereas, a verifiable document requires a [`documentStore`](/docs/)._
 
 - The `"name"` property in the `"issuers"` section is a string, which refers to the name of the token registry or the name of the document store.
-  Please refer to [token registry](/docs/tutorial/transferable-records/token-registry) for transferable document or [deploying document store](/docs/tutorial/verifiable-documents/ethereum/document-store) for verifiable document, for more information.
+  Please refer to [token registry](/docs/tutorial/transferable-records/token-registry/token-registry-cli) for transferable document or [deploying document store](/docs/) for verifiable document, for more information.
 
-- The `"tokenRegistry"` property is a string that is the address for the token registry, please refer to [token registry](/docs/tutorial/transferable-records/token-registry) for more information.
+- The `"tokenRegistry"` property is a string that is the address for the token registry, please refer to [token registry](/docs/tutorial/transferable-records/token-registry/token-registry-cli) for more information.
 
-- The `"documentStore"` property is a string that is the address for the document store, please refer to [deploying document store](/docs/tutorial/verifiable-documents/ethereum/document-store/) for more information.
+- The `"documentStore"` property is a string that is the address for the document store, please refer to [deploying document store](/docs/) for more information.
 
-- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](/docs/reference/configuration/configure-dns/) for more information.
+- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](/docs/tutorial/transferable-records/dns) for more information.
 
 #### V3 document defaults
 
@@ -277,11 +280,11 @@ _Transferrable document requires a [`tokenRegistry`](/docs/tutorial/transferable
 
 - The value of the `"openAttestationMetadata"` properties contains information about the `"template"` and `"proof"`.
 
-- The value of `"template"` property contains an object that refers to the custom renderer, please refer to [creating document renderer](/docs/reference/configuration/create-custom-renderer).
+- The value of `"template"` property contains an object that refers to the custom renderer, please refer to [creating document renderer](/docs/tutorial/decentralised-renderer/).
 
 - The value `"proof"` property contains an object with the necessary information about the `"type"` of proof, `"method"` of proof, `"value"` of the proof method and the `"revocation"` type and status of the document.
 
-- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](/docs/reference/configuration/configure-dns/) for more information.
+- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](/docs/tutorial/transferable-records/dns) for more information.
 
 - The value of the `"credentialSubject"` property is defined as a set of objects that contain one or more properties that are each related to a subject of the verifiable credential.
 
