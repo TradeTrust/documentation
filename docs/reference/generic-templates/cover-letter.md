@@ -23,8 +23,8 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
 "wallet": "<Your wallet string>",
 ```
 
-- `"network"` - Update with the desired network. For more information, click [here](/docs/reference/document-creator/config-file/file-structure#network-field).
-- `"wallet"` - Update with your wallet string. For more information, click [here](/docs/reference/document-creator/config-file/file-structure#wallet-field).
+- `"network"` - Update with the desired network. For more information, click [here](/docs/reference/document-creator/config-file#network-property).
+- `"wallet"` - Update with your wallet string. For more information, click [here](/docs/reference/document-creator/config-file#wallet-property).
 
 ```json
 "defaults": {
@@ -50,8 +50,8 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
 
 ```
 
-- `"documentStore"` - Update with your document store. For more information, click [here](/docs/tutorial/verifiable-documents/ethereum/document-store).
-- `"location"` - Update with the Issuer's domain. For more information, click [here](/docs/reference/configuration/configure-dns).
+- `"documentStore"` - Update with your document store. For more information, click [here](/docs/).
+- `"location"` - Update with the Issuer's domain. For more information, click [here](/docs/).
 - `"logo"` - Update with the Logo's URL, to be displayed accordingly as the image above.
 - `"backgroundColor"` - Update with the desired background color. The default color(#ffffff) will be used if color is not stated here. i.e. values for this field "#000000", "black"
 - `"titleColor"` - Update with the desired title text color. The default color(#4e4e50) will be used if color is not stated here. i.e. values for this field "#ffffff", "white"

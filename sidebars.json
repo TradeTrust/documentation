@@ -197,31 +197,16 @@
     "Appendix": ["topics/appendix/glossary", "topics/appendix/tradetrust-api", "topics/appendix/non-fungible-token"]
   },
   "reference": {
-    "TradeTrust Website": [
+    "TradeTrust Verifier Website": [
       "reference/tradetrust-website/overview",
-      "reference/tradetrust-website/info-bar",
       "reference/tradetrust-website/endorsement-chain",
       "reference/tradetrust-website/address-resolver",
       "reference/tradetrust-website/qr-code"
     ],
-    "Document Creator": [
+    "TradeTrust Document Creator": [
       "reference/document-creator/overview",
       "reference/document-creator/prerequisites",
-      {
-        "type": "category",
-        "label": "Setup",
-        "items": [
-          "reference/document-creator/setup/overview",
-          "reference/document-creator/setup/config-generator",
-          "reference/document-creator/setup/document-creator-website",
-          "reference/document-creator/setup/going-further"
-        ]
-      },
-      {
-        "label": "Config File",
-        "type": "category",
-        "items": ["reference/document-creator/config-file/file-structure"]
-      },
+      "reference/document-creator/config-file",
       "reference/document-creator/data-file"
     ],
     "Generic Templates": [

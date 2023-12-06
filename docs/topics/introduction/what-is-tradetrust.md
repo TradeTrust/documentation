@@ -4,7 +4,9 @@ title: What is TradeTrust?
 sidebar_label: What is TradeTrust
 ---
 
-TradeTrust is a framework that comprises globally-accepted standards that connect governments and businesses to a public blockchain to enable trusted interoperability of electronic trade documents across digital platforms and it is offered as a digital utility.
+TradeTrust is a framework that is built using [Open Attestation](https://github.com/Open-Attestation/open-attestation) framework as its base and as a collaborative work between IMDA and Govtechsg.
+
+TradeTrust comprises globally-accepted standards that connect governments and businesses to a public blockchain to enable trusted interoperability of electronic trade documents across digital platforms and it is offered as a digital utility.
 
 <figure style={{ maxWidth: "960px", margin: "0 auto" }}>
   <img src='/docs/topics/introduction/what-is-tradetrust/key-components-tradetrust.jpeg' />

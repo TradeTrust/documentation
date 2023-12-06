@@ -20,6 +20,6 @@ The endorsement chain provides an overview of the EBL's transaction history, sho
 
 **Surrender of document accepted** -> Document is shredded and destroyed.
 
-_Note: Please follow this [guide](/docs/reference/add-polygon-networks-to-metamask-wallet) if you are having trouble viewing the endorsement chain on polygon networks._
+_Note: Please follow this [guide](/docs/topics/advanced/add-polygon-networks-to-metamask-wallet) if you are having trouble viewing the endorsement chain on polygon networks._
 
 > The endorsement chain is only viewable for Transferable Record documents.
