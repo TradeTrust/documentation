@@ -2,19 +2,21 @@
 id: document-store-cli
 title: Deploying Document Store Smart Contract (CLI)
 sidebar_label: Deploying Document Store (CLI)
-pagination_next: tutorial/advanced/verifiable-documents/ethereum/dns-proof
+pagination_next: tutorial/verifiable-documents/advanced/document-store/configuring-dns
 ---
 
 import Flow from "../flow.mdx";
 
 <Flow />
 
-The document store is a smart contract on the Ethereum network that records the issuance and revocation status of OA documents. In this guide, we will deploy a document store smart contract on the Ethereum `sepolia` network, which is a test network that does not require actual [ethers](/docs/reference/appendix/glossary#ether) for transactions.
+> For the current step, you can either opt to use the [CLI](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli) or [Code](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-code).
 
-In this guide we will make use of the wallet that we created in the [previous step](/docs/tutorial/verifiable-documents/ethereum/wallet)
+The document store is a smart contract on the blockchain network that records the issuance and revocation status of TradeTrust documents. In this guide, we will deploy a document store smart contract on the Ethereum blockchain, `sepolia` network, which is a test network that does not require actual [ethers](/docs/reference/appendix/glossary#ether) for transactions.
+
+In this guide, we will make use of the wallet that we created in the [previous step](/docs/tutorial/prerequisites#wallet-creation)
 
 ```bash
-open-attestation deploy document-store "My first document store" --network sepolia --encrypted-wallet-path wallet.json
+tradetrust deploy document-store "My first document store" --network sepolia --encrypted-wallet-path wallet.json
 ```
 
 You will be prompted for the password that you used while creating the wallet. Once your document store smart contract has been successfully deployed, you will see the success message with the document store address.
@@ -32,3 +34,7 @@ You will be prompted for the password that you used while creating the wallet. O
 In the example above, the document store address is `0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b`, please do **NOT** use the Transaction ID.
 
 **Save the document store address somewhere.** You will need this address later to complete the tutorial.
+
+Congratulations! You have successfully deployed a document store.
+
+Next we take a look at configuring the DNS.

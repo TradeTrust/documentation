@@ -8,27 +8,28 @@ import Flow from "./flow.mdx";
 
 <Flow />
 
-Every OA document's provenance can be verified and traced back to its creator or issuer. This is achieved by embedding an
-`identityProof` property in the document, which serves as a claim for identity. During the verification phase, the claim
-is checked against external records.
+Every TradeTrust document's provenance can be verified and traced back to its creator or issuer. This is achieved by embedding an
+`identityProof` property in the document, which serves as a claim for identity. During the verification phase, the claim is checked against external records.
 
 ![Example Issuer Identity](/docs/tutorial/verifiable-documents/ethereum/dns-proof/example.png)
 
 In this example above, the document's issuer is bound to `example.tradetrust.io`.
 
-In this guide, we will bind the document issuer's identity to a valid domain name. This domain will be displayed as issuer every time the document is rendered in an OA-compliant decentralized renderer.
+In this guide, we will bind the document issuer's identity to a valid domain name. This domain will be displayed as issuer every time the document is rendered in an TT-compliant decentralized renderer.
 
-We will be inserting a temporary DNS record on our DNS at `sandbox.openattestation.com` so you do not need your own domain to follow the guide. If you prefer to use your own domain name for the identity, you may skip the steps involving the CLI and instead read the [DNS Configuration Guide](/docs/reference/configuration/configure-dns).
+We will be inserting a temporary DNS record on our DNS at `sandbox.openattestation.com` so you do not need your own domain to follow the guide.
+
+If you prefer to use your own domain name for the identity, you may skip the steps involving the CLI and instead read the [DNS Configuration Guide](/docs/topics/introduction/issuer-method-dns-did#hands-on-creating-a-dns-did--did).
 
 ## Creating Temporary DNS Proof with CLI
 
-With your [wallet address](/docs/tutorial/verifiable-documents/did/create), run the following command:
+With your DID string, `"did:ethr:<YOUR_WALLET_ADDRESS>"`, that we get in the previous step, we now run the following command:
 
 ```bash
-open-attestation dns txt-record create --public-key did:ethr:0xaCc51f664D647C9928196c4e33D46fd98FDaA91D#controller
+tradetrust dns txt-record create --public-key did:ethr:0xaCc51f664D647C9928196c4e33D46fd98FDaA91D#controller
 ```
 
-Take note that you need to prepend your wallet address by `did:ethr:` and append `#controller` to it. Indeed, open again your own DID on uniresolver (see previous step). Check the value of `didDocument.publicKey`. It should look like:
+Take note that you need to append `#controller` to your DID string. Indeed, open again your own DID on uniresolver (see previous step). Check the value of `didDocument.publicKey`. It should look like:
 
 ```json
 [
@@ -43,16 +44,18 @@ Take note that you need to prepend your wallet address by `did:ethr:` and append
 
 The `public-key` parameter in the creation command above **MUST** match the `id` property.
 
-Once the DNS TXT record has been successfully deployed, you will see the success message with the bound location.
+After you run the create command, wait for it to be successfully deployed, and you will see the success message with the bound location.
 
 ```text
-✔  success   Record created at intermediate-sapphire-catfish.sandbox.openattestation.com and will stay valid until Fri Nov 27 2020 14:12:03 GMT+0800 (Singapore Standard Time)
+✔  success   Record created at intermediate-sapphire-catfish.sandbox.openattestation.com and will stay valid until Fri Nov 27 2023 14:12:03 GMT+0800 (Singapore Standard Time)
 ```
 
-In the example above, the document store `did:ethr:0xaCc51f664D647C9928196c4e33D46fd98FDaA91D#controller`, has been bound to the `intermediate-sapphire-catfish.sandbox.openattestation.com` location. Let's make sure the entry has been propagated to the DNS:
+In the example above, the DID `did:ethr:0xaCc51f664D647C9928196c4e33D46fd98FDaA91D#controller`, has been bound to the `intermediate-sapphire-catfish.sandbox.openattestation.com` location.
+
+Let's make sure the entry has been propagated to the DNS:
 
 ```bash
-open-attestation dns txt-record get --location intermediate-sapphire-catfish.sandbox.openattestation.com
+tradetrust dns txt-record get --location intermediate-sapphire-catfish.sandbox.openattestation.com
 ```
 
 which will display to you the list of the DNS TXT records associated to that location.
@@ -67,3 +70,7 @@ which will display to you the list of the DNS TXT records associated to that loc
 ```
 
 > Note that it can take some time for the record to be correctly propagated to the DNS, even though it usually takes 10 to 15s.
+
+Congratulations! You have just created a DID and linked it to a DNS. This will be the issuer's identity.
+
+For the next step we will be creating a raw verifiable document.

@@ -2,14 +2,14 @@
 id: document-store-code
 title: Deploying Document Store Smart Contract (Code)
 sidebar_label: Deploying Document Store (Code)
-pagination_next: tutorial/advanced/verifiable-documents/ethereum/dns-proof
+pagination_next: tutorial/verifiable-documents/advanced/document-store/configuring-dns
 ---
 
 import Flow from "../flow.mdx";
 
 <Flow />
 
-> For the current step, you can either opt to use the [CLI](/docs/tutorial/advanced/verifiable-documents/ethereum/document-store) or [Code](/docs/tutorial/advanced/verifiable-documents/ethereum/document-store-code).
+> For the current step, you can either opt to use the [CLI](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli) or [Code](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-code).
 
 ## Installation
 
@@ -23,7 +23,7 @@ npm install --save @govtechsg/document-store
 
 To use the package, you will need to provide your own Web3 [provider](https://docs.ethers.io/v5/api/providers/api-providers/) or [signer](https://docs.ethers.io/v5/api/signer/#Wallet) (if you are writing to the blockchain).
 
-Refer to the [pre-requisite](/docs/tutorial/prerequisites-code) on setup instructions.
+Refer to the [pre-requisite](/docs/tutorial/prerequisites#understanding-provider-class) on setup instructions.
 
 ### Deploy new document store
 
@@ -41,13 +41,7 @@ const factory = new DocumentStoreFactory(wallet);
 const transaction = await factory.deploy("Demo Document Store", walletAddress);
 const transactionReceipt = await transaction.deployTransaction.wait();
 const documentStoreAddress = transactionReceipt.contractAddress;
-console.log(transactionReceipt.contractAddress);
-```
-
-Output
-
-```
-Contract Address: 0x63A223E025256790E88778a01f480eBA77731D04
+console.log(documentStoreAddress); // 0x63A223E025256790E88778a01f480eBA77731D04
 ```
 
 ### Connect to existing document store
@@ -62,11 +56,9 @@ const provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545"); 
 const wallet = unconnectedWallet.connect(provider);
 
 const documentStore = DocumentStoreFactory.connect("0x63A223E025256790E88778a01f480eBA77731D04", wallet);
-console.log(`Document Store Name: ${await documentStore.name()}`);
+console.log(`Document Store Name: ${await documentStore.name()}`); // Document Store Name: DemoDocumentStore
 ```
 
-Output
+Congratulations! You have successfully deployed a document store.
 
-```
-Document Store Name: DemoDocumentStore
-```
+Next we take a look at configuring the DNS.

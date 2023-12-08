@@ -2,16 +2,16 @@
 id: signing-document-code
 title: Signing Documents (Code)
 sidebar_label: Signing Documents (Code)
-pagination_next: tutorial/verifiable-documents/did/revoking-document
+pagination_next: tutorial/verifiable-documents/revoking-document
 ---
 
 import Flow from "../flow.mdx";
 
 <Flow />
 
-> For the current step, you can either opt to use the [CLI](/docs/tutorial/verifiable-documents/did/cli/signing-document-cli) or [Code](/docs/tutorial/verifiable-documents/did/code/signing-document-code).
+> For the current step, you can either opt to use the [CLI](/docs/tutorial/verifiable-documents/signing-document/signing-document-cli) or [Code](/docs/tutorial/verifiable-documents/signing-document/signing-document-code).
 
-After wrapping the documents and obtaining a merkle root, the documents are ready to be signed on the document store smart contract. Each documents will be signed individually, and the proof of the signature will be appended into the signed documents.
+After wrapping the documents and obtaining a merkle root, the documents are ready to be signed. Each documents will be signed individually, and the proof of the signature will be appended into the signed documents.
 
 ## Installation
 
@@ -23,9 +23,11 @@ npm i @govtechsg/open-attestation
 
 ## Usage
 
-### Sign a document
+### Signing a document
 
-`signDocument` takes a wrapped document, as well as a public/private key pair or an [Ethers.js Signer](https://docs.ethers.io/v5/api/signer/). The method will sign the merkle root from the wrapped document, append the signature to the document and return it. Currently, it supports the following sign algorithm:
+`signDocument` takes a wrapped document, a wallet (public and private key pair) or an [Ethers.js Signer](https://docs.ethers.io/v5/api/signer/).
+
+The method will sign the merkle root from the wrapped document, append the signature to the document and return it. Currently, it supports the following sign algorithm:
 
 - `Secp256k1VerificationKey2018`
 
@@ -77,13 +79,8 @@ const signedDocument = await signDocument(
   wallet
 );
 console.log(`Signed Document: ${JSON.stringify(signedDocument)}`);
-```
 
-Output
-
-Signed Document:
-
-```json
+// Signed Document:
 {
   "version": "https://schema.openattestation.com/2.0/schema.json",
   "data": {
@@ -126,12 +123,12 @@ Signed Document:
 
 ## Verifying the documents
 
-Head to `dev.tradetrust.io` and drag and drop one of the issued /signed documents. The document will be verified, then displayed.
+Head over to [dev.tradetrust.io](https://dev.tradetrust.io/verify), drag and drop one of the signed documents. The document will be verified, then displayed like in the image below.
 
 ![Successful verification](/docs/tutorial/verifiable-documents/ethereum/signing-document/verifying.png)
 
 🎉 Congratulations, you have completed the getting started guide to create your own Verifiable Document!
 
-### See Also
+#### Additional information: Revocation of Verifiable Documents
 
-[TradeTrust Website - Overview](/docs/topics/tradetrust-website/overview)
+[Revoking of Verifiable Documents](/docs/tutorial/verifiable-documents/revoking-document)

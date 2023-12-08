@@ -2,14 +2,14 @@
 id: issuing-document-code
 title: Issuing Documents (Code)
 sidebar_label: Issuing Documents (Code)
-pagination_next: tutorial/advanced/verifiable-documents/ethereum/revoking-document/revoking-document-code
+pagination_next: tutorial/verifiable-documents/advanced/document-store/revoking-document/revoking-document-code
 ---
 
 import Flow from "../flow.mdx";
 
 <Flow />
 
-> For the current step, you can either opt to use the [CLI](/docs/tutorial/advanced/verifiable-documents/ethereum/issuing-document) or [Code](/docs/tutorial/advanced/verifiable-documents/ethereum/issuing-document-code).
+> For the current step, you can either opt to use the [CLI](/docs/tutorial/verifiable-documents/advanced/document-store/issuing-document/issuing-document-cli) or [Code](/docs/tutorial/verifiable-documents/advanced/document-store/issuing-document/issuing-document-code).
 
 ## Installation
 
@@ -23,7 +23,7 @@ npm install --save @govtechsg/document-store
 
 To use the package, you will need to provide your own Web3 [provider](https://docs.ethers.io/v5/api/providers/api-providers/) or [signer](https://docs.ethers.io/v5/api/signer/#Wallet) (if you are writing to the blockchain).
 
-Refer to the [deploy document store](/docs/tutorial/advanced/verifiable-documents/ethereum/document-store-code) section on setup instructions.
+Refer to the [pre-requisite](/docs/tutorial/prerequisites#understanding-provider-class) on setup instructions.
 
 ### Connect to existing document store
 
@@ -37,13 +37,7 @@ const provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545"); 
 const wallet = unconnectedWallet.connect(provider);
 
 const documentStore = DocumentStoreFactory.connect("0x63A223E025256790E88778a01f480eBA77731D04", wallet);
-console.log(`Document Store Name: ${await documentStore.name()}`);
-```
-
-Output
-
-```
-Document Store Name: DemoDocumentStore
+console.log(`Document Store Name: ${await documentStore.name()}`); // Document Store Name: DemoDocumentStore
 ```
 
 ### Issuing on document store
@@ -60,14 +54,9 @@ const receipt = await tx.wait();
 console.log(`Issue Transaction: ${JSON.stringify(receipt)}`);
 
 const isIssued = await documentStore.isIssued("0x8dcf358a9436bca6654f565e3c5843d91c0052d3a2eff37bbd380038e8a1fa39");
-console.log(`Has been Issued: ${isIssued}`);
-```
+console.log(`Has been Issued: ${isIssued}`); // Has been Issued: true
 
-Ouput
-
-Issue Transaction
-
-```json
+// Issue Transaction:
 {
   "to": "0x63A223E025256790E88778a01f480eBA77731D04",
   "from": "0xe0A71284EF59483795053266CB796B65E48B5124",
@@ -120,8 +109,10 @@ Issue Transaction
 }
 ```
 
-```
-Has been Issued: true
-```
+Please refer to [Document-Store](https://github.com/Open-Attestation/Document-Store) repository on other interfaces available on the smart contracts;
 
-Refer to [Document-Store](https://github.com/Open-Attestation/Document-Store) repository on other interfaces available on the smart contracts;
+🎉 Congratulations, you have completed the getting started guide to create your own Verifiable Document!
+
+#### Additional information: Revocation of Verifiable Documents
+
+[Revoking of Verifiable Documents](/docs/tutorial/verifiable-documents/advanced/document-store/revoking-document/revoking-document-code)

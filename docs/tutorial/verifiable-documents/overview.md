@@ -3,15 +3,17 @@ title: Overview
 sidebar_label: Overview
 ---
 
-Verifiable documents form the core of the OpenAttestation (OA) framework. In this tutorial guide, you will be deploying your first verifiable document.
+Building upon OpenAttestation framework, our Verifiable Document form one of two core pillars for TradeTrust framework.
+
+In this tutorial guide, you will be deploying your first verifiable document.
 
 ## Goal
 
-By the end of this guide, you would be able to create your 📜 Certificate of Completion that is valid on any compatible OA Viewer. The following guides are available:
+By the end of this guide, you would be able to create your 📜 Certificate of Completion that is valid on any compatible TradeTrust Verifier. The following guides are available:
 
-- Use OpenAttestation with [DID](/docs/tutorial/verifiable-documents/did/create)
-- (Advanced) Use OpenAttestation with [Ethereum Smart Contract](/docs/tutorial/advanced/verifiable-documents/ethereum/document-store-overview)
+- Issue a TradeTrust Verifiable document using [DNS-DID](/docs/topics/introduction/issuer-method-dns-did) method.
+- (Advanced) Issue a TradeTrust Verifiable document that interacts with a [document store](/docs/tutorial/verifiable-documents/advanced/document-store/overview) (Ethereum Smart Contract).
 
 ### See Also
 
-[Verifiable Document - Overview](/docs/topics/verifiable-documents/overview)
+[Topics: Verifiable Document - Overview](/docs/topics/verifiable-documents/overview)

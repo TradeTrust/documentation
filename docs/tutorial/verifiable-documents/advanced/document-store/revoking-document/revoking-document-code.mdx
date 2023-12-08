@@ -2,14 +2,13 @@
 id: revoking-document-code
 title: Revoking Documents (Code)
 sidebar_label: Revoking Documents (Code)
-pagination_next: tutorial/advanced/verifiable-documents/ethereum/going-further
 ---
 
 import Flow from "../flow.mdx";
 
 <Flow />
 
-> For the current step, you can either opt to use the [CLI](/docs/tutorial/advanced/verifiable-documents/ethereum/revoking-document) or [Code](/docs/tutorial/advanced/verifiable-documents/ethereum/revoking-document-code).
+> For the current step, you can either opt to use the [CLI](/docs/tutorial/verifiable-documents/advanced/document-store/revoking-document/revoking-document-cli) or [Code](/docs/tutorial/verifiable-documents/advanced/document-store/revoking-document/revoking-document-code).
 
 ## Installation
 
@@ -23,9 +22,7 @@ npm i @govtechsg/document-store
 
 To use the package, you will need to provide your own Web3 [provider](https://docs.ethers.io/v5/api/providers/api-providers/) or [signer](https://docs.ethers.io/v5/api/signer/#Wallet) (if you are writing to the blockchain).
 
-Refer to the [deploy document store](/docs/tutorial/advanced/verifiable-documents/ethereum/document-store-code) section on setup instructions.
-
-Refer to the [deploy document store](/docs/tutorial/advanced/verifiable-documents/ethereum/issuing-document-code.md) section on issue instructions.
+Refer to the [pre-requisite](/docs/tutorial/prerequisites#understanding-provider-class) on setup instructions.
 
 ### Connect to existing document store
 
@@ -39,13 +36,7 @@ const provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545"); 
 const wallet = unconnectedWallet.connect(provider);
 
 const documentStore = DocumentStoreFactory.connect("0x63A223E025256790E88778a01f480eBA77731D04", wallet);
-console.log(`Document Store Name: ${await documentStore.name()}`);
-```
-
-Output
-
-```
-Document Store Name: DemoDocumentStore
+console.log(`Document Store Name: ${await documentStore.name()}`); // Document Store Name: DemoDocumentStore
 ```
 
 ### Revocation on document store
@@ -62,14 +53,9 @@ const receipt = await tx.wait();
 console.log(`Revoke Transaction: ${JSON.stringify(receipt)}`);
 
 const isIssued = await documentStore.isRevoked("0x8dcf358a9436bca6654f565e3c5843d91c0052d3a2eff37bbd380038e8a1fa39");
-console.log(`Has been Revoked: ${isIssued}`);
-```
+console.log(`Has been Revoked: ${isIssued}`); // Has been Revoked: true
 
-Ouput
-
-Revoke Transaction
-
-```json
+// Revoke Transaction:
 {
   "to": "0x63A223E025256790E88778a01f480eBA77731D04",
   "from": "0xe0A71284EF59483795053266CB796B65E48B5124",
@@ -122,8 +108,22 @@ Revoke Transaction
 }
 ```
 
-```
-Has been Revoked: true
-```
+Please refer to [Document-Store](https://github.com/Open-Attestation/Document-Store) repository on other interfaces available on the smart contracts;
 
-Refer to [Document-Store](https://github.com/Open-Attestation/Document-Store) repository on other interfaces available on the smart contracts;
+## Verifying the document
+
+Head to [dev.tradetrust.io](https://dev.tradetrust.io/verify) and drag and drop the revoked document. An error will be displayed by the portal.
+
+![Successful verification](/docs/tutorial/verifiable-documents/ethereum/revoking-document/verifying.png)
+
+The document has been revoked, thus, we do not display the content of the document on our document viewer.
+
+## Misc questions:
+
+Q: hey you mentioned that if I use DID documents, I would not need to pay for transactions, but following this flow, I would still have to pay for at least 1 transaction (deploying a `documentStore`), what gives?
+
+A: yes, you are right, for now this implementation will still need at least 1 transaction to the ethereum blockchain. We are working on this so please be patient and watch this space.
+
+Q: this might be a weird question but I did not issue any documents from the deployed `documentStore`, how am I able to revoke this document from said `documentStore` when in the first place, I did not even issue anything?
+
+A: long story short, the revocation mapping in the `documentStore` is a separate mapping from the issued mapping.
