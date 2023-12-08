@@ -1,7 +1,7 @@
 ---
 id: token-registry-code
-title: Deploying Transferable Record Registry (Code)
-sidebar_label: Deploying Transferable Record Registry (Code)
+title: DeployingToken Registry (Code)
+sidebar_label: Deploying Token Registry (Code)
 pagination_next: tutorial/transferable-records/dns
 ---
 
@@ -9,13 +9,13 @@ import Flow from "../flow.mdx";
 
 <Flow />
 
-> For the current step, you can either opt to use the [CLI](/docs/tutorial/transferable-records/token-registry-code) or [Code](/docs/tutorial/transferable-records/token-registry-cli).
+> For the current step, you can either opt to use the [CLI](/docs/tutorial/transferable-records/token-registry/token-registry-cli) or [Code](/docs/tutorial/transferable-records/token-registry/token-registry-code).
 
-The token registry is a smart contract on the Ethereum network that records the ownership information of a transferable record.
+The token registry is a smart contract on the blockchain network that records the ownership and holdership information of a transferable record.
 
 > The Token Registry is a Soulbound Token (SBT) tied to the Title Escrow. The SBT implementation is loosely based on OpenZeppelin's implementation of the [ERC721 standard](https://eips.ethereum.org/EIPS/eip-721). An SBT is used in this case because the token, while can be transferred to the registry, is largely restricted to its designated Title Escrow contracts.
 
-In this guide, we will deploy a token registry smart contract on the Ethereum `sepolia` network which is a test network that does not require actual ethers for transactions.
+In this guide, we will deploy a token registry smart contract on the Ethereum blockchain, `sepolia` network which is a test network that does not require actual ethers for transactions.
 
 ## Installation
 
@@ -23,30 +23,13 @@ In this guide, we will deploy a token registry smart contract on the Ethereum `s
 npm install --save @govtechsg/token-registry
 ```
 
----
-
 ## Usage
 
 To use the package, you will need to provide your own Web3 [provider](https://docs.ethers.io/v5/api/providers/api-providers/) or [signer](https://docs.ethers.io/v5/api/signer/#Wallet) (if you are writing to the blockchain).
 
-Refer to the [pre-requisite](/docs/tutorial/prerequisites-code) on setup instructions.
+Refer to the [pre-requisite](/docs/tutorial/prerequisites#understanding-provider-class) on setup instructions.
 
-## Network Configuration
-
-Here's a list of network names currently pre-configured:
-
-- `mainnet` (Ethereum)
-- `sepolia`
-- `polygon` (Polygon Mainnet)
-- `mumbai` (Polygon Mumbai)
-- `xdc` (XDC Network Mainnet)
-- `xdcapothem` (XDC Apothem TestNet)
-
-For unconfigured networks, refer to the token-registry repository on instructions to setting it up, or deploy Token Registry using the Open-Attestation-CLI application
-
-#### Deploy new token registry
-
-##### Code Deployment
+### Deploy a token registry
 
 ```ts
 import { TDocDeployer__factory } from "@govtechsg/token-registry/contracts";
@@ -76,15 +59,10 @@ const registryAddress = TokenRegistryUtils.getEventFromReceipt<DeploymentEvent>(
   deployerContract.interface.getEventTopic("Deployment")
 ).args.deployed;
 
+console.log(`Contract Address: ${registryAddress}`); // Contract Address: 0x7Ae2aE35f66ACE6671CB2bfb985011b0a2d9cf72
 console.log(`Transaction: ${JSON.stringify(receipt)}`);
-console.log(`Contract Address: ${registryAddress}`);
-```
 
-Output
-
-Transaction
-
-```json
+// Transaction:
 {
   "to": "0x9eBC30E7506E6Ce36eAc5507FCF0121BaF7AeA57",
   "from": "0xE94E4f16ad40ADc90C29Dc85b42F1213E034947C",
@@ -267,15 +245,9 @@ Transaction
 }
 ```
 
-Contract Address
+> Save your **token registry address** for future reference!
 
-```
-0x7Ae2aE35f66ACE6671CB2bfb985011b0a2d9cf72
-```
-
-> Save YOUR token registry address for future reference
-
-#### Connecting to token registry
+### Connecting to token registry
 
 ```ts
 import { TradeTrustToken__factory } from "@govtechsg/token-registry/contracts";
@@ -288,11 +260,9 @@ const provider = ethers.getDefaultProvider("sepolia");
 const wallet = unconnectedWallet.connect(provider);
 
 const connectedRegistry = TradeTrustToken__factory.connect(tokenRegistryAddress, wallet);
-console.log(await connectedRegistry.name());
+console.log(await connectedRegistry.name()); // Test Token Registry
 ```
 
-Output
+Congratulations! You have successfully deployed a token registry.
 
-```
-Test Token Registry
-```
+Next we take a look at configuring the DNS.

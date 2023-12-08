@@ -13,7 +13,14 @@ import Flow from "../flow.mdx";
 
 The document store is a smart contract on the blockchain network that records the issuance and revocation status of TradeTrust documents. In this guide, we will deploy a document store smart contract on the Ethereum blockchain, `sepolia` network, which is a test network that does not require actual [ethers](/docs/reference/appendix/glossary#ether) for transactions.
 
-In this guide, we will make use of the wallet that we created in the [previous step](/docs/tutorial/prerequisites#wallet-creation)
+In this guide, we will deploy a document store smart contract on the Ethereum blockchain, `sepolia` network which is a test network that does not require actual ethers for transactions
+
+## Prerequisite
+
+- [TradeTrust CLI](/docs/tutorial/prerequisites#installation-of-tradetrust-cli) installed
+- Private key to an [Ethereum wallet](/docs/tutorial/prerequisites#wallet-creation) with sufficient ethers
+
+## Deploying via TradeTrust CLI
 
 ```bash
 tradetrust deploy document-store "My first document store" --network sepolia --encrypted-wallet-path wallet.json

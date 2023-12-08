@@ -1,7 +1,7 @@
 ---
 id: decentralised-renderer
-title: Decentralised Renderer
-sidebar_label: Decentralised Renderer
+title: Creating a Custom Decentralised Renderer
+sidebar_label: Creating a Custom Decentralised Renderer
 ---
 
 OA documents are both readable by machines as well as by humans. Every OA document file is stored in a `.json` format, allowing any application to process the content within. To present the data file in a human-readable format, a renderer needs to be written.

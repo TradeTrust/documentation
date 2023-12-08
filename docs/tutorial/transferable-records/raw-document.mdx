@@ -1,7 +1,7 @@
 ---
 id: raw-document
-title: Preparing Transferable Record
-sidebar_label: Preparing Transferable Record
+title: Creating Raw Document
+sidebar_label: Creating Raw Document
 pagination_next: null
 ---
 
@@ -9,13 +9,13 @@ import Flow from "./flow.mdx";
 
 <Flow />
 
-Every OA document has a checksum that provides it a tamper-proof property. At the same time, because the checksum can be used to uniquely identify a document, the checksum (or its derived value) is stored onto the document store as evidence of issuance. To compute the checksum, a `raw document` goes through a process known as `wrapping` to become a `wrapped document`. Only then, the document is ready to be issued onto the blockchain.
+Every TradeTrust document has a checksum that provides it a tamper-proof property. At the same time, because the checksum can be used to uniquely identify a document, the checksum (or its derived value) is stored onto the document store as evidence of issuance. To compute the checksum, a `raw document` goes through a process known as `wrapping` to become a `wrapped document`. Only then, the document is ready to be issued onto the blockchain.
 
 In this guide, we will learn how to create one raw document that conforms to the OpenAttestation v2 Schema.
 
-## Understanding the OA Document Schema
+## Understanding TradeTrust Document Schema
 
-The OpenAttestation v2.0 defines the shape of data for the `raw document` - the data before the wrapping process. It is defined in [JSON Schema](https://json-schema.org/) format.
+Because TradeTrust is build using Open Attestation, we will be using OpenAttestation v2.0 schema. It defines the shape of data for the `raw document` - the data before the wrapping process. It is defined in [JSON Schema](https://json-schema.org/) format.
 
 The official OpenAttestation v2.0 schema can be found at https://schema.openattestation.com/2.0/schema.json
 
@@ -35,7 +35,7 @@ This will setup the JSON schema validator to validate the JSON inputs on the rig
 
 If you start editing the JSON data on the right you should see errors if the data does not conform to the OpenAttestation v2.0 schema. A summary of the number of errors is found on top of the right panel and the details of the errors are found below the two panels.
 
-### Creating raw Transferable Document
+### Creating raw document
 
 We will now create the data for your document. Paste the following JSON data into the right panel of the JSON schema validator tool:
 
@@ -66,11 +66,11 @@ To makes things simple, we will use an existing deployed renderer (at https://tu
 
 #### 1. issuers[0].tokenRegistry
 
-Replace the value of `issuers[0].tokenRegistry` from `0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b` to the smart contract address of your document store in the [previous steps](/docs/tutorial/verifiable-documents/ethereum/document-store)
+Replace the value of `issuers[0].tokenRegistry` from `0x8431012Bc040942B59e3C5bf428221eab0b2f723` to the smart contract address of your token registry in the [previous steps](/docs/tutorial/transferable-records/token-registry/token-registry-cli)
 
 #### 1. issuers[0].identityProof.location
 
-Replace the value of `issuers[0].identityProof.location` from `few-green-cat.sandbox.openattestation.com` to the dns name used to bind the document store's identity in the [previous steps](/docs/tutorial/verifiable-documents/ethereum/dns-proof)
+Replace the value of `issuers[0].identityProof.location` from `few-green-cat.sandbox.openattestation.com` to the dns name used to bind the token registry's identity in the [previous steps](/docs/tutorial/transferable-records/dns)
 
 ![Validator Completed](/docs/tutorial/verifiable-documents/ethereum/document-data/validator-completed.png)
 

@@ -4,7 +4,7 @@
     "tutorial/prerequisites",
     {
       "type": "category",
-      "label": "Verifiable Documents",
+      "label": "Creating a Verifiable Document",
       "items": [
         "tutorial/verifiable-documents/overview",
         "tutorial/verifiable-documents/create",
@@ -73,17 +73,18 @@
               ]
             }
           ]
-        }
+        },
+        "tutorial/verifiable-documents/going-further"
       ]
     },
     {
       "type": "category",
-      "label": "Transferable Records",
+      "label": "Creating a Transferable Record",
       "items": [
         "tutorial/transferable-records/overview",
         {
           "type": "category",
-          "label": "Deploying Transferable Records",
+          "label": "Deploying Token Registry",
           "items": [
             "tutorial/transferable-records/token-registry/token-registry-cli",
             "tutorial/transferable-records/token-registry/token-registry-code"
@@ -102,16 +103,11 @@
         },
         {
           "type": "category",
-          "label": "Issuing Document",
+          "label": "Minting of the Document",
           "items": [
             "tutorial/transferable-records/issuing-document/issuing-document-cli",
             "tutorial/transferable-records/issuing-document/issuing-document-code"
           ]
-        },
-        {
-          "type": "category",
-          "label": "Title Escrow (Code)",
-          "items": ["tutorial/transferable-records/title-escrow/title-escrow-code"]
         },
         "tutorial/transferable-records/going-further"
       ]
