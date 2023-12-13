@@ -1,0 +1,90 @@
+---
+id: wrapping-document-cli
+title: Wrapping Documents (CLI)
+sidebar_label: Wrapping Documents (CLI)
+pagination_next: tutorial/transferable-records/issuing-document/issuing-document-cli
+---
+
+import Flow from "../flow.mdx";
+
+<Flow />
+
+> For the current step, you can either opt to use the [CLI](/docs/tutorial/transferable-records/wrapping-document/wrapping-document-cli) or [Code](/docs/tutorial/transferable-records/wrapping-document/wrapping-document-code).
+
+Every TradeTrust document has a checksum that provides it a tamper-proof property. At the same time, because the checksum can be used to uniquely identify a document, the checksum (or its derived value) will be issued into the token registry as evidence of issuance. To compute the checksum, a `raw document` goes through a process known as `wrapping` to become a `wrapped document`. Only then, the document is ready to be issue.
+
+> Please note that for Transferable Records, there is **NO** batch wrapping.
+
+In this guide, we will learn how to generate the checksum by running the `wrapping` process.
+
+We will use the CLI tool to read all the files in the `raw-documents` folder, wrap them and then output the files in another directory `wrapped-documents`.
+
+A `merkleRoot`, a 64 character long string prepended with `0x` will be generated. The `merkleRoot` is the only information that will be stored onto the Blockchain to verify the issuance status of a TradeTrust document.
+
+From the folder containing the `raw-documents` folder, run:
+
+```sh
+tradetrust wrap raw-documents --output-dir wrapped-documents
+✔  success   Batch Document Root: 0x80cc53b77c0539fc383f8d434ac5ffad281f3d64ae5a0e59e9f36f19548e1fff
+```
+
+After running the CLI you will see the success message with the `Batch Document Root`. In the above sample, the document root (also known as merkle root) is `0x80cc53b77c0539fc383f8d434ac5ffad281f3d64ae5a0e59e9f36f19548e1fff`, you will definitely have a different value.
+
+> Save this value for future reference.
+
+At the same time, you will notice that another directory, `wrapped-document`, has been created:
+
+```text
+wallet.json
+raw-documents
+  |-- certificate-1.json
+wrapped-documents
+  |-- certificate-1.json
+```
+
+In the `wrapped-document` directory, you will find the wrapped document which can be sent to the recipient later once the `merkleRoot` has been issued to the token registry.
+
+> Visit our github page to learn more about [TradeTrust CLI wrapping](https://github.com/TradeTrust/tradetrust-cli/#wrapping-documents)!
+
+Now let us take a look at a wrapped document.
+
+```json
+// wrapped Document
+{
+  "version": "https://schema.openattestation.com/2.0/schema.json",
+  "data": {
+    "$template": {
+      "name": "592202e4-bf4b-4826-9639-a9a3fad38314:string:main",
+      "type": "172389bf-ef30-448f-9153-79475c4a0236:string:EMBEDDED_RENDERER",
+      "url": "8aaf3835-f1d5-444d-9855-0ec230c271ec:string:https://tutorial-renderer.openattestation.com"
+    },
+    "recipient": {
+      "name": "5bc9f48f-5f85-4a8f-a3c4-2e99ee94b509:string:John Doe"
+    },
+    "issuers": [
+      {
+        "name": "f8bf7139-6ca5-4678-b2c7-49aa81ac3ccc:string:Demo Issuer",
+        "tokenRegistry": "a84e9b5b-a99f-4248-ac4d-087b66eec523:string:0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b",
+        "identityProof": {
+          "type": "2fb102d4-00b2-4c42-87b9-ab545829a4ab:string:DNS-TXT",
+          "location": "592202e4-bf4b-4826-9639-a9a3fad38314:string:few-green-cat.sandbox.openattestation.com"
+        }
+      }
+    ]
+  },
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash": "d83534d672d96753ea3cb50ac63129782a1c345d98b1141f9fe5449f1c225601",
+    "proof": [],
+    "merkleRoot": "d83534d672d96753ea3cb50ac63129782a1c345d98b1141f9fe5449f1c225601"
+  }
+}
+```
+
+The `signature` section includes the fields of `targetHash` and `merkleRoot`.
+
+`signature.targetHash` is the generated hash of the document, computed on the algorithm stated on the `signature.type`.
+
+In this scenario, `signature.merkleRoot` will be the same as `signature.targetHash` as we just did a wrapping of a single document.
+
+Congratulation! you have successfully wrapped the document, next lets see how we can mint the documents to 'issue' it.

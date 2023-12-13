@@ -3,7 +3,7 @@ require("dotenv").config();
 const GA_MEASUREMENT_ID = "G-Z4JTBB0GN7";
 
 const siteConfig = {
-  title: "TradeTrust Developer Hub",
+  title: "TradeTrust Documentation",
   tagline:
     "Integrate TradeTrust framework in your apps to future-ready your digital infrastructure for electronic trade documents.",
   url: "https://www.tradetrust.io",
@@ -13,6 +13,11 @@ const siteConfig = {
   favicon: "img/favicon.svg",
   stylesheets: ["https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap"],
   plugins: [require.resolve("./docusaurus-plugin/src")], // monkey patch webpack config -> https://docusaurus.io/docs/next/api/plugin-methods/lifecycle-apis#configureWebpack
+  themes: ["@docusaurus/theme-mermaid"],
+  markdown: {
+    mermaid: true,
+  },
+  onBrokenLinks: "warn",
   presets: [
     [
       "@docusaurus/preset-classic",
@@ -21,6 +26,7 @@ const siteConfig = {
           path: "./docs",
           sidebarPath: require.resolve("./sidebars.json"),
           sidebarCollapsible: true,
+          editUrl: "https://github.com/tradetrust/documentation/edit/master/",
         },
         theme: {
           customCss: [require.resolve("./src/css/tailwind.css")],
@@ -39,8 +45,10 @@ const siteConfig = {
         srcDark: "img/logo/logo-tt-full.svg",
       },
       items: [
-        { to: "docs/introduction/what-is-tradetrust", label: "Docs" },
-        { to: "https://github.com/TradeTrust", label: "Github" },
+        { to: "docs/getting-started", label: "Getting Started" },
+        { to: "docs/tutorial/introduction", label: "Tutorial" },
+        { to: "docs/topics/introduction/what-is-tradetrust", label: "Topics" },
+        { to: "docs/reference/tradetrust-website/overview", label: "References" },
       ],
     },
     footer: {
@@ -56,7 +64,7 @@ const siteConfig = {
           title: "Docs",
           items: [
             {
-              to: "docs/introduction/what-is-tradetrust",
+              to: "docs/getting-started",
               label: "Getting Started",
             },
           ],

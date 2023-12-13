@@ -35,7 +35,7 @@ const Home = () => {
                   <div className="flex-shrink-0 flex justify-center">
                     <Link
                       className="btn bg-cerulean-500 text-white hover:text-white my-4 py-3 px-4"
-                      to={useBaseUrl("docs/introduction/what-is-tradetrust")}
+                      to={useBaseUrl("docs/getting-started")}
                     >
                       Get Started
                     </Link>
