@@ -5,19 +5,24 @@ sidebar_label: Prerequisites
 toc_max_heading_level: 6
 ---
 
-## CLI Method
+Please keep in mind that we have more than one method to achieve our goal and throughout the tutorial we will be diving into the different methods available, to issue verifiable documents and to mint transferable records.
 
-Before we start, you will need the an [ethereum wallet](https://ethereum.org/en/wallets/). They can be created with [ethers.js](https://docs.ethers.org/v5/api/signer/#Wallet) or via [metamask](https://support.metamask.io/hc/en-us/articles/360059952212-MetaMask-is-a-self-custodial-wallet) browser extension. For our tutorials, we will be using OpenAttestation CLI (OA CLI) to [generate](https://github.com/Open-Attestation/open-attestation-cli#wallet) our wallet.
+In most of our tutorial we will be using:
 
-### What OA CLI does
+- Method 1: TradeTrust CLI
+- Method 2: Code integration (using our library to achieve the same result)
 
-The [Open Attestation CLI](https://github.com/Open-Attestation/open-attestation-cli) tool allows users to deploy, mint, wrap and other operation on their documents. It can be used for both Verifiable Documents and Transferable Records.
+Before we get started, to make sure you have a good experience with the tutorial, you will need to install our TradeTrust CLI.
 
-### Installation
+### What TradeTrust CLI does
+
+The [TradeTrust CLI](https://github.com/TradeTrust/tradetrust-cli) is a tool that allows users to run many operation on their machine to get a valid TradeTrust documents. It can be used for both Verifiable Documents and Transferable Records.
+
+### Installation of TradeTrust CLI
 
 #### Binary
 
-To install the binary, simply download the binary from the [CLI release page](https://github.com/Open-Attestation/open-attestation-cli/releases) for your OS.
+To install the binary, simply download the binary from the [CLI release page](https://github.com/TradeTrust/tradetrust-cli/releases/) for your OS.
 
 > We are aware that the size of the binaries must be reduced and we have tracked the issue in [Github](https://github.com/Open-Attestation/open-attestation-cli/issues/68). We hope to find a solution in a near future and any help is welcomed.
 
@@ -26,18 +31,18 @@ To install the binary, simply download the binary from the [CLI release page](ht
 Alternatively for Linux or MacOS users, if you have `npm` installed on your machine, you may install the cli using the following command:
 
 ```bash
-npm install -g @govtechsg/open-attestation-cli
+npm install -g @tradetrust-tt/tradetrust-cli
 ```
 
-The above command will install the open-attestation CLI to your machine. You will need to have node.js installed to be able to run the command.
+The above command will install the TradeTrust CLI to your machine. You will need to have node.js installed to be able to run the command.
 
 You can also opt to use npx:
 
 ```bash
-npx -p @govtechsg/open-attestation-cli open-attestation <arguments>
+npx -p @tradetrust-tt/tradetrust-cli tradetrust <arguments>
 ```
 
-> In all the guides, we will refer to the CLI as `open-attestation` when running a command. That means we will assume the CLI is available in your execution path. If it's not the case, you will to change `open-attestation` by the full path to the executable.
+> In all the guides, we will refer to the CLI as `tradetrust` when running a command. That means we will assume the CLI is available in your execution path. If it's not the case, you will to change `tradetrust` by the full path to the executable.
 
 ---
 
@@ -46,17 +51,23 @@ npx -p @govtechsg/open-attestation-cli open-attestation <arguments>
 To check if the setup is working correctly, run the following command:
 
 ```bash
-open-attestation --version
+tradetrust --version
 ```
 
 > In the event you need to change the binary name or the path to the binary, makes sure to change the command above accordingly as well as all the commands we will run throughout the guide.
 
-#### Wallet Creation
+## Wallet Creation
 
-The first step that we will need to go through, is the [wallet](/docs/reference/appendix/glossary#wallet) creation:
+Now that the TradeTrust CLI has been installed successfully, the first thing you will need is an [ethereum wallet](https://ethereum.org/en/wallets/).
+
+They can be created either by using our TradeTrust CLI or with [ethers.js](https://docs.ethers.org/v5/api/signer/#Wallet) or via [metamask](https://support.metamask.io/hc/en-us/articles/360059952212-MetaMask-is-a-self-custodial-wallet) browser extension.
+
+### Method 1: Using TradeTrust CLI
+
+The first step that we will need to go through, is the [wallet](/docs/topics/appendix/glossary#wallet) creation:
 
 ```bash
-open-attestation wallet create --output-file wallet.json
+tradetrust wallet create --output-file wallet.json
 ```
 
 During the creation, you will be prompted for a password. Make sure to remember it for the following steps. You will see a message after completion of the command:
@@ -80,17 +91,7 @@ You can use any of these ether faucet for sepolia network to fund your wallet. F
 - https://sepoliafaucet.com/
 - https://sepolia-faucet.pk910.de/
 
-### Further
-
-For detailed information about the application, please refer to the [Github Repository](https://github.com/Open-Attestation/open-attestation-cli)
-
-> Ethers.js provides a getting started guide on basic usage, we suggest referencing the guide as provided [https://docs.ethers.org/v5/getting-started/](https://docs.ethers.org/v5/getting-started/)
-
-## Code Method
-
-### Wallet creation
-
-#### Ethers.js
+### Method 2: Using ethers.js
 
 ```ts
 import { Wallet } from "ethers";
@@ -105,27 +106,19 @@ Address: 0xb985d345c4bb8121cE2d18583b2a28e98D56d04b
 Private Key: 0x49723865a8ab41e5e8081839e33dff15ab6b0125ba3acc82c25df64e8a8668f5
 ```
 
-[Ethers.js Wallet](https://docs.ethers.org/v5/api/signer/#Wallet)
+For more information please check [ethers.js Wallet](https://docs.ethers.org/v5/api/signer/#Wallet).
 
-#### Metamask
+> Alternately, ethers.js provides a getting started guide on basic usage, we suggest referencing the guide as provided [https://docs.ethers.org/v5/getting-started/](https://docs.ethers.org/v5/getting-started/)
+
+### Method 3: Using Metamask
 
 Follow the guide as linked: [https://www.coindesk.com/learn/how-to-set-up-a-metamask-wallet/](https://www.coindesk.com/learn/how-to-set-up-a-metamask-wallet/)
 
-### Provider
+## Understanding Provider class
 
-> Take note that there's an issue on ethers-v5 on estimating gas prices.
->
-> Utilize Gas Station or Oracles to estimate gas prices.
->
-> A sample implementation is available on open-attestation-cli and document-creator-website.
->
-> The issue does not occur on metamask, as gas prices is handled seperately
+The next thing we need to take note of is the provider class, both in ethers.js and metamask.
 
-#### Network Support
-
-The list of network that is supported is available on the [Supported Network](docs/topics/introduction/supported-network) page.
-
-#### Ethers.js
+### Ethers.js
 
 Ethers provides multiple Provider class to access the blockchain networks, some of which provides provider specific information
 
@@ -166,7 +159,17 @@ const provider = ethers.getDefaultProvider(network, {
 
 Other Providers are also available, [ethers.js documentation](https://docs.ethers.org/v5/api/providers/)
 
-#### Metamask
+> Take note that there's an issue on ethers-v5 on estimating gas prices.
+>
+> Utilize Gas Station or Oracles to estimate gas prices.
+>
+> A sample implementation is available on open-attestation-cli and document-creator-website.
+>
+> The issue does not occur on metamask, as gas prices is handled separately.
+
+For more information, please check out this [ethers.js guide](https://docs.ethers.org/v5/getting-started/#getting-started--connecting).
+
+### Metamask
 
 Metamask and other wallet providers are also provides access to the network, alongside the ability to send transactions from the wallet.
 
@@ -188,10 +191,9 @@ await provider.send("eth_requestAccounts", []);
 const signer = provider.getSigner();
 ```
 
-[Ethers.js Guide](https://docs.ethers.org/v5/getting-started/#getting-started--connecting)
-[Metamask Guide](https://docs.metamask.io/wallet/reference/provider-api/)
+For more information, please check out this [Metamask guide](https://docs.metamask.io/wallet/reference/provider-api/).
 
-### Signers, Providers and Contracts
+## Important terms to keep in mind
 
 | Term     | Description                                                                                                                                                                                                               |
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -216,3 +218,5 @@ signerFromEncryptedJson.connect(provider);
 const signerFromMnemonic = Wallet.fromMnemonic("MNEMONIC-HERE");
 signerFromMnemonic.connect(provider);
 ```
+
+Now that you have a basic understand, let us begin our journey to create a TradeTrust document!

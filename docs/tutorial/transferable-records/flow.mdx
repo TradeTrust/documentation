@@ -10,11 +10,9 @@ direction LR
     D --> E(Preparing Transferable Record);
     E -- CLI --> F(Wrapping Documents - CLI);
     E -- Code --> G(Wrapping Documents - Code);
-    F(Wrapping Documents - CLI) --> H(Issuing Document - CLI);
-    G(Wrapping Documents - Code) --> I(Issuing Documents - Code);
-    I --> J(Managing Title Escrows - Code);
-    H --> K(Going Further);
-    J --> K;
+    F(Wrapping Documents - CLI) --> H(Minting of the Document - CLI);
+    G(Wrapping Documents - Code) --> I(Minting of the Documents - Code);
+
 
     click A href "/docs/tutorial/transferable-records/overview"
     click B href "/docs/tutorial/transferable-records/token-registry/token-registry-cli"
@@ -25,7 +23,5 @@ direction LR
     click G href "/docs/tutorial/transferable-records/wrapping-document/wrapping-document-code"
     click H href "/docs/tutorial/transferable-records/issuing-document/issuing-document-cli"
     click I href "/docs/tutorial/transferable-records/issuing-document/issuing-document-code"
-    click J href "/docs/tutorial/transferable-records/title-escrow/title-escrow-code"
-    click K href "/docs/tutorial/transferable-records/going-further"
 end
 ```

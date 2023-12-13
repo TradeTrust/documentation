@@ -1,14 +1,14 @@
 ---
 id: decentralised-renderer
-title: Decentralised Renderer
-sidebar_label: Decentralised Renderer
+title: Creating a Custom Decentralised Renderer
+sidebar_label: Creating a Custom Decentralised Renderer
 ---
 
-OA documents are both readable by machines as well as by humans. Every OA document file is stored in a `.json` format, allowing any application to process the content within. To present the data file in a human-readable format, a renderer needs to be written.
+TradeTrust documents are both readable by machines as well as by humans. Every TradeTrust document file is stored in a `.json` format, allowing any application to process the content within. To present the data file in a human-readable format, a renderer needs to be written.
 
 In this guide, we will build and deploy the renderer to display data from a 📜 Certificate of Completion.
 
-This renderer is a static website that will be embedded in compliant OA viewer. It will take in the OA document in the raw form and generates the corresponding HTML code for rendering.
+This renderer is a static website that will be embedded in compliant TradeTrust viewer. It will take in the TradeTrust document and generates the corresponding HTML code for rendering.
 
 ## Prerequisites
 
@@ -38,6 +38,8 @@ In order to fully understand how developing a renderer work, we will start by cl
 - remove the folder `src/integration`
 
 Once you have finished the tutorial feel free to clone the repository again and have a look into the deleted files.
+
+Once you have a better understanding about how this decentralised renderer works, you can go ahead and fork a version of this repo and start development of your very own decentralised renderer template.
 
 ### Install code dependencies
 
@@ -81,7 +83,7 @@ export interface CocTemplateCertificate extends v2.OpenAttestationDocument {
 }
 
 export const cocTemplateCertificate: CocTemplateCertificate = {
-  name: "OpenAttestation Tutorial Certificate of Completion",
+  name: "TradeTrust Tutorial Certificate of Completion",
   issuers: [
     {
       name: "My name",
@@ -105,31 +107,31 @@ export const cocTemplateCertificate: CocTemplateCertificate = {
 
 ### Document objects explained
 
-In the above OA document, you will see four root objects:
+In the above TradeTrust document, you will see four root objects:
 
 #### `$template`
 
 The `$template` key to describe the template name used to render this display. It should have the following keys:
 
-- `$template.name` is the name of the template used to render a given OA document. This allows a single document renderer to render for multiple types of OA documents; each with a different template name.
+- `$template.name` is the name of the template used to render a given TradeTrust document. This allows a single document renderer to render for multiple types of TradeTrust documents; each with a different template name.
 
 - `$template.type` will always take the value of `EMBEDDED_RENDERER` for documents rendered in this manner.
 
-- `$template.url` will be the remote URL where your OA decentralized renderer resides. For now, we set it to `https://localhost:3000` but we will change this value later on in the [Deploying Document Renderer](#deploying-document-renderer) section.
+- `$template.url` will be the remote URL where your TradeTrust decentralized renderer resides. For now, we set it to `https://localhost:3000` but we will change this value later on in the [Deploying Document Renderer](#deploying-document-renderer) section.
 
 #### `name`
 
-The `name` key is a compulsory key to describe the type of OA document. In this case, we are creating an `OpenAttestation Tutorial Certificate of Completion`.
+The `name` key is a compulsory key to describe the type of TradeTrust document. In this case, we are creating a `TradeTrust Tutorial Certificate of Completion`.
 
 #### `recipient`
 
-OA documents do not have a strict data structure and allows issuers of documents to define their own data schema. The `recipient` object is a user-defined object that describes who the certificate is conferred to. In this case, you may replace `John Doe` with your name.
+TradeTrust documents do not have a strict data structure and allows issuers of documents to define their own data schema. The `recipient` object is a user-defined object that describes who the certificate is conferred to. In this case, you may replace `John Doe` with your name.
 
-In the next section, you will learn more about the OA document schema and how you may define your own data structure. For this guide, we will stick to this simple document.
+In the next section, you will learn more about the TradeTrust document schema and how you may define your own data structure. For this guide, we will stick to this simple document.
 
 #### `issuers`
 
-See [Creating Raw Document](/docs/tutorial/verifiable-documents/ethereum/raw-document#creating-raw-document).
+See [Creating Raw Document](/docs/tutorial/verifiable-documents/raw-document).
 
 ### Developing the COC Template View
 
@@ -209,7 +211,7 @@ We can now [start storybook](#run-development-preview) and make sure our compone
 
 ### Certificate of Completion template configuration
 
-An OA document may have multiple views, each of them rendered in separate tabs. For example, an OA document that is a degree certificate may have the actual certificate as one view, and the transcript as another view in a single template. A demo of the multiple views feature can be found [here](https://opencerts.io/?q={%22type%22:%22DOCUMENT%22,%22payload%22:{%22uri%22:%22https://opencerts.io/static/demo/homestead.opencert%22,%22permittedActions%22:[%22STORE%22],%22redirect%22:%22https://opencerts.io%22}}).
+A TradeTrust document may have multiple views, each of them rendered in separate tabs. For example, a TradeTrust document that is a degree certificate may have the actual certificate as one view, and the transcript as another view in a single template.
 
 For our 📜 Certificate of Completion, we will only use a single view. Create a file `src/templates/coc/index.tsx` with the following content:
 
@@ -286,4 +288,4 @@ If you are using Netlify, we recommend you to check out [how to enable custom do
 
 ## See Also
 
-[Generic Templates by TradeTrust](/docs/topics/generic-templates/overview)
+[Generic Templates by TradeTrust](/docs/reference/generic-templates/overview)

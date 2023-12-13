@@ -28,7 +28,7 @@ Each document is identified uniquely by a Document Hash, and comes into existenc
 
 This layer is not up for alteration or alternatives as it is the foundational layer which allows us to interact with TradeTrust documents. In particular, while the specification for how a TradeTrust document is generated from a `.json` file is fixed - the method with which this specification is achieved is open for modification at L2 discussed below.
 
-Some examples of various TradeTrust document schemas can be found at our the [Schemata Page](https://schemata.openattestation.com/)
+Some examples of various TradeTrust document schemas can be found at our the [Schemata Page](https://schemata.tradetrust.io/)
 
 ### L0: Alternative Ledger Integration
 
@@ -41,11 +41,11 @@ There are two different categories of integration at this level:
 
 In the event that a shared universe integration is proposed, it has to be a public, permissionless network similar to TradeTrust (Ethereum). This means that no entity should be able to exclude another entity from participating on the network. The network has to also be trustlessly verifiable by both participants, and the ledger state should be accessible publicly.
 
-For a parallel universe integration, documents and assets issued on the alternative ledger will not be verifiable on [TradeTrust.io](https://tradetrust.io), but implementers are welcome to create their own stack spanning L0 to L4. They may wish to rely on some of the work already done by TradeTrust to reduce the amount of bespoke work required. For example, [tt-verify](https://github.com/TradeTrust/tt-verify) is very [easily modified](/docs/reference/development/verifier/verify#available-verification-methods) to support [alternative verification methods](/docs/topics/advanced/alternative-ledgers).
+For a parallel universe integration, documents and assets issued on the alternative ledger will not be verifiable on [TradeTrust.io](https://tradetrust.io), but implementers are welcome to create their own stack spanning L0 to L4. They may wish to rely on some of the work already done by TradeTrust to reduce the amount of bespoke work required. For example, [tt-verify](https://github.com/TradeTrust/tt-verify) is very [easily modified](/docs/reference/libraries/tt-verify) to support [alternative verification methods](/docs/topics/advanced/alternative-ledgers).
 
 ### L1: Protocol Integration
 
-Reference Implementations: [TradeTrust Document Store library](https://github.com/TradeTrust/document-store) and [Tradetrust Token Registry Library](https://github.com/TradeTrust/token-registry)
+Libraries: [Document Store library](https://github.com/Open-Attestation/document-store) and [Token Registry Library](https://github.com/Open-Attestation/token-registry)
 
 L1 provides for an implementation of the TradeTrust protocol on Ethereum, based on the combination of a ERC721-compliant non-fungible token registry smart contract and our own Title Escrow smart contract. This layer provides the assurance that the MLETR requires for compliance.
 
@@ -53,7 +53,7 @@ An example of an alternative implementation here could be a Viper port of the sm
 
 ### L2: Library Level Integration
 
-Reference Implementation: [GitHub - tt-verify](https://github.com/TradeTrust/tt-verify).
+Library: [GitHub - tt-verify](https://github.com/TradeTrust/tt-verify).
 
 L2 provides for implementations of userland libraries that interact with the Ethereum smart contracts in L1 as well as TradeTrust documents in L(-1). These libraries are for ease of interaction, abstracting out the state and wallet management functionalities that require a lot of integration work.
 

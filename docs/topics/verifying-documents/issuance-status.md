@@ -16,7 +16,7 @@ The Token Registry stores the ownership state of the transferable records using 
 
 ### Document Store
 
-The [document store](/docs/integrator-section/verifiable-document/ethereum/document-store) is a smart contract on the Ethereum network that records the issuance and revocation status of TradeTrust documents. It stores the hashes of wrapped documents, which are the records of the owner of the document store having issued the documents. Before we explain the verification process in detail, we need to introduce a new concept: the `merkleRoot`.
+The [document store](/docs/topics/introduction/verifiable-documents/document-store) is a smart contract on the Ethereum network that records the issuance and revocation status of TradeTrust documents. It stores the hashes of wrapped documents, which are the records of the owner of the document store having issued the documents. Before we explain the verification process in detail, we need to introduce a new concept: the `merkleRoot`.
 
 Let's imagine that we need to wrap thousands of files and had to issue the `targetHash` for each of them. It would be extremely inefficient because Ethereum is slow, and we would have to pay for each transaction.
 
@@ -45,7 +45,7 @@ As discussed above, issuance of documents can happen individually or by batch. I
 
 To issue a document, an institution or individual :
 
-- [Deploys a new document store](/docs/integrator-section/verifiable-document/ethereum/document-store) on Ethereum and get the address of the deployed contract. (this action needs to be performed only once)
+- [Deploys a new document store](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli) on Ethereum and get the address of the deployed contract. (this action needs to be performed only once)
 - Adds the address of the deployed contract into the document (before wrapping).
 - Wraps a document (or a batch of documents) and get a `merkleRoot`. The wrapped documents can be shared to the recipients.
 - Issues the `merkleRoot` by calling the `issue` function from the document store contract, or `mint` function from the token registry contract.
@@ -164,7 +164,7 @@ Three important information can be found:
 - The DID controller (here `did:ethr:0x6813Eb9362372EEF6200f3b1dbC3f819671cBA69#controller`). It's used to identify which public key control the DID and must be added into the `issuer.identityProof.key` property of the document. It's also worth to note that the value is equal to the DID identifier, appended with `#controller`.
 - The ethereum address associated to the DID controller (here `0x6813eb9362372eef6200f3b1dbc3f819671cba69`). We will use it to verify the signature.
 
-> You can find an example of document using DID in our [guide](/docs/integrator-section/verifiable-document/did/raw-document).
+> You can find an example of document using DID in our [guide](/docs/tutorial/verifiable-documents/raw-document).
 
 A proof of signature looks like:
 

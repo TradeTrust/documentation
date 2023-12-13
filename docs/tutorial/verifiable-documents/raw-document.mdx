@@ -35,27 +35,31 @@ This will setup the JSON schema validator to validate the JSON inputs on the rig
 
 If you start editing the JSON data on the right you should see errors if the data does not conform to the OpenAttestation v2.0 schema. A summary of the number of errors is found on top of the right panel and the details of the errors are found below the two panels.
 
-### Creating raw document
+## Creating raw document
 
 We will now create the data for your document. Paste the following JSON data into the right panel of the JSON schema validator tool:
 
 ```json
 {
+  "recipient": {
+    "name": "John Doe"
+  },
   "$template": {
     "name": "main",
     "type": "EMBEDDED_RENDERER",
     "url": "https://tutorial-renderer.openattestation.com"
   },
-  "recipient": {
-    "name": "John Doe"
-  },
   "issuers": [
     {
+      "id": "did:ethr:0xaCc51f664D647C9928196c4e33D46fd98FDaA91D",
       "name": "Demo Issuer",
-      "tokenRegistry": "0x8431012Bc040942B59e3C5bf428221eab0b2f723",
+      "revocation": {
+        "type": "NONE"
+      },
       "identityProof": {
-        "type": "DNS-TXT",
-        "location": "automatic-orange-grouse.sandbox.openattestation.com"
+        "type": "DNS-DID",
+        "location": "intermediate-sapphire-catfish.sandbox.openattestation.com",
+        "key": "did:ethr:0xaCc51f664D647C9928196c4e33D46fd98FDaA91D#controller"
       }
     }
   ]
@@ -64,13 +68,17 @@ We will now create the data for your document. Paste the following JSON data int
 
 To makes things simple, we will use an existing deployed renderer (at https://tutorial-renderer.openattestation.com). However you will still need to replace the following values for your own document:
 
-#### 1. issuers[0].tokenRegistry
+#### 1. issuers[0].id
 
-Replace the value of `issuers[0].tokenRegistry` from `0x8431012Bc040942B59e3C5bf428221eab0b2f723` to the smart contract address of your token registry in the [previous steps](/docs/tutorial/transferable-records/token-registry/token-registry-cli)
+Replace the value of `issuers[0].id` from `did:ethr:0xaCc51f664D647C9928196c4e33D46fd98FDaA91D` to use the wallet address created from the [previous steps](/docs/tutorial/verifiable-documents/create). Keep `did:ethr:` in front of the wallet address.
 
 #### 1. issuers[0].identityProof.location
 
-Replace the value of `issuers[0].identityProof.location` from `few-green-cat.sandbox.openattestation.com` to the dns name used to bind the token registry's identity in the [previous steps](/docs/tutorial/transferable-records/dns)
+Replace the value of `issuers[0].identityProof.location` from `intermediate-sapphire-catfish.sandbox.openattestation.com` to the dns name used to bind the wallet address in the [previous steps](/docs/tutorial/verifiable-documents/dns)
+
+#### 1. issuers[0].identityProof.key
+
+Replace the value of `issuers[0].identityProof.key` from `did:ethr:0xaCc51f664D647C9928196c4e33D46fd98FDaA91D#controller` to the public key used to bind the wallet address in the [previous steps](/docs/tutorial/verifiable-documents/dns)
 
 ![Validator Completed](/docs/tutorial/verifiable-documents/ethereum/document-data/validator-completed.png)
 
@@ -80,7 +88,7 @@ Once all the values are configured and the raw document conforms to the schema, 
 
 Near the `wallet.json` file, create a folder named `raw-documents`. Inside that folder create a file names `certificate-1.json` and paste the validated JSON from above.
 
-> For transferable record, you may not batch process it with other documents. Your directory `raw-documents` may only contain one file.
+Create another file named `certificate-2.json` and paste the same validated JSON into the file, changing the `recipient.name` to a different name.
 
 At this point in time, your directory should look like the following:
 
@@ -88,13 +96,14 @@ At this point in time, your directory should look like the following:
 wallet.json
 raw-documents
   |-- certificate-1.json
+  |-- certificate-2.json
 ```
 
 We are now ready to wrap the documents.
 
 The tutorial will now require you to choose between the following options:
 
-- [CLI](/docs/tutorial/transferable-records/wrapping-document/wrapping-document-cli)
-- [Code](/docs/tutorial/transferable-records/wrapping-document/wrapping-document-code)
+- [CLI](/docs/tutorial/verifiable-documents/wrapping-document/wrapping-document-cli)
+- [Code](/docs/tutorial/verifiable-documents/wrapping-document/wrapping-document-code)
 
 <Flow />

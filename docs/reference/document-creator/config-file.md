@@ -90,7 +90,7 @@ The `"wallet"` property is a string that refers to your ethereum wallet. We supp
 
 The wallet property can be derive from either one of these methods:
 
-1. If you don't have a wallet, you can refer to [TradeTrust's documentation](https://github.com/TradeTrust/tradetrust-cli#wallet) to create a wallet.
+1. If you don't have a wallet, you can refer to [TradeTrust's documentation](/docs/tutorial/prerequisites#wallet-creation) to create a wallet.
    _Note: you will need to have TradeTrust Cli installed._ After running TT CLI `wallet create` command, this will give you a wallet.json.
 
 2. Alternatively, you can also generate a wallet.json from an existing account created in Metamask using the TradeTrust Cli. _Note: you will need to have TradeTrust Cli installed._
@@ -216,16 +216,16 @@ Below is an example of the `"defaults"` property:
 
 - The value of `"issuers"` property contains an array of the issuer object. The required properties for each issuer are `name`, `identityProof` and one of `documentStore` OR `tokenRegistry`.
 
-_Transferrable document requires a [`tokenRegistry`](/docs/tutorial/transferable-records/token-registry/token-registry-cli), whereas, a verifiable document requires a [`documentStore`](/docs/)._
+_Transferrable document requires a [`tokenRegistry`](/docs/tutorial/transferable-records/token-registry/token-registry-cli), whereas, a verifiable document requires a [`documentStore`](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli)._
 
 - The `"name"` property in the `"issuers"` section is a string, which refers to the name of the token registry or the name of the document store.
-  Please refer to [token registry](/docs/tutorial/transferable-records/token-registry/token-registry-cli) for transferable document or [deploying document store](/docs/) for verifiable document, for more information.
+  Please refer to [token registry](/docs/tutorial/transferable-records/token-registry/token-registry-cli) for transferable document or [deploying document store](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli) for verifiable document, for more information.
 
 - The `"tokenRegistry"` property is a string that is the address for the token registry, please refer to [token registry](/docs/tutorial/transferable-records/token-registry/token-registry-cli) for more information.
 
-- The `"documentStore"` property is a string that is the address for the document store, please refer to [deploying document store](/docs/) for more information.
+- The `"documentStore"` property is a string that is the address for the document store, please refer to [deploying document store](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli) for more information.
 
-- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](/docs/tutorial/transferable-records/dns) for more information.
+- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](/docs/tutorial/verifiable-documents/advanced/document-store/configuring-dns) for more information.
 
 #### V3 document defaults
 
@@ -284,7 +284,7 @@ _Transferrable document requires a [`tokenRegistry`](/docs/tutorial/transferable
 
 - The value `"proof"` property contains an object with the necessary information about the `"type"` of proof, `"method"` of proof, `"value"` of the proof method and the `"revocation"` type and status of the document.
 
-- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](/docs/tutorial/transferable-records/dns) for more information.
+- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](/docs/tutorial/verifiable-documents/advanced/document-store/configuring-dns) for more information.
 
 - The value of the `"credentialSubject"` property is defined as a set of objects that contain one or more properties that are each related to a subject of the verifiable credential.
 

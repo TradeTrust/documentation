@@ -104,7 +104,7 @@ Also, please make sure you have completed the prerequisites listed below.
 
 #### Creation of wallet
 
-- Create a [wallet](/docs/tutorial/verifiable-documents/ethereum/wallet).
+- Create a [wallet](/docs/tutorial/prerequisites#wallet-creation).
 
 ### Creation of DID
 

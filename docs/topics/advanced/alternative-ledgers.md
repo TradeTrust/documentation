@@ -8,7 +8,7 @@ In this article we will discuss how TradeTrust can be modified to be used for le
 
 ## Quorum
 
-[Quorum](https://consensys.net/quorum/) is a fork of Ethereum, with enterprise functionality and permissioning added on top of it. It also differs from Ethereum by using non-proof of work consensus algorithms - between a choice of [IBFT](https://docs.goquorum.consensys.net/en/stable/Concepts/Consensus/IBFT/) or [Raft](https://docs.goquorum.consensys.net/en/stable/Concepts/Consensus/Raft/). It thus follows that it is not a public, permissionless network like Ethereum, but a permissioned network.
+[Quorum](https://consensys.net/quorum/) is a fork of Ethereum, with enterprise functionality and permissioning added on top of it. It also differs from Ethereum by using non-proof of work consensus algorithms - between a choice of [IBFT](https://docs.goquorum.consensys.io/configure-and-manage/configure/consensus-protocols/ibft#docusaurus_skipToContent_fallback) or [Raft](https://docs.goquorum.consensys.io/configure-and-manage/configure/consensus-protocols/raft). It thus follows that it is not a public, permissionless network like Ethereum, but a permissioned network.
 
 Nevertheless, Quorum has taken care to maintain compatibility with Ethereum smart contracts and this means that we can use not only the TradeTrust file format, we can also use the Document Store and Token Registry smart contracts without any modification.
 

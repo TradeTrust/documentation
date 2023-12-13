@@ -9,13 +9,17 @@ import Flow from "../flow.mdx";
 
 <Flow />
 
-> For the current step, you can either opt to use the [CLI](/docs/tutorial/transferable-records/wrapping-document-cli) or [Code](/docs/tutorial/transferable-records/wrapping-document-cli).
+> For the current step, you can either opt to use the [CLI](/docs/tutorial/transferable-records/wrapping-document/wrapping-document-cli) or [Code](/docs/tutorial/transferable-records/wrapping-document/wrapping-document-code).
 
-Every OA document has a checksum that provides it a tamper-proof property. At the same time, because the checksum can be used to uniquely identify a document, the checksum (or its derived value) is stored onto the document store as evidence of issuance. To compute the checksum, a `raw document` goes through a process known as `wrapping` to become a `wrapped document`. Only then, the document is ready to be issued onto the blockchain.
+Every TradeTrust document has a checksum that provides it a tamper-proof property. At the same time, because the checksum can be used to uniquely identify a document, the checksum (or its derived value) will be issued into the token registry as evidence of issuance. To compute the checksum, a `raw document` goes through a process known as `wrapping` to become a `wrapped document`. Only then, the document is ready to be issue.
+
+> Please note that for Transferable Records, there is **NO** batch wrapping.
 
 In this guide, we will learn how to generate the checksum by running the `wrapping` process.
 
-A `targetHash`, a 64 character long string prepended with `0x` will be generated. The `targetHash` is the only information that will be stored onto the Blockchain to verify the issuance status of an OA document.
+We will use the CLI tool to read all the files in the `raw-documents` folder, wrap them and then output the files in another directory `wrapped-documents`.
+
+A `merkleRoot`, a 64 character long string prepended with `0x` will be generated. The `merkleRoot` is the only information that will be stored onto the Blockchain to verify the issuance status of a TradeTrust document.
 
 ## Installation
 
@@ -51,52 +55,50 @@ const document = {
     },
   ],
   recipient: {
-    name: "Recipient Name",
-  },
-  unknownKey: "unknownValue",
-  attachments: [
-    {
-      filename: "sample.pdf",
-      type: "application/pdf",
-      data: "BASE64_ENCODED_FILE",
-    },
-  ],
+    name: "John Doe",
+  }
 } as any;
 
 const wrappedDocument = wrapDocument(document);
 console.log(wrappedDocument);
-```
 
-wrappedDocument
-
-```json
+// wrapped Document
 {
-  version: 'https://schema.openattestation.com/2.0/schema.json',
-  data: {
-    id: '1535e123-172b-477d-be3a-d066ed0066ac:string:SERIAL_NUMBER_123',
-    '$template': {
-      name: 'da731bd8-455d-4bb7-be2d-52b86e295e14:string:CUSTOM_TEMPLATE',
-      type: 'c168dc65-afa4-4051-8c07-3c155c3b37bc:string:EMBEDDED_RENDERER',
-      url: '1a4fd76f-a2aa-4ee9-abb1-3b046aa41b3d:string:https://localhost:3000/renderer'
+  "version": "https://schema.openattestation.com/2.0/schema.json",
+  "data": {
+    "id": "1535e123-172b-477d-be3a-d066ed0066ac:string:SERIAL_NUMBER_123",
+    "$template": {
+      "name": "da731bd8-455d-4bb7-be2d-52b86e295e14:string:CUSTOM_TEMPLATE",
+      "type": "c168dc65-afa4-4051-8c07-3c155c3b37bc:string:EMBEDDED_RENDERER",
+      "url": "1a4fd76f-a2aa-4ee9-abb1-3b046aa41b3d:string:https://localhost:3000/renderer"
     },
-    issuers: [ [Object] ],
-    recipient: {
-      name: 'c2bab1ae-37d2-4b7a-86c1-f300edc4e6d2:string:Recipient Name'
-    },
-    unknownKey: 'af4cad23-f277-4d31-a947-51870bf1739a:string:unknownValue',
-    attachments: [ [Object] ]
+    "issuers": [
+      {
+        "name": "2fb102d4-00b2-4c42-87b9-ab545829a4ab:string:DEMO STORE",
+        "tokenRegistry": "592202e4-bf4b-4826-9639-a9a3fad38314:string:0x9178F546D3FF57D7A6352bD61B80cCCD46199C2d",
+        "identityProof": {
+          "type": "a84e9b5b-a99f-4248-ac4d-087b66eec523:string:DNS-TXT",
+          "location": "f8bf7139-6ca5-4678-b2c7-49aa81ac3ccc:string:tradetrust.io"
+        }
+      }
+    ],
+    "recipient": {
+      "name": "c2bab1ae-37d2-4b7a-86c1-f300edc4e6d2:string:John Doe"
+    }
   },
-  signature: {
-    type: 'SHA3MerkleProof',
-    targetHash: '8dcf358a9436bca6654f565e3c5843d91c0052d3a2eff37bbd380038e8a1fa39',
-    proof: [],
-    merkleRoot: '8dcf358a9436bca6654f565e3c5843d91c0052d3a2eff37bbd380038e8a1fa39'
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash": "8dcf358a9436bca6654f565e3c5843d91c0052d3a2eff37bbd380038e8a1fa39",
+    "proof": [],
+    "merkleRoot": "8dcf358a9436bca6654f565e3c5843d91c0052d3a2eff37bbd380038e8a1fa39"
   }
 }
 ```
 
 The `signature` section includes the fields of `targetHash` and `merkleRoot`.
+
 `signature.targetHash` is the generated hash of the document, computed on the algorithm stated on the `signature.type`.
+
 In the scenerio of `wrapDocument`, `signature.merkleRoot` will be the same as `signature.targetHash`.
 
 > Note:
@@ -110,12 +112,13 @@ In the scenerio of `wrapDocument`, `signature.merkleRoot` will be the same as `s
 > - The object has an unique `targetHash` value based on the input.
 > - The object has an unique `merkleRoot` value which correspond to the `targetHash`.
 
+:::tip
 To extract the merkle root, refer to the example below
-
-> Save this value for future reference.
 
 ```ts
 const merkleRoot: string = wrappedDocument.signature.targetHash;
 ```
 
-You can now issue the merkle root (`signature.merkleRoot`) to create valid transferable document.
+:::
+
+Congratulation! you have successfully wrapped the documents, next lets see how we can mint the document to 'issue' it.
