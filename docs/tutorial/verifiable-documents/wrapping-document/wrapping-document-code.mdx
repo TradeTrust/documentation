@@ -211,7 +211,7 @@ The `signature` section includes the fields of `targetHash` and `merkleRoot`.
 
 `signature.targetHash` is the generated hash of the document, computed on the algorithm stated on the `signature.type`.
 
-`signature.merkleRoot` uses the [merkle tree](/docs/topics/appendix/glossary), which combines the `signature.targetHash` and the `signature.proofs` to generate a unique hash for the batch.
+`signature.merkleRoot` uses the merkle tree, which combines the `signature.targetHash` and the `signature.proofs` to generate a unique hash for the batch.
 
 `signature.proofs` consists of other `signature.targetHash` and branch (merkle root) that is required for the verification of `signature.merkleRoot`.
 

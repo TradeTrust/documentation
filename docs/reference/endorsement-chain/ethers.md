@@ -4,8 +4,7 @@ title: Endorsement Chain (Ethers.js)
 sidebar_label: Endorsement Chain (Ethers.js)
 ---
 
-## Endorsement Chain (Ethers.js)
-
+<!--
 ```sh
 npm install --save @govtechsg/endorsement-chain
 ```
@@ -19,6 +18,7 @@ const tokenId = "0xabcd";
 const endorsementChain = retrieveEndorsementChain({ tokenRegistry, tokenId });
 console.log(endorsementChain);
 ```
+-->
 
 ## How it works internally
 

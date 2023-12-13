@@ -64,7 +64,7 @@ They can be created either by using our TradeTrust CLI or with [ethers.js](https
 
 ### Method 1: Using TradeTrust CLI
 
-The first step that we will need to go through, is the [wallet](/docs/reference/appendix/glossary#wallet) creation:
+The first step that we will need to go through, is the [wallet](/docs/topics/appendix/glossary#wallet) creation:
 
 ```bash
 tradetrust wallet create --output-file wallet.json

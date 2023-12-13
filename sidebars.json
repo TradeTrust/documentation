@@ -201,9 +201,8 @@
     ],
     "Libraries": [
       "reference/libraries/open-attestation",
-      "reference/libraries/oa-verify",
+      "reference/libraries/tt-verify",
       "reference/libraries/subgraph"
-    ],
-    "Endorsement Chain": ["reference/endorsement-chain/endorsement-chain-ethers"]
+    ]
   }
 }

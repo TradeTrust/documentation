@@ -50,7 +50,7 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
 
 ```
 
-- `"documentStore"` - Update with your document store. For more information, click [here](/docs/).
+- `"documentStore"` - Update with your document store. For more information, click [here](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli).
 - `"location"` - Update with the Issuer's domain. For more information, click [here](/docs/tutorial/transferable-records/dns).
 - `"logo"` - Update with the Logo's URL, to be displayed accordingly as the image above.
 - `"backgroundColor"` - Update with the desired background color. The default color(#ffffff) will be used if color is not stated here. i.e. values for this field "#000000", "black"

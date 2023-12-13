@@ -211,7 +211,7 @@ We can now [start storybook](#run-development-preview) and make sure our compone
 
 ### Certificate of Completion template configuration
 
-A TradeTrust document may have multiple views, each of them rendered in separate tabs. For example, a TradeTrust document that is a degree certificate may have the actual certificate as one view, and the transcript as another view in a single template. A demo of the multiple views feature can be found [here](https://opencerts.io/?q={%22type%22:%22DOCUMENT%22,%22payload%22:{%22uri%22:%22https://opencerts.io/static/demo/homestead.opencert%22,%22permittedActions%22:[%22STORE%22],%22redirect%22:%22https://opencerts.io%22}}).
+A TradeTrust document may have multiple views, each of them rendered in separate tabs. For example, a TradeTrust document that is a degree certificate may have the actual certificate as one view, and the transcript as another view in a single template.
 
 For our 📜 Certificate of Completion, we will only use a single view. Create a file `src/templates/coc/index.tsx` with the following content:
 

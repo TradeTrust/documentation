@@ -7,7 +7,7 @@ sidebar_label: Prerequisites
 Before you construct your configuration file(`.json` file), please ensure you have these:
 
 - [Wallet (`.json` file)](/docs/tutorial/prerequisites#wallet-creation)
-- [Document Store (for verifiable document)](/docs/)
+- [Document Store (for verifiable document)](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli)
 - [Token Registry (for transferable document)](/docs/tutorial/transferable-records/token-registry/token-registry-cli)
 - [Configured DNS](/docs/tutorial/transferable-records/dns)
 - [Decentralised Renderer](/docs/tutorial/decentralised-renderer/)

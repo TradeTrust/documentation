@@ -17,9 +17,9 @@ It's possible to revoke a signed document only if you fulfill certain **prerequi
 
 - an `ethr` DID (if you've been following the above steps, you should have one already)
 - some kind of DID documents:
-  1. base DID document (`ISSUER_IDENTITY`: `identityProof.identifier` against `ethr` DID)
-  2. DID-DNS document (`ISSUER_IDENTITY`: `identityProof.identifier` against a [DNS-TXT](/docs/docs-section/how-does-it-work/issuance-identity))
-- a deployed `documentStore`, click [here](/docs/) for how to do so.
+  1. base DID document (`ISSUER_IDENTITY`: `identityProof.identifier` = [`ethr` DID](/docs/topics/introduction/issuer-method-dns-did))
+  2. DNS-DID document (`ISSUER_IDENTITY`: `identityProof.identifier` = [DNS-DID](/docs/topics/introduction/issuer-method-dns-did))
+- a deployed `documentStore`, click [here](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli) for how to do so.
 - before you wrap your document with the wrapper SDK, add a `revocation` block with these keys:
 
 ```json
@@ -63,7 +63,7 @@ tradetrust document-store revoke --address <DOCUMENT_STORE_ADDRESS> --hash <HASH
 
 In the example above:
 
-- `--address` is the document store address, for instance the one created with the [Deploying Document Store](/docs/) guide.
+- `--address` is the document store address, for instance the one created with the [Deploying Document Store](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli) guide.
 - `--hash` is the value of `targetHash` field of one of the [previously wrapped documents](/docs/tutorial/verifiable-documents/wrapping-document/wrapping-document-cli) (open one of the file, head to the bottom and check for the `targetHash` in the `signature` object.)
 
 You will be prompted for the password that you used while creating the wallet. You will see a message after completion of the command:
