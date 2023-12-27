@@ -89,9 +89,6 @@ const siteConfig = {
       indexName: "tradetrust",
       algoliaOptions: {},
     },
-    prism: {
-      theme: require("prism-react-renderer/themes/nightOwl"),
-    },
   },
   customFields: {
     GA_MEASUREMENT_ID,

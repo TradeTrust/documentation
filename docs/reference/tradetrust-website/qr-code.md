@@ -25,7 +25,7 @@ Sample of how the qrcode looks like upon document rendering:
 
 ### TradeTrust functions
 
-_Prerequisite: [Netlify functions](https://docs.netlify.com/functions/overview/)._
+*Prerequisite: [Netlify functions](https://docs.netlify.com/functions/overview/).*
 
 TradeTrust functions is built with Netlify functions. TradeTrust provides a set of API endpoints for demonstration purposes only. Essentially you should have an endpoint service yourself to store your documents so to facilitate rendering of QR code in your web application later on.
 
@@ -44,8 +44,8 @@ Let's go through the steps:
    - `TT_STORAGE_AWS_ACCESS_KEY_ID` = Your AWS access key ID. (For document storage service)
    - `TT_STORAGE_AWS_SECRET_ACCESS_KEY` = Your AWS secret access key. (For document storage service)
 6. Hit deploy site on netlify dashboard and your API endpoints should be up. They are accessible at:
-   - https://<YOUR_RENAMED_NETLIFY_SITENAME>/.netlify/functions/verify/
-   - https://<YOUR_RENAMED_NETLIFY_SITENAME>/.netlify/functions/storage/
+   - `https://<YOUR_RENAMED_NETLIFY_SITENAME>/.netlify/functions/verify/`
+   - `https://<YOUR_RENAMED_NETLIFY_SITENAME>/.netlify/functions/storage/`
 
 #### Document storage
 

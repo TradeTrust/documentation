@@ -10,15 +10,6 @@
     "serve": "docusaurus serve",
     "clear": "docusaurus clear"
   },
-  "dependencies": {
-    "@docusaurus/core": "^2.4.1",
-    "@docusaurus/preset-classic": "^2.4.1",
-    "@docusaurus/theme-mermaid": "^2.4.1",
-    "@govtechsg/tradetrust-ui-components": "^2.20.0",
-    "@govtechsg/tradetrust-utils": "^1.6.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
   "browserslist": {
     "production": [
       ">0.5%",
@@ -32,24 +23,33 @@
     ]
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=18.0.0"
   },
   "prettier": {
     "printWidth": 120
   },
+  "dependencies": {
+    "@docusaurus/core": "^3.0.1",
+    "@docusaurus/preset-classic": "^3.0.1",
+    "@docusaurus/theme-mermaid": "^3.0.1",
+    "@tradetrust-tt/tradetrust-ui-components": "^2.22.0",
+    "@tradetrust-tt/tradetrust-utils": "^1.9.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^2.4.1",
-    "@tsconfig/docusaurus": "^2.0.0",
-    "@types/react": "^18.0.14",
-    "@types/react-helmet": "^6.1.5",
+    "@docusaurus/module-type-aliases": "^3.0.1",
+    "@tsconfig/docusaurus": "^2.0.2",
+    "@types/react": "^18.2.45",
+    "@types/react-helmet": "^6.1.11",
     "@types/react-router-dom": "^5.3.3",
-    "autoprefixer": "^10.4.7",
-    "dotenv": "^16.0.1",
+    "autoprefixer": "^10.4.16",
+    "dotenv": "^16.3.1",
     "lodash": "^4.17.21",
-    "postcss": "^8.4.14",
-    "postcss-cli": "^10.0.0",
-    "prettier": "^2.7.1",
-    "tailwindcss": "^3.1.4",
-    "typescript": "^4.7.4"
+    "postcss": "^8.4.32",
+    "postcss-cli": "^11.0.0",
+    "prettier": "^3.1.1",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.3.3"
   }
 }

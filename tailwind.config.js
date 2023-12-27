@@ -1,8 +1,8 @@
 const merge = require("lodash/merge");
-const commonUiConfig = require("@govtechsg/tradetrust-ui-components/build/tailwind");
+const commonUiConfig = require("@tradetrust-tt/tradetrust-ui-components/build/tailwind");
 
 module.exports = merge(commonUiConfig, {
-  content: ["./src/**/*.{js,jsx,ts,tsx}", "./node_modules/@govtechsg/tradetrust-ui-components/src/**/*.tsx"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}", "./node_modules/@tradetrust-tt/tradetrust-ui-components/src/**/*.tsx"],
   theme: {
     container: (theme) => ({
       center: true,

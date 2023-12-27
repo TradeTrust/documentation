@@ -1,7 +1,7 @@
 import React from "react";
 import BrowserOnly from "@docusaurus/BrowserOnly";
-import { FeedbackWidget, FeedbackWidgetText } from "@govtechsg/tradetrust-ui-components";
-import { gaEvent } from "@govtechsg/tradetrust-utils";
+import { FeedbackWidget, FeedbackWidgetText } from "@tradetrust-tt/tradetrust-ui-components";
+import { gaEvent } from "@tradetrust-tt/tradetrust-utils";
 
 const FeedbackWidgetTextWrapper: React.FunctionComponent = () => {
   const pathname = location.pathname;

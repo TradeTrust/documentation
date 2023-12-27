@@ -16,7 +16,11 @@ To make full use of this generic template (cover letter), please update the conf
 
 ### Fields to update
 
-_Note: **Please replace all the placeholder "<...>" with your values.**_
+:::note
+
+_Please replace all the placeholder `"<...>"` with your values._
+
+:::
 
 ```json
 "network": "<Your network>",
@@ -69,4 +73,6 @@ _Note: **Please replace all the placeholder "<...>" with your values.**_
 - `"apiKey"` - Update with the document storage API key. For more information, click [here](/docs/reference/document-creator/config-file#document-storage-property).
 - `"url"` - Update with the document storage URL. For more information, click [here](/docs/reference/document-creator/config-file#document-storage-property).
 
-_Note: **The "documentStorage" field is optional, if you do not have any document storage endpoint setup, you can omit this entire section.**._
+:::note
+_**The "documentStorage" field is optional, if you do not have any document storage endpoint setup, you can omit this entire section.**._
+:::
