@@ -23,6 +23,8 @@ const siteConfig = {
       "@docusaurus/preset-classic",
       {
         docs: {
+          // When release, uncomment includeCurrentVersion: false
+          // includeCurrentVersion: false,          
           path: "./docs",
           sidebarPath: require.resolve("./sidebars.json"),
           sidebarCollapsible: true,
@@ -49,6 +51,11 @@ const siteConfig = {
         { to: "docs/tutorial/introduction", label: "Tutorial" },
         { to: "docs/topics/introduction/what-is-tradetrust", label: "Topics" },
         { to: "docs/reference/tradetrust-website/overview", label: "References" },
+        { 
+          type: "docsVersionDropdown", 
+          position: "right", 
+          dropdownActiveClassDisabled: false,
+        }
       ],
     },
     footer: {
