@@ -166,6 +166,11 @@
   @apply text-gray-400;
 }
 
+.footer__link-item {
+  @apply flex;
+  @apply items-center;
+}
+
 .navbar__brand {
   @apply h-full;
 }

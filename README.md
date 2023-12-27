@@ -1,8 +1,12 @@
 # Website
 
-This website is built using [Docusaurus 2](https://v2.docusaurus.io/), a modern static website generator.
+This website is built using [Docusaurus 3](https://docusaurus.io/blog/releases/3.0), a modern static website generator.
+
+We are using versioning from docusaurus, for more information: [https://docusaurus.io/docs/versioning]
 
 ## Installation
+
+**Please use node version 18.x.x**
 
 ```
 npm install

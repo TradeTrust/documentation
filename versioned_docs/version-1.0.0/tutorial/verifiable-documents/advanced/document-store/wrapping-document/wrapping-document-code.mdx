@@ -1,0 +1,236 @@
+---
+id: wrapping-document-code
+title: Wrapping Documents (Code)
+sidebar_label: Wrapping Documents (Code)
+pagination_next: tutorial/verifiable-documents/advanced/document-store/issuing-document/issuing-document-code
+---
+
+import Flow from "../flow.mdx";
+
+<Flow />
+
+> For the current step, you can either opt to use the [CLI](/docs/tutorial/verifiable-documents/advanced/document-store/wrapping-document/wrapping-document-cli) or [Code](/docs/tutorial/verifiable-documents/advanced/document-store/wrapping-document/wrapping-document-code).
+
+Every TradeTrust document has a checksum that provides it a tamper-proof property. At the same time, because the checksum can be used to uniquely identify a document, the checksum (or its derived value) will be issued into the document store as evidence of issuance. To compute the checksum, a `raw document` goes through a process known as `wrapping` to become a `wrapped document`. Only then, the document is ready to be issue.
+
+Multiple documents can be wrapped at the same time in a single batch operation, creating a single checksum for the entire batch of raw documents. This is especially useful when using document store on the Ethereum blockchain to lower the transaction cost and time.
+
+In this guide, we will learn how to generate the checksum by running the `wrapping` process.
+
+We will use the CLI tool to read all the files in the `raw-documents` folder, wrap them and then output the files in another directory `wrapped-documents`.
+
+A `merkleRoot`, a 64 character long string prepended with `0x` will be generated.
+
+## Installation
+
+```bash
+npm i --save @govtechsg/open-attestation
+```
+
+---
+
+## Usage
+
+### Wrapping a single document
+
+`wrapDocument` takes in a documents and returns the wrapped document. Upon validating the document against it's schema, the document hash will be computed, to be placed onto the `signature` section of the wrapped document. The `signature` is to be used for integrity verification on the later stage of the tutorial.
+
+```js
+import { wrapDocument } from "@govtechsg/open-attestation";
+const document = {
+  "$template": {
+    "name": "main",
+    "type": "EMBEDDED_RENDERER",
+    "url": "https://tutorial-renderer.openattestation.com"
+  },
+  "recipient": {
+    "name": "John Doe"
+  },
+  "issuers": [
+    {
+      "name": "Demo Issuer",
+      "documentStore": "0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b",
+      "identityProof": {
+        "type": "DNS-TXT",
+        "location": "few-green-cat.sandbox.openattestation.com"
+      }
+    }
+  ]
+} as any;
+
+const wrappedDocument = wrapDocument(document);
+console.log(wrappedDocument);
+
+// wrappedDocument
+{
+  "version": "https://schema.openattestation.com/2.0/schema.json",
+  "data": {
+    "$template": {
+      "name": "592202e4-bf4b-4826-9639-a9a3fad38314:string:main",
+      "type": "172389bf-ef30-448f-9153-79475c4a0236:string:EMBEDDED_RENDERER",
+      "url": "8aaf3835-f1d5-444d-9855-0ec230c271ec:string:https://tutorial-renderer.openattestation.com"
+    },
+    "recipient": {
+      "name": "5bc9f48f-5f85-4a8f-a3c4-2e99ee94b509:string:John Doe"
+    },
+    "issuers": [
+      {
+        "name": "f8bf7139-6ca5-4678-b2c7-49aa81ac3ccc:string:Demo Issuer",
+        "documentStore": "a84e9b5b-a99f-4248-ac4d-087b66eec523:string:0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b",
+        "identityProof": {
+          "type": "2fb102d4-00b2-4c42-87b9-ab545829a4ab:string:DNS-TXT",
+          "location": "592202e4-bf4b-4826-9639-a9a3fad38314:string:few-green-cat.sandbox.openattestation.com"
+        }
+      }
+    ]
+  },
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash": "d83534d672d96753ea3cb50ac63129782a1c345d98b1141f9fe5449f1c225601",
+    "proof": [],
+    "merkleRoot": "d83534d672d96753ea3cb50ac63129782a1c345d98b1141f9fe5449f1c225601"
+  }
+}
+```
+
+The `signature` section includes the fields of `targetHash` and `merkleRoot`.
+`signature.targetHash` is the generated hash of the document, computed on the algorithm stated on the `signature.type`.
+In the scenerio of `wrapDocument`, `signature.merkleRoot` will be the same as `signature.targetHash`.
+
+### Batch Wrapping of documents
+
+`wrapDocuments` takes in an array of documents and returns the wrapped batch. Each document must be valid regarding the version of the schema used (see below) It computes the Merkle root of the batch and appends it to each document. This Merkle root can be published on the blockchain and queried against to prove the provenance of the document issued this way. Alternatively, the Merkle root may be signed by the document issuer's private key, which may be cryptographically verified using the issuer's public key or Ethereum account.
+
+```js
+import { wrapDocuments } from "@govtechsg/open-attestation";
+  const document = {
+  "recipient": {
+    "name": "John Doe"
+  },
+  "$template": {
+    "name": "main",
+    "type": "EMBEDDED_RENDERER",
+    "url": "https://tutorial-renderer.openattestation.com"
+  },
+  "issuers": [
+    {
+      "name": "Demo Issuer",
+      "documentStore": "0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b",
+      "identityProof": {
+        "type": "DNS-TXT",
+        "location": "few-green-cat.sandbox.openattestation.com"
+      }
+    }
+  ]
+} as any;
+
+  const inputDocument = [document, { ...document, recipient.name: "Sam Timmy" }];
+
+  const wrappedDocuments: WrappedDocument<any>[] = wrapDocuments(inputDocument);
+  console.log(
+    `Same merkleRoot: ${
+      wrappedDocuments[0].signature.merkleRoot ===
+      wrappedDocuments[1].signature.merkleRoot
+    }`
+  ); // Same merkleRoot: true
+  console.log(`Merkle Root: ${wrappedDocuments[0].signature.merkleRoot}`); // Merkle Root: ab6504f9c8975157fd05e503116e9b706fff758705027d6895599efe7b3fe1b7
+  console.log(`${JSON.stringify(wrappedDocuments)}`);
+
+// wrappedDocuments
+[
+  {
+    "version": "https://schema.openattestation.com/2.0/schema.json",
+    "data": {
+      "$template": {
+        "name": "592202e4-bf4b-4826-9639-a9a3fad38314:string:main",
+        "type": "172389bf-ef30-448f-9153-79475c4a0236:string:EMBEDDED_RENDERER",
+        "url": "8aaf3835-f1d5-444d-9855-0ec230c271ec:string:https://tutorial-renderer.openattestation.com"
+      },
+      "recipient": {
+        "name": "5bc9f48f-5f85-4a8f-a3c4-2e99ee94b509:string:John Doe"
+      },
+      "issuers": [
+        {
+          "name": "f8bf7139-6ca5-4678-b2c7-49aa81ac3ccc:string:Demo Issuer",
+          "documentStore": "a84e9b5b-a99f-4248-ac4d-087b66eec523:string:0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b",
+          "identityProof": {
+            "type": "2fb102d4-00b2-4c42-87b9-ab545829a4ab:string:DNS-TXT",
+            "location": "592202e4-bf4b-4826-9639-a9a3fad38314:string:few-green-cat.sandbox.openattestation.com"
+          }
+        }
+      ]
+    },
+    "signature": {
+      "type": "SHA3MerkleProof",
+      "targetHash": "1d9f8d9sd9fjeiweob50ac63129782a1c3y837f6s78s8cg8hjg76hj5h342k33h",
+      "proof": [],
+      "merkleRoot": "d83534d672d96753ea3cb50ac63129782a1c345d98b1141f9fe5449f1c225601"
+    }
+  },
+  {
+    "version": "https://schema.openattestation.com/2.0/schema.json",
+    "data": {
+      "recipient": { "name": "468a6e8e-a748-4335-8fd7-dcf173ab0385:string:Sam Timmy" },
+      "$template": {
+        "name": "051b6d16-e29e-4ada-90f4-c8758148a84b:string:main",
+        "type": "8767bed1-db53-43cc-b4a3-ba0b3e8ae683:string:EMBEDDED_RENDERER",
+        "url": "01b783ef-712f-470c-9603-0a3b9e9706c0:string:https://tutorial-renderer.openattestation.com"
+      },
+      "issuers": [
+        {
+          "name": "1da609ef-86e1-4d1c-a50b-ae0a542e4489:string:string:Demo Issuer",
+          "documentStore": "49357695-a00b-4927-90db-deb8b9f52b6f:string:0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b",
+          "identityProof": {
+            "type": "6b711869-14e1-4597-b67d-ef26fb274e37:string:DNS-TXT",
+            "location": "ca004b8b-daa8-4573-b5d3-507230ebb244:string:few-green-cat.sandbox.openattestation.com"
+          }
+        }
+      ]
+    },
+    "signature": {
+      "type": "SHA3MerkleProof",
+      "targetHash": "5d340efd7e1d5693c4baa423499684c9be5aafbe3882d482316b444b661d969f",
+      "proof": ["2d4e16ac99f90aa4e95afd173173a438f054060140b0664c3afd568074557c60"],
+      "merkleRoot": "ab6504f9c8975157fd05e503116e9b706fff758705027d6895599efe7b3fe1b7"
+    }
+  }
+]
+```
+
+The `signature` section includes the fields of `targetHash` and `merkleRoot`.
+
+`signature.targetHash` is the generated hash of the document, computed on the algorithm stated on the `signature.type`.
+
+`signature.merkleRoot` uses the merkle tree, which combines the `signature.targetHash` and the `signature.proofs` to generate a unique hash for the batch.
+
+`signature.proofs` consists of other `signature.targetHash` and branch (merkle root) that is required for the verification of `signature.merkleRoot`.
+
+> Note:
+> Though `wrapDocument` and `wrapDocuments` are almost identical, there is a slight difference.
+>
+> wrapDocument:
+>
+> - returns an object.
+> - The object is a wrapped document corresponding to the one provided as input.
+> - The object has an unique `targetHash` value based on the input.
+> - The object has an unique `merkleRoot` value which correspond to the `targetHash`.
+>
+> wrapDocuments:
+>
+> - returns an array.
+> - Each element in the array is a wrapped document corresponding to the one provided as input.
+> - Each element has an unique `targetHash` value.
+> - Each element will share the same unique `merkleRoot` value in every batch wrap instance.
+> - Similar to wrapDocument, every time you run wrapDocuments, it will create unique hashes (in front of every fields in the data object).
+
+:::tip
+
+To extract the merkle root, refer to the example below
+
+```ts
+const merkleRoot: string = wrappedDocument.signature.merkleRoot;
+```
+
+:::
+
+Congratulation! you have successfully wrapped the documents, next lets see how we can issue the documents to the document store.
