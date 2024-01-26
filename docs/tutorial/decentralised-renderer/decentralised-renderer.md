@@ -155,7 +155,7 @@ The first step consist of creating a file `src/templates/coc/template.tsx` with 
 import React, { FunctionComponent } from "react";
 import { TemplateProps } from "@govtechsg/decentralized-renderer-react-components";
 import { css } from "@emotion/core";
-import { CocTemplateCertificate } from "../samples/customTemplateSample";
+import { CocTemplateCertificate } from "./sample";
 
 const containerStyle = css`
   background-color: #324353;
@@ -180,31 +180,26 @@ export const CocTemplate: FunctionComponent<TemplateProps<CocTemplateCertificate
 };
 ```
 
-Now that the component has been created, we can add a story to view it. Next to `src/templates/coc/template.tsx` create a file called `template.stories.mdx` with the following content:
+Now that the component has been created, we can add a story to view it. Next to `src/templates/coc/template.tsx` create a file called `template.stories.tsx` with the following content:
 
-```markdown
+```jsx harmony
 import { Meta, Preview, Props, Description, Story } from "@storybook/addon-docs/blocks";
-import { object } from "@storybook/addon-knobs";
 import { CocTemplate } from "./template";
-import { cocTemplateCertificate } from "../samples/customTemplateSample";
+import { cocTemplateCertificate } from "./sample";
+import { FunctionComponent } from "react";
+import React from 'react';
 
-<Meta title="MDX|CocTemplate" component={CocTemplate} />
+export default {
+  title: "Sample Template",
+  component: CocTemplate,
+  parameters: {
+    componentSubtitle: "Sample Template",
+  },
+};
 
-# CocTemplate component
-
-<Description of={CocTemplate} />
-
-# Props
-
-<Props of={CocTemplate} />
-
-# Usage
-
-<Preview>
-  <Story name="basic sample">
-    <CocTemplate document={object("document", cocTemplateCertificate)} />
-  </Story>
-</Preview>
+export const SampleTemplate: FunctionComponent  = ()=> {
+  return <CocTemplate document={cocTemplateCertificate} handleObfuscation={() => {}} />
+}
 ```
 
 We can now [start storybook](#run-development-preview) and make sure our component looks like expected.
