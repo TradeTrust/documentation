@@ -202,7 +202,7 @@ export const SampleTemplate: FunctionComponent  = ()=> {
 }
 ```
 
-We can now [start storybook](#run-development-preview) and make sure our component looks like expected.
+We can now [start storybook](#run-development-preview) and make sure our component looks like expected as below.
 
 ![Completed Story Book View](/docs/reference/configuration/custom-renderer/completed-storybook.png)
 
