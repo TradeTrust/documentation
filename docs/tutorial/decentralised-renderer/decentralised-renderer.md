@@ -25,21 +25,10 @@ A template for building your own document renderer has been created for you at [
 ### Clone code repository locally
 
 ```sh
-git clone https://github.com/Open-Attestation/decentralized-renderer-react-template.git
-cd decentralized-renderer-react-template
+git clone https://github.com/TradeTrust/tradetrust-decentralized-renderer.git
+cd tradetrust-decentralized-renderer
 rm -rf .git
 ```
-
-### Clean the template
-
-In order to fully understand how developing a renderer work, we will start by cleaning it a bit:
-
-- remove the folder `src/templates/customTemplate`
-- remove the folder `src/integration`
-
-Once you have finished the tutorial feel free to clone the repository again and have a look into the deleted files.
-
-Once you have a better understanding about how this decentralised renderer works, you can go ahead and fork a version of this repo and start development of your very own decentralised renderer template.
 
 ### Install code dependencies
 
@@ -64,13 +53,26 @@ This is a live preview where you can see the changes when you:
 1. edit the raw document data in the `Knobs` tab
 1. edit the template code to render the data
 
+### Clean the template
+
+In order to fully understand how developing a renderer work, we will start by cleaning it a bit:
+
+- remove all the template folders under `src/templates`
+:::info
+don't delete `src/templates/index.tsx` as it is the template registry
+:::
+
+Once you have finished the tutorial feel free to clone the repository again and have a look into the deleted files.
+
+Once you have a better understanding about how this decentralised renderer works, you can go ahead and fork a version of this repo and start development of your very own decentralised renderer template.
+
 ## Developing the Document Renderer
 
 Now that we have set up the development environment, we can start writing our document renderer. We will first define the data structure of our 📜 Certificate of Completion (COC), followed by writing the renderer to render the HTML code corresponding to the data provided.
 
 ### Update sample document data and type
 
-To update the raw document data and the corresponding data type, you will need to update the data definition file in `src/templates/samples/customTemplateSample.ts`:
+To update the raw document data and the corresponding data type, you will need to create the new folder for the template and data definition file in `src/templates/coc/sample.ts`:
 
 ```typescript jsx
 import { v2 } from "@govtechsg/open-attestation";
@@ -153,7 +155,7 @@ The first step consist of creating a file `src/templates/coc/template.tsx` with 
 import React, { FunctionComponent } from "react";
 import { TemplateProps } from "@govtechsg/decentralized-renderer-react-components";
 import { css } from "@emotion/core";
-import { CocTemplateCertificate } from "../samples/customTemplateSample";
+import { CocTemplateCertificate } from "./sample";
 
 const containerStyle = css`
   background-color: #324353;
@@ -178,34 +180,29 @@ export const CocTemplate: FunctionComponent<TemplateProps<CocTemplateCertificate
 };
 ```
 
-Now that the component has been created, we can add a story to view it. Next to `src/templates/coc/template.tsx` create a file called `template.stories.mdx` with the following content:
+Now that the component has been created, we can add a story to view it. Next to `src/templates/coc/template.tsx` create a file called `template.stories.tsx` with the following content:
 
-```markdown
+```jsx harmony
 import { Meta, Preview, Props, Description, Story } from "@storybook/addon-docs/blocks";
-import { object } from "@storybook/addon-knobs";
 import { CocTemplate } from "./template";
-import { cocTemplateCertificate } from "../samples/customTemplateSample";
+import { cocTemplateCertificate } from "./sample";
+import { FunctionComponent } from "react";
+import React from 'react';
 
-<Meta title="MDX|CocTemplate" component={CocTemplate} />
+export default {
+  title: "Sample Template",
+  component: CocTemplate,
+  parameters: {
+    componentSubtitle: "Sample Template",
+  },
+};
 
-# CocTemplate component
-
-<Description of={CocTemplate} />
-
-# Props
-
-<Props of={CocTemplate} />
-
-# Usage
-
-<Preview>
-  <Story name="basic sample">
-    <CocTemplate document={object("document", cocTemplateCertificate)} />
-  </Story>
-</Preview>
+export const SampleTemplate: FunctionComponent  = ()=> {
+  return <CocTemplate document={cocTemplateCertificate} handleObfuscation={() => {}} />
+}
 ```
 
-We can now [start storybook](#run-development-preview) and make sure our component looks like expected.
+We can now [start storybook](#run-development-preview) and make sure our component looks like expected as below.
 
 ![Completed Story Book View](/docs/reference/configuration/custom-renderer/completed-storybook.png)
 
