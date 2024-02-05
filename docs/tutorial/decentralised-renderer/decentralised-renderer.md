@@ -58,9 +58,15 @@ This is a live preview where you can see the changes when you:
 In order to fully understand how developing a renderer work, we will start by cleaning it a bit:
 
 - remove all the template folders under `src/templates`
+<<<<<<< HEAD
   :::info
   don't delete `src/templates/index.tsx` as it is the template registry
   :::
+=======
+:::info
+don't delete `src/templates/index.tsx` as it is the template registry
+:::
+>>>>>>> 9824382 (feat: tt-11 replace repo include core comps (#135))
 
 Once you have finished the tutorial feel free to clone the repository again and have a look into the deleted files.
 
@@ -187,7 +193,11 @@ import { Meta, Preview, Props, Description, Story } from "@storybook/addon-docs/
 import { CocTemplate } from "./template";
 import { cocTemplateCertificate } from "./sample";
 import { FunctionComponent } from "react";
+<<<<<<< HEAD
 import React from "react";
+=======
+import React from 'react';
+>>>>>>> 9824382 (feat: tt-11 replace repo include core comps (#135))
 
 export default {
   title: "Sample Template",
@@ -197,9 +207,15 @@ export default {
   },
 };
 
+<<<<<<< HEAD
 export const SampleTemplate: FunctionComponent = () => {
   return <CocTemplate document={cocTemplateCertificate} handleObfuscation={() => {}} />;
 };
+=======
+export const SampleTemplate: FunctionComponent  = ()=> {
+  return <CocTemplate document={cocTemplateCertificate} handleObfuscation={() => {}} />
+}
+>>>>>>> 9824382 (feat: tt-11 replace repo include core comps (#135))
 ```
 
 We can now [start storybook](#run-development-preview) and make sure our component looks like expected as below.
