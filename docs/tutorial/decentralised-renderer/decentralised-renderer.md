@@ -58,9 +58,9 @@ This is a live preview where you can see the changes when you:
 In order to fully understand how developing a renderer work, we will start by cleaning it a bit:
 
 - remove all the template folders under `src/templates`
-:::info
-don't delete `src/templates/index.tsx` as it is the template registry
-:::
+  :::info
+  don't delete `src/templates/index.tsx` as it is the template registry
+  :::
 
 Once you have finished the tutorial feel free to clone the repository again and have a look into the deleted files.
 
@@ -187,7 +187,7 @@ import { Meta, Preview, Props, Description, Story } from "@storybook/addon-docs/
 import { CocTemplate } from "./template";
 import { cocTemplateCertificate } from "./sample";
 import { FunctionComponent } from "react";
-import React from 'react';
+import React from "react";
 
 export default {
   title: "Sample Template",
@@ -197,9 +197,9 @@ export default {
   },
 };
 
-export const SampleTemplate: FunctionComponent  = ()=> {
-  return <CocTemplate document={cocTemplateCertificate} handleObfuscation={() => {}} />
-}
+export const SampleTemplate: FunctionComponent = () => {
+  return <CocTemplate document={cocTemplateCertificate} handleObfuscation={() => {}} />;
+};
 ```
 
 We can now [start storybook](#run-development-preview) and make sure our component looks like expected as below.
@@ -282,6 +282,48 @@ Note that the website will be an empty page when viewed directly. **This is norm
 It is recommended to use a custom domain you own for the document renderer website in production. This prevents locking in to any specific third party hosting provider.
 
 If you are using Netlify, we recommend you to check out [how to enable custom domains](https://docs.netlify.com/domains-https/custom-domains/).
+
+## Core Components
+
+Core components, located in the `src/core directory`, are reusable React components that offer enhanced functionalities for your decentralized renderer template.
+
+This repository contains a collection of example templates along with demonstrations of how to use core components. You can find these examples in the `/src/templates` directory. These templates serve as references and guides to help you set up your own templates to meet your unique requirements.
+
+### DocumentQrCode
+
+It allows users to share documents across devices using a QR code.
+
+For detailed information on how to use the QR Code Component, please refer to the official documentation [here](https://docs.tradetrust.io/docs/reference/tradetrust-website/qr-code/).
+
+![QRCode Example](/docs/reference/core-components/qr.png)
+
+### Wrapper/ ErrorBoundary
+
+The Wrapper/ErrorBoundary Component is designed to handle scenarios where a template cannot be rendered correctly. In such cases, this component can act as a fallback, displaying a user-friendly error message and stack.
+
+![Wrapper/ ErrorBoundary Example](/docs/reference/core-components/wrapper.png)
+
+### PrivacyFilter
+
+The Privacy Filter Component is a powerful tool for safeguarding sensitive information within a document. To use the Privacy Filter in the decentralized renderer, follow these steps
+
+Click the "Edit Document" button within the PrivacyFilter component.
+
+![Privacy Filter Example](/docs/reference/core-components/privacyfilter-1.png)
+
+Click "Remove" on the redactable values to specify the information you want to remove.
+
+![Privacy Filter Example](/docs/reference/core-components/privacyfilter-2.png)
+
+Click "Done" on the Privacy Filter Component to complete the process. After that, you can now download the document with hidden values
+
+![Privacy Filter Example](/docs/reference/core-components/privacyfilter-3.png)
+
+### PrintWatermark
+
+The PrintWatermark Component allows users to include the TradeTrust watermark text in the background of a document's print preview.
+
+![PrintWatermark Example](/docs/reference/core-components/watermark.png)
 
 ## See Also
 
