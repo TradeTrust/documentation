@@ -179,7 +179,12 @@
         ]
       }
     ],
-    "Appendix": ["topics/appendix/glossary", "topics/appendix/tradetrust-api", "topics/appendix/non-fungible-token"]
+    "Appendix": [
+      "topics/appendix/glossary",
+      "topics/appendix/tradetrust-api",
+      "topics/appendix/non-fungible-token",
+      "topics/appendix/core-components"
+    ]
   },
   "reference": {
     "TradeTrust Verifier Website": [
