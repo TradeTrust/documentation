@@ -20,7 +20,7 @@ This renderer is a static website that will be embedded in compliant TradeTrust 
 
 ## Clone Decentralized Renderer React Template
 
-A template for building your own document renderer has been created for you at [our GitHub template repository](https://github.com/Open-Attestation/decentralized-renderer-react-template).
+A template for building your own document renderer has been created for you at [our GitHub template repository](https://github.com/TradeTrust/tradetrust-decentralized-renderer).
 
 ### Clone code repository locally
 
@@ -58,9 +58,11 @@ This is a live preview where you can see the changes when you:
 In order to fully understand how developing a renderer work, we will start by cleaning it a bit:
 
 - remove all the template folders under `src/templates`
+
 :::info
 don't delete `src/templates/index.tsx` as it is the template registry
 :::
+=======
 
 Once you have finished the tutorial feel free to clone the repository again and have a look into the deleted files.
 
@@ -182,12 +184,13 @@ export const CocTemplate: FunctionComponent<TemplateProps<CocTemplateCertificate
 
 Now that the component has been created, we can add a story to view it. Next to `src/templates/coc/template.tsx` create a file called `template.stories.tsx` with the following content:
 
-```jsx harmony
+````jsx harmony
 import { Meta, Preview, Props, Description, Story } from "@storybook/addon-docs/blocks";
 import { CocTemplate } from "./template";
 import { cocTemplateCertificate } from "./sample";
 import { FunctionComponent } from "react";
 import React from 'react';
+
 
 export default {
   title: "Sample Template",
@@ -197,10 +200,9 @@ export default {
   },
 };
 
-export const SampleTemplate: FunctionComponent  = ()=> {
-  return <CocTemplate document={cocTemplateCertificate} handleObfuscation={() => {}} />
-}
-```
+export const SampleTemplate: FunctionComponent = () => {
+  return <CocTemplate document={cocTemplateCertificate} handleObfuscation={() => {}} />;
+};
 
 We can now [start storybook](#run-development-preview) and make sure our component looks like expected as below.
 
@@ -222,7 +224,7 @@ export const templates = [
     template: CocTemplate,
   },
 ];
-```
+````
 
 - `templates` must be an array where each element correspond to a view (or a tab). Here we need only one view.
 - Each view must define the following property:
@@ -283,6 +285,6 @@ It is recommended to use a custom domain you own for the document renderer websi
 
 If you are using Netlify, we recommend you to check out [how to enable custom domains](https://docs.netlify.com/domains-https/custom-domains/).
 
-## See Also
+## Decentralized Renderer Core Components
 
-[Generic Templates by TradeTrust](/docs/reference/generic-templates/overview)
+Decentralized renderer core components, located in the `src/core directory`, are reusable React components that offer enhanced functionalities for your decentralized renderer template. We recommend you to check out [using decentralized renderer core components](/docs/topics/appendix/core-components.md)
