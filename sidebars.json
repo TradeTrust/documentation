@@ -183,7 +183,8 @@
       "topics/appendix/glossary",
       "topics/appendix/tradetrust-api",
       "topics/appendix/non-fungible-token",
-      "topics/appendix/core-components"
+      "topics/appendix/core-components",
+      "topics/appendix/polygon-mainnet-workaround"
     ]
   },
   "reference": {
