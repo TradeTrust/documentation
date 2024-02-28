@@ -44,8 +44,8 @@ Let's go through the steps:
    - `TT_STORAGE_AWS_ACCESS_KEY_ID` = Your AWS access key ID. (For document storage service)
    - `TT_STORAGE_AWS_SECRET_ACCESS_KEY` = Your AWS secret access key. (For document storage service)
 6. Hit deploy site on netlify dashboard and your API endpoints should be up. They are accessible at:
-   - https://<YOUR_RENAMED_NETLIFY_SITENAME>/.netlify/functions/verify/
-   - https://<YOUR_RENAMED_NETLIFY_SITENAME>/.netlify/functions/storage/
+   - https://&lt;YOUR_RENAMED_NETLIFY_SITENAME&gt;/.netlify/functions/verify/
+   - https://&lt;YOUR_RENAMED_NETLIFY_SITENAME&gt;/.netlify/functions/storage/
 
 #### Document storage
 
