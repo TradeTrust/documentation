@@ -8,20 +8,13 @@ The "transaction underpriced" error occurs on the Polygon Mainnet when using eth
 
 To resolve this issue, we can use a gas station to estimate the gas price.
 
-It's worth noting that using ethers.js v6 also resolves this problem.
-
 ### Using of gas station to estimate the gas price
 
 ```ts
 import { BigNumber } from "ethers";
 import { parseUnits } from "ethers/lib/utils";
 
-export interface SuggestedGasPrice {
-  maxPriorityFeePerGas: BigNumber;
-  maxFeePerGas: BigNumber;
-};
-
-const fetchPolygonGasStationSuggestedPrice = async (): Promise<SuggestedGasPrice> => {
+export const fetchPolygonGasStationSuggestedPrice = async (): Promise<Overrides> => {
   const apiUrl = "https://gasstation.polygon.technology/v2";
 
   const suggestedPriceResponse = await fetch(apiUrl);
@@ -32,7 +25,7 @@ const fetchPolygonGasStationSuggestedPrice = async (): Promise<SuggestedGasPrice
   };
 };
 
-export const safeParseUnits = (_value: number | string, decimals: number): BigNumber => {
+const safeParseUnits = (_value: number | string, decimals: number): BigNumber => {
   const value = String(_value);
   if (!value.match(/^[0-9.]+$/)) {
     throw new Error(`invalid gwei value: ${_value}`);
@@ -61,4 +54,30 @@ export const safeParseUnits = (_value: number | string, decimals: number): BigNu
 
   return parseUnits(`${comps[0]}.${comps[1]}`, decimals);
 };
+```
+
+### Example on how we use the gas price when we mint a transferable record
+
+```ts
+import { TradeTrustToken__factory } from "@tradetrust-tt/token-registry/contracts";
+import { TransactionReceipt } from "@ethersproject/abstract-provider";
+
+const tokenRegistryAddress = "<TOKEN_REGISTRY_CONTRACT_ADDRESS>";
+const owner = "<OWNER_WALLET_ADDRESS>";
+const holder = "<HOLDER_WALLET_ADDRESS>";
+const tokenId = "<MERKLE_ROOT>";
+const signer = "<SIGNER>";
+
+export const issueToTokenRegistry = async (): Promise<TransactionReceipt> => {
+  const connectedRegistry = TradeTrustToken__factory.connect(tokenRegistryAddress, signer);
+  const gasFees = await fetchPolygonGasStationSuggestedPrice(); // using the function from the above code snippet
+
+  // Previously, we are using the default gas price
+  // const transaction = await connectedRegistry.mint(owner, holder, tokenId);
+
+  // Now, we will need to override with the new gas price when interacting with the chain
+  const transaction = await connectedRegistry.mint(owner, holder, tokenId, { ...gasFees });
+
+  return transaction.wait();
+}
 ```
