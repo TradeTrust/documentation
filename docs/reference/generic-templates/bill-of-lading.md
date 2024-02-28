@@ -16,7 +16,7 @@ To make full use of this generic template (bill of lading), please update the co
 
 ### Fields to update
 
-_Note: **Please replace all the placeholder "<...>" with your values.**_
+_Note: **Please replace all the placeholder "&lt;...&gt;" with your values.**_
 
 ```json
 "network": "<Your network>",
