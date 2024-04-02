@@ -166,6 +166,7 @@
     ],
     "Advanced": [
       "topics/advanced/alternative-ledgers",
+      "topics/advanced/stability-metamask-guide",
       "topics/advanced/add-polygon-networks-to-metamask-wallet",
       "topics/advanced/wallet-management",
       {
