@@ -90,7 +90,7 @@ const siteConfig = {
       algoliaOptions: {},
     },
     prism: {
-      theme: require("prism-react-renderer/themes/nightOwl"),
+      theme: require("prism-react-renderer").themes.nightOwl,
     },
   },
   customFields: {
