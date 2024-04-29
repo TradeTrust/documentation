@@ -9,6 +9,6 @@ Tradetrust verifier website is a place where you can verify any of the `Transfer
 Please keep in mind that TradeTrust has 2 environments, each connecting to different ethereum networks:
 
 - Mainnets (Ethereum, Polygon) = http://tradetrust.io
-- Testnets (Sepolia, Polygon Mumbai) = http://dev.tradetrust.io
+- Testnets (Sepolia, Polygon Amoy, XDC Apothem, Stability Testnet and Hedera Testnet) = http://dev.tradetrust.io
 
 The next few topics are going to explain on some of the features the website provides.

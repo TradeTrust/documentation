@@ -11,7 +11,6 @@ sidebar_label: Supported Network
 | ETH   | 1        | homestead        | Ethereum Mainnet  | [Ethereum](https://ethereum.org/)                    | L1 Mainnet | Active |
 | ETH   | 11155111 | sepolia          | Ethereum Sepolia  | Ethereum                                             | L1 Testnet | Active |
 | MATIC | 137      | matic            | Polygon Mainnet   | [Polygon](https://polygon.technology/)               | L2 Mainnet | Active |
-| MATIC | 80001    | maticmum         | Polygon Mumbai    | Polygon                                              | L2 Testnet | Active |
 | MATIC | 80002    | amoy             | Polygon Amoy      | Polygon                                              | L2 Testnet | Active |
 | FREE  | 101010   | stability        | Stability Mainnet | [Stability Protocol](https://stabilityprotocol.com/) | -          | Active |
 | FREE  | 20180427 | stabilitytestnet | Stability Testnet | Stability Protocol                                   | -          | Active |

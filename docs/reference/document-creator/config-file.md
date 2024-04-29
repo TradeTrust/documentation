@@ -71,7 +71,7 @@ Currently, we only support to 6 networks.
 - Ethereum Mainnet : `"homestead"`
 - Sepolia Testnet : `"sepolia"`
 - Polygon Mainnet: `"matic"`
-- Mumbai Testnet: `"maticmum"`
+- Amoy Testnet: `"amoy"`
 - XDC Mainnet: `"xdc"`
 - XDC Apothem Testnet: `"xdcapothem"`
 

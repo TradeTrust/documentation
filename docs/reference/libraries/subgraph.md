@@ -20,7 +20,7 @@ Configure your Token Registry contract addresses in the `config.json` file.
 
 ```json
 {
-  "network": "mumbai",
+  "network": "amoy",
   "dataSources": [
     {
       "address": "0xabc",
@@ -31,7 +31,7 @@ Configure your Token Registry contract addresses in the `config.json` file.
 }
 ```
 
-- The `network` field can be any one of the many network names supported by the Graph protocol, for eg, `mainnet` for Ethereum mainnet, `goerli` for Ethereum Goerli, `matic` for Polygon, `mumbai` for Polygon Mumbai, etc.
+- The `network` field can be any one of the many network names supported by the Graph protocol, for eg, `mainnet` for Ethereum mainnet, `goerli` for Ethereum Goerli, `matic` for Polygon, `amoy` for Polygon Amoy, etc.
 - The `address` is the address of your Token Registry contract and `startBlock` is the start block of your contract.
 - You can index multiple Token Registry contracts by adding to the `dataSources` array
 
