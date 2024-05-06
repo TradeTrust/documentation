@@ -36,47 +36,52 @@ A verification happens on a wrapped document, and it consists of answering to so
 
 An issued TradeTrust document (shown below) would be required.
 
-> **NOTE:** The document shown below is valid and has been issued on the goerli network
+> **NOTE:** The document shown below is valid and has been issued on the sepolia network
 
 ```json
 {
   "version": "https://schema.openattestation.com/2.0/schema.json",
   "data": {
-    "billFrom": {},
-    "billTo": { "company": {} },
+    "shipper": {
+      "address": {}
+    },
+    "consignee": {},
+    "notifyParty": {},
     "$template": {
-      "type": "f76f4d39-8d23-455b-96ba-5889e0233641:string:EMBEDDED_RENDERER",
-      "name": "575f0624-7f43-484c-9285-edd1ae96ebc6:string:INVOICE",
-      "url": "fb61f072-64e9-4c2f-83bf-ae68fd911414:string:https://generic-templates.tradetrust.io"
+      "type": "2a44df6d-9c17-4351-b7ec-3a925d846a3a:string:EMBEDDED_RENDERER",
+      "name": "163bf5e0-93df-40dd-a031-98a2b53a1f27:string:BILL_OF_LADING_CARRIER",
+      "url": "4940e701-349c-4c36-bed2-058c8d5bc244:string:https://generic-templates.tradetrust.io"
     },
     "issuers": [
       {
-        "name": "ed121e9e-8f70-4a01-a422-4509d837c13f:string:Demo Issuer",
-        "documentStore": "08948d61-9392-459f-b476-e3c51961f04b:string:0x49b2969bF0E4aa822023a9eA2293b24E4518C1DD",
+        "name": "adbb47be-fdd7-4c5b-add5-269b65d508ac:string:DEMO TOKEN REGISTRY",
+        "tokenRegistry": "846a8776-a868-4edb-a0f9-5e41b7d335bc:string:0x142Ca30e3b78A840a82192529cA047ED759a6F7e",
         "identityProof": {
-          "type": "61c13b84-181a-43aa-85f5-dfe89e4b6963:string:DNS-TXT",
-          "location": "d7ba5e33-cf5f-4fcc-a4b7-3e6e17324966:string:demo-tradetrust.openattestation.com"
+          "type": "3f1c3a37-80eb-4694-a507-556b07af0e5b:string:DNS-TXT",
+          "location": "f5f9f25a-2e67-4148-b217-5fe7682226f5:string:example.tradetrust.io"
         },
         "revocation": {
-          "type": "23d47c6b-4384-4c31-90ca-8284602f6b3e:string:NONE"
+          "type": "b490ff1b-8e76-4fea-850c-c3cf1981732c:string:NONE"
         }
       }
     ],
+    "network": {
+      "chain": "5f0f6419-835b-4ef6-a514-c5544a20042f:string:ETH",
+      "chainId": "9549fb41-93d2-4aa9-9f0f-9831bbf932f2:string:11155111"
+    },
+    "blNumber": "5859aca2-6b65-4820-b44a-f97be1392cc2:string:123",
+    "scac": "6703a550-4b41-47b1-963c-32b6c3cd397c:string:123",
     "links": {
       "self": {
-        "href": "121c55c0-864d-4e54-a1f0-86bec4b9a050:string:https://action.openattestation.com?q=%7B%22type%22%3A%22DOCUMENT%22%2C%22payload%22%3A%7B%22uri%22%3A%22https%3A%2F%2Ftradetrust-functions.netlify.app%2F.netlify%2Ffunctions%2Fstorage%2Faea9cb1a-816a-4fd7-b3a9-84924dc9a9e9%22%2C%22key%22%3A%22d80b453e53bb26d3b36efe65f18f0482f52d97cffad6f6c9c195d10e165b9a83%22%2C%22permittedActions%22%3A%5B%22STORE%22%5D%2C%22redirect%22%3A%22https%3A%2F%2Fdev.tradetrust.io%2F%22%2C%22chainId%22%3A%225%22%7D%7D"
+        "href": "573f11a5-3e41-4d74-a0f7-400f3d7d61f2:string:https://actions.tradetrust.io?q=%7B%22type%22%3A%22DOCUMENT%22%2C%22payload%22%3A%7B%22uri%22%3A%22https%3A%2F%2Ftradetrust-functions.netlify.app%2F.netlify%2Ffunctions%2Fstorage%2F64090a0b-a794-4e56-a6fc-7cf0d41b7838%22%2C%22key%22%3A%220bbec3cd58aca5ad2cb69f6b0350fc37a8e58ea4a71e372c465e816cf68da66c%22%2C%22permittedActions%22%3A%5B%22STORE%22%5D%2C%22redirect%22%3A%22https%3A%2F%2Fdev.tradetrust.io%2F%22%2C%22chainId%22%3A%2211155111%22%7D%7D"
       }
-    },
-    "network": {
-      "chain": "05eb1707-5426-41d8-8fde-bc48ff0f2182:string:ETH",
-      "chainId": "ae505425-2df7-4597-87d2-037418d7bcbf:string:5"
     }
   },
   "signature": {
     "type": "SHA3MerkleProof",
-    "targetHash": "f292056ed5e5535400cec63b78a84ec384d2d77117e1606a17644e7b97a03cac",
+    "targetHash": "0253b8c5b73908e9c8c2d9dbe9cf97836e0e0f0dca2434143b8ca620024ac389",
     "proof": [],
-    "merkleRoot": "f292056ed5e5535400cec63b78a84ec384d2d77117e1606a17644e7b97a03cac"
+    "merkleRoot": "0253b8c5b73908e9c8c2d9dbe9cf97836e0e0f0dca2434143b8ca620024ac389"
   }
 }
 ```
@@ -376,7 +381,7 @@ The document that we [created](#verifying-a-document) is not valid against our o
 
 - `PROVIDER_API_KEY`: let you provide your own PROVIDER API key.
 - `PROVIDER_ENDPOINT_URL`: let you provide your preferred JSON-RPC HTTP API URL.
-- `PROVIDER_NETWORK`: let you specify the network to use, i.e. "homestead", "mainnet", "goerli".
+- `PROVIDER_NETWORK`: let you specify the network to use, i.e. "homestead", "mainnet"
 - `PROVIDER_ENDPOINT_TYPE`: let you specify the provider to use, i.e. "infura", "alchemy", "jsonrpc".
 
 _Provider that is supported: Infura, EtherScan, Alchemy, JSON-RPC_
@@ -427,7 +432,7 @@ You may generate a provider using the provider generator, it supports `INFURA`, 
 
 It requires a set of options:
 
-- `network`: The _network_ may be specified as a **string** for a common network name, i.e. "homestead", "mainnet", "goerli".
+- `network`: The _network_ may be specified as a **string** for a common network name, i.e. "homestead", "mainnet".
 - `provider`: The _provider_ may be specified as a **string**, i.e. "infura", "alchemy" or "jsonrpc".
 - `url`: The _url_ may be specified as a **string** in which is being used to connect to a JSON-RPC HTTP API
 - `apiKey`: The _apiKey_ may be specified as a **string** for use together with the provider. If no apiKey is provided, a default shared API key will be used, which may result in reduced performance and throttled requests.
@@ -462,7 +467,7 @@ Alternate way 2 (passing values in as parameters):
 ```ts
 import { utils } from "@tradetrust-tt/tt-verify";
 const providerOptions = {
-  network: "goerli",
+  network: "amoy",
   providerType: "infura",
   apiKey: "abdfddsfe23232",
 };
