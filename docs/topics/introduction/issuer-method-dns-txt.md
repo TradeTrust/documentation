@@ -95,7 +95,7 @@ The `netId` corresponds to the [chain ID for the different Ethereum networks](ht
 | `1`        | `1`        | Ethereum Mainnet         | `homestead`  |
 | `11155111` | `11155111` | Ethereum Sepolia Testnet | `sepolia`    |
 | `137`      | `137`      | Polygon Mainnet          | `matic`      |
-| `80001`    | `80001`    | Polygon Mumbai Testnet   | `maticmum`   |
+| `80002`    | `80002`    | Polygon Amoy Testnet     | `amoy`       |
 | `50`       | `50`       | XDC Mainnet              | `XDC`        |
 | `51`       | `51`       | XDC Apothem Testnet      | `xdcapothem` |
 
