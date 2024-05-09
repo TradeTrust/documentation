@@ -1,6 +1,6 @@
 import React from "react";
 import { FiatLabel } from "../FiatLabel";
-import { useFetchGasPrice } from "../hooks";
+import { useFetchGasPrice, Chain } from "../hooks";
 import { DeploymentTypeLabel } from "../DeploymentTypeLabel";
 import { BoxTag } from "../BoxTag";
 
@@ -74,10 +74,13 @@ const contractGasData = {
 };
 
 export const PriceTable = (props) => {
-  const { price, gwei } = useFetchGasPrice("ethereum", 30000);
-  const { price: maticPrice, gwei: maticGwei } = useFetchGasPrice("polygon", 30000);
+  const FETCH_INTERVAL = 30000;
+  const { price, gwei } = useFetchGasPrice(Chain.Ethereum, FETCH_INTERVAL);
+  const { price: maticPrice, gwei: maticGwei } = useFetchGasPrice(Chain.Polygon, FETCH_INTERVAL);
+  const { price: xdcPrice, gwei: xdcGwei } = useFetchGasPrice(Chain.XDC, FETCH_INTERVAL);
   const priceFactor = gwei * 0.000000001 * price;
   const maticPriceFactor = maticGwei * 0.000000001 * maticPrice;
+  const xdcPriceFactor = xdcGwei * 0.000000001 * xdcPrice;
   const { type, priceFormatOptions } = props;
   const costData = contractGasData[type];
   const currentDtStr = new Date().toLocaleString("en-SG", { hour12: true, timeZoneName: "short" });
@@ -92,6 +95,13 @@ export const PriceTable = (props) => {
           <em>Calculating...</em>
         ) : (
           <FiatLabel {...priceFormatOptions}>{record.gas * maticPriceFactor}</FiatLabel>
+        )}
+      </td>
+      <td>
+        {xdcPriceFactor === 0 ? (
+          <em>Calculating...</em>
+        ) : (
+          <FiatLabel {...priceFormatOptions}>{record.gas * xdcPriceFactor}</FiatLabel>
         )}
       </td>
       <td>
@@ -120,6 +130,7 @@ export const PriceTable = (props) => {
             <th style={tableHeaderStyle}>Estimated Gas</th>
             <th style={tableHeaderStyle}>Est. Fiat (USD) on Ethereum</th>
             <th style={tableHeaderStyle}>Est. Fiat (USD) on Polygon</th>
+            <th style={tableHeaderStyle}>Est. Fiat (USD) on XDC</th>
             <th style={tableHeaderStyle}>Issuer's Identity Method</th>
           </tr>
         </thead>
