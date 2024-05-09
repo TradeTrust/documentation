@@ -19,6 +19,6 @@ export const FiatLabel: FunctionComponent<{ children: number }> = ({ children, .
     currency: "USD",
     ...options,
   });
-  const res = nf.format(Number(children));
+  const res = children === 0 ? "FREE" : nf.format(Number(children));
   return <span style={{ opacity, transition: "opacity 1s ease-in" }}>{res}</span>;
 };

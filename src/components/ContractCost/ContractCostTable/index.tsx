@@ -105,6 +105,9 @@ export const PriceTable = (props) => {
         )}
       </td>
       <td>
+        <FiatLabel {...priceFormatOptions}>{0}</FiatLabel>
+      </td>
+      <td>
         <DeploymentTypeLabel deploymentType={record.deploymentType} remarks={record.remarks} />
       </td>
     </tr>
@@ -131,6 +134,7 @@ export const PriceTable = (props) => {
             <th style={tableHeaderStyle}>Est. Fiat (USD) on Ethereum</th>
             <th style={tableHeaderStyle}>Est. Fiat (USD) on Polygon</th>
             <th style={tableHeaderStyle}>Est. Fiat (USD) on XDC</th>
+            <th style={tableHeaderStyle}>Est. Fiat (USD) on Stability</th>
             <th style={tableHeaderStyle}>Issuer's Identity Method</th>
           </tr>
         </thead>
