@@ -107,9 +107,6 @@ export const PriceTable = (props) => {
       <td>
         <FiatLabel {...priceFormatOptions}>{0}</FiatLabel>
       </td>
-      <td>
-        <DeploymentTypeLabel deploymentType={record.deploymentType} remarks={record.remarks} />
-      </td>
     </tr>
   ));
   const tableHeaderStyle = { textAlign: "left" as const };
@@ -139,7 +136,6 @@ export const PriceTable = (props) => {
             <th style={tableHeaderStyle}>Est. Fiat (USD) on Polygon</th>
             <th style={tableHeaderStyle}>Est. Fiat (USD) on XDC</th>
             <th style={tableHeaderStyle}>Est. Fiat (USD) on Stability</th>
-            <th style={tableHeaderStyle}>Issuer's Identity Method</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
