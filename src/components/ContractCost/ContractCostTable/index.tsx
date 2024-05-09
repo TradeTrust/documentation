@@ -116,15 +116,19 @@ export const PriceTable = (props) => {
   return (
     <div>
       <p>
-        Estimations based on the current gas average at <BoxTag>{Math.ceil(gwei)} gwei (ETH)</BoxTag>, ETH price at USD{" "}
+        Estimations are made based on the current ETH price at USD{" "}
         <BoxTag>
           <FiatLabel>{price}</FiatLabel>
         </BoxTag>{" "}
-        for <strong>Ethereum</strong> and <BoxTag>{Math.ceil(maticGwei)} gwei (MATIC)</BoxTag>, MATIC price at USD{" "}
+        for <strong>Ethereum</strong>, MATIC price at USD{" "}
         <BoxTag>
           <FiatLabel>{maticPrice}</FiatLabel>
         </BoxTag>{" "}
-        for <strong>Polygon</strong> as at {currentDtStr}.
+        for <strong>Polygon</strong>, XDC price at USD{" "}
+        <BoxTag>
+          <FiatLabel>{xdcPrice}</FiatLabel>
+        </BoxTag>{" "}
+        for <strong>XDC</strong> as at {currentDtStr}.
       </p>
       <table>
         <thead>
