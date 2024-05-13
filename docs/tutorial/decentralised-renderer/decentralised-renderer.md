@@ -77,7 +77,7 @@ Now that we have set up the development environment, we can start writing our do
 To update the raw document data and the corresponding data type, you will need to create the new folder for the template and data definition file in `src/templates/coc/sample.ts`:
 
 ```typescript jsx
-import { v2 } from "@govtechsg/open-attestation";
+import { v2 } from "@tradetrust-tt/tradetrust";
 
 export interface CocTemplateCertificate extends v2.OpenAttestationDocument {
   name: string;
@@ -155,7 +155,7 @@ The first step consist of creating a file `src/templates/coc/template.tsx` with 
 
 ```jsx harmony
 import React, { FunctionComponent } from "react";
-import { TemplateProps } from "@govtechsg/decentralized-renderer-react-components";
+import { TemplateProps } from "@tradetrust-tt/decentralized-renderer-react-components";
 import { css } from "@emotion/core";
 import { CocTemplateCertificate } from "./sample";
 
@@ -241,7 +241,7 @@ To register a new template, simply add it as a key to the `registry` constant. T
 Replace `src/templates/index.tsx` with the following code to add the new `COC` template:
 
 ```js
-import { TemplateRegistry } from "@govtechsg/decentralized-renderer-react-components";
+import { TemplateRegistry } from "@tradetrust-tt/decentralized-renderer-react-components";
 import { templates } from "./coc";
 
 export const registry: TemplateRegistry<any> = {

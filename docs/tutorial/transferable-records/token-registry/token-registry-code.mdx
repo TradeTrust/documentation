@@ -20,7 +20,7 @@ In this guide, we will deploy a token registry smart contract on the Ethereum bl
 ## Installation
 
 ```sh
-npm install --save @govtechsg/token-registry
+npm install --save @tradetrust-tt/token-registry
 ```
 
 ## Usage
@@ -32,9 +32,9 @@ Refer to the [pre-requisite](/docs/tutorial/prerequisites#understanding-provider
 ### Deploy a token registry
 
 ```ts
-import { TDocDeployer__factory } from "@govtechsg/token-registry/contracts";
-import { constants as TokenRegistryConstants, utils as TokenRegistryUtils } from "@govtechsg/token-registry";
-import { DeploymentEvent } from "@govtechsg/token-registry/dist/contracts/contracts/utils/TDocDeployer";
+import { TDocDeployer__factory } from "@tradetrust-tt/token-registry/contracts";
+import { constants as TokenRegistryConstants, utils as TokenRegistryUtils } from "@tradetrust-tt/token-registry";
+import { DeploymentEvent } from "@tradetrust-tt/token-registry/dist/contracts/contracts/utils/TDocDeployer";
 
 const unconnectedWallet = new Wallet("privateKey");
 const provider = ethers.getDefaultProvider("sepolia");
@@ -250,7 +250,7 @@ console.log(`Transaction: ${JSON.stringify(receipt)}`);
 ### Connecting to token registry
 
 ```ts
-import { TradeTrustToken__factory } from "@govtechsg/token-registry/contracts";
+import { TradeTrustToken__factory } from "@tradetrust-tt/token-registry/contracts";
 
 const privateKey = "";
 const tokenRegistryAddress = "0x7Ae2aE35f66ACE6671CB2bfb985011b0a2d9cf72";
