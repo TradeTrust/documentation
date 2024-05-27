@@ -24,7 +24,7 @@ A `merkleRoot`, a 64 character long string prepended with `0x` will be generated
 ## Installation
 
 ```bash
-npm i --save @govtechsg/open-attestation
+npm i --save @tradetrust-tt/tradetrust
 ```
 
 ---
@@ -36,7 +36,7 @@ npm i --save @govtechsg/open-attestation
 `wrapDocument` takes in a documents and returns the wrapped document. Upon validating the document against it's schema, the document hash will be computed, to be placed onto the `signature` section of the wrapped document. The `signature` is to be used for integrity verification on the later stage of the tutorial.
 
 ```js
-import { wrapDocument } from "@govtechsg/open-attestation";
+import { wrapDocument } from "@tradetrust-tt/tradetrust";
 const document = {
   "recipient": {
     "name": "John Doe"
@@ -106,7 +106,7 @@ In the scenerio of `wrapDocument`, `signature.merkleRoot` will be the same as `s
 `wrapDocuments` takes in an array of documents and returns the wrapped batch. Each document must be valid regarding the version of the schema used (see below) It computes the Merkle root of the batch and appends it to each document. This Merkle root can be published on the blockchain and queried against to prove the provenance of the document issued this way. Alternatively, the Merkle root may be signed by the document issuer's private key, which may be cryptographically verified using the issuer's public key or Ethereum account.
 
 ```js
-import { wrapDocuments } from "@govtechsg/open-attestation";
+import { wrapDocuments } from "@tradetrust-tt/tradetrust";
   const document = {
   "recipient": {
     "name": "John Doe"

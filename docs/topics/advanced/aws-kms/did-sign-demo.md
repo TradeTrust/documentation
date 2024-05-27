@@ -21,7 +21,7 @@ const {
   wrapDocument,
   signDocument,
   SUPPORTED_SIGNING_ALGORITHM,
-} = require("@govtechsg/open-attestation");
+} = require("@tradetrust-tt/tradetrust");
 
 const { AwsKmsSigner } = require("ethers-aws-kms-signer");
 ```
@@ -95,7 +95,7 @@ const {
   wrapDocument,
   signDocument,
   SUPPORTED_SIGNING_ALGORITHM,
-} = require("@govtechsg/open-attestation");
+} = require("@tradetrust-tt/tradetrust");
 
 const { AwsKmsSigner } = require("ethers-aws-kms-signer");
 
@@ -164,7 +164,7 @@ didSignDemo();
     "dotenv": "^9.0.2"
   },
   "dependencies": {
-    "@govtechsg/open-attestation": "^5.3.0",
+    "@tradetrust-tt/tradetrust": "^6.9.4",
     "ethers-aws-kms-signer": "^1.1.0"
   }
 }

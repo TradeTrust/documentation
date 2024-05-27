@@ -225,7 +225,7 @@ This is where `skip` and `test` methods come into play. We will use the `test` m
 ```ts
 // index.ts
 import { verificationBuilder, openAttestationVerifiers, Verifier, isValid } from "@tradetrust-tt/tt-verify";
-import { getData } from "@govtechsg/open-attestation";
+import { getData } from "@tradetrust-tt/tradetrust";
 import * as document from "./document.json";
 
 const customVerifier: Verifier<any> = {
@@ -254,7 +254,7 @@ Once we have decided `when` the verification method run, it's time to write the 
 ```ts
 // index.ts
 import { verificationBuilder, openAttestationVerifiers, Verifier, isValid } from "@tradetrust-tt/tt-verify";
-import { getData } from "@govtechsg/open-attestation";
+import { getData } from "@tradetrust-tt/tradetrust";
 import * as document from "./document.json";
 
 const customVerifier: Verifier<any> = {
@@ -298,7 +298,7 @@ Extending from what have been mentioned in [Custom Verification](#custom-verific
 ```ts
 // index.ts
 import { verificationBuilder, openAttestationVerifiers, Verifier, isValid } from "@tradetrust-tt/tt-verify";
-import { getData } from "@govtechsg/open-attestation";
+import { getData } from "@tradetrust-tt/tradetrust";
 import document from "./document.json";
 
 // our custom verifier will be valid only if the document version is not https://schema.openattestation.com/2.0/schema.json

@@ -15,7 +15,7 @@ In this final step, we will mint the transferable record and initialize the firs
 ## Installation
 
 ```bash
-npm install --save @govtechsg/token-registry
+npm install --save @tradetrust-tt/token-registry
 ```
 
 ## Usage
@@ -27,7 +27,7 @@ Refer to the [pre-requisite](/docs/tutorial/transferable-records/token-registry/
 ### Connect to existing token registry
 
 ```ts
-import { TradeTrustToken__factory } from "@govtechsg/token-registry/contracts";
+import { TradeTrustToken__factory } from "@tradetrust-tt/token-registry/contracts";
 
 const privateKey = "";
 const tokenRegistryAddress = "0x7Ae2aE35f66ACE6671CB2bfb985011b0a2d9cf72";
@@ -44,7 +44,7 @@ const connectedRegistry = TradeTrustToken__factory.connect(tokenRegistryAddress,
 In the example, we will use `0x6FFeD6E6591b808130a9b248fEA32101b5220eca` wallet address as owner and holder. You will need to replace this value with a wallet address you control to be able to perform different actions on the transferable records later.
 
 ```ts
-import { TradeTrustToken__factory } from "@govtechsg/token-registry/contracts";
+import { TradeTrustToken__factory } from "@tradetrust-tt/token-registry/contracts";
 
 const privateKey = "";
 const tokenRegistryAddress = "0x7Ae2aE35f66ACE6671CB2bfb985011b0a2d9cf72";
