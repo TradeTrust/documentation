@@ -16,7 +16,7 @@ After wrapping the documents and obtaining a merkle root, the documents are read
 ## Installation
 
 ```bash
-npm i @tradetrust-tt/tradetrust
+npm i @tradetrust-tt/tradetrust-core
 ```
 
 ---
@@ -34,7 +34,7 @@ The method will sign the merkle root from the wrapped document, append the signa
 #### Example with Wallet
 
 ```js
-import { signDocument, SUPPORTED_SIGNING_ALGORITHM } from "@govtechsg/open-attestation";
+import { signDocument, SUPPORTED_SIGNING_ALGORITHM } from '@tradetrust-tt/tradetrust-core'
 
 const wrappedDocument = {
   version: "https://schema.openattestation.com/2.0/schema.json",
