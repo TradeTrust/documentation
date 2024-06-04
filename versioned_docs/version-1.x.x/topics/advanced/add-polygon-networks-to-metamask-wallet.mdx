@@ -1,0 +1,107 @@
+---
+id: add-polygon-networks-to-metamask-wallet
+title: Add Polygon Networks to MetaMask Wallet
+sidebar_label: Add Polygon Networks to MetaMask Wallet
+---
+
+> This guide covers configuring the MetaMask wallet to support both Polygon mainnet and testnet (Amoy) networks.
+>
+> This process requires the use of the MetaMask browser extension.
+
+### Step 1: Open MetaMask Network settings
+
+Navigate to the `Settings` tab in MetaMask:
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/reference/add-polygon-networks-to-metamask-wallet/metamask-settings.png"}
+  alt="MetaMask Settings"
+/>
+
+Next, navigate to the `Networks` tab and click on `Add a network`:
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/reference/add-polygon-networks-to-metamask-wallet/metamask-add-network.png"}
+  alt="MetaMask Add Network"
+/>
+
+### Step 2: Add the Polygon Network Details
+
+Click on `Add a network manually`:
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/reference/add-polygon-networks-to-metamask-wallet/metamask-add-network-manually.png"}
+  alt="MetaMask Add Network Manually"
+/>
+
+Fill in the network configuration for the Polygon network as required and click `Save`.
+
+| Field Name         | Polygon Mainnet                   | Polygon Testnet (Amoy)                                |
+| ------------------ | --------------------------------- | ----------------------------------------------------- |
+| Network Name       | Polygon                           | Amoy                                                  |
+| RPC URL            | https://polygon-rpc.com           | https://polygon-amoy.infura.io/v3/your_infura_api_key |
+| Public RPC URL     | https://rpc-mainnet.matic.network | https://rpc-amoy.polygon.technology/                  |
+| Chain ID           | 137                               | 80002                                                 |
+| Currency Symbol    | Matic                             | Matic                                                 |
+| Block Explorer URL | https://polygonscan.com           | https://amoy.polygonscan.com                          |
+
+> #### Note on Public RPC URL
+>
+> You can use either RPC URL or Public RPC URL from the above table for the 'New RPC Url' field in MetaMask. Note that Public RPC URLs are suited only for testing. They are publicly known and often go down, so it's better to get your own [API keys](#how-to-get-api-key-from-infura) of web3 service provider like [infura](https://app.infura.io/) to interact with the blockchains.
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/reference/add-polygon-networks-to-metamask-wallet/network-detail.png"}
+  alt="Enter Network Details"
+/>
+
+### Step 3: Save the Settings
+
+Click the `Save` button at the bottom of the screen to add the Polygon network to MetaMask:
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/reference/add-polygon-networks-to-metamask-wallet/successful-metamask-network-added.png"}
+  alt="Save Network Details"
+/>
+
+---
+
+## How to get API key from Infura
+
+### Step 1: Navigate to Infura
+
+Navigate to [infura.io](https://app.infura.io/).
+
+And Sign up for a free account or log in to your existing account. Infura will automatically generate the `My First Key API` key for new users.
+Click the API Key.
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/reference/add-polygon-networks-to-metamask-wallet/click-api-key.png"}
+  alt="Click API Key"
+/>
+
+### Step 2: Enable Amoy
+
+Enable `AMOY` from list of networks and click `SAVE CHANGES`.
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/reference/add-polygon-networks-to-metamask-wallet/enable-amoy.png"}
+  alt="Enable Amoy"
+/>
+
+### Step 3: Copy API Key
+
+Click the icon ( highlighted with red border ), to copy the API Key.
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/reference/add-polygon-networks-to-metamask-wallet/copy-api-key.png"}
+  alt="Copy API Key"
+/>
+
+Now that you have the **API Key**, you can add it into your MetaMask. You can refer to the [guide](#step-1-open-metamask-network-settings) above.

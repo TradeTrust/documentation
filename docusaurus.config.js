@@ -23,6 +23,13 @@ const siteConfig = {
       "@docusaurus/preset-classic",
       {
         docs: {
+          lastVersion: "current",
+          versions: {
+            current: {
+              label: "2.0.0",
+              path: "2.0.0",
+            },
+          },
           path: "./docs",
           sidebarPath: require.resolve("./sidebars.json"),
           sidebarCollapsible: true,
@@ -45,10 +52,15 @@ const siteConfig = {
         srcDark: "img/logo/logo-tt-full.svg",
       },
       items: [
-        { to: "docs/getting-started", label: "Getting Started" },
-        { to: "docs/tutorial/introduction", label: "Tutorial" },
-        { to: "docs/topics/introduction/what-is-tradetrust", label: "Topics" },
-        { to: "docs/reference/tradetrust-website/overview", label: "References" },
+        { to: "docs/2.0.0/getting-started", label: "Getting Started" },
+        { to: "docs/2.0.0/tutorial/introduction", label: "Tutorial" },
+        { to: "docs/2.0.0/topics/introduction/what-is-tradetrust", label: "Topics" },
+        { to: "docs/2.0.0/reference/tradetrust-website/overview", label: "References" },
+        {
+          type: "docsVersionDropdown",
+          position: "right",
+          dropdownActiveClassDisabled: true,
+        },
       ],
     },
     footer: {

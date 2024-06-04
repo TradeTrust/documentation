@@ -1,0 +1,63 @@
+---
+id: stability-metamask-guide
+title: Add Stability Networks to MetaMask
+sidebar_label: Add Stability Networks to MetaMask
+---
+
+> This guide covers configuraing Metamask to support both Stability Mainnet and Stability Testnet.
+>
+> This process requires the use of the MetaMask browser extension.
+
+### 1: Sign up for a Stability Protocol's API Key
+
+Follow [Stability's guide](https://docs.stabilityprotocol.com/developers/register_for_api_key) to sign up for a Stability Protocol's API Key
+
+### 2: Adding Stability Protocol into Metamask
+
+Navigate to the `Settings` tab in MetaMask:
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/reference/add-polygon-networks-to-metamask-wallet/metamask-settings.png"}
+  alt="MetaMask Settings"
+/>
+
+Next, navigate to the `Networks` tab and click on `Add a network`:
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/reference/add-polygon-networks-to-metamask-wallet/metamask-add-network.png"}
+  alt="MetaMask Add Network"
+/>
+
+Click on `Add a network manually`:
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/reference/add-polygon-networks-to-metamask-wallet/metamask-add-network-manually.png"}
+  alt="MetaMask Add Network Manually"
+/>
+
+Fill in the network configuration for Stability Protocol network as required.
+
+| Field Name         | Stability Protocol Mainnet                      | Stability Protocol Testnet                 |
+| ------------------ | ----------------------------------------------- | ------------------------------------------ |
+| Network Name       | Stability                                       | Stability Testnet                          |
+| RPC URL            | https://gtn.stabilityprotocol.com/zgt/(API_KEY) | https://free.testnet.stabilityprotocol.com |
+| Chain ID           | 101010                                          | 20180427                                   |
+| Currency Symbol    | Free                                            | Free                                       |
+| Block Explorer URL | https://stability.blockscout.com/               | https://stability-testnet.blockscout.com/  |
+
+> Note: Please replace the (API_KEY) with the API Key you get in [step 1](#1-sign-up-for-a-stability-protocols-api-key).
+
+After adding Stability Protocol's details, you should get something like this:
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/topics/advanced/stability-metamask-guide/stability-network.png"}
+  alt="Network Details"
+/>
+
+Click the `Save` button at the bottom of the screen to add the Stability Protocol network to MetaMask:
+
+:tada: Congratulations! :tada: You have successful added Stability Protocol network to metamask!

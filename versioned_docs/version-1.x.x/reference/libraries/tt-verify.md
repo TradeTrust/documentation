@@ -90,7 +90,7 @@ To perform verification check on the document:
 
 ```ts
 // index.ts
-import { isValid, verify } from "@tradetrust-tt/tradetrust-core";
+import { isValid, verify } from "@tradetrust-tt/tt-verify";
 import * as document from "./document.json";
 
 const fragments = await verify(document as any);
@@ -112,7 +112,7 @@ You can build your own verify method or your own verifiers:
 
 ```ts
 // creating your own verify using default exported verifiers
-import { verificationBuilder, openAttestationVerifiers } from "@tradetrust-tt/tradetrust-core";
+import { verificationBuilder, openAttestationVerifiers } from "@tradetrust-tt/tt-verify";
 
 const verify1 = verificationBuilder(openAttestationVerifiers, { network: "sepolia" }); // this verify is equivalent to the one exported by the library
 // this verify is equivalent to the one exported by the library
@@ -123,7 +123,7 @@ const verify2 = verificationBuilder([openAttestationVerifiers[0], openAttestatio
 
 ```ts
 // creating your own verify using custom verifier
-import { verificationBuilder, openAttestationVerifiers, Verifier } from "@tradetrust-tt/tradetrust-core";
+import { verificationBuilder, openAttestationVerifiers, Verifier } from "@tradetrust-tt/tt-verify";
 const customVerifier: Verifier<any> = {
   skip: () => {
     // return a SkippedVerificationFragment if the verifier should be skipped or throw an error if it should always run

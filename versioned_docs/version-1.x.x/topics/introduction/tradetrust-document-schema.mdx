@@ -1,0 +1,358 @@
+---
+id: tradetrust-document-schema
+title: TradeTrust document schema
+sidebar_label: TradeTrust document schema
+---
+
+To explain on TradeTrust's document schema, we will use a sample document. For this example, a verifiable document will be used.
+
+We have 2 schema versions, OA Schema version 2, and OA Schema version 4 alpha which is more aligned with [W3C VC data model](https://www.w3.org/TR/vc-data-model-2.0/).
+
+## Raw document
+
+Let's take a closer look at a raw document:
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs groupId="document-schema">
+  <TabItem value="v2" label="OA Schema Version 2" default>
+
+```json
+{
+  "$template": {
+    "name": "INVOICE",
+    "type": "EMBEDDED_RENDERER",
+    "url": "https://generic-templates.tradetrust.io"
+  }, // needed for presentation of data in a decentralised renderer
+  "issuers": [
+    {
+      "name": "Company A",
+      "documentStore": "0x93092C2B449712281008112870063fF439367C00",
+      "revocation": {
+        "type": "NONE"
+      },
+      "identityProof": {
+        "type": "DNS-TXT",
+        "location": "example.tradetrust.io"
+      }
+    }
+  ], // required to get the information of the issuer
+  "network": {
+    "chain": "MATIC",
+    "chainId": "80002"
+  }, // needed to determine the network of the document
+  "id": "1111",
+  "date": "2018-02-21",
+  "customerId": "564",
+  "terms": "Due Upon Receipt",
+  "billFrom": {
+    "name": "ABC Company",
+    "streetAddress": "Level 1, Industry Offices",
+    "city": "Singapore",
+    "postalCode": "123456",
+    "phoneNumber": "60305029"
+  },
+  "billTo": {
+    "company": {
+      "name": "DEF Company",
+      "streetAddress": "Level 2, Industry Offices",
+      "city": "Singapore",
+      "postalCode": "612345",
+      "phoneNumber": "61204028"
+    },
+    "name": "James Lee",
+    "email": "def@company.com"
+  },
+  "billableItems": [
+    {
+      "description": "Service Fee",
+      "quantity": 1,
+      "unitPrice": 200,
+      "amount": 200
+    },
+    {
+      "description": "Labor: 5 hours at $75/hr",
+      "quantity": 5,
+      "unitPrice": 75,
+      "amount": 375
+    }
+  ],
+  "subtotal": 625,
+  "tax": 0,
+  "taxTotal": 0,
+  "total": 625
+}
+```
+
+  </TabItem>
+  <TabItem value="v4" label="OA Schema Version 4 alpha">
+
+```json
+{
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://schemata.openattestation.com/com/openattestation/4.0/alpha-context.json"
+  ],
+  "type": ["VerifiableCredential", "OpenAttestationCredential"],
+  "validFrom": "2021-03-08T12:00:00+08:00",
+  "name": "Republic of Singapore Driving Licence",
+  "issuer": {
+    "id": "did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90",
+    "type": "OpenAttestationIssuer",
+    "name": "Government Technology Agency of Singapore (GovTech)",
+    "identityProof": { "identityProofType": "DNS-DID", "identifier": "example.openattestation.com" }
+  },
+  "credentialStatus": { "type": "OpenAttestationCredentialStatus", "credentialStatusType": "NONE" },
+  "renderMethod": {
+    "type": "OpenAttestationRenderMethod",
+    "renderMethodType": "EMBEDDED_RENDERER",
+    "name": "GOVTECH_DEMO",
+    "url": "https://demo-renderer.openattestation.com"
+  },
+  "credentialSubject": {
+    "id": "urn:uuid:a013fb9d-bb03-4056-b696-05575eceaf42",
+    "type": ["DriversLicense"],
+    "name": "John Doe",
+    "licenses": [
+      {
+        "class": "3",
+        "description": "Motor cars with unladen weight <= 3000kg",
+        "effectiveDate": "2013-05-16T00:00:00+08:00"
+      },
+      {
+        "class": "3A",
+        "description": "Motor cars with unladen weight <= 3000kg",
+        "effectiveDate": "2013-05-16T00:00:00+08:00"
+      }
+    ]
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+## Wrapped document
+
+We will need to wrap a TradeTrust document to generate a hash to ensure the integrity of the document. You can read more about it over at the [document integrity section](/docs/topics/verifying-documents/document-integrity).
+
+Now, lets take a look at a wrapped document:
+
+<Tabs groupId="document-schema">
+  <TabItem value="v2" label="OA Schema Version 2" default>
+
+```json
+{
+  "version": "https://schema.openattestation.com/2.0/schema.json",
+  "data": {
+    "$template": {
+      "name": "51ce82e4-d772-45c3-b854-8f50e6d0f05c:string:INVOICE",
+      "type": "c07c3e4b-f5aa-4ac7-a0ba-35be56895895:string:EMBEDDED_RENDERER",
+      "url": "bdaf86f4-8faf-4c8a-b00b-91ae97c23315:string:https://generic-templates.tradetrust.io"
+    },
+    "issuers": [
+      {
+        "name": "9772fe01-91c4-46af-9687-211b7b2f573e:string:Company A",
+        "documentStore": "c6f41b35-49c8-450a-864d-20b065e22bee:string:0x93092C2B449712281008112870063fF439367C00",
+        "revocation": {
+          "type": "27865177-2b5e-4b45-92cb-f9f8d9cbd712:string:NONE"
+        },
+        "identityProof": {
+          "type": "5e38c996-ffba-466a-bee7-aa31fbbf31e1:string:DNS-TXT",
+          "location": "dc50caf2-2f3d-43ae-bf55-2ef5ac8c0d57:string:example.tradetrust.io"
+        }
+      }
+    ],
+    "network": {
+      "chain": "d7011829-cdaf-4f54-8c23-8492e1c65404:string:MATIC",
+      "chainId": "d8b0a3b0-58e9-465b-a5aa-dbd154877ebc:string:80002"
+    },
+    "id": "1e987726-d6d7-41f1-9859-0a06b0f87e12:string:1111",
+    "date": "a90b9d97-b51a-4a72-97d4-297160ecd2f2:string:2018-02-21",
+    "customerId": "fb300720-07a1-4cac-84d8-5ae230d29637:string:564",
+    "terms": "ca45944a-6d13-4acd-88bc-e6dacf1ee5a7:string:Due Upon Receipt",
+    "billFrom": {
+      "name": "a4ce7ad8-a634-4c73-8ddc-6db70c7a77d8:string:ABC Company",
+      "streetAddress": "fc65a8b0-82b9-4dab-9ee0-b2d1fb7b637f:string:Level 1, Industry Offices",
+      "city": "bf653d90-61b0-4b8f-bbcd-8f6cc0895d57:string:Singapore",
+      "postalCode": "5296a8b0-d2f1-47e8-b9d9-330525202990:string:123456",
+      "phoneNumber": "f84be7f5-019a-4578-bf20-760a1ce51299:string:60305029"
+    },
+    "billTo": {
+      "company": {
+        "name": "565d8098-6c4b-4e95-9b62-ac580f8a8864:string:DEF Company",
+        "streetAddress": "96b82c4e-887f-4aa7-9b59-110069eabad6:string:Level 2, Industry Offices",
+        "city": "b3682df3-db5b-4276-b0b5-0932c6beff98:string:Singapore",
+        "postalCode": "0c63fb9c-cee8-4bfc-bbcc-710791ee3d88:string:612345",
+        "phoneNumber": "8f1651fb-fa21-4efb-bdcd-01951a85487e:string:61204028"
+      },
+      "name": "06110012-738a-4534-91b0-c9e3b9dca9e4:string:James Lee",
+      "email": "e50cf21d-37bd-42ba-b592-b5ee268d01f3:string:def@company.com"
+    },
+    "billableItems": [
+      {
+        "description": "a7f53a1c-28f3-43da-adb4-8ca3686e0a74:string:Service Fee",
+        "quantity": "5772a41e-df14-4a0d-aaf1-ae0b470523e9:number:1",
+        "unitPrice": "2cda167e-f533-4402-940c-3279c8176c67:number:200",
+        "amount": "d62ca746-bc06-40aa-962f-d81d85418741:number:200"
+      },
+      {
+        "description": "6a8d455d-142f-4d15-9356-b4b85ff51fed:string:Labor: 5 hours at $75/hr",
+        "quantity": "601ecae8-4ad2-4898-9ca7-5e4f94a5ffa5:number:5",
+        "unitPrice": "9216bfe7-2f04-4d65-8273-698d4682e9e6:number:75",
+        "amount": "d467b10c-0e4c-4e39-b434-3d996fcd3c50:number:375"
+      }
+    ],
+    "subtotal": "666e7962-f674-44cf-82db-70a93939194b:number:625",
+    "tax": "8cca3bf7-0ad4-4957-bb2b-9b4d3137cc5b:number:0",
+    "taxTotal": "50c4605f-3931-4f10-bb1f-94d6c6850474:number:0",
+    "total": "6e329e75-996f-4d35-9a04-65870ae174f7:number:625"
+  },
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash": "080623ba6a9e12bfd0ad496226fb10cd4252d10d3b9eee6771fd348fef58a123",
+    "proof": [],
+    "merkleRoot": "080623ba6a9e12bfd0ad496226fb10cd4252d10d3b9eee6771fd348fef58a123"
+  }
+}
+```
+
+  </TabItem>
+  <TabItem value="v4" label="OA Schema Version 4 alpha">
+
+```json
+{
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://schemata.openattestation.com/com/openattestation/4.0/alpha-context.json"
+  ],
+  "type": ["VerifiableCredential", "OpenAttestationCredential"],
+  "validFrom": "2021-03-08T12:00:00+08:00",
+  "name": "Republic of Singapore Driving Licence",
+  "issuer": {
+    "id": "did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90",
+    "type": "OpenAttestationIssuer",
+    "name": "Government Technology Agency of Singapore (GovTech)",
+    "identityProof": { "identityProofType": "DNS-DID", "identifier": "example.openattestation.com" }
+  },
+  "credentialStatus": { "type": "OpenAttestationCredentialStatus", "credentialStatusType": "NONE" },
+  "renderMethod": {
+    "type": "OpenAttestationRenderMethod",
+    "renderMethodType": "EMBEDDED_RENDERER",
+    "name": "GOVTECH_DEMO",
+    "url": "https://demo-renderer.openattestation.com"
+  },
+  "credentialSubject": {
+    "id": "urn:uuid:a013fb9d-bb03-4056-b696-05575eceaf42",
+    "type": ["DriversLicense"],
+    "name": "John Doe",
+    "licenses": [
+      {
+        "class": "3",
+        "description": "Motor cars with unladen weight <= 3000kg",
+        "effectiveDate": "2013-05-16T00:00:00+08:00"
+      },
+      {
+        "class": "3A",
+        "description": "Motor cars with unladen weight <= 3000kg",
+        "effectiveDate": "2013-05-16T00:00:00+08:00"
+      }
+    ]
+  },
+  "proof": {
+    "type": "OpenAttestationMerkleProofSignature2018",
+    "proofPurpose": "assertionMethod",
+    "targetHash": "adb16863b9b92f1f46d67f518f853092404dc1322ffb61b45a831ee113f4ea99",
+    "proofs": [],
+    "merkleRoot": "adb16863b9b92f1f46d67f518f853092404dc1322ffb61b45a831ee113f4ea99",
+    "salts": "W3sidmFsdWUiOiJkYTlkMTE5MTMxOWRjOTM4ZTQ2ZjZhYmMzMjU1NTM5NGYwYzEzNDIyMGUwYjgyMDY0NzBhYjlmNmYxN2QyZTJlIiwicGF0aCI6IkBjb250ZXh0WzBdIn0seyJ2YWx1ZSI6IjhhZDM5Njg2NGIwNGI5ZjYxY2I3ODNjY2M1YWEyNTYxODgxYmRiODZmZmI5ZmNjZjViYTQ1YzUyN2MwZGFmMGMiLCJwYXRoIjoiQGNvbnRleHRbMV0ifSx7InZhbHVlIjoiMjYwNDllNWExODQ4MDVlYTUxNjQ4OTM3OGI0NDZhNTdiMjdlZWU0YmFhN2VmYjBkNWM3OTcwMGMzZDI5OGM5MyIsInBhdGgiOiJ0eXBlWzBdIn0seyJ2YWx1ZSI6IjU3N2M2ZGUzMzYzZmE1ZjA2ZDc5NjQyMjAxNTk3ODkzYzdmNDg3NWZlYzFiZTYyOWIxZWRkNTdhZWFlOTE3YzkiLCJwYXRoIjoidHlwZVsxXSJ9LHsidmFsdWUiOiI0NmMyOTY5MTVkZWVhNDMwMDNmY2ZmNjc3NzUxNTc3Zjg2MTdlODliYjBjNDhiNzIwMTdlMzRkOWNhNTM0ZGNlIiwicGF0aCI6InZhbGlkRnJvbSJ9LHsidmFsdWUiOiIwZWQ1Yzg0OTBlYjg2YWM5YmEyNGJlYzc3OTE2MThhZWZjZGE2M2M3OGNmZDJlMTdjMWNlNDRmNzVmZjU3NjljIiwicGF0aCI6Im5hbWUifSx7InZhbHVlIjoiMzEyNGUxNzc4Y2EzYTc2ZmI0MjUxNGExMmIzNDYzYmY4ZmY4NjNiNDdiZTExNDYyY2RiMGRiNzRmMzk1ZjViYiIsInBhdGgiOiJpc3N1ZXIuaWQifSx7InZhbHVlIjoiYTJmNTJhNTdmMWM5MDJhYzQ5MmJiNzc0YTQzOTIxYjk2NWJlM2VmZjRjNTBjMDhiNDhhNjJkOGZkNjNhMWQ1NCIsInBhdGgiOiJpc3N1ZXIudHlwZSJ9LHsidmFsdWUiOiI0NGZhZWFhNmIxYmZlZmI0NGM4NzJlYzI2Nzc4OWNkNzUwM2U3YTQ1YjZjMDdmMmE0MmJkMDE5OWU1NzI0ZjM1IiwicGF0aCI6Imlzc3Vlci5uYW1lIn0seyJ2YWx1ZSI6IjJjNzg1Y2NhOGMyODdhZjhmOGM1NWM4MmJkODI3ZGY4M2YyZDIxY2M4MTVhZWJlYTg5MmVjOTZmNGRmMzVkNzAiLCJwYXRoIjoiaXNzdWVyLmlkZW50aXR5UHJvb2YuaWRlbnRpdHlQcm9vZlR5cGUifSx7InZhbHVlIjoiOWM0OWNiOGQ1Njc2NjljOTEzMDEwYzE3MmI2YmM5N2Q4MTVlOWZlOGY3Mjg2ZWE0NzA3NWVhNDQxYzc4NmYwMyIsInBhdGgiOiJpc3N1ZXIuaWRlbnRpdHlQcm9vZi5pZGVudGlmaWVyIn0seyJ2YWx1ZSI6IjJjZDcxMmFlZTdjZDlkZmI1NjBmYzBjNWVjZmZhY2FkYzkzYmYzZmI1MGRhYTgyYTk2ZTQzYjA5OGU2OTg4YTEiLCJwYXRoIjoiY3JlZGVudGlhbFN0YXR1cy50eXBlIn0seyJ2YWx1ZSI6ImM4MmUwNmU1NWI1YTY2YmUwNTk5NjVjZDI5YTUzZWE1ODg0YjM3NjU0NWE4ZmMwMzNiMTEwNWE0MzMyMWI5ZjAiLCJwYXRoIjoiY3JlZGVudGlhbFN0YXR1cy5jcmVkZW50aWFsU3RhdHVzVHlwZSJ9LHsidmFsdWUiOiJiNzBkMTU5MmU4ZTk3NDlkNGU5ZTEzNjg5NTgxNjhlY2MxZWQ2ODE5NWQzMmE4YmI1MDdlOTc3NGU3ZjkxMGFlIiwicGF0aCI6InJlbmRlck1ldGhvZC50eXBlIn0seyJ2YWx1ZSI6IjIxMGI0NGNjYTdmYzZkOTY4ZDk2ZmVjZWY3MGQzNTU1ZDY5MjViYWEwNjA4ZTczMDM3YjBiOGI5Njc4MTQ0ZGEiLCJwYXRoIjoicmVuZGVyTWV0aG9kLnJlbmRlck1ldGhvZFR5cGUifSx7InZhbHVlIjoiODQyZDBhZTQ1ZTI5N2U1YzgyMmJhZWVjMGMxNDg5MGYyNzkwZjNhNzY1M2JkMTAwNzI5YWJiNTM5NzAxMGY3NCIsInBhdGgiOiJyZW5kZXJNZXRob2QubmFtZSJ9LHsidmFsdWUiOiI4ZDIyYmIwMzJlMjg1N2RlYTk3NDU4ZWZmMjQ5ODgxZGZiZmE2MmUxNDU0MzBkZTdmNWIzZThkNWM5NGVjNmY4IiwicGF0aCI6InJlbmRlck1ldGhvZC51cmwifSx7InZhbHVlIjoiNGJiNWMyMzliNzBmZmI2NDkwYmY4MmQwZTBjODQ3ZWE0YWIyYTQyYWU1MmZjMDljZjA0ZjFiMTg1YjQ5ODFmMyIsInBhdGgiOiJjcmVkZW50aWFsU3ViamVjdC5pZCJ9LHsidmFsdWUiOiJkOGJmNmI3NzRlNjY0MGU2MWIwMmY4MmIzNTM5Y2RhMjdjODkyNmVlNjI0ZDE1ODZlOTZlMzhjZjNkMWQ0MjY1IiwicGF0aCI6ImNyZWRlbnRpYWxTdWJqZWN0LnR5cGVbMF0ifSx7InZhbHVlIjoiYTViNjg5NThkOTNiZmM3Y2M0ZDYzM2IxODViZTRlZGNmMGFmZTkwOGRhYjIwOTI3N2RhOGQ3Nzg2ZTc0MjQ3ZCIsInBhdGgiOiJjcmVkZW50aWFsU3ViamVjdC5uYW1lIn0seyJ2YWx1ZSI6IjNlMjUyNTkwMmI1MDY3ZjZiMjNhZGFjYmNmMzdiOTBjNTY1N2ViZWY1ZTQwZmQ2ZTNlMGM1N2QyYjBhODFlMmYiLCJwYXRoIjoiY3JlZGVudGlhbFN1YmplY3QubGljZW5zZXNbMF0uY2xhc3MifSx7InZhbHVlIjoiODViZDZjYzhkODI4OTRlNWI0OGQ2NmI5ZTM2NGU4MTRhMzIxMWM4ODI0NGVhNmFlZDhkZTYzNWQ1YmFhODljMCIsInBhdGgiOiJjcmVkZW50aWFsU3ViamVjdC5saWNlbnNlc1swXS5kZXNjcmlwdGlvbiJ9LHsidmFsdWUiOiJiZWRlZDA0Yjk1MDEzZjBkNjgzZjZmNGI1YmI2ZDBjNjRjMDM0MjUxYjYwOWQwOTNkZGM0ZDE0Njg2MWJkMjVlIiwicGF0aCI6ImNyZWRlbnRpYWxTdWJqZWN0LmxpY2Vuc2VzWzBdLmVmZmVjdGl2ZURhdGUifSx7InZhbHVlIjoiYzQ2ZTBhMzkyYTExMmM1NjRkNDdmODQ5NmFhMGRiYmZmZTg1NGEwNDQxODAxZmYxNzYyNzBiYmMyYmUxN2MwOSIsInBhdGgiOiJjcmVkZW50aWFsU3ViamVjdC5saWNlbnNlc1sxXS5jbGFzcyJ9LHsidmFsdWUiOiJjMGYzMWI2MGYyMjVkZTg1M2YzNzAyYzk4Y2E1OTk0Y2EzNTcyNmUwZTAyNGZkNzRkMWUwZTM1NzZiYjRhNmZlIiwicGF0aCI6ImNyZWRlbnRpYWxTdWJqZWN0LmxpY2Vuc2VzWzFdLmRlc2NyaXB0aW9uIn0seyJ2YWx1ZSI6IjY0YTUxYjRkMmE3OWMyZTI5NTdkOTg0MDkwN2Q3MGEzMzY4NDRiN2QyYzNlNmE5NDk3NzY1NGUwM2RkMzk1ZWMiLCJwYXRoIjoiY3JlZGVudGlhbFN1YmplY3QubGljZW5zZXNbMV0uZWZmZWN0aXZlRGF0ZSJ9XQ==",
+    "privacy": { "obfuscated": [] }
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+This will give us both `targetHash` and `merkleRoot`. You can read more about these hashes and how these hashes are derived upon [here](/docs/topics/verifying-documents/document-integrity#the-signature-object).
+
+## Key fields in the schema
+
+<Tabs groupId="document-schema">
+  <TabItem value="v2" label="OA Schema Version 2" default>
+
+Key fields to note:
+
+- $template
+- issuers
+- network
+
+> The other fields in the document are dependant on the type of document you want to use. They will differ accordingly, as TradeTrust framework does not restrict the data of your document.
+
+**$template**
+
+The `$template` key describes the template used to render the document. It should have the following keys:
+
+- `name` is the name of the template to be use by template renderer to determine the template to use.
+- `type` will always take the value of `EMBEDDED_RENDERER` for documents rendered in this manner.
+- `url` will be the remote URL where your decentralised renderer resides.
+
+**issuers**
+
+The `issuers` key describes who issued this document. It should have the following keys:
+
+- `name` is a name label.
+- `documentStore` / `tokenRegistry` is the address of your deployed document store or token registry smart contract.
+- `revocation` is an optional field that stores the revocation status of the document.
+- `revocation.type` has the value of `NONE` or `REVOCATION_STORE`.
+- `revocation.location` is the address of your deployed document store or Online Certificate Status Protocol (OCSP) responder url.
+- `identityProof.type` is the method type used for identifying issuer. `DNS-TXT` or `DNS-DID`
+- `identityProof.location` is the domain URL where DNS txt records of `documentStore` / `tokenRegistry` address is created.
+
+**network**
+
+The `network` key is used to determine which network the document is issued on. It should have the following keys:
+
+- `chain` is the type of blockchain in which the document is issued on.
+- `chainId` is the value of the network in which is used to connect to the blockchain.
+
+You can get the list of supported networks [here](/docs/topics/introduction/supported-network).
+
+  </TabItem>
+  <TabItem value="v4" label="OA Schema Version 4 alpha">
+  
+Key fields to note:
+
+- @context
+- issuers
+- renderMethod
+- credentialSubject
+- credentialStatus
+
+**@context**
+
+The `@context` property is now introduced as per [W3C VC data model](https://www.w3.org/TR/vc-data-model-2.0/#contexts) to allow the issuer to map such short-form aliases to the URIs required by specific verifiable credentials and verifiable presentations.
+
+OpenAttestation has released our alpha extension to W3C credentials context via [here](https://schemata.openattestation.com/com/openattestation/4.0/alpha-schema.json).
+
+**issuer**
+
+In OA Schema V4, there will only be one named `issuer` of verifiable credentials, as conforming to [W3C VC data model](https://www.w3.org/TR/vc-data-model-2.0/#issuer).
+
+**renderMethod**
+
+Previously known as the `$template` field,in OA Schema V2, this determines the rendering method.
+
+> This [reserved property](https://www.w3.org/TR/vc-data-model-2.0/#reserved-extension-points), renderMethod is at risk and subjected to changes.
+
+**credentialSubject**
+
+The `credentialSubject` describe the claims about the subject of the credential are now to be placed in the `credentialSubject` field, as conforming to [W3C VC data model](https://www.w3.org/TR/vc-data-model-2.0/#credential-subject).
+
+**credentialStatus**
+
+The `credentialStatus` describe the revocation status of document. credentialStatus.credentialStatusType of `NONE`, `REVOCATION_STORE`.
+
+  </TabItem>
+</Tabs>
