@@ -207,6 +207,7 @@
       "reference/generic-templates/bill-of-lading"
     ],
     "Libraries": [
+      "reference/libraries/tt-core",
       "reference/libraries/open-attestation",
       "reference/libraries/tt-verify",
       "reference/libraries/subgraph"
