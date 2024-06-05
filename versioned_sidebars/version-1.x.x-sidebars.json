@@ -153,10 +153,7 @@
       {
         "label": "Identifying the Issuer",
         "type": "category",
-        "items": [
-          "topics/introduction/issuer-method-dns-txt",
-          "topics/introduction/issuer-method-dns-did"
-        ]
+        "items": ["topics/introduction/issuer-method-dns-txt", "topics/introduction/issuer-method-dns-did"]
       },
       "topics/introduction/estimated-cost-for-transactions"
     ],

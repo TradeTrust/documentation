@@ -27,7 +27,13 @@ const siteConfig = {
           versions: {
             current: {
               label: "2.0.0",
-              path: "2.0.0",
+              path: "",
+              badge: false,
+            },
+            "1.x.x": {
+              label: "1.x.x",
+              path: "1.x.x",
+              badge: true,
             },
           },
           path: "./docs",
@@ -52,14 +58,14 @@ const siteConfig = {
         srcDark: "img/logo/logo-tt-full.svg",
       },
       items: [
-        { to: "docs/2.0.0/getting-started", label: "Getting Started" },
-        { to: "docs/2.0.0/tutorial/introduction", label: "Tutorial" },
-        { to: "docs/2.0.0/topics/introduction/what-is-tradetrust", label: "Topics" },
-        { to: "docs/2.0.0/reference/tradetrust-website/overview", label: "References" },
+        { to: "docs/getting-started", label: "Getting Started" },
+        { to: "docs/tutorial/introduction", label: "Tutorial" },
+        { to: "docs/topics/introduction/what-is-tradetrust", label: "Topics" },
+        { to: "docs/reference/tradetrust-website/overview", label: "References" },
         {
           type: "docsVersionDropdown",
           position: "right",
-          dropdownActiveClassDisabled: true,
+          dropdownActiveClassDisabled: false,
         },
       ],
     },
