@@ -23,19 +23,6 @@ const siteConfig = {
       "@docusaurus/preset-classic",
       {
         docs: {
-          lastVersion: "current",
-          versions: {
-            current: {
-              label: "2.0.0",
-              path: "",
-              badge: false,
-            },
-            "1.x.x": {
-              label: "1.x.x",
-              path: "1.x.x",
-              badge: true,
-            },
-          },
           path: "./docs",
           sidebarPath: require.resolve("./sidebars.json"),
           sidebarCollapsible: true,
@@ -62,11 +49,6 @@ const siteConfig = {
         { to: "docs/tutorial/introduction", label: "Tutorial" },
         { to: "docs/topics/introduction/what-is-tradetrust", label: "Topics" },
         { to: "docs/reference/tradetrust-website/overview", label: "References" },
-        {
-          type: "docsVersionDropdown",
-          position: "right",
-          dropdownActiveClassDisabled: false,
-        },
       ],
     },
     footer: {
