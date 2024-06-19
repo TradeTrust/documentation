@@ -185,7 +185,8 @@
       "topics/appendix/tradetrust-api",
       "topics/appendix/non-fungible-token",
       "topics/appendix/core-components",
-      "topics/appendix/polygon-mainnet-workaround"
+      "topics/appendix/polygon-mainnet-workaround",
+      "topics/appendix/stability-gasfee-workaround"
     ]
   },
   "reference": {
