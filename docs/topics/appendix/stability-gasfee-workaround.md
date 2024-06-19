@@ -4,7 +4,7 @@ title: Workaround to "ZeroGasTransactions RPCs" error on GTN ( Stability ) Netwo
 sidebar_label: Workaround to ZeroGasTransactions RPCs on GTN ( Stability ) Networks
 ---
 
-When you use methods from `tradetrust-core` that require gas fee such as deploying doucment-store or minting token, you will encunter this error `ZeroGasTransactions RPCs do not support transactions where maxFeePerGas/gasPrice is greater than 0`. This error occurs because stability networks ( both mainnet and testnet ) don't require any gas fee and we need to mention that the gasPrice is 0 when using ethers.js v5.
+When you use methods from `tradetrust-core` that require gas fee such as deploying doucment-store or minting token, you will encounter this error `ZeroGasTransactions RPCs do not support transactions where maxFeePerGas/gasPrice is greater than 0`. This error occurs because stability networks ( both mainnet and testnet ) don't require any gas fee and we need to mention that the gasPrice is 0.
 
 ### Example on how we set the gas price to zero when we deploy the document store
 
