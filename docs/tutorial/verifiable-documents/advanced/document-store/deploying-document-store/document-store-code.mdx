@@ -14,7 +14,7 @@ import Flow from "../flow.mdx";
 ## Installation
 
 ```sh
-npm install --save @tradetrust-tt/document-store
+npm install --save @tradetrust-tt/tradetrust-core
 ```
 
 ---
@@ -28,7 +28,7 @@ Refer to the [pre-requisite](/docs/tutorial/prerequisites#understanding-provider
 ### Deploy new document store
 
 ```ts
-import { DocumentStoreFactory } from "@tradetrust-tt/document-store";
+import { DocumentStoreFactory } from "@tradetrust-tt/tradetrust-core";
 import { TransactionReceipt } from "@ethersproject/abstract-provider";
 import { Wallet, ethers } from "ethers";
 
@@ -47,7 +47,7 @@ console.log(documentStoreAddress); // 0x63A223E025256790E88778a01f480eBA77731D04
 ### Connect to existing document store
 
 ```ts
-import { DocumentStoreFactory } from "@tradetrust-tt/document-store";
+import { DocumentStoreFactory } from "@tradetrust-tt/tradetrust-core";
 import { TransactionReceipt } from "@ethersproject/abstract-provider";
 import { Wallet, ethers } from "ethers";
 

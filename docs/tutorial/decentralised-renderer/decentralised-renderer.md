@@ -77,7 +77,7 @@ Now that we have set up the development environment, we can start writing our do
 To update the raw document data and the corresponding data type, you will need to create the new folder for the template and data definition file in `src/templates/coc/sample.ts`:
 
 ```typescript jsx
-import { v2 } from "@tradetrust-tt/tradetrust";
+import { v2 } from "@tradetrust-tt/tradetrust-core";
 
 export interface CocTemplateCertificate extends v2.OpenAttestationDocument {
   name: string;

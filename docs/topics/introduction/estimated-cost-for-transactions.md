@@ -4,7 +4,7 @@ title: Estimated cost for transactions
 sidebar_label: Estimated cost for transactions
 ---
 
-import { PriceTable } from "../../../src/components/ContractCost/ContractCostTable";
+import { PriceTable } from "@site/src/components/ContractCost/ContractCostTable";
 
 Here is an estimated breakdown of the gas and costs involved when interacting with the contracts.
 You should be aware that the estimated gas required can differ slightly depending on the states of the contract when called. The gas prices and fiat costs are constantly changing and you should check the numbers from a source you trust to get an accurate figure.

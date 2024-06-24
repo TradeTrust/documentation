@@ -185,7 +185,8 @@
       "topics/appendix/tradetrust-api",
       "topics/appendix/non-fungible-token",
       "topics/appendix/core-components",
-      "topics/appendix/polygon-mainnet-workaround"
+      "topics/appendix/polygon-mainnet-workaround",
+      "topics/appendix/stability-gasfee-workaround"
     ]
   },
   "reference": {
@@ -207,9 +208,21 @@
       "reference/generic-templates/bill-of-lading"
     ],
     "Libraries": [
+      "reference/libraries/tt-core",
       "reference/libraries/open-attestation",
       "reference/libraries/tt-verify",
       "reference/libraries/subgraph"
+    ],
+    "TradeTrust V4 (Beta)": [
+      "reference/tradetrust-v4/tradetrust-v4-schema",
+      {
+        "label": "Issuer method IDVC",
+        "type": "category",
+        "items": ["reference/tradetrust-v4/idvc-overview",
+          "reference/tradetrust-v4/obtaining-valid-idvc",
+          "reference/tradetrust-v4/issuing-v4-idvc-document",
+          "reference/tradetrust-v4/verifying-v4-idvc-document"]
+      }   
     ]
   }
 }

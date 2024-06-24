@@ -24,7 +24,7 @@ A `merkleRoot`, a 64 character long string prepended with `0x` will be generated
 ## Installation
 
 ```bash
-npm i --save @tradetrust-tt/tradetrust
+npm i --save @tradetrust-tt/tradetrust-core
 ```
 
 ---
@@ -36,7 +36,7 @@ npm i --save @tradetrust-tt/tradetrust
 `wrapDocument` takes in a documents and returns the wrapped document. Upon validating the document against it's schema, the document hash will be computed, to be placed onto the `signature` section of the wrapped document. The `signature` is to be used for integrity verification on the later stage of the tutorial.
 
 ```js
-import { wrapDocument } from "@tradetrust-tt/tradetrust";
+import { wrapDocument } from "@tradetrust-tt/tradetrust-core";
 const document = {
   id: "SERIAL_NUMBER_123",
   $template: {
