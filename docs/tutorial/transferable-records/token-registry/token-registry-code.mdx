@@ -48,7 +48,6 @@ import { Wallet, ethers } from 'ethers'
     const walletAddress = await wallet.getAddress()
     const chainId = await wallet.getChainId()
 
-    // deploy standard token registry
     const { TokenImplementation, Deployer } = TOKEN_REG_CONSTS.contractAddress
     const deployerContract = TDocDeployer__factory.connect(
         Deployer[chainId],
