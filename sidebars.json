@@ -218,11 +218,14 @@
       {
         "label": "Issuer method IDVC",
         "type": "category",
-        "items": ["reference/tradetrust-v4/idvc-overview",
+        "items": [
+          "reference/tradetrust-v4/idvc-overview",
           "reference/tradetrust-v4/obtaining-valid-idvc",
+          "reference/tradetrust-v4/identity-vc-specifications",
           "reference/tradetrust-v4/issuing-v4-idvc-document",
-          "reference/tradetrust-v4/verifying-v4-idvc-document"]
-      }   
+          "reference/tradetrust-v4/verifying-v4-idvc-document"
+        ]
+      }
     ]
   }
 }
