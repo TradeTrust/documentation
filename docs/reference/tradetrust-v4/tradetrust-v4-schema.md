@@ -4,7 +4,7 @@ title: TradeTrust V4 schema
 sidebar_label: TradeTrust V4 Schema
 ---
 
-TradeTrust V4 schema is currently in its beta phase. This version aligns more closely with the [W3C Verifiable Credentials (VC) data model](https://www.w3.org/TR/vc-data-model-2.0/), enhancing interoperability and standardization for verifiable documents.
+TradeTrust V4 schema is currently in its beta phase. This version aligns more closely with the [W3C Verifiable Credentials (VC) data model](https://www.w3.org/TR/vc-data-model/), enhancing interoperability and standardization for verifiable documents.
 
 The schema can be found [here](https://schemata.tradetrust.io/io/tradetrust/4.0/schema.json).
 
@@ -103,13 +103,13 @@ Key fields to note:
 
 **@context**
 
-The `@context` property is introduced as per the [W3C VC data model](https://www.w3.org/TR/vc-data-model-2.0/#contexts) to allow the issuer to map short-form aliases to the URIs required by specific verifiable credentials and presentations. 
+The `@context` property is introduced as per the [W3C VC data model](https://www.w3.org/TR/vc-data-model/#contexts) to allow the issuer to map short-form aliases to the URIs required by specific verifiable credentials and presentations.
 
 TradeTrust has released a beta extension to W3C credentials context, which can be accessed [here](https://schemata.tradetrust.io/io/tradetrust/4.0/context.json).
 
 **issuer**
 
-In TradeTrust Schema V4, there will be a single named issuer conforming to one of the three issuer methods: IDVC, DNS-TXT, and DNS-DID.
+In TradeTrust Schema V4, there will be a single named issuer conforming to one of the three issuer's identity methods: IDVC, DNS-TXT, and DNS-DID.
 
 **network**
 
@@ -124,7 +124,7 @@ This key determines the rendering method of the document. It specifies how the d
 
 **credentialSubject**
 
-The `credentialSubject` field describes the claims about the subject of the credential, conforming to the [W3C VC data model](https://www.w3.org/TR/vc-data-model-2.0/#credential-subject). This field contains information about the entity that the credential is issued to.
+The `credentialSubject` field describes the claims about the subject of the credential, conforming to the [W3C VC data model](https://www.w3.org/TR/vc-data-model//#credential-subject). This field contains information about the entity that the credential is issued to.
 
 **credentialStatus**
 
@@ -136,4 +136,5 @@ The `credentialStatus` field describes the status of the document. The `credenti
 - `TOKEN_REGISTRY`: Status tracked by a token registry.
 
 ### Disclaimer
+
 Please note that TradeTrust V4 Schema is currently in its beta phase, and the process may be subject to changes based on feedback and further development.
