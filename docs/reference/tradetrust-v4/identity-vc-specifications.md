@@ -11,35 +11,35 @@ A sample IDVC:
 ```json
 {
   "@context": [
-    "https://w3id.org/security/bbs/v1",
     "https://www.w3.org/2018/credentials/v1",
+    "https://didrp-test.esatus.com/schemas/basic-did-lei-mapping/v1",
+    "https://w3id.org/security/bbs/v1",
     "https://w3id.org/vc/status-list/2021/v1"
   ],
-  "id": "https://sbl.alwaysdata.net/oa/credentials/123456789",
-  "type": ["VerifiableCredential"],
-  "issuer": "did:web:sbl.alwaysdata.net:oa",
-  "credentialSubject": {
-    "uen": "198801234E",
-    "companyname": "My Own Company Pte Ltd",
-    "type": ["CorporateBasicDetails"],
-    "id": "did:ethr:0xE94E4f16ad40ADc90C29Dc85b42F1213E034947C"
-  },
-  "expirationDate": "2023-11-01T06:45:43Z",
   "credentialStatus": {
-    "id": "https://sbl.alwaysdata.net/oa/status/1#325",
-    "type": "StatusList2021Entry",
-    "statusListIndex": 325,
-    "statusListCredential": "https://sbl.alwaysdata.net/oa/status/1/325"
+    "id": "https://didrp-test.esatus.com/credentials/statuslist/1#27934",
+    "statusListCredential": "https://didrp-test.esatus.com/credentials/statuslist/1",
+    "statusListIndex": 27934,
+    "statusPurpose": "revocation",
+    "type": "StatusList2021Entry"
   },
-  "issuanceDate": "2023-22-13T01:35:08Z",
+  "credentialSubject": {
+    "entityName": "IMDA_active",
+    "entityIdentifier": "391200WCZAYD47QIKX37",
+    "id": "did:ethr:0x433097a1C1b8a3e9188d8C54eCC057B1D69f1638",
+    "type": ["BasicDIDLEIMapping"]
+  },
+  "issuanceDate": "2024-04-01T12:19:52Z",
+  "expirationDate": "2029-12-03T12:19:52Z",
+  "issuer": "did:web:didrp-test.esatus.com",
+  "type": ["VerifiableCredential"],
   "proof": {
     "type": "BbsBlsSignature2020",
-    "created": "2023-10-18T07:14:46Z",
+    "created": "2024-04-11T10:51:46Z",
     "proofPurpose": "assertionMethod",
-    "proofValue": "tqvUVZOPaY/A+7Wu47HZIYbboPU/MPGhb1EPLUKKPRwmRe8QJ/dzjRviQ5fAbR88TjSalqLbaBeopNocjrl7TmzCOlLQxGeNC4El1TCICu5tiX0HxGSNAPY4t5CglTLMTsdu5kg4f0a5MGQTnFgwyw==",
-    "verificationMethod": "did:web:sbl.alwaysdata.net:oa#didkey"
+    "proofValue": "uDqETewb6fwNzGgihIxUSdvTyncfEeIjowsj91O4qT2HsTLk4OUmkdreSY55d+SzYUHlKfzccE4m7waZyoLEkBLFiK2g54Q2i+CdtYBgDdkUDsoULSBMcH1MwGHwdjfXpldFNFrHFx/IAvLVniyeMQ==",
+    "verificationMethod": "did:web:didrp-test.esatus.com#keys-1"
   }
-}
 ```
 
 **@context**
@@ -50,8 +50,8 @@ The `@context` property is introduced as per the W3C VC data model to allow the 
 
 The `credentialSubject` field describes the claims about the subject of the credential, conforming to the [W3C VC data model](https://www.w3.org/TR/vc-data-model/#credential-subject). This field contains information about the identity of the entity that the credential is issued to. We standardize the field to require 3 fields so that this VC will be classified as a Identity VC by GLEIF, if require, it may contain additional field other than these 3 fields.
 
-- `uen`: the entity's registered company number.
-- `companyname`: the company's name.
+- `entityName`: the company's/entity's name.
+- `entityIdentifier`: the company's/entity's identifier. (e.g. GLEIF's lei, Unique Entity Number, D-U-N-S Number)
 - `id`: a `did:ethr` which will link to the issuer's ethereum wallet.
 
 **credentialStatus**
