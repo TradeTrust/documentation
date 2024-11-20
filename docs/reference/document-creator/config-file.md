@@ -66,7 +66,7 @@ Optional property:
 
 The value of `"network"` property is a string that refers to the network in which the document is created in.
 
-Currently, we only support to 6 networks.
+Currently, we only support the following networks. [List of Supported Network](/docs/topics/introduction/supported-network)
 
 - Ethereum Mainnet : `"homestead"`
 - Sepolia Testnet : `"sepolia"`
@@ -74,6 +74,9 @@ Currently, we only support to 6 networks.
 - Amoy Testnet: `"amoy"`
 - XDC Mainnet: `"xdc"`
 - XDC Apothem Testnet: `"xdcapothem"`
+- Stability Mainnet: `"stability"`
+- Stability Testnet: `"stabilitytestnet"`
+- Astron Mainnet: `"astron"`
 
 ---
 
