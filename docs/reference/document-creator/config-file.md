@@ -68,6 +68,8 @@ The value of `"network"` property is a string that refers to the network in whic
 
 Currently, we only support the following networks. [List of Supported Network](/docs/topics/introduction/supported-network)
 
+### Permissionless Networks
+
 - Ethereum Mainnet : `"homestead"`
 - Sepolia Testnet : `"sepolia"`
 - Polygon Mainnet: `"matic"`
@@ -76,7 +78,10 @@ Currently, we only support the following networks. [List of Supported Network](/
 - XDC Apothem Testnet: `"xdcapothem"`
 - Stability Mainnet: `"stability"`
 - Stability Testnet: `"stabilitytestnet"`
-- Astron Mainnet: `"astron"`
+
+### Permissioned Networks
+
+- Astron Mainnet: `"astron"` (requires wallet whitelisting)
 
 ---
 
