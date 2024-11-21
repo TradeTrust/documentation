@@ -90,14 +90,17 @@ An example of a valid `TXT` record for Ethereum `mainnet` network is as shown:
 
 The `netId` corresponds to the [chain ID for the different Ethereum networks](https://chainid.network/). Here is a list of TradeTrust supported networks:
 
-| Chain ID   | netID      | Name                     | Network Name |
-| ---------- | ---------- | ------------------------ | ------------ |
-| `1`        | `1`        | Ethereum Mainnet         | `homestead`  |
-| `11155111` | `11155111` | Ethereum Sepolia Testnet | `sepolia`    |
-| `137`      | `137`      | Polygon Mainnet          | `matic`      |
-| `80002`    | `80002`    | Polygon Amoy Testnet     | `amoy`       |
-| `50`       | `50`       | XDC Mainnet              | `XDC`        |
-| `51`       | `51`       | XDC Apothem Testnet      | `xdcapothem` |
+| Chain ID   | netID      | Name                     | Network Name         |
+| ---------- | ---------- | ------------------------ | -------------------- |
+| `1`        | `1`        | Ethereum Mainnet         | `homestead`          |
+| `11155111` | `11155111` | Ethereum Sepolia Testnet | `sepolia`            |
+| `137`      | `137`      | Polygon Mainnet          | `matic`              |
+| `80002`    | `80002`    | Polygon Amoy Testnet     | `amoy`               |
+| `50`       | `50`       | XDC Mainnet              | `XDC`                |
+| `51`       | `51`       | XDC Apothem Testnet      | `xdcapothem`         |
+| `101010`   | `101010`   | Stability Mainnet        | `stability`          |
+| `20180427` | `20180427` | Stability Testnet        | `stabilitytestnet`   |
+| `1338`     | `1338`     | Astron Mainnet           | `astron`             |
 
 ### Testing the DNS Record
 

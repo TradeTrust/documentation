@@ -8,7 +8,7 @@ sidebar_label: Overview
 
 There are 2 type of verifiable documents which uses different types of issuer method, a blockchain issuer method (DNS-TXT) and a DID issuer method (DNS-DID). For the blockchain issuer method (DNS-TXT), the fingerprint of the wrapped TradeTrust file is then committed to a [Document Store](https://github.com/Open-Attestation/document-store) smart contract on the Blockchain, which serves as an immutable ledger. For the DID issuer method (DNS-DID), the document is signed instead of being committed to the blockchain.
 
-Both the signed and committed TradeTrust file can then be distributed to recipients, who will be able to verify the file on https://tradetrust.io/verify simply by dragging and dropping it into the Web interface.
+Both the signed and committed TradeTrust file can then be distributed to recipients, who will be able to verify the file on https://ref.tradetrust.io simply by dragging and dropping it into the Web interface.
 
 ### Types of Verifiable Documents
 

@@ -166,8 +166,7 @@
     ],
     "Advanced": [
       "topics/advanced/alternative-ledgers",
-      "topics/advanced/stability-metamask-guide",
-      "topics/advanced/add-polygon-networks-to-metamask-wallet",
+      "topics/advanced/additional-network-metamask-guide",
       "topics/advanced/wallet-management",
       {
         "label": "AWS KMS",
@@ -186,7 +185,8 @@
       "topics/appendix/non-fungible-token",
       "topics/appendix/core-components",
       "topics/appendix/polygon-mainnet-workaround",
-      "topics/appendix/stability-gasfee-workaround"
+      "topics/appendix/stability-gasfee-workaround",
+      "topics/appendix/astron-address-whitelist-error"
     ]
   },
   "reference": {
