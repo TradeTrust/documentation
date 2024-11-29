@@ -1,10 +1,10 @@
 ---
 id: trustvc
-title: "New Feature Introduction: TrustVC"
-sidebar_label: "New Feature Introduction: TrustVC"
+title: "Introduction: TrustVC"
+sidebar_label: "Introduction: TrustVC"
 ---
 
-[**TrustVC**](https://github.com/TrustVC/trustvc) is a comprehensive wrapper library designed to simplify the signing and verification processes for [TrustVC W3C Verifiable Credentials (VC)](https://github.com/TrustVC/w3c) and [OpenAttestation Verifiable Documents (VD)](https://github.com/Open-Attestation/open-attestation/). It adheres to the **W3C VC Data Model v1.1** ([W3C Standard](https://www.w3.org/TR/vc-data-model/)), ensuring compatibility and interoperability for Verifiable Credentials.
+[**TrustVC**](https://github.com/TrustVC/trustvc) is a comprehensive library designed to simplify the signing and verification processes for [TrustVC W3C Verifiable Credentials (VC)](https://github.com/TrustVC/w3c) and [OpenAttestation Verifiable Documents (VD)](https://github.com/Open-Attestation/open-attestation/). It adheres to the **W3C VC Data Model v1.1** ([W3C Standard](https://www.w3.org/TR/vc-data-model/)), ensuring compatibility and interoperability for Verifiable Credentials.
 
 With **TrustVC**, developers can seamlessly handle both W3C Verifiable Credentials and OpenAttestation Verifiable Documents through an integrated set of functionalities. The library not only simplifies signing and verification but also imports and integrates existing TradeTrust libraries and smart contracts for token registry (V4 and V5), making it a versatile tool for decentralized identity and trust solutions.
 
@@ -147,6 +147,6 @@ const resultFragments = await verifyDocument(signedDocument);
 
 By integrating these libraries, **TrustVC** brings together a robust set of tools that are easy to adopt and provide real value to users in managing digital credentials and documents.
 
-## Migrate to TrustVC
+## Migrating to TrustVC
 
-For detailed instructions on migrating to **TrustVC**, refer to the [Upgrade Guide](migration-trustvc).
+For detailed instructions on migrating to **TrustVC**, refer to the [Migration Guide](migration-trustvc).

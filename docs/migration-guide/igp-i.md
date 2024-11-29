@@ -4,12 +4,12 @@ title: New Features in Token Registry v5
 sidebar_label: New Features in Token Registry v5
 ---
 
-[Version 5 of our Token Registry smart contracts](https://github.com/TradeTrust/token-registry) introduces significant updates designed to improve functionality, control, and compliance, particularly with **IG P&I requirements**. These enhancements provide robust features for managing transferable records while ensuring traceability and alignment with industry standards.
+[Version 5 of our Token Registry smart contracts](https://github.com/TradeTrust/token-registry) introduces significant updates designed to improve functionality, control, and compliance, particularly with **IG P&I requirements**. These enhancements provide robust features for managing transferable records while ensuring alignment with industry standards.
 
 ## Key Changes in Version 5
 
 - **Remark Field**:
-  - Supports detailed and traceable documentation for IG P&I-required actions.
+  - Supports detailed documentation for transactional actions.
 
 - **Reject Functions**:
   - Prevent wrongful transfers by rejecting ownership or holding changes.
@@ -24,9 +24,9 @@ sidebar_label: New Features in Token Registry v5
   - Limit: Up to **120 characters**.
   - Encryption: Recommended for sensitive remarks.
 
-- **IG P&I Alignment**: Enhances traceability by enabling users to document additional context for all actions.
+- **IG P&I Alignment**: Enabling users to document additional context for all actions.
 
-### 2. Enhanced Reject Functions
+### 2. Reject Functions
 
 - Reject functions empower users to decline unwanted changes to ownership or holding roles.
 
@@ -39,6 +39,6 @@ sidebar_label: New Features in Token Registry v5
 
 - **Important Note**: Rejection must occur immediately after being appointed as the beneficiary and/or holder. If any transactions occur by the new appointee (such as transfer actions or other operations), it will be treated as an implicit acceptance of the appointment, and the rejection process will be voided.
 
-## Upgrade to Token Registry v5
+## Migrating to Token Registry v5
 
-For detailed instructions on migrating to **Token Registry v5**, refer to the [Upgrade Guide](migration-tr-v5).
+For detailed instructions on migrating to **Token Registry v5**, refer to the [Migration Guide](migration-tr-v5).

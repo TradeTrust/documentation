@@ -32,7 +32,7 @@ npm install @tradetrust-tt/token-registry@^5.x
 ## 3. Code Migration
 ### Connect to Token Registry
 
-In Token Registry v5, the way you connect to a registry hasn’t changed much, but it's important to ensure you're using the updated contract and factory from Token Registry v5.
+In Token Registry v5, the way you connect to a registry hasn’t changed much, but it's **important** to ensure you're using the **updated contract and factory from Token Registry v5**.
 
 **Before (Token Registry v4)**:
 ```ts
