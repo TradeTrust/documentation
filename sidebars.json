@@ -227,5 +227,11 @@
         ]
       }
     ]
-  }
+  },
+  "migration-guide": [
+    "migration-guide/trustvc",
+    "migration-guide/migration-trustvc",
+    "migration-guide/igp-i",
+    "migration-guide/migration-tr-v5"
+  ]
 }
