@@ -149,4 +149,4 @@ By integrating these libraries, **TrustVC** brings together a robust set of tool
 
 ## Migrating to TrustVC
 
-For detailed instructions on migrating to **TrustVC**, refer to the [Migration Guide](migration-trustvc).
+For detailed instructions on migrating to **TrustVC**, please refer to the [Migration Guide](migration-trustvc).

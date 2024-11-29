@@ -41,4 +41,4 @@ sidebar_label: New Features in Token Registry v5
 
 ## Migrating to Token Registry v5
 
-For detailed instructions on migrating to **Token Registry v5**, refer to the [Migration Guide](migration-tr-v5).
+For detailed instructions on migrating to **Token Registry v5**, please refer to the [Migration Guide](migration-tr-v5).
