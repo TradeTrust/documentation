@@ -42,9 +42,9 @@ const connectedRegistry = TradeTrustToken__factory.connect(tokenRegistryAddress,
 ```
 **After (Token Registry v5 via TrustVC)**:
 
-If you are migrating to TrustVC, you will use the v5Contracts module to access the Token Registry v5 contracts.
+If you are migrating to TrustVC, you will use the token-registry-v5 module to access the Token Registry v5 contracts.
 ```ts
-import { TradeTrustToken__factory } from "@trustvc/trustvc/v5Contracts";
+import { TradeTrustToken__factory } from "@trustvc/trustvc/token-registry-v5/contracts";
 
 const connectedRegistry = TradeTrustToken__factory.connect(tokenRegistryAddress, signer);
 ```
@@ -114,13 +114,13 @@ const connectedEscrow = TitleEscrow__factory.connect(existingTitleEscrowAddress,
 ```
 **After (Token Registry v5 with TrustVC)**:
 ```ts
-import { TitleEscrow__factory } from "@trustvc/trustvc/v5Contracts";
+import { TitleEscrow__factory } from "@trustvc/trustvc/token-registry-v5/contracts";
 
 const connectedEscrow = TitleEscrow__factory.connect(existingTitleEscrowAddress, signer);
 ```
-**If you are still using Token Registry v4, you will connect like this**:
+**If you are still using Token Registry v4 but with TrustVC, you will connect like this**:
 ```ts
-import { TitleEscrow__factory } from "@tradetrust-tt/token-registry/contracts";
+import { TitleEscrow__factory } from "@trustvc/trustvc/token-registry-v4/contracts";
 
 const connectedEscrow = TitleEscrow__factory.connect(existingTitleEscrowAddress, signer);
 ```
