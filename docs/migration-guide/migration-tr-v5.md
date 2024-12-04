@@ -40,7 +40,7 @@ npm install @tradetrust-tt/token-registry@^5.x
 
 ### Ethers v6 Integration
 
-- The usage of Ethers v6 in the Token Registry module introduces conflicts with existing modules built on Ethers v5. Notably, only the **Token Registry** module has been upgraded to **Ethers v6**, while the rest of the modules remain on **Ethers v5**. To ensure compatibility across the system, we recommend using Ethers v5, as it is largely compatible with and avoids issues with the type changes introduced in v6.
+- The usage of Ethers v6 in the Token Registry module introduces conflicts with existing modules built on Ethers v5. Notably, only the **Token Registry** module has been upgraded to **Ethers v6**, while the rest of the modules remain on **Ethers v5**. To ensure compatibility across the system, **we recommend using Ethers v5**, as it is largely compatible with and avoids issues with the type changes introduced in v6.
 
 In Ethers v6, stricter and more structured types—especially for Signer, Provider, and BigNumber—have been refactored for better type safety. Certain types, like Wallet, have been moved out of the main ethers object, and ABI encoding/decoding is now more type-sensitive. These changes can cause type mismatches with v5 code and may require casting functions to **'any'** to ensure compatibility.
 
@@ -117,7 +117,8 @@ In some of the contract instances if **'parseLog'** is not available function , 
 
 - **Example 4**
   In Ethers v5, contract functions are organized under the functions property, requiring you to access them using this structure. However, in Ethers v6, functions are called directly from the contract object, simplifying the process.
-  **Ethers v5 (Using token Registry v4)**
+
+**Ethers v5 (Using token Registry v4)**
 
 ```ts
 const result = await contract.functions.myFunction(arg1, arg2); //called 'myFunction' under the functions property
