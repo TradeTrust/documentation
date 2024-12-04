@@ -36,46 +36,102 @@ If you only need to integrate Token Registry v5 and don't require the full Trust
 npm install @tradetrust-tt/token-registry@^5.x
 ```
 
-### 3. Breaking Changes
+## 3. Code Migration
 
-### Breaking Changes
+### Ethers v6 Integration
 
-1. **Ethers v6 Integration**
+- The usage of Ethers v6 in the Token Registry module introduces conflicts with existing modules built on Ethers v5. Notably, only the **Token Registry** module has been upgraded to **Ethers v6**, while the rest of the modules remain on **Ethers v5**. To ensure compatibility across the system, we recommend using Ethers v5, as it is largely compatible with and avoids issues with the type changes introduced in v6.
 
-   - The usage of Ethers v6 in the modules introduces conflicts with existing modules built on v5. In **Ethers v6**, there are stricter and more structured types, especially for `Signer`, `Provider`, and `BigNumber`, which have been refactored for better type safety. Some types like `Wallet` have been moved out of the main `ethers` object, and ABI encoding/decoding is now more type-sensitive. These differences can cause type mismatches and require casting some functions to `any` to ensure compatibility with the older **Ethers v5** code.
-   - **Example 1**
+In Ethers v6, stricter and more structured types—especially for Signer, Provider, and BigNumber—have been refactored for better type safety. Certain types, like Wallet, have been moved out of the main ethers object, and ABI encoding/decoding is now more type-sensitive. These changes can cause type mismatches with v5 code and may require casting functions to **'any'** to ensure compatibility.
 
-   ```ts
-   import { ethers } from "ethers";
-   if (ethers.version.includes("/5")) {
-     (ethers as any).ZeroAddress = (ethers as any)?.constants?.AddressZero;
-   }
-   export const defaultAddress = {
-     Zero: (ethers as any).ZeroAddress,
-     Burn: "0x000000000000000000000000000000000000dEaD",
-   };
-   ```
+Some of the common issues you might face are detailed in the examples below, along with solutions to address them. Please review them carefully.
 
-   - **Example 2**
+- **Example 1**
 
-   ```ts
-   const tx = await token.mint(beneficiary.address, holder.address, tokenId, txnHexRemarks.mintRemark);
-   const receipt = await tx.wait();
-   if (receipt === null) {
-     throw new Error("Transaction receipt is null.");
-   }
-   const titleEscrowFactoryInterface = (await ethers.getContractFactory("TitleEscrowFactory")).interface;
-   const event = getEventFromReceipt<any>(
-     receipt as unknown as TransactionReceipt,
-     "TitleEscrowCreated",
-     titleEscrowFactoryInterface,
-   );
-   ```
+**Ethers v5 (Token Registry v4 via TrustVC)**:
 
-2. **OpenZeppelin v5 Compatibility**
-   - OpenZeppelin v5 contracts are written for Solidity version 0.8.20, whereas the compiler being used is 0.8.22. It is recommended to deploy on chains that have the Cancun upgrade to avoid potential issues with contract execution.
+```ts
+import { ethers } from "ethers";
+ZeroAddress = ethers.constants.AddressZero;
+```
 
-## 4. Code Migration
+**Ethers v5 (Token Registry v5 via TrustVC)**:
+
+```ts
+import { ethers } from "ethers";
+if (ethers.version.includes("/5")) {
+  (ethers as any).ZeroAddress = (ethers as any)?.constants?.AddressZero;
+}
+export const defaultAddress = {
+  Zero: (ethers as any).ZeroAddress,
+  Burn: "0x000000000000000000000000000000000000dEaD",
+};
+```
+
+- **Example 2**
+
+**Ethers v5 (Token Registry v4)**:
+
+```ts
+const tx = await token.mint(beneficiary.address, holder.address, tokenId);
+const receipt = await tx.wait();
+
+const titleEscrowFactoryInterface = (await ethers.getContractFactory("TitleEscrowFactory")).interface;
+const event = getEventFromReceipt<TitleEscrowCreatedEvent>(
+  receipt,
+  titleEscrowFactoryInterface.getEventTopic("TitleEscrowCreated"),
+  titleEscrowFactoryInterface, // optional parameter
+);
+```
+
+**Ethers v5 (Token Registry v5 via TrustVC)**:
+
+```ts
+const tx = await token.mint(beneficiary.address, holder.address, tokenId, txnHexRemarks.mintRemark);
+const receipt = await tx.wait();
+if (receipt === null) {
+  throw new Error("Transaction receipt is null.");
+}
+const titleEscrowFactoryInterface = (await ethers.getContractFactory("TitleEscrowFactory")).interface;
+const event = getEventFromReceipt<any>( // use any to bypass type checking
+  receipt,
+  (titleEscrowFactoryInterface as any).getEventTopic("TitleEscrowCreated"), //Bypasses Type Checking
+  titleEscrowFactoryInterface, // necessary parameter
+);
+```
+
+- **Example 3**
+
+**Ethers v5 (Using Token Registry v4)**:
+
+```ts
+titleEscrow.interface.parseLog(log);
+```
+
+**Ethers v5 (Using Token Registry v5)**:
+In some of the contract instances if **'parseLog'** is not available function , Please refer to below code.
+
+```ts
+(titleEscrow.interface as any).parseLog(log);
+```
+
+- **Example 4**
+  In Ethers v5, contract functions are organized under the functions property, requiring you to access them using this structure. However, in Ethers v6, functions are called directly from the contract object, simplifying the process.
+  **Ethers v5 (Using token Registry v4)**
+
+```ts
+const result = await contract.functions.myFunction(arg1, arg2); //called 'myFunction' under the functions property
+```
+
+**Ethers v5 (Using token Registry v5)**
+
+```ts
+const result = await contract.myFunction(arg1, arg2); //called directly from the contract object
+```
+
+### OpenZeppelin v5 Compatibility
+
+- OpenZeppelin v5 contracts are written for Solidity version 0.8.20, whereas the compiler being used is 0.8.22. It is recommended to deploy on chains that have the Cancun upgrade to avoid potential issues with contract execution.
 
 ### Connect to Token Registry
 
@@ -173,6 +229,22 @@ await connectedRegistry.burn(tokenId, remarks);
 await connectedRegistry.burn(tokenId, "0x");
 ```
 
+### Function Name Update: getAddress to getEscrowAddress
+
+In Token Registry v4, the method to fetch the address was getAddress(). With Token Registry v5, this has been updated to getEscrowAddress().
+
+**Before (Token Registry v4)**:
+
+```ts
+await connectedRegistry.getAddress();
+```
+
+**After (Token Registry v5)**:
+
+```ts
+await connectedRegistry.getEscrowAddress();
+```
+
 ### Connecting to Title Escrow
 
 When connecting to Title Escrow, the process is similar. You will use the updated contract from Token Registry v5 or TrustVC depending on your installation choice.
@@ -201,7 +273,7 @@ import { v4Contracts } from "@trustvc/trustvc";
 const connectedEscrow = v4Contracts.TitleEscrow__factory.connect(existingTitleEscrowAddress, signer);
 ```
 
-### Surrender to Return to Issuer
+### Function Name Update: Surrender to Return to Issuer
 
 In Token Registry v4, the method to return the title to the issuer was surrender(). With Token Registry v5, this has been updated to returnToIssuer().
 
