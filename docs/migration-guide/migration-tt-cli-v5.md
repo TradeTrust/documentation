@@ -109,7 +109,7 @@ If this transaction is mined and successful, the state of the transferable recor
 
 ### Present state:
 
-The token belongs to `Charlie` (both owner and holder are the address of Alice)
+The token belongs to `Charlie` (both owner and holder are the address of Charlie)
 
 ### Actions
 
@@ -123,12 +123,12 @@ The token belongs to `Charlie` (both owner and holder are the address of Alice)
    - surrender document
    - reject ownership and holdership
 
-We will do **reject change of wownership** now.
+We will do **reject change of ownership** now.
 
 What this command does is it sets the states (holder and owner) of the token to it's previous holder and onwer address, in this case we will reject the change of ownership back to Alice.
 
 ```
-tradetrust title-escrow reject-change-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <CHARLIE_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+tradetrust title-escrow reject-transfer-owner-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <CHARLIE_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
 ```
 
 If this transaction is mined and successful, the state of the transferable record will be different.
@@ -155,7 +155,6 @@ The token belongs to `Charlie` (both owner and holder are the address of Charlie
    - change holder
    - endorse change of ownership
    - surrender document
-   - reject change of ownership
 
 Now we will do the **change holder** command.
 
@@ -196,7 +195,7 @@ Now we will do the **reject change of holder** command.
 What this command does is it just sets the holder state to it's previous holder address.
 
 ```bash
-tradetrust title-escrow reject-change-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <CHARLIE_PTE_KEY> --remark <REMARK_STRING>  --encryption-key <REMARK_ENCRYPTION_KEY>
+tradetrust title-escrow reject-transfer-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <BOB_PTE_KEY> --remark <REMARK_STRING>  --encryption-key <REMARK_ENCRYPTION_KEY>
 ```
 
 Do take note that the private key supplied should be that of Bob instead of Charlie since Bob currently holds the token and Charlie owns the token.
@@ -287,7 +286,7 @@ Now we will do the **reject change of owner** command.
 What this command does is it just sets the owner state to it's previous owner address.
 
 ```bash
-tradetrust title-escrow reject-change-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <ALICE_PTE_KEY> --remark <REMARK_STRING> --encryp
+tradetrust title-escrow reject-transfer-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <ALICE_PTE_KEY> --remark <REMARK_STRING> --encryp
 tion-key <REMARK_ENCRYPTION_KEY>
 ```
 
@@ -297,7 +296,7 @@ tion-key <REMARK_ENCRYPTION_KEY>
 
 ### Present state:
 
-_NOTE - Considering Bob actually not made the reject change of owner transaction._
+_NOTE - Considering Alice actually not made the reject change of owner transaction._
 The token is held by `Bob`, token is owned by `Alice`
 
 ### Actions:
