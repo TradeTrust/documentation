@@ -15,7 +15,7 @@ const contractGasData = {
       remarks: (
         <>
           With{" "}
-          <a href="https://github.com/Open-Attestation/token-registry/tree/master#quick-start" target="_blank">
+          <a href="https://github.com/Open-Attestation/token-registry/tree/master#quick-start" target="_blank" rel="noopener noreferrer">
             Quick Start
           </a>{" "}
           deployment in v4
@@ -88,7 +88,7 @@ const contractGasData = {
       remarks: (
         <>
           For{" "}
-          <a href="https://github.com/Open-Attestation/token-registry/tree/master#stand-alone-contract" target="_blank">
+          <a href="https://github.com/Open-Attestation/token-registry/tree/master#stand-alone-contract" target="_blank" rel="noopener noreferrer">
             standalone
           </a>{" "}
           deployment in v4 (optional)
