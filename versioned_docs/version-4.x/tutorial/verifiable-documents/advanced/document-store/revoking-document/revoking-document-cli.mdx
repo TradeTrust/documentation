@@ -1,0 +1,67 @@
+---
+id: revoking-document-cli
+title: Revoking Documents (CLI)
+sidebar_label: Revoking Documents (CLI)
+---
+
+import Flow from "../flow.mdx";
+
+<Flow />
+
+> For the current step, you can either opt to use the [CLI](/docs/tutorial/verifiable-documents/advanced/document-store/revoking-document/revoking-document-cli) or [Code](/docs/tutorial/verifiable-documents/advanced/document-store/revoking-document/revoking-document-code).
+
+After issuing a document, you might want to revoke it for any reason:
+
+- the information provided by the recipient was wrong.
+- the information in the document are outdated.
+- there is a problem in the document.
+- etc.
+
+## Revoking a document
+
+```bash
+tradetrust document-store revoke --address 0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b --hash 0x1e0c5e93c04032ed6571b31c785b963f0a27776041f35bdcc98cd8dfe073adc0  --network sepolia --encrypted-wallet-path wallet.json
+```
+
+In the example above:
+
+- `--address` is the document store address, for instance the one created with the [Deploying Document Store](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli) guide.
+- `--hash` is the value of `targetHash` field of one of the [previously wrapped documents](/docs/tutorial/verifiable-documents/advanced/document-store/wrapping-document/wrapping-document-cli) (open one of the file, head to the bottom and check for the `targetHash` in the `signature` object.
+
+You will be prompted for the password that you used while creating the wallet. You will see a message after completion of the command:
+
+```text
+✔  success   Document/Document Batch with hash 0x1e0c5e93c04032ed6571b31c785b963f0a27776041f35bdcc98cd8dfe073adc0 has been revoked on 0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b
+```
+
+## Verifying the document
+
+Head to [dev.tradetrust.io](https://dev.tradetrust.io/verify) and drag and drop the revoked document. An error will be displayed by the portal.
+
+![Successful verification](/docs/tutorial/verifiable-documents/ethereum/revoking-document/verifying.png)
+
+The document has been revoked, thus, we do not display the content of the document on our document viewer.
+
+## Revoking multiple documents
+
+If you open the [previously wrapped documents](/docs/tutorial/verifiable-documents/advanced/document-store/wrapping-document/wrapping-document-cli) side by side, you will notice:
+
+- they have a different `targetHash`: it uniquely identifies any document
+- they have the same `merkleRoot`: it uniquely identifies any group of wrapped documents.
+
+When you revoke a document you can use any of those hash, but the result will be different depending on the one used:
+
+- when using the `targetHash`, only the document will be revoked.
+- when using the `merkleRoot`, all the documents wrapped together (in the same batch) will be revoked.
+
+If you run again the command above, by using the `merkleRoot` of the documents, then all document will be revoked.
+
+## Misc questions:
+
+Q: hey you mentioned that if I use DID documents, I would not need to pay for transactions, but following this flow, I would still have to pay for at least 1 transaction (deploying a `documentStore`), what gives?
+
+A: yes, you are right, for now this implementation will still need at least 1 transaction to the ethereum blockchain. We are working on this so please be patient and watch this space.
+
+Q: this might be a weird question but I did not issue any documents from the deployed `documentStore`, how am I able to revoke this document from said `documentStore` when in the first place, I did not even issue anything?
+
+A: long story short, the revocation mapping in the `documentStore` is a separate mapping from the issued mapping.
