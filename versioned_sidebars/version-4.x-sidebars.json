@@ -111,18 +111,7 @@
         "tutorial/transferable-records/going-further"
       ]
     },
-    "tutorial/decentralised-renderer/decentralised-renderer",
-    {
-      "type": "category",
-      "label": "Migrating to V5",
-      "items": [
-        "migration-guide/trustvc",
-        "migration-guide/migration-trustvc",
-        "migration-guide/igp-i",
-        "migration-guide/migration-tr-v5",
-        "migration-guide/migration-tt-cli-v5"
-      ]
-    }
+    "tutorial/decentralised-renderer/decentralised-renderer"
   ],
   "topics": {
     "Introduction": [

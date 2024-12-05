@@ -27,6 +27,12 @@ const siteConfig = {
           sidebarPath: require.resolve("./sidebars.json"),
           sidebarCollapsible: true,
           editUrl: "https://github.com/tradetrust/documentation/edit/master/",
+          lastVersion: 'current',
+          versions: {
+            current: {
+              label: '5.x'
+            },
+          },
         },
         theme: {
           customCss: [require.resolve("./src/css/tailwind.css")],
@@ -49,7 +55,17 @@ const siteConfig = {
         { to: "docs/tutorial/introduction", label: "Tutorial" },
         { to: "docs/topics/introduction/what-is-tradetrust", label: "Topics" },
         { to: "docs/reference/tradetrust-website/overview", label: "References" },
-        { to: "docs/migration-guide/trustvc", label: "Migration Guide" },
+        {
+          type: 'docsVersionDropdown',
+          position: 'right',
+          dropdownActiveClassDisabled: true,
+          dropdownItemsAfter: [
+            {
+              type: 'html',
+              value: '<hr class="dropdown-separator">',
+            },
+          ],
+        },
       ],
     },
     footer: {

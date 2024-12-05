@@ -1,0 +1,163 @@
+---
+id: additional-network-metamask-guide
+title: Add custom network to MetaMask
+description: A step by step guide on how to add a custom network in MetaMask
+sidebar_label: Add custom network to MetaMask
+keywords: [add network to metamask, polygon, amoy, stability, stability testnet, astron, astron l2]
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+:::tip
+This guide covers configuraing Metamask to support additional networks.
+
+This process requires the use of the MetaMask browser extension.
+:::
+
+## Manually adding a custom network into Metamask
+
+### Navigate to the `Network` tab in MetaMask:
+
+<Tabs>
+  <TabItem value="fullscreen" label="Fullscreen View" default>
+    <img
+      style={{ margin: "auto", height: "500px" }}
+      src={"/docs/topics/advanced/additional-networks-to-metamask-guide/metamask-select-network-full.png"}
+      alt="MetaMask Settings"
+    />
+  </TabItem>
+  <TabItem value="popup" label="Popup View">
+    <img
+      style={{ margin: "auto", height: "500px" }}
+      src={"/docs/topics/advanced/additional-networks-to-metamask-guide/metamask-select-network.png"}
+      alt="MetaMask Settings"
+    />
+  </TabItem>
+</Tabs>
+
+### Click on `Add a custom network`
+
+<img
+  style={{ margin: "auto", height: "500px" }}
+  src={"/docs/topics/advanced/additional-networks-to-metamask-guide/metamask-add-custom-network.png"}
+  alt="MetaMask Add custom network"
+/>
+
+### Fill in the network configuration for the new network as required
+
+<Tabs>
+  <TabItem value="polygon" label="Polygon" default>
+    :::note
+    Please replace the (INFURA_API_KEY) with the API Key. [Find out more](#sign-up-for-infuras-api-key).
+    :::
+
+    | Field Name         | Polygon Mainnet                   | Polygon Testnet (Amoy)                             |
+    | ------------------ | --------------------------------- | -------------------------------------------------- |
+    | Network Name       | Polygon                           | Amoy                                               |
+    | RPC URL            | https://polygon-rpc.com           | https://polygon-amoy.infura.io/v3/(INFURA_API_KEY) |
+    | Public RPC URL     | https://rpc-mainnet.matic.network | https://rpc-amoy.polygon.technology/               |
+    | Chain ID           | 137                               | 80002                                              |
+    | Currency Symbol    | Matic                             | Matic                                              |
+    | Block Explorer URL | https://polygonscan.com           | https://amoy.polygonscan.com                       |
+
+  </TabItem>
+  <TabItem value="stability" label="Stability">
+    :::note
+    Please replace the (API_KEY) with the API Key. [Find out more](#sign-up-for-a-stability-protocols-api-key).
+    :::
+
+    | Field Name         | Stability Protocol Mainnet                      | Stability Protocol Testnet                 |
+    | ------------------ | ----------------------------------------------- | ------------------------------------------ |
+    | Network Name       | Stability                                       | Stability Testnet                          |
+    | RPC URL            | https://gtn.stabilityprotocol.com/zgt/(API_KEY) | https://free.testnet.stabilityprotocol.com |
+    | Chain ID           | 101010                                          | 20180427                                   |
+    | Currency Symbol    | FREE                                            | FREE                                       |
+    | Block Explorer URL | https://stability.blockscout.com/               | https://stability-testnet.blockscout.com/  |
+
+  </TabItem>
+  <TabItem value="astron" label="Astron L2" default>
+    :::warning
+    Your wallet address needs to be whitelisted before transacting on the Astron L2 network.
+    :::
+    
+    | Field Name         | Astron L2 Mainnet                         |
+    | ------------------ | --------------------------------------- |
+    | Network Name       | Astron                                  |
+    | RPC URL            | https://astronlayer2.bitfactory.cn/rpc/ |
+    | Chain ID           | 1338                                    |
+    | Currency Symbol    | Astron                                  |
+    | Block Explorer URL | https://astronscanl2.bitfactory.cn/     |
+  </TabItem>
+</Tabs>
+
+After adding Network's details, you should get something like this:
+
+<img
+  style={{ margin: "auto", height: "500px" }}
+  src={"/docs/topics/advanced/additional-networks-to-metamask-guide/metamask-fill-network-info.png"}
+  alt="Network Details"
+/>
+
+### Click the `Save` button at the bottom of the screen to add a new network to MetaMask
+
+:tada: Congratulations! :tada: You have successful added a new network to metamask!
+
+<img
+  style={{ margin: "auto", height: "500px" }}
+  src={"/docs/topics/advanced/additional-networks-to-metamask-guide/metamask-network-added-successfully.png"}
+  alt="Added Successfully"
+/>
+
+---
+
+## Sign up for a Stability Protocol's API Key
+
+Follow [Stability's guide](https://docs.stabilityprotocol.com/developers/register_for_api_key) to sign up for a Stability Protocol's API Key
+
+## Sign up for Infura's API Key
+
+:::tip
+Refer to Infura official documentation [here](https://docs.metamask.io/developer-tools/dashboard/get-started/create-api/)
+:::
+
+### Step 1: Navigate to Infura
+
+Navigate to [infura.io](https://app.infura.io/).
+
+And Sign up for a free account or log in to your existing account. 
+
+Infura will automatically generate the `My First Key` API key for new users.
+Click the API Key.
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/topics/advanced/additional-networks-to-metamask-guide/infura-home.png"}
+  alt="Click API Key"
+/>
+
+### Step 2: Enable Service / Network
+
+Enable endpoints from list of networks and click `Save Changes`.
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/topics/advanced/additional-networks-to-metamask-guide/infura-select-network.png"}
+  alt="Enable endpoints"
+/>
+
+### Step 3: Copy API Key
+
+Click the icon ( highlighted with red border ), to copy the API Key.
+
+<img
+  style={{ margin: "auto", marginBottom: "2rem" }}
+  src={"/docs/topics/advanced/additional-networks-to-metamask-guide/infura-copy-key.png"}
+  alt="Copy API Key"
+/>
+
+Now that you have the **API Key**, you can add it into your MetaMask. You can refer to the [guide](#fill-in-the-network-configuration-for-the-new-network-as-required) above.
+
+## Alternative guide
+
+For additional details, refer to the Metamask guide [here](https://support.metamask.io/networks-and-sidechains/managing-networks/how-to-add-a-custom-network-rpc/).
