@@ -68,7 +68,7 @@ Note that we will be using token/transferable record interchangeably at times.
 - reject change holder (v5)
 - nominate change of ownership
 - endorse transfer of ownership
-- reject transfer of ownership (5)
+- reject transfer of ownership (v5)
 
 At each action done, we will state the present state of the token, and the respective actions the players can do with the given present state.
 
