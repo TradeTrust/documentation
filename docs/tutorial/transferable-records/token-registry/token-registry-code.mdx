@@ -33,7 +33,7 @@ Refer to the [pre-requisite](/docs/tutorial/prerequisites#understanding-provider
 
 ```ts
 import { v5Contracts } from "@trustvc/trustvc";
-import { Wallet, ethers, TransactionReceipt } from "ethers";
+import { Wallet, ethers } from "ethers";
 
 const { TDocDeployer__factory, TOKEN_REG_CONSTS, DeploymentEvent, encodeInitParams, getEventFromReceipt } = v5Contracts;
 // preparing the wallet
@@ -52,8 +52,7 @@ const initParam = encodeInitParams({
 });
 const tx = await deployerContract.deploy(TokenImplementation[chainId], initParam);
 const receipt = await tx.wait();
-const registryAddress = getEventFromReceipt<any>(receipt as unknown as TransactionReceipt, "Deployment", deployerContract.interface).args
-  .deployed;
+const registryAddress = getEventFromReceipt<any>(receipt, (deployerContract as any).getEventTopic("TitleEscrowCreated"), deployerContract.interface).args.deployed;
 
 console.log(`Contract Address: ${registryAddress}`); // Contract Address: 0x7Ae2aE35f66ACE6671CB2bfb985011b0a2d9cf72
 console.log(`Transaction: ${JSON.stringify(receipt)}`);

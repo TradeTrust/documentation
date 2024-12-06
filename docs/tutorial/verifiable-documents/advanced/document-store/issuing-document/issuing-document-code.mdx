@@ -34,7 +34,6 @@ import { Wallet, ethers } from "ethers";
 const unconnectedWallet = new Wallet("privateKey");
 const provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545"); // Local network
 const wallet = unconnectedWallet.connect(provider);
-bv;
 const documentStore = DocumentStoreFactory.connect("0x63A223E025256790E88778a01f480eBA77731D04", wallet);
 console.log(`Document Store Name: ${await documentStore.name()}`); // Document Store Name: DemoDocumentStore
 ```

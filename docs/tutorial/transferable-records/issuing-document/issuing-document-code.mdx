@@ -45,7 +45,7 @@ const connectedRegistry = TradeTrustToken__factory.connect(tokenRegistryAddress,
 In the example, we will use `0x6FFeD6E6591b808130a9b248fEA32101b5220eca` wallet address as owner and holder. You will need to replace this value with a wallet address you control to be able to perform different actions on the transferable records later.
 
 ```ts
-import { v5Contracts } from "@trustvc/trustvc";
+import { v5Contracts, encrypt } from "@trustvc/trustvc";
 
 const { TradeTrustToken__factory } = v5Contracts;
 const privateKey = "";
