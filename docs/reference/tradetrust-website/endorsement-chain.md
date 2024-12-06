@@ -16,9 +16,9 @@ The endorsement chain provides an overview of the EBL's transaction history, sho
 
 **Endorse of Change of Owner** -> When Owner and Holder are same, current Owner/Holder can endorse the change of owner to another owner. This will result in a change of Owner and Holder values.
 
-**Surrender of Document** -> When Owner and Holder are the same, the current Owner/Holder can surrender the document to issuer. Once the document is surrendered, both Owner and Holder values will be empty because it is no longer in circulation.
+**Return of Document** -> When Owner and Holder are the same, the current Owner/Holder can return the document to issuer. Once the document is returned, both Owner and Holder values will be empty because it is no longer in circulation.
 
-**Surrender of document accepted** -> Document is shredded and destroyed.
+**Return of document accepted** -> Document is shredded and destroyed.
 
 _Note: Please follow this [guide](/docs/topics/advanced/add-polygon-networks-to-metamask-wallet) if you are having trouble viewing the endorsement chain on polygon networks._
 

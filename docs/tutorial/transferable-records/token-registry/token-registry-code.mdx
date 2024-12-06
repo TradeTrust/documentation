@@ -20,7 +20,7 @@ In this guide, we will deploy a token registry smart contract on the Ethereum bl
 ## Installation
 
 ```sh
-npm install --save @tradetrust-tt/tradetrust-core
+npm install @trustvc/trustvc
 ```
 
 ## Usage
@@ -32,41 +32,27 @@ Refer to the [pre-requisite](/docs/tutorial/prerequisites#understanding-provider
 ### Deploy a token registry
 
 ```ts
-import {
-    TDocDeployer__factory,
-    TOKEN_REG_CONSTS,
-    DeploymentEvent,
-    encodeInitParams,
-    getEventFromReceipt,
-} from '@tradetrust-tt/tradetrust-core'
-import { Wallet, ethers } from 'ethers'
+import { v5Contracts } from "@trustvc/trustvc";
+import { Wallet, ethers } from "ethers";
 
-    // preparing the wallet
-    const unconnectedWallet = new Wallet('<your_private_key>')
-    const provider = new ethers.providers.JsonRpcProvider('<your_provider_url>')
-    const wallet = unconnectedWallet.connect(provider)
-    const walletAddress = await wallet.getAddress()
-    const chainId = await wallet.getChainId()
+const { TDocDeployer__factory, TOKEN_REG_CONSTS, DeploymentEvent, encodeInitParams, getEventFromReceipt } = v5Contracts;
+// preparing the wallet
+const unconnectedWallet = new Wallet("<your_private_key>");
+const provider = new ethers.providers.JsonRpcProvider("<your_provider_url>");
+const wallet = unconnectedWallet.connect(provider);
+const walletAddress = await wallet.getAddress();
+const chainId = await wallet.getChainId();
 
-    const { TokenImplementation, Deployer } = TOKEN_REG_CONSTS.contractAddress
-    const deployerContract = TDocDeployer__factory.connect(
-        Deployer[chainId],
-        wallet
-    )
-    const initParam = encodeInitParams({
-        name: 'DemoTokenRegistry',
-        symbol: 'DTR',
-        deployer: walletAddress,
-    })
-    const tx = await deployerContract.deploy(
-        TokenImplementation[chainId],
-        initParam
-    )
-    const receipt = await tx.wait()
-    const registryAddress = getEventFromReceipt<DeploymentEvent>(
-        receipt,
-        deployerContract.interface.getEventTopic('Deployment')
-    ).args.deployed
+const { TokenImplementation, Deployer } = TOKEN_REG_CONSTS.contractAddress;
+const deployerContract = TDocDeployer__factory.connect(Deployer[chainId], wallet);
+const initParam = encodeInitParams({
+  name: "DemoTokenRegistry",
+  symbol: "DTR",
+  deployer: walletAddress,
+});
+const tx = await deployerContract.deploy(TokenImplementation[chainId], initParam);
+const receipt = await tx.wait();
+const registryAddress = getEventFromReceipt<any>(receipt, (deployerContract as any).getEventTopic("Deployment"), deployerContract.interface).args.deployed;
 
 console.log(`Contract Address: ${registryAddress}`); // Contract Address: 0x7Ae2aE35f66ACE6671CB2bfb985011b0a2d9cf72
 console.log(`Transaction: ${JSON.stringify(receipt)}`);
@@ -259,8 +245,9 @@ console.log(`Transaction: ${JSON.stringify(receipt)}`);
 ### Connecting to token registry
 
 ```ts
-import { TradeTrustToken__factory } from "@tradetrust-tt/tradetrust-core";
+import { v5Contracts } from "@trustvc/trustvc";
 
+const { TradeTrustToken__factory } = v5Contracts;
 const privateKey = "";
 const tokenRegistryAddress = "0x7Ae2aE35f66ACE6671CB2bfb985011b0a2d9cf72";
 

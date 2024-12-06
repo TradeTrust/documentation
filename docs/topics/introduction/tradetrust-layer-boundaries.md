@@ -45,7 +45,7 @@ For a parallel universe integration, documents and assets issued on the alternat
 
 ### L1: Protocol Integration
 
-Libraries: [Document Store library](https://github.com/Open-Attestation/document-store) and [Token Registry Library](https://github.com/Open-Attestation/token-registry)
+Libraries: [Document Store library](https://github.com/TradeTrust/document-store) and [Token Registry Library](https://github.com/TradeTrust/token-registry)
 
 L1 provides for an implementation of the TradeTrust protocol on Ethereum, based on the combination of a ERC721-compliant non-fungible token registry smart contract and our own Title Escrow smart contract. This layer provides the assurance that the MLETR requires for compliance.
 

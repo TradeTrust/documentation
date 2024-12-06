@@ -46,15 +46,15 @@ In this scenario, we allow the Owner to prepare a **Remote Endorsement**, but fo
 
 The Holder field is much simpler, and similarly to the physical world - an existing holder (and only the holder) can effect a change in Possession without further approval.
 
-#### Surrender
+#### Return to Issuer
 
-At the end of its' life cycle, a Title is surrendered back to the Issuer. This is effected by transferring the Token back to the Issuer.
+At the end of its' life cycle, a Title is returned back to the Issuer. This is effected by transferring the Token back to the Issuer.
 
-The Title Escrow makes an allowance for this action to be performed by the Owner, only when he is also the holder. This action is termed **Surrender**.
+The Title Escrow makes an allowance for this action to be performed by the Owner, only when he is also the holder. This action is termed **returnToIssuer**.
 
 ## Manage Assets
 
-User interface of how EBL is transferred/endorsed/surrendered using Manage Assets. (Note that this only appears for Transferable Record type of documents)
+User interface of how EBL is transferred/endorsed/returned using Manage Assets. (Note that this only appears for Transferable Record type of documents)
 
 ![Manage Asset](/docs/topics/introduction/transferable-records/title-transfer/manage-asset.png)
 

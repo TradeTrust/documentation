@@ -15,7 +15,11 @@ const contractGasData = {
       remarks: (
         <>
           With{" "}
-          <a href="https://github.com/Open-Attestation/token-registry/tree/master#quick-start" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://github.com/Open-Attestation/token-registry/tree/master#quick-start"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Quick Start
           </a>{" "}
           deployment in v4
@@ -59,7 +63,7 @@ const contractGasData = {
       },
     },
     {
-      name: "Surrender Document",
+      name: "Return Document to Issuer",
       gas: {
         v3: 93435,
         v4: 84586,
@@ -87,10 +91,14 @@ const contractGasData = {
       },
       remarks: (
         <>
-          For{" "}
-          <a href="https://github.com/Open-Attestation/token-registry/tree/master#stand-alone-contract" target="_blank" rel="noopener noreferrer">
+          For
+          <a
+            href="https://github.com/Open-Attestation/token-registry/tree/master#stand-alone-contract"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             standalone
-          </a>{" "}
+          </a>
           deployment in v4 (optional)
         </>
       ),

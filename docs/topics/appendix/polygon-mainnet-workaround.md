@@ -59,9 +59,10 @@ const safeParseUnits = (_value: number | string, decimals: number): BigNumber =>
 ### Example on how we use the gas price when we mint a transferable record
 
 ```ts
-import { TradeTrustToken__factory } from "@tradetrust-tt/tradetrust-core";
+import { v5Contracts } from "@trustvc/trustvc";
 import { TransactionReceipt } from "@ethersproject/abstract-provider";
 
+const { TradeTrustToken__factory } = v5Contracts;
 const tokenRegistryAddress = "<TOKEN_REGISTRY_CONTRACT_ADDRESS>";
 const owner = "<OWNER_WALLET_ADDRESS>";
 const holder = "<HOLDER_WALLET_ADDRESS>";
