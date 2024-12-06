@@ -20,7 +20,7 @@ In this guide, we will deploy a token registry smart contract on the Ethereum bl
 ## Installation
 
 ```sh
-npm install --save @tradetrust-tt/tradetrust-core
+npm install @trustvc/trustvc
 ```
 
 ## Usage
@@ -32,15 +32,15 @@ Refer to the [pre-requisite](/docs/tutorial/prerequisites#understanding-provider
 ### Deploy a token registry
 
 ```ts
-import {
+import { v5Contracts } from '@trustvc/trustvc'
+import { Wallet, ethers } from 'ethers'
+
+    const {
     TDocDeployer__factory,
     TOKEN_REG_CONSTS,
     DeploymentEvent,
     encodeInitParams,
-    getEventFromReceipt,
-} from '@tradetrust-tt/tradetrust-core'
-import { Wallet, ethers } from 'ethers'
-
+    getEventFromReceipt } = v5Contracts;
     // preparing the wallet
     const unconnectedWallet = new Wallet('<your_private_key>')
     const provider = new ethers.providers.JsonRpcProvider('<your_provider_url>')
@@ -63,7 +63,7 @@ import { Wallet, ethers } from 'ethers'
         initParam
     )
     const receipt = await tx.wait()
-    const registryAddress = getEventFromReceipt<DeploymentEvent>(
+    const registryAddress = getEventFromReceipt<any>(
         receipt,
         deployerContract.interface.getEventTopic('Deployment')
     ).args.deployed
@@ -259,8 +259,9 @@ console.log(`Transaction: ${JSON.stringify(receipt)}`);
 ### Connecting to token registry
 
 ```ts
-import { TradeTrustToken__factory } from "@tradetrust-tt/tradetrust-core";
+import { v5Contracts } from "@trustvc/trustvc";
 
+const { TradeTrustToken__factory } = v5Contracts;
 const privateKey = "";
 const tokenRegistryAddress = "0x7Ae2aE35f66ACE6671CB2bfb985011b0a2d9cf72";
 

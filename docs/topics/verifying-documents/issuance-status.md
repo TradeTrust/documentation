@@ -61,7 +61,7 @@ A TradeTrust verifier:
 
   ```js
   import { providers } from "ethers";
-  import { DocumentStoreFactory } from "@tradetrust-tt/tradetrust-core";
+  import { DocumentStoreFactory } from "@tradetrust-tt/document-store";
 
   try {
     const documentStore = "0xabc..."; // your document store address
@@ -94,7 +94,7 @@ A TradeTrust verifier:
 
   ```js
   import { providers } from "ethers";
-  import { DocumentStoreFactory } from "@tradetrust-tt/tradetrust-core";
+  import { DocumentStoreFactory } from "@tradetrust-tt/document-store";
 
   try {
     const documentStore = "0xabc..."; // your document store address

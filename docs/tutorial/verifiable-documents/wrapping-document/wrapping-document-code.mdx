@@ -24,7 +24,7 @@ A `merkleRoot`, a 64 character long string prepended with `0x` will be generated
 ## Installation
 
 ```bash
-npm i --save @tradetrust-tt/tradetrust-core
+npm install @trustvc/trustvc
 ```
 
 ---
@@ -33,10 +33,10 @@ npm i --save @tradetrust-tt/tradetrust-core
 
 ### Wrapping a single document
 
-`wrapDocument` takes in a documents and returns the wrapped document. Upon validating the document against it's schema, the document hash will be computed, to be placed onto the `signature` section of the wrapped document. The `signature` is to be used for integrity verification on the later stage of the tutorial.
+`wrapOADocument` takes in a documents and returns the wrapped document. Upon validating the document against it's schema, the document hash will be computed, to be placed onto the `signature` section of the wrapped document. The `signature` is to be used for integrity verification on the later stage of the tutorial.
 
 ```js
-import { wrapDocument } from "@tradetrust-tt/tradetrust-core";
+import { wrapOADocument } from '@trustvc/trustvc';
 const document = {
   "recipient": {
     "name": "John Doe"
@@ -62,7 +62,7 @@ const document = {
   ]
 } as any;
 
-const wrappedDocument = wrapDocument(document);
+const wrappedDocument = wrapOADocument(document);
 console.log(wrappedDocument);
 
 // wrappedDocument
@@ -99,14 +99,14 @@ console.log(wrappedDocument);
 
 The `signature` section includes the fields of `targetHash` and `merkleRoot`.
 `signature.targetHash` is the generated hash of the document, computed on the algorithm stated on the `signature.type`.
-In the scenerio of `wrapDocument`, `signature.merkleRoot` will be the same as `signature.targetHash`.
+In the scenerio of `wrapOADocument`, `signature.merkleRoot` will be the same as `signature.targetHash`.
 
 ### Batch Wrapping of documents
 
-`wrapDocuments` takes in an array of documents and returns the wrapped batch. Each document must be valid regarding the version of the schema used (see below) It computes the Merkle root of the batch and appends it to each document. This Merkle root can be published on the blockchain and queried against to prove the provenance of the document issued this way. Alternatively, the Merkle root may be signed by the document issuer's private key, which may be cryptographically verified using the issuer's public key or Ethereum account.
+`wrapOADocuments` takes in an array of documents and returns the wrapped batch. Each document must be valid regarding the version of the schema used (see below) It computes the Merkle root of the batch and appends it to each document. This Merkle root can be published on the blockchain and queried against to prove the provenance of the document issued this way. Alternatively, the Merkle root may be signed by the document issuer's private key, which may be cryptographically verified using the issuer's public key or Ethereum account.
 
 ```js
-import { wrapDocuments } from "@tradetrust-tt/tradetrust-core";
+import { wrapOADocuments } from '@trustvc/trustvc';
   const document = {
   "recipient": {
     "name": "John Doe"
@@ -134,7 +134,7 @@ import { wrapDocuments } from "@tradetrust-tt/tradetrust-core";
 
   const inputDocument = [document, { ...document, recipient.name: "Sam Timmy" }];
 
-  const wrappedDocuments: WrappedDocument<any>[] = wrapDocuments(inputDocument);
+  const wrappedDocuments: WrappedDocument<any>[] = wrapOADocuments(inputDocument);
   console.log(
     `Same merkleRoot: ${
       wrappedDocuments[0].signature.merkleRoot ===
@@ -216,22 +216,22 @@ The `signature` section includes the fields of `targetHash` and `merkleRoot`.
 `signature.proofs` consists of other `signature.targetHash` and branch (merkle root) that is required for the verification of `signature.merkleRoot`.
 
 > Note:
-> Though `wrapDocument` and `wrapDocuments` are almost identical, there is a slight difference.
+> Though `wrapOADocument` and `wrapOADocuments` are almost identical, there is a slight difference.
 >
-> wrapDocument:
+> wrapOADocument:
 >
 > - returns an object.
 > - The object is a wrapped document corresponding to the one provided as input.
 > - The object has an unique `targetHash` value based on the input.
 > - The object has an unique `merkleRoot` value which correspond to the `targetHash`.
 >
-> wrapDocuments:
+> wrapOADocuments:
 >
 > - returns an array.
 > - Each element in the array is a wrapped document corresponding to the one provided as input.
 > - Each element has an unique `targetHash` value.
 > - Each element will share the same unique `merkleRoot` value in every batch wrap instance.
-> - Similar to wrapDocument, every time you run wrapDocuments, it will create unique hashes (in front of every fields in the data object).
+> - Similar to wrapOADocument, every time you run wrapOADocuments, it will create unique hashes (in front of every fields in the data object).
 
 :::tip
 
