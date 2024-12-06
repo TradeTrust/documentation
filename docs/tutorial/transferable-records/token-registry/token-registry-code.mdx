@@ -52,7 +52,7 @@ const initParam = encodeInitParams({
 });
 const tx = await deployerContract.deploy(TokenImplementation[chainId], initParam);
 const receipt = await tx.wait();
-const registryAddress = getEventFromReceipt<any>(receipt, (deployerContract as any).getEventTopic("TitleEscrowCreated"), deployerContract.interface).args.deployed;
+const registryAddress = getEventFromReceipt<any>(receipt, (deployerContract as any).getEventTopic("Deployment"), deployerContract.interface).args.deployed;
 
 console.log(`Contract Address: ${registryAddress}`); // Contract Address: 0x7Ae2aE35f66ACE6671CB2bfb985011b0a2d9cf72
 console.log(`Transaction: ${JSON.stringify(receipt)}`);
