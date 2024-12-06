@@ -26,48 +26,68 @@ const contractGasData = {
   ],
   transferable: [
     {
-      name: "Token Registry Deployment (one time set-up)",
-      gas: 301065,
+      name: "Token Registry Deployment[standalone] (one time set-up)",
+      gas: 3719718,
+      deploymentType: ["DNS"],
+    },
+    {
+      name: "Token Registry Deployment[through TDocDeployer] (one time set-up)",
+      gas: 308748,
       deploymentType: ["DNS"],
     },
     {
       name: "Issuance of Document",
-      gas: 250509,
+      gas: 404835,
       deploymentType: ["DNS"],
     },
     {
       name: "Transfer Ownership",
-      gas: 61333,
+      gas: 127795,
       deploymentType: ["DNS"],
     },
     {
       name: "Transfer Holdership",
-      gas: 47282,
+      gas: 137033,
       deploymentType: ["DNS"],
     },
     {
       name: "Nominate Ownership",
-      gas: 47320,
+      gas: 82530,
       deploymentType: ["DNS"],
     },
     {
       name: "Endorse Ownership",
-      gas: 52057,
+      gas: 103550,
       deploymentType: ["DNS"],
     },
     {
-      name: "Surrender Document",
-      gas: 84586,
+      name: "Return Document to Issuer",
+      gas: 124270,
       deploymentType: ["DNS"],
     },
     {
       name: "Restore Document",
-      gas: 92043,
+      gas: 123723,
       deploymentType: ["DNS"],
     },
     {
       name: "Burn Document",
-      gas: 94795,
+      gas: 125194,
+      deploymentType: ["DNS"],
+    },
+    {
+      name: "Reject Transfer Owner",
+      gas: 81834,
+      deploymentType: ["DNS"],
+    },
+    {
+      name: "Reject Transfer Holder",
+      gas: 76774,
+      deploymentType: ["DNS"],
+    },
+    {
+      name: "Reject Transfer Owner and Holder",
+      gas: 91265,
       deploymentType: ["DNS"],
     },
   ],
@@ -76,6 +96,7 @@ const contractGasData = {
 export const PriceTable = (props) => {
   const FETCH_INTERVAL = 30000;
   const { price, gwei } = useFetchGasPrice(Chain.Ethereum, FETCH_INTERVAL);
+  console.log("price", price, gwei);
   const { price: maticPrice, gwei: maticGwei } = useFetchGasPrice(Chain.Polygon, FETCH_INTERVAL);
   const { price: xdcPrice, gwei: xdcGwei } = useFetchGasPrice(Chain.XDC, FETCH_INTERVAL);
   const priceFactor = gwei * 0.000000001 * price;
