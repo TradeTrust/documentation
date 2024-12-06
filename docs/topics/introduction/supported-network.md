@@ -26,5 +26,3 @@ Disclaimer: Community supported networks are not maintained by TradeTrust and up
 | ----- | -------- | ------------- | -------------- | ----------------------------- | ---------- | ------ |
 | XDC   | 50       | xdc           | XDC Mainnet    | [XDC](https://xdc.org/)       | L1 Mainnet | Active |
 | XDC   | 51       | xdcapothem    | XDC Apothem    | XDC                           | L1 Testnet | Active |
-| HBAR  | 295      | hederamainnet | Hedera Mainnet | [Hedera](https://hedera.com/) | L1 Mainnet | Active |
-| HBAR  | 296      | hederatestnet | Hedera Testnet | Hedera                        | L1 Testnet | Active |
