@@ -69,17 +69,17 @@ Merge Overlapping Logs into Events
      - HOLDER_TRANSFER
      - OWNER_TRANSFER
 
-   RETURN_ACCEPTED (Shred) that emits:
+   RETURN_TO_ISSUER_ACCEPTED (Shred) that emits:
 
    - Title Escrow
      - HOLDER_TRANSFER
      - OWNER_TRANSFER
    - Token Registry
-     - RETURN_ACCEPTED
+     - RETURN_TO_ISSUER_ACCEPTED
 
    Others, with only a single event
 
-3. Merge Log Event with the same Transaction Hash into a Single Event as their idenified Event Type (INITIAL, TRANSFER_OWNERS or RETURN_ACCEPTED)
+3. Merge Log Event with the same Transaction Hash into a Single Event as their idenified Event Type (INITIAL, TRANSFER_OWNERS or RETURN_TO_ISSUER_ACCEPTED)
 
 ### Contextualise Events
 

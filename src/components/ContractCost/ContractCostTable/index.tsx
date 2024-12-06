@@ -96,7 +96,6 @@ const contractGasData = {
 export const PriceTable = (props) => {
   const FETCH_INTERVAL = 30000;
   const { price, gwei } = useFetchGasPrice(Chain.Ethereum, FETCH_INTERVAL);
-  console.log("price", price, gwei);
   const { price: maticPrice, gwei: maticGwei } = useFetchGasPrice(Chain.Polygon, FETCH_INTERVAL);
   const { price: xdcPrice, gwei: xdcGwei } = useFetchGasPrice(Chain.XDC, FETCH_INTERVAL);
   const priceFactor = gwei * 0.000000001 * price;
