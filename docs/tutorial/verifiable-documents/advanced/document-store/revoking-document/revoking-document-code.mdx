@@ -13,7 +13,7 @@ import Flow from "../flow.mdx";
 ## Installation
 
 ```sh
-npm i @tradetrust-tt/tradetrust-core
+npm i @tradetrust-tt/document-store
 ```
 
 ---
@@ -27,7 +27,7 @@ Refer to the [pre-requisite](/docs/tutorial/verifiable-documents/advanced/docume
 ### Connect to existing document store
 
 ```ts
-import { DocumentStoreFactory } from "@tradetrust-tt/tradetrust-core";
+import { DocumentStoreFactory } from "@tradetrust-tt/document-store";
 import { Wallet, ethers } from "ethers";
 
 const unconnectedWallet = new Wallet("privateKey");

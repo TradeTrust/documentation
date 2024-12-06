@@ -24,7 +24,7 @@ A `merkleRoot`, a 64 character long string prepended with `0x` will be generated
 ## Installation
 
 ```bash
-npm i --save @tradetrust-tt/tradetrust-core
+npm install @trustvc/trustvc
 ```
 
 ---
@@ -33,10 +33,10 @@ npm i --save @tradetrust-tt/tradetrust-core
 
 ### Wrapping documents
 
-`wrapDocument` takes in a documents and returns the wrapped document. Upon validating the document against it's schema, the document hash will be computed, to be placed onto the `signature` section of the wrapped document. The `signature` is to be used for integrity verification on the later stage of the tutorial.
+`wrapOADocument` takes in a documents and returns the wrapped document. Upon validating the document against it's schema, the document hash will be computed, to be placed onto the `signature` section of the wrapped document. The `signature` is to be used for integrity verification on the later stage of the tutorial.
 
 ```js
-import { wrapDocument } from "@tradetrust-tt/tradetrust-core";
+import { wrapOADocument } from '@trustvc/trustvc';
 const document = {
   id: "SERIAL_NUMBER_123",
   $template: {
@@ -59,7 +59,7 @@ const document = {
   }
 } as any;
 
-const wrappedDocument = wrapDocument(document);
+const wrappedDocument = wrapOADocument(document);
 console.log(wrappedDocument);
 
 // wrapped Document
@@ -99,13 +99,13 @@ The `signature` section includes the fields of `targetHash` and `merkleRoot`.
 
 `signature.targetHash` is the generated hash of the document, computed on the algorithm stated on the `signature.type`.
 
-In the scenerio of `wrapDocument`, `signature.merkleRoot` will be the same as `signature.targetHash`.
+In the scenerio of `wrapOADocument`, `signature.merkleRoot` will be the same as `signature.targetHash`.
 
 > Note:
-> Transferable Records are limited to the `wrapDocument` method.
+> Transferable Records are limited to the `wrapOADocument` method.
 > Merkle Root cannot be used to uniquely identified seperate transferable records.
 >
-> wrapDocument:
+> wrapOADocument:
 >
 > - returns an object.
 > - The object is a wrapped document corresponding to the one provided as input.

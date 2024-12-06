@@ -164,10 +164,7 @@
       {
         "label": "Identifying the Issuer",
         "type": "category",
-        "items": [
-          "topics/introduction/issuer-method-dns-txt",
-          "topics/introduction/issuer-method-dns-did"
-        ]
+        "items": ["topics/introduction/issuer-method-dns-txt", "topics/introduction/issuer-method-dns-did"]
       },
       "topics/introduction/estimated-cost-for-transactions"
     ],
@@ -221,7 +218,7 @@
       "reference/generic-templates/bill-of-lading"
     ],
     "Libraries": [
-      "reference/libraries/tt-core",
+      "reference/libraries/trustvc",
       "reference/libraries/open-attestation",
       "reference/libraries/tt-verify",
       "reference/libraries/subgraph"
