@@ -106,7 +106,7 @@ In the scenerio of `wrapOADocument`, `signature.merkleRoot` will be the same as 
 `wrapOADocuments` takes in an array of documents and returns the wrapped batch. Each document must be valid regarding the version of the schema used (see below) It computes the Merkle root of the batch and appends it to each document. This Merkle root can be published on the blockchain and queried against to prove the provenance of the document issued this way. Alternatively, the Merkle root may be signed by the document issuer's private key, which may be cryptographically verified using the issuer's public key or Ethereum account.
 
 ```js
-import { wrapOADocuments } from '@trustvc/trustvc';
+  import { wrapOADocuments } from '@trustvc/trustvc';
   const document = {
   "recipient": {
     "name": "John Doe"

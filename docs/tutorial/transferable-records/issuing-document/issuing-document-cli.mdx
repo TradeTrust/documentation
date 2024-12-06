@@ -28,7 +28,7 @@ In the example, we will use `0x6FFeD6E6591b808130a9b248fEA32101b5220eca` wallet 
 To mint the transferable record, simply run the following command:
 
 ```sh
-tradetrust token-registry mint --address 0x8431012Bc040942B59e3C5bf428221eab0b2f723 --tokenId 0x0d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ea --beneficiary 0x6FFeD6E6591b808130a9b248fEA32101b5220eca --holder 0x6FFeD6E6591b808130a9b248fEA32101b5220eca --network sepolia -f key.txt
+tradetrust token-registry mint --address 0x8431012Bc040942B59e3C5bf428221eab0b2f723 --tokenId 0x0d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ea --beneficiary 0x6FFeD6E6591b808130a9b248fEA32101b5220eca --holder 0x6FFeD6E6591b808130a9b248fEA32101b5220eca --remark "This is a test remark" --encryptionKey "testEncryptionKey" --network sepolia -f key.txt
 ```
 
 Note to replace the following values:
@@ -37,6 +37,10 @@ Note to replace the following values:
 - --tokenId: `0x0d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ea` with your merkle root (with a `0x` prefix)
 - --beneficiary: `0x6FFeD6E6591b808130a9b248fEA32101b5220eca` with your owner wallet addresses
 - --holder: `0x6FFeD6E6591b808130a9b248fEA32101b5220eca` with your holder wallet addresses
+- --remark: `This is a test remark` with your mint remark
+- --encryptionKey: `testEncryptionKey` with your encryption key
+
+> Note: remark and encryptionKey are optional.
 
 Once the document has been minted, you will be able to see an output similar to the following:
 
