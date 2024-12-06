@@ -25,7 +25,7 @@ In the overview diagram above, we can see 3 different states of documents:
 
 1. An unissued document (`0xaaaa...aaaa`) will have a smart contract address `0x0000...0000`
 2. An issued document (`0xbbbb...bbbb`) will have a title escrow smart contract (ie `0x8888...8888`)
-3. A surrendered document (`0xcccc...cccc`) will have a smart contract address which is the token registry's address (ie `0x5555...5555`)
+3. A returned document (`0xcccc...cccc`) will have a smart contract address which is the token registry's address (ie `0x5555...5555`)
 
 ### Title Escrow Smart Contract
 

@@ -98,13 +98,13 @@ deploy the subgraph to the hosted service.
 
 There are many interesting queries that can be made. Here are some example queries:
 
-- What are all the document IDs and their surrender statuses in my Token Registries?
+- What are all the document IDs and their returned statuses in my Token Registries?
   ```graphql
   {
     tokenRegistries {
       tokens {
         documentId
-        surrendered
+        returned
       }
     }
   }
@@ -122,7 +122,7 @@ There are many interesting queries that can be made. Here are some example queri
     }
   }
   ```
-- What about listing snapshots of a document at the time of all actions (issuance, surrender, etc)?
+- What about listing snapshots of a document at the time of all actions (issuance, returnToIssuer, etc)?
   ```graphql
   {
     tokens(where: { documentId: "0x0ddba11" }) {
@@ -138,7 +138,7 @@ There are many interesting queries that can be made. Here are some example queri
         nominee {
           id
         }
-        surrendered
+        returned
         accepted
       }
     }

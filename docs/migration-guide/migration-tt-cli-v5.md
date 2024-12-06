@@ -85,7 +85,7 @@ The token belongs to `Alice` (both owner and holder are the address of Alice)
 1. Alice:
    - change holder
    - endorse
-   - surrender document
+   - return document to issuer
 2. Bob:
    - no access
 3. Charlie:
@@ -120,7 +120,7 @@ The token belongs to `Charlie` (both owner and holder are the address of Charlie
 3. Charlie:
    - change holder
    - endorse
-   - surrender document
+   - return document to issuer
    - reject ownership and holdership
 
 We will do **reject change of ownership** now.
@@ -154,7 +154,7 @@ The token belongs to `Charlie` (both owner and holder are the address of Charlie
 3. Charlie:
    - change holder
    - endorse change of ownership
-   - surrender document
+   - return document to issuer
 
 Now we will do the **change holder** command.
 
@@ -326,4 +326,4 @@ The token is still held by `Alice`, the token is owned by `Alice`.
 
 In this demonstration, we have simulated a Title Transfer between 3 parties, going through each state change and the actions that could happen with each different state of the token.
 
-This demonstration does not cover any surrender actions that could happen and it should be covered in an upcoming document.
+This demonstration does not cover any return to issuer actions that could happen and it should be covered in an upcoming document.
