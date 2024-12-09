@@ -24,4 +24,4 @@ The hash can exist independently of the two mappings.
 
 ### See also
 
-[Github Repository](https://github.com/Open-Attestation/document-store/)
+[Github Repository](https://github.com/TradeTrust/document-store)

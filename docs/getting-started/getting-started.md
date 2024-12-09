@@ -44,5 +44,5 @@ References are TradeTrust related applications that you can refer to when design
 - TradeTrust [website](/docs/reference/tradetrust-website/overview)
 - TradeTrust [document creator](/docs/reference/document-creator/overview)
 - TradeTrust [generic templates](/docs/reference/generic-templates/overview)
-- TradeTrust [Core](/docs/reference//libraries/tradetrust-core.md)
+- TradeTrust [TrustVc](/docs/reference//libraries/trustvc.md)
 - TradeTrust [Verifier](/docs/reference/libraries/tt-verify)

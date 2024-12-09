@@ -19,7 +19,7 @@ This module does not provide the following functionality:
 ## Installation
 
 ```bash
-npm i @tradetrust-tt/tt-verify
+npm i @trustvc/trustvc
 ```
 
 ---
@@ -90,7 +90,7 @@ To perform verification check on the document:
 
 ```ts
 // index.ts
-import { isValid, verify } from "@tradetrust-tt/tt-verify";
+import { isValid, verify } from "@trustvc/trustvc";
 import * as document from "./document.json";
 
 const fragments = await verify(document as any);
@@ -112,7 +112,7 @@ You can build your own verify method or your own verifiers:
 
 ```ts
 // creating your own verify using default exported verifiers
-import { verificationBuilder, openAttestationVerifiers } from "@tradetrust-tt/tt-verify";
+import { verificationBuilder, openAttestationVerifiers } from "@trustvc/trustvc";
 
 const verify1 = verificationBuilder(openAttestationVerifiers, { network: "sepolia" }); // this verify is equivalent to the one exported by the library
 // this verify is equivalent to the one exported by the library
@@ -123,7 +123,7 @@ const verify2 = verificationBuilder([openAttestationVerifiers[0], openAttestatio
 
 ```ts
 // creating your own verify using custom verifier
-import { verificationBuilder, openAttestationVerifiers, Verifier } from "@tradetrust-tt/tt-verify";
+import { verificationBuilder, openAttestationVerifiers, Verifier } from "@trustvc/trustvc";
 const customVerifier: Verifier<any> = {
   skip: () => {
     // return a SkippedVerificationFragment if the verifier should be skipped or throw an error if it should always run
@@ -157,7 +157,7 @@ The function also allows a list of types to check for as a second parameter.
 
 ```ts
 // index.ts
-import { isValid, openAttestationVerifiers, verificationBuilder } from "@tradetrust-tt/tt-verify";
+import { isValid, openAttestationVerifiers, verificationBuilder } from "@trustvc/trustvc";
 import * as document from "./document.json";
 
 const verify = verificationBuilder(openAttestationVerifiers, {
@@ -183,7 +183,7 @@ The `verify` function provides an option to listen to individual verification me
 
 ```ts
 // index.ts
-import { isValid, openAttestationVerifiers, verificationBuilder } from "@tradetrust-tt/tt-verify";
+import { isValid, openAttestationVerifiers, verificationBuilder } from "@trustvc/trustvc";
 import * as document from "./document.json";
 
 const verify = verificationBuilder(openAttestationVerifiers, {
@@ -224,7 +224,7 @@ This is where `skip` and `test` methods come into play. We will use the `test` m
 
 ```ts
 // index.ts
-import { verificationBuilder, openAttestationVerifiers, Verifier, isValid } from "@tradetrust-tt/tt-verify";
+import { verificationBuilder, openAttestationVerifiers, Verifier, isValid } from "@trustvc/trustvc";
 import { getData } from "@tradetrust-tt/tradetrust";
 import * as document from "./document.json";
 
@@ -253,7 +253,7 @@ Once we have decided `when` the verification method run, it's time to write the 
 
 ```ts
 // index.ts
-import { verificationBuilder, openAttestationVerifiers, Verifier, isValid } from "@tradetrust-tt/tt-verify";
+import { verificationBuilder, openAttestationVerifiers, Verifier, isValid } from "@trustvc/trustvc";
 import { getData } from "@tradetrust-tt/tradetrust";
 import * as document from "./document.json";
 
@@ -297,7 +297,7 @@ Extending from what have been mentioned in [Custom Verification](#custom-verific
 
 ```ts
 // index.ts
-import { verificationBuilder, openAttestationVerifiers, Verifier, isValid } from "@tradetrust-tt/tt-verify";
+import { verificationBuilder, openAttestationVerifiers, Verifier, isValid } from "@trustvc/trustvc";
 import { getData } from "@tradetrust-tt/tradetrust";
 import document from "./document.json";
 
@@ -410,7 +410,7 @@ const verify = verificationBuilder(openAttestationVerifiers, { network: "sepolia
 `oa-verify` exposes a method, called `createResolver` that allows you to easily create custom resolvers, to resolve DIDs:
 
 ```ts
-import { createResolver, verificationBuilder, openAttestationVerifiers } from "@tradetrust-tt/tt-verify";
+import { createResolver, verificationBuilder, openAttestationVerifiers } from "@trustvc/trustvc";
 
 const resolver = createResolver({
   networks: [{ name: "my-network", rpcUrl: "https://my-private-chain/besu", registry: "0xaE5a9b9..." }],
@@ -442,7 +442,7 @@ It requires a set of options:
 The most basic way to use:
 
 ```ts
-import { utils } from "@tradetrust-tt/tt-verify";
+import { utils } from "@trustvc/trustvc";
 const provider = utils.generateProvider();
 // This will generate an infura provider using the default values.
 ```
@@ -457,7 +457,7 @@ PROVIDER_ENDPOINT_URL = "http://jsonrpc.com";
 PROVIDER_API_KEY = "ajdh1j23";
 
 // provider file
-import { utils } from "@tradetrust-tt/tt-verify";
+import { utils } from "@trustvc/trustvc";
 const provider = utils.generateProvider();
 // This will use the environment variables declared in the files automatically.
 ```
@@ -465,7 +465,7 @@ const provider = utils.generateProvider();
 Alternate way 2 (passing values in as parameters):
 
 ```ts
-import { utils } from "@tradetrust-tt/tt-verify";
+import { utils } from "@trustvc/trustvc";
 const providerOptions = {
   network: "amoy",
   providerType: "infura",

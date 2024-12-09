@@ -46,8 +46,8 @@ A token registry is a smart contract on the Ethereum network that records the is
 - mint a new TradeTrust transferable records
 - Transfer of ownership of a TradeTrust transferable records
 - Transfer of holdership of a TradeTrust transferable records
-- surrender of a TradeTrust transferable records
-- acceptance/rejection of surrender of a TradeTrust transferable records
+- return of a TradeTrust transferable records
+- acceptance/rejection of return of a TradeTrust transferable records
 
 ### Wallet
 

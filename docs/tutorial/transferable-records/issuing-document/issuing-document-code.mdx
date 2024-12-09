@@ -15,7 +15,7 @@ In this final step, we will mint the transferable record and initialize the firs
 ## Installation
 
 ```bash
-npm install --save @tradetrust-tt/tradetrust-core
+npm install @trusvc/trustvc
 ```
 
 ## Usage
@@ -27,8 +27,9 @@ Refer to the [pre-requisite](/docs/tutorial/transferable-records/token-registry/
 ### Connect to existing token registry
 
 ```ts
-import { TradeTrustToken__factory } from "@tradetrust-tt/tradetrust-core";
+import { v5Contracts } from "@trusvc/trustvc";
 
+const { TradeTrustToken__factory } = v5Contracts;
 const privateKey = "";
 const tokenRegistryAddress = "0x7Ae2aE35f66ACE6671CB2bfb985011b0a2d9cf72";
 
@@ -44,20 +45,24 @@ const connectedRegistry = TradeTrustToken__factory.connect(tokenRegistryAddress,
 In the example, we will use `0x6FFeD6E6591b808130a9b248fEA32101b5220eca` wallet address as owner and holder. You will need to replace this value with a wallet address you control to be able to perform different actions on the transferable records later.
 
 ```ts
-import { TradeTrustToken__factory } from "@tradetrust-tt/tradetrust-core";
+import { v5Contracts, encrypt } from "@trustvc/trustvc";
 
+const { TradeTrustToken__factory } = v5Contracts;
 const privateKey = "";
 const tokenRegistryAddress = "0x7Ae2aE35f66ACE6671CB2bfb985011b0a2d9cf72";
 const owner = "0x6FFeD6E6591b808130a9b248fEA32101b5220eca";
 const holder = "0x6FFeD6E6591b808130a9b248fEA32101b5220eca";
 const tokenId = "0x0d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ea";
+const mintRemarks = "This is test mint remark";
+const encryptionKey = "testEncryptionKey";
 
+const encryptedMintRemark = encrypt(mintRemark, encryptionKey);
 const unconnectedWallet = new Wallet(privateKey);
 const provider = ethers.getDefaultProvider("sepolia");
 const wallet = unconnectedWallet.connect(provider);
 
 const connectedRegistry = TradeTrustToken__factory.connect(tokenRegistryAddress, wallet);
-const tx = await connectedRegistry.mint(owner, holder, tokenId);
+const tx = await connectedRegistry.mint(owner, holder, tokenId, encryptedMintRemark);
 const receipt = await tx.wait();
 console.log(`Receipt: ${JSON.stringify(receipt)}`);
 ```
