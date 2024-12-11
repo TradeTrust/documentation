@@ -31,7 +31,7 @@ sidebar_label: New Features in Token Registry v5
 - Reject functions empower users to decline unwanted changes to ownership or holding roles.
 
 - **Details**:
-  - Reject Transfer of Ownership (`rejectTransferOwner`)
+  - Reject Transfer of Ownership (`rejectTransferBeneficiary`)
   - Reject Transfer of Holding (`rejectTransferHolder`)
   - Reject Both Roles (`rejectTransferOwners`)
 
