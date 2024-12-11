@@ -305,7 +305,7 @@ Token Registry v5 introduces additional methods for rejecting transfers, if nece
 Prevents a transfer of ownership to an incorrect or unauthorized party.
 
 ```ts
-function rejectTransferOwner(bytes calldata _remark) external;
+function rejectTransferBeneficiary(bytes calldata _remark) external;
 ```
 
 **Reject Transfer of Holding**:
