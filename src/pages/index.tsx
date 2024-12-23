@@ -8,6 +8,13 @@ const Home = () => {
   const context = useDocusaurusContext();
   const { siteConfig } = context;
 
+  const activeVersion = localStorage.getItem("docs-preferred-version-default");
+
+  if (!activeVersion || activeVersion === "current") {
+    window.location.replace("/docs/topics/introduction/what-is-tradetrust/");
+    return null;
+  }
+
   return (
     <Layout title={siteConfig.title} description={siteConfig.tagline}>
       <main>

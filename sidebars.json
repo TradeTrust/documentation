@@ -1,4 +1,79 @@
 {
+  "topics": {
+    "Introduction": [
+      "topics/introduction/what-is-tradetrust",
+      "topics/introduction/tradetrust-layer-boundaries",
+      "topics/introduction/supported-network",
+      {
+        "label": "Supported types of Documents",
+        "type": "category",
+        "items": [
+          {
+            "label": "Verifiable Documents",
+            "type": "category",
+            "items": [
+              "topics/introduction/verifiable-documents/overview",
+              "topics/introduction/verifiable-documents/document-store",
+              "topics/introduction/verifiable-documents/did"
+            ]
+          },
+          {
+            "label": "Transferable Records",
+            "type": "category",
+            "items": [
+              "topics/introduction/transferable-records/overview",
+              "topics/introduction/transferable-records/token-registry",
+              {
+                "label": "Title Transfer",
+                "type": "category",
+                "items": [
+                  "topics/introduction/transferable-records/title-transfer",
+                  "topics/introduction/transferable-records/title-transfer-example"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "topics/introduction/tradetrust-document-schema",
+      {
+        "label": "Identifying the Issuer",
+        "type": "category",
+        "items": ["topics/introduction/issuer-method-dns-txt", "topics/introduction/issuer-method-dns-did"]
+      },
+      "topics/introduction/estimated-cost-for-transactions"
+    ],
+    "Verifying of Documents": [
+      "topics/verifying-documents/overview",
+      "topics/verifying-documents/issuer-identity",
+      "topics/verifying-documents/issuance-status",
+      "topics/verifying-documents/document-integrity"
+    ],
+    "Advanced": [
+      "topics/advanced/alternative-ledgers",
+      "topics/advanced/additional-network-metamask-guide",
+      "topics/advanced/wallet-management",
+      {
+        "label": "AWS KMS",
+        "type": "category",
+        "items": [
+          "topics/advanced/aws-kms/overview",
+          "topics/advanced/aws-kms/create-key",
+          "topics/advanced/aws-kms/access-keys",
+          "topics/advanced/aws-kms/did-sign-demo"
+        ]
+      }
+    ],
+    "Appendix": [
+      "topics/appendix/glossary",
+      "topics/appendix/tradetrust-api",
+      "topics/appendix/non-fungible-token",
+      "topics/appendix/core-components",
+      "topics/appendix/polygon-mainnet-workaround",
+      "topics/appendix/stability-gasfee-workaround",
+      "topics/appendix/astron-address-whitelist-error"
+    ]
+  },
   "tutorial": [
     "tutorial/introduction",
     "tutorial/prerequisites",
@@ -124,81 +199,6 @@
       ]
     }
   ],
-  "topics": {
-    "Introduction": [
-      "topics/introduction/what-is-tradetrust",
-      "topics/introduction/tradetrust-layer-boundaries",
-      "topics/introduction/supported-network",
-      {
-        "label": "Supported types of Documents",
-        "type": "category",
-        "items": [
-          {
-            "label": "Verifiable Documents",
-            "type": "category",
-            "items": [
-              "topics/introduction/verifiable-documents/overview",
-              "topics/introduction/verifiable-documents/document-store",
-              "topics/introduction/verifiable-documents/did"
-            ]
-          },
-          {
-            "label": "Transferable Records",
-            "type": "category",
-            "items": [
-              "topics/introduction/transferable-records/overview",
-              "topics/introduction/transferable-records/token-registry",
-              {
-                "label": "Title Transfer",
-                "type": "category",
-                "items": [
-                  "topics/introduction/transferable-records/title-transfer",
-                  "topics/introduction/transferable-records/title-transfer-example"
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      "topics/introduction/tradetrust-document-schema",
-      {
-        "label": "Identifying the Issuer",
-        "type": "category",
-        "items": ["topics/introduction/issuer-method-dns-txt", "topics/introduction/issuer-method-dns-did"]
-      },
-      "topics/introduction/estimated-cost-for-transactions"
-    ],
-    "Verifying of Documents": [
-      "topics/verifying-documents/overview",
-      "topics/verifying-documents/issuer-identity",
-      "topics/verifying-documents/issuance-status",
-      "topics/verifying-documents/document-integrity"
-    ],
-    "Advanced": [
-      "topics/advanced/alternative-ledgers",
-      "topics/advanced/additional-network-metamask-guide",
-      "topics/advanced/wallet-management",
-      {
-        "label": "AWS KMS",
-        "type": "category",
-        "items": [
-          "topics/advanced/aws-kms/overview",
-          "topics/advanced/aws-kms/create-key",
-          "topics/advanced/aws-kms/access-keys",
-          "topics/advanced/aws-kms/did-sign-demo"
-        ]
-      }
-    ],
-    "Appendix": [
-      "topics/appendix/glossary",
-      "topics/appendix/tradetrust-api",
-      "topics/appendix/non-fungible-token",
-      "topics/appendix/core-components",
-      "topics/appendix/polygon-mainnet-workaround",
-      "topics/appendix/stability-gasfee-workaround",
-      "topics/appendix/astron-address-whitelist-error"
-    ]
-  },
   "reference": {
     "TradeTrust Verifier Website": [
       "reference/tradetrust-website/overview",
