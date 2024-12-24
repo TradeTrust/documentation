@@ -35,7 +35,10 @@ const siteConfig = {
           },
         },
         theme: {
-          customCss: [require.resolve("./src/css/tailwind.css")],
+          customCss: [
+            require.resolve("./src/css/custom.css"),
+            require.resolve("./src/css/tailwind.css"),
+          ],
         },
         gtag: {
           trackingID: GA_MEASUREMENT_ID,
@@ -51,10 +54,12 @@ const siteConfig = {
         srcDark: "img/logo/logo-tt-full.svg",
       },
       items: [
-        { to: "docs/getting-started", label: "Getting Started" },
-        { to: "docs/tutorial/introduction", label: "Tutorial" },
-        { to: "docs/topics/introduction/what-is-tradetrust", label: "Topics" },
-        { to: "docs/reference/tradetrust-website/overview", label: "References" },
+        { to: "docs/4.x/getting-started", label: "Getting Started", className: "navbar-item-getting-started" },
+        { to: "docs/4.x/tutorial/introduction", label: "Tutorial", className: "navbar-item-tutorial" },
+        { to: "docs/4.x/topics/introduction/what-is-tradetrust", label: "Topics", className: "navbar-item-topics" },
+        { to: "docs/4.x/reference/tradetrust-website/overview", label: "References", className: "navbar-item-references" },
+        { to: "https://gallery.openattestation.com/tag/trade-trust", label: "Gallery", className: "navbar-item-gallery" },
+        { to: "https://toolkit.openattestation.com/", label: "Tools", className: "navbar-item-tools" },
         {
           type: 'docsVersionDropdown',
           position: 'right',
@@ -74,15 +79,6 @@ const siteConfig = {
           items: [
             {
               html: `<a href="https://www.tradetrust.io" target="_blank" rel="noreferrer noopener"><img src="/img/logo/logo-tt-full.svg" alt="TradeTrust Logo" style="max-width: 142px;" /></a>`,
-            },
-          ],
-        },
-        {
-          title: "Docs",
-          items: [
-            {
-              to: "docs/getting-started",
-              label: "Getting Started",
             },
           ],
         },
