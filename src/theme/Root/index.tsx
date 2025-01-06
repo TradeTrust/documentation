@@ -35,7 +35,7 @@ const Root = ({ children }) => {
 
           // Redirect to a specific URL based on the new version
           if (event.newValue === 'current') {
-            window.location.replace('/docs/topics/introduction/what-is-tradetrust/');
+            window.location.replace('/docs/introduction/what-is-tradetrust/');
           } else if (event.newValue === '4.x') {
             window.location.replace('/');
           }
