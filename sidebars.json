@@ -1,7 +1,7 @@
 {
   "topics": {
     "Introduction": [
-      "topics/introduction/what-is-tradetrust",
+      "introduction/what-is-tradetrust",
       {
         "label": "Key components of TradeTrust ",
         "type": "category",
