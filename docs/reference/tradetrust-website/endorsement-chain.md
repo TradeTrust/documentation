@@ -6,13 +6,17 @@ sidebar_label: Endorsement Chain
 
 The endorsement chain provides an overview of the EBL's transaction history, showing which wallet is currently the EBL's ownership/holdership.
 
-![Endorsement Chain](/docs/topics/tradetrust-website/endorsement-chain/endorsement-chain.png)
+![Endorsement Chain](/docs/topics/tradetrust-website/endorsement-chain/endorsement-chain-v5.png)
 
 **Document has been issued** -> Document is created by issuer with Owner and Holder being empty at the start. Owner and Holder will be then be specified by issuer during issuance.
 
 **Transfer of Holdership** -> Current Holder can transfer the holdership to another holder.
 
-**Nominate Change of Owner** -> When Owner and Holder are different, current Owner can transfer nominate change of owner. This will require current Holder to endorse the change (this will not be reflected in endorsement chain, as it is not a finalized owner/holder record until holder accepts the nomination)
+**Rejection of Holdership** -> New Holder can reject the transfer of holdership to previous holder.
+
+**Change Owners** -> When Owner and Holder are same, current Owner can transfer beneficiary and holdership in single transaction.
+
+**Rejection of Ownership and Holdership** -> New Holder & Owner can reject the transfer of holdership and ownership to previous holder and owner respectively.
 
 **Endorse of Change of Owner** -> When Owner and Holder are same, current Owner/Holder can endorse the change of owner to another owner. This will result in a change of Owner and Holder values.
 

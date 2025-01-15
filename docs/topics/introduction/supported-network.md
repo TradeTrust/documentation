@@ -1,6 +1,6 @@
 ---
 id: supported-network
-title: Supported Network
+title: Supported Blockchain & Network
 sidebar_label: Supported Network
 ---
 
@@ -26,7 +26,7 @@ _Note: Please follow this [guide](docs/topics/introduction/supported-network.md)
 
 Disclaimer: Community supported networks are not maintained by TradeTrust and up to the discretion of their network provers.
 
-| Chain | Chain Id | Network Name  | Network        | Blockchain                    | Type       | Status |
-| ----- | -------- | ------------- | -------------- | ----------------------------- | ---------- | ------ |
-| XDC   | 50       | xdc           | XDC Mainnet    | [XDC](https://xdc.org/)       | L1 Mainnet | Active |
-| XDC   | 51       | xdcapothem    | XDC Apothem    | XDC                           | L1 Testnet | Active |
+| Chain | Chain Id | Network Name | Network     | Blockchain              | Type       | Status |
+| ----- | -------- | ------------ | ----------- | ----------------------- | ---------- | ------ |
+| XDC   | 50       | xdc          | XDC Mainnet | [XDC](https://xdc.org/) | L1 Mainnet | Active |
+| XDC   | 51       | xdcapothem   | XDC Apothem | XDC                     | L1 Testnet | Active |

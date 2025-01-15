@@ -1,7 +1,7 @@
 ---
 id: overview
-title: Transferable Records Overview
-sidebar_label: Overview
+title: Transferable Records
+sidebar_label: Transferable Records
 ---
 
 Transferable Records are documents which extends on Verifiable Documents' blockchain issuer method (DNS-TXT) to allow a document to have an owner and a holder. These records references properties laid out in the [UNCITRAL Model Law on Electronic Transferable Records](https://uncitral.un.org/sites/uncitral.un.org/files/media-documents/uncitral/en/mletr_ebook_e.pdf). You can read more about TradeTrust's MLETR compliance over at our [legality page](https://www.tradetrust.io/legality).

@@ -3,23 +3,77 @@
     "Introduction": [
       "introduction/what-is-tradetrust",
       {
-        "label": "Key components",
+        "label": "Key components of TradeTrust ",
         "type": "category",
         "items": [
           {
-            "label": "Transferable Records",
+            "label": "W3C VC",
+            "type": "category",
+            "items": [
+              "topics/introduction/tradetrust-document-schema",
+              {
+                "label": "Identifying the Issuer",
+                "type": "category",
+                "items": ["topics/introduction/issuer-method-dns-txt", "topics/introduction/issuer-method-dns-did"]
+              },
+              {
+                "type": "category",
+                "label": "Signing Document",
+                "items": [
+                  "tutorial/verifiable-documents/signing-w3c-document/signing-document-cli",
+                  "tutorial/verifiable-documents/signing-w3c-document/signing-document-code"
+                ]
+              },
+              {
+                "type": "category",
+                "label": "Verifying of Documents",
+                "items": [
+                  "topics/verifying-documents/overview",
+                  "topics/verifying-documents/issuer-identity",
+                  "topics/verifying-documents/issuance-status",
+                  "topics/verifying-documents/document-integrity"
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Transferability",
             "type": "category",
             "items": [
               "topics/introduction/transferable-records/overview",
               "topics/introduction/transferable-records/token-registry",
+              "topics/introduction/transferable-records/title-transfer",
+              "reference/tradetrust-website/endorsement-chain",
+              "topics/introduction/transferable-records/transactions",
+              "topics/introduction/transferable-records/remarks-encryption-decryption"
+            ]
+          },
+          {
+            "label": "Blockchain",
+            "type": "category",
+            "items": ["topics/introduction/supported-network", "topics/introduction/estimated-cost-for-transactions"]
+          },
+          {
+            "label": "Add-ons",
+            "type": "category",
+            "items": [
               {
-                "label": "Title Transfer",
+                "label": "Document Preview + templates",
                 "type": "category",
                 "items": [
-                  "topics/introduction/transferable-records/title-transfer",
-                  "topics/introduction/transferable-records/title-transfer-example"
+                  {
+                    "label": "Create Template",
+                    "type": "category",
+                    "items": [
+                      "reference/generic-templates/overview",
+                      "reference/generic-templates/cover-letter",
+                      "reference/generic-templates/bill-of-lading"
+                    ]
+                  },
+                  "tutorial/decentralised-renderer/decentralised-renderer"
                 ]
-              }
+              },
+              "reference/tradetrust-website/qr-code"
             ]
           }
         ]

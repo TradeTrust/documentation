@@ -71,8 +71,6 @@ Once the `data` object has been computed we will be able to create an unique has
 
 Later on, during verification of the document, the same exact steps are performed again to assert that the contents of the document has not been tampered with. This works as the final `targetHash` will be completely different if any part of the wrapped document is different from the original.
 
-## Obfuscation mechanism (a.k.a selective redaction)
-
 Due to the way we compute `targetHash`, TradeTrust allows for one to obfuscate data they don't want to make public, we call this selective redaction. For this we can simply compute the hash of a specific field and add it into the documents. Let's try it with the [CLI](/docs/tutorial/prerequisites#installation-of-tradetrust-cli) and the document above:
 
 ```bash

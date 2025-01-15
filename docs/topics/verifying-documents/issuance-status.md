@@ -1,7 +1,7 @@
 ---
 id: issuance-status
-title: Issuance Status
-sidebar_label: Issuance Status
+title: Document Status
+sidebar_label: Document Status
 ---
 
 TradeTrust checks that the document has been issued and that it's issuance status is in good standing (for instance, that it hasn't been revoked). As of today, TradeTrust supports two ways to issue documents: DIDs and Ethereum Smart Contracts.
