@@ -245,6 +245,12 @@ The verifier app is now ready.
   <img src='/docs/tutorial/verifier/verifier-project.png' />
 </figure>
 
+### 8. Source code and demo file
+
+The source code for this project is also available on GitHub at [TradeTrust/verifier-tutorial](https://github.com/TradeTrust/verifier-tutorial). You can explore the code, contribute, or make any modifications.
+
+To test the verification process, you can use the demo file available at [this link](https://github.com/TradeTrust/verifier-tutorial/blob/main/demo/amoy.tt). You are free to modify this file or upload your own document to see how the verification process works.
+
 ## Default verification
 
 By default, the provided `verifyDocument` method performs various checks on a document depending on its type. These checks ensure the integrity, status, and identity of the document and its issuer. Below are the verifiers and their categories for OpenAttestation and W3C.
