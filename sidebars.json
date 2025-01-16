@@ -80,6 +80,9 @@
       },
       "introduction/legal",
       "introduction/ig-p&i"
+    ],
+    "Tutorial": [
+      "tutorial/verifier"
     ]
   }
 }
