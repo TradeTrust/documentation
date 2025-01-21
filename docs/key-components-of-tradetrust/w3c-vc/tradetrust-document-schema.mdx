@@ -1,0 +1,141 @@
+---
+id: tradetrust-document-schema
+title: Document schema
+sidebar_label: Document schema
+---
+
+To explain on TradeTrust's document schema, we will use a sample document. For this example, a verifiable document will be used.
+
+Below is w3c vc schema which is more aligned with [W3C VC data model](https://www.w3.org/TR/vc-data-model-2.0/).
+
+## Raw document
+
+Let's take a closer look at a raw document:
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+```json
+{
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://w3id.org/security/bbs/v1",
+    "https://w3id.org/vc/status-list/2021/v1",
+    "https://trustvc.io/context/transferable-records-context.json",
+    "https://trustvc.io/context/render-method-context.json",
+    "https://trustvc.io/context/attachments-context.json",
+    "https://schemata.openattestation.com/io/tradetrust/bill-of-lading/1.0/bill-of-lading-context.json"
+  ],
+  "credentialStatus": {
+    "type": "TransferableRecords",
+    "tokenNetwork": {
+      "chain": "ETH",
+      "chainId": "1337"
+    },
+    "tokenRegistry": "0x9Eb613a88534E2939518f4ffBFE65F5969b491FF",
+    "tokenId": "e52a60e9c1308960bcf1d6c8531c58bf480aec373e1e3442a6af151475c3f89d"
+  },
+  "renderMethod": [
+    {
+      "id": "https://generic-templates.tradetrust.io",
+      "type": "EMBEDDED_RENDERER",
+      "templateName": "BILL_OF_LADING"
+    }
+  ],
+  "credentialSubject": {
+    "shipper": {
+      "address": {}
+    },
+    "consignee": {},
+    "notifyParty": {},
+    "blNumber": "20250107",
+    "scac": "20250107"
+  }
+}
+```
+
+## Key fields in the schema
+
+**1. @context**
+
+The @context field defines the vocabulary and data schema used in the document. Each URL specifies a context that provides definitions for terms used within the document.
+
+Key entries in this example:
+
+- https://www.w3.org/2018/credentials/v1: Defines the core Verifiable Credential terms.
+- https://w3id.org/security/bbs/v1: Provides support for BBS+ signature schemes.
+- https://w3id.org/vc/status-list/2021/v1: Enables referencing a status list for credential revocation or suspension.
+- https://trustvc.io/context/*: Custom contexts specific to the trustvc framework for handling transferable records and attachments.
+- https://schemata.openattestation.com/.../bill-of-lading-context.json: Defines data for a bill of lading under the TradeTrust framework.
+
+**2. credentialStatus**
+Describes the status and ownership transferability of the credential.
+
+Key fields:
+
+- `type`: Indicates the status type; in this case, it is TransferableRecords, showing the record can be transferred.
+- `tokenNetwork`: Details the blockchain network where the token is managed.
+  chain: Blockchain type (e.g., ETH for Ethereum).
+  - _chain_: Blockchain type (e.g., ETH for Ethereum).
+  - _chainId_: Identifier for the specific Ethereum network (e.g., 1337 for a local development network).
+- `tokenRegistry`: The smart contract address where the records are registered.
+- `tokenId`: A unique identifier for the record, usually derived cryptographically.
+
+**3. renderMethod**
+Describes how the document should be rendered, often as a visual representation for human consumption.
+
+Key fields:
+
+- `id`: URL pointing to the renderer used for rendering the document.
+- `type`: Specifies the rendering method, which is always EMBEDDED_RENDERER for documents rendered directly via a linked renderer.
+- `templateName`: Indicates the specific template used for rendering; here, it's BILL_OF_LADING.
+
+**4. credentialSubject**
+Contains the main data related to the credential, which varies depending on the document type. In this schema:
+
+- `shipper`: Details about the shipping party.
+- `consignee`: Information about the recipient of the goods.
+- `notifyParty`: Contact details of the party to be notified upon shipment arrival.
+- `blNumber`: Bill of Lading number, a unique identifier for the shipment.
+- `scac`: Standard Carrier Alpha Code, identifying the shipping line.
+
+### Key Fields to Note
+
+**_$template_**
+Defines the structure for rendering the document.
+
+- `name`: Template name for identifying the rendering style (e.g., BILL_OF_LADING).
+- `type`: Rendering type, usually EMBEDDED_RENDERER.
+- `url`: Remote URL hosting the renderer for decentralized document display.
+
+**_issuers_**
+Identifies the entity or entities responsible for issuing the document.
+
+- `name`: Issuer's name or label.
+- `documentStore / tokenRegistry`: Smart contract address for the issuer's document store or token registry.
+
+**_revocation_**
+
+- `type`: Indicates if the document is revocable (REVOCATION_STORE) or not (NONE).
+- `location`: is the address of your deployed document store or Online Certificate Status Protocol (OCSP) responder url
+
+**_identityProof_**
+
+- `type`: Method of identity verification (e.g., DID:web, DNS-TXT, DNS-DID).
+- `location`: URL pointing to the domain used for identity proof records of documentStore / tokenRegistry address is created.
+
+**_network_**
+The `network` key is used to determine which network the document is issued on. It should have the following keys:
+You can get the list of supported networks [here](/docs/topics/introduction/supported-network).
+
+- `chain`: Blockchain type in which the document is issued on(e.g., Ethereum, Polygon).
+- `chainId`: Network ID for the blockchain, aligning with the Ethereum chain list.
+
+### Flexible Fields
+
+The TradeTrust framework allows customization for specific document types:
+
+credentialSubject data varies with document types (e.g., bills of lading, invoices).
+@context can be extended with additional definitions to meet specific use cases.
+
+> The other fields in the document are dependant on the type of document you want to use. They will differ accordingly, as TradeTrust framework does not restrict the data of your document.
