@@ -4,16 +4,23 @@ title: Document Status
 sidebar_label: Document Status
 ---
 
-TradeTrust checks that the document has been issued and that it's issuance status is in good standing (for instance, that it hasn't been revoked). As of today, TradeTrust supports two ways to issue documents: DIDs and Ethereum Smart Contracts.
+TradeTrust checks that the document has been issued and that it's issuance status is in good standing (for instance, that it hasn't been revoked).
 
-## Ethereum Smart Contracts
+As of today, TradeTrust supports two ways to verify documents:
 
-### Token Registry
+- Transferable: Uses Ethereum smart contracts through a Token Registry.
+- Non-Transferable: Uses BitString CredentialStatus (specifically, BitStringStatusList2021).
+- None
 
-The Token Registry smart contract is deployed by individual transferable records issuers such as the land title registry (for title deed) or shipping lines (for bill of lading).It stores the ownership of documents through mappings from a document ID (target hash) to a title escrow contract address.
+## Transferable
 
-The Token Registry stores the ownership state of the transferable records using a mapping from document ID to smart contract address, where the document ID (also known as the token ID) is the target hash (and merkle root) of the individual TradeTrust document and the smart contract address will be a title escrow smart contract address.
+### Ethereum Smart Contracts - Token Registry
 
+The Token Registry smart contract is deployed by individual issuers, such as land title registries (for title deeds) or shipping lines (for bills of lading), to mint transferable records. It stores document ownership by mapping document IDs (also known as token IDs) to title escrow contract addresses.
+
+The Token Registry tracks the ownership state of transferable records using a mapping from document ID to smart contract address. Each document ID (token ID) is the hash of the Verifiable Credential (VC) ID of the individual TradeTrust document, and the corresponding smart contract address represents a title escrow smart contract.
+
+_Sample TransferableRecords credentialStatus within a W3C VC document:_
 ```js
   "credentialStatus": {
     "type": "TransferableRecords",
@@ -21,96 +28,98 @@ The Token Registry stores the ownership state of the transferable records using 
       "chain": "ETH",
       "chainId": "1337"
     },
-    "tokenRegistry": "0x9Eb613a88534E2939518f4ffBFE65F5969b491FF"
+    "tokenRegistry": "0x9Eb613a88534E2939518f4ffBFE65F5969b491FF",
+    "tokenId": "1683a00c42430b72c42a8013e6695b839ab7f7b06db69835b974392613826bd2"
   }
 ```
 
-The process involves:
+### Issuance and verification process
 
-- Deploying the `Token Registry` contract.
+1. Create a issuer key pair using `did:web`.
 
-- Binding the registry’s identity to the issuer using `DID:WEB`.
+2. Deploys a `Token Registry` contract on a supported network and obtain its address. (This is a one-time action)
 
-- Issuing documents by minting tokens that represent ownership.
+3. Bind the registry's identity to the issuer using `did:web`.
 
-- Shredding documents by interacting with the contract’s shred function.
+4. Prepare the raw Verifiable Credential (VC) payload with a `TransferableRecords` `credentialStatus` object.
 
-### BitStringStatusList2021
+5. Sign the VC payload to generate the VC document's `id` and `tokenId`.
 
-The BitStringStatusList2021 credential status uses a compact, off-chain structure to manage document status efficiently. It relies on a bitstring to represent the state of each document in a batch.
+6. Issue the document by minting an NFT with the generated `tokenId`, specifying its holder and beneficiary.
 
-Workflow
+7. During verification, the `tokenId` is checked against the `tokenRegistry` address to verify its validity.
 
-- A bitstring is generated for a batch of documents, where each bit represents the status of a document.
+For more information, refer to the [Tutorial - Creator]()
 
-- The bitstring is stored off-chain and linked to a document through its Merkle Root.
+## Non-Transferable
 
-- Status verification involves:
+### BitString CredentialStatus - BitStringStatusList2021
 
-  - Fetching the bitstring associated with the Merkle Root.
+The BitStringStatusList2021 credential status uses a compact, off-chain structure to manage document status efficiently. It relies on a bitstring to represent the state of each document, ensures scalability and reduces on-chain storage costs.
 
-  - Checking the bit corresponding to the document’s index.
+_Sample BitString credentialStatus within a W3C VC document:_
 
-This method ensures scalability and reduces on-chain storage costs.
+```js
+  "credentialStatus": {
+    "id": 'https://trustvc.github.io/did/credentials/statuslist/1#1',
+    "statusListCredential": 'https://trustvc.github.io/did/credentials/statuslist/1',
+    "statusListIndex": '1',
+    "statusPurpose": 'revocation',
+    "type": 'StatusList2021Entry'
+  },
+```
+
+_Sample Bitstring Status List._ Example hosted on [GitHub Pages](https://github.com/TrustVC/did/blob/main/credentials/statuslist/1).
 
 ```js
 {
   "@context": [
-    "https://www.w3.org/ns/status/v1"
+    "https://www.w3.org/2018/credentials/v1",
+    "https://w3id.org/security/bbs/v1",
+    "https://w3id.org/vc/status-list/2021/v1"
   ],
-  "id": "https://issuer.example/status/1",
-  "type": "StatusList2021",
-  "statusPurpose": "revocation",
-  "encodedList": "H4sIAAAAAAAA/+3BQREAAAzCwNGhiJjEIA0go/j9KkjJEgCI7q6uq7+7eyDYbZXhKgAoAQPUsUCoQAAAAA=="
+  "id": "https://trustvc.github.io/did/credentials/statuslist/1",
+  "type": [
+    "VerifiableCredential",
+    "StatusList2021Credential"
+  ],
+  "issuer": "did:web:trustvc.github.io:did:1",
+  "issuanceDate": "2024-10-02T08:49:52.749Z",
+  "validFrom": "2024-10-02T08:49:52.435Z",
+  "credentialSubject": {
+    "id": "https://trustvc.github.io/did/credentials/statuslist/1#list",
+    "type": "StatusList2021",
+    "statusPurpose": "revocation",
+    "encodedList": "H4sIAAAAAAAAA-3BMQEAAAwCoH32b7RoxvAB8gcAAAAAAAAAAAAAAAAAAACMFVeOQ9sAQAAA"
+  },
+  "proof": {
+    "type": "BbsBlsSignature2020",
+    "created": "2024-10-02T08:49:54Z",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "ohxpxgF6BUhGkSLBSGknWAVgx2flaQ4Hvl8MpD+tvVVEESXlQf0PbefZgg0Kj4+AUQS9wzJ/DjfbmkEkqiQU4RSKC82uPmoL5K7QWQRL4G8tymiY5ITLuRtYeACoiZz/dhF1wxxyJArGEI8ZWGCGNw==",
+    "verificationMethod": "did:web:trustvc.github.io:did:1#keys-1"
+  }
 }
 ```
 
-### Document Issuer Verification
+### Issuance and verification process
 
-The DocumentIssuerVerification credential status employs Decentralized Identifiers (DIDs) for signing and verifying document issuance. DIDs ensure that the document’s provenance can be traced back to a legitimate issuer.
+1. A BitString Status List is generated for a batch of documents, where each bit represents the status of a document.
 
-#### Issuance Process
+2. Prepare the raw Verifiable Credential (VC) payload with `StatusList2021Entry` `credentialStatus` object, which includes the `statusListIndex`.
 
-- A DID is created for the issuer, providing a public-private key pair.
+3. The BitString Status List can be updated to modify the status of any index. After updating, the list is signed and rehosted.
 
-- The document’s Merkle Root is signed using the private key.
+4. Status verification involves:
+   - Fetching the bitstring list associated to the document `id`.
+   - Checking the bit corresponding to the document’s `statusListIndex`.
 
-- The signature and DID metadata are added to the document.
+## Without any Document Status
 
-- The document is shared with recipients.
+When no document status is explicitly provided, the document's validity is determined based on its document integrity. This implies that the document may be perpetually active, without an explicit expiry date.
 
-#### Verification Process
+### Issuance and verification process
 
-- Extract the DID and its associated public key from the document.
+1. No `credentialStatus` required, therefore, no additional issuance steps are necessary.
 
-- Use the Merkle Root and signature to verify the document’s authenticity.
-
-- Ensure the public key matches the DID controller.
-
-- This approach offers a cost-effective and decentralized method for verifying document authenticity.
-
-### Issuance and Verification
-
-#### Issuance Steps
-
-- Deploy the required credential status mechanism (e.g., Token Registry, BitString, or DID).
-
-- Generate a target hash.
-
-- Issue the document(s) using the corresponding issuance function:
-
-  - Token Registry: mint function.
-
-  - DID: Sign the document with the private key.
-
-#### Verification Steps
-
-Retrieve the credential status mechanism from the document metadata. Verify the document’s status by checking:
-
-- Transferable Records: Merkle Root issuance and ownership mapping.
-
-- BitStringStatusList2021: Bitstring status at the document’s index.
-
-- DocumentIssuerVerification: Signature validity and DID metadata.
-
-By integrating these three credential statuses, TradeTrust provides a robust and scalable framework for managing document issuance, verification, and revocation, ensuring trust and transparency in digital transactions.
+2. The verification process performs the same integrity check as for standard document integrity verification.

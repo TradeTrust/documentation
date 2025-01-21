@@ -4,11 +4,13 @@ title: Document Integrity
 sidebar_label: Document Integrity
 ---
 
-TradeTrust ensures that the content of a document remains intact and untampered with after its creation by leveraging decentralized identifiers (DID) and cryptographic methods. The adoption of DID:web simplifies document verification, focusing on validating proofs using the public key of the specified DID. Let’s explore how this mechanism works.
+TradeTrust ensures that the content of a document remains intact and untampered with after its creation by leveraging decentralized identifiers (DID) and cryptographic methods. The adoption of did:web simplifies document verification, focusing on validating proofs using the public key of the specified DID. Let’s explore how this mechanism works.
 
-### Document Structure and DID:web Integration
+### Document Structure and did:web Integration
 
-The document now uses a DID:web identifier to ensure cryptographic integrity and traceability. Below is an example structure:
+The document now uses a did:web identifier to ensure cryptographic integrity and traceability. Below is an example structure:
+
+_Sample did:web host._
 
 ```js
 {
@@ -38,7 +40,6 @@ The document now uses a DID:web identifier to ensure cryptographic integrity and
     "did:web:trustvc.github.io:did:1#keys-1"
   ]
 }
-
 ```
 
 ### How It Works
@@ -54,13 +55,13 @@ Upon creation, the document is signed using a cryptographic algorithm, such as `
 
 To verify the integrity of a document, the following steps are executed:
 
-**Extract the Public Key:**
+- **Extract the Public Key:**
 Retrieve the public key (publicKeyBase58) from the verificationMethod section of the DID:web document.
 
-**Validate the Proof:**
+- **Validate the Proof:**
 Use the public key and cryptographic algorithms to validate the proof provided in the document. The signature ensures that no unauthorized modifications have been made.
 
-**Contextual Validation:**
+- **Contextual Validation:**
 Confirm the document adheres to the specified `JSON-LD contexts` (@context), ensuring compatibility and alignment with the DID and cryptographic specifications.
 
 #### 3. Selective Disclosure and Privacy
