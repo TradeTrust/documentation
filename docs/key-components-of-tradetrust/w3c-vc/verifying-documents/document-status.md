@@ -1,5 +1,5 @@
 ---
-id: issuance-status
+id: document-status
 title: Document Status
 sidebar_label: Document Status
 ---
@@ -35,7 +35,7 @@ The process involves:
 
 - Shredding documents by interacting with the contract’s shred function.
 
-## BitStringStatusList2021
+### BitStringStatusList2021
 
 The BitStringStatusList2021 credential status uses a compact, off-chain structure to manage document status efficiently. It relies on a bitstring to represent the state of each document in a batch.
 
@@ -65,11 +65,11 @@ This method ensures scalability and reduces on-chain storage costs.
 }
 ```
 
-## DocumentIssuerVerification
+### Document Issuer Verification
 
 The DocumentIssuerVerification credential status employs Decentralized Identifiers (DIDs) for signing and verifying document issuance. DIDs ensure that the document’s provenance can be traced back to a legitimate issuer.
 
-### Issuance Process
+#### Issuance Process
 
 - A DID is created for the issuer, providing a public-private key pair.
 
@@ -79,7 +79,7 @@ The DocumentIssuerVerification credential status employs Decentralized Identifie
 
 - The document is shared with recipients.
 
-### Verification Process
+#### Verification Process
 
 - Extract the DID and its associated public key from the document.
 
@@ -89,9 +89,9 @@ The DocumentIssuerVerification credential status employs Decentralized Identifie
 
 - This approach offers a cost-effective and decentralized method for verifying document authenticity.
 
-## Issuance and Verification
+### Issuance and Verification
 
-### Issuance Steps
+#### Issuance Steps
 
 - Deploy the required credential status mechanism (e.g., Token Registry, BitString, or DID).
 
@@ -103,7 +103,7 @@ The DocumentIssuerVerification credential status employs Decentralized Identifie
 
   - DID: Sign the document with the private key.
 
-### Verification Steps
+#### Verification Steps
 
 Retrieve the credential status mechanism from the document metadata. Verify the document’s status by checking:
 

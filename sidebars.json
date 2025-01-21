@@ -30,10 +30,13 @@
                 "items": [
                   "key-components-of-tradetrust/w3c-vc/verifying-documents/overview",
                   "key-components-of-tradetrust/w3c-vc/verifying-documents/issuer-identity",
-                  "key-components-of-tradetrust/w3c-vc/verifying-documents/issuance-status",
-                  "key-components-of-tradetrust/w3c-vc/verifying-documents/document-integrity"
+                  "key-components-of-tradetrust/w3c-vc/verifying-documents/document-status",
+                  "key-components-of-tradetrust/w3c-vc/verifying-documents/document-integrity",
+                  "key-components-of-tradetrust/w3c-vc/verifying-documents/verifying-document-cli",
+                  "key-components-of-tradetrust/w3c-vc/verifying-documents/verifying-document-code"
                 ]
-              }
+              },
+              "key-components-of-tradetrust/add-ons/qr-code"
             ]
           },
           {
@@ -83,6 +86,7 @@
       },
       "introduction/legal",
       "introduction/ig-p&i"
-    ]
+    ],
+    "Tutorial": ["tutorial/verifier"]
   }
 }
