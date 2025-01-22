@@ -10,6 +10,8 @@ TradeTrust ensures that the content of a document remains intact and untampered 
 
 The document now uses a did:web identifier to ensure cryptographic integrity and traceability. Below is an example structure:
 
+_Sample did:web host._
+
 ```js
 {
   "id": "did:web:trustvc.github.io:did:1",
@@ -38,7 +40,6 @@ The document now uses a did:web identifier to ensure cryptographic integrity and
     "did:web:trustvc.github.io:did:1#keys-1"
   ]
 }
-
 ```
 
 ### How It Works
@@ -57,11 +58,11 @@ To verify the integrity of a document, the following steps are executed:
 **Extract the Public Key:**
 Retrieve the public key (publicKeyBase58) from the verificationMethod section of the did:web document.
 
-**Validate the Proof:**
-Use the public key and cryptographic algorithms to validate the proof provided in the document. The signature ensures that no unauthorized modifications have been made.
+- **Validate the Proof:**
+  Use the public key and cryptographic algorithms to validate the proof provided in the document. The signature ensures that no unauthorized modifications have been made.
 
-**Contextual Validation:**
-Confirm the document adheres to the specified `JSON-LD contexts` (@context), ensuring compatibility and alignment with the DID and cryptographic specifications.
+- **Contextual Validation:**
+  Confirm the document adheres to the specified `JSON-LD contexts` (@context), ensuring compatibility and alignment with the DID and cryptographic specifications.
 
 #### 3. Selective Disclosure and Privacy
 

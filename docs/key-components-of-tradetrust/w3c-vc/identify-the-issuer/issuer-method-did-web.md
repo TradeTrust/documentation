@@ -16,13 +16,13 @@ This guide explains how to self-host a Decentralized Identifier (DID) using the 
 - A did:web identifier is represented as did:web:`<domain>` or did:web:`<domain>:<path>/`.
   For example:
 
-- did:web:example.com
-- did:web:example.com:subpath
+  - did:web:example.com
+  - did:web:example.com:subpath
 
 The DID document associated with a did:web identifier is hosted at the following location on your domain:
 
-- For root domains: https://example.com/.well-known/did.json
-- For subdomains or paths: `https://example.com/<path>/well-known/did.json`
+- For root domains: `https://example.com/.well-known/did.json`
+- For subdomains or paths: `https://example.com/<path>/did.json`
   This DID document contains details about the entity, including public keys, service endpoints, and methods of verification.
 
 ### Step-by-Step Setup
@@ -34,17 +34,17 @@ The DID document associated with a did:web identifier is hosted at the following
 
 ```typescript
 {
-"@context": "https://www.w3.org/ns/did/v1",
-"id": "did:web:yourdomain.com",
-"verificationMethod": [{
-"id": "did:web:yourdomain.com#key-1",
-"type": "BbsBlsSignature2020",
-"controller": "did:web:yourdomain.com",
-"publicKeyBase58": "2qz8jVcPgs6xzL5mZHTZGkXQaDe5BsVofLpqqBfAw1Nc"
-}],
-"authentication": [
-"did:web:yourdomain.com#key-1"
-]
+  "@context": "https://www.w3.org/ns/did/v1",
+  "id": "did:web:yourdomain.com",
+  "verificationMethod": [{
+    "id": "did:web:yourdomain.com#key-1",
+    "type": "BbsBlsSignature2020",
+    "controller": "did:web:yourdomain.com",
+    "publicKeyBase58": "2qz8jVcPgs6xzL5mZHTZGkXQaDe5BsVofLpqqBfAw1Nc"
+  }],
+  "authentication": [
+    "did:web:yourdomain.com#key-1"
+  ]
 }
 ```
 
@@ -61,17 +61,21 @@ The DID document associated with a did:web identifier is hosted at the following
 
 ### Example using GitHub Pages
 
+:::note
+We hosted a sample did:web `did:web:trustvc.github.io:did:1` in this repo https://github.com/TrustVC/did
+:::
+
 If you’re hosting the DID document on GitHub Pages:
 
 1. Create a repository with the structure:
 
 ```typescript
-.well-known/
-did.json
+└── `<path>`
+   └── did.json
 ```
 
 2. Push the repository to GitHub and enable GitHub Pages for the repository.
-3. Your DID document should be accessible at https://yourusername.github.io/.well-known/did.json.
+3. Your DID document `did:web:<yourusername>.github.io:<repo>:<path>` should be accessible at `https://<yourusername>.github.io/<repo>/<path>/did.json`.
 
 ### Verifying Your did:web
 
