@@ -55,8 +55,8 @@ Upon creation, the document is signed using a cryptographic algorithm, such as `
 
 To verify the integrity of a document, the following steps are executed:
 
-**Extract the Public Key:**
-Retrieve the public key (publicKeyBase58) from the verificationMethod section of the did:web document.
+- **Extract the Public Key:**
+  Retrieve the public key (publicKeyBase58) from the verificationMethod section of the did:web document.
 
 - **Validate the Proof:**
   Use the public key and cryptographic algorithms to validate the proof provided in the document. The signature ensures that no unauthorized modifications have been made.

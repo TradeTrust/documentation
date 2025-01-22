@@ -25,7 +25,3 @@ The did:web method works by hosting a DID document at a well-known URL on the do
 Domain name owners have exclusive authority to host or update the DID document at their domain. This means that when the did:web identifier endorses a certain fact (such as the association with a Token Registry or Document Store address), it transitively asserts that the domain owner endorses that fact.
 
 In a TradeTrust did:web identity proof, we record the Token Registry address and the blockchain network (e.g., Ethereum Mainnet) within the DID document. In the TradeTrust document itself, we declare the did:web identifier as the issuer. When the document's cryptographic proof is validated against the DID document, we can assert that the domain owner has endorsed the issuance of this document.
-
-This forms a bi-directional trust assertion, linking the domain name to the blockchain asset and ensuring the integrity and authenticity of the issuance.
-
-For a deeper technical discussion, refer to the TradeTrust’s Decentralized Identity Proof using did:web Architecture Decision Record.
