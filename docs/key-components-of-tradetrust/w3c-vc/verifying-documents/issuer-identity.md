@@ -28,4 +28,4 @@ In a TradeTrust did:web identity proof, we record the Token Registry or Document
 
 This forms a bi-directional trust assertion, linking the domain name to the blockchain asset and ensuring the integrity and authenticity of the issuance.
 
-For a deeper technical discussion, refer to the TradeTrust’s Decentralized Identity Proof using DID:Web Architecture Decision Record.
+For a deeper technical discussion, refer to the TradeTrust’s Decentralized Identity Proof using did:web Architecture Decision Record.

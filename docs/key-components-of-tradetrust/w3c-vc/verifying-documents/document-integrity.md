@@ -4,11 +4,11 @@ title: Document Integrity
 sidebar_label: Document Integrity
 ---
 
-TradeTrust ensures that the content of a document remains intact and untampered with after its creation by leveraging decentralized identifiers (DID) and cryptographic methods. The adoption of DID:web simplifies document verification, focusing on validating proofs using the public key of the specified DID. Let’s explore how this mechanism works.
+TradeTrust ensures that the content of a document remains intact and untampered with after its creation by leveraging decentralized identifiers (DID) and cryptographic methods. The adoption of did:web simplifies document verification, focusing on validating proofs using the public key of the specified DID. Let’s explore how this mechanism works.
 
-### Document Structure and DID:web Integration
+### Document Structure and did:web Integration
 
-The document now uses a DID:web identifier to ensure cryptographic integrity and traceability. Below is an example structure:
+The document now uses a did:web identifier to ensure cryptographic integrity and traceability. Below is an example structure:
 
 ```js
 {
@@ -45,17 +45,17 @@ The document now uses a DID:web identifier to ensure cryptographic integrity and
 
 #### 1. Document Proof Generation
 
-Upon creation, the document is signed using a cryptographic algorithm, such as `Bls12381G2Key2020`. This signature is tied to the document's content and the DID:web identifier, ensuring authenticity.
+Upon creation, the document is signed using a cryptographic algorithm, such as `Bls12381G2Key2020`. This signature is tied to the document's content and the did:web identifier, ensuring authenticity.
 
 - The proof value contains cryptographic evidence of the document's integrity.
-- The public key associated with the DID:web identifier is used to verify this signature.
+- The public key associated with the did:web identifier is used to verify this signature.
 
 #### 2. Validation Process
 
 To verify the integrity of a document, the following steps are executed:
 
 **Extract the Public Key:**
-Retrieve the public key (publicKeyBase58) from the verificationMethod section of the DID:web document.
+Retrieve the public key (publicKeyBase58) from the verificationMethod section of the did:web document.
 
 **Validate the Proof:**
 Use the public key and cryptographic algorithms to validate the proof provided in the document. The signature ensures that no unauthorized modifications have been made.
@@ -76,4 +76,4 @@ The method leverages strong cryptographic algorithms like `Bls12381G2Key2020` to
 
 ### Summary
 
-By integrating `DID:web`, TradeTrust achieves robust document integrity through decentralized identifiers and cryptographic proofs. This approach guarantees the authenticity and integrity of documents, supports selective disclosure, and provides a streamlined mechanism for validation using public keys associated with DID:web.
+By integrating `did:web`, TradeTrust achieves robust document integrity through decentralized identifiers and cryptographic proofs. This approach guarantees the authenticity and integrity of documents, supports selective disclosure, and provides a streamlined mechanism for validation using public keys associated with did:web.

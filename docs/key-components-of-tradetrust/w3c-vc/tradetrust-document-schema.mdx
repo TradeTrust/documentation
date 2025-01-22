@@ -6,7 +6,7 @@ sidebar_label: Document schema
 
 To explain on TradeTrust's document schema, we will use a sample document. For this example, a verifiable document will be used.
 
-Below is w3c vc schema which is more aligned with [W3C VC data model](https://www.w3.org/TR/vc-data-model-2.0/).
+Below is w3c vc schema which is more aligned with [W3C VC data model](https://www.w3.org/TR/vc-data-model/).
 
 ## Raw document
 
@@ -98,38 +98,6 @@ Contains the main data related to the credential, which varies depending on the 
 - `notifyParty`: Contact details of the party to be notified upon shipment arrival.
 - `blNumber`: Bill of Lading number, a unique identifier for the shipment.
 - `scac`: Standard Carrier Alpha Code, identifying the shipping line.
-
-### Key Fields to Note
-
-**_$template_**
-Defines the structure for rendering the document.
-
-- `name`: Template name for identifying the rendering style (e.g., BILL_OF_LADING).
-- `type`: Rendering type, usually EMBEDDED_RENDERER.
-- `url`: Remote URL hosting the renderer for decentralized document display.
-
-**_issuers_**
-Identifies the entity or entities responsible for issuing the document.
-
-- `name`: Issuer's name or label.
-- `documentStore / tokenRegistry`: Smart contract address for the issuer's document store or token registry.
-
-**_revocation_**
-
-- `type`: Indicates if the document is revocable (REVOCATION_STORE) or not (NONE).
-- `location`: is the address of your deployed document store or Online Certificate Status Protocol (OCSP) responder url
-
-**_identityProof_**
-
-- `type`: Method of identity verification (e.g., DID:web, DNS-TXT, DNS-DID).
-- `location`: URL pointing to the domain used for identity proof records of documentStore / tokenRegistry address is created.
-
-**_network_**
-The `network` key is used to determine which network the document is issued on. It should have the following keys:
-You can get the list of supported networks [here](/docs/topics/introduction/supported-network).
-
-- `chain`: Blockchain type in which the document is issued on(e.g., Ethereum, Polygon).
-- `chainId`: Network ID for the blockchain, aligning with the Ethereum chain list.
 
 ### Flexible Fields
 

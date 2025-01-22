@@ -1,25 +1,25 @@
 ---
 id: issuer-method-did-web
-title: Did:Web
-sidebar_label: DID:Web
+title: did:web
+sidebar_label: did:web
 ---
 
-## Hands-on Creating a DID:web Document
+## Hands-on Creating a did:web Document
 
-This guide explains how to self-host a Decentralized Identifier (DID) using the did:web method. The did:web method allows you to create a DID linked to a domain you control, enabling decentralized identity services hosted on your website.
+This guide explains how to self-host a Decentralized Identifier (DID) using the [did:web](https://w3c-ccg.github.io/did-method-web/) method. The did:web method allows you to create a DID linked to a domain you control, enabling decentralized identity services hosted on your website.
 
 ### Prerequisites
 
 - A domain name: You need access to a domain name where you can host static content.
 - Web hosting: Ensure you have the ability to host static files on your domain. This can be done via any web hosting service that supports serving static JSON files (e.g., GitHub Pages, Netlify, your own web server).
 - Tools: Familiarity with basic command-line tools and JSON structure is helpful.
-- A DID:web identifier is represented as did:web:`<domain>` or did:web:`<domain>:<path>/`.
+- A did:web identifier is represented as did:web:`<domain>` or did:web:`<domain>:<path>/`.
   For example:
 
 - did:web:example.com
 - did:web:example.com:subpath
 
-The DID document associated with a DID:web identifier is hosted at the following location on your domain:
+The DID document associated with a did:web identifier is hosted at the following location on your domain:
 
 - For root domains: https://example.com/.well-known/did.json
 - For subdomains or paths: `https://example.com/<path>/well-known/did.json`
@@ -91,9 +91,9 @@ Verify that your DID Document conforms to the DID specification.
 - File Not Found Error: Double-check the file path and ensure your web hosting service is correctly serving static files.
 - DID Not Resolving: Verify that your DNS is properly configured, and the DID Document is correctly formatted.
 
-### Additional Notes for Hosting DID:web Documents
+### Additional Notes for Hosting did:web Documents
 
 - Make sure your server supports HTTPS.
 - Ensure the .well-known/did.json file is publicly readable.
 - For advanced use cases, you can add service endpoints or include additional verification methods in your DID document.
-- By following the above steps, you can successfully create and manage a DID:web identifier, providing a secure, decentralized identity anchored to your domain.
+- By following the above steps, you can successfully create and manage a did:web identifier, providing a secure, decentralized identity anchored to your domain.
