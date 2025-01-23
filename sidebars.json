@@ -10,48 +10,54 @@
             "label": "W3C VC",
             "type": "category",
             "items": [
-              "topics/introduction/tradetrust-document-schema",
+              "key-components-of-tradetrust/w3c-vc/tradetrust-document-schema",
               {
                 "label": "Identifying the Issuer",
                 "type": "category",
-                "items": ["topics/introduction/issuer-method-dns-txt", "topics/introduction/issuer-method-dns-did"]
+                "items": ["key-components-of-tradetrust/w3c-vc/identify-the-issuer/issuer-method-did-web"]
               },
               {
                 "type": "category",
                 "label": "Signing Document",
                 "items": [
-                  "tutorial/verifiable-documents/signing-w3c-document/signing-document-cli",
-                  "tutorial/verifiable-documents/signing-w3c-document/signing-document-code"
+                  "key-components-of-tradetrust/w3c-vc/signing-documents/signing-document-cli",
+                  "key-components-of-tradetrust/w3c-vc/signing-documents/signing-document-code"
                 ]
               },
               {
                 "type": "category",
                 "label": "Verifying of Documents",
                 "items": [
-                  "topics/verifying-documents/overview",
-                  "topics/verifying-documents/issuer-identity",
-                  "topics/verifying-documents/issuance-status",
-                  "topics/verifying-documents/document-integrity"
+                  "key-components-of-tradetrust/w3c-vc/verifying-documents/overview",
+                  "key-components-of-tradetrust/w3c-vc/verifying-documents/issuer-identity",
+                  "key-components-of-tradetrust/w3c-vc/verifying-documents/document-status",
+                  "key-components-of-tradetrust/w3c-vc/verifying-documents/document-integrity",
+                  "key-components-of-tradetrust/w3c-vc/verifying-documents/verifying-document-cli",
+                  "key-components-of-tradetrust/w3c-vc/verifying-documents/verifying-document-code"
                 ]
-              }
+              },
+              "key-components-of-tradetrust/add-ons/qr-code"
             ]
           },
           {
             "label": "Transferability",
             "type": "category",
             "items": [
-              "topics/introduction/transferable-records/overview",
-              "topics/introduction/transferable-records/token-registry",
-              "topics/introduction/transferable-records/title-transfer",
+              "key-components-of-tradetrust/transferability/overview",
+              "key-components-of-tradetrust/transferability/token-registry",
+              "key-components-of-tradetrust/transferability/title-transfer",
               "reference/tradetrust-website/endorsement-chain",
-              "topics/introduction/transferable-records/transactions",
-              "topics/introduction/transferable-records/remarks-encryption-decryption"
+              "key-components-of-tradetrust/transferability/transactions",
+              "key-components-of-tradetrust/transferability/remarks-encryption-decryption"
             ]
           },
           {
             "label": "Blockchain",
             "type": "category",
-            "items": ["topics/introduction/supported-network", "topics/introduction/estimated-cost-for-transactions"]
+            "items": [
+              "key-components-of-tradetrust/blockchain/supported-network",
+              "key-components-of-tradetrust/blockchain/estimated-cost-for-transactions"
+            ]
           },
           {
             "label": "Add-ons",
@@ -65,15 +71,15 @@
                     "label": "Create Template",
                     "type": "category",
                     "items": [
-                      "reference/generic-templates/overview",
-                      "reference/generic-templates/cover-letter",
-                      "reference/generic-templates/bill-of-lading"
+                      "key-components-of-tradetrust/add-ons/document-preview-templates/create-template/overview",
+                      "key-components-of-tradetrust/add-ons/document-preview-templates/create-template/cover-letter",
+                      "key-components-of-tradetrust/add-ons/document-preview-templates/create-template/bill-of-lading"
                     ]
                   },
-                  "tutorial/decentralised-renderer/decentralised-renderer"
+                  "key-components-of-tradetrust/add-ons/document-preview-templates/decentralised-renderer"
                 ]
               },
-              "reference/tradetrust-website/qr-code"
+              "key-components-of-tradetrust/add-ons/qr-code"
             ]
           }
         ]
@@ -81,8 +87,6 @@
       "introduction/legal",
       "introduction/ig-p&i"
     ],
-    "Tutorial": [
-      "tutorial/verifier"
-    ]
+    "Tutorial": ["tutorial/verifier"]
   }
 }

@@ -1,0 +1,81 @@
+---
+id: signing-document-cli
+title: Signing Documents (CLI)
+sidebar_label: Signing Documents (CLI)
+pagination_next: tutorial/verifiable-documents/revoking-document
+---
+
+import Flow from "./flow.mdx";
+
+<Flow />
+
+> For the current step, you can either opt to use the [CLI](/docs/key-components-of-tradetrust/w3c-vc/signing-documents/signing-document-cli) or [Code](/docs/key-components-of-tradetrust/w3c-vc/signing-documents/signing-document-code).
+
+> Only while using `bitstring` for **Credential Status**, the list can be configured as either a **revocation list** or a **suspension list**, depending on the use case.
+
+Each documents will be signed individually, and the proof of the signature will be appended into the signed documents.
+
+## Signing the documents
+
+### Installation
+
+Install CLI:
+
+> Note Remember to install the cli globally
+
+```bash
+npm install -g @trustvc/w3c-cli
+```
+
+### Signing
+
+Run the Command
+Execute the following command in your terminal:
+
+```bash
+w3c-cli sign
+```
+
+The tool will prompt you to provide the path to your key pair file.
+
+```bash
+? Please enter the path to your key pair JSON file: ./didKeyPairs.json
+```
+
+Next, you will be asked to provide the path to your Verifiable Credential file.
+
+    ```bash
+    ? Please enter the path to your credential JSON file: ./vc.json
+    ```
+
+Provide the directory path where the signed credential will be saved.
+
+    ```bash
+    ? Please specify a directory path to save your signed verifiable credential: .
+    ```
+    The . indicates the current directory. You can specify a different path if needed.
+
+Once the process is complete, the signed credential will be saved to the specified location.
+
+```bash
+Signed credential saved successfully to ./signed_vc.json
+```
+
+In this example, the signed credential is saved as signed_vc.json in the current directory.
+
+```bash
+$ w3c-cli sign
+? Please enter the path to your key pair JSON file: ./didKeyPairs.json
+? Please enter the path to your credential JSON file: ./vc.json
+? Please specify a directory path to save your signed verifiable credential: .
+Signed credential saved successfully to ./signed_vc.json
+```
+
+The CLI digitally signs a Verifiable Credential using the signCredential function from the w3c-vc repository, ensuring that the credential is tamper-evident and can be trusted by external verifiers.
+
+Commands
+The CLI provides several commands to help users interact with DIDs and Verifiable Credentials:
+
+#### Additional information: Revocation of Verifiable Documents
+
+[Revoking of Verifiable Documents](/docs/tutorial/verifiable-documents/revoking-document)
