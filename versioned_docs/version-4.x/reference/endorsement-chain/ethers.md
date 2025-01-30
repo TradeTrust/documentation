@@ -53,7 +53,7 @@ console.log(endorsementChain);
 Merge Overlapping Logs into Events
 
 1. Group Log Event with the same Transaction Hash - hash(blockNumber, transactionIndex)
-2. Idenitfy Event Type by Log Event Count and their Log Event Type on the same Transaction Hash
+2. Identify Event Type by Log Event Count and their Log Event Type on the same Transaction Hash
 
    INITIAL (Minting) that emits:
 
