@@ -23,9 +23,9 @@ This documentation explains each verification step and its significance.
 
 ![3 ticks](/docs/verifying-documents/3-ticks.png)
 
-- [Document integrity](/docs/topics/verifying-documents/document-integrity): TradeTrust ensures that the content of the document has not been modified since the document has been created, with exception of data removed using the built-in obfuscation mechanism.
-- [Issuance Status](/docs/topics/verifying-documents/issuance-status): TradeTrust checks that the document has been issued and that its issuance status is in good standing (for instance, that it hasn't been revoked). As of today, TradeTrust supports two ways to issue documents: DID Signing and Ethereum Smart Contracts.
-- [Issuer's Identity](/docs/topics/verifying-documents/issuer-identity): TradeTrust checks and returns the identity of the issuer. By default, TradeTrust uses DID to verify the identity. It's important to note that TradeTrust does not endorse any issuers. It only verifies that the issuing party in the document has provided some sort of proof that it is the same party as claimed.
+- [Document integrity](/docs/4.x/topics/verifying-documents/document-integrity): TradeTrust ensures that the content of the document has not been modified since the document has been created, with exception of data removed using the built-in obfuscation mechanism.
+- [Issuance Status](/docs/4.x/topics/verifying-documents/issuance-status): TradeTrust checks that the document has been issued and that its issuance status is in good standing (for instance, that it hasn't been revoked). As of today, TradeTrust supports two ways to issue documents: DID Signing and Ethereum Smart Contracts.
+- [Issuer's Identity](/docs/4.x/topics/verifying-documents/issuer-identity): TradeTrust checks and returns the identity of the issuer. By default, TradeTrust uses DID to verify the identity. It's important to note that TradeTrust does not endorse any issuers. It only verifies that the issuing party in the document has provided some sort of proof that it is the same party as claimed.
 
 ### Complementary but Non-Compulsory Verifications
 

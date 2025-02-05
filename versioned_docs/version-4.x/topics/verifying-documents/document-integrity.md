@@ -6,7 +6,7 @@ sidebar_label: Document Integrity
 
 TradeTrust ensures that the content of the document has not been modified since the document has been created, with exception of data removed using the built-in [obfuscation mechanism](#obfuscation-mechanism-aka-selective-redaction). Let's explore how it works.
 
-In the tutorial section, we have learnt how to [wrap a document](/docs/tutorial/verifiable-documents/advanced/document-store/wrapping-document/wrapping-document-cli) and [issue it](/docs/tutorial/verifiable-documents/advanced/document-store/issuing-document/issuing-document-cli) into a document store. However, we didn't explain what these actions were doing and why they are necessary.
+In the tutorial section, we have learnt how to [wrap a document](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/wrapping-document/wrapping-document-cli) and [issue it](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/issuing-document/issuing-document-cli) into a document store. However, we didn't explain what these actions were doing and why they are necessary.
 
 ### Wrapping a document
 
@@ -42,7 +42,7 @@ A few interesting transformations happened that we will dive into below:
 - A `data` key has been created and its value holds the contents of the file previously provided when wrapping, along with some weird-looking extra (hexadecimal) data.
 - A `signature` object has been created.
 
-> The above example is a [V2 schema](/docs/topics/introduction/tradetrust-document-schema) document. There is a [V4 alpha schema](/docs/topics/introduction/tradetrust-document-schema) in the works too.
+> The above example is a [V2 schema](/docs/4.x/topics/introduction/tradetrust-document-schema) document. There is a [V4 alpha schema](/docs/4.x/topics/introduction/tradetrust-document-schema) in the works too.
 
 #### The `data` object
 
@@ -57,7 +57,7 @@ The first step of wrapping consists of transforming all the object properties pr
 
 #### The `signature` object
 
-##### targetHash - see [issuance status](/docs/topics/verifying-documents/issuance-status#merkleroot) for more information.
+##### targetHash - see [issuance status](/docs/4.x/topics/verifying-documents/issuance-status#merkleroot) for more information.
 
 Once the `data` object has been computed we will be able to create an unique hash for the document that we will set into `targetHash`:
 
@@ -73,7 +73,7 @@ Later on, during verification of the document, the same exact steps are performe
 
 ## Obfuscation mechanism (a.k.a selective redaction)
 
-Due to the way we compute `targetHash`, TradeTrust allows for one to obfuscate data they don't want to make public, we call this selective redaction. For this we can simply compute the hash of a specific field and add it into the documents. Let's try it with the [CLI](/docs/tutorial/prerequisites#installation-of-tradetrust-cli) and the document above:
+Due to the way we compute `targetHash`, TradeTrust allows for one to obfuscate data they don't want to make public, we call this selective redaction. For this we can simply compute the hash of a specific field and add it into the documents. Let's try it with the [CLI](/docs/4.x/tutorial/prerequisites#installation-of-tradetrust-cli) and the document above:
 
 ```bash
 tradetrust filter ./path/to/file.json ./output.json name

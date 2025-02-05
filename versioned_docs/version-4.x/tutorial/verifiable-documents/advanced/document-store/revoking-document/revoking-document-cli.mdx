@@ -8,7 +8,7 @@ import Flow from "../flow.mdx";
 
 <Flow />
 
-> For the current step, you can either opt to use the [CLI](/docs/tutorial/verifiable-documents/advanced/document-store/revoking-document/revoking-document-cli) or [Code](/docs/tutorial/verifiable-documents/advanced/document-store/revoking-document/revoking-document-code).
+> For the current step, you can either opt to use the [CLI](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/revoking-document/revoking-document-cli) or [Code](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/revoking-document/revoking-document-code).
 
 After issuing a document, you might want to revoke it for any reason:
 
@@ -25,8 +25,8 @@ tradetrust document-store revoke --address 0xBBb55Bd1D709955241CAaCb327A765e2b6D
 
 In the example above:
 
-- `--address` is the document store address, for instance the one created with the [Deploying Document Store](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli) guide.
-- `--hash` is the value of `targetHash` field of one of the [previously wrapped documents](/docs/tutorial/verifiable-documents/advanced/document-store/wrapping-document/wrapping-document-cli) (open one of the file, head to the bottom and check for the `targetHash` in the `signature` object.
+- `--address` is the document store address, for instance the one created with the [Deploying Document Store](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli) guide.
+- `--hash` is the value of `targetHash` field of one of the [previously wrapped documents](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/wrapping-document/wrapping-document-cli) (open one of the file, head to the bottom and check for the `targetHash` in the `signature` object.
 
 You will be prompted for the password that you used while creating the wallet. You will see a message after completion of the command:
 
@@ -44,7 +44,7 @@ The document has been revoked, thus, we do not display the content of the docume
 
 ## Revoking multiple documents
 
-If you open the [previously wrapped documents](/docs/tutorial/verifiable-documents/advanced/document-store/wrapping-document/wrapping-document-cli) side by side, you will notice:
+If you open the [previously wrapped documents](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/wrapping-document/wrapping-document-cli) side by side, you will notice:
 
 - they have a different `targetHash`: it uniquely identifies any document
 - they have the same `merkleRoot`: it uniquely identifies any group of wrapped documents.

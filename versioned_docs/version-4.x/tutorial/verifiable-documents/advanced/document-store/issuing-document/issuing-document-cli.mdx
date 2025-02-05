@@ -9,7 +9,7 @@ import Flow from "../flow.mdx";
 
 <Flow />
 
-> For the current step, you can either opt to use the [CLI](/docs/tutorial/verifiable-documents/advanced/document-store/issuing-document/issuing-document-cli) or [Code](/docs/tutorial/verifiable-documents/advanced/document-store/issuing-document/issuing-document-code).
+> For the current step, you can either opt to use the [CLI](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/issuing-document/issuing-document-cli) or [Code](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/issuing-document/issuing-document-code).
 
 After wrapping the documents and obtaining a merkle root, the documents are ready to be issued on the document store smart contract. To issue a batch of documents, we will use the merkle root that will be appended to the list of issued documents on the document store. This issuance only needs to be done once for all documents in a batch.
 
@@ -21,8 +21,8 @@ tradetrust document-store issue --address 0xBBb55Bd1D709955241CAaCb327A765e2b6D6
 
 In the example above:
 
-- `--address` is the document store address, for instance the one created with the [Deploying Document Store](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli) guide.
-- `--hash` is the merkle root hash, for instance generated while [Wrapping Documents](/docs/tutorial/verifiable-documents/advanced/document-store/wrapping-document/wrapping-document-cli)
+- `--address` is the document store address, for instance the one created with the [Deploying Document Store](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli) guide.
+- `--hash` is the merkle root hash, for instance generated while [Wrapping Documents](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/wrapping-document/wrapping-document-cli)
 
 You will be prompted for the password that you used while creating the wallet. You will see a message after completion of the command:
 
@@ -40,4 +40,4 @@ Head over to [dev.tradetrust.io](https://dev.tradetrust.io/verify), drag and dro
 
 #### Additional information: Revocation of Verifiable Documents
 
-[Revoking of Verifiable Documents](/docs/tutorial/verifiable-documents/advanced/document-store/revoking-document/revoking-document-cli)
+[Revoking of Verifiable Documents](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/revoking-document/revoking-document-cli)
