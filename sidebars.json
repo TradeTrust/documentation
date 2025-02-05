@@ -87,6 +87,6 @@
       "introduction/legal",
       "introduction/ig-p&i"
     ],
-    "Tutorial": ["tutorial/verifier"]
+    "Tutorial": ["tutorial/verifier", "tutorial/transferability"]
   }
 }
