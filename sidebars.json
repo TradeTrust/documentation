@@ -87,6 +87,10 @@
       "introduction/legal",
       "introduction/ig-p&i"
     ],
-    "Tutorial": ["tutorial/verifier"]
+    "Tutorial": ["tutorial/verifier"],
+    "How Tos": [
+      "how-tos/contexts",
+      "how-tos/bitstring"
+    ]
   }
 }
