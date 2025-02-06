@@ -5,7 +5,7 @@ sidebar_label: Transferability
 ---
 
 This guide will walk you through setting up a simple React project using TypeScript and Vite, and integrate the TrustVC library to see the endorsement chain and make available transactions to transfer, reject or return the document. This tutorial focuses on transferable credentials.
-You can continue building from the existing Verifier setup by adding another page or integrating it within the same page. [Skip to 6th step](#6-add-a-basic-project-structure) for the same. Alternatively, you can start fresh and set up a new React project from scratch.
+You can continue building from the existing Verifier setup by adding another page or integrating it within the same page. Install ethers@5 and [Skip to 6th step](#6-add-a-basic-project-structure) for the same. Alternatively, you can start fresh and set up a new React project from scratch.
 
 ## Prerequisites
 
@@ -22,8 +22,8 @@ Before starting, ensure you have the following installed:
 ### 1. Create a new project directory
 
 ```bash
-mkdir verifier-project
-cd verifier-project
+mkdir transferability-project
+cd transferability-project
 ```
 
 ### 2. Initialize the project
@@ -37,7 +37,7 @@ This creates a package.json file in your project directory.
 ### 3. Install required dependencies
 
 ```bash
-npm install react react-dom vite-plugin-node-polyfills @trustvc/trustvc
+npm install react react-dom vite-plugin-node-polyfills @trustvc/trustvc ethers@5
 npm install --save-dev typescript @vitejs/plugin-react @types/react @types/react-dom
 ```
 
@@ -1237,7 +1237,7 @@ The tranferabiity app is now ready.
 <img src='/docs/tutorial/transferability/initial.png' />
 </figure>
 
-### Steps to Perform Endorsement Chain Actions
+## Steps to Perform Endorsement Chain Actions
 
 #### 1. Connect to MetaMask
 
@@ -1313,7 +1313,7 @@ The tranferabiity app is now ready.
 <img src='/docs/tutorial/transferability/after-reject-transfer.png' />
 </figure>
 
-### 8. Source code and demo file
+## Source code and demo file
 
 The source code for this project is also available on GitHub at [TradeTrust/transferability-tutorial](https://github.com/TradeTrust/transferability-tutorial). You can explore the code, contribute, or make any modifications.
 
