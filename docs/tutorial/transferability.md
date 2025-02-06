@@ -98,6 +98,14 @@ src/
 
 ```
 
+Add and update the .env file with infura api key
+
+```
+VITE_INFURA_ID=YOUR_INFURA_ID
+```
+
+You can update the chain you want to test by updating the RPC url in app.js.
+
 Add the following content to App.tsx:
 
 ```tsx
@@ -109,6 +117,7 @@ import AssetManagement from "./assetManagement";
 import TitleEscrowAbi from "./abi/TitleEscrow.json";
 
 const App: React.FC = () => {
+  const rpc = `https://polygon-amoy.infura.io/v3/${import.meta.env.VITE_INFURA_ID}`; //update the rpc to test on different available chain
   const [hasAttemptedUpload, setHasAttemptedUpload] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -159,9 +168,6 @@ const App: React.FC = () => {
     try {
       const fileContent = await file.text();
       const vc = JSON.parse(fileContent);
-      const rpc = "https://polygon-amoy.infura.io/v3/f724c79c65a74253a6bdb6c0d6a1cc27";
-      //   const rpc =
-      //     "https://sepolia.infura.io/v3/f724c79c65a74253a6bdb6c0d6a1cc27";
       const _provider = new ethers.providers.JsonRpcProvider(rpc);
       if (!_provider) return;
       const titleEscrowAddress = await getTitleEscrowAddress(
@@ -214,6 +220,12 @@ const App: React.FC = () => {
       }
       params = [newHolder, encryptedRemark];
     } else if (action === "transferBeneficiary") {
+      if (!ethers.utils.isAddress(newBeneficiary)) {
+        console.error("Invalid Ethereum address:", newBeneficiary);
+        return;
+      }
+      params = [newBeneficiary, encryptedRemark];
+    } else if (action === "nominate") {
       if (!ethers.utils.isAddress(newBeneficiary)) {
         console.error("Invalid Ethereum address:", newBeneficiary);
         return;
