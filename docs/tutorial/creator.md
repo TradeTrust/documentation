@@ -170,7 +170,7 @@ For more details refer to the ngrok configuration [below](/docs/tutorial/creator
 #### 7.2 Create a script to generate a new did:web and store it in the .env file
 
 <details>
-<summary>Create a src/scripts/util.ts file and add the following code:</summary>
+<summary>Create a src/scripts/utils.ts file and add the following code:</summary>
 
 ```ts
 import { readFileSync, writeFileSync, appendFileSync } from "fs";
@@ -203,31 +203,26 @@ export const writeEnvVariable = (key: string, value: string): void => {
 </details>
 
 <details>
-<summary>Next create a src/scripts/createDid.ts file and add the following code:</summary>
+<summary>Next create a src/scripts/generateDidWeb.ts file and add the following code:</summary>
 
 ```ts
 import { generateKeyPair, issueDID, VerificationType } from "@trustvc/trustvc/w3c/issuer";
 import { writeFileSync } from "fs";
 import { join } from "path";
 import { writeEnvVariable } from "./utils";
-import { ethers } from "ethers";
 
 const main = async () => {
-  console.log("ethers.version", ethers.version);
-  console.log("process.env.DOMAIN", process.env.DOMAIN);
   const keyPair = await generateKeyPair({
     type: VerificationType.Bls12381G2Key2020,
   });
-  console.log("keyPair: ", keyPair);
   const issuedDidWeb = await issueDID({
     domain: process.env.DOMAIN,
     ...keyPair,
   });
-  console.log("issuedDidWeb: ", JSON.stringify(issuedDidWeb, null, 2));
 
   // Write the wellKnownDid to a JSON file
-  const outputPath = join(process.cwd());
-  writeFileSync(join(outputPath, "did.json"), JSON.stringify(issuedDidWeb.wellKnownDid, null, 2));
+  const outputPath = join(process.cwd(), "did.json");
+  writeFileSync(outputPath, JSON.stringify(issuedDidWeb.wellKnownDid, null, 2));
   console.log("DID document has been written to ./did.json");
 
   // write issuedDidWeb.didKeyPairs into .env as DID_KEY_PAIRS key
@@ -256,36 +251,55 @@ More details [here](/docs/topics/advanced/additional-network-metamask-guide/#fil
 ```ts
 import { CHAIN_ID, SUPPORTED_CHAINS, v5ContractAddress, v5Contracts } from "@trustvc/trustvc";
 import { utils as v5Utils } from "@trustvc/trustvc/token-registry-v5";
-import { ethers, Wallet } from "ethers";
+import { ethers } from "ethers";
 import { writeEnvVariable } from "./utils";
 
 const main = async () => {
-  const chainId: CHAIN_ID = (process.env.NET as CHAIN_ID) ?? CHAIN_ID.amoy;
+  if (!process.env.WALLET_PRIVATE_KEY) {
+    throw new Error("Wallet private key not found in environment variables");
+  }
 
-  const unconnectedWallet = new Wallet(process.env.WALLET_PRIVATE_KEY!);
-  const provider = new ethers.JsonRpcProvider(SUPPORTED_CHAINS[chainId].rpcUrl);
+  const chainId: CHAIN_ID = (process.env.NET as CHAIN_ID) ?? CHAIN_ID.amoy;
+  const CHAININFO = SUPPORTED_CHAINS[chainId];
+
+  const unconnectedWallet = new ethers.Wallet(process.env.WALLET_PRIVATE_KEY);
+  const JsonRpcProvider = ethers.version.startsWith("6.")
+    ? (ethers as any).JsonRpcProvider
+    : (ethers as any).providers.JsonRpcProvider;
+  const provider = new JsonRpcProvider(CHAININFO.rpcUrl);
   const wallet = unconnectedWallet.connect(provider);
   const walletAddress = await wallet.getAddress();
 
   const { TDocDeployer__factory } = v5Contracts;
 
   const { TokenImplementation, Deployer } = v5ContractAddress;
-  const deployerContract = TDocDeployer__factory.connect(Deployer[chainId], wallet);
+  const deployerContract = new ethers.Contract(Deployer[chainId], TDocDeployer__factory.abi, wallet);
   const initParam = v5Utils.encodeInitParams({
     name: "DemoTokenRegistry",
     symbol: "DTR",
     deployer: walletAddress,
   });
 
-  const tx = await deployerContract.deploy(TokenImplementation[chainId], initParam);
+  let tx;
+  if (CHAININFO.gasStation) {
+    const gasFees = await CHAININFO.gasStation();
+    console.log("gasFees", gasFees);
+
+    tx = await deployerContract.deploy(TokenImplementation[chainId], initParam, {
+      maxFeePerGas: gasFees!.maxFeePerGas?.toBigInt() ?? 0,
+      maxPriorityFeePerGas: gasFees!.maxPriorityFeePerGas?.toBigInt() ?? 0,
+    });
+  } else {
+    tx = await deployerContract.deploy(TokenImplementation[chainId], initParam);
+  }
   const receipt = await tx.wait();
-  console.log(`Document ${documentId} minted on tx hash ${receipt?.hash}`);
+  console.log("receipt:", JSON.stringify(receipt, null, 2));
 
   let registryAddress;
   if (ethers.version.includes("/5.")) {
     registryAddress = v5Utils.getEventFromReceipt<any>(
       receipt,
-      (deployerContract as any).getEventTopic("Deployment"),
+      (deployerContract.interface as any).getEventTopic("Deployment"),
       deployerContract.interface,
     ).args.deployed;
   } else if (ethers.version.startsWith("6.")) {
@@ -440,38 +454,38 @@ const SUPPORTED_DOCUMENT: {
 app.post("/create/:documentId", async (req: Request, res: Response, next: NextFunction) => {
   try {
     let { documentId } = req.params;
-    documentId = documentId?.toUpperCase() || "";
+    documentId = documentId?.toUpperCase() || '';
 
     // Validate documentId
     if (!SUPPORTED_DOCUMENT[documentId]) {
-      throw new Error("Document not supported");
+      throw new Error('Document not supported');
     }
 
     const { credentialSubject, owner, holder, remarks } = req.body as {
-      credentialSubject: CredentialSubjects;
-      owner: string;
-      holder: string;
-      remarks: string;
+      credentialSubject: CredentialSubjects,
+      owner: string,
+      holder: string,
+      remarks: string
     };
 
     if (!process.env.WALLET_PRIVATE_KEY) {
-      throw new Error("Wallet private key not found in environment variables");
+      throw new Error('Wallet private key not found in environment variables');
     }
 
     if (!process.env.DID_KEY_PAIRS) {
-      throw new Error("DID key pairs not found in environment variables");
+      throw new Error('DID key pairs not found in environment variables');
     }
 
     if (!process.env.TOKEN_REGISTRY_ADDRESS) {
-      throw new Error("Token registry address not found in environment variables");
+      throw new Error('Token registry address not found in environment variables');
     }
 
     // Get environment variables
     const SYSTEM_TOKEN_REGISTRY_ADDRESS = process.env.TOKEN_REGISTRY_ADDRESS;
-    const CHAINID: CHAIN_ID = (process.env.NET as CHAIN_ID) ?? CHAIN_ID.amoy;
+    const CHAINID: CHAIN_ID = process.env.NET as CHAIN_ID ?? CHAIN_ID.amoy;
     const CHAININFO = SUPPORTED_CHAINS[CHAINID];
     // Remove escaped characters before parsing
-    const cleanedJsonString = process.env.DID_KEY_PAIRS.replace(/\\(?=["])/g, "");
+    const cleanedJsonString = process.env.DID_KEY_PAIRS.replace(/\\(?=["])/g, '');
     const DID_KEY_PAIRS = JSON.parse(cleanedJsonString);
 
     // Prepare the document
@@ -488,26 +502,26 @@ app.post("/create/:documentId", async (req: Request, res: Response, next: NextFu
         SUPPORTED_DOCUMENT[documentId],
       ],
       type: ["VerifiableCredential"],
-      credentialStatus: {
-        type: "TransferableRecords",
-        tokenNetwork: {
-          chain: CHAININFO.currency,
-          chainId: CHAINID,
+      "credentialStatus": {
+        "type": "TransferableRecords",
+        "tokenNetwork": {
+          "chain": CHAININFO.currency,
+          "chainId": CHAINID
         },
-        tokenRegistry: SYSTEM_TOKEN_REGISTRY_ADDRESS,
+        "tokenRegistry": SYSTEM_TOKEN_REGISTRY_ADDRESS,
       },
-      renderMethod: [
+      "renderMethod": [
         {
-          id: "https://generic-templates.tradetrust.io",
-          type: "EMBEDDED_RENDERER",
-          templateName: documentId,
-        },
+          "id": "https://generic-templates.tradetrust.io",
+          "type": "EMBEDDED_RENDERER",
+          "templateName": documentId
+        }
       ],
       credentialSubject,
-      issuanceDate: issuanceDate.toISOString(),
-      expirationDate: expirationDate.toISOString(),
-      issuer: DID_KEY_PAIRS.id?.split("#")?.[0],
-    };
+      "issuanceDate": issuanceDate.toISOString(),
+      "expirationDate": expirationDate.toISOString(),
+      "issuer": DID_KEY_PAIRS.id?.split('#')?.[0],
+    }
 
     // Sign the document
     const { error, signed: signedW3CDocument } = await signW3C(document, DID_KEY_PAIRS);
@@ -519,29 +533,33 @@ app.post("/create/:documentId", async (req: Request, res: Response, next: NextFu
     const tokenId = getTokenId(signedW3CDocument!);
     const unconnectedWallet = new Wallet(process.env.WALLET_PRIVATE_KEY!);
     let provider;
-    if (ethers.version.startsWith("6.")) {
+    if (ethers.version.startsWith('6.')) {
       provider = new (ethers as any).JsonRpcProvider(CHAININFO.rpcUrl);
-    } else if (ethers.version.includes("/5.")) {
+    } else if (ethers.version.includes('/5.')) {
       provider = new (ethers as any).providers.JsonRpcProvider(CHAININFO.rpcUrl);
     }
     const wallet = unconnectedWallet.connect(provider);
-    const tokenRegistry = TradeTrustToken__factory.connect(SYSTEM_TOKEN_REGISTRY_ADDRESS, wallet);
+    const tokenRegistry = new ethers.Contract(
+      SYSTEM_TOKEN_REGISTRY_ADDRESS,
+      TradeTrustToken__factory.abi,
+      wallet
+    );
 
     // Encrypt remarks
-    const encryptedRemarks = (remarks && encrypt(remarks ?? "", signedW3CDocument?.id!)) || "0x";
+    const encryptedRemarks = remarks && encrypt(remarks ?? '', signedW3CDocument?.id!) || '0x'
 
     // mint the document
     try {
       const mintTx = await tokenRegistry.mint.staticCall(owner, holder, tokenId, encryptedRemarks);
     } catch (error) {
       console.error(error);
-      throw new Error("Failed to mint token");
+      throw new Error('Failed to mint token');
     }
-    let tx: ethers.ContractTransactionResponse;
+    let tx;
     // query gas station
     if (CHAININFO.gasStation) {
       const gasFees = await CHAININFO.gasStation();
-      console.log("gasFees", gasFees);
+      console.log('gasFees', gasFees);
 
       tx = await tokenRegistry.mint(owner, holder, tokenId, encryptedRemarks, {
         maxFeePerGas: gasFees!.maxFeePerGas?.toBigInt() ?? 0,
@@ -552,7 +570,8 @@ app.post("/create/:documentId", async (req: Request, res: Response, next: NextFu
     }
 
     // Long polling for the transaction to be mined, can be optimized to skip the wait for transaction to be confirmed in 1 block
-    const receipt = await tx.wait();
+    const receipt = await tx.wait()
+    console.log(`Document ${documentId} minted on tx hash ${receipt?.hash}`);
 
     return res.json({
       signedW3CDocument: signedW3CDocument,
