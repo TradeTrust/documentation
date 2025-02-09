@@ -88,7 +88,7 @@ Create the following files and folders:
 src/
 ├── App.tsx
 ├── main.tsx
-├── index.css
+└── index.css
 ```
 Add the following content to App.tsx:
 ```tsx

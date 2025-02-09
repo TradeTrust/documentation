@@ -92,10 +92,7 @@ src/
 ├── main.tsx
 ├── assetManagement.tsx
 ├── endorsementChain.tsx
-├── index.css
-├── abi/
-    ├── TitleEscrow.json
-
+└── index.css
 ```
 
 Add and update the .env file with infura api key
