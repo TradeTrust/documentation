@@ -260,7 +260,7 @@ import { ethers, Wallet } from "ethers";
 import { writeEnvVariable } from "./utils";
 
 const main = async () => {
-  const chainId: CHAIN_ID = (process.env.NET as CHAIN_ID) ?? CHAIN_ID.stabilitytestnet;
+  const chainId: CHAIN_ID = (process.env.NET as CHAIN_ID) ?? CHAIN_ID.amoy;
 
   const unconnectedWallet = new Wallet(process.env.WALLET_PRIVATE_KEY!);
   const provider = new ethers.JsonRpcProvider(SUPPORTED_CHAINS[chainId].rpcUrl);
@@ -468,7 +468,7 @@ app.post("/create/:documentId", async (req: Request, res: Response, next: NextFu
 
     // Get environment variables
     const SYSTEM_TOKEN_REGISTRY_ADDRESS = process.env.TOKEN_REGISTRY_ADDRESS;
-    const CHAINID: CHAIN_ID = (process.env.NET as CHAIN_ID) ?? CHAIN_ID.stabilitytestnet;
+    const CHAINID: CHAIN_ID = (process.env.NET as CHAIN_ID) ?? CHAIN_ID.amoy;
     const CHAININFO = SUPPORTED_CHAINS[CHAINID];
     // Remove escaped characters before parsing
     const cleanedJsonString = process.env.DID_KEY_PAIRS.replace(/\\(?=["])/g, "");
