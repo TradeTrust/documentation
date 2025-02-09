@@ -12,7 +12,7 @@ The [TradeTrust Verify](https://github.com/TradeTrust/tt-verify) repository is t
 
 This module does not provide the following functionality:
 
-- Programmatic [wrapping of TradeTrust documents](/docs/tutorial/verifiable-documents/wrapping-document/wrapping-document-cli)
+- Programmatic [wrapping of TradeTrust documents](/docs/4.x/tutorial/verifiable-documents/wrapping-document/wrapping-document-cli)
 - Encryption or decryption of TradeTrust documents (refer to [Open Attestation (Encryption)](https://www.openattestation.com/docs/developer-section/libraries/remote-files/open-attestation-encryption))
 - Programmatic issuance/revocation of document on the Ethereum blockchain
 
@@ -32,7 +32,7 @@ A verification happens on a wrapped document, and it consists of answering to so
 
 - Has the document been tampered with ?
 - Is the issuance state of the document valid ?
-- Is the document issuer identity valid ? (see [identity proof](/docs/topics/verifying-documents/issuer-identity))
+- Is the document issuer identity valid ? (see [identity proof](/docs/4.x/topics/verifying-documents/issuer-identity))
 
 An issued TradeTrust document (shown below) would be required.
 
@@ -174,7 +174,7 @@ console.log(isValid(fragments)); // output false
 
 - `isValid(fragments, ["DOCUMENT_INTEGRITY"])` returns true because the integrity of the document is not dependent on the network it has been published to.
 - `isValid(fragments, ["DOCUMENT_STATUS"])` returns false because the document has not been published on Ethereum main network.
-- `isValid(fragments, ["ISSUER_IDENTITY"])` returns false because there is no [DNS-TXT record](/docs/tutorial/verifiable-documents/advanced/document-store/configuring-dns) associated with the Ethereum main network's document store.
+- `isValid(fragments, ["ISSUER_IDENTITY"])` returns false because there is no [DNS-TXT record](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/configuring-dns) associated with the Ethereum main network's document store.
 - `isValid(fragments)` returns false because at least one of the above returns false.
 
 ### Listening to individual verification method
@@ -249,7 +249,7 @@ const customVerifier: Verifier<any> = {
 
 **Document holds correct `name` property**
 
-Once we have decided `when` the verification method run, it's time to write the logic of the verifier in the `verify` method. We will use [getData](/docs/reference/libraries/open-attestation#retrieving-document-data) utility to access the data of the document and return the appropriate fragment depending on the content:
+Once we have decided `when` the verification method run, it's time to write the logic of the verifier in the `verify` method. We will use [getData](/docs/4.x/reference/libraries/open-attestation#retrieving-document-data) utility to access the data of the document and return the appropriate fragment depending on the content:
 
 ```ts
 // index.ts
