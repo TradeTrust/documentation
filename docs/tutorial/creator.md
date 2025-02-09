@@ -122,12 +122,12 @@ Update package.json with the following scripts:
 
 ### 7. Setup script for single executed commands
 
-In order to sign and mint a token, we need to need the signing key pair (did:web) and a token registry contract (smart contract) respectively.
+In order to sign and mint a token, we need the signing key pair (did:web) and a token registry contract (smart contract).
 In this example, we will generate a new signing key pair and deploy a deploy a new token registry contract, and store the signing private key and contract address in the .env file.
 The signing key public key will stored as a did.json file which will then be served as a publicly accessable did:web document.
 
 :::note
-For a multi tenanted environment, you can convert these scripts to a executable functinon and store the result in your database, in a secure manner.
+For a multi tenanted environment, you can convert these scripts to a executable function and store the result in your database, in a secure manner.
 :::
 
 #### 7.1 Create a .env file
@@ -136,7 +136,7 @@ For a multi tenanted environment, you can convert these scripts to a executable 
 # Required values
 DOMAIN=
 WALLET_PRIVATE_KEY=
-NET=20180427
+NET=80002
 
 # Optional
 NGROK_AUTHTOKEN=
@@ -151,23 +151,23 @@ DID_KEY_PAIRS=
 TOKEN_REGISTRY_ADDRESS=
 ```
 
-Sepcify the following values:
+Specify the following values:
 
 - `DOMAIN` variable, the domain name where you want to host your did:web
 - `WALLET_PRIVATE_KEY` variable, with the private key of the wallet you want to use to deploy the token registry contract.
 - `NET` variable, with the network you want to use to deploy the token registry contract.
 
-Depend on your selected network, you will need to setup the RPC URL for your selected network. Retrieve the API KEY and add it to the.env file.
+Depending on your selected network, you will need to set up the RPC URL. Retrieve the API KEY and add it to the .env file.
 
 :::tip
 If you would like to test and validate the issued document on the web, you can use ngrok to expose your local server to the internet.
 
-Generate the authtoken and add it to the.env file under the `NGROK_AUTHTOKEN` variable.
+Generate the authtoken and add it to the .env file under the `NGROK_AUTHTOKEN` variable.
 
 For more details refer to the ngrok configuration [below](/docs/tutorial/creator#81-serve-the-did-with-ngrok).
 :::
 
-#### 7.2 Create a script to generate a new did:web and store it in the.env file
+#### 7.2 Create a script to generate a new did:web and store it in the .env file
 
 <details>
 <summary>Create a src/scripts/util.ts file and add the following code:</summary>
@@ -354,10 +354,10 @@ This step is optional, and is only required if you would like to test and valida
 It shall only be used for testing purposes.
 :::
 
-You can use ngrok or any other service to expose your local server to the internet. In this example, we will use ngrok.
+You can use ngrok or any other service to expose your local server to the internet. In this example, we will use ngrok:
 
-- Create an account on [ngrok.com](https://ngrok.com/), retrieve your authtoken and add it to the.env file under the NGROK_AUTHTOKEN variable.
-- Create a static domain on ngrok.com and add it to the.env file under the DOMAIN variable. For more information refer to the [ngrok documentation](https://ngrok.com/blog-post/free-static-domains-ngrok-users).
+- Create an account on [ngrok.com](https://ngrok.com/), retrieve your authtoken and add it to the .env file under the NGROK_AUTHTOKEN variable.
+- Create a static domain on ngrok.com and add it to the .env file under the DOMAIN variable. For more information refer to the [ngrok documentation](https://ngrok.com/blog-post/free-static-domains-ngrok-users).
 
 <details>
 
@@ -380,7 +380,7 @@ app.listen(port, () => {
 
 </details>
 
-\*If you have already generated the did:web previously, remember to regenerate it, by running the command again
+\*If you have already generated the did:web previously, remember to regenerate it by running the command again:
 
 ```bash
 npm run script:generateDidWeb
@@ -601,7 +601,7 @@ You can reference the code in this [creator-tutorial](/) repository.
 ## Optional: Post validation using tradetrust.io
 
 :::note
-You might face issue with ngrok on browswers. A workaround can be found [here](https://stackoverflow.com/questions/73017353/how-to-bypass-ngrok-browser-warning#answer-78128230).
+You might face issues with ngrok on browsers. A workaround can be found [here](https://stackoverflow.com/questions/73017353/how-to-bypass-ngrok-browser-warning#answer-78128230).
 :::
 
 - Copy the output value from step 9.1 and save it as a .tt file, e.g. `sample.tt`
