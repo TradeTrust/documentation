@@ -8,7 +8,7 @@ import Flow from "../flow.mdx";
 
 <Flow />
 
-> For the current step, you can either opt to use the [CLI](/docs/tutorial/transferable-records/issuing-document/issuing-document-cli) or [Code](/docs/tutorial/transferable-records/issuing-document/issuing-document-code).
+> For the current step, you can either opt to use the [CLI](/docs/4.x/tutorial/transferable-records/issuing-document/issuing-document-cli) or [Code](/docs/4.x/tutorial/transferable-records/issuing-document/issuing-document-code).
 
 In this final step, we will mint the transferable record and initialize the first owner and holder for the title escrow.
 
@@ -22,7 +22,7 @@ npm install --save @tradetrust-tt/tradetrust-core
 
 To use the package, you will need to provide your own Web3 [provider](https://docs.ethers.io/v5/api/providers/api-providers/) or [signer](https://docs.ethers.io/v5/api/signer/#Wallet).
 
-Refer to the [pre-requisite](/docs/tutorial/transferable-records/token-registry/token-registry-code) on token registry deployment.
+Refer to the [pre-requisite](/docs/4.x/tutorial/transferable-records/token-registry/token-registry-code) on token registry deployment.
 
 ### Connect to existing token registry
 
@@ -318,4 +318,4 @@ console.log(`Holder: ${await connectedEscrow.holder()}`); // Holder: "0x6FFeD6E6
 
 #### Additional information: Title Transfer actions
 
-[Title Transfer actions](/docs/topics/introduction/transferable-records/title-transfer)
+[Title Transfer actions](/docs/4.x/topics/introduction/transferable-records/title-transfer)

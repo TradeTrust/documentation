@@ -30,7 +30,7 @@ Please take note of the document types that supports this method of identifying 
 | Transferable Records | &check;         |
 
 Not sure which type of document to use?
-Have a better understanding about our different document types: [verifiable documents](/docs/topics/introduction/verifiable-documents/overview) and [Transferable Records](/docs/topics/introduction/transferable-records/overview).
+Have a better understanding about our different document types: [verifiable documents](/docs/4.x/topics/introduction/verifiable-documents/overview) and [Transferable Records](/docs/4.x/topics/introduction/transferable-records/overview).
 
 :::
 
@@ -47,8 +47,8 @@ Also, please make sure you have completed the prerequisites listed below.
 
 #### Deployment of smart contracts
 
-- How to deploy [Document Store](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli).
-- How to deploy [Token Registry](/docs/tutorial/transferable-records/token-registry/token-registry-cli).
+- How to deploy [Document Store](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli).
+- How to deploy [Token Registry](/docs/4.x/tutorial/transferable-records/token-registry/token-registry-cli).
 
 ### How to create DNS-TXT Record
 

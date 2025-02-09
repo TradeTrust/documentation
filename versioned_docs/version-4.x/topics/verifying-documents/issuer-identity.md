@@ -4,7 +4,7 @@ title: Issuer's Identity
 sidebar_label: Issuer's Identity
 ---
 
-TradeTrust uses 2 methods to verify the issuer's ideneity, the [DNS-TXT](/docs/topics/introduction/issuer-method-dns-txt) method and the [DNS-DID](/docs/topics/introduction/issuer-method-dns-did) method. Both methods uses the Domain Name System (DNS). A one-liner introduction to the DNS system can be summarised as: "Phonebook for the Internet". It's primary purpose is to resolve human readable names such as "google.com", or "tradetrust.com", etc. to a set of records. The most common records are 'A records', which resolve to IP addresses - this allows network routing to operate over the Internet.
+TradeTrust uses 2 methods to verify the issuer's ideneity, the [DNS-TXT](/docs/4.x/topics/introduction/issuer-method-dns-txt) method and the [DNS-DID](/docs/4.x/topics/introduction/issuer-method-dns-did) method. Both methods uses the Domain Name System (DNS). A one-liner introduction to the DNS system can be summarised as: "Phonebook for the Internet". It's primary purpose is to resolve human readable names such as "google.com", or "tradetrust.com", etc. to a set of records. The most common records are 'A records', which resolve to IP addresses - this allows network routing to operate over the Internet.
 
 For TradeTrust, we are using the TXT type of record, which simply allows us to store textual data. The textual data we store indicates the Token Registry / Document Store that the domain administrator trusts.
 

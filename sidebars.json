@@ -14,7 +14,9 @@
               {
                 "label": "Identifying the Issuer",
                 "type": "category",
-                "items": ["key-components-of-tradetrust/w3c-vc/identify-the-issuer/issuer-method-did-web"]
+                "items": [
+                  "key-components-of-tradetrust/w3c-vc/identify-the-issuer/issuer-method-did-web"
+                ]
               },
               {
                 "type": "category",
@@ -90,6 +92,10 @@
     "Tutorial": [
       "tutorial/creator",
       "tutorial/verifier"
+    ],
+    "How Tos": [
+      "how-tos/contexts",
+      "how-tos/bitstring"
     ]
   }
 }
