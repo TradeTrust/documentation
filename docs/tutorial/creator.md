@@ -74,7 +74,7 @@ Update tsconfig.json with the following configurations:
 }
 ```
 
-### 5. Create a empty express app
+### 5. Create an empty Express app
 
 Create a src directory and an index.ts file in it, and add the following code:
 
@@ -120,14 +120,14 @@ Update package.json with the following scripts:
   }
 ```
 
-### 7. Setup script for single executed commands
+### 7. Setup script for single-execution commands
 
 In order to sign and mint a token, we need the signing key pair (did:web) and a token registry contract (smart contract).
-In this example, we will generate a new signing key pair and deploy a deploy a new token registry contract, and store the signing private key and contract address in the .env file.
-The signing key public key will stored as a did.json file which will then be served as a publicly accessable did:web document.
+In this example, we will generate a new signing key pair and deploy a new token registry contract, and store the signing private key and contract address in the .env file.
+The signing key's public key will be stored as a did.json file which will then be served as a publicly accessible did:web document.
 
 :::note
-For a multi tenanted environment, you can convert these scripts to a executable function and store the result in your database, in a secure manner.
+For a multi-tenanted environment, you can convert these scripts to executable functions and store the results in your database in a secure manner.
 :::
 
 #### 7.1 Create a .env file
@@ -433,8 +433,8 @@ const SUPPORTED_DOCUMENT: {
   [key: string]: string;
 } = {
   BILL_OF_LADING: "https://schemata.openattestation.com/io/tradetrust/bill-of-lading/1.0/bill-of-lading-context.json",
-  // "INOVICE": "https://schemata.openattestation.com/io/tradetrust/invoice/1.0/invoice-context.json",
-  // "CERTIFIATE_OF_ORIGIN": "https://schemata.openattestation.com/io/tradetrust/certificate-of-origin/1.0/certificate-of-origin-context.json"
+  // "INVOICE": "https://schemata.openattestation.com/io/tradetrust/invoice/1.0/invoice-context.json",
+  // "CERTIFICATE_OF_ORIGIN": "https://schemata.openattestation.com/io/tradetrust/certificate-of-origin/1.0/certificate-of-origin-context.json"
 };
 
 app.post("/create/:documentId", async (req: Request, res: Response, next: NextFunction) => {
