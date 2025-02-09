@@ -21,7 +21,7 @@ As of today, we have 2 different types of issuer methods, thus, we have 2 forms 
 
 These 2 forms of Verifiable Documents rely on a common trust anchor, which is the use of DNS records. Since DNS records are often considered an authoritative source for a domain name, the DNS entry represents the entity.
 
-For further explanation, refer to their respective sections [DNS-TXT](/docs/topics/introduction/issuer-method-dns-txt) AND [DNS-DID](/docs/topics/introduction/issuer-method-dns-did)
+For further explanation, refer to their respective sections [DNS-TXT](/docs/4.x/topics/introduction/issuer-method-dns-txt) AND [DNS-DID](/docs/4.x/topics/introduction/issuer-method-dns-did)
 
 ### Differences
 
@@ -38,4 +38,4 @@ For further explanation, refer to their respective sections [DNS-TXT](/docs/topi
 
 ### See Also
 
-[Document Store](/docs/topics/introduction/verifiable-documents/document-store)
+[Document Store](/docs/4.x/topics/introduction/verifiable-documents/document-store)

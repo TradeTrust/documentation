@@ -6,7 +6,7 @@ sidebar_label: Overview
 
 TradeTrust V4 introduces a new issuer's identity method, Identity Verifiable Credential (IDVC), enhancing the way documents are authenticated and verified. This method allows for embedding or splicing an Identity Verifiable Credential from an established identity provider directly into a TradeTrust document. This documentation provides an overview of this new issuer's identity method and how it integrates with the TradeTrust V4 schema.
 
-For more information about existing issuer's identity methods like [DNS-TXT](/docs/topics/introduction/issuer-method-dns-txt) or [DID/DNS-DID](/docs/topics/introduction/issuer-method-dns-did), please visit their respective pages.
+For more information about existing issuer's identity methods like [DNS-TXT](/docs/4.x/topics/introduction/issuer-method-dns-txt) or [DID/DNS-DID](/docs/4.x/topics/introduction/issuer-method-dns-did), please visit their respective pages.
 
 ### TradeTrust V4 Document (with IDVC method)
 

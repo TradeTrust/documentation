@@ -135,7 +135,7 @@ In the next section, you will learn more about the TradeTrust document schema an
 
 #### `issuers`
 
-See [Creating Raw Document](/docs/tutorial/verifiable-documents/raw-document).
+See [Creating Raw Document](/docs/4.x/tutorial/verifiable-documents/raw-document).
 
 ### Developing the COC Template View
 
@@ -287,4 +287,4 @@ If you are using Netlify, we recommend you to check out [how to enable custom do
 
 ## Decentralized Renderer Core Components
 
-Decentralized renderer core components, located in the `src/core directory`, are reusable React components that offer enhanced functionalities for your decentralized renderer template. We recommend you to check out [using decentralized renderer core components](/docs/topics/appendix/core-components.md)
+Decentralized renderer core components, located in the `src/core directory`, are reusable React components that offer enhanced functionalities for your decentralized renderer template. We recommend you to check out [using decentralized renderer core components](/docs/4.x/topics/appendix/core-components)
