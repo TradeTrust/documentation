@@ -615,7 +615,7 @@ output:
 ## Conclusion
 
 In this tutorial, we have learned how to create a did:web and a token registry contract. We have also learned how to create a transferable document using the token registry contract.
-You can reference the code in this [creator-tutorial](/) repository.
+You can reference the code in this [creator-tutorial](https://github.com/TradeTrust/creator-tutorial) repository.
 
 ## Optional: Post validation using tradetrust.io
 
