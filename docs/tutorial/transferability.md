@@ -763,4 +763,4 @@ The transferability app is now ready.
 
 The source code for this project is also available on GitHub at [TradeTrust/transferability-tutorial](https://github.com/TradeTrust/transferability-tutorial). You can explore the code, contribute, or make any modifications.
 
-To test the process, you can use the demo file available at [this link](https://github.com/TradeTrust/verifier-tutorial/blob/main/demo/amoy.tt). You are free to modify this file or upload your own document to see how the transferability process works.
+To test the process, you can use the demo file available at [this link](https://github.com/TradeTrust/transferability-tutorial/blob/main/demo/amoy.tt). You are free to modify this file or upload your own document to see how the transferability process works.
