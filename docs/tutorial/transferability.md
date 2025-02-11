@@ -4,17 +4,16 @@ title: Transferability
 sidebar_label: Transferability
 ---
 
-This guide will walk you through setting up a simple React project using TypeScript and Vite, and integrate the TrustVC library to see the endorsement chain and make available transactions to transfer, reject or return the document. This tutorial focuses on transferable credentials.
-You can continue building from the existing Verifier setup by adding another page or integrating it within the same page. Install ethers@5 and [Skip to 6th step](#6-add-a-basic-project-structure) for the same. Alternatively, you can start fresh and set up a new React project from scratch.
+This guide walks you through setting up a simple React project using TypeScript and Vite, and integrating the TrustVC library to visualize the endorsement chain and enable transactions to transfer, reject, or return a document. This tutorial focuses on transferable credentials.
+
+You can continue building from the existing Verifier setup by adding another page or integrating it within the same page. Install `ethers` and [skip to step 6](#6-add-a-basic-project-structure). Alternatively, you can start fresh with a new React project.
 
 ## Prerequisites
 
 Before starting, ensure you have the following installed:
 
 - Node.js (version 18 or higher)
-
 - npm or yarn
-
 - A code editor, e.g., Visual Studio Code
 
 ## Setting Up the React Project
@@ -32,12 +31,12 @@ cd transferability-project
 npm init -y
 ```
 
-This creates a package.json file in your project directory.
+This creates a `package.json` file in your project directory.
 
 ### 3. Install required dependencies
 
 ```bash
-npm install react react-dom vite-plugin-node-polyfills @trustvc/trustvc ethers@5
+npm install react react-dom vite-plugin-node-polyfills @trustvc/trustvc ethers
 npm install --save-dev typescript @vitejs/plugin-react @types/react @types/react-dom
 ```
 
@@ -49,7 +48,7 @@ Initialize TypeScript with the following command:
 npx tsc --init
 ```
 
-Update the tsconfig.json file as needed. For a basic setup, ensure the following options are included:
+Update the `tsconfig.json` file as needed. For a basic setup, ensure the following options are included:
 
 ```json
 {
@@ -58,7 +57,7 @@ Update the tsconfig.json file as needed. For a basic setup, ensure the following
     "module": "ESNext",
     "jsx": "react",
     "strict": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true
@@ -70,7 +69,7 @@ Update the tsconfig.json file as needed. For a basic setup, ensure the following
 
 ### 5. Set up Vite (build tool):
 
-Create a vite.config.ts file in the root directory and add the following content:
+Create a `vite.config.ts` file in the root directory and add the following content:
 
 ```ts
 import { defineConfig } from "vite";
@@ -87,34 +86,33 @@ export default defineConfig({
 Create the following files and folders:
 
 ```bash
-src/
-├── App.tsx
-├── main.tsx
-├── assetManagement.tsx
-├── endorsementChain.tsx
-└── index.css
+├── src
+│   ├── app.tsx
+│   ├── assetManagement.tsx
+│   ├── endorsementChain.tsx
+│   └── main.tsx
+└── index.html
 ```
 
-Add and update the .env file with infura api key
+Add and update the `.env` file with your Infura API key:
 
 ```
 VITE_INFURA_ID=YOUR_INFURA_ID
 ```
 
-You can update the chain you want to test by updating the RPC url in app.js.
+You can update the chain you want to test by updating the RPC URL in `app.tsx`.
 
-Add the following content to App.tsx:
+Add the following content to `app.tsx`:
 
 ```tsx
-import React, { useState } from "react";
-import { getTitleEscrowAddress, fetchEndorsementChain, encrypt } from "@trustvc/trustvc";
+import { encrypt, fetchEndorsementChain, getTitleEscrowAddress, v5Contracts } from "@trustvc/trustvc";
 import { ethers, Signer } from "ethers";
-import EndorsementChain from "./endorsementChain";
+import React, { useState } from "react";
 import AssetManagement from "./assetManagement";
-import TitleEscrowAbi from "./abi/TitleEscrow.json";
+import EndorsementChain from "./endorsementChain";
 
 const App: React.FC = () => {
-  const rpc = `https://polygon-amoy.infura.io/v3/${import.meta.env.VITE_INFURA_ID}`; //update the rpc to test on different available chain
+  const rpc = `https://polygon-amoy.infura.io/v3/${import.meta.env.VITE_INFURA_ID}`;
   const [hasAttemptedUpload, setHasAttemptedUpload] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -137,9 +135,14 @@ const App: React.FC = () => {
     if (ethereum) {
       try {
         const injectedWeb3 = ethereum || (web3 && web3.currentProvider);
-        const newProvider = new ethers.providers.Web3Provider(injectedWeb3, "any");
+        let newProvider;
+        if (ethers.version.startsWith("6.")) {
+          newProvider = new (ethers as any).BrowserProvider(injectedWeb3, "any");
+        } else {
+          newProvider = new (ethers as any).providers.Web3Provider(injectedWeb3, "any");
+        }
         await ethereum.request({ method: "eth_requestAccounts" });
-        const _signer = newProvider.getSigner();
+        const _signer = await newProvider.getSigner();
         setSigner(_signer);
         const address = await _signer.getAddress();
         setAccount(address);
@@ -165,14 +168,18 @@ const App: React.FC = () => {
     try {
       const fileContent = await file.text();
       const vc = JSON.parse(fileContent);
-      const _provider = new ethers.providers.JsonRpcProvider(rpc);
+      const JsonRpcProvider = ethers.version.startsWith("6.")
+        ? (ethers as any).JsonRpcProvider
+        : (ethers as any).providers.JsonRpcProvider;
+      const _provider = new JsonRpcProvider(rpc);
       if (!_provider) return;
       const titleEscrowAddress = await getTitleEscrowAddress(
         vc.credentialStatus.tokenRegistry,
         "0x" + vc.credentialStatus.tokenId,
         _provider,
       );
-      const contract = new ethers.Contract(titleEscrowAddress, TitleEscrowAbi, _provider);
+      const contract = new ethers.Contract(titleEscrowAddress, v5Contracts.TitleEscrow__factory.abi, _provider);
+
       setHolder(await contract.holder());
       setBeneficiary(await contract.beneficiary());
       setPrevHolder(await contract.prevHolder());
@@ -186,7 +193,7 @@ const App: React.FC = () => {
         vc.credentialStatus.tokenRegistry,
         "0x" + vc.credentialStatus.tokenId,
         _provider as any,
-        vc.id,
+        vc?.id,
       );
       console.log("Endorsement Chain", _endorsementChain);
       setEndorsementChain(_endorsementChain as any);
@@ -204,32 +211,33 @@ const App: React.FC = () => {
     }
 
     // Connect to the contract
-    const contract = new ethers.Contract(titleEscrowAddress, TitleEscrowAbi, signer);
+    const contract = new ethers.Contract(titleEscrowAddress, v5Contracts.TitleEscrow__factory.abi, signer);
 
     const encryptedRemark = "0x" + encrypt(remarks, encryptionId);
     console.log("encrypted remark", encryptedRemark);
 
+    const isAddress = ethers.version.startsWith("6.") ? (ethers as any).isAddress : (ethers as any).utils.isAddress;
     let params: string[] = [];
     if (action === "transferHolder") {
-      if (!ethers.utils.isAddress(newHolder)) {
+      if (!isAddress(newHolder)) {
         console.error("Invalid Ethereum address:", newHolder);
         return;
       }
       params = [newHolder, encryptedRemark];
     } else if (action === "transferBeneficiary") {
-      if (!ethers.utils.isAddress(newBeneficiary)) {
+      if (!isAddress(newBeneficiary)) {
         console.error("Invalid Ethereum address:", newBeneficiary);
         return;
       }
       params = [newBeneficiary, encryptedRemark];
     } else if (action === "nominate") {
-      if (!ethers.utils.isAddress(newBeneficiary)) {
+      if (!isAddress(newBeneficiary)) {
         console.error("Invalid Ethereum address:", newBeneficiary);
         return;
       }
       params = [newBeneficiary, encryptedRemark];
     } else if (action === "transferOwners") {
-      if (!ethers.utils.isAddress(newBeneficiary) || !ethers.utils.isAddress(newHolder)) {
+      if (!isAddress(newBeneficiary) || !isAddress(newHolder)) {
         console.error("Invalid Ethereum address:", newBeneficiary, newHolder);
         return;
       }
@@ -352,13 +360,12 @@ const App: React.FC = () => {
 export default App;
 ```
 
-Add the following content to main.tsx:
+Add the following content to `main.tsx`:
 
 ```tsx
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -367,7 +374,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 );
 ```
 
-Add the following content to assentManagement.tsx:
+Add the following content to `assentManagement.tsx`:
 
 ```tsx
 import React, { Dispatch, Key, SetStateAction, useState } from "react";
@@ -544,7 +551,7 @@ const AssetManagement: React.FC<AssetManagementProps> = ({
 export default AssetManagement;
 ```
 
-Add the following content to endorsementChain.tsx:
+Add the following content to `endorsementChain.tsx`:
 
 ```tsx
 import React from "react";
@@ -555,15 +562,19 @@ interface EndorsementChainProps {
 const EndorsementChain: React.FC<EndorsementChainProps> = ({ endorsementChain }) => {
   const actionMessage = {
     INITIAL: "Document has been issued",
-    TRANSFER_HOLDER: "Transfer holdership",
-    REJECT_TRANSFER_HOLDER: "Rejection of holdership",
     NOMINATE: "Nomination of new beneficiary",
     REJECT_TRANSFER_BENEFICIARY: "Rejection of beneficiary",
+    REJECT_TRANSFER_HOLDER: "Rejection of holdership",
     REJECT_TRANSFER_OWNERS: "Rejection of owners",
-    RETURNED_TO_ISSUER: "Returned to issuer",
     RETURN_TO_ISSUER_ACCEPTED: "Return to issuer accepted",
-    TRANSFER_BENEFICIARY: "Transfer beneficiary",
     RETURN_TO_ISSUER_REJECTED: "Return to issuer rejected",
+    RETURNED_TO_ISSUER: "Returned to issuer",
+    SURRENDER_ACCEPTED: "Return to issuer accepted",
+    SURRENDER_REJECTED: "Return to issuer rejected",
+    SURRENDERED: "Returned to issuer",
+    TRANSFER_BENEFICIARY: "Transfer beneficiary",
+    TRANSFER_HOLDER: "Transfer holdership",
+    TRANSFER_OWNERS: "Trnasfer beneficiary and holdership",
   };
   const formatDate = (timestamp: number) => {
     const date = new Date(timestamp);
@@ -628,575 +639,7 @@ const EndorsementChain: React.FC<EndorsementChainProps> = ({ endorsementChain })
 export default EndorsementChain;
 ```
 
-Click to expand JSON and copy the abi to your abi/TitleEscrow.json
-
-<details>
-  <summary>Title Escrow Contract ABI </summary>
-
-```json
-[
-  { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" },
-  { "inputs": [], "name": "CallerNotBeneficiary", "type": "error" },
-  { "inputs": [], "name": "CallerNotHolder", "type": "error" },
-  { "inputs": [], "name": "DualRoleRejectionRequired", "type": "error" },
-  { "inputs": [], "name": "EmptyReceivingData", "type": "error" },
-  { "inputs": [], "name": "InactiveTitleEscrow", "type": "error" },
-  { "inputs": [], "name": "InvalidInitialization", "type": "error" },
-  { "inputs": [], "name": "InvalidNominee", "type": "error" },
-  {
-    "inputs": [{ "internalType": "address", "name": "registry", "type": "address" }],
-    "name": "InvalidRegistry",
-    "type": "error"
-  },
-  {
-    "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }],
-    "name": "InvalidTokenId",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "beneficiary", "type": "address" },
-      { "internalType": "address", "name": "holder", "type": "address" }
-    ],
-    "name": "InvalidTokenTransferToZeroAddressOwners",
-    "type": "error"
-  },
-  { "inputs": [], "name": "InvalidTransferToZeroAddress", "type": "error" },
-  { "inputs": [], "name": "NomineeAlreadyNominated", "type": "error" },
-  { "inputs": [], "name": "NotInitializing", "type": "error" },
-  { "inputs": [], "name": "RecipientAlreadyHolder", "type": "error" },
-  { "inputs": [], "name": "RegistryContractPaused", "type": "error" },
-  { "inputs": [], "name": "RemarkLengthExceeded", "type": "error" },
-  { "inputs": [], "name": "TargetNomineeAlreadyBeneficiary", "type": "error" },
-  { "inputs": [], "name": "TitleEscrowNotHoldingToken", "type": "error" },
-  { "inputs": [], "name": "TokenNotReturnedToIssuer", "type": "error" },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "fromBeneficiary",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "toBeneficiary",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "registry",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes",
-        "name": "remark",
-        "type": "bytes"
-      }
-    ],
-    "name": "BeneficiaryTransfer",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "fromHolder",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "toHolder",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "registry",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes",
-        "name": "remark",
-        "type": "bytes"
-      }
-    ],
-    "name": "HolderTransfer",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint64",
-        "name": "version",
-        "type": "uint64"
-      }
-    ],
-    "name": "Initialized",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "prevNominee",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "nominee",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "registry",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes",
-        "name": "remark",
-        "type": "bytes"
-      }
-    ],
-    "name": "Nomination",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "fromBeneficiary",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "toBeneficiary",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "registry",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes",
-        "name": "remark",
-        "type": "bytes"
-      }
-    ],
-    "name": "RejectTransferBeneficiary",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "fromHolder",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "toHolder",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "registry",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes",
-        "name": "remark",
-        "type": "bytes"
-      }
-    ],
-    "name": "RejectTransferHolder",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "fromBeneficiary",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "toBeneficiary",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "fromHolder",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "toHolder",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "registry",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes",
-        "name": "remark",
-        "type": "bytes"
-      }
-    ],
-    "name": "RejectTransferOwners",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "caller",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "registry",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes",
-        "name": "remark",
-        "type": "bytes"
-      }
-    ],
-    "name": "ReturnToIssuer",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "registry",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes",
-        "name": "remark",
-        "type": "bytes"
-      }
-    ],
-    "name": "Shred",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "beneficiary",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "holder",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "bool",
-        "name": "isMinting",
-        "type": "bool"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "registry",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes",
-        "name": "remark",
-        "type": "bytes"
-      }
-    ],
-    "name": "TokenReceived",
-    "type": "event"
-  },
-  {
-    "inputs": [],
-    "name": "active",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "beneficiary",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "holder",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_registry", "type": "address" },
-      { "internalType": "uint256", "name": "_tokenId", "type": "uint256" }
-    ],
-    "name": "initialize",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "isHoldingToken",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_nominee", "type": "address" },
-      { "internalType": "bytes", "name": "_remark", "type": "bytes" }
-    ],
-    "name": "nominate",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "nominee",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "", "type": "address" },
-      { "internalType": "address", "name": "", "type": "address" },
-      { "internalType": "uint256", "name": "_tokenId", "type": "uint256" },
-      { "internalType": "bytes", "name": "data", "type": "bytes" }
-    ],
-    "name": "onERC721Received",
-    "outputs": [{ "internalType": "bytes4", "name": "", "type": "bytes4" }],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "prevBeneficiary",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "prevHolder",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "registry",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "bytes", "name": "_remark", "type": "bytes" }],
-    "name": "rejectTransferBeneficiary",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "bytes", "name": "_remark", "type": "bytes" }],
-    "name": "rejectTransferHolder",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "bytes", "name": "_remark", "type": "bytes" }],
-    "name": "rejectTransferOwners",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "remark",
-    "outputs": [{ "internalType": "bytes", "name": "", "type": "bytes" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "bytes", "name": "_remark", "type": "bytes" }],
-    "name": "returnToIssuer",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "bytes", "name": "_remark", "type": "bytes" }],
-    "name": "shred",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "bytes4", "name": "interfaceId", "type": "bytes4" }],
-    "name": "supportsInterface",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "tokenId",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_nominee", "type": "address" },
-      { "internalType": "bytes", "name": "_remark", "type": "bytes" }
-    ],
-    "name": "transferBeneficiary",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "newHolder", "type": "address" },
-      { "internalType": "bytes", "name": "_remark", "type": "bytes" }
-    ],
-    "name": "transferHolder",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_nominee", "type": "address" },
-      { "internalType": "address", "name": "newHolder", "type": "address" },
-      { "internalType": "bytes", "name": "_remark", "type": "bytes" }
-    ],
-    "name": "transferOwners",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  }
-]
-```
-
-</details>
-
-Create an index.html in the root directory:
+Create an `index.html` in the root directory:
 
 ```html
 <!doctype html>
@@ -1213,7 +656,7 @@ Create an index.html in the root directory:
 
 ### 7. Run the development server
 
-Open your package.json file and add "dev": "vite" under the scripts section, like this:
+Open your `package.json` file and add `"dev": "vite"` under the scripts section, like this:
 
 ```json
 "scripts": {
@@ -1228,7 +671,7 @@ Then run the following command to see the app running in the browser.
 npm run dev
 ```
 
-The tranferabiity app is now ready.
+The transferability app is now ready.
 
 <figure style={{ maxWidth: "800px", margin: "0 auto" }}>
 <img src='/docs/tutorial/transferability/initial.png' />
@@ -1236,32 +679,35 @@ The tranferabiity app is now ready.
 
 ## Steps to Perform Endorsement Chain Actions
 
-#### 1. Connect to MetaMask
+### 1. Connect to MetaMask
 
-    -  Click on the "Connect MetaMask" button.
-    - Select your preferred wallet and authorize the connection.
+- Click on the "Connect MetaMask" button.
+- Select your preferred wallet and authorize the connection.
 
 <figure style={{ maxWidth: "800px", margin: "0 auto" }}>
 <img src='/docs/tutorial/transferability/connect-metamask.png' />
 </figure>
 
-#### 2. Load the Endorsement Chain
+### 2. Load the Endorsement Chain
 
 - Drag and drop your file into the designated area.
 - The endorsement chain will be processed and displayed.
+
 <figure style={{ maxWidth: "800px", margin: "0 auto" }}>
 <img src='/docs/tutorial/transferability/drop-document.png' />
 </figure>
 
-#### 3. View the Endorsement Chains
+### 3. View the Endorsement Chains
 
-- Once the file is loaded, the asset managemt box and the endorsement chain details will be shown.
+- Once the file is loaded, the asset management box and the endorsement chain details will be shown.
+
 <figure style={{ maxWidth: "800px", margin: "0 auto" }}>
 <img src='/docs/tutorial/transferability/load-endorsement-chain.png' />
 </figure>
-- You will see address in the asset management box , Nominee , Previous Holder and Previous Beneficiary are currently zero address . These will have relevant addresses when there is a nomination or transfer.
 
-#### 4. Transfer Holder
+- You will see addresses in the asset management box. Nominee, Previous Holder, and Previous Beneficiary are currently zero addresses. These will have relevant addresses when there is a nomination or transfer.
+
+### 4. Transfer Holder
 
 - Enter the new holder's address and remarks in the provided fields.
 - Click on "Transfer Holder" to initiate the transfer.
@@ -1270,28 +716,31 @@ The tranferabiity app is now ready.
 <img src='/docs/tutorial/transferability/transfer-holder.png' />
 </figure>
 
-#### 5. View Updated Endorsement Chain
+### 5. View Updated Endorsement Chain
 
 - After the transfer, check the updated endorsement chain to verify the changes.
+
  <figure style={{ maxWidth: "800px", margin: "0 auto" }}>
 <img src='/docs/tutorial/transferability/after-holder-transfer.png' />
 </figure>
 
-#### 6. View Available Actions for the Connected Holder in MetaMask
+### 6. View Available Actions for the Connected Holder in MetaMask
 
 - The new holder's available actions will be displayed.
+
 <figure style={{ maxWidth: "400px", margin: "0 auto" }}>
 <img src='/docs/tutorial/transferability/available-actions-holder.png' />
 </figure>
 
-#### 7. View Available Actions for the Connected Beneficiary in MetaMask
+### 7. View Available Actions for the Connected Beneficiary in MetaMask
 
 - The beneficiary’s available actions will also be shown.
-<figure style={{ maxWidth: "400px", margin: "0 auto" }}>
-   <img src='/docs/tutorial/transferability/available-actions-beneficiary.png' />
-   </figure>
 
-#### 8. Reject Transfer Holder as the New Holder
+<figure style={{ maxWidth: "400px", margin: "0 auto" }}>
+<img src='/docs/tutorial/transferability/available-actions-beneficiary.png' />
+</figure>
+
+### 8. Reject Transfer Holder as the New Holder
 
 - Disconnect from the current wallet.
 - Connect as the new holder via MetaMask.
@@ -1301,7 +750,7 @@ The tranferabiity app is now ready.
 <img src='/docs/tutorial/transferability/reject-transfer.png' />
 </figure>
 
-#### 9. View Updated Endorsement Chain
+### 9. View Updated Endorsement Chain
 
 - The endorsement chain will now reflect the rejected transfer.
 - After rejection, holdership reverts to the Previous Holder
