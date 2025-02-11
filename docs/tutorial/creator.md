@@ -76,7 +76,7 @@ Update tsconfig.json with the following configurations:
 
 ### 5. Create an empty Express app
 
-Create a src directory and an index.ts file in it, and add the following code:
+Create a src directory and an `index.ts` file in it, and add the following code:
 
 ```ts
 import express, { Express, NextFunction, Request, Response } from "express";
@@ -170,7 +170,7 @@ For more details refer to the ngrok configuration [below](/docs/tutorial/creator
 #### 7.2 Create a script to generate a new did:web and store it in the .env file
 
 <details>
-<summary>Create a src/scripts/utils.ts file and add the following code:</summary>
+<summary>Create a `scripts/utils.ts` file and add the following code:</summary>
 
 ```ts
 import { readFileSync, writeFileSync, appendFileSync } from "fs";
@@ -203,7 +203,7 @@ export const writeEnvVariable = (key: string, value: string): void => {
 </details>
 
 <details>
-<summary>Next create a src/scripts/generateDidWeb.ts file and add the following code:</summary>
+<summary>Next create a `scripts/generateDidWeb.ts` file and add the following code:</summary>
 
 ```ts
 import { generateKeyPair, issueDID, VerificationType } from "@trustvc/trustvc/w3c/issuer";
@@ -246,7 +246,7 @@ More details [here](/docs/topics/advanced/additional-network-metamask-guide/#fil
 :::
 
 <details>
-<summary> Create a src/scripts/deployTokenRegistry.ts file and add the following code:</summary>
+<summary> Create a `scripts/deployTokenRegistry.ts` file and add the following code:</summary>
 
 ```ts
 import { CHAIN_ID, SUPPORTED_CHAINS, v5ContractAddress, v5Contracts } from "@trustvc/trustvc";
@@ -341,7 +341,7 @@ npm run script:deployTokenRegistry
 
 After the execution, the `DID_KEY_PAIRS` and `TOKEN_REGISTRY_ADDRESS` variables will be stored in the **.env** file and the `did.json` file will be created.
 
-### 8. Update the express app to serve the did.json file
+### 8. Update the express app `src/index.ts` to serve the did.json file
 
 ```ts
 import fs from "fs";
@@ -375,7 +375,7 @@ You can use ngrok or any other service to expose your local server to the intern
 
 <details>
 
-<summary>Update src/index.ts with the following code, at the end of the file:</summary>
+<summary>Update `src/index.ts` with the following code, at the end of the file:</summary>
 
 ```ts
 app.listen(port, () => {
@@ -426,7 +426,7 @@ In this step, we will add the route to allow the creation of transferable docume
 
 <details>
 
-<summary>Update src/index.ts with the following code:</summary>
+<summary>Update `src/index.ts` with the following code:</summary>
 
 ```ts
 import { CHAIN_ID, encrypt, getTokenId, signW3C, SUPPORTED_CHAINS } from "@trustvc/trustvc";
