@@ -91,21 +91,25 @@
     "How Tos": [
       "how-tos/contexts",
       "how-tos/credential-subject",
-      "how-tos/bitstring"
-    ],
-    "Advanced": [
+      "how-tos/bitstring",
       {
-        "label": "AWS KMS",
+        "label": "Advanced",
         "type": "category",
         "items": [
-          "advanced/aws-kms/overview",
-          "advanced/aws-kms/create-key",
-          "advanced/aws-kms/access-keys",
-          "advanced/aws-kms/did-sign-demo"
+          {
+            "label": "AWS KMS",
+            "type": "category",
+            "items": [
+              "how-tos/advanced/aws-kms/overview",
+              "how-tos/advanced/aws-kms/create-key",
+              "how-tos/advanced/aws-kms/access-keys",
+              "how-tos/advanced/aws-kms/did-sign-demo"
+            ]
+          },
+          "how-tos/advanced/wallet-management",
+          "how-tos/advanced/address-resolver"
         ]
-      },
-      "advanced/wallet-management",
-      "advanced/address-resolver"
+      }
     ]
   }
 }
