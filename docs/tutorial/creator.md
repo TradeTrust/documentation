@@ -47,8 +47,8 @@ npm init -y
 ### 3. Install the required dependencies
 
 ```bash
-npm install @trustvc/trustvc dotenv express
-npm install --save-dev @types/express @types/node concurrently cross-env dotenv-cli nodemon ts-node tsc-alias typescript
+npm install @ngrok/ngrok @trustvc/trustvc dotenv ethers express
+npm install --save-dev @types/express@^4 @types/node concurrently cross-env dotenv-cli nodemon ts-node tsc-alias typescript
 ```
 
 ### 4. Set up TypeScript
@@ -57,7 +57,7 @@ npm install --save-dev @types/express @types/node concurrently cross-env dotenv-
 npx tsc --init
 ```
 
-Update tsconfig.json with the following configurations:
+Update `tsconfig.json` with the following configurations:
 
 ```json
 {
@@ -98,7 +98,7 @@ app.listen(port, () => {
 
 ### 6. Update package.json with scripts and nodemon configuration
 
-Create a nodemon.json file in the root directory with the following content:
+Create a `nodemon.json` file in the root directory with the following content:
 
 ```json
 {
@@ -108,7 +108,7 @@ Create a nodemon.json file in the root directory with the following content:
 }
 ```
 
-Update package.json with the following scripts:
+Update `package.json` with the following scripts:
 
 ```json
   ...
@@ -122,12 +122,10 @@ Update package.json with the following scripts:
 
 ### 7. Setup script for single-execution commands
 
-In order to sign and mint a token, we need the signing key pair (did:web) and a token registry contract (smart contract).
-In this example, we will generate a new signing key pair and deploy a new token registry contract, and store the signing private key and contract address in the .env file.
-The signing key's public key will be stored as a did.json file which will then be served as a publicly accessible did:web document.
+To sign and mint a token, we need the signing key pair (did:web) and a Token Registry contract (smart contract). In this example, we will generate a new signing key pair and deploy a new Token Registry contract, storing the signing private key and contract address in the `.env` file. The signing key's public key will be stored as a `did.json` file, which will then be served as a publicly accessible did:web document.
 
 :::note
-For a multi-tenanted environment, you can convert these scripts to executable functions and store the results in your database in a secure manner.
+For a multi-tenant environment, you can convert these scripts to executable functions and store the results in your database securely
 :::
 
 #### 7.1 Create a .env file
@@ -153,16 +151,16 @@ TOKEN_REGISTRY_ADDRESS=
 
 Specify the following values:
 
-- `DOMAIN` variable, the domain name where you want to host your did:web
-- `WALLET_PRIVATE_KEY` variable, with the private key of the wallet you want to use to deploy the token registry contract.
-- `NET` variable, with the network you want to use to deploy the token registry contract.
+- `DOMAIN`: The domain name where you want to host your did:web.
+- `WALLET_PRIVATE_KEY`: The private key of the wallet you want to use to deploy the Token Registry contract.
+- `NET`: The network you want to use to deploy the Token Registry contract.
 
 Depending on your selected network, you will need to set up the RPC URL. Retrieve the API KEY and add it to the .env file.
 
 :::tip
 If you would like to test and validate the issued document on the web, you can use ngrok to expose your local server to the internet.
 
-Generate the authtoken and add it to the .env file under the `NGROK_AUTHTOKEN` variable.
+Generate the authtoken and add it to the `.env` file under the `NGROK_AUTHTOKEN` variable.
 
 For more details refer to the ngrok configuration [below](/docs/tutorial/creator#81-serve-the-did-with-ngrok).
 :::
@@ -233,14 +231,14 @@ main();
 
 </details>
 
-The did:web private key will be stored as a stringified JSON object in the `DID_KEY_PAIRS` variable in the .env file.
+The did:web private key will be stored as a stringified JSON object in the `DID_KEY_PAIRS` variable in the `.env` file.
 
 While the public did:web will be stored in the did.json file.
 
-#### 7.3 Create a script to deploy a token registry contract
+#### 7.3 Create a script to deploy a Token Registry contract
 
 :::important
-You will need to setup the RPC URL for your selected network. Retrieve the API KEY and add it to the .env file.
+You will need to set up the RPC URL for your selected network. Retrieve the API KEY and add it to the `.env` file.
 
 More details [here](/docs/topics/advanced/additional-network-metamask-guide/#fill-in-the-network-configuration-for-the-new-network-as-required)
 :::
@@ -319,7 +317,7 @@ main();
 
 </details>
 
-The token registry contract address will be stored as a string in the `TOKEN_REGISTRY_ADDRESS` variable in the .env file.
+The Token Registry contract address will be stored as a string in the `TOKEN_REGISTRY_ADDRESS` variable in the `.env` file.
 
 #### 7.4 Update package.json with the new scripts
 
@@ -339,7 +337,7 @@ npm run script:generateDidWeb
 npm run script:deployTokenRegistry
 ```
 
-After the execution, the `DID_KEY_PAIRS` and `TOKEN_REGISTRY_ADDRESS` variables will be stored in the **.env** file and the `did.json` file will be created.
+After the execution, the `DID_KEY_PAIRS` and `TOKEN_REGISTRY_ADDRESS` variables will be stored in the `.env` file and the `did.json` file will be created.
 
 ### 8. Update the express app to serve the did.json file
 
@@ -364,14 +362,14 @@ app.get("/.well-known/did.json", (req: Request, res: Response, next: NextFunctio
 #### 8.1 Serve the did:web with ngrok
 
 :::important
-This step is optional, and is only required if you would like to test and validate the issued document on the web.
-It shall only be used for testing purposes.
+This step is optional and is only required if you would like to test and validate the issued document on the web.
+It should only be used for testing purposes.
 :::
 
 You can use ngrok or any other service to expose your local server to the internet. In this example, we will use ngrok:
 
-- Create an account on [ngrok.com](https://ngrok.com/), retrieve your authtoken and add it to the .env file under the NGROK_AUTHTOKEN variable.
-- Create a static domain on ngrok.com and add it to the .env file under the DOMAIN variable. For more information refer to the [ngrok documentation](https://ngrok.com/blog-post/free-static-domains-ngrok-users).
+- Create an account on [ngrok.com](https://ngrok.com/), retrieve your authtoken and add it to the `.env` file under the `NGROK_AUTHTOKEN` variable.
+- Create a static domain on ngrok.com and add it to the `.env` file under the DOMAIN variable. For more information refer to the [ngrok documentation](https://ngrok.com/blog-post/free-static-domains-ngrok-users).
 
 <details>
 
@@ -422,7 +420,9 @@ Visit [https://dev.uniresolver.io/](https://dev.uniresolver.io/) and enter the d
 
 ### 9. Update the express app to allow the creation of transferable documents
 
-In this step, we will add the route to allow the creation of transferable documents. For documents with attachments, you will need to increase the limit of the request body.
+In this step, we will add a route to allow the creation of transferable documents. It will allow the creation of transferable documents with the document type `BILL_OF_LADING`. We will be using the default renderer to preview the document. To learn more about decentralized rendering, refer to the [renderer documentation](/).
+
+For documents with attachments, you will need to increase the limit of the request body.
 
 <details>
 
@@ -614,8 +614,9 @@ output:
 
 ## Conclusion
 
-In this tutorial, we have learned how to create a did:web and a token registry contract. We have also learned how to create a transferable document using the token registry contract.
-You can reference the code in this [creator-tutorial](https://github.com/TradeTrust/creator-tutorial) repository.
+In this tutorial, we have learned how to create a did:web and a Token Registry contract. We have also learned how to create a transferable document using the Token Registry contract.
+
+You can reference the code in this[creator-tutorial](https://github.com/TradeTrust/creator-tutorial) repository.
 
 ## Optional: Post validation using tradetrust.io
 
