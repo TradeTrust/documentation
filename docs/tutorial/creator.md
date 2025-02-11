@@ -341,7 +341,7 @@ npm run script:deployTokenRegistry
 
 After the execution, the `DID_KEY_PAIRS` and `TOKEN_REGISTRY_ADDRESS` variables will be stored in the **.env** file and the `did.json` file will be created.
 
-### 8. Update the express app `src/index.ts` to serve the did.json file
+### 8. Update the express app to serve the did.json file
 
 ```ts
 import fs from "fs";
