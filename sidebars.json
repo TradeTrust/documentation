@@ -90,7 +90,26 @@
     "Tutorial": ["tutorial/verifier", "tutorial/transferability"],
     "How Tos": [
       "how-tos/contexts",
-      "how-tos/bitstring"
+      "how-tos/credential-subject",
+      "how-tos/bitstring",
+      {
+        "label": "Advanced",
+        "type": "category",
+        "items": [
+          {
+            "label": "AWS KMS",
+            "type": "category",
+            "items": [
+              "how-tos/advanced/aws-kms/overview",
+              "how-tos/advanced/aws-kms/create-key",
+              "how-tos/advanced/aws-kms/access-keys",
+              "how-tos/advanced/aws-kms/did-sign-demo"
+            ]
+          },
+          "how-tos/advanced/wallet-management",
+          "how-tos/advanced/address-resolver"
+        ]
+      }
     ]
   }
 }
