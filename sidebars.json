@@ -91,7 +91,8 @@
     ],
     "Tutorial": [
       "tutorial/creator",
-      "tutorial/verifier"
+      "tutorial/verifier",
+      "tutorial/transferability"
     ],
     "How Tos": [
       "how-tos/contexts",
