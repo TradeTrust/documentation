@@ -37,7 +37,7 @@ const signer = new AwsKmsSigner({
 });
 ```
 
-Prepare an example document (can refer to [this](/docs/4.x/tutorial/verifiable-documents/raw-document)) that is to be signed:
+Prepare an example document (can refer to [this](/docs/key-components-of-tradetrust/w3c-vc/tradetrust-document-schema#raw-document)) that is to be signed:
 
 ```
 const address = await signer.getAddress();
