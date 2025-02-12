@@ -331,11 +331,11 @@ example.com/
 
 ### Use Cases
 
-| **Organizational Structure**                   | **User Management**      | **Environment Separation** |
-| ---------------------------------------------- | ------------------------ | -------------------------- |
-| 📂 Different departments having their own DIDs | 🔑 Individual user DIDs  | 🛠️ Development DIDs        |
-| 👥 Team-specific DIDs                          | 👔 Role-based DIDs       | 🧪 Staging DIDs            |
-| 📋 Project-based DIDs                          | ⚙️ Service-specific DIDs | 🚀 Production DIDs         |
+| Use Cases | Purpose |
+| --- | --- |
+| Organizational Structure | 📂 Different departments having their own DIDs<br/>👥 Team-specific DIDs<br/>📋 Project-based DIDs |
+| User Management | 🔑 Individual user DIDs<br/>👔 Role-based DIDs<br/>⚙️ Service-specific DIDs |
+| Environment Separation | 🛠️ Development DIDs<br/>🧪 Staging DIDs<br/>🚀 Production DIDs |
 
 ## Security Considerations
 
