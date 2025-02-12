@@ -89,6 +89,21 @@
     ],
     "Tutorial": ["tutorial/verifier", "tutorial/transferability"],
     "How Tos": [
+      {
+        "label": "Issuer",
+        "type": "category",
+        "items": [
+          "how-tos/issuer/did-web",
+          {
+            "label": "OA (Legacy)",
+            "type": "category",
+            "items": [
+              "how-tos/issuer/dns-did",
+              "how-tos/issuer/dns-txt"
+            ]
+          }
+        ]
+      },
       "how-tos/contexts",
       "how-tos/credential-subject",
       "how-tos/bitstring",
