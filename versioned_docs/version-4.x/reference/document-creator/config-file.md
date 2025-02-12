@@ -66,7 +66,7 @@ Optional property:
 
 The value of `"network"` property is a string that refers to the network in which the document is created in.
 
-Currently, we only support the following networks. [List of Supported Network](/docs/topics/introduction/supported-network)
+Currently, we only support the following networks. [List of Supported Network](/docs/4.x/topics/introduction/supported-network)
 
 ### Permissionless Networks
 
@@ -98,7 +98,7 @@ The `"wallet"` property is a string that refers to your ethereum wallet. We supp
 
 The wallet property can be derive from either one of these methods:
 
-1. If you don't have a wallet, you can refer to [TradeTrust's documentation](/docs/tutorial/prerequisites#wallet-creation) to create a wallet.
+1. If you don't have a wallet, you can refer to [TradeTrust's documentation](/docs/4.x/tutorial/prerequisites#wallet-creation) to create a wallet.
    _Note: you will need to have TradeTrust Cli installed._ After running TT CLI `wallet create` command, this will give you a wallet.json.
 
 2. Alternatively, you can also generate a wallet.json from an existing account created in Metamask using the TradeTrust Cli. _Note: you will need to have TradeTrust Cli installed._
@@ -153,7 +153,7 @@ This result can now be entered into the `"wallet"` property in the [config file]
 
 Ethereum uses Elliptic Curve Digital Signing Algorithm (ECDSA). More specifically, the elliptic curve being used for transaction signing is secp256k1
 
-1. If you don't have an Aws Kms Wallet, you can refer to [documentation](/docs/topics/advanced/aws-kms/overview) to create a ECC_SECG_P256K1 Key.
+1. If you don't have an Aws Kms Wallet, you can refer to [documentation](/docs/4.x/topics/advanced/aws-kms/overview) to create a ECC_SECG_P256K1 Key.
 
 2. Connect the Aws Kms Key to an Aws Iam User and enable the signing access control.
 
@@ -220,20 +220,20 @@ Below is an example of the `"defaults"` property:
 },
 ```
 
-- The value of `"$template"` property contains an object that refers to the custom renderer, please refer to [creating document renderer](/docs/tutorial/decentralised-renderer/).
+- The value of `"$template"` property contains an object that refers to the custom renderer, please refer to [creating document renderer](/docs/4.x/tutorial/decentralised-renderer/).
 
 - The value of `"issuers"` property contains an array of the issuer object. The required properties for each issuer are `name`, `identityProof` and one of `documentStore` OR `tokenRegistry`.
 
-_Transferrable document requires a [`tokenRegistry`](/docs/tutorial/transferable-records/token-registry/token-registry-cli), whereas, a verifiable document requires a [`documentStore`](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli)._
+_Transferrable document requires a [`tokenRegistry`](/docs/4.x/tutorial/transferable-records/token-registry/token-registry-cli), whereas, a verifiable document requires a [`documentStore`](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli)._
 
 - The `"name"` property in the `"issuers"` section is a string, which refers to the name of the token registry or the name of the document store.
-  Please refer to [token registry](/docs/tutorial/transferable-records/token-registry/token-registry-cli) for transferable document or [deploying document store](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli) for verifiable document, for more information.
+  Please refer to [token registry](/docs/4.x/tutorial/transferable-records/token-registry/token-registry-cli) for transferable document or [deploying document store](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli) for verifiable document, for more information.
 
-- The `"tokenRegistry"` property is a string that is the address for the token registry, please refer to [token registry](/docs/tutorial/transferable-records/token-registry/token-registry-cli) for more information.
+- The `"tokenRegistry"` property is a string that is the address for the token registry, please refer to [token registry](/docs/4.x/tutorial/transferable-records/token-registry/token-registry-cli) for more information.
 
-- The `"documentStore"` property is a string that is the address for the document store, please refer to [deploying document store](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli) for more information.
+- The `"documentStore"` property is a string that is the address for the document store, please refer to [deploying document store](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli) for more information.
 
-- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](/docs/tutorial/verifiable-documents/advanced/document-store/configuring-dns) for more information.
+- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/configuring-dns) for more information.
 
 #### V3 document defaults
 
@@ -288,11 +288,11 @@ _Transferrable document requires a [`tokenRegistry`](/docs/tutorial/transferable
 
 - The value of the `"openAttestationMetadata"` properties contains information about the `"template"` and `"proof"`.
 
-- The value of `"template"` property contains an object that refers to the custom renderer, please refer to [creating document renderer](/docs/tutorial/decentralised-renderer/).
+- The value of `"template"` property contains an object that refers to the custom renderer, please refer to [creating document renderer](/docs/4.x/tutorial/decentralised-renderer/).
 
 - The value `"proof"` property contains an object with the necessary information about the `"type"` of proof, `"method"` of proof, `"value"` of the proof method and the `"revocation"` type and status of the document.
 
-- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](/docs/tutorial/verifiable-documents/advanced/document-store/configuring-dns) for more information.
+- The `"identityProof"` property is an object that refers to the issuer identity, please refer to [identity Proof](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/configuring-dns) for more information.
 
 - The value of the `"credentialSubject"` property is defined as a set of objects that contain one or more properties that are each related to a subject of the verifiable credential.
 

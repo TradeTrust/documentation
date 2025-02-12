@@ -23,8 +23,8 @@ _Note: **Please replace all the placeholder "&lt;...&gt;" with your values.**_
 "wallet": "<Your wallet string>",
 ```
 
-- `"network"` - Update with the desired network. For more information, click [here](/docs/reference/document-creator/config-file#network-property).
-- `"wallet"` - Update with your wallet string. For more information, click [here](/docs/reference/document-creator/config-file#wallet-property).
+- `"network"` - Update with the desired network. For more information, click [here](/docs/4.x/reference/document-creator/config-file#network-property).
+- `"wallet"` - Update with your wallet string. For more information, click [here](/docs/4.x/reference/document-creator/config-file#wallet-property).
 
 ```json
 "defaults": {
@@ -58,8 +58,8 @@ _Note: **Please replace all the placeholder "&lt;...&gt;" with your values.**_
 
 ```
 
-- `"tokenRegistry"` - Update with your token registry. For more information, click [here](/docs/tutorial/transferable-records/token-registry/token-registry-cli).
-- `"location"` - Update with the Issuer's domain. For more information, click [here](/docs/tutorial/transferable-records/dns).
+- `"tokenRegistry"` - Update with your token registry. For more information, click [here](/docs/4.x/tutorial/transferable-records/token-registry/token-registry-cli).
+- `"location"` - Update with the Issuer's domain. For more information, click [here](/docs/4.x/tutorial/transferable-records/dns).
 - `"blNumber"` - Update with the BL Number, to be displayed accordingly as the image above.
 - `"companyName"` - Update with the Company Name, to be displayed accordingly as the image above.
 - `"field#"` - Update with the Field content, to be displayed accordingly as the image above.

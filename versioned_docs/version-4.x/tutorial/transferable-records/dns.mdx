@@ -18,7 +18,7 @@ In this example above, the document's issuer is bound to `example.tradetrust.io`
 
 In this guide, we will bind the document issuer's identity to a valid domain name. This domain will be displayed as issuer every time the document is rendered in any TradeTrust-compliant decentralized renderer.
 
-We will be inserting a temporary DNS record on our DNS at `sandbox.openattestation.com` so you do not need your own domain to follow the guide. If you prefer to use your own domain name for the identity, you may skip the steps involving the CLI and instead read the [DNS Configuration Guide](/docs/topics/introduction/issuer-method-dns-txt#hands-on-creating-a-dns-txt-record).
+We will be inserting a temporary DNS record on our DNS at `sandbox.openattestation.com` so you do not need your own domain to follow the guide. If you prefer to use your own domain name for the identity, you may skip the steps involving the CLI and instead read the [DNS Configuration Guide](/docs/4.x/topics/introduction/issuer-method-dns-txt#hands-on-creating-a-dns-txt-record).
 
 ## DNS Configuration
 
@@ -32,7 +32,7 @@ You will need to replace the token registry address `0x8431012Bc040942B59e3C5bf4
 
 ## Creating Temporary DNS Proof with CLI
 
-With your [token registry address](/docs/tutorial/transferable-records/token-registry/token-registry-cli) that you get from the previous step, run the following command:
+With your [token registry address](/docs/4.x/tutorial/transferable-records/token-registry/token-registry-cli) that you get from the previous step, run the following command:
 
 ```sh
 tradetrust dns txt-record create --address 0x8431012Bc040942B59e3C5bf428221eab0b2f723 --network-id 11155111

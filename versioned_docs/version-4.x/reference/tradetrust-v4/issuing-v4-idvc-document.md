@@ -10,7 +10,7 @@ Issuing a TradeTrust V4 document using the IDVC issuer's identity method involve
 
 There are two types of documents that can be created using this method: Verifiable Documents and Transferable Records.
 
-For information on other issuer's identity methods like DNS-TXT and DNS-DID for both [Verifiable Documents](/docs/topics/introduction/verifiable-documents/overview) and [Transferable Records](/docs/topics/introduction/transferable-records/overview), please visit their respective pages.
+For information on other issuer's identity methods like DNS-TXT and DNS-DID for both [Verifiable Documents](/docs/4.x/topics/introduction/verifiable-documents/overview) and [Transferable Records](/docs/4.x/topics/introduction/transferable-records/overview), please visit their respective pages.
 
 ### Verifiable Documents (IDVC method)
 

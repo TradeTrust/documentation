@@ -4,7 +4,7 @@ title: Overview
 sidebar_label: Overview
 ---
 
-[TradeTrust document creator](https://creator.tradetrust.io) is a place where you can create and issue a TradeTrust document, either `transferable records` or `verifiable documents`. To use this functionality, you will need a configuration file(`.json` file) and some [prerequisite information](/docs/reference/document-creator/prerequisites).
+[TradeTrust document creator](https://creator.tradetrust.io) is a place where you can create and issue a TradeTrust document, either `transferable records` or `verifiable documents`. To use this functionality, you will need a configuration file(`.json` file) and some [prerequisite information](/docs/4.x/reference/document-creator/prerequisites).
 
 ### What is document creator about?
 

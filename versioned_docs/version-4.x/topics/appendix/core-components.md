@@ -10,7 +10,7 @@ sidebar_label: TradeTrust Decentralized Renderer Core Components
 
 It allows users to share documents across devices using a QR code.
 
-For detailed information on how to use the QR Code Component, please refer to the official documentation [here](https://docs.tradetrust.io/docs/reference/tradetrust-website/qr-code/).
+For detailed information on how to use the QR Code Component, please refer to the official documentation [here](/docs/4.x/reference/tradetrust-website/qr-code/).
 
 ![QRCode Example](/docs/reference/core-components/qr.png)
 
@@ -44,4 +44,4 @@ The PrintWatermark Component allows users to include the TradeTrust watermark te
 
 ## See Also
 
-[Generic Templates by TradeTrust](/docs/reference/generic-templates/overview)
+[Generic Templates by TradeTrust](/docs/4.x/reference/generic-templates/overview)
