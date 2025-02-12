@@ -1,18 +1,18 @@
 ---
 id: credential-status
-title: Working with Different Types of W3C VCs
-sidebar_label: Working with Different Types of W3C VCs
+title: Issuing Different Types of W3C VCs
+sidebar_label: Issuing Different Types of W3C VCs
 ---
 
 # Handling Different Credential Statuses in W3C VCs
 
-This page guides you through the process of managing **W3C Verifiable Credentials (VCs)** with different `credentialStatus` configurations. Whether you're dealing with **transferable tokens**, **non-transferable bitstring status lists**, or **static credentials without a status**, this guide covers the necessary actions, from deploying token registries to signing and minting credentials.
+This page guides you through signing and managing **W3C Verifiable Credentials (VCs)** with different `credentialStatus` configurations. Whether you're dealing with **transferable tokens**, **non-transferable bitstring status lists**, or **static credentials without a status**, this guide covers the necessary actions, from deploying token registries to signing and minting credentials.
 
-Each section includes:
+**Each section includes**:
 
 1. [Transferable W3C VC - Token Registry](#transferable-w3c-vc---token-registry)
 
-    Learn how to deploy a **Token Registry**, sign the credential, and mint it on the blockchain.
+    Learn how to sign the credential, and mint it on the blockchain.
 
 2. [Non-Transferable W3C VC - Bitstring Status List](#non-transferable-w3c-vc---bitstring-status-list)
 
@@ -22,11 +22,15 @@ Each section includes:
 
     Sign credentials without requiring a `credentialStatus` field, perfect for permanent claims.
 
+**For details on structuring your credential, refer to**:
+- [Working with Contexts](/docs/how-tos/contexts.md)
+- [Using Custom Contexts for "credentialSubject"](/docs/how-tos/credential-subject.md)
+
 ## Transferable W3C VC - Token Registry
 
-To enable transferable credentials, a Token Registry is required. This section covers:
+To enable transferable credentials, a Token Registry is required. [See Deploying a Token Registry](/) for setup instructions.
 
-- Deploying a Token Registry
+**This section covers**:
 - Signing a Verifiable Credential
 - Minting the Credential as a Transferable Token
 
@@ -36,67 +40,8 @@ To enable transferable credentials, a Token Registry is required. This section c
 - A supported network (e.g., Amoy, Sepolia, Polygon, etc.)
 - Chain-specific gas fee estimation (if applicable)
 
-### 1. Deploying a Token Registry
-
-Before you can mint or transfer tokenized Verifiable Credentials (VCs), you need to deploy a Token Registry. The Token Registry acts as a smart contract on the blockchain, managing the ownership and verification of tokenized credentials.
-
-#### Deployment Code (Using ethers v6 as an example)
-```ts
-import { Wallet, ethers } from "ethers";
-import { CHAIN_ID, SUPPORTED_CHAINS, v5ContractAddress, v5Contracts } from "@trustvc/trustvc";
-import { utils } from "@tradetrust-tt/token-registry-v5";
-
-// Set the chain
-const chainId = CHAIN_ID.amoy; // Amoy test network
-const CHAININFO = SUPPORTED_CHAINS[chainId];
-
-// Initialize the wallet
-const unconnectedWallet = new Wallet("<your_private_key>");
-const provider = new ethers.JsonRpcProvider(CHAININFO.rpcUrl);
-const wallet = unconnectedWallet.connect(provider);
-const walletAddress = await wallet.getAddress();
-
-const { TDocDeployer__factory } = v5Contracts;
-const { TokenImplementation, Deployer } = v5ContractAddress;
-
-// Initialize deployment parameters
-const deployerContract = new ethers.Contract(
-  Deployer[chainId], 
-  TDocDeployer__factory.abi, 
-  wallet
-);
-
-const initParam = utils.encodeInitParams({
-  name: "DemoTokenRegistry",
-  symbol: "DTR",
-  deployer: walletAddress,
-});
-
-// Deploy the contract
-let tx;
-if (CHAININFO.gasStation) {
-  const gasFees = await CHAININFO.gasStation();
-  tx = await deployerContract.deploy(TokenImplementation[chainId], initParam, {
-    maxFeePerGas: gasFees?.maxFeePerGas?.toBigInt() ?? 0,
-    maxPriorityFeePerGas: gasFees?.maxPriorityFeePerGas?.toBigInt() ?? 0,
-  });
-} else {
-  tx = await deployerContract.deploy(TokenImplementation[chainId], initParam);
-}
-
-const receipt = await tx.wait();
-const registryAddress = utils.getEventFromReceipt<any>(
-  receipt,
-  "Deployment",
-  deployerContract.interface
-).args.deployed;
-
-console.log(`Contract Address: ${registryAddress}`);
-console.log(`Transaction Receipt: ${JSON.stringify(receipt, null, 2)}`);
-```
-
-### 2. Signing a Verifiable Credential
-After deploying the token registry, create and sign a W3C Verifiable Credential (VC) referencing the Token Registry.
+### 1. Signing a Verifiable Credential
+After deploying the token registry, create and sign a W3C Verifiable Credential (VC) referencing the Token Registry. For signing, we use `BbsBlsSignature2020`, which enables selective disclosure and maintains privacy when verifying credentials.
 
 #### Deployment Code
 ```ts
@@ -115,7 +60,7 @@ const rawDocument = {
       chain: "MATIC",
       chainId: "80002",
     },
-    tokenRegistry: "0xH3C2...", // Address of the Token Registry deployed in previous step
+    tokenRegistry: "0xH3C2...", // Address of the Token Registry deployed
   },
   credentialSubject: {
     name: "TrustVC",
@@ -140,7 +85,7 @@ const signedDocument = await signW3C(rawDocument, {
 console.log(`Signed Document: ${JSON.stringify(signedDocument, null, 2)}`);
 ```
 
-### 3. Minting the Credential
+### 2. Minting the Credential
 
 After signing the Verifiable Credential (VC), the next step is minting it on the blockchain using the Token Registry. This process ensures the document is tokenized, allowing for on-chain verification and transferability.
 
@@ -154,8 +99,8 @@ const chainId = CHAIN_ID.amoy; // Amoy test network
 const CHAININFO = SUPPORTED_CHAINS[chainId];
 
 // Values from previous steps
-const tokenRegistryAddress = "<TOKEN_REGISTRY_ADDRESS_FROM_STEP_1>";
-const signedDocument = "<SIGNED_DOCUMENT_FROM_STEP_2>";
+const tokenRegistryAddress = "<TOKEN_REGISTRY_ADDRESS>";
+const signedDocument = "<SIGNED_DOCUMENT_FROM_STEP_1>";
 const owner = "<OWNER_WALLET_ADDRESS>";
 const holder = "<HOLDER_WALLET_ADDRESS>";
 const tokenId = getTokenId(signedDocument as any);
@@ -199,11 +144,11 @@ console.log(`Document minted successfully! Transaction Hash: ${receipt.hash}`);
 
 For non-transferable W3C Verifiable Credentials (VCs), we use a Bitstring Status List to manage credential status efficiently. This allows issuers to update credential revocation status without modifying the original credential.
 
-🔗 Learn more: [Bitstring Status List Documentation](/docs/how-tos/bitstring)
+🔗 Learn more: [Credential Status Management with Bitstring Status Lists](/docs/how-tos/bitstring)
 
 ### 1. Signing the Credential
 
-The following example demonstrates how to sign a VC using the Bitstring Status List.
+The following example demonstrates how to sign a VC using the Bitstring Status List. For signing, we use `BbsBlsSignature2020`, which enables selective disclosure and maintains privacy when verifying credentials.
 
 ```ts
 import { signW3C, VerificationType } from "@trustvc/trustvc";
@@ -251,7 +196,7 @@ In some cases, a Verifiable Credential (VC) does not require a `credentialStatus
 
 ### 1. Signing the Credential
 
-Below is an example of signing a VC without a credential status:
+Below is an example of signing a VC without a credential status. For signing, we use `BbsBlsSignature2020`, which enables selective disclosure and maintains privacy when verifying credentials.
 
 ```ts
 import { signW3C, VerificationType } from "@trustvc/trustvc";
