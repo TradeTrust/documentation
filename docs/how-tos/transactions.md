@@ -1,7 +1,7 @@
 ---
 id: transactions
-title: Making Transactions
-sidebar_label: Making Transactions
+title: Perform Transactions
+sidebar_label: Perform Transactions
 ---
 
 This document includes a Stateflow diagram illustrating the available actions that can be performed on a token ID by the holder and owner on the blockchain. The Title Escrow contract manages and represents token ownership between a beneficiary and a holder. During minting, the Token Registry creates and assigns a Title Escrow as the owner of the token. Actual owners interact with the Title Escrow contract to execute ownership-related operations.
@@ -79,13 +79,15 @@ The Title Escrow contract is used to manage and represent the ownership of a tok
 During minting, the Token Registry will create and assign a Title Escrow as the owner of that token.
 The actual owners will use the Title Escrow contract to perform their ownership operations.
 
-> [!IMPORTANT]
-> A new `remark` field has been **introduced** for all contract operations.
->
-> The `remark` field is optional and can be left empty by providing an empty string `"0x"`.
-> Please note that any value in the `remark` field is limited to **120** characters, and encryption is **recommended**.
->
-> Please refer to the sample encryption implementation .
+:::important
+
+A new `remark` field has been **introduced** for all contract operations.
+
+The `remark` field is optional and can be left empty by providing an empty string `"0x"`.
+Please note that any value in the `remark` field is limited to **120** characters, and encryption is **recommended**.
+
+Please refer to the sample encryption implementation .
+:::
 
 ### Connect to Title Escrow
 
@@ -110,11 +112,12 @@ await connectedTitleEscrow.nominate(nominee, remark);
 // Guard - beneficiary ≠ nominee
 ```
 
-> [!NOTE]
-> The `transferBeneficiary` transfers only the beneficiary and `transferHolder` transfers only the holder.
-> To transfer both beneficiary and holder in a single transaction, use `transferOwners`.
->
-> In the event where the **`holder`** is different from the **`beneficiary`**, the transfer of beneficiary will require a nomination done through the `nominate` method.
+:::note
+The `transferBeneficiary` transfers only the beneficiary and `transferHolder` transfers only the holder.
+To transfer both beneficiary and holder in a single transaction, use `transferOwners`.
+
+In the event where the **`holder`** is different from the **`beneficiary`**, the transfer of beneficiary will require a nomination done through the `nominate` method.
+:::
 
 ### Reject Transfers of Beneficiary/Holder
 
@@ -129,10 +132,11 @@ await connectedTitleEscrow.rejectTransferOwners(_remark);
 // Guard - prevOwner  ≠ zero_address & prevHolder  ≠  zero_address
 ```
 
-> [!IMPORTANT]
-> Rejection must occur as the very next action after being appointed as **`beneficiary`** and/or **`holder`**. If any transactions occur by the new appointee, it will be considered as an implicit acceptance of appointment.
->
-> There are separate methods to reject a **`beneficiary`** (`rejectTransferBeneficiary`) and a **`holder`** (`rejectTransferHolder`). However, if you are both, you must use `rejectTransferOwners`, as the other two methods will not work in this case.
+::: important
+Rejection must occur as the very next action after being appointed as **`beneficiary`** and/or **`holder`**. If any transactions occur by the new appointee, it will be considered as an implicit acceptance of appointment.
+
+There are separate methods to reject a **`beneficiary`** (`rejectTransferBeneficiary`) and a **`holder`** (`rejectTransferHolder`). However, if you are both, you must use `rejectTransferOwners`, as the other two methods will not work in this case.
+:::
 
 ### Return ETR Document to Issuer
 
@@ -143,7 +147,8 @@ await connectedTitleEscrow.returnToIssuer(remark);
 // Guard - holder = owner
 ```
 
-> [!IMPORTANT] > `returnToIssuer` can occur only when the `beneficiary` and `holder` are same.
+:::important `returnToIssuer` can occur only when the `beneficiary` and `holder` are same.
+:::
 
 ## 2) Using CLI
 

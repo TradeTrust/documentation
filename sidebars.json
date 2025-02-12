@@ -89,6 +89,7 @@
     ],
     "Tutorial": ["tutorial/creator", "tutorial/verifier", "tutorial/transferability"],
     "How Tos": [
+      "how-tos/transactions",
       "how-tos/contexts",
       "how-tos/credential-subject",
       "how-tos/bitstring",
@@ -109,8 +110,7 @@
           "how-tos/advanced/wallet-management",
           "how-tos/advanced/address-resolver"
         ]
-      },
-      "how-tos/transactions"
+      }
     ]
   }
 }
