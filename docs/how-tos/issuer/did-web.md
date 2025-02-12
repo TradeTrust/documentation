@@ -11,6 +11,8 @@ import TabItem from "@theme/TabItem";
 
 `did:web` is a Decentralized Identifier (DID) method that utilizes existing web infrastructure. This method enables organizations to represent their identifiers through their web domains without requiring a blockchain. The `did:web` method follows the [`did:web` specification](https://w3c-ccg.github.io/did-method-web/) and leverages standard HTTPS and DNS infrastructure for DID resolution.
 
+When working with TradeTrust documents, the `did:web` method's public key is used to validate the authenticity of any TradeTrust W3C signed document. This verification step is essential as it confirms the document's integrity by checking the digital signatures using the issuer's public key from their DID document. Since TradeTrust relies on these DID documents for verification, maintaining high availability of your `did:web` endpoint is critical - any downtime could prevent others from verifying your documents.
+
 ## How `did:web` Works
 
 1.  `did:web` uses standard web domain names to create DIDs in the format: `did:web:example.com`
