@@ -112,6 +112,7 @@
       },
       "how-tos/contexts",
       "how-tos/credential-subject",
+      "how-tos/credential-status",
       "how-tos/bitstring",
       {
         "label": "Advanced",
