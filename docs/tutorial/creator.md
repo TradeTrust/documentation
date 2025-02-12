@@ -122,7 +122,13 @@ Update `package.json` with the following scripts:
 
 ### 7. Setup script for single-execution commands
 
-To sign and mint a token, we need the signing key pair (did:web) and a Token Registry contract (smart contract). In this example, we will generate a new signing key pair and deploy a new Token Registry contract, storing the signing private key and contract address in the `.env` file. The signing key's public key will be stored as a `did.json` file, which will then be served as a publicly accessible did:web document.
+To sign and mint tokens, you'll need:
+1. A signing key pair (did:web)
+2. A Token Registry contract (smart contract)
+
+In this example, we'll generate these and store:
+- Signing private key and contract address in `.env`
+- Signing public key in `did.json` (served as a public did:web document)
 
 :::note
 For a multi-tenant environment, you can convert these scripts to executable functions and store the results in your database securely
@@ -153,9 +159,9 @@ Specify the following values:
 
 - `DOMAIN`: The domain name where you want to host your did:web.
 - `WALLET_PRIVATE_KEY`: The private key of the wallet you want to use to deploy the Token Registry contract.
-- `NET`: The network you want to use to deploy the Token Registry contract.
+- `NET`: The network you want to use to deploy the Token Registry contract. [List of Supported Network](/docs/key-components-of-tradetrust/blockchain/supported-network)
 
-Depending on your selected network, you will need to set up the RPC URL. Retrieve the API KEY and add it to the .env file.
+Depending on your selected network, you will need to set up the RPC URL. Retrieve the API KEY and add it to the .env file. Refer to [here](/docs/4.x/topics/advanced/additional-network-metamask-guide#sign-up-for-infuras-api-key) to guide you on your first API KEY.
 
 :::tip
 If you would like to test and validate the issued document on the web, you can use ngrok to expose your local server to the internet.
@@ -366,10 +372,12 @@ This step is optional and is only required if you would like to test and validat
 It should only be used for testing purposes.
 :::
 
-You can use ngrok or any other service to expose your local server to the internet. In this example, we will use ngrok:
+To expose your local server using ngrok:
+1. Create an account at [ngrok.com](https://ngrok.com/)
+2. Get your authtoken and add it to `.env` as `NGROK_AUTHTOKEN`
+3. Create a static domain and add it to `.env` as `DOMAIN`
 
-- Create an account on [ngrok.com](https://ngrok.com/), retrieve your authtoken and add it to the `.env` file under the `NGROK_AUTHTOKEN` variable.
-- Create a static domain on ngrok.com and add it to the `.env` file under the DOMAIN variable. For more information refer to the [ngrok documentation](https://ngrok.com/blog-post/free-static-domains-ngrok-users).
+For more details on static domains, see the [ngrok documentation](https://ngrok.com/blog-post/free-static-domains-ngrok-users).
 
 <details>
 
@@ -420,9 +428,11 @@ Visit [https://dev.uniresolver.io/](https://dev.uniresolver.io/) and enter the d
 
 ### 9. Update the express app to allow the creation of transferable documents
 
-In this step, we will add a route to allow the creation of transferable documents. It will allow the creation of transferable documents with the document type `BILL_OF_LADING`. We will be using the default renderer to preview the document. To learn more about decentralized rendering, refer to the [renderer documentation](/).
+In this step, we will add a route to allow the creation of transferable documents. It will allow the creation of transferable documents with the document type `BILL_OF_LADING`. We will be using the default renderer to preview the document. To learn more about decentralized rendering, refer to the [renderer documentation](/docs/4.x/tutorial/decentralised-renderer).
 
+:::note
 For documents with attachments, you will need to increase the limit of the request body.
+:::
 
 <details>
 
@@ -614,9 +624,12 @@ output:
 
 ## Conclusion
 
-In this tutorial, we have learned how to create a did:web and a Token Registry contract. We have also learned how to create a transferable document using the Token Registry contract.
+In this tutorial, You've learned how to:
+1. Create a did:web identifier
+2. Deploy a Token Registry contract
+3. Create transferable documents using the Token Registry
 
-You can reference the code in this[creator-tutorial](https://github.com/TradeTrust/creator-tutorial) repository.
+Find the complete code in the [creator-tutorial](https://github.com/TradeTrust/creator-tutorial) repository.
 
 ## Optional: Post validation using tradetrust.io
 
@@ -624,7 +637,7 @@ You can reference the code in this[creator-tutorial](https://github.com/TradeTru
 You might face issues with ngrok on browsers. A workaround can be found [here](https://stackoverflow.com/questions/73017353/how-to-bypass-ngrok-browser-warning#answer-78128230).
 :::
 
-- Copy the output value from step 9.1 and save it as a .tt file, e.g. `sample.tt`
+- Save `signedW3CDocument` object from the output value from [step 9.1](#91-run-the-app-and-test-the-creation-of-transferable-documents) and save it as a .tt file, e.g. `sample.tt`
 - Visit [testnet](http://v5-token-registry.dev.tradetrust.io/) / [mainnet](https://v5-token-registry.tradetrust.io/) and upload the file.
 - You will be able to view the document.
 
