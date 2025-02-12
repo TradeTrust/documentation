@@ -109,7 +109,8 @@
           "how-tos/advanced/wallet-management",
           "how-tos/advanced/address-resolver"
         ]
-      }
+      },
+      "how-tos/transactions"
     ]
   }
 }
