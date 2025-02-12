@@ -89,8 +89,8 @@
     ],
     "Tutorial": ["tutorial/creator", "tutorial/verifier", "tutorial/transferability"],
     "How Tos": [
-      "how-tos/transactions",
       "how-tos/contexts",
+      "how-tos/transactions",
       "how-tos/credential-subject",
       "how-tos/bitstring",
       {
