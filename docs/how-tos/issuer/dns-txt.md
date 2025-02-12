@@ -4,6 +4,10 @@ title: Issuer method DNS-TXT
 sidebar_label: Issuer method DNS-TXT
 ---
 
+:::important
+This segment is retained for legacy support for Open Attestation Document. For more information, please refer to v4 docs.
+:::
+
 | Requirement                       | DNS-TXT | DNS-DID | DID     |
 | --------------------------------- | ------- | ------- | ------- |
 | Domain name needed?               | &check; | &check; | &cross; |
