@@ -57,6 +57,8 @@ A Promise `<EndorsementChain>` that resolves to an array of transfer events repr
 ### Example Usage
 
 ```typescript
+import { fetchEndorsementChain } from "@trustvc/trustvc";
+
 const endorsementChain = await fetchEndorsementChain(
   "0x123456...", // Token Registry Address
   "0x12345", // Token ID
