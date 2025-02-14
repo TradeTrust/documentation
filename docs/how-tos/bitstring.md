@@ -62,6 +62,8 @@ const purpose: CredentialStatusPurpose = 'revocation';
 
 ### 4. Update the Status of an Index
 
+> Note: Consider using a randomized index to enhance security and prevent predictability.
+
 Retrieve and modify the status of a specific index:
 
 ```ts
