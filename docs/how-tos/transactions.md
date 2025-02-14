@@ -26,8 +26,8 @@ To execute these transactions, you can use either the Command Line Interface (CL
 
 #### Installation
 
-```sh
-npm install --save @tradetrust-tt/token-registry
+```bash
+npm install --save  @trustvc/trustvc
 ```
 
 ---

@@ -91,6 +91,8 @@
     "How Tos": [
       "how-tos/contexts",
       "how-tos/transactions",
+      "how-tos/verifydocument",
+      "how-tos/fetch-endorsement-chain",
       "how-tos/credential-subject",
       "how-tos/bitstring",
       {
