@@ -1,6 +1,6 @@
 ---
 id: fetch-endorsement-chain
-title: Fetch Endorsement Chain
+title: fetchEndorsementChain
 sidebar_label: Fetch Endorsement Chain
 ---
 

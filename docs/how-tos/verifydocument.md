@@ -1,10 +1,10 @@
 ---
 id: verifydocument
-title: Verify Document
+title: verifyDocument
 sidebar_label: Verify Document
 ---
 
-## Overview
+### Overview
 
 TrustVC simplifies the verification process with a single function that supports both W3C Verifiable Credentials (VCs) and OpenAttestation Verifiable Documents (VDs). Whether you're working with W3C standards or OpenAttestation standards, TrustVC handles the verification seamlessly.It ensures document authenticity, integrity, and issuer identity using Ethereum-compatible JSON-RPC provider services.
 
@@ -12,23 +12,22 @@ TrustVC simplifies the verification process with a single function that supports
 
 #### 1) document (DocumentsToVerify | SignedVerifiableCredential)
 
-The document to be verified, which can be either:
+The document to be verified. It can be:
 
-- An OpenAttestation document (V2/V3)
-- A W3C Verifiable Credential
+- A W3C Verifiable Credential (VC) that follows the W3C standards.
+- An OpenAttestation (OA) document that adheres to the OA framework.
 
-#### 2) rpcProviderUrl (string)
+### 2) rpcProviderUrl (string)
 
-- A URL pointing to an Ethereum-compatible JSON-RPC provider (e.g., Infura, Alchemy, or a custom node).
-- This provider is essential for resolving Decentralized Identifiers (DIDs) and validating cryptographic proofs.
+- The URL of an Ethereum-compatible RPC provider. This is required for verifying blockchain-based proofs, such as smart contract status or on-chain signature validation.
 
-### Return Value
+### Returns
 
-- Returns a Promise that resolves to an array of verification fragments (VerificationFragment[]).
-- Each fragment represents a specific verification step, such as:
-  - Signature integrity verification
-  - Credential status check (e.g., revocation)
-  - Issuer identity validation
+- Returns a Promise`<VerificationFragment[]>` that resolves to an array of verification fragments (VerificationFragment[]).
+- Resolves to an array of VerificationFragment objects, where each fragment represents a verification step and its result. The possible statuses of a fragment include:
+  - VALID: The check passed successfully.
+  - INVALID: The check failed.
+  - SKIPPED: The check was not applicable.
 
 ### Function Logic
 
