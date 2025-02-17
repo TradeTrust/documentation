@@ -17,7 +17,7 @@ The document to be verified. It can be:
 - A W3C Verifiable Credential (VC) that follows the W3C standards.
 - An OpenAttestation (OA) document that adheres to the OA framework.
 
-### 2) rpcProviderUrl (string)
+#### 2) rpcProviderUrl (string)
 
 - The URL of an Ethereum-compatible RPC provider. This is required for verifying blockchain-based proofs, such as smart contract status or on-chain signature validation.
 
