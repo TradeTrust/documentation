@@ -1,0 +1,19 @@
+```mermaid
+graph TD;
+subgraph Z[" "]
+direction LR
+    A(Overview)-->B(Creating a DID);
+    B-->C(Creating Raw Document);
+    C -- CLI -->D(Signing Documents - CLI);
+    C -- Code -->E(Signing Documents - Code);
+    E-->F(Revoking Documents);
+    D-->F;
+
+    click A href "docs/introduction/key-components-of-tradetrust/w3c-vc/verifying-documents/overview"
+    click B href "/docs/introduction/key-components-of-tradetrust/w3c-vc/identify-the-issuer/issuer-method-did-web"
+    click C href "/docs/introduction/key-components-of-tradetrust/w3c-vc/tradetrust-document-schema"
+    click D href "/docs/introduction/key-components-of-tradetrust/w3c-vc/signing-documents/signing-document-cli"
+    click E href "/docs/introduction/key-components-of-tradetrust/w3c-vc/signing-documents/signing-document-code"
+    click F href "/docs/how-tos/open-attestation/verifiable-documents/dns-did/revoking-document"
+end
+```

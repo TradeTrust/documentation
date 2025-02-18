@@ -159,7 +159,7 @@ Specify the following values:
 
 - `DOMAIN`: The domain name where you want to host your did:web.
 - `WALLET_PRIVATE_KEY`: The private key of the wallet you want to use to deploy the Token Registry contract.
-- `NET`: The network you want to use to deploy the Token Registry contract. [List of Supported Network](/docs/key-components-of-tradetrust/blockchain/supported-network)
+- `NET`: The network you want to use to deploy the Token Registry contract. [List of Supported Network](/docs/introduction/key-components-of-tradetrust/blockchain/supported-network)
 
 Depending on your selected network, you will need to set up the RPC URL. Retrieve the API KEY and add it to the .env file. Refer to [here](/docs/4.x/topics/advanced/additional-network-metamask-guide#sign-up-for-infuras-api-key) to guide you on your first API KEY.
 
@@ -246,7 +246,7 @@ While the public did:web will be stored in the did.json file.
 :::important
 You will need to set up the RPC URL for your selected network. Retrieve the API KEY and add it to the `.env` file.
 
-More details [here](/docs/topics/advanced/additional-network-metamask-guide/#fill-in-the-network-configuration-for-the-new-network-as-required)
+More details [here](/docs/4.x/topics/advanced/additional-network-metamask-guide/#fill-in-the-network-configuration-for-the-new-network-as-required)
 :::
 
 <details>

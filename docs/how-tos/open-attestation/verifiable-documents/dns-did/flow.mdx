@@ -1,0 +1,25 @@
+```mermaid
+graph TD;
+subgraph Z[" "]
+direction LR
+    A(Overview)-->B(Creating a DID);
+    B-->C(Configuring DNS);
+    C-->D(Creating Raw Document);
+    D -- CLI -->E(Wrapping Documents - CLI);
+    D -- Code -->F(Wrapping Documents - Code);
+    E-->G(Signing Documents - CLI);
+    F-->H(Signing Documents - Code);
+    G-->I(Revoking Documents);
+    H-->I;
+
+    click A href "/docs/how-tos/open-attestation/verifiable-documents/dns-did/overview"
+    click B href "/docs/how-tos/open-attestation/verifiable-documents/dns-did/create"
+    click C href "/docs/how-tos/open-attestation/verifiable-documents/dns-did/dns"
+    click D href "/docs/how-tos/open-attestation/verifiable-documents/dns-did/raw-document"
+    click E href "/docs/how-tos/open-attestation/verifiable-documents/dns-did/wrapping-document/wrapping-document-cli"
+    click F href "/docs/how-tos/open-attestation/verifiable-documents/dns-did/wrapping-document/wrapping-document-code"
+    click G href "/docs/how-tos/open-attestation/verifiable-documents/dns-did/signing-document/signing-document-cli"
+    click H href "/docs/how-tos/open-attestation/verifiable-documents/dns-did/signing-document/signing-document-code"
+    click I href "/docs/how-tos/open-attestation/verifiable-documents/dns-did/revoking-document"
+end
+```

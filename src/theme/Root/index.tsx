@@ -10,13 +10,26 @@ const Root = ({ children }) => {
 
   const initializeVersion = () => {
     if (typeof window !== 'undefined') {
+      const { pathname } = window.location;
+
+      // Get the saved version from localStorage
       const savedVersion = localStorage.getItem('docs-preferred-version-default');
-      if (savedVersion) {
-        setHtmlDataVersion(savedVersion);
-      } else {
-        // Default to "current" if no saved version exists
-        setHtmlDataVersion('current');
+
+      // Determine the preferred version based on the pathname
+      let preferredVersion = "current"; // Default version
+
+      console.log(pathname)
+      if (pathname === "/") {
+        preferredVersion = savedVersion === "4.x" ? "4.x" : "current"; // Root URL logic
+      } else if (pathname.includes("/docs/4.x/")) {
+        preferredVersion = "4.x"; // Docs 4.x URL logic
       }
+
+      // Store the selected version in localStorage
+      localStorage.setItem("docs-preferred-version-default", preferredVersion);
+
+      // Set HTML data version
+      setHtmlDataVersion(preferredVersion);
     }
   };
 
