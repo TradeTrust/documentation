@@ -97,15 +97,14 @@
           {
             "label": "OA (Legacy)",
             "type": "category",
-            "items": [
-              "how-tos/issuer/dns-did",
-              "how-tos/issuer/dns-txt"
-            ]
+            "items": ["how-tos/issuer/dns-did", "how-tos/issuer/dns-txt"]
           }
         ]
       },
       "how-tos/contexts",
       "how-tos/transactions",
+      "how-tos/verifydocument",
+      "how-tos/fetch-endorsement-chain",
       "how-tos/credential-subject",
       "how-tos/bitstring",
       "how-tos/credential-status",

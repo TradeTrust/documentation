@@ -6,6 +6,12 @@ sidebar_label: Transferability
 
 This guide walks you through setting up a simple React project using TypeScript and Vite, and integrating the TrustVC library to visualize the endorsement chain and enable transactions to transfer, reject, or return a document. This tutorial focuses on transferable credentials.
 
+## Source code and demo file
+
+The source code for this project is also available on GitHub at [TradeTrust/transferability-tutorial](https://github.com/TradeTrust/transferability-tutorial). You can explore the code, contribute, or make any modifications.
+
+To test the process, you can use the demo file available at [this link](https://github.com/TradeTrust/transferability-tutorial/blob/main/demo/amoy.tt). You are free to modify this file or upload your own document to see how the transferability process works.
+
 You can continue building from the existing Verifier setup by adding another page or integrating it within the same page. Install `ethers` and [skip to step 6](#6-add-a-basic-project-structure). Alternatively, you can start fresh with a new React project.
 
 ## Prerequisites
@@ -758,9 +764,3 @@ The transferability app is now ready.
 <figure style={{ maxWidth: "800px", margin: "0 auto" }}>
 <img src='/docs/tutorial/transferability/after-reject-transfer.png' />
 </figure>
-
-## Source code and demo file
-
-The source code for this project is also available on GitHub at [TradeTrust/transferability-tutorial](https://github.com/TradeTrust/transferability-tutorial). You can explore the code, contribute, or make any modifications.
-
-To test the process, you can use the demo file available at [this link](https://github.com/TradeTrust/transferability-tutorial/blob/main/demo/amoy.tt). You are free to modify this file or upload your own document to see how the transferability process works.
