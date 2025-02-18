@@ -1,7 +1,7 @@
 ---
 id: credential-status
-title: Issuing Different Types of W3C VCs
-sidebar_label: Issuing Different Types of W3C VCs
+title: Issuing W3C VCs
+sidebar_label: Issuing W3C VCs
 ---
 
 # Handling Different Credential Statuses in W3C VCs

@@ -1,0 +1,29 @@
+```mermaid
+graph TD;
+subgraph Z[" "]
+direction LR
+    A(Overview)-- CLI -->B(Deploying Document Store - CLI);
+    A(Overview)-- Code -->C(Deploying Document Store - Code);
+    B-->D(Configuring DNS);
+    C-->D(Configuring DNS);
+    D-->E(Creating Raw Document)
+    E -- CLI -->F(Wrapping Documents - CLI);
+    E -- Code -->G(Wrapping Documents - Code);
+    F-->H(Issuing Documents - CLI);
+    G-->I(Issuing Documents - Code);
+    H-->J(Revoking Documents - CLI);
+    I-->K(Revoking Documents - Code);
+
+    click A href "/docs/how-tos/open-attestation/verifiable-documents/dns-txt/overview"
+    click B href "/docs/how-tos/open-attestation/verifiable-documents/dns-txt/deploying-document-store/document-store-cli"
+    click C href "/docs/how-tos/open-attestation/verifiable-documents/dns-txt/deploying-document-store/document-store-code"
+    click D href "/docs/how-tos/open-attestation/verifiable-documents/dns-txt/configuring-dns"
+    click E href "/docs/how-tos/open-attestation/verifiable-documents/dns-txt/raw-document"
+    click F href "/docs/how-tos/open-attestation/verifiable-documents/dns-txt/wrapping-document/wrapping-document-cli"
+    click G href "/docs/how-tos/open-attestation/verifiable-documents/dns-txt/wrapping-document/wrapping-document-code"
+    click H href "/docs/how-tos/open-attestation/verifiable-documents/dns-txt/issuing-document/issuing-document-cli"
+    click I href "/docs/how-tos/open-attestation/verifiable-documents/dns-txt/issuing-document/issuing-document-code"
+    click J href "/docs/how-tos/open-attestation/verifiable-documents/dns-txt/revoking-document/revoking-document-cli"
+    click K href "/docs/how-tos/open-attestation/verifiable-documents/dns-txt/revoking-document/revoking-document-code"
+end
+```
