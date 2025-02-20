@@ -94,4 +94,4 @@ A verification happens on a wrapped OA document or signed w3c VC , and it consis
 - Is the issuance state of the document valid ?
 - Is the document issuer identity valid ?
 
-For more information you can refer to [Key Components - Verifying](/docs/key-components-of-tradetrust/w3c-vc/verifying-documents/overview)
+For more information you can refer to [Key Components - Verifying](/docs/introduction/key-components-of-tradetrust/w3c-vc/verifying-documents/overview)

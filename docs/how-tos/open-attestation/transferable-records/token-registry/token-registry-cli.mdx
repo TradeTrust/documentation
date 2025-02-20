@@ -1,0 +1,64 @@
+---
+id: token-registry-cli
+title: Deploying Token Registry (CLI)
+sidebar_label: Deploying Token Registry (CLI)
+pagination_next: how-tos/open-attestation/transferable-records/dns
+pagination_prev: how-tos/open-attestation/transferable-records/overview
+---
+
+import Flow from "../flow.mdx";
+
+<Flow />
+
+> For the current step, you can either opt to use the [CLI](/docs/how-tos/open-attestation/transferable-records/token-registry/token-registry-cli) or [Code](/docs/how-tos/open-attestation/transferable-records/token-registry/token-registry-code).
+
+The token registry is a smart contract on the blockchain network that records the ownership and holdership information of a transferable record.
+
+> The Token Registry is a Soulbound Token (SBT) tied to the Title Escrow. The SBT implementation is loosely based on OpenZeppelin's implementation of the [ERC721 standard](https://eips.ethereum.org/EIPS/eip-721). An SBT is used in this case because the token, while can be transferred to the registry, is largely restricted to its designated Title Escrow contracts.
+
+In this guide, we will deploy a token registry smart contract on the Ethereum blockchain, `sepolia` network which is a test network that does not require actual ethers for transactions.
+
+## Prerequisite
+
+- [TradeTrust CLI](/docs/tutorial/prerequisites#installation-of-tradetrust-cli) installed
+- Private key to an [Ethereum wallet](/docs/tutorial/prerequisites#wallet-creation) with sufficient ethers
+
+## Deploying via TradeTrust CLI
+
+### Creating the key file
+
+Create a file `key.txt` with the private key of your Ethereum wallet and save it in your working directory. If you are using Metamask, you may retrieve this key from the extension in [this guide](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key).
+
+Sample `key.txt` file content (replace with your private key):
+
+```sh
+d8f30c982fc23245a2cc4ec8271edcb4637f539d490ce750cdb5085241ffb41c
+```
+
+> Do not share this file with anyone else!
+
+### Deploying the token registry
+
+Simply run the following command. You may replace the `<registry-name>` and `<registry-symbol>` with a suitable name and symbol (usually 3 characters).
+
+```sh
+tradetrust deploy token-registry "<registry-name>" <registry-symbol> -n sepolia -f key.txt
+```
+
+This will deploy the token registry on the `sepolia` network. You should see a similar output when the deployment is successful:
+
+```txt
+ℹ  info      Deploying token registry My Token Registry
+…  awaiting  Sending transaction to pool
+…  awaiting  Waiting for transaction 0x7e3eea01c42bb10b3160f19c9f55fe3de24ed05abb9d6f4363c80c0d0f1be355 to be mined
+✔  success   Token registry deployed at 0x8431012Bc040942B59e3C5bf428221eab0b2f723
+ℹ  info      Find more details at https://sepolia.etherscan.io/address/0x8431012Bc040942B59e3C5bf428221eab0b2f723
+```
+
+In this case, our contract has been successfully deployed on sepolia at the address `0x8431012Bc040942B59e3C5bf428221eab0b2f723`.
+
+> Save your **token registry address** for future reference!
+
+Congratulations! You have successfully deployed a token registry.
+
+Next we take a look at configuring the DNS.

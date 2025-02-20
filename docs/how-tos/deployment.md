@@ -1,12 +1,12 @@
 ---
 id: deployment
-title: Deploy new Token Registry
+title: Deployment
 sidebar_label: Deployment
 ---
 
 ### TDocDeployer
 
-TDocDeployer is a deployer contract for transferable documents using minimal proxy clones. It allows the deployment of contract instances based on predefined implementations while associating each implementation with a titleEscrowFactory.
+TDocDeployer is a **deployer** contract for transferable documents using minimal proxy clones. It allows the deployment of contract instances based on predefined implementations while associating each implementation with a **titleEscrowFactory**.
 
 #### Key Features
 
@@ -17,9 +17,9 @@ TDocDeployer is a deployer contract for transferable documents using minimal pro
 
 #### deploy Function Explanation
 
-The deploy function creates a new contract instance by cloning an existing implementation.
+The **deploy** function creates a new contract instance by cloning an existing implementation of **Token Registry**.
 
-### Installation
+### Installing tradetrust-cli
 
 #### Binary
 
@@ -45,9 +45,11 @@ npx -p @tradetrust-tt/tradetrust-cli tradetrust <arguments>
 
 ## TitleEscrowFactory
 
-The TitleEscrowFactory contract is responsible for deploying and managing instances of TitleEscrow contracts. It follows a factory pattern that enables the deterministic creation of title escrow instances using the Clones library from OpenZeppelin. This approach ensures gas efficiency and allows for easy management of multiple title escrow contracts.
+The **TitleEscrowFactory** contract is responsible for deploying and managing instances of **TitleEscrow** contracts. It follows a factory pattern that enables the deterministic creation of title escrow instances using the Clones library from OpenZeppelin. This approach ensures gas efficiency and allows for easy management of multiple title escrow contracts.
 
-Deploy Title Escrow Factory:
+The Title Escrow Factory contract is already registered in our **TDocDeployer** contract against the Token Registry. However, if you need to deploy the Token Registry separately as a **standalone** contract, you can deploy the Title Escrow Factory independently.
+
+Here's how:
 
 ```bash
 tradetrust deploy title-escrow-factory --network sepolia
@@ -57,7 +59,7 @@ tradetrust deploy title-escrow-factory --network sepolia
 
 ### Mint document to token registry
 
-Mint a hash to a token registry deployed on the blockchain. The tokenId option would be used to indicate the document hash, and the to option to indicate the title escrow address the document is mapped to.
+Mint a hash to a token registry deployed on the blockchain. The tokenId option would be used to indicate the document hash, and the to option to indicate the title escrow address the document is mapped to. Every minting of a new document will also create a new Title Escrow Contract .
 
 ```bash
 tradetrust token-registry mint --network <NETWORK> --address <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --beneficiary <BENEFICIARY> --holder <HOLDER> [options]
@@ -103,7 +105,7 @@ npm install --save  @trustvc/trustvc
 
 ---
 
-#### Usage
+##### Usage
 
 To use the package, you will need to provide your own
 Web3 [provider](https://docs.ethers.io/v5/api/providers/api-providers/)
@@ -140,6 +142,8 @@ const tx = await connectedDeployer.deploy(implAddress, initParam);
 ```
 
 ### StandAlone
+
+If you want to deploy the Token Registry as a standalone contract instead of using TDocDeployer, you will need the Title Escrow Factory contract address. Below is the CLI command for deployment:
 
 ```bash
 tradetrust deploy token-registry <registry-name> <registry-symbol> --factory-address <factory-address> [options]
