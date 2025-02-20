@@ -28,7 +28,7 @@ Please take note of the document types that supports this method of identifying 
 | Transferable Records | &cross;               |
 
 Not sure which type of document to use?
-Have a better understanding about our different document types: [verifiable documents](/docs/4.x/topics/introduction/verifiable-documents/overview) and [Transferable Records](/docs/4.x/topics/introduction/transferable-records/overview).
+Have a better understanding about our different document types: [verifiable documents](/docs/how-tos/open-attestation/verifiable-documents/overview) and [Transferable Records](/docs/introduction/key-components-of-tradetrust/transferability/overview).
 
 :::
 

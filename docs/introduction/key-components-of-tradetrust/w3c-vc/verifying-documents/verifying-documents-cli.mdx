@@ -1,0 +1,61 @@
+---
+id: verifying-document-cli
+title: Verifying Documents (CLI)
+sidebar_label: Verifying Documents (CLI)
+---
+
+> For the current step, you can either opt to use the [CLI](/docs/introduction/key-components-of-tradetrust/w3c-vc/verifying-documents/verifying-document-cli) or [Code](/docs/introduction/key-components-of-tradetrust/w3c-vc/verifying-documents/verifying-document-code).
+
+This document provides a step-by-step guide on how to verify the authenticity and integrity of a signed Verifiable Credential (VC) using the w3c-cli tool. The verification process ensures that the credential has not been tampered with and validates the issuer’s signature.
+
+Prerequisites:
+
+- Install the w3c-cli tool on your system.
+- Ensure you have the JSON file of the signed Verifiable Credential (e.g., signed_vc.json).
+
+### Installation
+
+Install CLI:
+
+> Note Remember to install the cli globally
+
+```bash
+npm install -g @trustvc/w3c-cli
+```
+
+### Verification Process
+
+Open a terminal or command prompt on your system.
+
+Run the verify command:
+
+```bash
+w3c-cli verify
+```
+
+Provide the path to your Verifiable Credential JSON file when prompted:
+
+```bash
+? Please enter the path to your verifiable credential JSON file: ./signed_vc.json
+```
+
+Replace ./signed_vc.json with the path to your credential file if it is located in a different directory.
+
+`View the verification result:` After running the command, you will receive an output similar to the following:
+
+```bash
+Verification result: true
+Credential status verification result: "revocation:false"
+```
+
+Verification result: true indicates that the cryptographic proofs in the credential are valid and the credential has not been altered.
+
+Credential status verification result: "revocation:false" confirms that the credential has not been revoked.
+
+### Notes
+
+Ensure that the credential file is in the correct JSON format and adheres to the W3C Verifiable Credentials Data Model.
+
+If the verification fails, double-check the file path and the format of the credential JSON file.
+
+If the status verification shows revocation:true, it means the credential has been revoked and is no longer valid.
