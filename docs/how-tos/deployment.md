@@ -55,27 +55,9 @@ Here's how:
 tradetrust deploy title-escrow-factory --network sepolia
 ```
 
-## TitleEscrow
-
-### Mint document to token registry
-
-Mint a hash to a token registry deployed on the blockchain. The tokenId option would be used to indicate the document hash, and the to option to indicate the title escrow address the document is mapped to. Every minting of a new document will also create a new Title Escrow Contract .
-
-```bash
-tradetrust token-registry mint --network <NETWORK> --address <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --beneficiary <BENEFICIARY> --holder <HOLDER> [options]
-```
-
-Example - with private key set in OA_PRIVATE_KEY environment variable (recommended). More options.
-
-```bash
-tradetrust token-registry mint --network sepolia --address 0x6133f580aE903b8e79845340375cCfd78a45FF35 --tokenId 0x10ee711d151bc2139473a57531f91d961b639affb876b350c31d031059cdcc2c --to 0xB26B4941941C51a4885E5B7D3A1B861E54405f90
-
-✔  success   Token with hash 0x10ee711d151bc2139473a57531f91d961b639affb876b350c31d031059cdcc2c has been issued on 0x6133f580aE903b8e79845340375cCfd78a45FF35 with the initial recipient being 0xB26B4941941C51a4885E5B7D3A1B861E54405f90
-```
-
 ## Token Registry
 
-You can deploy a Token Registry contract on the blockchain either as a standalone deployment or through a Factory Contract. If a Title Escrow Factory Contract has been deployed using the Token Registry, you can use the factory address flag to interact with it. Additionally, you have the flexibility to deploy the Token Registry using both the CLI and code, depending on your preferred approach.
+You can deploy a Token Registry contract on the blockchain either as a standalone deployment or through a Factory Contract(tDocDeployer). If a Factory Contract has been deployed using the Token Registry, you can use the factory address flag to interact with it. Additionally, you have the flexibility to deploy the Token Registry using both the CLI and code, depending on your preferred approach.
 
 ### Using TDocDeployer
 
@@ -83,11 +65,14 @@ You can deploy a Token Registry contract on the blockchain either as a standalon
 
 Now we will see performing the deployment using tDocDeployer via the command line -
 
+- tDocDeployer can have multiple implementations added as option. The `--token-implementation-address` flag explicitly provides a custom token implementation address. It will look for this implementation address inside tDocDeployer.
+- If no implementation is passed, **tDocDeployer** will automatically pick the **default implementation**.
+
 ```bash
-tradetrust deploy token-registry <registry-name> <registry-symbol> --factory-address <factory-address> [options]
+tradetrust deploy token-registry <registry-name> <registry-symbol> --token-implementation-address <token-implementation-address> --network <network-name>
 ```
 
-Example - with private key set in OA_PRIVATE_KEY environment variable (recommended). More options.
+Example - with private key set in OA_PRIVATE_KEY environment variable (recommended).
 
 ```bash
 tradetrust deploy token-registry "My Sample Token" MST --network sepolia
@@ -146,13 +131,31 @@ const tx = await connectedDeployer.deploy(implAddress, initParam);
 If you want to deploy the Token Registry as a standalone contract instead of using TDocDeployer, you will need the Title Escrow Factory contract address. Below is the CLI command for deployment:
 
 ```bash
-tradetrust deploy token-registry <registry-name> <registry-symbol> --factory-address <factory-address> [options]
+tradetrust deploy token-registry <registry-name> <registry-symbol> --factory-address <factory-address> --standalone --network <network-name>
 ```
 
-Example - with private key set in OA_PRIVATE_KEY environment variable (recommended). More options.
+Example - with private key set in OA_PRIVATE_KEY environment variable (recommended).
 
 ```bash
 tradetrust deploy token-registry "My Sample Token" MST --factory 0xfcafea839e576967b96ad1FBFB52b5CA26cd1D25 --standalone --network sepolia
 
 ✔ success Token registry deployed at 0x4B127b8d5e53872d403ce43414afeb1db67B1842
+```
+
+## TitleEscrow
+
+### Mint document to token registry
+
+Mint a hash to a token registry deployed on the blockchain. The tokenId option would be used to indicate the document hash, and the to option to indicate the title escrow address the document is mapped to. Every minting of a new document will also create a new Title Escrow Contract .
+
+```bash
+tradetrust token-registry mint --network <NETWORK> --address <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --beneficiary <BENEFICIARY> --holder <HOLDER>
+```
+
+Example - with private key set in OA_PRIVATE_KEY environment variable (recommended).
+
+```bash
+tradetrust token-registry mint --network sepolia --address 0x6133f580aE903b8e79845340375cCfd78a45FF35 --tokenId 0x10ee711d151bc2139473a57531f91d961b639affb876b350c31d031059cdcc2c --beneficiary 0xB26B4941941C51a4885E5B7D3A1B861E54405f90  --holder 0xB26B4941941C51a4885E5B7D3A1B861E54405f90
+
+✔  success   Token with hash 0x10ee711d151bc2139473a57531f91d961b639affb876b350c31d031059cdcc2c has been issued on 0x6133f580aE903b8e79845340375cCfd78a45FF35 with the initial recipient being 0xB26B4941941C51a4885E5B7D3A1B861E54405f90 and initial holder 0xB26B4941941C51a4885E5B7D3A1B861E54405f90
 ```
