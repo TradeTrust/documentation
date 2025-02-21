@@ -137,7 +137,7 @@ tradetrust deploy token-registry <registry-name> <registry-symbol> --factory-add
 Example - with private key set in OA_PRIVATE_KEY environment variable (recommended).
 
 ```bash
-tradetrust deploy token-registry "My Sample Token" MST --factory 0xfcafea839e576967b96ad1FBFB52b5CA26cd1D25 --standalone --network sepolia
+tradetrust deploy token-registry "My Sample Token" MST --factory-address 0xfcafea839e576967b96ad1FBFB52b5CA26cd1D25 --standalone --network sepolia
 
 ✔ success Token registry deployed at 0x4B127b8d5e53872d403ce43414afeb1db67B1842
 ```
