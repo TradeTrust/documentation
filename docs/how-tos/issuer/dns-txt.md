@@ -51,8 +51,8 @@ Also, please make sure you have completed the prerequisites listed below.
 
 #### Deployment of smart contracts
 
-- How to deploy [Document Store](/docs/4.x/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli).
-- How to deploy [Token Registry](/docs/4.x/tutorial/transferable-records/token-registry/token-registry-cli).
+- How to deploy [Document Store](/docs/how-tos/open-attestation/verifiable-documents/dns-txt/deploying-document-store/document-store-cli).
+- How to deploy [Token Registry](/docs/how-tos/open-attestation/transferable-records/token-registry/token-registry-cli).
 
 ### How to create DNS-TXT Record
 
