@@ -135,7 +135,7 @@ In the next section, you will learn more about the TradeTrust document schema an
 
 #### `issuers`
 
-See [Creating Raw Document](/docs/tutorial/verifiable-documents/raw-document).
+See [Creating Raw Document](/docs/how-tos/open-attestation/verifiable-documents/dns-did/raw-document).
 
 ### Developing the COC Template View
 

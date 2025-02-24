@@ -28,7 +28,7 @@ This page guides you through signing and managing **W3C Verifiable Credentials (
 
 ## Transferable W3C VC - Token Registry
 
-To enable transferable credentials, a Token Registry is required. [See Deploying a Token Registry](/) for setup instructions.
+To enable transferable credentials, a Token Registry is required. [See Deploying a Token Registry](/docs/how-tos/deployment#token-registry) for setup instructions.
 
 **This section covers**:
 - Signing a Verifiable Credential

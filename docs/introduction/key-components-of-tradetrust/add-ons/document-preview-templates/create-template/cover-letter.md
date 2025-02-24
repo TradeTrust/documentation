@@ -23,8 +23,8 @@ _Note: **Please replace all the placeholder "&lt;...&gt;" with your values.**_
 "wallet": "<Your wallet string>",
 ```
 
-- `"network"` - Update with the desired network. For more information, click [here](/docs/reference/document-creator/config-file#network-property).
-- `"wallet"` - Update with your wallet string. For more information, click [here](/docs/reference/document-creator/config-file#wallet-property).
+- `"network"` - Update with the desired network. For more information, click [here](/docs/4.x/reference/document-creator/config-file#network-property).
+- `"wallet"` - Update with your wallet string. For more information, click [here](/docs/4.x/reference/document-creator/config-file#wallet-property).
 
 ```json
 "defaults": {
@@ -50,8 +50,8 @@ _Note: **Please replace all the placeholder "&lt;...&gt;" with your values.**_
 
 ```
 
-- `"documentStore"` - Update with your document store. For more information, click [here](/docs/tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli).
-- `"location"` - Update with the Issuer's domain. For more information, click [here](/docs/tutorial/transferable-records/dns).
+- `"documentStore"` - Update with your document store. For more information, click [here](/docs/how-tos/open-attestation/verifiable-documents/dns-txt/deploying-document-store/document-store-cli).
+- `"location"` - Update with the Issuer's domain. For more information, click [here](/docs/how-tos/open-attestation/transferable-records/dns).
 - `"logo"` - Update with the Logo's URL, to be displayed accordingly as the image above.
 - `"backgroundColor"` - Update with the desired background color. The default color(#ffffff) will be used if color is not stated here. i.e. values for this field "#000000", "black"
 - `"titleColor"` - Update with the desired title text color. The default color(#4e4e50) will be used if color is not stated here. i.e. values for this field "#ffffff", "white"
@@ -66,7 +66,7 @@ _Note: **Please replace all the placeholder "&lt;...&gt;" with your values.**_
 }
 ```
 
-- `"apiKey"` - Update with the document storage API key. For more information, click [here](/docs/reference/document-creator/config-file#document-storage-property).
-- `"url"` - Update with the document storage URL. For more information, click [here](/docs/reference/document-creator/config-file#document-storage-property).
+- `"apiKey"` - Update with the document storage API key. For more information, click [here](/docs/4.x/reference/document-creator/config-file#document-storage-property).
+- `"url"` - Update with the document storage URL. For more information, click [here](/docs/4.x/reference/document-creator/config-file#document-storage-property).
 
 _Note: **The "documentStorage" field is optional, if you do not have any document storage endpoint setup, you can omit this entire section.**._

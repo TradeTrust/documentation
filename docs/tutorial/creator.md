@@ -428,7 +428,7 @@ Visit [https://dev.uniresolver.io/](https://dev.uniresolver.io/) and enter the d
 
 ### 9. Update the express app to allow the creation of transferable documents
 
-In this step, we will add a route to allow the creation of transferable documents. It will allow the creation of transferable documents with the document type `BILL_OF_LADING`. We will be using the default renderer to preview the document. To learn more about decentralized rendering, refer to the [renderer documentation](/docs/4.x/tutorial/decentralised-renderer).
+In this step, we will add a route to allow the creation of transferable documents. It will allow the creation of transferable documents with the document type `BILL_OF_LADING`. We will be using the default renderer to preview the document. To learn more about decentralized rendering, refer to the [renderer documentation](/docs/introduction/key-components-of-tradetrust/add-ons/document-preview-templates/decentralised-renderer).
 
 :::note
 For documents with attachments, you will need to increase the limit of the request body.

@@ -86,7 +86,7 @@ The token belongs to `Charlie` (both owner and holder are the address of Charlie
 
 We will do **reject change of ownership** now.
 
-What this command does is it sets the states (holder and owner) of the token to it's previous holder and onwer address, in this case we will reject the change of ownership back to Alice.
+What this command does is it sets the states (holder and owner) of the token to it's previous holder and owner address, in this case we will reject the change of ownership back to Alice.
 
 ```
 tradetrust title-escrow reject-transfer-owner-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <CHARLIE_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
