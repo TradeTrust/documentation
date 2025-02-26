@@ -22,9 +22,9 @@ Below are the available transactions based on your role (Owner/Holder) and the c
 
 To execute these transactions, you can use either the Command Line Interface (CLI) or interact with the smart contract programmatically through code. Below, we provide step-by-step instructions on both methods, starting with the installation process.
 
-### 1) Using Code
+## 1) Using Code
 
-#### Installation
+### Installation
 
 ```bash
 npm install --save  @trustvc/trustvc

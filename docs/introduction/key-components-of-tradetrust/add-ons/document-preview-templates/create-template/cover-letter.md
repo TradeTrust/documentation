@@ -8,7 +8,7 @@ We have designed and created a simple generic template (cover letter) config fil
 
 Click <a href="/docs/topics/generic-templates/cover-letter/cover-letter-generic-template-config-file.json" target="_blank" rel="noopener noreferrer" download="cover-letter-generic-template-config-file.json">here</a> to download a config file.
 
-![Generic Template - Cover Letter](/docs/topics/generic-templates/cover-letter/cover-letter-generic-template.png)
+![Generic Template - Cover Letter](/docs/topics/generic-templates/cover-letter/cover-letter-generic-template-tradetrust-logo.png)
 
 Above is an example of how the generic cover letter will look like.
 
