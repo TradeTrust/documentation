@@ -41,7 +41,7 @@ There are two different categories of integration at this level:
 
 In the event that a shared universe integration is proposed, it has to be a public, permissionless network similar to TradeTrust (Ethereum). This means that no entity should be able to exclude another entity from participating on the network. The network has to also be trustlessly verifiable by both participants, and the ledger state should be accessible publicly.
 
-For a parallel universe integration, documents and assets issued on the alternative ledger will not be verifiable on [TradeTrust.io](https://tradetrust.io), but implementers are welcome to create their own stack spanning L0 to L4. They may wish to rely on some of the work already done by TradeTrust to reduce the amount of bespoke work required. For example, [tt-verify](https://github.com/TradeTrust/tt-verify) is very [easily modified](/docs/reference/libraries/tt-verify) to support [alternative verification methods](/docs/topics/advanced/alternative-ledgers).
+For a parallel universe integration, documents and assets issued on the alternative ledger will not be verifiable on [TradeTrust.io](https://tradetrust.io), but implementers are welcome to create their own stack spanning L0 to L4. They may wish to rely on some of the work already done by TradeTrust to reduce the amount of bespoke work required. For example, [tt-verify](https://github.com/TradeTrust/tt-verify) is very [easily modified](/docs/4.x/reference/libraries/tt-verify) to support [alternative verification methods](/docs/4.x/topics/advanced/alternative-ledgers).
 
 ### L1: Protocol Integration
 

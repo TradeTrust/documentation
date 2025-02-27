@@ -8,6 +8,13 @@ const Home = () => {
   const context = useDocusaurusContext();
   const { siteConfig } = context;
 
+  const activeVersion = localStorage.getItem("docs-preferred-version-default");
+
+  if (!activeVersion || activeVersion === "current") {
+    window.location.replace("/docs/introduction/what-is-tradetrust");
+    return null;
+  }
+
   return (
     <Layout title={siteConfig.title} description={siteConfig.tagline}>
       <main>
@@ -35,7 +42,7 @@ const Home = () => {
                   <div className="flex-shrink-0 flex justify-center">
                     <Link
                       className="btn bg-cerulean-500 text-white hover:text-white my-4 py-3 px-4"
-                      to={useBaseUrl("docs/getting-started")}
+                      to={useBaseUrl("docs/4.x/getting-started")}
                     >
                       Get Started
                     </Link>

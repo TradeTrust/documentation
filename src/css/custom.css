@@ -1,0 +1,23 @@
+/* Hide all items by default */
+.navbar-item-getting-started,
+.navbar-item-tutorial,
+.navbar-item-topics,
+.navbar-item-references,
+.navbar-item-gallery,
+.navbar-item-tools {
+  display: none;
+}
+
+/* Show specific items for version 'current' */
+html[data-docs-version='4.x'] .navbar-item-getting-started,
+html[data-docs-version='4.x'] .navbar-item-tutorial,
+html[data-docs-version='4.x'] .navbar-item-topics,
+html[data-docs-version='4.x'] .navbar-item-references {
+  display: block;
+}
+
+/* Show specific items for version '4.x' */
+html[data-docs-version='current'] .navbar-item-gallery,
+html[data-docs-version='current'] .navbar-item-tools {
+  display: block;
+}

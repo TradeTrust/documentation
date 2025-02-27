@@ -20,7 +20,7 @@ The blockchain networks listed here are not officially endorsed by IMDA Singapor
 | FREE   | 20180427 | stabilitytestnet | Stability Testnet | Stability Protocol                                   | -          | Active |
 | ASTRON | 1338     | astron           | Astron Mainnet    | Astron                                               | L2 Mainnet | Active |
 
-_Note: Please follow this [guide](docs/topics/introduction/supported-network.md) to add Stability into your metamask to use Stability Protocol blockchain with TradeTrust reference implementation._
+_Note: Please follow this [guide](/docs/4.x/topics/advanced/additional-network-metamask-guide#sign-up-for-a-stability-protocols-api-key) to add Stability into your metamask to use Stability Protocol blockchain with TradeTrust reference implementation._
 
 ### Community Supported Networks
 

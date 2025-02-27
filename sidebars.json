@@ -1,241 +1,274 @@
 {
-  "tutorial": [
-    "tutorial/introduction",
-    "tutorial/prerequisites",
-    {
-      "type": "category",
-      "label": "Creating a Verifiable Document",
-      "items": [
-        "tutorial/verifiable-documents/overview",
-        "tutorial/verifiable-documents/create",
-        "tutorial/verifiable-documents/dns",
-        "tutorial/verifiable-documents/raw-document",
-        {
-          "type": "category",
-          "label": "Wrapping Document",
-          "items": [
-            "tutorial/verifiable-documents/wrapping-document/wrapping-document-cli",
-            "tutorial/verifiable-documents/wrapping-document/wrapping-document-code"
-          ]
-        },
-        {
-          "type": "category",
-          "label": "Signing Document",
-          "items": [
-            "tutorial/verifiable-documents/signing-document/signing-document-cli",
-            "tutorial/verifiable-documents/signing-document/signing-document-code"
-          ]
-        },
-        "tutorial/verifiable-documents/revoking-document",
-        {
-          "type": "category",
-          "label": "Advanced",
-          "items": [
-            {
-              "type": "category",
-              "label": "Verifiable Documents (using document store)",
-              "items": [
-                "tutorial/verifiable-documents/advanced/document-store/overview",
-                {
-                  "type": "category",
-                  "label": "Deploying Document Store",
-                  "items": [
-                    "tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-cli",
-                    "tutorial/verifiable-documents/advanced/document-store/deploying-document-store/document-store-code"
-                  ]
-                },
-                "tutorial/verifiable-documents/advanced/document-store/configuring-dns",
-                "tutorial/verifiable-documents/advanced/document-store/raw-document",
-                {
-                  "type": "category",
-                  "label": "Wrapping Documents",
-                  "items": [
-                    "tutorial/verifiable-documents/advanced/document-store/wrapping-document/wrapping-document-cli",
-                    "tutorial/verifiable-documents/advanced/document-store/wrapping-document/wrapping-document-code"
-                  ]
-                },
-                {
-                  "type": "category",
-                  "label": "Issuing Documents",
-                  "items": [
-                    "tutorial/verifiable-documents/advanced/document-store/issuing-document/issuing-document-cli",
-                    "tutorial/verifiable-documents/advanced/document-store/issuing-document/issuing-document-code"
-                  ]
-                },
-                {
-                  "type": "category",
-                  "label": "Revoking Documents",
-                  "items": [
-                    "tutorial/verifiable-documents/advanced/document-store/revoking-document/revoking-document-cli",
-                    "tutorial/verifiable-documents/advanced/document-store/revoking-document/revoking-document-code"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        "tutorial/verifiable-documents/going-further"
-      ]
-    },
-    {
-      "type": "category",
-      "label": "Creating a Transferable Record",
-      "items": [
-        "tutorial/transferable-records/overview",
-        {
-          "type": "category",
-          "label": "Deploying Token Registry",
-          "items": [
-            "tutorial/transferable-records/token-registry/token-registry-cli",
-            "tutorial/transferable-records/token-registry/token-registry-code"
-          ]
-        },
-        "tutorial/transferable-records/dns",
-        "tutorial/transferable-records/raw-document",
-        {
-          "type": "category",
-          "label": "Wrapping Document",
-          "items": [
-            "tutorial/transferable-records/wrapping-document/wrapping-document-cli",
-            "tutorial/transferable-records/wrapping-document/wrapping-document-code"
-          ]
-        },
-        {
-          "type": "category",
-          "label": "Minting of the Document",
-          "items": [
-            "tutorial/transferable-records/issuing-document/issuing-document-cli",
-            "tutorial/transferable-records/issuing-document/issuing-document-code"
-          ]
-        },
-        "tutorial/transferable-records/going-further"
-      ]
-    },
-    "tutorial/decentralised-renderer/decentralised-renderer",
-    {
-      "type": "category",
-      "label": "Migrating to V5",
-      "items": [
-        "migration-guide/trustvc",
-        "migration-guide/migration-trustvc",
-        "migration-guide/igp-i",
-        "migration-guide/migration-tr-v5",
-        "migration-guide/migration-tt-cli-v5"
-      ]
-    }
-  ],
   "topics": {
     "Introduction": [
-      "topics/introduction/what-is-tradetrust",
-      "topics/introduction/tradetrust-layer-boundaries",
-      "topics/introduction/supported-network",
+      "introduction/what-is-tradetrust",
       {
-        "label": "Supported types of Documents",
+        "label": "Key components of TradeTrust",
         "type": "category",
         "items": [
           {
-            "label": "Verifiable Documents",
+            "label": "W3C VC",
             "type": "category",
             "items": [
-              "topics/introduction/verifiable-documents/overview",
-              "topics/introduction/verifiable-documents/document-store",
-              "topics/introduction/verifiable-documents/did"
+              "introduction/key-components-of-tradetrust/w3c-vc/tradetrust-document-schema",
+              {
+                "label": "Identifying the Issuer",
+                "type": "category",
+                "items": [
+                  "introduction/key-components-of-tradetrust/w3c-vc/identify-the-issuer/issuer-method-did-web"
+                ]
+              },
+              {
+                "type": "category",
+                "label": "Signing Document",
+                "items": [
+                  "introduction/key-components-of-tradetrust/w3c-vc/signing-documents/signing-document-cli",
+                  "introduction/key-components-of-tradetrust/w3c-vc/signing-documents/signing-document-code"
+                ]
+              },
+              {
+                "type": "category",
+                "label": "Verifying of Documents",
+                "items": [
+                  "introduction/key-components-of-tradetrust/w3c-vc/verifying-documents/overview",
+                  "introduction/key-components-of-tradetrust/w3c-vc/verifying-documents/issuer-identity",
+                  "introduction/key-components-of-tradetrust/w3c-vc/verifying-documents/document-status",
+                  "introduction/key-components-of-tradetrust/w3c-vc/verifying-documents/document-integrity",
+                  "introduction/key-components-of-tradetrust/w3c-vc/verifying-documents/verifying-document-cli",
+                  "introduction/key-components-of-tradetrust/w3c-vc/verifying-documents/verifying-document-code"
+                ]
+              }
             ]
           },
           {
-            "label": "Transferable Records",
+            "label": "Transferability",
             "type": "category",
             "items": [
-              "topics/introduction/transferable-records/overview",
-              "topics/introduction/transferable-records/token-registry",
+              "introduction/key-components-of-tradetrust/transferability/overview",
+              "introduction/key-components-of-tradetrust/transferability/token-registry",
+              "introduction/key-components-of-tradetrust/transferability/title-transfer",
+              "introduction/key-components-of-tradetrust/transferability/endorsement-chain",
+              "introduction/key-components-of-tradetrust/transferability/transactions",
+              "introduction/key-components-of-tradetrust/transferability/remarks-encryption-decryption"
+            ]
+          },
+          {
+            "label": "Blockchain",
+            "type": "category",
+            "items": [
+              "introduction/key-components-of-tradetrust/blockchain/supported-network",
+              "introduction/key-components-of-tradetrust/blockchain/estimated-cost-for-transactions"
+            ]
+          },
+          {
+            "label": "Add-ons",
+            "type": "category",
+            "items": [
               {
-                "label": "Title Transfer",
+                "label": "Document Preview + templates",
                 "type": "category",
                 "items": [
-                  "topics/introduction/transferable-records/title-transfer",
-                  "topics/introduction/transferable-records/title-transfer-example"
+                  {
+                    "label": "Create Template",
+                    "type": "category",
+                    "items": [
+                      "introduction/key-components-of-tradetrust/add-ons/document-preview-templates/create-template/overview",
+                      "introduction/key-components-of-tradetrust/add-ons/document-preview-templates/create-template/cover-letter",
+                      "introduction/key-components-of-tradetrust/add-ons/document-preview-templates/create-template/bill-of-lading"
+                    ]
+                  },
+                  "introduction/key-components-of-tradetrust/add-ons/document-preview-templates/decentralised-renderer"
+                ]
+              },
+              "introduction/key-components-of-tradetrust/add-ons/qr-code"
+            ]
+          }
+        ]
+      },
+      "introduction/legal",
+      "introduction/ig-p&i"
+    ],
+    "Tutorial": [
+      "tutorial/creator",
+      "tutorial/verifier",
+      "tutorial/transferability"
+    ],
+    "How Tos": [
+      "how-tos/deployment",
+      {
+        "label": "Issuer",
+        "type": "category",
+        "items": [
+          "how-tos/issuer/did-web",
+          {
+            "label": "OA (Legacy)",
+            "type": "category",
+            "items": [
+              "how-tos/issuer/dns-did",
+              "how-tos/issuer/dns-txt"
+            ]
+          }
+        ]
+      },
+      "how-tos/contexts",
+      "how-tos/credential-subject",
+      "how-tos/bitstring",
+      "how-tos/credential-status",
+      {
+        "label": "Issuing OpenAttestation Documents",
+        "type": "category",
+        "items": [
+          "how-tos/open-attestation/prerequisites",
+          {
+            "label": "Creating a Verifiable Document",
+            "type": "category",
+            "items": [
+              "how-tos/open-attestation/verifiable-documents/overview",
+              {
+                "label": "DNS-DID Method",
+                "type": "category",
+                "items": [
+                  "how-tos/open-attestation/verifiable-documents/dns-did/overview",
+                  "how-tos/open-attestation/verifiable-documents/dns-did/create",
+                  "how-tos/open-attestation/verifiable-documents/dns-did/dns",
+                  "how-tos/open-attestation/verifiable-documents/dns-did/raw-document",
+                  {
+                    "label": "Wrapping Document",
+                    "type": "category",
+                    "items": [
+                      "how-tos/open-attestation/verifiable-documents/dns-did/wrapping-document/wrapping-document-cli",
+                      "how-tos/open-attestation/verifiable-documents/dns-did/wrapping-document/wrapping-document-code"
+                    ]
+                  },
+                  {
+                    "label": "Signing Document",
+                    "type": "category",
+                    "items": [
+                      "how-tos/open-attestation/verifiable-documents/dns-did/signing-document/signing-document-cli",
+                      "how-tos/open-attestation/verifiable-documents/dns-did/signing-document/signing-document-code"
+                    ]
+                  },
+                  "how-tos/open-attestation/verifiable-documents/dns-did/revoking-document"
+                ]
+              },
+              {
+                "label": "DNS-TXT Method",
+                "type": "category",
+                "items": [
+                  "how-tos/open-attestation/verifiable-documents/dns-txt/overview",
+                  {
+                    "label": "Deploying Document Store",
+                    "type": "category",
+                    "items": [
+                      "how-tos/open-attestation/verifiable-documents/dns-txt/deploying-document-store/document-store-cli",
+                      "how-tos/open-attestation/verifiable-documents/dns-txt/deploying-document-store/document-store-code"
+                    ]
+                  },
+                  "how-tos/open-attestation/verifiable-documents/dns-txt/configuring-dns",
+                  "how-tos/open-attestation/verifiable-documents/dns-txt/raw-document",
+                  {
+                    "label": "Wrapping Documents",
+                    "type": "category",
+                    "items": [
+                      "how-tos/open-attestation/verifiable-documents/dns-txt/wrapping-document/wrapping-document-cli",
+                      "how-tos/open-attestation/verifiable-documents/dns-txt/wrapping-document/wrapping-document-code"
+                    ]
+                  },
+                  {
+                    "label": "Issuing Documents",
+                    "type": "category",
+                    "items": [
+                      "how-tos/open-attestation/verifiable-documents/dns-txt/issuing-document/issuing-document-cli",
+                      "how-tos/open-attestation/verifiable-documents/dns-txt/issuing-document/issuing-document-code"
+                    ]
+                  },
+                  {
+                    "label": "Revoking Documents",
+                    "type": "category",
+                    "items": [
+                      "how-tos/open-attestation/verifiable-documents/dns-txt/revoking-document/revoking-document-cli",
+                      "how-tos/open-attestation/verifiable-documents/dns-txt/revoking-document/revoking-document-code"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Creating a Transferable Record",
+            "type": "category",
+            "items": [
+              "how-tos/open-attestation/transferable-records/overview",
+              {
+                "label": "Deploying Token Registry",
+                "type": "category",
+                "items": [
+                  "how-tos/open-attestation/transferable-records/token-registry/token-registry-cli",
+                  "how-tos/open-attestation/transferable-records/token-registry/token-registry-code"
+                ]
+              },
+              "how-tos/open-attestation/transferable-records/dns",
+              "how-tos/open-attestation/transferable-records/raw-document",
+              {
+                "label": "Wrapping Document",
+                "type": "category",
+                "items": [
+                  "how-tos/open-attestation/transferable-records/wrapping-document/wrapping-document-cli",
+                  "how-tos/open-attestation/transferable-records/wrapping-document/wrapping-document-code"
+                ]
+              },
+              {
+                "label": "Minting of the Document",
+                "type": "category",
+                "items": [
+                  "how-tos/open-attestation/transferable-records/issuing-document/issuing-document-cli",
+                  "how-tos/open-attestation/transferable-records/issuing-document/issuing-document-code"
                 ]
               }
             ]
           }
         ]
       },
-      "topics/introduction/tradetrust-document-schema",
+      "how-tos/transactions",
+      "how-tos/verifydocument",
+      "how-tos/fetch-endorsement-chain",
       {
-        "label": "Identifying the Issuer",
-        "type": "category",
-        "items": ["topics/introduction/issuer-method-dns-txt", "topics/introduction/issuer-method-dns-did"]
-      },
-      "topics/introduction/estimated-cost-for-transactions"
-    ],
-    "Verifying of Documents": [
-      "topics/verifying-documents/overview",
-      "topics/verifying-documents/issuer-identity",
-      "topics/verifying-documents/issuance-status",
-      "topics/verifying-documents/document-integrity"
-    ],
-    "Advanced": [
-      "topics/advanced/alternative-ledgers",
-      "topics/advanced/additional-network-metamask-guide",
-      "topics/advanced/wallet-management",
-      {
-        "label": "AWS KMS",
+        "label": "Advanced",
         "type": "category",
         "items": [
-          "topics/advanced/aws-kms/overview",
-          "topics/advanced/aws-kms/create-key",
-          "topics/advanced/aws-kms/access-keys",
-          "topics/advanced/aws-kms/did-sign-demo"
+          {
+            "label": "AWS KMS",
+            "type": "category",
+            "items": [
+              "how-tos/advanced/aws-kms/overview",
+              "how-tos/advanced/aws-kms/create-key",
+              "how-tos/advanced/aws-kms/access-keys",
+              "how-tos/advanced/aws-kms/did-sign-demo"
+            ]
+          },
+          "how-tos/advanced/wallet-management",
+          "how-tos/advanced/address-resolver",
+          "how-tos/advanced/role-and-access"
         ]
       }
     ],
-    "Appendix": [
-      "topics/appendix/glossary",
-      "topics/appendix/tradetrust-api",
-      "topics/appendix/non-fungible-token",
-      "topics/appendix/core-components",
-      "topics/appendix/polygon-mainnet-workaround",
-      "topics/appendix/stability-gasfee-workaround",
-      "topics/appendix/astron-address-whitelist-error"
-    ]
-  },
-  "reference": {
-    "TradeTrust Verifier Website": [
-      "reference/tradetrust-website/overview",
-      "reference/tradetrust-website/endorsement-chain",
-      "reference/tradetrust-website/address-resolver",
-      "reference/tradetrust-website/qr-code"
+    "Migration / Upgrading": [
+      "migration-guide/trustvc",
+      "migration-guide/migration-trustvc",
+      "migration-guide/igp-i",
+      "migration-guide/migration-tr-v5",
+      "migration-guide/migration-tt-cli-v5"
     ],
-    "TradeTrust Document Creator": [
-      "reference/document-creator/overview",
-      "reference/document-creator/prerequisites",
-      "reference/document-creator/config-file",
-      "reference/document-creator/data-file"
+    "Community": [
+      "community/contributing"
     ],
-    "Generic Templates": [
-      "reference/generic-templates/overview",
-      "reference/generic-templates/cover-letter",
-      "reference/generic-templates/bill-of-lading"
+    "Common Issues & Solutions": [
+      "common-issues/polygon-mainnet-workaround",
+      "common-issues/stability-gasfee-workaround",
+      "common-issues/astron-address-whitelist-error"
     ],
-    "Libraries": [
-      "reference/libraries/trustvc",
-      "reference/libraries/open-attestation",
-      "reference/libraries/tt-verify",
-      "reference/libraries/subgraph"
-    ],
-    "TradeTrust V4 (Beta)": [
-      "reference/tradetrust-v4/tradetrust-v4-schema",
-      {
-        "label": "Issuer method IDVC",
-        "type": "category",
-        "items": [
-          "reference/tradetrust-v4/idvc-overview",
-          "reference/tradetrust-v4/obtaining-valid-idvc",
-          "reference/tradetrust-v4/identity-vc-specifications",
-          "reference/tradetrust-v4/issuing-v4-idvc-document",
-          "reference/tradetrust-v4/verifying-v4-idvc-document"
-        ]
-      }
+    "Glossary": [
+      "glossary/glossary"
     ]
   }
 }
