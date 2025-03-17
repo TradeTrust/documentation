@@ -108,7 +108,7 @@ Also, please make sure you have completed the prerequisites listed below.
 
 #### Creation of wallet
 
-- Create a [wallet](/docs/4.x/tutorial/prerequisites#wallet-creation).
+- Create a [wallet](/docs/how-tos/open-attestation/prerequisites#wallet-creation).
 
 ### Creation of DID
 

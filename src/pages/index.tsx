@@ -11,7 +11,7 @@ const Home = () => {
   const activeVersion = localStorage.getItem("docs-preferred-version-default");
 
   if (!activeVersion || activeVersion === "current") {
-    window.location.replace("/docs/introduction/what-is-tradetrust/");
+    window.location.replace("/docs/introduction/what-is-tradetrust");
     return null;
   }
 

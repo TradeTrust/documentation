@@ -123,10 +123,12 @@ Update `package.json` with the following scripts:
 ### 7. Setup script for single-execution commands
 
 To sign and mint tokens, you'll need:
+
 1. A signing key pair (did:web)
 2. A Token Registry contract (smart contract)
 
 In this example, we'll generate these and store:
+
 - Signing private key and contract address in `.env`
 - Signing public key in `did.json` (served as a public did:web document)
 
@@ -373,6 +375,7 @@ It should only be used for testing purposes.
 :::
 
 To expose your local server using ngrok:
+
 1. Create an account at [ngrok.com](https://ngrok.com/)
 2. Get your authtoken and add it to `.env` as `NGROK_AUTHTOKEN`
 3. Create a static domain and add it to `.env` as `DOMAIN`
@@ -428,7 +431,7 @@ Visit [https://dev.uniresolver.io/](https://dev.uniresolver.io/) and enter the d
 
 ### 9. Update the express app to allow the creation of transferable documents
 
-In this step, we will add a route to allow the creation of transferable documents. It will allow the creation of transferable documents with the document type `BILL_OF_LADING`. We will be using the default renderer to preview the document. To learn more about decentralized rendering, refer to the [renderer documentation](/docs/4.x/tutorial/decentralised-renderer).
+In this step, we will add a route to allow the creation of transferable documents. It will allow the creation of transferable documents with the document type `BILL_OF_LADING`. We will be using the default renderer to preview the document. To learn more about decentralized rendering, refer to the [renderer documentation](/docs/introduction/key-components-of-tradetrust/add-ons/document-preview-templates/decentralised-renderer).
 
 :::note
 For documents with attachments, you will need to increase the limit of the request body.
@@ -625,6 +628,7 @@ output:
 ## Conclusion
 
 In this tutorial, You've learned how to:
+
 1. Create a did:web identifier
 2. Deploy a Token Registry contract
 3. Create transferable documents using the Token Registry
