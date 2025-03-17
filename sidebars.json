@@ -14,9 +14,7 @@
               {
                 "label": "Identifying the Issuer",
                 "type": "category",
-                "items": [
-                  "introduction/key-components-of-tradetrust/w3c-vc/identify-the-issuer/issuer-method-did-web"
-                ]
+                "items": ["introduction/key-components-of-tradetrust/w3c-vc/identify-the-issuer/issuer-method-did-web"]
               },
               {
                 "type": "category",
@@ -88,11 +86,7 @@
       "introduction/legal",
       "introduction/ig-p&i"
     ],
-    "Tutorial": [
-      "tutorial/creator",
-      "tutorial/verifier",
-      "tutorial/transferability"
-    ],
+    "Tutorial": ["tutorial/creator", "tutorial/verifier", "tutorial/transferability"],
     "How Tos": [
       "how-tos/deployment",
       {
@@ -103,10 +97,7 @@
           {
             "label": "OA (Legacy)",
             "type": "category",
-            "items": [
-              "how-tos/issuer/dns-did",
-              "how-tos/issuer/dns-txt"
-            ]
+            "items": ["how-tos/issuer/dns-did", "how-tos/issuer/dns-txt"]
           }
         ]
       },
@@ -248,7 +239,8 @@
           },
           "how-tos/advanced/wallet-management",
           "how-tos/advanced/address-resolver",
-          "how-tos/advanced/role-and-access"
+          "how-tos/advanced/role-and-access",
+          "how-tos/advanced/additional-network-metamask-guide"
         ]
       }
     ],
@@ -259,16 +251,12 @@
       "migration-guide/migration-tr-v5",
       "migration-guide/migration-tt-cli-v5"
     ],
-    "Community": [
-      "community/contributing"
-    ],
+    "Community": ["community/contributing"],
     "Common Issues & Solutions": [
       "common-issues/polygon-mainnet-workaround",
       "common-issues/stability-gasfee-workaround",
       "common-issues/astron-address-whitelist-error"
     ],
-    "Glossary": [
-      "glossary/glossary"
-    ]
+    "Glossary": ["glossary/glossary"]
   }
 }
