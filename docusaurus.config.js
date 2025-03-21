@@ -18,6 +18,15 @@ const siteConfig = {
     mermaid: true,
   },
   onBrokenLinks: "warn",
+  headTags: [
+    {
+      tagName: "meta",
+      attributes: {
+        name: "algolia-site-verification",
+        content: "272AFA3283E853CB", // Replace with your actual user ID
+      },
+    },
+  ],
   presets: [
     [
       "@docusaurus/preset-classic",
@@ -27,18 +36,15 @@ const siteConfig = {
           sidebarPath: require.resolve("./sidebars.json"),
           sidebarCollapsible: true,
           editUrl: "https://github.com/tradetrust/documentation/edit/master/",
-          lastVersion: 'current',
+          lastVersion: "current",
           versions: {
             current: {
-              label: '5.x'
+              label: "5.x",
             },
           },
         },
         theme: {
-          customCss: [
-            require.resolve("./src/css/custom.css"),
-            require.resolve("./src/css/tailwind.css"),
-          ],
+          customCss: [require.resolve("./src/css/custom.css"), require.resolve("./src/css/tailwind.css")],
         },
         gtag: {
           trackingID: GA_MEASUREMENT_ID,
@@ -57,16 +63,24 @@ const siteConfig = {
         { to: "docs/4.x/getting-started", label: "Getting Started", className: "navbar-item-getting-started" },
         { to: "docs/4.x/tutorial/introduction", label: "Tutorial", className: "navbar-item-tutorial" },
         { to: "docs/4.x/topics/introduction/what-is-tradetrust", label: "Topics", className: "navbar-item-topics" },
-        { to: "docs/4.x/reference/tradetrust-website/overview", label: "References", className: "navbar-item-references" },
-        { to: "https://gallery.openattestation.com/tag/trade-trust", label: "Gallery", className: "navbar-item-gallery" },
+        {
+          to: "docs/4.x/reference/tradetrust-website/overview",
+          label: "References",
+          className: "navbar-item-references",
+        },
+        {
+          to: "https://gallery.openattestation.com/tag/trade-trust",
+          label: "Gallery",
+          className: "navbar-item-gallery",
+        },
         { to: "https://toolkit.openattestation.com/", label: "Tools", className: "navbar-item-tools" },
         {
-          type: 'docsVersionDropdown',
-          position: 'right',
+          type: "docsVersionDropdown",
+          position: "right",
           dropdownActiveClassDisabled: true,
           dropdownItemsAfter: [
             {
-              type: 'html',
+              type: "html",
               value: '<hr class="dropdown-separator">',
             },
           ],
