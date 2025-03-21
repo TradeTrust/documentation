@@ -18,6 +18,15 @@ const siteConfig = {
     mermaid: true,
   },
   onBrokenLinks: "warn",
+  headTags: [
+    {
+      tagName: "meta",
+      attributes: {
+        name: "algolia-site-verification",
+        content: "272AFA3283E853CB", // Replace with your actual user ID
+      },
+    },
+  ],
   presets: [
     [
       "@docusaurus/preset-classic",
@@ -27,18 +36,15 @@ const siteConfig = {
           sidebarPath: require.resolve("./sidebars.json"),
           sidebarCollapsible: true,
           editUrl: "https://github.com/tradetrust/documentation/edit/master/",
-          lastVersion: 'current',
+          lastVersion: "current",
           versions: {
             current: {
-              label: '5.x'
+              label: "5.x",
             },
           },
         },
         theme: {
-          customCss: [
-            require.resolve("./src/css/custom.css"),
-            require.resolve("./src/css/tailwind.css"),
-          ],
+          customCss: [require.resolve("./src/css/custom.css"), require.resolve("./src/css/tailwind.css")],
         },
         gtag: {
           trackingID: GA_MEASUREMENT_ID,
@@ -57,16 +63,24 @@ const siteConfig = {
         { to: "docs/4.x/getting-started", label: "Getting Started", className: "navbar-item-getting-started" },
         { to: "docs/4.x/tutorial/introduction", label: "Tutorial", className: "navbar-item-tutorial" },
         { to: "docs/4.x/topics/introduction/what-is-tradetrust", label: "Topics", className: "navbar-item-topics" },
-        { to: "docs/4.x/reference/tradetrust-website/overview", label: "References", className: "navbar-item-references" },
-        { to: "https://gallery.openattestation.com/tag/trade-trust", label: "Gallery", className: "navbar-item-gallery" },
+        {
+          to: "docs/4.x/reference/tradetrust-website/overview",
+          label: "References",
+          className: "navbar-item-references",
+        },
+        {
+          to: "https://gallery.openattestation.com/tag/trade-trust",
+          label: "Gallery",
+          className: "navbar-item-gallery",
+        },
         { to: "https://toolkit.openattestation.com/", label: "Tools", className: "navbar-item-tools" },
         {
-          type: 'docsVersionDropdown',
-          position: 'right',
+          type: "docsVersionDropdown",
+          position: "right",
           dropdownActiveClassDisabled: true,
           dropdownItemsAfter: [
             {
-              type: 'html',
+              type: "html",
               value: '<hr class="dropdown-separator">',
             },
           ],
@@ -98,8 +112,20 @@ const siteConfig = {
     },
     algolia: {
       appId: "6DNGPTCB04",
-      apiKey: process.env.ALGOLIA_SEARCH_API_KEY || "dummykey",
+      apiKey: "45fb3f4d25432800827f4cd40f0a1495",
       indexName: "tradetrust",
+      contextualSearch: true, // Ensures search results match the current version
+      transformSearchResult: (result) => {
+        if (result.url.includes("/docs/tutorial")) {
+          result.url = result.url.replace("/docs/tutorial", "/docs/"); // Fix URLs for version 5.x
+        } else if (result.url.includes("/docs/topics")) {
+          result.url = result.url.replace("/docs/topics", "/docs/"); // Fix URLs for version 5.x
+        } else if (result.url.includes("/docs/4.x/")) {
+          result.url = result.url.replace("/docs/4.x/", "/docs/4.x/"); // Keep old version structure
+        }
+        return result;
+      },
+      debug: true,
       algoliaOptions: {},
     },
     prism: {
