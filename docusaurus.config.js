@@ -114,18 +114,6 @@ const siteConfig = {
       appId: "6DNGPTCB04",
       apiKey: process.env.ALGOLIA_SEARCH_API_KEY || "dummykey",
       indexName: "tradetrust",
-      contextualSearch: true, // Ensures search results match the current version
-      transformSearchResult: (result) => {
-        if (result.url.includes("/docs/tutorial")) {
-          result.url = result.url.replace("/docs/tutorial", "/docs/"); // Fix URLs for version 5.x
-        } else if (result.url.includes("/docs/topics")) {
-          result.url = result.url.replace("/docs/topics", "/docs/"); // Fix URLs for version 5.x
-        } else if (result.url.includes("/docs/4.x/")) {
-          result.url = result.url.replace("/docs/4.x/", "/docs/4.x/"); // Keep old version structure
-        }
-        return result;
-      },
-      debug: true,
       algoliaOptions: {},
     },
     prism: {
