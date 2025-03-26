@@ -4,7 +4,7 @@ import { useFetchGasPrice, Chain } from "../hooks";
 import { DeploymentTypeLabel } from "../DeploymentTypeLabel";
 import { BoxTag } from "../BoxTag";
 
-const contractGasData = {
+const contractGasDataV5 = {
   verifiable: [
     {
       name: "Document Store Deployment (one time set-up)",
@@ -93,6 +93,75 @@ const contractGasData = {
   ],
 };
 
+const contractGasDataV4 = {
+  verifiable: [
+    {
+      name: "Document Store Deployment (one time set-up)",
+      gas: 1106320,
+      remarks: "Only applicable to DID if require revocation.",
+      deploymentType: ["DNS", "DID"],
+    },
+    {
+      name: "Issuance of Document",
+      gas: 47886,
+      remarks: "Applicable for batch Issue.",
+      deploymentType: ["DNS"],
+    },
+    {
+      name: "Revoke Document",
+      gas: 47980,
+      deploymentType: ["DNS", "DID"],
+    },
+  ],
+  transferable: [
+    {
+      name: "Token Registry Deployment (one time set-up)",
+      gas: 301065,
+      deploymentType: ["DNS"],
+    },
+    {
+      name: "Issuance of Document",
+      gas: 250509,
+      deploymentType: ["DNS"],
+    },
+    {
+      name: "Transfer Ownership",
+      gas: 61333,
+      deploymentType: ["DNS"],
+    },
+    {
+      name: "Transfer Holdership",
+      gas: 47282,
+      deploymentType: ["DNS"],
+    },
+    {
+      name: "Nominate Ownership",
+      gas: 47320,
+      deploymentType: ["DNS"],
+    },
+    {
+      name: "Endorse Ownership",
+      gas: 52057,
+      deploymentType: ["DNS"],
+    },
+    {
+      name: "Surrender Document",
+      gas: 84586,
+      deploymentType: ["DNS"],
+    },
+    {
+      name: "Restore Document",
+      gas: 92043,
+      deploymentType: ["DNS"],
+    },
+    {
+      name: "Burn Document",
+      gas: 94795,
+      deploymentType: ["DNS"],
+    },
+  ],
+};
+
 export const PriceTable = (props) => {
   const FETCH_INTERVAL = 30000;
   const { price, gwei } = useFetchGasPrice(Chain.Ethereum, FETCH_INTERVAL);
@@ -101,8 +170,12 @@ export const PriceTable = (props) => {
   const priceFactor = gwei * 0.000000001 * price;
   const maticPriceFactor = maticGwei * 0.000000001 * maticPrice;
   const xdcPriceFactor = xdcGwei * 0.000000001 * xdcPrice;
-  const { type, priceFormatOptions } = props;
+  const { type, priceFormatOptions, version = "v5" } = props;
+  
+  // Select the appropriate contract gas data based on version
+  const contractGasData = version === "v4" ? contractGasDataV4 : contractGasDataV5;
   const costData = contractGasData[type];
+  
   const currentDtStr = new Date().toLocaleString("en-SG", { hour12: true, timeZoneName: "short" });
   const nf = new Intl.NumberFormat();
   const rows = costData.map((record, idx) => (
