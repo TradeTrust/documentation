@@ -64,7 +64,7 @@ Before you begin, ensure you have Node.js installed on your system.
     ```
     ? Please enter the path to your key pair JSON file: ./keypair.json
     ? Please enter your domain for hosting the did-web public key (e.g.,
-    https://example.com/.wellknown/did.json): https://example.com/.wellknown/did.json
+    https://example.com/.well-known/did.json): https://example.com/.well-known/did.json
     ? Please specify a directory path to save the DID token file (optional): .
     File written successfully to ./wellknown.json
     File written successfully to ./didKeyPairs.json
@@ -176,7 +176,7 @@ Before adding new keys:
     ```
     ? Please enter the path to your key pair JSON file: ./keypair.json
     ? Please enter your domain for hosting the did-web public key (e.g.,
-    https://example.com/.wellknown/did.json): https://example.com/.wellknown/did.json
+    https://example.com/.well-known/did.json): https://example.com/.well-known/did.json
     ? Please specify a directory path to save the DID token file (optional): .
     File written successfully to ./wellknown.json
     File written successfully to ./didKeyPairs.json
