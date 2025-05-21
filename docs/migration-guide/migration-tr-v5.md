@@ -134,6 +134,59 @@ const result = await contract.myFunction(arg1, arg2); //called directly from the
 
 - OpenZeppelin v5 contracts are written for Solidity version 0.8.20, whereas the compiler being used is 0.8.22. It is recommended to deploy on chains that have the Cancun upgrade to avoid potential issues with contract execution.
 
+### Token Registry Deployment
+
+**Before (Token Registry v4)**:
+
+```ts
+import { TDocDeployer__factory } from "@tradetrust-tt/token-registry/contracts";
+import { constants, utils } from "@tradetrust-tt/token-registry";
+
+const networkId = await signer.getChainId();
+const tDocDeployerAddress = constants.contractAddress.Deployer[networkId];
+const implContractAddress = constants.contractAddress.TokenImplementation[networkId];
+const tDocDeployerV5 = TDocDeployer__factory.connect(tDocDeployerAddress, signer);
+const initParams = utils.encodeInitParams({
+  name,
+  symbol,
+  deployer: await signer.getAddress(),
+});
+
+const mintingReceipt = await tDocDeployerV5.deploy(implContractAddress, initParams);
+const mintingTx = await mintingReceipt.wait();
+console.log(mintingTx.transactionHash);
+```
+
+**After (Token Registry v5 with TrustVC)**:
+If you are migrating to TrustVC, you will use the token-registry-v5 module to access the Token Registry v5 contracts.
+
+```ts
+import { v5ContractAddress, v5Contracts, v5Utils, SUPPORTED_CHAINS, CHAIN_ID } from "@trustvc/trustvc";
+
+const walletAddress = await signer.getAddress();
+const networkId = await signer.getChainId();
+const tDocDeployerAddress = v5ContractAddress.Deployer[networkId];
+const implContractAddress = v5ContractAddress.TokenImplementation[networkId];
+const tDocDeployerV5 = v5Contracts.TDocDeployer__factory.connect(tDocDeployerAddress, signer);
+const initParams = v5Utils.encodeInitParams({
+  name,
+  symbol,
+  deployer: await signer.getAddress(),
+});
+
+const { gasStation } = SUPPORTED_CHAINS[networkId as unknown as CHAIN_ID];
+const feeData = gasStation && (await gasStation());
+const { maxFeePerGas, maxPriorityFeePerGas } = feeData || (await signer.getFeeData());
+const { maxFeePerGas, maxPriorityFeePerGas } = feeData || (await signer.getFeeData());
+const mintingReceipt = await tDocDeployerV5.deploy(implContractAddress, initParams, {
+  maxPriorityFeePerGas: maxPriorityFeePerGas,
+  maxFeePerGas: maxFeePerGas,
+});
+const mintingTx = await mintingReceipt.wait();
+
+console.log(mintingTx.transactionHash);
+```
+
 ### Connect to Token Registry
 
 In Token Registry v5, the way you connect to a registry hasn’t changed much, but it's **important** to ensure you're using the **updated contract and factory from Token Registry v5**.

@@ -100,27 +100,25 @@ This package exposes the [Typechain (Ethers)](https://github.com/dethcrypto/Type
 #### Connect to existing tDocDeployer
 
 ```ts
-import { v5Contracts } from "@trustvc/trustvc";
+import { v5Contracts, v5ContractAddress, v5Utils } from "@trustvc/trustvc";
 import { ethers, Signer } from "ethers";
 
 const rpc = `https://polygon-amoy.infura.io/v3/${INFURA_ID}`; // add your infura ID
-const tDocDeployerAddress = "0x123"; // token registry deployer address
 
 const JsonRpcProvider = ethers.version.startsWith("6.")
   ? (ethers as any).JsonRpcProvider
   : (ethers as any).providers.JsonRpcProvider; // to manage both ether's v5 and v6
 
 const _provider = new JsonRpcProvider(rpc);
+const networkId = await provider.getNetwork();
+
+const tDocDeployerAddress = v5ContractAddress.Deployer[networkId]; // token registry deployer address
 const connectedDeployer = new ethers.Contract(tDocDeployerAddress, v5Contracts.TDocDeployer__factory.abi, _provider);
 
-const encodeInitParams = ({ name, symbol, deployer }: Params) => {
-  return (ethers as any).AbiCoder.defaultAbiCoder().encode(["string", "string", "address"], [name, symbol, deployer]);
-};
-
-const initParam = encodeInitParams({
+const initParam = v5Utils.encodeInitParams({
   name,
   symbol,
-  deployerAddress,
+  deployer: await signer.getAddress(),
 });
 
 const tx = await connectedDeployer.deploy(implAddress, initParam);
