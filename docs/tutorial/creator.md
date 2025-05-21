@@ -123,10 +123,12 @@ Update `package.json` with the following scripts:
 ### 7. Setup script for single-execution commands
 
 To sign and mint tokens, you'll need:
+
 1. A signing key pair (did:web)
 2. A Token Registry contract (smart contract)
 
 In this example, we'll generate these and store:
+
 - Signing private key and contract address in `.env`
 - Signing public key in `did.json` (served as a public did:web document)
 
@@ -253,8 +255,7 @@ More details [here](/docs/4.x/topics/advanced/additional-network-metamask-guide/
 <summary> Create a `scripts/deployTokenRegistry.ts` file and add the following code:</summary>
 
 ```ts
-import { CHAIN_ID, SUPPORTED_CHAINS, v5ContractAddress, v5Contracts } from "@trustvc/trustvc";
-import { utils as v5Utils } from "@trustvc/trustvc/token-registry-v5";
+import { CHAIN_ID, SUPPORTED_CHAINS, v5ContractAddress, v5Contracts, v5Utils } from "@trustvc/trustvc";
 import { ethers } from "ethers";
 import { writeEnvVariable } from "./utils";
 
@@ -373,6 +374,7 @@ It should only be used for testing purposes.
 :::
 
 To expose your local server using ngrok:
+
 1. Create an account at [ngrok.com](https://ngrok.com/)
 2. Get your authtoken and add it to `.env` as `NGROK_AUTHTOKEN`
 3. Create a static domain and add it to `.env` as `DOMAIN`
@@ -439,8 +441,7 @@ For documents with attachments, you will need to increase the limit of the reque
 <summary>Update `src/index.ts` with the following code:</summary>
 
 ```ts
-import { CHAIN_ID, encrypt, getTokenId, signW3C, SUPPORTED_CHAINS } from "@trustvc/trustvc";
-import { TradeTrustToken__factory } from "@trustvc/trustvc/token-registry-v5/contracts";
+import {v5Contracts, CHAIN_ID, encrypt, getTokenId, signW3C, SUPPORTED_CHAINS } from "@trustvc/trustvc";
 import { CredentialSubjects } from "@trustvc/trustvc/w3c/vc";
 import { ethers, Wallet } from "ethers";
 ...
@@ -551,7 +552,7 @@ app.post("/create/:documentId", async (req: Request, res: Response, next: NextFu
     const wallet = unconnectedWallet.connect(provider);
     const tokenRegistry = new ethers.Contract(
       SYSTEM_TOKEN_REGISTRY_ADDRESS,
-      TradeTrustToken__factory.abi,
+      v5Contracts.TradeTrustToken__factory.abi,
       wallet
     );
 
@@ -625,6 +626,7 @@ output:
 ## Conclusion
 
 In this tutorial, You've learned how to:
+
 1. Create a did:web identifier
 2. Deploy a Token Registry contract
 3. Create transferable documents using the Token Registry

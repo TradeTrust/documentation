@@ -33,10 +33,10 @@ Refer to the [pre-requisite](/docs/how-tos/open-attestation/prerequisites#unders
 ### Deploy a token registry
 
 ```ts
-import { v5Contracts } from "@trustvc/trustvc";
+import { v5Contracts, v5ContractAddress, v5Utils } from "@trustvc/trustvc";
 import { Wallet, ethers } from "ethers";
 
-const { TDocDeployer__factory, TOKEN_REG_CONSTS, DeploymentEvent, encodeInitParams, getEventFromReceipt } = v5Contracts;
+const { TDocDeployer__factory } = v5Contracts;
 // preparing the wallet
 const unconnectedWallet = new Wallet("<your_private_key>");
 const provider = new ethers.providers.JsonRpcProvider("<your_provider_url>");
@@ -44,8 +44,9 @@ const wallet = unconnectedWallet.connect(provider);
 const walletAddress = await wallet.getAddress();
 const chainId = await wallet.getChainId();
 
-const { TokenImplementation, Deployer } = TOKEN_REG_CONSTS.contractAddress;
+const { TokenImplementation, Deployer } = v5ContractAddress;
 const deployerContract = TDocDeployer__factory.connect(Deployer[chainId], wallet);
+const { encodeInitParams, getEventFromReceipt } = v5Utils;
 const initParam = encodeInitParams({
   name: "DemoTokenRegistry",
   symbol: "DTR",

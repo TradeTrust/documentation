@@ -19,6 +19,7 @@ The **Bitstring Status List** efficiently tracks the revocation/suspension state
 This approach enables verifiers to determine the status of a credential without altering the original VC.
 
 ## Installation
+
 To install the package, use:
 
 ```bash
@@ -34,8 +35,8 @@ import {
   createCredentialStatusPayload,
   CredentialStatusPurpose,
   StatusList,
-} from '@trustvc/w3c-credential-status';
-import { signCredential } from '@trustvc/w3c-vc';
+} from "@trustvc/trustvc/w3c/credential-status";
+import { signCredential } from "@trustvc/trustvc/w3c/vc";
 ```
 
 ### 2. Set Up Hosting URL and Status List
@@ -43,7 +44,7 @@ import { signCredential } from '@trustvc/w3c-vc';
 Pick a hosting URL for the status list:
 
 ```ts
-const hostingUrl = 'https://example.com/credentials/status/3';
+const hostingUrl = "https://example.com/credentials/status/3";
 ```
 
 Initialize a new StatusList:
@@ -57,7 +58,7 @@ const credentialStatus = new StatusList({ length: 131072 }); // Default: 131,072
 Choose between `revocation` or `suspension`:
 
 ```ts
-const purpose: CredentialStatusPurpose = 'revocation';
+const purpose: CredentialStatusPurpose = "revocation";
 ```
 
 ### 4. Update the Status of an Index
@@ -88,22 +89,22 @@ const options = {
   id: hostingUrl,
   credentialSubject: {
     id: `${hostingUrl}#list`,
-    type: 'StatusList2021',
+    type: "StatusList2021",
     statusPurpose: purpose,
     encodedList,
   },
 };
 
 const keyPair = {
-  id: 'did:web:example.com#keys-1',
-  type: 'Bls12381G2Key2020',
-  controller: 'did:web:example.com',
-  privateKeyBase58: '<privateKeyBase58>',
-  publicKeyBase58: '<publicKeyBase58>',
+  id: "did:web:example.com#keys-1",
+  type: "Bls12381G2Key2020",
+  controller: "did:web:example.com",
+  privateKeyBase58: "<privateKeyBase58>",
+  publicKeyBase58: "<publicKeyBase58>",
 };
 
 const credentialStatusVC = await createCredentialStatusPayload(options, keyPair);
-console.log('Credential Status VC:', credentialStatusVC);
+console.log("Credential Status VC:", credentialStatusVC);
 ```
 
 Sign the Credential Status VC:
@@ -111,7 +112,7 @@ Sign the Credential Status VC:
 ```ts
 const { signed, error } = await signCredential(credentialStatusVC, keyPair);
 if (error) throw new Error(error);
-console.log('Signed Credential Status VC:', signed);
+console.log("Signed Credential Status VC:", signed);
 ```
 
 ## Updating the Credential Status List
@@ -123,8 +124,8 @@ import {
   createCredentialStatusPayload,
   fetchCredentialStatusVC,
   StatusList,
-} from '@trustvc/w3c-credential-status';
-import { signCredential } from '@trustvc/w3c-vc';
+} from "@trustvc/trustvc/w3c/credential-status";
+import { signCredential } from "@trustvc/trustvc/w3c/vc";
 ```
 
 ### 2. Fetch the Existing Credential Status VC
@@ -132,13 +133,13 @@ import { signCredential } from '@trustvc/w3c-vc';
 Retrieve the Credential Status VC from the hosting URL:
 
 ```ts
-const hostingUrl = 'https://example.com/credentials/status/3';
+const hostingUrl = "https://example.com/credentials/status/3";
 
 let credentialStatusVC;
 try {
   credentialStatusVC = await fetchCredentialStatusVC(hostingUrl);
 } catch (err) {
-  console.error('Invalid URL:', err);
+  console.error("Invalid URL:", err);
   throw err;
 }
 ```
@@ -172,8 +173,8 @@ const credentialStatusPayload = await createCredentialStatusPayload(
     id: hostingUrl,
     credentialSubject: {
       id: `${hostingUrl}#list`,
-      type: 'StatusList2021',
-      statusPurpose: 'revocation',
+      type: "StatusList2021",
+      statusPurpose: "revocation",
       encodedList,
     },
   },
@@ -182,7 +183,7 @@ const credentialStatusPayload = await createCredentialStatusPayload(
 
 const { signed, error } = await signCredential(credentialStatusPayload, keyPair);
 if (error) throw new Error(error);
-console.log('Updated Credential Status VC:', signed);
+console.log("Updated Credential Status VC:", signed);
 ```
 
 ## Hosting the Credential Status List
@@ -212,7 +213,7 @@ To use the hosted Credential Status List in your Verifiable Credential:
 
 - Replace the example values in the `credentialStatus` object with those relevant to your setup:
 
-    - Update the `id`, `statusListIndex`, and `statusListCredential` fields with the appropriate values based on your hosted Credential Status List and the credential's specific entry.
+  - Update the `id`, `statusListIndex`, and `statusListCredential` fields with the appropriate values based on your hosted Credential Status List and the credential's specific entry.
 
 - Include the `credentialStatus` object in your Verifiable Credential payload before signing.
 
