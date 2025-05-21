@@ -77,13 +77,13 @@ Before you begin, ensure you have Node.js installed on your system.
     1. Install the package:
 
     ```bash
-    npm install @trustvc/w3c-issuer
+    npm install @trustvc/trustvc
     ```
 
     2. Create a script to generate the DID:
 
     ```typescript
-    import { generateKeyPair, issueDID, VerificationType } from "@trustvc/w3c-issuer";
+    import { generateKeyPair, issueDID, VerificationType } from "@trustvc/trustvc/w3c/issuer";
 
     const main = async () => {
       // Generate a key pair
@@ -187,12 +187,12 @@ Before adding new keys:
   <TabItem value="code" label="Using Code">
     1. Install the package:
     ```bash
-    npm install @trustvc/w3c-issuer
+    npm install @trustvc/trustvc
     ```
 
     2. Create a script to generate and add a new key:
     ```typescript
-    import { generateKeyPair, issueDID, VerificationType } from "@trustvc/w3c-issuer";
+    import { generateKeyPair, issueDID, VerificationType } from "@trustvc/trustvc/w3c/issuer";
 
     const addNewKey = async () => {
       // Generate a new key pair
@@ -331,11 +331,11 @@ example.com/
 
 ### Use Cases
 
-| Use Cases | Purpose |
-| --- | --- |
+| Use Cases                | Purpose                                                                                            |
+| ------------------------ | -------------------------------------------------------------------------------------------------- |
 | Organizational Structure | 📂 Different departments having their own DIDs<br/>👥 Team-specific DIDs<br/>📋 Project-based DIDs |
-| User Management | 🔑 Individual user DIDs<br/>👔 Role-based DIDs<br/>⚙️ Service-specific DIDs |
-| Environment Separation | 🛠️ Development DIDs<br/>🧪 Staging DIDs<br/>🚀 Production DIDs |
+| User Management          | 🔑 Individual user DIDs<br/>👔 Role-based DIDs<br/>⚙️ Service-specific DIDs                        |
+| Environment Separation   | 🛠️ Development DIDs<br/>🧪 Staging DIDs<br/>🚀 Production DIDs                                     |
 
 ## Security Considerations
 
