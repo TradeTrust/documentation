@@ -6,11 +6,13 @@ sidebar_label: Working with Attachments
 
 # Working with Attachments in TradeTrust Documents
 
-TradeTrust allows you to attach files directly to your verifiable documents and credentials, making them part of the document's integrity verification. This guide explains how to work with attachments across different document formats:
+TradeTrust allows you to attach files directly to your verifiable documents and credentials, making them part of the document's integrity verification. This guide focuses primarily on the recommended W3C Verifiable Credentials format, with references to legacy formats for backward compatibility.
 
-- **OpenAttestation v2**: Attachments are included in the document data before wrapping
-- **OpenAttestation v3**: Attachments are added at the root level of the document
-- **W3C Verifiable Credentials**: Attachments are included within the credentialSubject
+**W3C Verifiable Credentials (Recommended)**: Attachments are included within the credentialSubject
+
+Legacy formats (for reference only):
+- OpenAttestation v2: Attachments are included in the document data before wrapping
+- OpenAttestation v3: Attachments are added at the root level of the document
 
 Attachments enable you to bundle supporting files with your verifiable documents, ensuring that all related information remains together and tamper-evident.
 
@@ -27,27 +29,28 @@ Attachments are stored as plain base64-encoded strings within the document struc
 
 ## Attachment Structure
 
-The standard attachment structure contains the following properties:
+The standard attachment structure for W3C Verifiable Credentials is as follows:
 
 ```typescript
 type Attachment = {
   data: string;      // Base64-encoded file content
-  filename: string;  // Name of the file (in v2)
-  fileName: string;  // Name of the file (in v3)
+  filename: string;  // Name of the file
   mimeType: string;  // MIME type of the file (e.g., "application/pdf")
 };
 ```
+
+Note: While OpenAttestation v2 and v3 formats are still supported for backward compatibility, they are deprecated in favor of W3C Verifiable Credentials.
 
 ### Important Notes
 
 1. **Base64 Encoding**: The `data` field should contain the file content encoded as a plain base64 string (e.g., `JVBERi0xLjQKJ...`). Do not include data URL prefixes like `data:application/pdf;base64,`.
 2. **File Size**: Be mindful of attachment sizes as they directly impact the overall document size. Consider compressing files when possible.
 3. **MIME Types**: Always specify the correct MIME type in the `mimeType` field to ensure proper rendering and handling of the attachment.
-4. **Naming Conventions**: OpenAttestation v2 uses `filename`, while v3 uses `fileName`. The renderer supports both formats, but it's recommended to use the convention that matches your document version.
+4. **Legacy Support**: For backward compatibility, the renderer also supports `fileName` (with capital 'N') as used in OpenAttestation v3, but the recommended practice for new W3C Verifiable Credentials is to use `filename`.
 
-## Adding Attachments to Different Document Types
+## Adding Attachments to Documents
 
-### In W3C Verifiable Credentials
+### W3C Verifiable Credentials (Recommended)
 
 #### Attachment Context
 
@@ -115,7 +118,7 @@ For W3C Verifiable Credentials, attachments must be added inside the `credential
 }
 ```
 
-### In OpenAttestation v2
+### OpenAttestation v2 (Legacy)
 
 #### Unwrapped Document
 
@@ -188,7 +191,7 @@ After wrapping, the attachments will be part of the document data with salted va
 }
 ```
 
-### In OpenAttestation v3
+### OpenAttestation v3 (Legacy)
 
 For OpenAttestation v3 documents, attachments are added at the root level:
 
@@ -307,9 +310,10 @@ The TradeTrust website provides a user-friendly interface for adding attachments
 
 Attachments are a powerful feature in TradeTrust that enable you to bundle supporting files directly within your verifiable documents while maintaining tamper-evidence. This guide has covered:
 
-- How to properly structure attachments for different document formats (OpenAttestation v2, OpenAttestation v3, and W3C Verifiable Credentials)
+- How to properly structure attachments for W3C Verifiable Credentials (the recommended format)
 - The importance of using plain base64-encoded strings without data URL prefixes
-- The different placement of attachments in each document type (in document data for v2, at root level for v3, and in credentialSubject for W3C)
+- The correct placement of attachments within the credentialSubject for W3C Verifiable Credentials
+- Reference information on legacy OpenAttestation formats for backward compatibility
 - The flexibility for implementers to create custom renderers while maintaining compatibility with the standard TradeTrust UI
 
-By following these guidelines, you can create robust verifiable documents with properly embedded attachments that will render correctly in the TradeTrust ecosystem while maintaining the integrity and security of your documents.
+By following these guidelines and using the W3C Verifiable Credentials format for new documents, you can create robust verifiable documents with properly embedded attachments that will render correctly in the TradeTrust ecosystem while maintaining the integrity and security of your documents.
