@@ -561,7 +561,11 @@ app.post("/create/:documentId", async (req: Request, res: Response, next: NextFu
 
     // mint the document
     try {
-      const mintTx = await tokenRegistry.mint.staticCall(owner, holder, tokenId, encryptedRemarks);
+      if (ethers.version.startsWith('6.')) {
+        const mintTx = await tokenRegistry.mint.staticCall(owner, holder, tokenId, encryptedRemarks);
+      } else if (ethers.version.includes('/5.')) {
+        const mintTx = await tokenRegistry.callStatic.mint(owner, holder, tokenId, encryptedRemarks);
+      }
     } catch (error) {
       console.error(error);
       throw new Error('Failed to mint token');
