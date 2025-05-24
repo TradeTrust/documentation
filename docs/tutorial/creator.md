@@ -557,7 +557,7 @@ app.post("/create/:documentId", async (req: Request, res: Response, next: NextFu
     );
 
     // Encrypt remarks
-    const encryptedRemarks = remarks && encrypt(remarks ?? '', signedW3CDocument?.id!) || '0x'
+    const encryptedRemarks = remarks && `0x${encrypt(remarks ?? '', signedW3CDocument?.id!)}` || '0x'
 
     // mint the document
     try {
