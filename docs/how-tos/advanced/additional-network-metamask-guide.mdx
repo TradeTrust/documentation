@@ -77,17 +77,17 @@ This process requires the use of the MetaMask browser extension.
 
   </TabItem>
   <TabItem value="astron" label="Astron L2" default>
-    :::warning
-    Your wallet address needs to be whitelisted before transacting on the Astron L2 network.
+    :::note
+    Please replace the (API_KEY) with the API Key. [Find out more](#sign-up-for-a-astron-l2s-api-key).
     :::
 
-    | Field Name         | Astron L2 Mainnet                         |
-    | ------------------ | --------------------------------------- |
-    | Network Name       | Astron                                  |
-    | RPC URL            | https://astronlayer2.bitfactory.cn/rpc/ |
-    | Chain ID           | 1338                                    |
-    | Currency Symbol    | Astron                                  |
-    | Block Explorer URL | https://astronscanl2.bitfactory.cn/     |
+    | Field Name         | Astron L2 Mainnet                      | Astron L2 Testnet                              |
+    | ------------------ | ----------------------------------------------- | ------------------------------------------------------- |
+    | Network Name       | Astron                                       | Astron Testnet                                       |
+    | RPC URL            | https://astronlayer2.bitfactory.cn/auth/(API_KEY) | https://dev-astronlayer2.bitfactory.cn/auth/(API_KEY) |
+    | Chain ID           | 1338                                          | 21002                                                |
+    | Currency Symbol    | Astron                                            | Astron                                                    |
+    | Block Explorer URL | https://astronscanl2.bitfactory.cn/              | https://dev-astronscanl2.bitfactory.cn/               |
 
   </TabItem>
       <TabItem value="XDC" label="XDC" default>
@@ -131,6 +131,16 @@ After adding Network's details, you should get something like this:
 ## Sign up for a Stability Protocol's API Key
 
 Follow [Stability's guide](https://docs.stabilityprotocol.com/developers/register_for_api_key) to sign up for a Stability Protocol's API Key
+
+## Sign up for a Astron l2's API Key
+
+Follow [Astron's guide](https://bop.bitfactory.cn/l2/home/) to sign up for a Astron l2's API Key. After logging in to the page, you can access the relevant Astron documentation via this action to learn about information related to the API Key.
+
+<img
+  style={{ margin: "auto", height: "500px" }}
+  src={"/docs/topics/advanced/additional-networks-to-metamask-guide/astron-home.png"}
+  alt="Astron Details"
+/>
 
 ## Sign up for Infura's API Key
 
