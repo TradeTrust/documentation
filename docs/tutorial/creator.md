@@ -63,7 +63,7 @@ Update `tsconfig.json` with the following configurations:
 {
   "compilerOptions": {
     ...
-    "module": "NodeNext",
+    "module": "nodenext",
     "moduleResolution": "nodenext",
     "outDir": "./dist",
     ...
