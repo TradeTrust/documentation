@@ -63,7 +63,7 @@ Update `tsconfig.json` with the following configurations:
 {
   "compilerOptions": {
     ...
-    "module": "NodeNext",
+    "module": "nodenext",
     "moduleResolution": "nodenext",
     "outDir": "./dist",
     ...
@@ -212,7 +212,7 @@ export const writeEnvVariable = (key: string, value: string): void => {
 <summary>Next create a `scripts/generateDidWeb.ts` file and add the following code:</summary>
 
 ```ts
-import { generateKeyPair, issueDID, VerificationType } from "@trustvc/trustvc/w3c/issuer";
+import { generateKeyPair, issueDID, VerificationType } from "@trustvc/w3c-issuer";
 import { writeFileSync } from "fs";
 import { join } from "path";
 import { writeEnvVariable } from "./utils";
