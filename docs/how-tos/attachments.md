@@ -29,24 +29,68 @@ Attachments are stored as plain base64-encoded strings within the document struc
 
 ## Attachment Structure
 
-The standard attachment structure for W3C Verifiable Credentials is as follows:
+For broad compatibility TradeTrust, we recommends the following attachment structure:
 
 ```typescript
+// Recommended Attachment Structure
 type Attachment = {
   data: string;      // Base64-encoded file content
-  filename: string;  // Name of the file
-  mimeType: string;  // MIME type of the file (e.g., "application/pdf")
+  filename: string;  // Name of the file, e.g., "invoice.pdf"
+  mimeType: string;  // MIME type of the file, e.g., "application/pdf"
 };
 ```
 
-Note: While OpenAttestation v2 and v3 formats are still supported for backward compatibility, they are deprecated in favor of W3C Verifiable Credentials.
+This structure is preferred for new documents. However, the TradeTrust platform, particularly its decentralized renderer, is designed to be flexible and can parse attachments from older OpenAttestation (OA) v2 and v3 formats as well.
 
-### Important Notes
+### Important Considerations for Attachments
 
-1. **Base64 Encoding**: The `data` field should contain the file content encoded as a plain base64 string (e.g., `JVBERi0xLjQKJ...`). Do not include data URL prefixes like `data:application/pdf;base64,`.
-2. **File Size**: Be mindful of attachment sizes as they directly impact the overall document size. Consider compressing files when possible.
-3. **MIME Types**: Always specify the correct MIME type in the `mimeType` field to ensure proper rendering and handling of the attachment.
-4. **Legacy Support**: For backward compatibility, the renderer also supports `fileName` (with capital 'N') as used in OpenAttestation v3, but the recommended practice for new W3C Verifiable Credentials is to use `filename`.
+Regardless of the specific format variation, keep these points in mind:
+
+1.  **Base64 Encoding**: The `data` field **must** contain the file content encoded as a plain base64 string (e.g., `JVBERi0xLjQKJ...`). Do **not** include data URL prefixes like `data:application/pdf;base64,`.
+2.  **File Size**: Be mindful of attachment sizes. Large attachments increase the overall document size, which can impact performance and storage. Consider compressing files where appropriate.
+3.  **MIME Types**: Always specify the correct MIME type (e.g., `application/pdf`, `image/jpeg`, `text/csv`). This helps the renderer and other systems handle the file appropriately.
+4.  **Mandatory Fields**: The `data` field is always essential for the attachment content to be accessible.
+
+### Renderer Parsing and Legacy Support
+
+The TradeTrust decentralized renderer processes attachments to extract the necessary information for display. It primarily looks for the recommended fields (`data`, `filename`, `mimeType`) but also checks for common variations found in OA v2 and OA v3 documents.
+
+The following code snippet from `decentralized-renderer-react-components/src/utils.ts` illustrates how the renderer extracts attachment details:
+
+```typescript
+// From decentralized-renderer-react-components/src/utils.ts
+const attachments = vc.isSignedDocument(document)
+  ? [(document as SignedVerifiableCredential)?.credentialSubject]
+      .flat()
+      ?.map((s) => s.attachments)
+      ?.filter(Boolean)
+      ?.flat()
+  : isV2Document(document) || isV3Document(document)
+    ? document.attachments
+    : [];
+const tabsRenderedFromAttachments = (attachments || ([] as Attachment[]))
+  .map((attachment: Attachment, index: number) => {
+    return {
+      id: `attachment-${index}`,
+      // For filename, it checks for 'fileName' (common in OA v3) then 'filename' (recommended, and OA v2)
+      label: ((attachment as any).fileName ?? (attachment as any)?.filename) || "Unknown filename",
+      // For MIME type, it checks for 'type' (common in OA v2) then 'mimeType' (recommended, and OA v3)
+      type: ((attachment as any).type ?? (attachment as any).mimeType) || "Unknown filetype",
+      // The 'data' property is used within attachmentToComponent to render the content
+      template: attachmentToComponent(attachment, document)!
+    };
+  })
+  .filter((template: any) => template.template);
+```
+
+As shown in the snippet:
+
+-   For the attachment's **name/label**, the renderer first looks for a `fileName` property (common in OA v3) and falls back to `filename` (recommended, and also used in OA v2).
+-   For the attachment's **type**, it first looks for a `type` property (common in OA v2) and falls back to `mimeType` (recommended, and also used in OA v3).
+
+This ensures that documents created with older OpenAttestation schemas remain compatible. While this flexibility is provided, new implementations should adhere to the recommended structure (`data`, `filename`, `mimeType`) for clarity and future-proofing.
+
+While you must include these properties for the generic templates to display attachments correctly, you are free to implement your own custom renderer that handles attachments differently.
 
 ## Adding Attachments to Documents
 
