@@ -104,6 +104,7 @@
       "how-tos/contexts",
       "how-tos/credential-subject",
       "how-tos/bitstring",
+      "how-tos/implementing-qr-codes",
       "how-tos/credential-status",
       {
         "label": "Issuing OpenAttestation Documents",
