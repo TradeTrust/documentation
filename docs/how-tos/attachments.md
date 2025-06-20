@@ -29,7 +29,7 @@ Attachments are stored as plain base64-encoded strings within the document struc
 
 ## Attachment Structure
 
-For broad compatibility TradeTrust, we recommends the following attachment structure:
+For broad compatibility with TradeTrust, we recommend the following attachment structure:
 
 ```typescript
 // Recommended Attachment Structure
@@ -311,7 +311,7 @@ The TradeTrust website provides a user-friendly interface for adding attachments
 1. **File Size**: Keep attachments as small as possible to minimize document size and improve performance.
 2. **File Types**: Use common file formats that are widely supported by browsers.
 3. **Sensitive Information**: Remember that attachments are part of the document and will be visible to anyone with access to the document.
-4. **Base64 Encoding**: Always use proper base64 encoding with the appropriate data URL prefix for the file type.
+4. **Base64 Encoding**: Always use proper base64 encoding for the file content. Remember to use raw base64 strings without data URL prefixes (no `data:application/pdf;base64,`).
 5. **Validation**: Validate attachments before adding them to ensure they meet size and format requirements.
 
 ## Troubleshooting
