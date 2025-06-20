@@ -162,7 +162,10 @@ For W3C Verifiable Credentials, attachments must be added inside the `credential
 }
 ```
 
-### OpenAttestation v2 (Legacy)
+### OpenAttestation (Legacy)
+
+<details>
+<summary><b>OpenAttestation v2</b></summary>
 
 #### Unwrapped Document
 
@@ -234,8 +237,10 @@ After wrapping, the attachments will be part of the document data with salted va
     }
 }
 ```
+</details>
 
-### OpenAttestation v3 (Legacy)
+<details>
+<summary><b>OpenAttestation v3</b></summary>
 
 For OpenAttestation v3 documents, attachments are added at the root level:
 
@@ -279,40 +284,7 @@ For OpenAttestation v3 documents, attachments are added at the root level:
     }
 }
 ```
-
-## Implementation Flexibility
-
-The attachment structure described in this guide is a **recommendation** to ensure compatibility with the TradeTrust decentralized renderer. The renderer looks for specific properties in the attachment objects to properly display them:
-
-```typescript
-// From decentralized-renderer-react-components/src/utils.ts
-const attachments = vc.isSignedDocument(document)
-  ? [(document as SignedVerifiableCredential)?.credentialSubject]
-      .flat()
-      ?.map((s) => s.attachments)
-      ?.filter(Boolean)
-      ?.flat()
-  : isV2Document(document) || isV3Document(document)
-    ? document.attachments
-    : [];
-const tabsRenderedFromAttachments = (attachments || ([] as Attachment[]))
-  .map((attachment: Attachment, index: number) => {
-    return {
-      id: `attachment-${index}`,
-      label: ((attachment as any).fileName ?? (attachment as any)?.filename) || "Unknown filename",
-      type: ((attachment as any).type ?? (attachment as any).mimeType) || "Unknown filetype",
-      template: attachmentToComponent(attachment, document)!
-    };
-  })
-  .filter((template: any) => template.template);
-```
-
-As shown above, the renderer looks for:
-- `fileName` or `filename` property for the display name
-- `type` or `mimeType` property for the file type
-- `data` property containing the base64-encoded content
-
-While you must include these properties for the generic templates to display attachments correctly, you are free to implement your own custom renderer that handles attachments differently.
+</details>
 
 ## Handling Attachments in TradeTrust UI
 
