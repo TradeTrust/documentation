@@ -20,14 +20,14 @@ The `q` parameter is **critical** - it identifies the request as a document veri
 
 The encoded payload is a URL-safe string created by using `encodeURIComponent(JSON.stringify(payload))`, where the payload follows this schema:
 
-| Field | Description | Requirement |
-|-------|-------------|--------------|
-| `type` | Must be "DOCUMENT" | Required |
-| `payload.uri` | URL where document is hosted | Required |
-| `payload.key` | Encryption key | Optional |
-| `payload.permittedActions` | Allowed actions (e.g., ["STORE"]) | Optional |
-| `payload.redirect` | Redirect URL after verification | Optional |
-| `payload.chainId` | Blockchain ID | Optional (Required for Transferable Documents) |
+| Field | Type | Description | Requirement |
+|-------|------|-------------|------------|
+| `type` | string | Must be "DOCUMENT" | Required |
+| `payload.uri` | string | URL where document is hosted | Required |
+| `payload.key` | string | Encryption key | Optional |
+| `payload.permittedActions` | string[] | Allowed actions (e.g., ["STORE"]) | Optional |
+| `payload.redirect` | string | Redirect URL after verification | Optional |
+| `payload.chainId` | string | Blockchain network ID | Optional (Required for Transferable Documents) |
 
 When scanned, this QR code will direct users to the verification portal where the document is retrieved from the specified URI, decrypted if necessary, and verified.
 
