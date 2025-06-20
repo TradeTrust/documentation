@@ -223,6 +223,7 @@
       "how-tos/transactions",
       "how-tos/verifydocument",
       "how-tos/fetch-endorsement-chain",
+      "how-tos/implementing-qr-codes",
       {
         "label": "Advanced",
         "type": "category",

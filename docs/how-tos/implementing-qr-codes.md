@@ -20,47 +20,16 @@ The `q` parameter is **critical** - it identifies the request as a document veri
 
 The encoded payload is a URL-safe string created by using `encodeURIComponent(JSON.stringify(payload))`, where the payload follows this schema:
 
-```javascript
-{
-  "type": "DOCUMENT",                              // Fixed value, must be "DOCUMENT"
-  "payload": {
-    "uri": "https://example.com/documents/123",    // URL where document is hosted
-    "key": "abcdef1234567890",                     // Encryption key (optional)
-    "permittedActions": ["STORE"],                 // Allowed actions (optional)
-    "redirect": "https://tradetrust.io/",          // Redirect URL after verification (optional)
-    "chainId": "101010"                            // Blockchain ID (optional | required for Transferable Documents)
-  }
-}
-```
+| Field | Description | Requirement |
+|-------|-------------|--------------|
+| `type` | Must be "DOCUMENT" | Required |
+| `payload.uri` | URL where document is hosted | Required |
+| `payload.key` | Encryption key | Optional |
+| `payload.permittedActions` | Allowed actions (e.g., ["STORE"]) | Optional |
+| `payload.redirect` | Redirect URL after verification | Optional |
+| `payload.chainId` | Blockchain ID | Optional (Required for Transferable Documents) |
 
 When scanned, this QR code will direct users to the verification portal where the document is retrieved from the specified URI, decrypted if necessary, and verified.
-
-## Why Use QR Codes in Documents
-
-### 1. Enhanced Accessibility
-QR codes enable users to quickly access documents without manually typing URLs, making them more accessible on mobile devices.
-
-### 2. Seamless Verification
-QR codes enable one-scan document verification on any supporting platform. Organizations can implement verification on their own systems while also allowing verification through public services like TradeTrust. This provides flexibility while maintaining consistent verification standards.
-
-### 3. Integration with Physical Workflows
-For industries that still rely on physical documents, QR codes bridge the gap between paper and digital workflows. When integrated into document templates (like in TradeTrust's generic-templates), QR codes are included in the rendered document using components like `DocumentQrCode`. This allows printed documents to maintain a direct link to their digital versions, enabling instant verification through a simple scan even when the document exists in physical form.
-
-```jsx
-// Example from BillOfLadingTemplate.tsx
-export const BillOfLadingTemplate: FunctionComponent<TemplateProps<BillOfLadingSchema>> = ({ document }) => {
-  const documentData = getDocumentData(document) as BillOfLadingDocument;
-  const qrCodeUrl = getQRCodeURL(document); // Extract QR code URL from document
-  return (
-    <Wrapper>
-      {/* Document content sections */}
-      {qrCodeUrl && <DocumentQrCode url={qrCodeUrl} />} {/* Add QR code if URL exists */}
-    </Wrapper>
-  );
-};
-```
-
-This ensures that even when documents are printed, exchanged physically, or archived in paper form, they maintain their verifiable digital connection.
 
 ## QR Code Implementation for Different Document Types
 
@@ -86,9 +55,15 @@ For W3C Verifiable Credentials, you need to add a `qrCode` property to your cred
 
 **Note**: Make sure to include the `qrcode-context.json` in your `@context` array to properly define the QR code schema.
 
-### OpenAttestation v3 Documents
+### OpenAttestation Documents
 
-For OA v3 documents, QR codes are implemented in the `credentialSubject.links.self.href` property:
+For OpenAttestation documents, QR codes are implemented in the document's links property:
+
+- In OA v3: via `credentialSubject.links.self.href`
+- In OA v2: via `data.links.self.href`
+
+<details>
+<summary>View OA v3 Example</summary>
 
 ```json
 {
@@ -108,10 +83,10 @@ For OA v3 documents, QR codes are implemented in the `credentialSubject.links.se
   // Other document properties
 }
 ```
+</details>
 
-### OpenAttestation v2 Documents
-
-In OA v2 documents, QR codes are implemented through the `data.links.self.href` property:
+<details>
+<summary>View OA v2 Example</summary>
 
 ```json
 {
@@ -127,29 +102,7 @@ In OA v2 documents, QR codes are implemented through the `data.links.self.href` 
   // Other document properties
 }
 ```
-
-## QR Code URI Structure
-
-The QR code URI follows this structure:
-
-```
-https://actions.tradetrust.io?q=<encoded_payload>
-```
-
-Where `<encoded_payload>` is an encoded JSON object with the following structure:
-
-```json
-{
-  "type": "DOCUMENT",
-  "payload": {
-    "uri": "https://example.com/documents/123", // URL to the document
-    "key": "abcdef1234567890", // Encryption key (optional)
-    "permittedActions": ["STORE"], // Allowed actions on the document
-    "redirect": "https://tradetrust.io/", // Redirect URL after verification
-    "chainId": "101010" // Blockchain ID (optional)
-  }
-}
-```
+</details>
 
 ### Creating the QR Code URL
 
@@ -197,8 +150,7 @@ const payload = {
   type: "DOCUMENT",
   payload: {
     uri: "https://storage.example.com/encrypted-document-123",
-    key: encryptedContent.key,
-    // Other payload properties
+    key: encryptedContent.key
   }
 };
 ```
@@ -229,22 +181,23 @@ https://actions.yourdomain.com?q=<encoded_payload>
 
 When a TradeTrust-compatible document with a QR code is loaded, the TradeTrust website:
 
-1. Extracts the QR code URL using the `getQRCodeLink` function, which checks for:
+1. When the QR code is scanned, the encoded URL is opened, which redirects to TradeTrust with the document URI.
+
+2. Extracts the QR code URL using the `getQRCodeLink` function, which checks for:
    - `qrCode.uri` in W3C VC documents
    - `credentialSubject.links.self.href` in OA v3 documents
    - `links.self.href` in OA v2 documents
 
-2. Renders the URL as a scannable QR code.
+3. TradeTrust then downloads the document from the specified URI, decrypting it if necessary.
 
-3. When the QR code is scanned, the encoded URL is opened, which redirects to TradeTrust with the document URI.
+4. Renders the URL as a scannable QR code.
 
-4. TradeTrust then downloads the document from the specified URI, decrypting it if necessary.
 
 ## Testing Your QR Code Implementation
 
 To test if your QR code implementation is working correctly:
 
-1. Create a document with a QR code following one of the formats above.
+1. Create a document with a QR code.
 2. Host the document at a publicly accessible URL.
 3. Upload your document to [https://dev.tradetrust.io/](https://dev.tradetrust.io/) / [https://ref.tradetrust.io/](https://ref.tradetrust.io/).
 4. Verify that the QR code icon appears in the document utility bar.
@@ -252,3 +205,131 @@ To test if your QR code implementation is working correctly:
 6. Confirm that scanning the QR code successfully redirects to TradeTrust and loads the document.
 
 By following these guidelines, you can successfully implement QR codes in your W3C VC and OpenAttestation documents, making them more accessible and easier to verify.
+
+## Implementation Example: Using TradeTrust Functions and Actions
+
+This section provides a complete example of implementing QR codes using TradeTrust's reference implementations.
+
+### TradeTrust Functions
+
+_Prerequisite: [Netlify functions](https://docs.netlify.com/functions/overview/)._
+
+TradeTrust functions is built with Netlify functions. TradeTrust provides a set of API endpoints for demonstration purposes only. Essentially you should have an endpoint service yourself to store your documents so to facilitate rendering of QR code in your web application later on.
+
+### Setting up TradeTrust Functions
+
+Let's go through the steps:
+
+1. Sign up an account with [Netlify](https://app.netlify.com/signup).
+2. If you need document storage service, sign up an account with [AWS](https://aws.amazon.com/). Otherwise, this step **can be skipped**. Create an s3 bucket on AWS. Create access key ID and secret access key to access this resource. Take note of the bucket name, ID and secrets, we'll need them later.
+3. Fork tradetrust-functions [repo](https://github.com/TradeTrust/tradetrust-functions) on your github. Make sure to spin up a netlify site connected to the forked github repo.
+4. You should have a random site name allocated to your netlify site. You can edit site name to whichever name you want. For our example, we have renamed it to `tradetrust-functions.netlify.app`.
+   ![tt functions](/docs/reference/tradetrust-website/tt-functions.png)
+5. Populate your environment variables on netlify site settings.
+   - `API_KEY` = Can be anything.
+   - `TT_AWS_BUCKET_NAME` = Your AWS bucket name resource. (For document storage service)
+   - `TT_STORAGE_AWS_ACCESS_KEY_ID` = Your AWS access key ID. (For document storage service)
+   - `TT_STORAGE_AWS_SECRET_ACCESS_KEY` = Your AWS secret access key. (For document storage service)
+6. Hit deploy site on netlify dashboard and your API endpoints should be up. They are accessible at:
+   - https://&lt;YOUR_RENAMED_NETLIFY_SITENAME&gt;/.netlify/functions/verify/
+   - https://&lt;YOUR_RENAMED_NETLIFY_SITENAME&gt;/.netlify/functions/storage/
+
+### Document Storage
+
+For our reference implementation of [document storage service](https://github.com/TradeTrust/tradetrust-functions#document-storage), it does the following:
+
+- [Encrypts](https://github.com/Open-Attestation/oa-encryption#encrypting-a-document) a document, returning the `key` among other fields.
+- Only neccessary fields are uploaded and stored in Amazon s3 bucket, without `key`.
+- `key` is later prepared into document's `links.self.href` field, before it gets wrapped and issued.
+- A decoded example of `links.self.href` (action url) value looks like this:
+
+```
+{
+  "type":"DOCUMENT",
+  "payload": {
+    "uri":"https://tradetrust-functions.netlify.app/.netlify/functions/storage/95524c85-c1b4-44e3-ad91-3971f90e43cb","key":"1a8d6113d08210a2dbb91a3240216eefcf0de7601d87264ac2dd831c19853547",
+    "permittedActions":["STORE"],
+    "redirect":"https://dev.tradetrust.io/"
+  }
+}
+```
+
+- `key` 1a8d6... will be then be used to decrypt the document at `uri` with 95524... on TradeTrust web application end.
+
+> Note that the `key` value is up to integrators on how it should be managed. Do note that the process of whether to encrypt your document is at your discretion.
+
+### Preparing the QR Code URL
+
+The QR code URL typically follows this format: `https://actions.tradetrust.io?q={encodedPayload}`
+
+Where:
+- `actions.tradetrust.io` is TradeTrust's action handler service
+- `?q=` is the query parameter that contains the encoded payload
+- `{encodedPayload}` is a URL-encoded JSON object containing document access information
+
+Follow these steps to construct your QR code URL:
+
+1. Create a JSON object containing the document information:
+
+```javascript
+const payload = {
+  type: "DOCUMENT",
+  payload: {
+    uri: "https://your-storage-service.com/document-id", // URL where document is stored
+    key: "your-encryption-key", // Encryption key if the document is encrypted
+    permittedActions: ["STORE"], // Actions allowed with this document
+    redirect: "https://tradetrust.io/", // Optional: Redirect URL after action
+    chainId: "101010" // Optional: Blockchain network ID for NFTs
+  }
+};
+```
+
+2. Convert the payload to a JSON string, then URL-encode it:
+
+```javascript
+const jsonString = JSON.stringify(payload);
+const encodedPayload = encodeURIComponent(jsonString);
+```
+
+3. Construct the final QR code URL:
+
+```javascript
+const qrCodeUrl = `https://actions.tradetrust.io?q=${encodedPayload}`;
+```
+
+#### About TradeTrust Actions
+
+`actions.tradetrust.io` acts as a reverse proxy for document handling. When a QR code containing this URL is scanned:
+
+1. It redirects users to the TradeTrust web application with the document information
+2. The TradeTrust web application then fetches and verifies the document
+
+You can also set up your own custom action handler by forking the [TradeTrust Actions repository](https://github.com/TradeTrust/tradetrust-actions) and deploying it to your own infrastructure.
+
+This provides several benefits:
+- Custom domain for your QR codes
+- Ability to add custom actions and business logic
+- Control over redirection behavior
+- Analytics tracking for QR code scans
+
+### TradeTrust Web Application
+
+Within our TradeTrust web application, you can setup the QRCode component as per shown below:
+
+```js
+import QRCode, { ImageSettings } from "qrcode.react";
+
+<QRCode value={qrcodeUrl} level="Q" size={200} bgColor="#FFFFFF" fgColor="#000000" imageSettings={imageSettings} />;
+```
+
+Refer to the actual reference [here](https://github.com/TradeTrust/tradetrust-website/blob/29075e295468eace4674a847bd82a7618fe51784/src/components/DocumentUtility/DocumentUtility.tsx#L64-L71) if you need more help.
+
+### QR Image
+
+For QR code image generation, we are using this library called [qrcode.react](https://github.com/zpao/qrcode.react). The QR image holds information of just an URL. In our case, the QR image refers to `links.self.href` in the document.
+
+Upon scanning the QR code, users will redirect to application end to handle the document rendering. Meanwhile, this is also the point where the `key` value will be used to decrypt against s3 bucket stored data to get back our original wrapped + issued document.
+
+Thereafter, the document will be rendered accordingly.
+
+> **Important:** Above are reference implementations, it is up to integrators to decide on their own architecture / flow.
