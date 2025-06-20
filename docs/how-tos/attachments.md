@@ -31,25 +31,23 @@ Attachments are stored as plain base64-encoded strings within the document struc
 
 For broad compatibility with TradeTrust, we recommend the following attachment structure:
 
-```typescript
-// Recommended Attachment Structure
-type Attachment = {
-  data: string;      // Base64-encoded file content
-  filename: string;  // Name of the file, e.g., "invoice.pdf"
-  mimeType: string;  // MIME type of the file, e.g., "application/pdf"
-};
-```
+| Field | Type | Description | Required | Notes |
+|-------|------|-------------|----------|-------|
+| `data` | string | Base64-encoded file content | Yes | Must be plain base64 string without data URL prefixes (e.g., `JVBERi0xLjQKJ...`) |
+| `filename` | string | Name of the file | Yes* | Example: "invoice.pdf" (also supports `fileName` in OA v3) |
+| `mimeType` | string | MIME type of the file | Yes* | Example: "application/pdf" (also supports `type` in OA v2) |
+
+*Required for proper rendering in TradeTrust Verification Website
 
 This structure is preferred for new documents. However, the TradeTrust platform, particularly its decentralized renderer, is designed to be flexible and can parse attachments from older OpenAttestation (OA) v2 and v3 formats as well.
 
 ### Important Considerations for Attachments
 
-Regardless of the specific format variation, keep these points in mind:
+When working with attachments, keep these points in mind:
 
-1.  **Base64 Encoding**: The `data` field **must** contain the file content encoded as a plain base64 string (e.g., `JVBERi0xLjQKJ...`). Do **not** include data URL prefixes like `data:application/pdf;base64,`.
-2.  **File Size**: Be mindful of attachment sizes. Large attachments increase the overall document size, which can impact performance and storage. Consider compressing files where appropriate.
-3.  **MIME Types**: Always specify the correct MIME type (e.g., `application/pdf`, `image/jpeg`, `text/csv`). This helps the renderer and other systems handle the file appropriately.
-4.  **Mandatory Fields**: The `data` field is always essential for the attachment content to be accessible.
+- **File Size**: Large attachments increase the overall document size, which can impact performance and storage. Consider compressing files where appropriate.
+- **MIME Types**: Always specify the correct MIME type (e.g., `application/pdf`, `image/jpeg`, `text/csv`) to ensure proper handling.
+- **Format Variations**: While the TradeTrust renderer supports variations in field names for backward compatibility, using the recommended structure is best practice for new documents.
 
 ### Renderer Parsing and Legacy Support
 
@@ -286,9 +284,9 @@ For OpenAttestation v3 documents, attachments are added at the root level:
 ```
 </details>
 
-## Handling Attachments in TradeTrust UI
+## Handling Attachments in TradeTrust Verification Website
 
-TradeTrust's UI automatically detects and displays attachments in the document viewer. Attachments appear as tabs alongside the main document view, allowing users to switch between the main document and its attachments.
+TradeTrust's Verification Website automatically detects and displays attachments in the document viewer. Attachments appear as tabs alongside the main document view, allowing users to switch between the main document and its attachments.
 
 ### Supported File Types
 
@@ -298,13 +296,6 @@ The TradeTrust renderer can display various file types directly in the browser:
 - **Images** (JPEG, PNG, GIF, etc.): Displayed directly in the viewer
 - **Text files**: Displayed as formatted text
 - **Other file types**: Provided as downloadable files
-
-The TradeTrust website provides a user-friendly interface for adding attachments to documents:
-
-1. Navigate to the form filling page
-2. Look for the "Attachments" section (if enabled for the document type)
-3. Use the file upload interface to add attachments
-4. Continue with document issuance
 
 ## Best Practices
 
@@ -321,15 +312,3 @@ The TradeTrust website provides a user-friendly interface for adding attachments
 1. **Attachments not displaying**: Ensure the attachment's MIME type is correct and the base64 encoding is valid.
 2. **Large document size**: Consider compressing files before attaching them or using external references for very large files.
 3. **Rendering issues**: Some file types may not render correctly in all browsers. Stick to widely supported formats.
-
-## Conclusion
-
-Attachments are a powerful feature in TradeTrust that enable you to bundle supporting files directly within your verifiable documents while maintaining tamper-evidence. This guide has covered:
-
-- How to properly structure attachments for W3C Verifiable Credentials (the recommended format)
-- The importance of using plain base64-encoded strings without data URL prefixes
-- The correct placement of attachments within the credentialSubject for W3C Verifiable Credentials
-- Reference information on legacy OpenAttestation formats for backward compatibility
-- The flexibility for implementers to create custom renderers while maintaining compatibility with the standard TradeTrust UI
-
-By following these guidelines and using the W3C Verifiable Credentials format for new documents, you can create robust verifiable documents with properly embedded attachments that will render correctly in the TradeTrust ecosystem while maintaining the integrity and security of your documents.
