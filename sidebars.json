@@ -104,6 +104,7 @@
       "how-tos/contexts",
       "how-tos/credential-subject",
       "how-tos/bitstring",
+      "how-tos/implementing-qr-codes",
       "how-tos/credential-status",
       {
         "label": "Issuing OpenAttestation Documents",
@@ -223,7 +224,6 @@
       "how-tos/transactions",
       "how-tos/verifydocument",
       "how-tos/fetch-endorsement-chain",
-      "how-tos/implementing-qr-codes",
       {
         "label": "Advanced",
         "type": "category",
