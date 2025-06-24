@@ -103,6 +103,7 @@
       },
       "how-tos/contexts",
       "how-tos/credential-subject",
+      "how-tos/attachments",
       "how-tos/bitstring",
       "how-tos/implementing-qr-codes",
       "how-tos/credential-status",

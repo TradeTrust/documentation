@@ -557,11 +557,15 @@ app.post("/create/:documentId", async (req: Request, res: Response, next: NextFu
     );
 
     // Encrypt remarks
-    const encryptedRemarks = remarks && encrypt(remarks ?? '', signedW3CDocument?.id!) || '0x'
+    const encryptedRemarks = remarks && `0x${encrypt(remarks ?? '', signedW3CDocument?.id!)}` || '0x'
 
     // mint the document
     try {
-      const mintTx = await tokenRegistry.mint.staticCall(owner, holder, tokenId, encryptedRemarks);
+      if (ethers.version.startsWith('6.')) {
+        const mintTx = await tokenRegistry.mint.staticCall(owner, holder, tokenId, encryptedRemarks);
+      } else if (ethers.version.includes('/5.')) {
+        const mintTx = await tokenRegistry.callStatic.mint(owner, holder, tokenId, encryptedRemarks);
+      }
     } catch (error) {
       console.error(error);
       throw new Error('Failed to mint token');
