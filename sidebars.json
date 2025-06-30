@@ -62,6 +62,7 @@
             "label": "Add-ons",
             "type": "category",
             "items": [
+              "introduction/key-components-of-tradetrust/add-ons/document-preview",
               {
                 "label": "Document Preview + templates",
                 "type": "category",
@@ -89,6 +90,17 @@
     "Tutorial": ["tutorial/creator", "tutorial/verifier", "tutorial/transferability"],
     "How Tos": [
       "how-tos/deployment",
+      {
+        "label": "Document Preview Templates",
+        "type": "category",
+        "items": [
+          "how-tos/document-preview-templates/custom-decentralized-renderer",
+          "how-tos/document-preview-templates/using-generic-templates",
+          "how-tos/document-preview-templates/template-implementation-examples",
+          "how-tos/document-preview-templates/best-practices",
+          "how-tos/document-preview-templates/troubleshooting"
+        ]
+      },
       {
         "label": "Issuer",
         "type": "category",
