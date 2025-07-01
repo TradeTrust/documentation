@@ -14,14 +14,16 @@ Decentralized renderers are essential components in the TradeTrust ecosystem tha
 
 ### Key Concepts
 
-- **Decentralized Renderer**: A web application that provides document preview templates
-- **Document Schema**: The data structure of your TradeTrust document
-- **Template**: A React component that renders a specific document type
-- **Template Registry**: A mapping between document types and their template components
+| Term                       | Description                                                    |
+| -------------------------- | -------------------------------------------------------------- |
+| **Decentralized Renderer** | A web application that provides document preview templates     |
+| **Document Schema**        | The data structure of your document                            |
+| **Template**               | A React component that renders a specific document type        |
+| **Template Registry**      | A mapping between document types and their template components |
 
 ## Architecture and Communication Flow
 
-Decentralized renderers are designed to run in a sandboxed iframe, isolated from the main application. This architecture provides security while allowing documents to be rendered with custom templates. The communication between the host application and the decentralized renderer happens through a well-defined message passing interface.
+Decentralized renderers are designed to run in an iframe, isolated from the main application. This architecture provides security while allowing documents to be rendered with custom templates. The communication between the host application and the decentralized renderer happens through a well-defined message passing interface.
 
 ### Components Overview
 
@@ -97,17 +99,19 @@ sequenceDiagram
 - The renderer sends `UPDATE_HEIGHT` actions when content size changes
 - The host can trigger printing via a `PRINT` action
 
-#### 4.&nbsp; Error Handling:
+#### Error Handling:
 
 - If the renderer fails to load, a fallback renderer can be used
 - Error boundaries in the renderer catch and display template errors
 
-This architecture ensures that:
+#### Benefits of This Architecture
 
-- Documents can be securely rendered in isolation
-- The host application maintains control over the rendering process
-- Custom templates can be used without compromising security
-- The renderer can be hosted separately from the verification application
+| Benefit       | Description                                                             |
+| ------------- | ----------------------------------------------------------------------- |
+| Security      | Documents can be securely rendered in isolation                         |
+| Control       | The host application maintains control over the rendering process       |
+| Customization | Custom templates can be used without compromising security              |
+| Decoupling    | The renderer can be hosted separately from the verification application |
 
 ## Operational Considerations
 
@@ -115,11 +119,14 @@ This architecture ensures that:
 
 **Remember that your renderer might be used by external systems you don't control.**
 
-Your decentralized renderer will be embedded in various applications, including the TradeTrust document viewer, third-party applications, and other verification portals. This means:
+Your decentralized renderer will be embedded in various applications, including the TradeTrust document viewer, third-party applications, and other verification portals.
+
+:::important Important Guidelines
 
 - Don't rely on specific parent application behaviors
 - Avoid assumptions about the environment where your renderer will run
 - Design your renderer to be self-contained and autonomous
+  :::
 
 ### Perpetual Availability
 
@@ -127,10 +134,13 @@ Your decentralized renderer will be embedded in various applications, including 
 
 Since TradeTrust documents may not expire and could be verified years after issuance:
 
+:::note
+
 - Never remove templates from your decentralized renderer
 - Maintain consistent URLs for your renderer service
 - If you must migrate to a new domain, implement permanent redirects
 - Consider archiving old templates in publicly accessible repositories
+  :::
 
 ## Environment Setup & Requirements
 
@@ -140,9 +150,15 @@ Decentralized renderers must support Cross-Origin Resource Sharing (CORS) to fun
 
 **Best Practice**:
 
-- Enable CORS for all routes in your renderer
-- Allow all origins (`Access-Control-Allow-Origin: *`)
-- Support HEAD, GET, and POST methods
+```
+┌─────────────────── CORS Configuration ───────────────────┐
+│                                                          │
+│  ✓ Enable CORS for all routes in your renderer           │
+│  ✓ Allow all origins (Access-Control-Allow-Origin: *)    │
+│  ✓ Support HEAD, GET, and POST methods                   │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+```
 
 ### High Availability
 
@@ -150,17 +166,19 @@ Your decentralized renderer must be highly available to ensure documents can be 
 
 **Best Practice**:
 
-- Deploy to a reliable hosting service
-- Implement monitoring and alerting
-- Use CDN for static assets
-- Set up automated deployment pipelines
+| Recommendation                        | Purpose                                |
+| ------------------------------------- | -------------------------------------- |
+| Deploy to a reliable hosting service  | Ensure consistent uptime               |
+| Implement monitoring and alerting     | Detect and respond to issues quickly   |
+| Use CDN for static assets             | Improve load times and reliability     |
+| Set up automated deployment pipelines | Maintain consistent deployment quality |
 
 **Troubleshooting**:
 If your renderer is unavailable, documents will display with fallback UI. Ensure proper health checks are in place to detect and respond to outages quickly.
 
 ### Fallback UI
 
-Always provide a fallback UI in case your renderer fails or is unavailable.
+Always provide a fallback UI in case the decentralized renderer fails or is unavailable.
 
 **Best Practice**:
 
@@ -275,23 +293,20 @@ Proper error handling is crucial for creating robust and user-friendly templates
 
 When your renderer crashes, the reference implementation shows an error UI. Common causes include:
 
-  1.&nbsp; JavaScript errors in templates:
+1.&nbsp; JavaScript errors in templates:
 
     > - Check browser console for specific error messages
     > - Fix any React rendering errors
     > - Ensure data is accessed safely using optional chaining or nullish coalescing
 
-  2.&nbsp; Uncaught exceptions:
+### Error Handling Solutions
 
-    > - When this happens, you'll likely see an error screen like this on the reference implementation:
-    >   ![Reference Implementation Error](/docs/how-tos/decentralized-renderer/ref-implementation-error.png)
-    > - The browser console will typically show the actual error that occurred in your renderer:
-    >   ![Console Error](/docs/how-tos/decentralized-renderer/console-error.png)
-    - Solutions:
-      - Add try/catch blocks around risky operations
-      - Use the `ErrorBoundary` component to catch and display render errors
-      - Use TypeScript for type safety
-      - Optional chaining to handle missing data
+| Solution                               | Description                                           |
+| -------------------------------------- | ----------------------------------------------------- |
+| Try/Catch Blocks                       | Add around risky operations to prevent crashes        |
+| ErrorBoundary                          | Use to catch and display render errors gracefully     |
+| TypeScript                             | Implement for type safety and early error detection   |
+| Optional Chaining / Nullish Coalescing | Use `?.` or `??` syntax to safely handle missing data |
 
 **Implementation Example**:
 
@@ -340,35 +355,6 @@ src/templates/
 │   ├── ...
 └── index.tsx              # Main registry file
 ```
-
-**Troubleshooting**:
-
-1. **Template not rendering**:
-
-   **Possible Causes and Solutions**:
-
-   - **Template name mismatch**: Ensure the template name in the document matches the key in your registry exactly **(case-sensitive)**.
-
-     ```javascript
-     // Document
-     {
-       "renderMethod": [
-         {
-           "id": "http://localhost:3000",
-           "type": "EMBEDDED_RENDERER",
-           "templateName": "BILL_OF_LADING"
-         }
-       ]
-     }
-
-     // Template Registry
-     export const registry = {
-       "BILL_OF_LADING": BillOfLadingTemplate, // Must match templateName in renderMethod
-       // ...
-     };
-     ```
-
-   - **Missing template component**: Check that your template component is correctly exported and registered in the template registry.
 
 ### Component Composition
 
@@ -507,33 +493,15 @@ const Template = ({ document }) => {
 
 Optimized templates provide a better user experience and are more reliable.
 
-**Best Practice**:
+### Best Practices for Performance
 
-- Minimize component re-renders
-- Use React.memo for pure components
-- Implement windowing for long lists
-- Optimize images and assets
-- Split code into smaller chunks
-
-**Troubleshooting**:
-
-1. **Template renders slowly or causes browser lag**:
-
-   **Possible Causes and Solutions**:
-
-   - **Large document size**:
-
-     - Use virtualization for long lists
-     - Implement pagination for large data sets
-
-   - **Inefficient rendering**:
-
-     - Use React's memoization techniques
-     - Optimize expensive calculations with useMemo
-
-   - **Heavy dependencies**:
-     - Consider lighter alternatives
-     - Lazy-load heavy components
+| Technique           | Description                                                | Impact                          |
+| ------------------- | ---------------------------------------------------------- | ------------------------------- |
+| Minimize re-renders | Use React.memo and shouldComponentUpdate                   | Reduces unnecessary DOM updates |
+| Component windowing | Implement react-window or react-virtualized for long lists | Renders only visible items      |
+| Asset optimization  | Compress images and use appropriate formats (WebP, SVG)    | Reduces load times              |
+| Code splitting      | Split code into smaller chunks with dynamic imports        | Improves initial load time      |
+| Memoization         | Cache expensive calculations with useMemo                  | Prevents redundant processing   |
 
 ## Integration & Deployment
 
@@ -614,6 +582,64 @@ Storybook is an excellent tool for developing and testing templates in isolation
 - Include sample data fixtures
 - Test edge cases and error states
 - Use Storybook addons for accessibility and responsive testing
+
+## Common Issues and Solutions
+
+### Issue 1: Uncaught Exceptions
+
+When uncaught exceptions occur in your renderer:
+
+- You'll likely see an error screen like this on the reference implementation:
+  ![Reference Implementation Error](/docs/how-tos/decentralized-renderer/ref-implementation-error.png)
+- The browser console will typically show the actual error that occurred in your renderer:
+  ![Console Error](/docs/how-tos/decentralized-renderer/console-error.png)
+
+**Solutions:**
+
+- Add try/catch blocks around risky operations
+- Use the `ErrorBoundary` component to catch and display render errors
+- Implement proper error logging for debugging
+
+### Issue 2: Template Not Rendering
+
+| Possible Cause             | Solution                                                                                               |
+| -------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Template name mismatch     | Ensure the template name in the document matches the key in your registry exactly **(case-sensitive)** |
+| Invalid renderer URL       | Verify that the renderer URL is correct and accessible from your environment                           |
+| Missing renderer type      | Ensure the renderer type is set to **"EMBEDDED_RENDERER"**                                             |
+| Missing renderMethod       | Add the renderMethod field to your document with the correct renderer configuration                    |
+| Missing template component | Check that your template component is correctly exported and registered in the template registry       |
+
+**Example of correct template name matching:**
+
+```javascript
+// Document
+{
+  "renderMethod": [
+    {
+      "id": "http://localhost:3000",
+      "type": "EMBEDDED_RENDERER",
+      "templateName": "BILL_OF_LADING"
+    }
+  ]
+}
+
+// Template Registry
+export const registry = {
+  "BILL_OF_LADING": BillOfLadingTemplate, // Must match templateName in renderMethod
+  // ...
+};
+```
+
+### Issue 3: Template Renders Slowly or Causes Browser Lag
+
+| Root Cause                | Solutions                                                                                                                                           |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Large document size**   | • Use virtualization for long lists<br/> • Implement pagination for large data sets<br/> • Consider lazy loading sections of the document           |
+| **Inefficient rendering** | • Use React's memoization techniques<br/> • Optimize expensive calculations with useMemo<br/> • Avoid inline function definitions in render methods |
+| **Heavy dependencies**    | • Consider lighter alternatives<br/> • Lazy-load heavy components<br/> • Use dynamic imports for large libraries                                    |
+
+**Performance Monitoring Tip:** Use React DevTools Profiler to identify components that are rendering too frequently or taking too long to render.
 
 ## Conclusion
 

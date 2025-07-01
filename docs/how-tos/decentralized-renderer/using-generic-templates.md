@@ -12,11 +12,13 @@ TradeTrust provides a set of pre-designed generic templates for common document 
 
 TradeTrust currently offers the following generic templates:
 
-1. **Certificate of Origin (CoO)** - A document certifying the country in which a product was manufactured, grown, or processed.
-2. **Electronic Promissory Note (ePN)** - A digital equivalent of a paper-based promissory note, representing a legally binding agreement to repay a debt.
-3. **Electronic Bill of Lading (eBL)** - A digital record of a shipment, serving as a receipt, contract of carriage, and document of title.
-4. **Invoice** - A commercial document issued by a seller to a buyer, detailing the products or services provided, their quantities and agreed prices, and the total amount due.
-5. **Warehouse Receipt** - A document issued by a warehouse operator acknowledging the receipt of goods for storage.
+| Template Name | Description |
+| --- | --- |
+| **Certificate of Origin (CoO)** | A document certifying the country in which a product was manufactured, grown, or processed. |
+| **Electronic Promissory Note (ePN)** | A digital equivalent of a paper-based promissory note, representing a legally binding agreement to repay a debt. |
+| **Electronic Bill of Lading (eBL)** | A digital record of a shipment, serving as a receipt, contract of carriage, and document of title. |
+| **Invoice** | A commercial document issued by a seller to a buyer, detailing the products or services provided, their quantities and agreed prices, and the total amount due. |
+| **Warehouse Receipt** | A document issued by a warehouse operator acknowledging the receipt of goods for storage. |
 
 These templates are hosted at `https://generic-templates.tradetrust.io` and can be previewed in the [TradeTrust Gallery](https://gallery.tradetrust.io/), other legacy templates can be previewed in the [Generic Templates Storybook](https://storybook.generic-templates.tradetrust.io/).
 
