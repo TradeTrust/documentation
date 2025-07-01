@@ -6,7 +6,7 @@ sidebar_label: Document Preview
 
 ## Introduction
 
-TradeTrust documents are designed to be both machine-readable and human-readable. While TradeTrust documents are stored in `.json` format for machine processing, they require a renderer to present the data in a human-readable format. Document Preview provide this essential functionality, allowing users to visualize TradeTrust documents in a structured and readable way.
+TradeTrust documents are designed to be both machine-readable and human-readable. While TradeTrust documents are stored in `.json` format for machine processing, they require a renderer to present the data in a human-readable format. Document Preview provides this essential functionality, allowing users to visualize TradeTrust documents in a structured and readable way.
 
 ## What are Document Preview?
 
@@ -58,8 +58,9 @@ When implementing Document Preview, consider the following:
 
 To learn more about Document Preview:
 
-- Follow the guide on [Creating a Custom Decentralized Renderer](/docs/how-tos/document-preview-templates/custom-decentralized-renderer) to build your own template
-- Learn about [Using Generic Templates](/docs/how-tos/document-preview-templates/using-generic-templates) for quick demonstrations
-- Review detailed [Template Implementation Examples](/docs/how-tos/document-preview-templates/template-implementation-examples) including Bill of Lading and Cover Letter
-- Explore [Best Practices](/docs/how-tos/document-preview-templates/best-practices) for optimizing your templates
-- Check the [Troubleshooting Guide](/docs/how-tos/document-preview-templates/troubleshooting) if you encounter issues
+- Follow the guide on [Creating a Custom Decentralized Renderer](/docs/tutorial/decentralized-renderer) to build your own template
+- Explore our comprehensive [Decentralized Renderer Guide](/docs/how-tos/decentralized-renderer/decentralized-renderer-guide) for best practices and troubleshooting
+- Learn about [Using Generic Templates](/docs/how-tos/decentralized-renderer/using-generic-templates) for quick demonstrations
+- Review detailed [Template Implementation Examples](/docs/how-tos/decentralized-renderer/template-implementation-examples) including Bill of Lading and Cover Letter
+
+By leveraging Document Preview, you can ensure that your TradeTrust documents are not only cryptographically secure and verifiable but also easily understandable and visually appealing to end-users.

@@ -63,22 +63,6 @@
             "type": "category",
             "items": [
               "introduction/key-components-of-tradetrust/add-ons/document-preview",
-              {
-                "label": "Document Preview + templates",
-                "type": "category",
-                "items": [
-                  {
-                    "label": "Create Template",
-                    "type": "category",
-                    "items": [
-                      "introduction/key-components-of-tradetrust/add-ons/document-preview-templates/create-template/overview",
-                      "introduction/key-components-of-tradetrust/add-ons/document-preview-templates/create-template/cover-letter",
-                      "introduction/key-components-of-tradetrust/add-ons/document-preview-templates/create-template/bill-of-lading"
-                    ]
-                  },
-                  "introduction/key-components-of-tradetrust/add-ons/document-preview-templates/decentralised-renderer"
-                ]
-              },
               "introduction/key-components-of-tradetrust/add-ons/qr-code"
             ]
           }
@@ -87,18 +71,16 @@
       "introduction/legal",
       "introduction/ig-p&i"
     ],
-    "Tutorial": ["tutorial/creator", "tutorial/verifier", "tutorial/transferability"],
+    "Tutorial": ["tutorial/creator", "tutorial/verifier", "tutorial/transferability", "tutorial/decentralized-renderer"],
     "How Tos": [
       "how-tos/deployment",
       {
-        "label": "Document Preview Templates",
+        "label": "Decentralized Renderer",
         "type": "category",
         "items": [
-          "how-tos/document-preview-templates/custom-decentralized-renderer",
-          "how-tos/document-preview-templates/using-generic-templates",
-          "how-tos/document-preview-templates/template-implementation-examples",
-          "how-tos/document-preview-templates/best-practices",
-          "how-tos/document-preview-templates/troubleshooting"
+          "how-tos/decentralized-renderer/decentralized-renderer-guide",
+          "how-tos/decentralized-renderer/using-generic-templates",
+          "how-tos/decentralized-renderer/template-implementation-examples"
         ]
       },
       {
