@@ -369,24 +369,6 @@ src/templates/
 
    - **Missing template component**: Check that your template component is correctly exported and registered in the template registry.
 
-#### **Implementation Example**:
-
-```javascript
-// Well-structured template organization
-// src/templates/index.ts
-import { BillOfLadingTemplate } from "./BillOfLading";
-import { CertificateOfOriginTemplate } from "./CertificateOfOrigin";
-
-export const registry = {
-  BILL_OF_LADING: BillOfLadingTemplate,
-  CERTIFICATE_OF_ORIGIN: CertificateOfOriginTemplate,
-};
-
-// src/templates/BillOfLading/index.ts
-import { BillOfLading } from "./BillOfLading";
-export const BillOfLadingTemplate = BillOfLading;
-```
-
 ### Component Composition
 
 #### **Recommendation**: Break down complex templates into smaller, reusable components.
@@ -444,63 +426,6 @@ Proper data handling ensures your templates are robust against variations in doc
    - Implement type checking and conversion where necessary
    - Handle date formatting and other common transformations consistently
 
-#### **Implementation Example**:
-
-```typescript
-// Type definitions
-interface Shipper {
-  name: string;
-  address: string;
-}
-
-interface BillOfLadingData {
-  blNumber: string;
-  issueDate: string;
-  shipper?: Shipper;
-  consignee?: {
-    name: string;
-    address: string;
-  };
-  packages?: {
-    description: string;
-    weight: number;
-    measurement: string;
-  }[];
-}
-
-// Data validation and processing
-const validateAndProcessDocument = (doc: any): BillOfLadingData => {
-  // Basic validation
-  if (!doc.blNumber) {
-    console.warn("Missing BL Number in document");
-  }
-
-  // Date formatting
-  const formattedDate = doc.issueDate
-    ? new Date(doc.issueDate).toLocaleDateString()
-    : "Not specified";
-
-  return {
-    ...doc,
-    issueDate: formattedDate,
-    // Set defaults for optional fields if needed
-  };
-};
-
-// Usage in template
-const BillOfLadingTemplate: React.FC<{ document: any }> = ({ document }) => {
-  const processedData = validateAndProcessDocument(document);
-
-  return (
-    <div>
-      <h1>Bill of Lading: {processedData?.blNumber}</h1>
-      <p>Issue Date: {processedData?.issueDate}</p>
-      {/* Rest of template */}
-    </div>
-  );
-};
-```
-
 ### Versioning and Backward Compatibility
 
 Maintaining backward compatibility is essential for document templates that need to render documents issued at different times.
@@ -508,39 +433,8 @@ Maintaining backward compatibility is essential for document templates that need
 #### **Best Practice**:
 
 - Version your templates explicitly
-- Support legacy document formats
-- Design for graceful degradation when encountering unknown fields
-- Document version changes and migration paths
-
-#### **Troubleshooting**:
-
-1. **Template can't render older documents**:
-   - Implement version detection logic
-   - Use template factories to create appropriate template versions
-   - Normalize legacy data formats to current schema
-
-#### **Implementation Example**:
-
-```jsx
-// Template factory based on document version
-const getTemplateForDocument = (document) => {
-  // Check for version indicators in the document
-  if (document.version === "1.0" || !document.version) {
-    return LegacyBillOfLadingTemplate;
-  } else {
-    return CurrentBillOfLadingTemplate;
-  }
-};
-
-// Registry with version support
-export const registry = {
-  BILL_OF_LADING: (props) => {
-    const Template = getTemplateForDocument(props.document);
-    return <Template {...props} />;
-  },
-  // ...
-};
-```
+- Always support legacy document formats
+- Add deprecation warnings for old formats, if necessary
 
 ### Styling
 
@@ -608,51 +502,6 @@ const Template = ({ document }) => {
 };
 ```
 
-### Accessibility
-
-Creating accessible templates ensures documents can be used by everyone, including people with disabilities.
-
-#### **Best Practice**:
-
-- Follow WCAG 2.1 guidelines
-- Use semantic HTML elements
-- Include sufficient color contrast
-- Add proper alt text for images
-- Ensure keyboard navigation works
-- Test with screen readers
-
-#### **Implementation Example**:
-
-```jsx
-// Accessible template example
-const AccessibleTemplate = ({ document }) => (
-  <article aria-labelledby="doc-title">
-    <h1 id="doc-title">Bill of Lading: {document?.blNumber}</h1>
-
-    <section aria-labelledby="shipper-title">
-      <h2 id="shipper-title">Shipper Information</h2>
-      <p>{document?.shipper?.name ?? "Not specified"}</p>
-    </section>
-
-    <button aria-label="Close document" aria-expanded={isExpanded} onClick={toggleExpand}>
-      {isExpanded ? "Collapse" : "Expand"}
-    </button>
-
-    <div role="tabpanel" aria-labelledby="tab-1" id="panel-1">
-      {/* Tab content */}
-    </div>
-
-    {/* Form fields with proper aria-labels */}
-    <div>
-      <label id="vessel-label" htmlFor="vessel-input">
-        Vessel
-      </label>
-      <input id="vessel-input" aria-labelledby="vessel-label" value={document?.vessel} readOnly />
-    </div>
-  </article>
-);
-```
-
 ## Performance Optimization
 
 Optimized templates provide a better user experience and are more reliable.
@@ -685,43 +534,6 @@ Optimized templates provide a better user experience and are more reliable.
      - Consider lighter alternatives
      - Lazy-load heavy components
 
-#### **Implementation Example**:
-
-```jsx
-import React, { useMemo } from "react";
-import { FixedSizeList } from "react-window";
-
-// Memoized component to prevent unnecessary re-renders
-const PackageRow = React.memo(({ pkg }) => (
-  <div className="package-row">
-    <div>{pkg?.description}</div>
-    <div>{pkg?.weight}</div>
-    <div>{pkg?.measurement}</div>
-  </div>
-));
-
-// Optimized list rendering with windowing
-const PackageList = ({ packages }) => {
-  // Expensive calculation wrapped in useMemo
-  const sortedPackages = useMemo(() => {
-    return [...packages].sort((a, b) => a?.description?.localeCompare(b?.description || ""));
-  }, [packages]);
-
-  // Virtual list for efficient rendering of large datasets
-  const Row = ({ index, style }) => (
-    <div style={style}>
-      <PackageRow pkg={sortedPackages[index]} />
-    </div>
-  );
-
-  return (
-    <FixedSizeList height={400} width="100%" itemCount={sortedPackages.length} itemSize={50}>
-      {Row}
-    </FixedSizeList>
-  );
-};
-```
-
 ## Integration & Deployment
 
 ### Bundle Size Optimization
@@ -739,7 +551,7 @@ Documents must specify which template to use and where to find the renderer.
 
 #### **Best Practice**:
 
-- Use the current `renderMethod` array format for OpenAttestation documents
+- Use the current `renderMethod` array format for W3C documents
 - Include fallback renderers when possible
 - Use consistent naming conventions for templates
 
@@ -757,7 +569,7 @@ const document = {
   // Renderer specification
   renderMethod: [
     {
-      id: "https://renderer.example.com",
+      id: "https://generic-templates.tradetrust.io",
       type: "EMBEDDED_RENDERER",
       templateName: "BILL_OF_LADING",
     },
@@ -775,7 +587,7 @@ const document = {
 };
 ```
 
-**Legacy Format (deprecated but still supported)**:
+**Legacy Format for OpenAttestation Documents (deprecated but still supported)**:
 
 ```javascript
 // Legacy document format with $template (deprecated)
@@ -785,7 +597,7 @@ const legacyDocument = {
   $template: {
     name: "BILL_OF_LADING",
     type: "EMBEDDED_RENDERER",
-    url: "https://renderer.example.com",
+    url: "https://generic-templates.tradetrust.io",
   },
   // Other OpenAttestation fields
 };
@@ -802,98 +614,6 @@ Storybook is an excellent tool for developing and testing templates in isolation
 - Test edge cases and error states
 - Use Storybook addons for accessibility and responsive testing
 
-#### **Troubleshooting**:
-
-1. **Storybook configuration issues**:
-
-   - Check your `.storybook/main.js` and `.storybook/preview.js` files
-   - Ensure all required dependencies are installed
-
-2. **Missing dependencies**:
-   - Ensure all required dependencies are imported in stories
-
-#### **Implementation Example**:
-
-```jsx
-// src/templates/BillOfLading/BillOfLading.stories.jsx
-import React from "react";
-import { action } from "@storybook/addon-actions";
-import { BillOfLadingTemplate } from "./BillOfLading";
-import { sampleData, emptyData, partialData } from "./fixtures";
-
-export default {
-  title: "Templates/BillOfLading",
-  component: BillOfLadingTemplate,
-};
-
-export const Default = () => (
-  <BillOfLadingTemplate document={sampleData} handleObfuscation={action("handleObfuscation")} />
-);
-
-export const EmptyData = () => (
-  <BillOfLadingTemplate document={emptyData} handleObfuscation={action("handleObfuscation")} />
-);
-
-export const PartialData = () => (
-  <BillOfLadingTemplate document={partialData} handleObfuscation={action("handleObfuscation")} />
-);
-```
-
-### Production Deployment
-
-Proper deployment ensures your renderer is reliable, secure, and available for document rendering.
-
-#### **Best Practice**:
-
-- Use a continuous integration and deployment pipeline
-- Deploy to reliable hosting with high uptime
-- Implement monitoring and alerting
-- Use secure HTTPS connections
-- Set up proper caching for static assets
-
-#### **Troubleshooting**:
-
-1. **Template works locally but not in production**:
-
-   **Possible Causes and Solutions**:
-
-   - **URL configuration**:
-
-     - Update the renderer URL to point to your production renderer, not localhost
-
-     ```javascript
-     // Development
-     const document = {
-       renderMethod: [
-         {
-           id: "http://localhost:3000",
-           type: "EMBEDDED_RENDERER",
-           templateName: "BILL_OF_LADING",
-         },
-       ],
-     };
-
-     // Production
-     const document = {
-       renderMethod: [
-         {
-           id: "https://renderer.example.com",
-           type: "EMBEDDED_RENDERER",
-           templateName: "BILL_OF_LADING",
-         },
-       ],
-     };
-     ```
-
-   - **Environment variables**:
-
-     - Ensure environment variables are properly set in your production environment
-
-   - **CORS issues**:
-     - Confirm CORS is properly configured on the production server
-
 ## Conclusion
 
 Building effective decentralized renderers requires attention to both technical implementation details and user experience considerations. By following these best practices and troubleshooting techniques, you can create robust, maintainable, and user-friendly document templates for the TradeTrust ecosystem.
-
-For further assistance, join the TradeTrust community or refer to the [TradeTrust documentation](https://docs.tradetrust.io).
