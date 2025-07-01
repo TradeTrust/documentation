@@ -1,10 +1,10 @@
 ---
-id: template-implementation-examples
-title: Template Implementation Examples
-sidebar_label: Template Implementation Examples
+id: template-implementation
+title: Template Implementation
+sidebar_label: Template Implementation
 ---
 
-# Template Implementation Examples
+# Template Implementation
 
 This guide provides detailed examples of implementing document preview templates for specific document types in TradeTrust. We'll cover implementation examples for Bill of Lading templates, along with advanced features like multiple views.
 
@@ -107,9 +107,10 @@ export const BillOfLadingTemplates = [
 ];
 ```
 
-#### 3. Add Storybook Stories for the New Template
+#### 3. Update Storybook Stories for the New Template
 
-Update your `src/templates/BillOfLading/template.stories.tsx` file to include the summary view:
+<details>
+<summary>Update your `src/templates/BillOfLading/template.stories.tsx` file to include the summary view:</summary>
 
 ```tsx
 import { Meta, StoryFn } from "@storybook/react";
@@ -137,12 +138,63 @@ export const BillOfLading: FunctionComponent = () => {
 export const SummaryView: FunctionComponent = () => {
   return <Template document={BillOfLadingSample} handleObfuscation={() => {}} />;
 };
+
+const Template_: StoryFn<BillOfLadingDocument> = (args) => {
+  const documentWithProperties = {
+    ...BillOfLadingSample,
+    credentialSubject: {
+      ...BillOfLadingSample.credentialSubject,
+      ...args,
+    },
+  };
+
+  return <Template document={documentWithProperties} handleObfuscation={() => {}} />;
+};
+
+export const BillOfLadingCustomisable = Template_.bind({});
+BillOfLadingCustomisable.argTypes = {
+  // Define controls for sample document values
+  scac: { control: "text", description: "SCAC code" },
+  blNumber: { control: "text", description: "Bill of Lading number" },
+  vessel: { control: "text", description: "Vessel name" },
+  voyageNo: { control: "text", description: "Voyage number" },
+  portOfLoading: { control: "text", description: "Port of loading" },
+  portOfDischarge: { control: "text", description: "Port of discharge" },
+  carrierName: { control: "text", description: "Carrier name" },
+  shipperName: { control: "text", description: "Shipper name" },
+  shipperAddressStreet: { control: "text", description: "Shipper street address" },
+  shipperAddressCountry: { control: "text", description: "Shipper country" },
+  consigneeName: { control: "text", description: "Consignee name" },
+  notifyPartyName: { control: "text", description: "Notify party name" },
+  placeOfReceipt: { control: "text", description: "Place of receipt" },
+  placeOfDelivery: { control: "text", description: "Place of delivery" },
+  packages: {
+    control: "object",
+    description: "Array of package objects with description, weight, and measurement",
+  },
+};
+BillOfLadingCustomisable.args = {
+  ...BillOfLadingSample.credentialSubject,
+  packages: [
+    {
+      description: "10 PALLETS OF ELECTRONICS",
+      weight: "500",
+      measurement: "1000",
+    },
+    {
+      description: "5 CRATES OF MACHINE PARTS",
+      weight: "750",
+      measurement: "600",
+    },
+  ],
+};
 ```
+</details>
+
+#### 4. Screenshot of Bill of Lading Summary View in preview application
 
 <details>
 <summary>Screenshot of Bill of Lading Summary View</summary>
-
-Based on the [Decentralized Renderer Tutorial](/docs/tutorial/decentralized-renderer.md)
 
 ![Bill of Lading Summary View](/docs/how-tos/decentralized-renderer/multiple-view-summary-view.png)
 
@@ -153,7 +205,7 @@ Based on the [Decentralized Renderer Tutorial](/docs/tutorial/decentralized-rend
 You can create a print-friendly version of your document by adding specific CSS for printing. Add a print stylesheet to your template:
 
 ```jsx
-import { css, Global } from "@emotion/core";
+import { css, Global } from "@emotion/react";
 
 // Add this to your template component
 const PrintStyles = () => (
@@ -161,7 +213,10 @@ const PrintStyles = () => (
     styles={css`
       @media print {
         body {
+          background-color: #ffffff;
           font-size: 12pt;
+          max-width: 800px;
+          margin: auto;
         }
         .no-print {
           display: none !important;
@@ -182,126 +237,19 @@ const PrintStyles = () => (
 </>;
 ```
 
-### Adding Dynamic Form Fields
+### Print Watermark
 
-You can add editable fields to your templates to allow users to fill in missing information. Here's an example of adding editable fields to the Bill of Lading template:
-
-```jsx
-import React, { FunctionComponent, useState } from "react";
-import { TemplateProps } from "@tradetrust-tt/decentralized-renderer-react-components";
-import { css } from "@emotion/core";
-import { BillOfLadingDocument } from "./sample";
-
-// Add this to your styles
-const editableFieldStyle = css`
-  border-bottom: 1px dashed #999;
-  padding: 2px 5px;
-  min-width: 100px;
-  display: inline-block;
-`;
-
-const EditableField = ({ value, onChange }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [fieldValue, setFieldValue] = useState(value || "");
-
-  const handleBlur = () => {
-    setIsEditing(false);
-    if (onChange) onChange(fieldValue);
-  };
-
-  return isEditing ? (
-    <input
-      type="text"
-      value={fieldValue}
-      onChange={(e) => setFieldValue(e.target.value)}
-      onBlur={handleBlur}
-      autoFocus
-    />
-  ) : (
-    <span css={editableFieldStyle} onClick={() => setIsEditing(true)}>
-      {fieldValue || "Click to edit"}
-    </span>
-  );
-};
-
-// Use the EditableField component in your template
-<div css={sectionStyle}>
-  <div css={sectionTitleStyle}>Remarks</div>
-  <EditableField value="" onChange={(value) => console.log("New value:", value)} />
-</div>;
-```
-
-### Adding Document Verification Status
-
-You can display the verification status of a TradeTrust document in your template:
+Add a print watermark to your template to ensure it is visible when printing:
 
 ```jsx
-import { utils } from "@tradetrust-tt/decentralized-renderer-react-components";
+import { PrintWatermark } from "@tradetrust-tt/decentralized-renderer-react-components";
 
-// Add this to your component
-const { isVerified } = utils.documentStatus(document);
-
-// Add this to your component's return statement
-<div
-  css={css`
-    padding: 10px;
-    background-color: ${isVerified ? "#e6f7e6" : "#ffebeb"};
-    border-radius: 5px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-  `}
->
-  <div
-    css={css`
-      margin-right: 10px;
-    `}
-  >
-    {isVerified ? "✓" : "✗"}
-  </div>
-  <div>
-    <strong>{isVerified ? "Verified" : "Not Verified"}</strong>
-    <p>{isVerified ? "This document has been verified." : "This document could not be verified."}</p>
-  </div>
-</div>;
+// In your template component
+return (
+  <>
+    <PrintWatermark />
+    ...
+  </>
+)
 ```
-
-You can customize the Bill of Lading template to fit your specific needs.
-
-### Adding an Image
-
-Update your template component to render a logo / image:
-
-```tsx
-// Add to your imports
-import logo from "./logo.png";
-
-// Add to your styles
-const logoStyle = css`
-  max-width: 200px;
-  margin-bottom: 20px;
-`;
-
-// Add to your component's return statement, inside the headerStyle div
-<img src={logo} alt="Company Logo" css={logoStyle} />;
-```
-
-### Adding a Barcode or QR Code
-
-For more information on adding a barcode or QR code to your document, refer to the [QR Code Implementation](/docs/how-tos/implementing-qr-codes.md).
-
-The QR Code can also be preivew inside the template. You can add a barcode or QR code to your template:
-
-```jsx
-// Add to your imports
-import { QRCodeSVG } from "qrcode.react";
-
-// Add to your styles
-const qrCodeStyle = css`
-  margin: 20px auto;
-  display: block;
-`;
-
-// Add to your component's return statement
-<QRCodeSVG css={qrCodeStyle} value={url} level="M" size={400} />
-```
+![Print Watermark](/docs/tutorial/decentralised-renderer/print-watermark.png)

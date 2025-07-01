@@ -61,6 +61,6 @@ To learn more about Document Preview:
 - Follow the guide on [Creating a Custom Decentralized Renderer](/docs/tutorial/decentralized-renderer) to build your own template
 - Explore our comprehensive [Decentralized Renderer Guide](/docs/how-tos/decentralized-renderer/decentralized-renderer-guide) for best practices and troubleshooting
 - Learn about [Using Generic Templates](/docs/how-tos/decentralized-renderer/using-generic-templates) for quick demonstrations
-- Review detailed [Template Implementation Examples](/docs/how-tos/decentralized-renderer/template-implementation-examples) including Bill of Lading and Cover Letter
+- Explore advanced [Template Implementation](/docs/how-tos/decentralized-renderer/template-implementation) with multiple views and formats for Bill of Lading documents
 
 By leveraging Document Preview, you can ensure that your TradeTrust documents are not only cryptographically secure and verifiable but also easily understandable and visually appealing to end-users.

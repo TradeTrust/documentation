@@ -6,7 +6,7 @@ sidebar_label: Overview
 
 The TradeTrust framework is designed to combat fraud by ensuring the integrity and authenticity of digital documents. There are three key verifications that make this possible:
 
-![3 ticks](/docs/verifying-documents/3-ticks.png)
+![3 ticks](/docs/introduction/document-verify.png)
 
 - [Document Integrity](/docs/introduction/key-components-of-tradetrust/w3c-vc/verifying-documents/document-integrity): TradeTrust ensures that the content of the document has not been modified since the document has been created, with exception of data removed using the built-in obfuscation mechanism.
 - [Document Status](/docs/introduction/key-components-of-tradetrust/w3c-vc/verifying-documents/document-status): TradeTrust checks that the document has been issued and that its issuance status is in good standing (for instance, that it hasn't been revoked). As of today, TradeTrust supports two ways to issue documents: DID Signing and Ethereum Smart Contracts.
