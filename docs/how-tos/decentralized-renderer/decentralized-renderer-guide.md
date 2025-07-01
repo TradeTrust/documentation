@@ -201,9 +201,7 @@ When integrating with decentralized renderers, always use the `useFallbackRender
 />
 ```
 
-The `useFallbackRenderer` prop ensures that if the third-party renderer fails to load (4xx, 5xx), the application will display a fallback UI instead of breaking completely. This creates a more resilient user experience when dealing with external dependencies. The system automatically falls back to the generic templates at https://generic-templates.tradetrust.io.
-
-![Fallback Renderer](/docs/how-tos/decentralized-renderer/fallback-renderer.png)
+The `useFallbackRenderer` prop ensures that if the third-party renderer fails to load (4xx, 5xx), the application will display a fallback UI instead of breaking completely. This creates a more resilient user experience when dealing with external dependencies. The system automatically falls back to the generic templates at https://generic-templates.tradetrust.io with an error message [like this image](#fallback-renderer).
 
 #### 2.&nbsp; Surrounding your template with ErrorBoundary:
 
@@ -630,6 +628,14 @@ export const registry = {
   // ...
 };
 ```
+
+| **Example of missing renderer configuration / template**                                                                                                                                                                                                                                                            |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| - If the document contains renderMethod, it signifies that the decentralized renderer's template is missing. <br/> - If the document does not contain renderMethod, it signifies that the template has been missed configured. <br/> ![Missing Renderer](/docs/how-tos/decentralized-renderer/missing-renderer.png) |
+
+| **Example of fallback renderer**                                                                                                     |
+| :----------------------------------------------------------------------------------------------------------------------------------- |
+| - The renderMethod id URL, returned 4xx or 5xx <br/> <img id="fallback-renderer" alt="Fallback Renderer" src="/docs/how-tos/decentralized-renderer/fallback-renderer.png" /> |
 
 ### Issue 3: Template Renders Slowly or Causes Browser Lag
 
