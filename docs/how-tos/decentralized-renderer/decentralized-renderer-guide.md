@@ -264,35 +264,36 @@ Using the `Wrapper` component provides several benefits:
 
 Proper error handling is crucial for creating robust and user-friendly templates.
 
-#### **Best Practice**:
+**Best Practice**:
 
 - Wrap all components with error boundaries (using the `Wrapper` component shown earlier)
 - Handle missing or malformed data gracefully
 - Provide clear error messages
 - Log errors for debugging
 
-#### **Troubleshooting**:
+**Troubleshooting**:
 
 When your renderer crashes, the reference implementation shows an error UI. Common causes include:
 
-##### 1.&nbsp; JavaScript errors in templates:
+  1.&nbsp; JavaScript errors in templates:
 
-- Check browser console for specific error messages
-- Fix any React rendering errors
-- Ensure data is accessed safely using optional chaining or nullish coalescing
+    > - Check browser console for specific error messages
+    > - Fix any React rendering errors
+    > - Ensure data is accessed safely using optional chaining or nullish coalescing
 
-##### 2.&nbsp; Uncaught exceptions:
-  - When this happens, you'll likely see an error screen like this on the reference implementation:
-    ![Reference Implementation Error](/docs/how-tos/decentralized-renderer/ref-implementation-error.png)
-  - The browser console will typically show the actual error that occurred in your renderer:
-    ![Console Error](/docs/how-tos/decentralized-renderer/console-error.png)
-  - Solutions:
-    - Add try/catch blocks around risky operations
-    - Use the `ErrorBoundary` component to catch and display render errors
-    - Use TypeScript for type safety
-    - Optional chaining to handle missing data
+  2.&nbsp; Uncaught exceptions:
 
-#### **Implementation Example**:
+    > - When this happens, you'll likely see an error screen like this on the reference implementation:
+    >   ![Reference Implementation Error](/docs/how-tos/decentralized-renderer/ref-implementation-error.png)
+    > - The browser console will typically show the actual error that occurred in your renderer:
+    >   ![Console Error](/docs/how-tos/decentralized-renderer/console-error.png)
+    - Solutions:
+      - Add try/catch blocks around risky operations
+      - Use the `ErrorBoundary` component to catch and display render errors
+      - Use TypeScript for type safety
+      - Optional chaining to handle missing data
+
+**Implementation Example**:
 
 ```jsx
 // Safe data access
@@ -319,7 +320,7 @@ const BillOfLadingTemplate = ({ document }) => (
 
 Well-structured templates are easier to maintain and debug.
 
-#### **Best Practice**:
+**Best Practice**:
 
 - Use a modular component architecture
 - Create reusable UI components
@@ -340,7 +341,7 @@ src/templates/
 └── index.tsx              # Main registry file
 ```
 
-#### **Troubleshooting**:
+**Troubleshooting**:
 
 1. **Template not rendering**:
 
@@ -371,7 +372,7 @@ src/templates/
 
 ### Component Composition
 
-#### **Recommendation**: Break down complex templates into smaller, reusable components.
+**Recommendation**: Break down complex templates into smaller, reusable components.
 
 ```jsx
 // Bad practice - one large component
@@ -392,7 +393,7 @@ const BillOfLadingTemplate = ({ document }) => {
 };
 ```
 
-#### **Benefits**:
+**Benefits**:
 
 - Improved readability
 - Easier maintenance
@@ -403,14 +404,14 @@ const BillOfLadingTemplate = ({ document }) => {
 
 Proper data handling ensures your templates are robust against variations in document structure.
 
-#### **Best Practice**:
+**Best Practice**:
 
 - Define TypeScript interfaces for your document schema
 - Implement data validation
 - Use defensive coding to handle missing or unexpected data
 - Process and transform data before rendering when necessary
 
-#### **Troubleshooting**:
+**Troubleshooting**:
 
 1. **Missing or null data fields**:
 
@@ -430,7 +431,7 @@ Proper data handling ensures your templates are robust against variations in doc
 
 Maintaining backward compatibility is essential for document templates that need to render documents issued at different times.
 
-#### **Best Practice**:
+**Best Practice**:
 
 - Version your templates explicitly
 - Always support legacy document formats
@@ -440,7 +441,7 @@ Maintaining backward compatibility is essential for document templates that need
 
 Effective styling ensures your templates are visually appealing, printable, and accessible.
 
-#### **Best Practice**:
+**Best Practice**:
 
 - Use CSS-in-JS solutions like Emotion or Styled Components
 - Implement responsive designs that adapt to different screen sizes
@@ -448,7 +449,7 @@ Effective styling ensures your templates are visually appealing, printable, and 
 - Ensure consistent branding
 - Consider white-labeling needs
 
-#### **Troubleshooting**:
+**Troubleshooting**:
 
 1. **CSS conflicts**:
 
@@ -506,7 +507,7 @@ const Template = ({ document }) => {
 
 Optimized templates provide a better user experience and are more reliable.
 
-#### **Best Practice**:
+**Best Practice**:
 
 - Minimize component re-renders
 - Use React.memo for pure components
@@ -514,7 +515,7 @@ Optimized templates provide a better user experience and are more reliable.
 - Optimize images and assets
 - Split code into smaller chunks
 
-#### **Troubleshooting**:
+**Troubleshooting**:
 
 1. **Template renders slowly or causes browser lag**:
 
@@ -538,7 +539,7 @@ Optimized templates provide a better user experience and are more reliable.
 
 ### Bundle Size Optimization
 
-#### **Recommendation**: Minimize bundle size for faster loading.
+**Recommendation**: Minimize bundle size for faster loading.
 
 - Use code-splitting to load templates on demand
 - Implement tree-shaking
@@ -549,13 +550,13 @@ Optimized templates provide a better user experience and are more reliable.
 
 Documents must specify which template to use and where to find the renderer.
 
-#### **Best Practice**:
+**Best Practice**:
 
 - Use the current `renderMethod` array format for W3C documents
 - Include fallback renderers when possible
 - Use consistent naming conventions for templates
 
-#### **Implementation Example**:
+**Implementation Example**:
 
 ```javascript
 // Document with renderMethod (current format)
@@ -607,7 +608,7 @@ const legacyDocument = {
 
 Storybook is an excellent tool for developing and testing templates in isolation.
 
-#### **Best Practice**:
+**Best Practice**:
 
 - Create stories for each template and state
 - Include sample data fixtures
