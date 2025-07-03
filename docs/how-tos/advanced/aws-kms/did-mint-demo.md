@@ -84,7 +84,7 @@ const signer = new AwsKmsSigner(
 module.exports = { signer };
 ```
 
-### 3. Deploy Token Registry using KMS signer
+### 3. Deploy Token Registry
 
 Before minting tokens, we need to deploy a token registry smart contract to the blockchain. The token registry serves as the on-chain record keeper that maintains ownership information, facilitates transfers, and validates the tokens we mint.
 
