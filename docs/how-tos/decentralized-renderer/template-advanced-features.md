@@ -28,7 +28,7 @@ Let's extend our Bill of Lading example to include multiple views:
 
 Create a new file `src/templates/BillOfLading/summary-template.tsx` for a summary view:
 
-```tsx
+```tsx title="src/templates/BillOfLading/summary-template.tsx"
 import { css } from "@emotion/react";
 import { TemplateProps } from "@tradetrust-tt/decentralized-renderer-react-components";
 import React, { FunctionComponent } from "react";
@@ -85,7 +85,7 @@ export const BillOfLadingSummaryTemplate: FunctionComponent<TemplateProps<BillOf
 
 Modify your `src/templates/BillOfLading/index.tsx` file to include both templates:
 
-```tsx
+```tsx title="src/templates/BillOfLading/index.tsx"
 import { BillOfLadingSummaryTemplate } from "./summary-template";
 import { Template } from "./template";
 
@@ -105,10 +105,9 @@ export const BillOfLadingTemplates = [
 
 #### 3. Update Storybook Stories for the New Template
 
-<details>
-<summary>Update your `src/templates/BillOfLading/template.stories.tsx` file to include the summary view:</summary>
+Update your `src/templates/BillOfLading/template.stories.tsx` file to include the summary view:
 
-```tsx
+```tsx title="src/templates/BillOfLading/template.stories.tsx"
 import { Meta, StoryFn } from "@storybook/react";
 import React, { FunctionComponent } from "react";
 import { BillOfLadingSample } from "./sample";
@@ -185,7 +184,7 @@ BillOfLadingCustomisable.args = {
   ],
 };
 ```
-</details>
+
 
 #### 4. Screenshot of Bill of Lading Summary View in preview application
 
@@ -248,7 +247,12 @@ return (
   </>
 )
 ```
+
+<details>
+<summary>Print Watermark Example</summary>
+
 ![Print Watermark](/docs/tutorial/decentralised-renderer/print-watermark.png)
+</details>
 
 ### Conditional Rendering
 
@@ -353,6 +357,14 @@ export const InteractiveTemplate = ({ document }) => {
 };
 ```
 
+<details>
+<summary>Collapsible Example</summary>
+
+![Collapsible Example Closed](/docs/how-tos/decentralized-renderer/advance-collapsible-closed.png)
+![Collapsible Example Open](/docs/how-tos/decentralized-renderer/advance-collapsible-open.png)
+
+</details>
+
 ### Data Visualization
 
 Enhance your templates with charts and graphs to visualize document data:
@@ -413,6 +425,12 @@ export const DataVisualizationTemplate = ({ document }) => {
   );
 };
 ```
+
+<details>
+<summary>Chart Example</summary>
+
+![Data Visualization Template](/docs/how-tos/decentralized-renderer/advance-charts.png)
+</details>
 
 ### Internationalization Support
 
@@ -483,6 +501,14 @@ export const MultiLanguageTemplate = ({ document }) => {
   );
 };
 ```
+
+<details>
+<summary>Internationalization Example</summary>
+
+![Multi-Language EN](/docs/how-tos/decentralized-renderer/advance-translation-en.png)
+![Multi-Language ZH](/docs/how-tos/decentralized-renderer/advance-translation-zh.png)
+</details>
+
 
 ## Conclusion
 
