@@ -8,7 +8,7 @@ This guide walks you through the process of creating a custom decentralized rend
 
 ## Source code and demo repository
 
-TradeTrust provides a template repository to help you get started quickly: [TradeTrust/decentralized-renderer](https://github.com/TradeTrust/tradetrust-decentralized-renderer). You can use this as a reference, customize it, or fork it for your own renderer implementation.
+TradeTrust provides a template repository to help you get started quickly: [TradeTrust/decentralized-renderer](https://github.com/TradeTrust/tradetrust-decentralized-renderer). You can use this as a starting point, fork it for your own renderer implementation.
 
 ## Prerequisites
 
@@ -615,7 +615,7 @@ BillOfLadingCustomisable.parameters = {
 
 Register your template in the template registry. Update the file `src/templates/index.tsx`:
 
-```tsx
+```tsx title="src/templates/index.tsx"
 import { TemplateRegistry } from "@tradetrust-tt/decentralized-renderer-react-components";
 import { BillOfLadingTemplates } from "./BillOfLading";
 

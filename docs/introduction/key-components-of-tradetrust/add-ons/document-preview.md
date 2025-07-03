@@ -20,11 +20,11 @@ TradeTrust recommends using our Decentralized Renderer implementation by forking
 
 The Decentralized Renderer comes with several powerful built-in features that enhance document functionality:
 
-- **Selective Redaction**: Allows users to selectively hide sensitive information while maintaining document validity. Users can toggle edit mode to remove specific fields before sharing documents, with the redacted document remaining cryptographically valid.
-
 - **Print Watermark**: Automatically adds a watermark to printed versions of documents, enhancing security and indicating the document's origin. The watermark is visible only when the document is printed.
 
 - **Document QR Code**: Generates a QR code for printed documents that links back to the digital version, enabling quick verification and access to the latest document state. The QR code appears on a separate page when printing.
+
+- **Selective Redaction**: Allows users to selectively hide sensitive information while maintaining document validity. Users can toggle edit mode to remove specific fields before sharing documents, with the redacted document remaining cryptographically valid. (Only available for OA documents)
 
 ### Implementation Steps
 
@@ -44,7 +44,7 @@ This approach allows organizations to maintain their branding, include specific 
 - **Human Readability**: Transforms machine-readable JSON data into visually structured documents
 - **Flexibility**: Supports various document types through different templates
 - **Customization**: Allows for complete control over document appearance through custom renderers
-- **Decentralization**: Renderers can be hosted independently of the TradeTrust platform
+- **Decentralization**: Renderers can be hosted independently, without reliance on a specific TradeTrust enabled platform/system
 
 ## Implementation Considerations
 
