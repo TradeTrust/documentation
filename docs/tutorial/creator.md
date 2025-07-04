@@ -457,9 +457,9 @@ app.use((req, res, next) => {
 const SUPPORTED_DOCUMENT: {
   [key: string]: string;
 } = {
-  BILL_OF_LADING: "https://schemata.openattestation.com/io/tradetrust/bill-of-lading/1.0/bill-of-lading-context.json",
-  // "INVOICE": "https://schemata.openattestation.com/io/tradetrust/invoice/1.0/invoice-context.json",
-  // "CERTIFICATE_OF_ORIGIN": "https://schemata.openattestation.com/io/tradetrust/certificate-of-origin/1.0/certificate-of-origin-context.json"
+  BILL_OF_LADING: "https://trustvc.io/context/bill-of-lading.json",
+  // "INVOICE": "https://trustvc.io/context/invoice.json",
+  // "CERTIFICATE_OF_ORIGIN": "https://trustvc.io/context/coo.json"
 };
 
 app.post("/create/:documentId", async (req: Request, res: Response, next: NextFunction) => {
@@ -619,12 +619,12 @@ npm run dev
 ```
 
 ```bash
-curl --location 'localhost:3000/create/bill_of_lading' \
+curl --location 'http://localhost:3000/create/bill_of_lading' \
 --header 'Content-Type: application/json' \
---data '{"credentialSubject":{"shipper":{"address":{}},"consignee":{},"notifyParty":{},"blNumber":"20250107","scac":"20250107"},"owner":"0xCA93690Bb57EEaB273c796a9309246BC0FB93649","holder":"0xCA93690Bb57EEaB273c796a9309246BC0FB93649"}'
+--data '{"credentialSubject": {"type": ["BillOfLading"],"shipperAddressStreet": "","consigneeName": "","notifyPartyName": "","blNumber": "20250107","scac": "20250107"},"owner": "0xCA93690Bb57EEaB273c796a9309246BC0FB93649","holder": "0xCA93690Bb57EEaB273c796a9309246BC0FB93649"}'
 
 output:
-{"signedW3CDocument":{"@context":["https://www.w3.org/2018/credentials/v1","https://w3id.org/security/bbs/v1","https://trustvc.io/context/transferable-records-context.json","https://trustvc.io/context/render-method-context.json","https://trustvc.io/context/attachments-context.json","https://schemata.openattestation.com/io/tradetrust/bill-of-lading/1.0/bill-of-lading-context.json"],"type":["VerifiableCredential"],"credentialStatus":{"type":"TransferableRecords","tokenNetwork":{"chain":"FREE","chainId":"20180427"},"tokenRegistry":"0xaD26f724287bCfDCE2740736F9235D2AB4281161","tokenId":"b8e283a18c92f387984e728a58753c4dbacd314d4ff98ad42328991a37ed88f4"},"renderMethod":[{"id":"https://generic-templates.tradetrust.io","type":"EMBEDDED_RENDERER","templateName":"BILL_OF_LADING"}],"credentialSubject":{"shipper":{"address":{}},"consignee":{},"notifyParty":{},"blNumber":"20250107","scac":"20250107"},"issuanceDate":"2025-02-06T07:55:44.957Z","expirationDate":"2025-05-06T07:55:44.957Z","issuer":"did:web:massive-steadily-crane.ngrok-free.app","id":"urn:bnid:_:0194da41-fbc0-777f-85eb-102d0874e309","proof":{"type":"BbsBlsSignature2020","created":"2025-02-06T07:55:47Z","proofPurpose":"assertionMethod","proofValue":"o+6dCbyPjNgOu/fjU4wd8pZVGHGvVAke35ZEBejOYqvuMd+9F2xM9706NbPNZQhmXj+Fu9e9Ge7znjjx24B6KUTa3hMFhBxCojvjiy8A2G4bml2DsdoBha7oRpuLTKeNCRevNDeYub63TF2XkMdX7w==","verificationMethod":"did:web:massive-steadily-crane.ngrok-free.app#keys-1"}},"txHash":"0xfe0467e5c2ec4d9e7e42a3116612b3fe1ed617be0c7ecfdc170185a8b0c42847"}
+{"signedW3CDocument":{"@context":["https://www.w3.org/2018/credentials/v1","https://w3id.org/security/bbs/v1","https://trustvc.io/context/transferable-records-context.json","https://trustvc.io/context/render-method-context.json","https://trustvc.io/context/attachments-context.json","https://trustvc.io/context/bill-of-lading.json"],"type":["VerifiableCredential"],"credentialStatus":{"type":"TransferableRecords","tokenNetwork":{"chain":"MATIC","chainId":"80002"},"tokenRegistry":"0x3652efbc80ace560844afc932d2bf8b452a96c6d","tokenId":"b91d5b4dfcc23d33f7be4f2620dd569c89987e8299bc4b67f6edb95b0bbbb46b"},"renderMethod":[{"id":"https://generic-templates.tradetrust.io","type":"EMBEDDED_RENDERER","templateName":"BILL_OF_LADING"}],"credentialSubject":{"type":["BillOfLading"],"shipperAddressStreet":"","consigneeName":"","notifyPartyName":"","blNumber":"20250107","scac":"20250107"},"issuanceDate":"2025-06-30T08:58:15.679Z","expirationDate":"2025-09-30T08:58:15.679Z","issuer":"did:web:did.trustvc.io","id":"urn:bnid:_:0197c00e-f6ff-755b-88a2-a9e2f3974140","proof":{"type":"BbsBlsSignature2020","created":"2025-06-30T08:58:16Z","proofPurpose":"assertionMethod","proofValue":"hZXGbdsA9oFArnVg2yjpoR6M+FOL8JDsRyngG/56y7V6GVWfWJPjHOLvizcolJDIBZv2+0Ch0WCIYewp/jE2bGDy4XALHFGj8hM5lW5hB4kio0Kglkol4OlKw+eZ8ujstHAB9XhFu7/XwAcKOB02TQ==","verificationMethod":"did:web:did.trustvc.io#keys-1"}},"txHash":"0x2b57d581fd1434d5e9409af65d33358bc8436f2b9c412d2e7c687217500a58c9"}
 ```
 
 ## Conclusion
