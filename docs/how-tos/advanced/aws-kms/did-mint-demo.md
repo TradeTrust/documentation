@@ -4,7 +4,7 @@ title: Mint Transferable Token
 sidebar_label: Mint Transferable Token
 ---
 
-This guide shows how to mint a Title Escrow (NFT) using AWS KMS to securely sign the document.
+This guide shows how to mint a Title Escrow (NFT) using AWS KMS.
 Minting tokens in a secure environment often requires the use of hardware security modules (HSMs) like AWS KMS to safeguard private keys while allowing authorized applications to perform cryptographic operations.
 
 > **IMPORTANT:** You must be careful about how you expose your secret key and access key. Always follow AWS security best practices.
