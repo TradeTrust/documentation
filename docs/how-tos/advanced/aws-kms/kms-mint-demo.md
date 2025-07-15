@@ -128,8 +128,8 @@ const deployRegistry = async (signer, chainId) => {
       TokenImplementation[chainId],
       initParam,
       {
-        maxFeePerGas: gasFees?.maxFeePerGas?.toBigInt() ?? 0,
-        maxPriorityFeePerGas: gasFees?.maxPriorityFeePerGas?.toBigInt() ?? 0,
+        maxFeePerGas: gasFees?.maxFeePerGas ?? ethers.constants.Zero,
+        maxPriorityFeePerGas: gasFees?.maxPriorityFeePerGas ?? ethers.constants.Zero,
       }
     );
   } else {
@@ -245,8 +245,8 @@ const mintToken = async () => {
     console.log('Gas fees:', gasFees);
     
     tx = await tokenRegistry.mint(owner, holder, tokenId, encryptedRemarks, {
-      maxFeePerGas: gasFees?.maxFeePerGas?.toBigInt() ?? 0,
-      maxPriorityFeePerGas: gasFees?.maxPriorityFeePerGas?.toBigInt() ?? 0,
+      maxFeePerGas: gasFees?.maxFeePerGas ?? ethers.constants.Zero,
+      maxPriorityFeePerGas: gasFees?.maxPriorityFeePerGas ?? ethers.constants.Zero,
     });
   } else {
     tx = await tokenRegistry.mint(owner, holder, tokenId, encryptedRemarks);
