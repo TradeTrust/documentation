@@ -69,7 +69,7 @@ const siteConfig = {
           className: "navbar-item-references",
         },
         {
-          to: "https://gallery.openattestation.com/tag/trade-trust",
+          to: "https://gallery.tradetrust.io/",
           label: "Gallery",
           className: "navbar-item-gallery",
         },

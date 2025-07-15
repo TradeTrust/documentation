@@ -19,7 +19,7 @@ For our reference implementation, we have the following:
 
 Sample of how the qrcode looks like upon document rendering:
 
-![QRcode](/docs/reference/tradetrust-website/qrcode.png)
+![QRcode](/docs/introduction/qrcode.png)
 
 > **Note**: For more information on qr code implementation, refer to [Implementing QR Codes](../../../how-tos/implementing-qr-codes).
 
