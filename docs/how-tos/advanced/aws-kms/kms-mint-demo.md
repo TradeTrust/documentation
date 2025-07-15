@@ -78,7 +78,7 @@ const signer = new AwsKmsSigner(
     region: process.env.AWS_REGION,
     keyId: process.env.AWS_KEY_ID,
   },
-  new ethers.JsonRpcProvider(process.env.RPC_URL)
+  new ethers.providers.JsonRpcProvider(process.env.RPC_URL)
 );
 
 module.exports = { signer };
