@@ -230,7 +230,8 @@
               "how-tos/advanced/aws-kms/overview",
               "how-tos/advanced/aws-kms/create-key",
               "how-tos/advanced/aws-kms/access-keys",
-              "how-tos/advanced/aws-kms/did-sign-demo"
+              "how-tos/advanced/aws-kms/did-sign-demo",
+              "how-tos/advanced/aws-kms/kms-mint-demo"
             ]
           },
           "how-tos/advanced/wallet-management",
