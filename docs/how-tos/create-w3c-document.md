@@ -44,7 +44,7 @@ Update the `package.json` file:
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@trustvc/trustvc": "^1.6.0-alpha.4",
+    "@trustvc/trustvc": "^1.8.0",
     "dotenv": "^17.0.0",
     "ethers": "^6.13.4"
   },
