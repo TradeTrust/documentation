@@ -99,35 +99,35 @@ After completing the [first prerequisite](/docs/how-tos/issuer/did-web/) (genera
 DID Document:
 ```json
 {
-  "id": "did:web:locust-equipped-perfectly.ngrok-free.app",
+  "id": "did:web:<your_domain>",
   "verificationMethod": [
     {
       "type": "Bls12381G2Key2020",
-      "id": "did:web:locust-equipped-perfectly.ngrok-free.app#keys-1",
-      "controller": "did:web:locust-equipped-perfectly.ngrok-free.app",
-      "publicKeyBase58": "oFT4J2ukiHez1dq8GAVoeQJHSDgyQY6Y6vQFsNACHnsuZyLxgNTXr6yZvpaQnPUvSoh8TPVhxwrY6PB1VkXViV3DsT6egoBBqPrjQtkKxb761Gi5ZkTBrB71VJm4EFBFcf5"
+      "id": "did:web:<your_domain>#keys-1",
+      "controller": "did:web:<your_domain>",
+      "publicKeyBase58": "<your_public_key_base58>"
     }
   ],
   "@context": [
     "https://www.w3.org/ns/did/v1",
     "https://w3id.org/security/suites/bls12381-2020/v1"
   ],
-  "authentication": ["did:web:locust-equipped-perfectly.ngrok-free.app#keys-1"],
-  "assertionMethod": ["did:web:locust-equipped-perfectly.ngrok-free.app#keys-1"],
-  "capabilityInvocation": ["did:web:locust-equipped-perfectly.ngrok-free.app#keys-1"],
-  "capabilityDelegation": ["did:web:locust-equipped-perfectly.ngrok-free.app#keys-1"]
+  "authentication": ["did:web:<your_domain>#keys-1"],
+  "assertionMethod": ["did:web:<your_domain>#keys-1"],
+  "capabilityInvocation": ["did:web:<your_domain>#keys-1"],
+  "capabilityDelegation": ["did:web:<your_domain>#keys-1"]
 }
 ```
 
 Key Pair:
-```typescript
+```json
 {
-  id: 'did:web:locust-equipped-perfectly.ngrok-free.app#keys-1',
-  type: 'Bls12381G2Key2020',
-  controller: 'did:web:locust-equipped-perfectly.ngrok-free.app',
-  seedBase58: '47tpm6EMQUiDGGWrsDYwbo96qWCf6rjgNYEYjnX5B5qk',
-  privateKeyBase58: 'G3fh6uHeXFEChjdAVCrFzFPeTGXQpev4FCGf3Z7HUfSn',
-  publicKeyBase58: 'oFT4J2ukiHez1dq8GAVoeQJHSDgyQY6Y6vQFsNACHnsuZyLxgNTXr6yZvpaQnPUvSoh8TPVhxwrY6PB1VkXViV3DsT6egoBBqPrjQtkKxb761Gi5ZkTBrB71VJm4EFBFcf5'
+  "id": "did:web:<your_domain>#keys-1",
+  "type": "Bls12381G2Key2020",
+  "controller": "did:web:<your_domain>",
+  "seedBase58": "<your_seed_base58>",
+  "privateKeyBase58": "<your_private_key_base58>",
+  "publicKeyBase58": "<your_public_key_base58>"
 }
 ```
 
@@ -136,11 +136,11 @@ Now that you have our key pair object, we **convert it to a string format** befo
 
 ```bash
 # Your wallet private key for blockchain transactions
-WALLET_PRIVATE_KEY=0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+WALLET_PRIVATE_KEY=<your_wallet_private_key>
 
 # Domain and did key pair
-DOMAIN=locust-equipped-perfectly.ngrok-free.app
-DID_KEY_PAIRS='{"id":"did:web:locust-equipped-perfectly.ngrok-free.app#keys-1","type":"Bls12381G2Key2020","controller":"did:web:locust-equipped-perfectly.ngrok-free.app","seedBase58":"47tpm6EMQUiDGGWrsDYwbo96qWCf6rjgNYEYjnX5B5qk","privateKeyBase58":"G3fh6uHeXFEChjdAVCrFzFPeTGXQpev4FCGf3Z7HUfSn","publicKeyBase58":"oFT4J2ukiHez1dq8GAVoeQJHSDgyQY6Y6vQFsNACHnsuZyLxgNTXr6yZvpaQnPUvSoh8TPVhxwrY6PB1VkXViV3DsT6egoBBqPrjQtkKxb761Gi5ZkTBrB71VJm4EFBFcf5"}'
+DOMAIN=<your_domain>
+DID_KEY_PAIRS='{"id":"did:web:<your_domain>#keys-1","type":"Bls12381G2Key2020","controller":"did:web:<your_domain>","seedBase58":"<your_seed_base58>","privateKeyBase58":"<your_private_key_base58>","publicKeyBase58":"<your_public_key_base58>"}'
 
 # Network ID (80002 for Amoy testnet)
 NET=80002
@@ -177,11 +177,11 @@ After successfully deploying the token registry, you will receive a **contract a
 
 ```bash
 # Your wallet private key for blockchain transactions
-WALLET_PRIVATE_KEY=0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+WALLET_PRIVATE_KEY=<your_wallet_private_key>
 
 # Domain and did key pair
-DOMAIN=locust-equipped-perfectly.ngrok-free.app
-DID_KEY_PAIRS='{"id":"did:web:locust-equipped-perfectly.ngrok-free.app#keys-1","type":"Bls12381G2Key2020","controller":"did:web:locust-equipped-perfectly.ngrok-free.app","seedBase58":"47tpm6EMQUiDGGWrsDYwbo96qWCf6rjgNYEYjnX5B5qk","privateKeyBase58":"G3fh6uHeXFEChjdAVCrFzFPeTGXQpev4FCGf3Z7HUfSn","publicKeyBase58":"oFT4J2ukiHez1dq8GAVoeQJHSDgyQY6Y6vQFsNACHnsuZyLxgNTXr6yZvpaQnPUvSoh8TPVhxwrY6PB1VkXViV3DsT6egoBBqPrjQtkKxb761Gi5ZkTBrB71VJm4EFBFcf5"}'
+DOMAIN=<your_domain>
+DID_KEY_PAIRS='{"id":"did:web:<your_domain>#keys-1","type":"Bls12381G2Key2020","controller":"did:web:<your_domain>","seedBase58":"<your_seed_base58>","privateKeyBase58":"<your_private_key_base58>","publicKeyBase58":"<your_public_key_base58>"}'
 
 # Network ID (80002 for Amoy testnet)
 NET=80002
@@ -192,7 +192,7 @@ STABILITY_TESTNET_API_KEY=
 INFURA_API_KEY=
 
 # Token registry address (obtained after deployment)
-TOKEN_REGISTRY_ADDRESS=0x742d35Cc6634C0532925a3b8D45C0532925a3b8D
+TOKEN_REGISTRY_ADDRESS=<your_token_registry_address>
 ```
 
 ### 5. Creating a W3C Verifiable Credential Using Document Builder
