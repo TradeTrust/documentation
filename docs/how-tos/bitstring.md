@@ -35,6 +35,7 @@ import {
   createCredentialStatusPayload,
   CredentialStatusPurpose,
   StatusList,
+  VCBitstringCredentialSubject
 } from "@trustvc/trustvc/w3c/credential-status";
 import { signCredential } from "@trustvc/trustvc/w3c/vc";
 ```
@@ -85,14 +86,15 @@ const encodedList = await credentialStatus.encode();
 Create a Credential Status Payload:
 
 ```ts
+const credentialSubject: VCBitstringCredentialSubject = {
+  id: `${hostingUrl}#list`,
+  type: "StatusList2021",
+  statusPurpose: purpose,
+  encodedList,
+}
 const options = {
   id: hostingUrl,
-  credentialSubject: {
-    id: `${hostingUrl}#list`,
-    type: "StatusList2021",
-    statusPurpose: purpose,
-    encodedList,
-  },
+  credentialSubject: credentialSubject,
 };
 
 const keyPair = {
@@ -168,15 +170,17 @@ const encodedList = await statusList.encode();
 Create and sign the updated Credential Status VC:
 
 ```ts
+const credentialSubject: VCBitstringCredentialSubject = {
+  id: `${hostingUrl}#list`,
+  type: "StatusList2021",
+  statusPurpose: "revocation",
+  encodedList,
+}
+
 const credentialStatusPayload = await createCredentialStatusPayload(
   {
     id: hostingUrl,
-    credentialSubject: {
-      id: `${hostingUrl}#list`,
-      type: "StatusList2021",
-      statusPurpose: "revocation",
-      encodedList,
-    },
+    credentialSubject
   },
   keyPair,
 );

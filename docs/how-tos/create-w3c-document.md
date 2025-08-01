@@ -14,7 +14,7 @@ Before proceeding with this tutorial, ensure you have completed the following st
 
 1. **Generate BBS keypair and host DID:WEB**: Follow the [DID:WEB guide](/docs/how-tos/issuer/did-web/) to generate your BBS key pairs and set up DID:WEB hosting.
 2. **Set up document revocation**: Configure bit string revocation following the [bit string guide](/docs/how-tos/bitstring/).
-3. **Deploy Token Registry**: Deploy a token registry contract for transferable documents using the [token registry deployment guide](/docs/tutorial/creator#73-create-a-script-to-deploy-a-token-registry-contract).
+3. **Deploy Token Registry**: Deploy a token registry contract for transferable documents using the [token registry deployment guide](/docs/how-tos/deployment#token-registry).
 4. **Document verification setup**: Familiarize yourself with the [document verification process](/docs/how-tos/verifydocument/).
 
 ## Tutorial
@@ -153,7 +153,14 @@ INFURA_API_KEY=
 
 > **Note**: The API keys above are required for deploying the token registry on different networks. You can find detailed instructions on how to setup these API keys in the [network configuration guide](/docs/4.x/topics/advanced/additional-network-metamask-guide/#fill-in-the-network-configuration-for-the-new-network-as-required).
 
-### 3. Document Revocation (Bit String)
+### 3. Document Status
+
+We support different document status mechanisms depending on the nature of the document.
+
+For simple verifiable credentials that require revocation capability only, consider using the **Bit String Revocation** method.
+For Electronic Transferable Records (ETRs), the recommended approach is to use **Token Registry** for managing document status.
+
+#### A. Document Revocation (Bit String)
 
 In TradeTrust, the Bitstring Status List (also called StatusList2021) is used for revocation or suspension of Verifiable Credentials (VCs) without modifying the credentials themselves. This mechanism allows issuers to efficiently manage the status of multiple credentials using a single, compact, and publicly hosted bitstring.
 
@@ -165,13 +172,13 @@ In TradeTrust, the Bitstring Status List (also called StatusList2021) is used fo
 
 For detailed instructions on setting up document revocation using bitstring status lists, follow the [Bitstring Status List guide](/docs/how-tos/bitstring).
 
-### 4. Deploy Token Registry
+#### B. Deploying Token Registry
 
 If you want to make your W3C documents **transferable** (tokenized as NFTs), you need to deploy a **Token Registry** contract to the blockchain. The token registry enables us mint the token ID obtained from the signed document as an NFT, making the document ownership transferable between parties.
 
 > **Note**: This step is only required if you plan to mint your documents for transferability. You can create and sign W3C documents without a token registry.
 
-To deploy your token registry, follow the detailed guide: [Create a script to deploy a token registry contract](/docs/tutorial/creator/#73-create-a-script-to-deploy-a-token-registry-contract)
+To deploy your token registry, follow the detailed guide: [Create a script to deploy a token registry contract](/docs/how-tos/deployment/#token-registry)
 
 After successfully deploying the token registry, you will receive a **contract address**. Update your `.env` file with this address:
 
@@ -195,15 +202,20 @@ INFURA_API_KEY=
 TOKEN_REGISTRY_ADDRESS=<your_token_registry_address>
 ```
 
-### 5. Creating a W3C Verifiable Credential Using Document Builder
+### 4. Creating a W3C Verifiable Credential Using Document Builder
 
 Now we'll use TrustVC's **DocumentBuilder** to create a W3C Verifiable Credential. The DocumentBuilder provides a clean, intuitive way for constructing verifiable credentials that comply with W3C standards while integrating seamlessly with TradeTrust's ecosystem.
+
+Depending on your document status approach from Section 3, you'll configure the `credentialStatus` differently:
+
+- **For Simple VCs (Section 3A)**: Use `W3CVerifiableDocumentConfig` with bitstring status list
+- **For ETRs (Section 3B)**: Use `W3CTransferableRecordsConfig` with token registry
 
 Create a new file `src/utils/createW3CDocument.ts` with the document creation logic:
 
 ```typescript
 require('dotenv').config();
-import { DocumentBuilder, CHAIN_ID, SUPPORTED_CHAINS, W3CTransferableRecordsConfig } from '@trustvc/trustvc';
+import { DocumentBuilder, CHAIN_ID, SUPPORTED_CHAINS, W3CTransferableRecordsConfig, W3CVerifiableDocumentConfig } from '@trustvc/trustvc';
 
 export const createW3CDocument = async () => {
   try {
@@ -215,12 +227,22 @@ export const createW3CDocument = async () => {
     // Prepare the document
     const expirationDate = new Date();
     expirationDate.setMonth(expirationDate.getMonth() + 3);
+    
+    // Option 1: For ETRs using Token Registry (Section 3B)
     const credentialStatus: W3CTransferableRecordsConfig = {
       chain: CHAININFO.currency,
       chainId: Number(CHAINID),
       tokenRegistry: process.env.TOKEN_REGISTRY_ADDRESS!,
       rpcProviderUrl: RPC_PROVIDER_URL!
     };
+    
+    // Option 2: For Simple VCs using Bitstring Status List (Section 3A)
+    // Uncomment the following if using bitstring revocation:
+    // const credentialStatus: W3CVerifiableDocumentConfig = {
+    //   url: "https://your-domain.com/status-list/credentials",
+    //   index: 1,
+    //   purpose: "revocation"
+    // };
 
     console.log("Creating document...")
 
@@ -259,7 +281,14 @@ export const createW3CDocument = async () => {
 };
 ```
 
-### 6. Signing the Document
+**Key Differences in Credential Status Configuration:**
+
+- **W3CTransferableRecordsConfig (ETRs)**: Requires token registry address and blockchain configuration for minting transferable tokens
+- **W3CVerifiableDocumentConfig (Simple VCs)**: Requires a status list URL where the bitstring revocation list is hosted
+
+> **Important**: For bitstring revocation, you must host a valid StatusList2021 credential at the specified URL. Using placeholder URLs like `https://example.com` will cause verification errors. Follow the [Bitstring Status List guide](/docs/how-tos/bitstring) to set up proper hosting.
+
+### 5. Signing the Document
 
 Next, we need to sign our document to create a verifiable credential. We do this by calling the `sign` method on our DocumentBuilder instance and passing the DID key pair. Once signed, the document will include a **proof object** that contains cryptographic evidence of the document's authenticity.
 
@@ -296,9 +325,11 @@ export const signDocument = async (document: DocumentBuilder) => {
 };
 ```
 
-### 7. Minting Document for Transferability
+### 6. Minting Document for Transferability
 
 Now that we have a signed the W3C verifiable credential, we can **mint** a token that represents ownership of the document. We obtain a tokenId from the signed document and mint it as an NFT on the blockchain.
+
+> **Note**: This minting step is only applicable for **Electronic Transferable Records (ETRs)** when using the **Token Registry** approach from Section 3B. If you're using Bit String Revocation (Section 3A) for simple verifiable credentials, skip this step.
 
 We'll use TrustVC's **mint method** for minting a token.
 
@@ -381,7 +412,7 @@ export const mintDocument = async (
 };
 ```
 
-### 8. Verifying the Document
+### 7. Verifying the Document
 
 After creating and signing your W3C document, you can verify its authenticity and integrity. The verification process returns an array of verification fragments, each representing a different aspect of the document's validity.
 
@@ -418,7 +449,7 @@ export const verifyW3CDocument = async (
 
 ```
 
-The verification process checks multiple aspects of your document. To understand the different components of verification and what each fragment represents, refer to the [TradeTrust verification overview](https://docs.tradetrust.io/docs/introduction/key-components-of-tradetrust/w3c-vc/verifying-documents/overview), and the different [W3C verification fragments](https://docs.tradetrust.io/docs/tutorial/verifier#w3c-verifiers)
+The verification process checks multiple aspects of your document. To understand the different components of verification and what each fragment represents, refer to the [TradeTrust verification overview](/docs/introduction/key-components-of-tradetrust/w3c-vc/verifying-documents/overview), and the different [W3C verification fragments](/docs/tutorial/verifier#w3c-verifiers)
 
 ## Running the Complete Workflow
 
