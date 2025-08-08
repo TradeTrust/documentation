@@ -101,6 +101,7 @@
       "how-tos/bitstring",
       "how-tos/implementing-qr-codes",
       "how-tos/credential-status",
+      "how-tos/create-w3c-document",
       {
         "label": "Issuing OpenAttestation Documents",
         "type": "category",
