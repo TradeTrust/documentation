@@ -229,8 +229,6 @@ const scholarshipVC = await deriveW3C(signedCredential, [
 
 ##### Step 3: Verify the Derived Credential
 
-> **⚠️ Important**: Unlike BBS+ credentials, ECDSA-SD-2023 credentials **must be derived before verification**. You cannot verify the original full credential directly if you want selective disclosure.
-
 ```typescript
 import { verifyW3CSignature } from '@trustvc/trustvc';
 
@@ -244,6 +242,8 @@ const scholarshipVerification = await verifyW3CSignature(scholarshipVC);
 console.log('Job Application Valid:', jobVerification.verified);
 console.log('Scholarship Application Valid:', scholarshipVerification.verified);
 ```
+
+> **⚠️ Important**: Unlike BBS+ credentials, ECDSA-SD-2023 credentials **must be derived before verification**. You cannot verify the original full credential directly if you want selective disclosure.
 
 #### Best Practices for Selective Disclosure
 
@@ -382,14 +382,13 @@ const credentialWithStatusV2 = {
 };
 ```
 
-
-
 ### 7. Document Builder Migration
 
 The `DocumentBuilder` class helps build and manage W3C v2.0 credentials with credential status features.
+
 **Note**: The new DocumentBuilder only supports v2.0 credentials with ECDSA-SD-2023 cryptosuite by default.
 
-### Basic Document Builder Usage
+#### Basic Document Builder Usage
 
 ```typescript
 import { DocumentBuilder } from '@trustvc/trustvc';
@@ -432,7 +431,7 @@ document.credentialStatus({
 });
 ```
 
-### Document Builder with Signing and Selective Disclosure
+#### Document Builder with Signing and Selective Disclosure
 
 ```typescript
 // ECDSA-SD-2023 key pair
@@ -456,7 +455,11 @@ const signedDocument = await document.sign(modernKeyPair, 'ecdsa-sd-2023', {
 console.log(signedDocument);
 ```
 
-### Built-in Derive Function
+> **Mandatory Pointers**: In ECDSA-SD-2023, mandatory pointers specify which fields must always be disclosed and cannot be selectively hidden. This is useful for ensuring critical information like the credential subject's ID and name are always visible, while other fields like age or GPA can be selectively disclosed. The pointers use JSON Pointer syntax (RFC 6901) to reference specific fields in the credential.
+> 
+> **Default Behavior**: If no mandatory pointers are provided, all fields in the credential become selectively disclosable, meaning the holder can choose to hide any field during presentation. However, certain fields like the credential's `@context`, `type`, `issuer`, and `validFrom`/`validUntil` are typically always disclosed by default as they are essential for credential verification.
+
+#### Built-in Derive Function
 
 The new DocumentBuilder includes a built-in derive function for selective disclosure:
 
@@ -475,7 +478,7 @@ const isVerified = await document.verify();
 console.log(isVerified); // true or false
 ```
 
-### Advanced Document Builder Features
+#### Advanced Document Builder Features
 
 ```typescript
 // Add render method for display templates
