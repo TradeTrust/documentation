@@ -212,14 +212,14 @@ const { signed: fullCredential } = await signW3C(credential, modernKeyPair, 'ecd
 import { deriveW3C } from '@trustvc/trustvc';
 
 // Create job application VC (hide sensitive info)
-const jobApplicationVC = await deriveW3C(signedCredential, [
+const jobApplicationVC = await deriveW3C(fullCredential, [
   '/credentialSubject/graduationYear'
   // Reveals: id, name, degree (mandatory) + graduationYear
   // Hides: studentId, gpa, dateOfBirth
 ]);
 
 // Create scholarship application VC (show academic performance)
-const scholarshipVC = await deriveW3C(signedCredential, [
+const scholarshipVC = await deriveW3C(fullCredential, [
   '/credentialSubject/gpa',
   '/credentialSubject/graduationYear'
   // Reveals: id, name, degree (mandatory) + gpa + graduationYear
@@ -257,19 +257,19 @@ console.log('Scholarship Application Valid:', scholarshipVerification.verified);
 
 The TrustVC library provides seamless verification through the `verifyDocument` function, which offers **backward compatibility** and works with both v1.1 and v2.0 credentials automatically.
 
-#### Unified Verification with verifyW3C
+#### Unified Verification with verifyDocument
 
 ```typescript
 import { verifyDocument } from '@trustvc/trustvc';
 
 // ✅ Works with v1.1 BBS+ credentials
-const v1Result = await verifyDocument(signedV1Credential);
+const v1Result = await verifyDocument(signedV1BBSCredential);
 
 // ✅ Works with derived v2.0 ECDSA-SD-2023 credentials
-const derivedResult = await verifyDocument(derivedCredential);
+const v2Result = await verifyDocument(derivedV2ECDSACredential);
 
 console.log('v1.1 Verification:', v1Result.verified);
-console.log('Derived Verification:', derivedResult.verified);
+console.log('v2.0 Verification:', v2Result.verified);
 ```
 
 ### 6. Credential Status Migration
