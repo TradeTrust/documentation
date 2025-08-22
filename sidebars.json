@@ -245,6 +245,7 @@
     "Migration / Upgrading": [
       "migration-guide/trustvc",
       "migration-guide/migration-trustvc",
+      "migration-guide/w3c-vc-v2",
       "migration-guide/igp-i",
       "migration-guide/migration-tr-v5",
       "migration-guide/migration-tt-cli-v5"
