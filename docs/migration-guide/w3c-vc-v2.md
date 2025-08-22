@@ -47,7 +47,9 @@ npm install @trustvc/trustvc@latest
 
 #### v1.1 Key Generation (Legacy)
 ```typescript
-import { generateKeyPair, VerificationType } from '@trustvc/w3c-issuer';
+import { issuer } from '@trustvc/trustvc';
+
+const { generateKeyPair, VerificationType } = issuer;
 
 // v1.1 - BLS12-381 G2 Key
 const legacyKeyPair = await generateKeyPair({
@@ -67,7 +69,9 @@ console.log(legacyKeyPair);
 
 #### v2.0 Key Generation (Modern)
 ```typescript
-import { generateKeyPair, CryptoSuite } from '@trustvc/w3c-issuer';
+import { issuer } from '@trustvc/trustvc';
+
+const { generateKeyPair, CryptoSuite } = issuer;
 
 // v2.0 - ECDSA-SD-2023 with Multikey
 const modernKeyPair = await generateKeyPair({
@@ -83,11 +87,37 @@ console.log(modernKeyPair);
 // }
 ```
 
+> **Important**: After generating new ECDSA-SD-2023 keys, you must update your DID:WEB document to include the new public key. The key format changes from `publicKeyBase58` (BLS12-381) to `publicKeyMultibase` (Multikey).
+
+#### Sample DID Document Update
+
+```json
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://w3id.org/security/multikey/v1"
+  ],
+  "id": "did:web:example.com",
+  "verificationMethod": [
+    {
+      "id": "did:web:example.com#key-1",
+      "type": "Multikey",
+      "controller": "did:web:example.com",
+      "publicKeyMultibase": "z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK"
+    }
+  ],
+  "assertionMethod": ["did:web:example.com#key-1"],
+  "authentication": ["did:web:example.com#key-1"]
+}
+```
+
 ### 3. Credential Issuance Migration
 
 #### v1.1 Credential Issuance
 ```typescript
-import { signW3C } from '@trustvc/trustvc';
+import { issuer, signW3C } from '@trustvc/trustvc';
+
+const { CryptoSuite } = issuer;
 
 const credentialV1 = {
   '@context': [
@@ -113,12 +143,15 @@ const legacyKeyPair = {
   publicKeyBase58: '...'
 };
 
-const { signed: signedV1 } = await signW3C(credentialV1, legacyKeyPair, 'BbsBlsSignature2020');
+const { signed: signedV1 } = await signW3C(credentialV1, legacyKeyPair, CryptoSuite.BbsBlsSignature2020);
 ```
 
 #### v2.0 Credential Issuance
 ```typescript
 import { signW3C } from '@trustvc/trustvc';
+import { issuer } from '@trustvc/trustvc';
+
+const { CryptoSuite } = issuer;
 
 const credentialV2 = {
   '@context': [
@@ -145,7 +178,7 @@ const modernKeyPair = {
   publicKeyMultibase: 'z...'
 };
 
-const { signed: signedV2 } = await signW3C(credentialV2, modernKeyPair, 'ecdsa-sd-2023', {
+const { signed: signedV2 } = await signW3C(credentialV2, modernKeyPair, CryptoSuite.EcdsaSd2023, {
   mandatoryPointers: [
     '/credentialSubject/id',
     '/credentialSubject/name'
@@ -175,7 +208,9 @@ One of the most powerful features of v2.0 is enhanced selective disclosure using
 ##### Step 1: Sign Credential with Selective Disclosure Support
 
 ```typescript
-import { signW3C } from '@trustvc/trustvc';
+import { issuer, signW3C } from '@trustvc/trustvc';
+
+const { CryptoSuite } = issuer;
 
 const credential = {
   '@context': [
@@ -197,7 +232,7 @@ const credential = {
 };
 
 // Sign with mandatory pointers (always visible fields)
-const { signed: fullCredential } = await signW3C(credential, modernKeyPair, 'ecdsa-sd-2023', {
+const { signed: fullCredential } = await signW3C(credential, modernKeyPair, CryptoSuite.EcdsaSd2023, {
   mandatoryPointers: [
     '/credentialSubject/id',
     '/credentialSubject/name',
@@ -263,23 +298,28 @@ The TrustVC library provides seamless verification through the `verifyDocument` 
 import { verifyDocument } from '@trustvc/trustvc';
 
 // ✅ Works with v1.1 BBS+ credentials
-const v1Result = await verifyDocument(signedV1BBSCredential);
+const v1ResultFragments = await verifyDocument(signedV1BBSCredential);
 
 // ✅ Works with derived v2.0 ECDSA-SD-2023 credentials
-const v2Result = await verifyDocument(derivedV2ECDSACredential);
+const v2ResultFragments = await verifyDocument(derivedV2ECDSACredential);
 
-console.log('v1.1 Verification:', v1Result.verified);
-console.log('v2.0 Verification:', v2Result.verified);
+// ✅ Works with non-derived v2.0 ECDSA-SD-2023 credentials
+const v2FullResultFragments = await verifyDocument(signedV2ECDSACredential);
+
+console.log('v1.1 Verification fragments:', v1ResultFragments);
+console.log('v2.0 Derived Verification fragments:', v2ResultFragments);
+console.log('v2.0 Verification fragments:', v2ResultFragments);
 ```
+
+> **Note**: The `verifyDocument` function provides ease of use by automatically handling both derived and non-derived credentials. It returns verification result fragments containing detailed verification information rather than a simple boolean `verified` property.
 
 ### 6. Credential Status Migration
 
 #### v1.1 Status List Creation
 ```typescript
-import { 
-  createCredentialStatusPayload, 
-  StatusList 
-} from '@trustvc/w3c-credential-status';
+import { credentialStatus } from '@trustvc/trustvc';
+
+const { createCredentialStatusPayload, StatusList } = credentialStatus;
 
 // Create status list
 const statusList = new StatusList({ length: 100000 });
@@ -299,10 +339,9 @@ const statusCredentialV1 = await createCredentialStatusPayload(
   },
   legacyKeyPair,
   'StatusList2021Credential', // v1.1 credential type
-  'BbsBlsSignature2020' // legacy cryptosuite
+  CryptoSuite.BbsBlsSignature2020 // legacy cryptosuite
 );
 ```
-
 
 #### v1.1 Credential with Status List
 ```typescript
@@ -331,10 +370,9 @@ const credentialWithStatusV1 = {
 
 #### v2.0 Status List Creation
 ```typescript
-import { 
-  createCredentialStatusPayload, 
-  StatusList 
-} from '@trustvc/w3c-credential-status';
+import { credentialStatus } from '@trustvc/trustvc';
+
+const { createCredentialStatusPayload, StatusList } = credentialStatus;
 
 // Same StatusList class works for both versions
 const statusList = new StatusList({ length: 100000 });
@@ -354,7 +392,7 @@ const statusCredentialV2 = await createCredentialStatusPayload(
   },
   modernKeyPair,
   'BitstringStatusListCredential', // v2.0 credential type
-  'ecdsa-sd-2023' // modern cryptosuite
+  CryptoSuite.EcdsaSd2023 // modern cryptosuite
 );
 ```
 
@@ -445,7 +483,7 @@ const modernKeyPair = {
 };
 
 // Sign with mandatory pointers (always visible fields)
-const signedDocument = await document.sign(modernKeyPair, 'ecdsa-sd-2023', {
+const signedDocument = await document.sign(modernKeyPair, CryptoSuite.EcdsaSd2023, {
   mandatoryPointers: [
     '/credentialSubject/id',
     '/credentialSubject/name',
@@ -458,6 +496,23 @@ console.log(signedDocument);
 > **Mandatory Pointers**: In ECDSA-SD-2023, mandatory pointers specify which fields must always be disclosed and cannot be selectively hidden. This is useful for ensuring critical information like the credential subject's ID and name are always visible, while other fields like age or GPA can be selectively disclosed. The pointers use JSON Pointer syntax (RFC 6901) to reference specific fields in the credential.
 > 
 > **Default Behavior**: If no mandatory pointers are provided, all fields in the credential become selectively disclosable, meaning the holder can choose to hide any field during presentation. However, certain fields like the credential's `@context`, `type`, `issuer`, and `validFrom`/`validUntil` are typically always disclosed by default as they are essential for credential verification.
+
+#### Advanced Document Builder Features
+
+```typescript
+// Add render method for display templates
+document.renderMethod({
+  id: 'https://university.edu/templates',
+  type: 'EMBEDDED_RENDERER',
+  templateName: 'ACADEMIC_TRANSCRIPT'
+});
+
+// Set the qrcode method to be used for the document
+document.qrCode({
+  uri: 'https://example.com/qrcode',
+  type: 'TrustVCQRCode',
+});
+```
 
 #### Built-in Derive Function
 
@@ -476,23 +531,6 @@ console.log(derivedDocument);
 // ECDSA-SD-2023 credentials must be derived before verification
 const isVerified = await document.verify();
 console.log(isVerified); // true or false
-```
-
-#### Advanced Document Builder Features
-
-```typescript
-// Add render method for display templates
-document.renderMethod({
-  id: 'https://university.edu/templates',
-  type: 'EMBEDDED_RENDERER',
-  templateName: 'ACADEMIC_TRANSCRIPT'
-});
-
-// Set the qrcode method to be used for the document
-document.qrCode({
-  uri: 'https://example.com/qrcode',
-  type: 'TrustVCQRCode',
-});
 ```
 
 ## Migration Checklist
