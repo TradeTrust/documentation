@@ -88,7 +88,7 @@ Create a Credential Status Payload:
 ```ts
 const credentialSubject: VCBitstringCredentialSubject = {
   id: `${hostingUrl}#list`,
-  type: "StatusList2021",
+  type: "BitstringStatusList",
   statusPurpose: purpose,
   encodedList,
 }
@@ -98,14 +98,15 @@ const options = {
 };
 
 const keyPair = {
+  "@context": "https://w3id.org/security/multikey/v1",
   id: "did:web:example.com#keys-1",
-  type: "Bls12381G2Key2020",
+  type: "Multikey",
   controller: "did:web:example.com",
-  privateKeyBase58: "<privateKeyBase58>",
-  publicKeyBase58: "<publicKeyBase58>",
+  secretKeyMultibase: "<secretKeyMultibase>",
+  publicKeyMultibase: "<publicKeyMultibase>",
 };
 
-const credentialStatusVC = await createCredentialStatusPayload(options, keyPair);
+const credentialStatusVC = await createCredentialStatusPayload(options, keyPair, 'BitstringStatusListCredential', 'ecdsa-sd-2023');
 console.log("Credential Status VC:", credentialStatusVC);
 ```
 
@@ -172,7 +173,7 @@ Create and sign the updated Credential Status VC:
 ```ts
 const credentialSubject: VCBitstringCredentialSubject = {
   id: `${hostingUrl}#list`,
-  type: "StatusList2021",
+  type: "BitstringStatusList",
   statusPurpose: "revocation",
   encodedList,
 }
@@ -183,6 +184,8 @@ const credentialStatusPayload = await createCredentialStatusPayload(
     credentialSubject
   },
   keyPair,
+  'BitstringStatusListCredential',
+  'ecdsa-sd-2023',
 );
 
 const { signed, error } = await signCredential(credentialStatusPayload, keyPair);
@@ -204,7 +207,7 @@ Here is an example of how the hosted Credential Status List is referenced in a V
 ```json
 "credentialStatus": {
   "id": "https://example.com/credentials/status/3#94567",
-  "type": "StatusList2021Entry",
+  "type": "BitstringStatusListEntry",
   "statusPurpose": "revocation",
   "statusListIndex": "94567",
   "statusListCredential": "https://example.com/credentials/status/3"

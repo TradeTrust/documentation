@@ -9,7 +9,7 @@ TradeTrust checks that the document has been issued and that it's issuance statu
 As of today, TradeTrust supports two ways to verify documents:
 
 - Transferable: Uses Ethereum smart contracts through a Token Registry.
-- Non-Transferable: Uses BitString CredentialStatus (specifically, BitStringStatusList2021).
+- Non-Transferable: Uses BitString CredentialStatus (specifically, BitstringStatusList).
 - None
 
 ## Transferable
@@ -54,9 +54,9 @@ For more information, refer to the [Tutorial - Creator](/docs/tutorial/creator)
 
 ## Non-Transferable
 
-### BitString CredentialStatus - BitStringStatusList2021
+### BitString CredentialStatus - BitstringStatusList
 
-The BitStringStatusList2021 credential status uses a compact, off-chain structure to manage document status efficiently. It relies on a bitstring to represent the state of each document, ensures scalability and reduces on-chain storage costs.
+The BitstringStatusList credential status uses a compact, off-chain structure to manage document status efficiently. It relies on a bitstring to represent the state of each document, ensures scalability and reduces on-chain storage costs.
 
 _Sample BitString credentialStatus within a W3C VC document:_
 
@@ -66,7 +66,7 @@ _Sample BitString credentialStatus within a W3C VC document:_
     "statusListCredential": 'https://trustvc.github.io/did/credentials/statuslist/1',
     "statusListIndex": '1',
     "statusPurpose": 'revocation',
-    "type": 'StatusList2021Entry'
+    "type": 'BitstringStatusListEntry'
   },
 ```
 
@@ -75,26 +75,25 @@ _Sample Bitstring Status List._ Example hosted on [GitHub Pages](https://github.
 ```js
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
-    "https://w3id.org/security/bbs/v1",
-    "https://w3id.org/vc/status-list/2021/v1"
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/security/data-integrity/v2"
   ],
   "id": "https://trustvc.github.io/did/credentials/statuslist/1",
   "type": [
     "VerifiableCredential",
-    "StatusList2021Credential"
+    "BitstringStatusListCredential"
   ],
   "issuer": "did:web:trustvc.github.io:did:1",
-  "issuanceDate": "2024-10-02T08:49:52.749Z",
   "validFrom": "2024-10-02T08:49:52.435Z",
   "credentialSubject": {
     "id": "https://trustvc.github.io/did/credentials/statuslist/1#list",
-    "type": "StatusList2021",
+    "type": "BitstringStatusList",
     "statusPurpose": "revocation",
     "encodedList": "H4sIAAAAAAAAA-3BMQEAAAwCoH32b7RoxvAB8gcAAAAAAAAAAAAAAAAAAACMFVeOQ9sAQAAA"
   },
   "proof": {
-    "type": "BbsBlsSignature2020",
+    "type": "DataIntegrityProof",
+    "cryptosuite": "ecdsa-sd-2023",
     "created": "2024-10-02T08:49:54Z",
     "proofPurpose": "assertionMethod",
     "proofValue": "ohxpxgF6BUhGkSLBSGknWAVgx2flaQ4Hvl8MpD+tvVVEESXlQf0PbefZgg0Kj4+AUQS9wzJ/DjfbmkEkqiQU4RSKC82uPmoL5K7QWQRL4G8tymiY5ITLuRtYeACoiZz/dhF1wxxyJArGEI8ZWGCGNw==",
@@ -107,7 +106,7 @@ _Sample Bitstring Status List._ Example hosted on [GitHub Pages](https://github.
 
 1. A BitString Status List is generated for a batch of documents, where each bit represents the status of a document.
 
-2. Prepare the raw Verifiable Credential (VC) payload with `StatusList2021Entry` `credentialStatus` object, which includes the `statusListIndex`.
+2. Prepare the raw Verifiable Credential (VC) payload with `BitstringStatusListEntry` `credentialStatus` object, which includes the `statusListIndex`.
 
 3. The BitString Status List can be updated to modify the status of any index. After updating, the list is signed and rehosted.
 

@@ -74,10 +74,10 @@ Each template requires specific data fields. Below are examples for common templ
 ```json
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
-    "https://w3id.org/security/bbs/v1",
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/security/data-integrity/v2",
+    "https://trustvc.io/context/render-method-context-v2.json",
     "https://trustvc.io/context/transferable-records-context.json",
-    "https://trustvc.io/context/render-method-context.json",
     "https://trustvc.io/context/attachments-context.json",
     "https://trustvc.io/context/bill-of-lading-carrier.json"
   ],
@@ -112,12 +112,12 @@ Each template requires specific data fields. Below are examples for common templ
     "attachments": [
       {
         "filename": "word.docx",
-        "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         "data": "..."
       }
     ]
   },
-  "expirationDate": "2025-09-30T15:53:58.112Z",
+  "validUntil": "2025-09-30T15:53:58.112Z",
   "issuer": "did:web:did.trustvc.io",
 }
 ```

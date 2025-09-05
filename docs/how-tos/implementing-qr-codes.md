@@ -40,7 +40,8 @@ For W3C Verifiable Credentials, you need to add a `qrCode` property to your cred
 ```json
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/security/data-integrity/v2",
     "https://trustvc.io/context/bill-of-lading-carrier.json",
     "https://trustvc.io/context/qrcode-context.json" // Required for QR code support
   ],

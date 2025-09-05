@@ -12,7 +12,7 @@ This guide demonstrates how to create a complete W3C VC document using TradeTrus
 
 Before proceeding with this tutorial, ensure you have completed the following steps:
 
-1. **Generate BBS keypair and host DID:WEB**: Follow the [DID:WEB guide](/docs/how-tos/issuer/did-web/) to generate your BBS key pairs and set up DID:WEB hosting.
+1. **Generate ECDSA keypair and host DID:WEB**: Follow the [DID:WEB guide](/docs/how-tos/issuer/did-web/) to generate your ECDSA key pairs and set up DID:WEB hosting.
 2. **Set up document revocation**: Configure bit string revocation following the [bit string guide](/docs/how-tos/bitstring/).
 3. **Deploy Token Registry**: Deploy a token registry contract for transferable documents using the [token registry deployment guide](/docs/how-tos/deployment#token-registry).
 4. **Document verification setup**: Familiarize yourself with the [document verification process](/docs/how-tos/verifydocument/).
@@ -89,7 +89,7 @@ Update the generated `tsconfig.json` file with the following configuration:
 
 ### 2. Key Pair and Environment Configuration
 
-After completing the [first prerequisite](/docs/how-tos/issuer/did-web/) (generating BBS keypair and hosting DID:WEB), you should have **two pieces of information**:
+After completing the [first prerequisite](/docs/how-tos/issuer/did-web/) (generating ECDSA keypair and hosting DID:WEB), you should have **two pieces of information**:
 
 1. **DID Document** - A JSON document that describes your decentralized identifier
 2. **Key Pair** - The cryptographic keys used for signing documents
@@ -102,15 +102,15 @@ DID Document:
   "id": "did:web:<your_domain>",
   "verificationMethod": [
     {
-      "type": "Bls12381G2Key2020",
+      "type": "Multikey",
       "id": "did:web:<your_domain>#keys-1",
       "controller": "did:web:<your_domain>",
-      "publicKeyBase58": "<your_public_key_base58>"
+      "publicKeyMultibase": "<your_public_key_multibase>"
     }
   ],
   "@context": [
     "https://www.w3.org/ns/did/v1",
-    "https://w3id.org/security/suites/bls12381-2020/v1"
+    "https://w3id.org/security/multikey/v1"
   ],
   "authentication": ["did:web:<your_domain>#keys-1"],
   "assertionMethod": ["did:web:<your_domain>#keys-1"],
@@ -122,12 +122,12 @@ DID Document:
 Key Pair:
 ```json
 {
+  "@context": "https://w3id.org/security/multikey/v1",
   "id": "did:web:<your_domain>#keys-1",
-  "type": "Bls12381G2Key2020",
+  "type": "Multikey",
   "controller": "did:web:<your_domain>",
-  "seedBase58": "<your_seed_base58>",
-  "privateKeyBase58": "<your_private_key_base58>",
-  "publicKeyBase58": "<your_public_key_base58>"
+  "secretKeyMultibase": "<your_secret_key_multibase>",
+  "publicKeyMultibase": "<your_public_key_multibase>"
 }
 ```
 
@@ -140,7 +140,14 @@ WALLET_PRIVATE_KEY=<your_wallet_private_key>
 
 # Domain and did key pair
 DOMAIN=<your_domain>
-DID_KEY_PAIRS='{"id":"did:web:<your_domain>#keys-1","type":"Bls12381G2Key2020","controller":"did:web:<your_domain>","seedBase58":"<your_seed_base58>","privateKeyBase58":"<your_private_key_base58>","publicKeyBase58":"<your_public_key_base58>"}'
+DID_KEY_PAIRS='{
+  "@context": "https://w3id.org/security/multikey/v1",
+  "id": "did:web:<your_domain>#keys-1",
+  "type": "Multikey",
+  "controller": "did:web:<your_domain>",
+  "secretKeyMultibase": "<your_secret_key_multibase>",
+  "publicKeyMultibase": "<your_public_key_multibase>"
+}'
 
 # Network ID (80002 for Amoy testnet)
 NET=80002
@@ -188,7 +195,14 @@ WALLET_PRIVATE_KEY=<your_wallet_private_key>
 
 # Domain and did key pair
 DOMAIN=<your_domain>
-DID_KEY_PAIRS='{"id":"did:web:<your_domain>#keys-1","type":"Bls12381G2Key2020","controller":"did:web:<your_domain>","seedBase58":"<your_seed_base58>","privateKeyBase58":"<your_private_key_base58>","publicKeyBase58":"<your_public_key_base58>"}'
+DID_KEY_PAIRS='{
+  "@context": "https://w3id.org/security/multikey/v1",
+  "id": "did:web:<your_domain>#keys-1",
+  "type": "Multikey",
+  "controller": "did:web:<your_domain>",
+  "secretKeyMultibase": "<your_secret_key_multibase>",
+  "publicKeyMultibase": "<your_public_key_multibase>"
+}'
 
 # Network ID (80002 for Amoy testnet)
 NET=80002
@@ -293,7 +307,8 @@ export const createW3CDocument = async () => {
 Next, we need to sign our document to create a verifiable credential. We do this by calling the `sign` method on our DocumentBuilder instance and passing the DID key pair. Once signed, the document will include a **proof object** that contains cryptographic evidence of the document's authenticity.
 
 The proof object includes:
-- **type**: The signature algorithm used (e.g., `BbsBlsSignature2020`)
+- **type**: The signature algorithm used (`DataIntegrityProof`)
+- **cryptosuite**: The cryptographic suite used (`ecdsa-sd-2023`)
 - **created**: Timestamp of when the signature was created
 - **proofPurpose**: The purpose of the proof (e.g., `assertionMethod`)
 - **proofValue**: The actual cryptographic signature
@@ -508,7 +523,7 @@ npm run dev
 
 You have successfully created a complete W3C Verifiable Credential document using TradeTrust. The document is now:
 
-- ✅ Digitally signed using BBS+ signatures
+- ✅ Digitally signed using ECDSA-SD-2023 signatures
 - ✅ Minted as a transferable token on the blockchain
 - ✅ Ready for verification and transfer
 - ✅ Configured with proper rendering templates

@@ -25,7 +25,7 @@ This guide is designed for developers who want to:
 
 Before starting, ensure you have the following installed:
 
-- Node.js (version 18 or higher)
+- Node.js (version 20 or higher)
 - npm or yarn
 - A code editor, e.g., Visual Studio Code
 
@@ -212,18 +212,17 @@ export const writeEnvVariable = (key: string, value: string): void => {
 <summary>Next create a `scripts/generateDidWeb.ts` file and add the following code:</summary>
 
 ```ts
-import { generateKeyPair, issueDID, VerificationType } from "@trustvc/w3c-issuer";
+import { issuer } from "@trustvc/trustvc";
 import { writeFileSync } from "fs";
 import { join } from "path";
 import { writeEnvVariable } from "./utils";
 
+const { issueDID, CryptoSuite } = issuer;
+
 const main = async () => {
-  const keyPair = await generateKeyPair({
-    type: VerificationType.Bls12381G2Key2020,
-  });
   const issuedDidWeb = await issueDID({
     domain: process.env.DOMAIN,
-    ...keyPair,
+    type: CryptoSuite.EcdsaSd2023,
   });
 
   // Write the wellKnownDid to a JSON file
@@ -418,7 +417,7 @@ npm run dev
 curl --location 'localhost:3000/.well-known/did.json'
 
 output:
-{"id":"did:web:massive-steadily-crane.ngrok-free.app","verificationMethod":[{"type":"Bls12381G2Key2020","id":"did:web:massive-steadily-crane.ngrok-free.app#keys-1","controller":"did:web:massive-steadily-crane.ngrok-free.app","publicKeyBase58":"oCBKQMT7T7PFje1KaApEHYwe9ofrmsdyBMqmMgBJxVRiqNjuGChd1HoZzakrJGZh1x6uFRXRJB8PL2U8aStKCtnH2iLf5ZAC6rRSbj9DiW7aK7Ru3v7LRMCjdcteE7UTj8R"}],"@context":["https://www.w3.org/ns/did/v1","https://w3id.org/security/suites/bls12381-2020/v1"],"authentication":["did:web:massive-steadily-crane.ngrok-free.app#keys-1"],"assertionMethod":["did:web:massive-steadily-crane.ngrok-free.app#keys-1"],"capabilityInvocation":["did:web:massive-steadily-crane.ngrok-free.app#keys-1"],"capabilityDelegation":["did:web:massive-steadily-crane.ngrok-free.app#keys-1"]}
+{"id":"did:web:massive-steadily-crane.ngrok-free.app","verificationMethod":[{"type":"Multikey","id":"did:web:massive-steadily-crane.ngrok-free.app#keys-1","controller":"did:web:massive-steadily-crane.ngrok-free.app","publicKeyMultibase":"zDnaekGZTbQBerwcehBSXLqAg6s55hVEBms1zFy89VHXtJSa9"}],"@context":["https://www.w3.org/ns/did/v1","https://w3id.org/security/multikey/v1"],"authentication":["did:web:massive-steadily-crane.ngrok-free.app#keys-1"],"assertionMethod":["did:web:massive-steadily-crane.ngrok-free.app#keys-1"],"capabilityInvocation":["did:web:massive-steadily-crane.ngrok-free.app#keys-1"],"capabilityDelegation":["did:web:massive-steadily-crane.ngrok-free.app#keys-1"]}
 ```
 
 If you have setup ngrok, you can now test the did:web using the universal resolver.
@@ -621,7 +620,8 @@ curl --location 'http://localhost:3000/create/bill_of_lading' \
 --data '{"credentialSubject": {"type": ["BillOfLading"],"shipperAddressStreet": "","consigneeName": "","notifyPartyName": "","blNumber": "20250107","scac": "20250107"},"owner": "0xCA93690Bb57EEaB273c796a9309246BC0FB93649","holder": "0xCA93690Bb57EEaB273c796a9309246BC0FB93649"}'
 
 output:
-{"signedW3CDocument":{"@context":["https://www.w3.org/2018/credentials/v1","https://w3id.org/security/bbs/v1","https://trustvc.io/context/transferable-records-context.json","https://trustvc.io/context/render-method-context.json","https://trustvc.io/context/attachments-context.json","https://trustvc.io/context/bill-of-lading.json"],"type":["VerifiableCredential"],"credentialStatus":{"type":"TransferableRecords","tokenNetwork":{"chain":"MATIC","chainId":"80002"},"tokenRegistry":"0x3652efbc80ace560844afc932d2bf8b452a96c6d","tokenId":"b91d5b4dfcc23d33f7be4f2620dd569c89987e8299bc4b67f6edb95b0bbbb46b"},"renderMethod":[{"id":"https://generic-templates.tradetrust.io","type":"EMBEDDED_RENDERER","templateName":"BILL_OF_LADING"}],"credentialSubject":{"type":["BillOfLading"],"shipperAddressStreet":"","consigneeName":"","notifyPartyName":"","blNumber":"20250107","scac":"20250107"},"issuanceDate":"2025-06-30T08:58:15.679Z","expirationDate":"2025-09-30T08:58:15.679Z","issuer":"did:web:did.trustvc.io","id":"urn:bnid:_:0197c00e-f6ff-755b-88a2-a9e2f3974140","proof":{"type":"BbsBlsSignature2020","created":"2025-06-30T08:58:16Z","proofPurpose":"assertionMethod","proofValue":"hZXGbdsA9oFArnVg2yjpoR6M+FOL8JDsRyngG/56y7V6GVWfWJPjHOLvizcolJDIBZv2+0Ch0WCIYewp/jE2bGDy4XALHFGj8hM5lW5hB4kio0Kglkol4OlKw+eZ8ujstHAB9XhFu7/XwAcKOB02TQ==","verificationMethod":"did:web:did.trustvc.io#keys-1"}},"txHash":"0x2b57d581fd1434d5e9409af65d33358bc8436f2b9c412d2e7c687217500a58c9"}
+{"signedW3CDocument":{"@context":["https://www.w3.org/ns/credentials/v2","https://w3id.org/security/data-integrity/v2","https://trustvc.io/context/transferable-records-context.json","https://trustvc.io/context/render-method-context-v2.json","https://trustvc.io/context/attachments-context.json","https://trustvc.io/context/bill-of-lading.json"],"type":["VerifiableCredential"],"credentialStatus":{"type":"TransferableRecords","tokenNetwork":{"chain":"MATIC","chainId":"80002"},"tokenRegistry":"0x3652efbc80ace560844afc932d2bf8b452a96c6d","tokenId":"b91d5b4dfcc23d33f7be4f2620dd569c89987e8299bc4b67f6edb95b0bbbb46b"},"renderMethod":[{"id":"https://generic-templates.tradetrust.io","type":"EMBEDDED_RENDERER","templateName":"BILL_OF_LADING"}],"credentialSubject":{"type":["BillOfLading"],"shipperAddressStreet":"","consigneeName":"","notifyPartyName":"","blNumber":"20250107","scac":"20250107"},"validFrom":"2025-06-30T08:58:15.679Z","validUntil":"2025-09-30T08:58:15.679Z","issuer":"did:web:did.trustvc.io","id":"urn:bnid:_:0197c00e-f6ff-755b-88a2-a9e2f3974140","proof":{"type":"DataIntegrityProof","created":"2025-06-30T08:58:16Z",
+"cryptosuite": "ecdsa-sd-2023","proofPurpose":"assertionMethod","proofValue":"hZXGbdsA9oFArnVg2yjpoR6M+FOL8JDsRyngG/56y7V6GVWfWJPjHOLvizcolJDIBZv2+0Ch0WCIYewp/jE2bGDy4XALHFGj8hM5lW5hB4kio0Kglkol4OlKw+eZ8ujstHAB9XhFu7/XwAcKOB02TQ==","verificationMethod":"did:web:did.trustvc.io#keys-1"}},"txHash":"0x2b57d581fd1434d5e9409af65d33358bc8436f2b9c412d2e7c687217500a58c9"}
 ```
 
 ## Conclusion

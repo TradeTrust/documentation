@@ -30,19 +30,25 @@ The DID document associated with a did:web identifier is hosted at the following
 **1. Generate DID Document**
 
 - Use TrustVC W3C Issuer to generate your DID Document: Our tool simplifies the process of creating a compliant DID Document.
-- Review your DID Document: Ensure the generated file contains the required properties, such as id, verificationMethod, and authentication. Here's an example using the BbsBlsSignature2020 verification method:
+- Review your DID Document: Ensure the generated file contains the required properties, such as id, verificationMethod, and authentication. Here's an example using the Multikey verification method:
 
 ```typescript
 {
-  "@context": "https://www.w3.org/ns/did/v1",
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://w3id.org/security/multikey/v1"
+  ],
   "id": "did:web:yourdomain.com",
   "verificationMethod": [{
     "id": "did:web:yourdomain.com#key-1",
-    "type": "BbsBlsSignature2020",
+    "type": "Multikey",
     "controller": "did:web:yourdomain.com",
-    "publicKeyBase58": "2qz8jVcPgs6xzL5mZHTZGkXQaDe5BsVofLpqqBfAw1Nc"
+    "publicKeyMultibase": "z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK"
   }],
   "authentication": [
+    "did:web:yourdomain.com#key-1"
+  ],
+  "assertionMethod": [
     "did:web:yourdomain.com#key-1"
   ]
 }

@@ -101,7 +101,8 @@ For W3C Verifiable Credentials, you need to include the attachments context in y
 ```json
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/security/data-integrity/v2",
     "https://trustvc.io/context/your-document-context.json",
     "https://trustvc.io/context/attachments-context.json"
   ]
@@ -142,7 +143,8 @@ For W3C Verifiable Credentials, attachments must be added inside the `credential
 ```json
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/security/data-integrity/v2",
     "https://trustvc.io/context/your-document-context.json",
     "https://trustvc.io/context/attachments-context.json"
   ],
