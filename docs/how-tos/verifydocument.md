@@ -56,6 +56,7 @@ const signedDocument = {
   "@context": [
     "https://www.w3.org/ns/credentials/v2",
     "https://w3id.org/security/data-integrity/v2",
+    "https://w3c-ccg.github.io/citizenship-vocab/contexts/citizenship-v2.jsonld",
   ],
   credentialStatus: {
     id: "https://trustvc.github.io/did/credentials/statuslist/1#1",
