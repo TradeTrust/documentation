@@ -30,7 +30,7 @@ npm install @trustvc/trustvc
 
 The method will sign the merkle root from the document, append the signature to the document and return it. Currently, it supports the following sign algorithm:
 
-- `BbsBlsSignature2020`
+- `ecdsa-sd-2023`
 
 #### Example with Wallet
 
@@ -39,14 +39,12 @@ import { signW3C, VerificationType } from "@trustvc/trustvc";
 
 const rawDocument = {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
-    "https://w3c-ccg.github.io/citizenship-vocab/contexts/citizenship-v1.jsonld",
-    "https://w3id.org/security/bbs/v1",
-    "https://w3id.org/vc/status-list/2021/v1",
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/security/data-integrity/v2",
   ],
   credentialStatus: {
     id: "https://trustvc.github.io/did/credentials/statuslist/1#1",
-    type: "StatusList2021Entry",
+    type: "BitstringStatusListEntry",
     statusPurpose: "revocation",
     statusListIndex: "10",
     statusListCredential: "https://trustvc.github.io/did/credentials/statuslist/1",
@@ -56,19 +54,20 @@ const rawDocument = {
     birthDate: "2024-04-01T12:19:52Z",
     type: ["PermanentResident", "Person"],
   },
-  expirationDate: "2029-12-03T12:19:52Z",
+  validUntil: "2029-12-03T12:19:52Z",
   issuer: "did:web:trustvc.github.io:did:1",
   type: ["VerifiableCredential"],
-  issuanceDate: "2024-04-01T12:19:52Z",
+  validFrom: "2024-04-01T12:19:52Z",
 };
 
 // Sign the credential
 const signingResult = await signW3C(rawDocument, {
+  "@context": "https://w3id.org/security/multikey/v1",
   id: "did:web:trustvc.github.io:did:1#keys-1",
   controller: "did:web:trustvc.github.io:did:1",
-  type: VerificationType.Bls12381G2Key2020,
-  publicKeyBase58: "<publicKeyBase58>",
-  privateKeyBase58: "<privateKeyBase58>",
+  type: VerificationType.Multikey,
+  publicKeyMultibase: "<publicKeyMultibase>",
+  secretKeyMultibase: "<secretKeyMultibase>",
 });
 
 console.log(`Signed Document: ${JSON.stringify(signedDocument)}`);
@@ -78,14 +77,12 @@ console.log(`Signed Document: ${JSON.stringify(signedDocument)}`);
 // Signed Document:
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
-    "https://w3c-ccg.github.io/citizenship-vocab/contexts/citizenship-v1.jsonld",
-    "https://w3id.org/security/bbs/v1",
-    "https://w3id.org/vc/status-list/2021/v1"
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/security/data-integrity/v2"
   ],
   "credentialStatus": {
     "id": "https://trustvc.github.io/did/credentials/statuslist/1#1",
-    "type": "StatusList2021Entry",
+    "type": "BitstringStatusListEntry",
     "statusPurpose": "revocation",
     "statusListIndex": "10",
     "statusListCredential": "https://trustvc.github.io/did/credentials/statuslist/1"
@@ -95,13 +92,14 @@ console.log(`Signed Document: ${JSON.stringify(signedDocument)}`);
     "birthDate": "2024-04-01T12:19:52Z",
     "type": ["PermanentResident", "Person"]
   },
-  "expirationDate": "2029-12-03T12:19:52Z",
+  "validUntil": "2029-12-03T12:19:52Z",
   "issuer": "did:web:trustvc.github.io:did:1",
   "type": ["VerifiableCredential"],
-  "issuanceDate": "2024-04-01T12:19:52Z",
+  "validFrom": "2024-04-01T12:19:52Z",
   "id": "urn:bnid:_:01947f6a-8c2c-7117-9f9b-f990ec638dbb",
   "proof": {
-    "type": "BbsBlsSignature2020",
+    "type": "DataIntegrityProof",
+    "cryptosuite": "ecdsa-sd-2023",
     "created": "2025-01-19T16:34:40Z",
     "proofPurpose": "assertionMethod",
     "proofValue": "uS/VAIsquT7QifmvtJ2Mx3TBbTl7O6eLBk3GXaVfiimKJMM18Q9YQ5+vcGFhXoYfDuZ1Lbue0sgpSrxPGO2hH48UNpEIR5BaAwS1+Cjut+wpXov0rRg5MOLf/uTFLwjn1Luf7vd0bnRxI8zLq5Rv5g==",

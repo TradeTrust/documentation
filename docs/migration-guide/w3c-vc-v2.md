@@ -304,11 +304,11 @@ const v1ResultFragments = await verifyDocument(signedV1BBSCredential);
 const v2ResultFragments = await verifyDocument(derivedV2ECDSACredential);
 
 // ✅ Works with non-derived v2.0 ECDSA-SD-2023 credentials
-const v2FullResultFragments = await verifyDocument(signedV2ECDSACredential);
+const _v2ResultFragments = await verifyDocument(signedV2ECDSACredential);
 
 console.log('v1.1 Verification fragments:', v1ResultFragments);
 console.log('v2.0 Derived Verification fragments:', v2ResultFragments);
-console.log('v2.0 Verification fragments:', v2ResultFragments);
+console.log('v2.0 Verification fragments:', _v2ResultFragments);
 ```
 
 > **Note**: The `verifyDocument` function provides ease of use by automatically handling both derived and non-derived credentials. It returns verification result fragments containing detailed verification information rather than a simple boolean `verified` property.

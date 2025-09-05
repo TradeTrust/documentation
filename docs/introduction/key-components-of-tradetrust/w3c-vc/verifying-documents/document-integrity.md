@@ -17,15 +17,15 @@ _Sample did:web host._
   "id": "did:web:trustvc.github.io:did:1",
   "verificationMethod": [
     {
-      "type": "Bls12381G2Key2020",
+      "type": "Multikey",
       "id": "did:web:trustvc.github.io:did:1#keys-1",
       "controller": "did:web:trustvc.github.io:did:1",
-      "publicKeyBase58": "oRfEeWFresvhRtXCkihZbxyoi2JER7gHTJ5psXhHsdCoU1MttRMi3Yp9b9fpjmKh7bMgfWKLESiK2YovRd8KGzJsGuamoAXfqDDVhckxuc9nmsJ84skCSTijKeU4pfAcxeJ"
+      "publicKeyMultibase": "zDnaekGZTbQBerwcehBSXLqAg6s55hVEBms1zFy89VHXtJSa9"
     }
   ],
   "@context": [
     "https://www.w3.org/ns/did/v1",
-    "https://w3id.org/security/suites/bls12381-2020/v1"
+    "https://w3id.org/security/multikey/v1"
   ],
   "authentication": [
     "did:web:trustvc.github.io:did:1#keys-1"
@@ -46,7 +46,7 @@ _Sample did:web host._
 
 #### 1. Document Proof Generation
 
-Upon creation, the document is signed using a cryptographic algorithm, such as `Bls12381G2Key2020`. This signature is tied to the document's content and the did:web identifier, ensuring authenticity.
+Upon creation, the document is signed using a cryptographic algorithm, such as `ECDSA-SD-2023`. This signature is tied to the document's content and the did:web identifier, ensuring authenticity.
 
 - The proof value contains cryptographic evidence of the document's integrity.
 - The public key associated with the did:web identifier is used to verify this signature.
@@ -56,7 +56,7 @@ Upon creation, the document is signed using a cryptographic algorithm, such as `
 To verify the integrity of a document, the following steps are executed:
 
 - **Extract the Public Key:**
-  Retrieve the public key (publicKeyBase58) from the verificationMethod section of the did:web document.
+  Retrieve the public key (publicKeyMultibase) from the verificationMethod section of the did:web document.
 
 - **Validate the Proof:**
   Use the public key and cryptographic algorithms to validate the proof provided in the document. The signature ensures that no unauthorized modifications have been made.
@@ -73,7 +73,7 @@ The current implementation supports selective disclosure without compromising do
 
 #### 4. Cryptographic Resilience
 
-The method leverages strong cryptographic algorithms like `Bls12381G2Key2020` to ensure tamper resistance. Any unauthorized changes to the document render the cryptographic proof invalid.
+The method leverages strong cryptographic algorithms like `ECDSA-SD-2023` to ensure tamper resistance. Any unauthorized changes to the document render the cryptographic proof invalid.
 
 ### Summary
 

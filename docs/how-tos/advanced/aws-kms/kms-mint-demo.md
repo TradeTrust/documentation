@@ -174,10 +174,10 @@ const mintToken = async () => {
 
   const document = {
     "@context": [
-      "https://www.w3.org/2018/credentials/v1",
-      "https://w3id.org/security/bbs/v1",
+      "https://www.w3.org/ns/credentials/v2",
+      "https://w3id.org/security/data-integrity/v2",
       "https://trustvc.io/context/transferable-records-context.json",
-      "https://trustvc.io/context/render-method-context.json",
+      "https://trustvc.io/context/render-method-context-v2.json",
       "https://trustvc.io/context/attachments-context.json",
       "https://schemata.openattestation.com/io/tradetrust/bill-of-lading/1.0/bill-of-lading-context.json",
     ],
@@ -204,17 +204,18 @@ const mintToken = async () => {
       blNumber: "250107",
       scac: "250107",
     },
-    issuanceDate: new Date().toISOString(),
+    validFrom: new Date().toISOString(),
     issuer: "did:web:your-did-controller", // Replace with your DID controller
   };
 
   // Sign the W3C document using the DID key pair obtained from the prerequisites
   const didKeyPairs = {
-    id: "did:web:your-did-controller#keys-1",
-    type: "Bls12381G2Key2020",
-    controller: "did:web:your-did-controller",
-    privateKeyBase58: "your-private-key",
-    publicKeyBase58: "your-public-key"
+    "@context": "https://w3id.org/security/multikey/v1",
+    id: "did:web:trustvc.github.io:did:1#multikey-1",
+    type: "Multikey",
+    controller: "did:web:trustvc.github.io:did:1",
+    publicKeyMultibase: "your-public-key",
+    secretKeyMultibase: "your-private-key"
   };
   
   const { signed: signedW3CDocument } = await signW3C(document, didKeyPairs);

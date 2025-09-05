@@ -41,7 +41,7 @@ To enable transferable credentials, a Token Registry is required. [See Deploying
 - Chain-specific gas fee estimation (if applicable)
 
 ### 1. Signing a Verifiable Credential
-After deploying the token registry, create and sign a W3C Verifiable Credential (VC) referencing the Token Registry. For signing, we use `BbsBlsSignature2020`, which enables selective disclosure and maintains privacy when verifying credentials.
+After deploying the token registry, create and sign a W3C Verifiable Credential (VC) referencing the Token Registry. For signing, we use `ecdsa-sd-2023`, which enables selective disclosure and maintains privacy when verifying credentials.
 
 #### Deployment Code
 ```ts
@@ -49,9 +49,8 @@ import { signW3C, VerificationType } from "@trustvc/trustvc";
 
 const rawDocument = {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
-    "https://w3c-ccg.github.io/citizenship-vocab/contexts/citizenship-v1.jsonld",
-    "https://w3id.org/security/bbs/v1",
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/security/data-integrity/v2",
     "https://trustvc.io/context/transferable-records-context.json",
   ],
   credentialStatus: {
@@ -67,19 +66,20 @@ const rawDocument = {
     birthDate: "2024-04-01T12:19:52Z",
     type: ["PermanentResident", "Person"],
   },
-  expirationDate: "2029-12-03T12:19:52Z",
+  validUntil: "2024-04-01T12:19:52Z",
   issuer: "did:web:example.com",
   type: ["VerifiableCredential"],
-  issuanceDate: "2024-04-01T12:19:52Z",
+  validFrom: "2024-04-01T12:19:52Z",
 };
 
 // Sign the credential
 const signedDocument = await signW3C(rawDocument, {
+  "@context": "https://w3id.org/security/multikey/v1",
   id: "did:web:example.com#keys-1",
   controller: "did:web:example.com",
-  type: VerificationType.Bls12381G2Key2020,
-  publicKeyBase58: "<publicKeyBase58>",
-  privateKeyBase58: "<privateKeyBase58>",
+  type: VerificationType.Multikey,
+  publicKeyMultibase: "<publicKeyMultibase>",
+  secretKeyMultibase: "<secretKeyMultibase>",
 });
 
 console.log(`Signed Document: ${JSON.stringify(signedDocument, null, 2)}`);
@@ -148,21 +148,19 @@ For non-transferable W3C Verifiable Credentials (VCs), we use a Bitstring Status
 
 ### 1. Signing the Credential
 
-The following example demonstrates how to sign a VC using the Bitstring Status List. For signing, we use `BbsBlsSignature2020`, which enables selective disclosure and maintains privacy when verifying credentials.
+The following example demonstrates how to sign a VC using the Bitstring Status List. For signing, we use `ecdsa-sd-2023`, which enables selective disclosure and maintains privacy when verifying credentials.
 
 ```ts
 import { signW3C, VerificationType } from "@trustvc/trustvc";
 
 const rawDocument = {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
-    "https://w3c-ccg.github.io/citizenship-vocab/contexts/citizenship-v1.jsonld",
-    "https://w3id.org/security/bbs/v1",
-    "https://w3id.org/vc/status-list/2021/v1",
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/security/data-integrity/v2",
   ],
   credentialStatus: {
     id: "https://example.com/credentials/status/3#94567",
-    type: "StatusList2021Entry",
+    type: "BitstringStatusListEntry",
     statusPurpose: "revocation",
     statusListIndex: "94567",
     statusListCredential: "https://example.com/credentials/status/3"
@@ -172,19 +170,20 @@ const rawDocument = {
     birthDate: "2024-04-01T12:19:52Z",
     type: ["PermanentResident", "Person"],
   },
-  expirationDate: "2029-12-03T12:19:52Z",
+  validUntil: "2024-04-01T12:19:52Z",
   issuer: "did:web:example.com",
   type: ["VerifiableCredential"],
-  issuanceDate: "2024-04-01T12:19:52Z",
+  validFrom: "2024-04-01T12:19:52Z",
 };
 
 // Sign the credential
 const signingResult = await signW3C(rawDocument, {
+  "@context": "https://w3id.org/security/multikey/v1",
   id: "did:web:example.com#keys-1",
   controller: "did:web:example.com",
-  type: VerificationType.Bls12381G2Key2020,
-  publicKeyBase58: "<publicKeyBase58>",
-  privateKeyBase58: "<privateKeyBase58>",
+  type: VerificationType.Multikey,
+  publicKeyMultibase: "<publicKeyMultibase>",
+  secretKeyMultibase: "<secretKeyMultibase>",
 });
 
 console.log(`Signed Document: ${JSON.stringify(signingResult)}`);
@@ -196,35 +195,35 @@ In some cases, a Verifiable Credential (VC) does not require a `credentialStatus
 
 ### 1. Signing the Credential
 
-Below is an example of signing a VC without a credential status. For signing, we use `BbsBlsSignature2020`, which enables selective disclosure and maintains privacy when verifying credentials.
+Below is an example of signing a VC without a credential status. For signing, we use `ecdsa-sd-2023`, which enables selective disclosure and maintains privacy when verifying credentials.
 
 ```ts
 import { signW3C, VerificationType } from "@trustvc/trustvc";
 
 const rawDocument = {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
-    "https://w3c-ccg.github.io/citizenship-vocab/contexts/citizenship-v1.jsonld",
-    "https://w3id.org/security/bbs/v1",
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/security/data-integrity/v2",
   ],
   credentialSubject: {
     name: "TrustVC",
     birthDate: "2024-04-01T12:19:52Z",
     type: ["PermanentResident", "Person"],
   },
-  expirationDate: "2029-12-03T12:19:52Z",
+  validUntil: "2024-04-01T12:19:52Z",
   issuer: "did:web:example.com",
   type: ["VerifiableCredential"],
-  issuanceDate: "2024-04-01T12:19:52Z",
+  validFrom: "2024-04-01T12:19:52Z",
 };
 
 // Sign the credential
 const signingResult = await signW3C(rawDocument, {
+  "@context": "https://w3id.org/security/multikey/v1",
   id: "did:web:example.com#keys-1",
   controller: "did:web:example.com",
-  type: VerificationType.Bls12381G2Key2020,
-  publicKeyBase58: "<publicKeyBase58>",
-  privateKeyBase58: "<privateKeyBase58>",
+  type: VerificationType.Multikey,
+  publicKeyMultibase: "<publicKeyMultibase>",
+  secretKeyMultibase: "<secretKeyMultibase>",
 });
 
 console.log(`Signed Document: ${JSON.stringify(signingResult)}`);
