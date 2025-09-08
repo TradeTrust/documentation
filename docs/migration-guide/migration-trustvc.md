@@ -65,7 +65,9 @@ The TrustVC W3C Signing feature simplifies the signing process for W3C-compliant
 
 **Signing W3C Document (using @trustvc/trustvc)**:
 ```ts
-import { signW3C, CryptoSuite } from '@trustvc/trustvc';
+import { issuer, signW3C } from '@trustvc/trustvc';
+
+const { CryptoSuite } = issuer;
 
 const rawDocument = { /* document content */ };
 const signingResult = await signW3C(rawDocument, {
