@@ -61,20 +61,23 @@ const signedWrappedDocument = await signOA(wrappedDocument, {
 ```
 
 ### Signing W3C Document
-The TrustVC W3C Signing feature simplifies the signing process for W3C-compliant verifiable credentials using BBS+ signatures. This feature allows you to easily sign W3C Verifiable Credentials (VCs) and ensure they comply with the latest standards.
+The TrustVC W3C Signing feature simplifies the signing process for W3C-compliant verifiable credentials using ECDSA-SD-2023 signatures with selective disclosure. This feature allows you to easily sign W3C Verifiable Credentials (VCs) and ensure they comply with the latest W3C VC v2.0 standards.
 
 **Signing W3C Document (using @trustvc/trustvc)**:
 ```ts
-import { signW3C, VerificationType } from '@trustvc/trustvc';
+import { issuer, signW3C } from '@trustvc/trustvc';
+
+const { CryptoSuite } = issuer;
 
 const rawDocument = { /* document content */ };
 const signingResult = await signW3C(rawDocument, {
+  '@context': 'https://w3id.org/security/multikey/v1',
   id: 'did:web:trustvc.github.io:did:1#keys-1',
   controller: 'did:web:trustvc.github.io:did:1',
-  type: VerificationType.Bls12381G2Key2020,
-  publicKeyBase58: '<publicKeyBase58>',
-  privateKeyBase58: '<privateKeyBase58>',
-});
+  type: 'Multikey',
+  secretKeyMultibase: '<secretKeyMultibase>',
+  publicKeyMultibase: '<publicKeyMultibase>',
+}, CryptoSuite.EcdsaSd2023);
 ```
 
 ### Verifying Document

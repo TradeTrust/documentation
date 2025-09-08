@@ -127,12 +127,13 @@ To use the custom context in a Verifiable Credential, reference its URL in the `
 ```json
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/security/data-integrity/v2",
     "https://example.com/contexts/billoflading.jsonld"
   ],
   "type": ["VerifiableCredential"],
   "issuer": "did:web:example:123456",
-  "issuanceDate": "2025-02-10T00:00:00Z",
+  "validFrom": "2025-02-10T00:00:00Z",
   "credentialSubject": {
     "type": ["BillOfLading"],
     "billOfLadingName": "Example Bill of Lading",
@@ -154,8 +155,9 @@ To use the custom context in a Verifiable Credential, reference its URL in the `
     ]
   },
   "proof": {
-    "type": "BbsBlsSignature2020",
+    "type": "DataIntegrityProof",
     "created": "2025-02-10T00:00:00Z",
+    "cryptosuite": "ecdsa-sd-2023",
     "proofPurpose": "assertionMethod",
     "proofValue": "eyJhbGciOiJFZERTQSJ9...",
     "verificationMethod": "did:web:example:123456#key1"

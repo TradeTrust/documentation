@@ -4,7 +4,7 @@ title: "Introduction: TrustVC"
 sidebar_label: "Introduction: TrustVC"
 ---
 
-[**TrustVC**](https://github.com/TrustVC/trustvc) is a comprehensive library designed to simplify the signing and verification processes for [TrustVC W3C Verifiable Credentials (VC)](https://github.com/TrustVC/w3c) and [OpenAttestation Verifiable Documents (VD)](https://github.com/Open-Attestation/open-attestation/). It adheres to the **W3C VC Data Model v1.1** ([W3C Standard](https://www.w3.org/TR/vc-data-model/)), ensuring compatibility and interoperability for Verifiable Credentials.
+[**TrustVC**](https://github.com/TrustVC/trustvc) is a comprehensive library designed to simplify the signing and verification processes for [TrustVC W3C Verifiable Credentials (VC)](https://github.com/TrustVC/w3c) and [OpenAttestation Verifiable Documents (VD)](https://github.com/Open-Attestation/open-attestation/). It adheres to the **W3C VC Data Model v2.0** ([W3C Standard](https://www.w3.org/TR/vc-data-model/)), ensuring compatibility and interoperability for Verifiable Credentials.
 
 With **TrustVC**, developers can seamlessly handle both W3C Verifiable Credentials and OpenAttestation Verifiable Documents through an integrated set of functionalities. The library not only simplifies signing and verification but also imports and integrates existing TradeTrust libraries and smart contracts for token registry (V4 and V5), making it a versatile tool for decentralized identity and trust solutions.
 
@@ -47,20 +47,19 @@ const signedWrappedDocument = await signOA(wrappedDocument, {
 });
 ```
 
-- **TrustVC W3C Signing (signW3C)**: Simplifies the signing process for W3C-compliant verifiable credentials using BBS+ signatures.
+- **TrustVC W3C Signing (signW3C)**: Simplifies the signing process for W3C-compliant verifiable credentials using ECDSA-SD-2023 signatures.
 ```ts
 import { signW3C, VerificationType } from '@trustvc/trustvc';
 
 const rawDocument = {
   '@context': [
-    'https://www.w3.org/2018/credentials/v1',
-    'https://w3c-ccg.github.io/citizenship-vocab/contexts/citizenship-v1.jsonld',
-    'https://w3id.org/security/bbs/v1',
-    'https://w3id.org/vc/status-list/2021/v1',
+    'https://www.w3.org/ns/credentials/v2',
+    'https://w3id.org/security/data-integrity/v2',
+    'https://w3c-ccg.github.io/citizenship-vocab/contexts/citizenship-v2.jsonld',
   ],
   credentialStatus: {
     id: 'https://trustvc.github.io/did/credentials/statuslist/1#1',
-    type: 'StatusList2021Entry',
+    type: 'BitstringStatusListEntry',
     statusPurpose: 'revocation',
     statusListIndex: '10',
     statusListCredential: 'https://trustvc.github.io/did/credentials/statuslist/1',
@@ -70,19 +69,20 @@ const rawDocument = {
     birthDate: '2024-04-01T12:19:52Z',
     type: ['PermanentResident', 'Person'],
   },
-  expirationDate: '2029-12-03T12:19:52Z',
+  validUntil: '2029-12-03T12:19:52Z',
   issuer: 'did:web:trustvc.github.io:did:1',
   type: ['VerifiableCredential'],
-  issuanceDate: '2024-04-01T12:19:52Z',
+  validFrom: '2024-04-01T12:19:52Z',
 };
 
 // Sign the credential
 const signingResult = await signW3C(rawDocument, {
+  '@context': 'https://w3id.org/security/multikey/v1',
   id: 'did:web:trustvc.github.io:did:1#keys-1',
   controller: 'did:web:trustvc.github.io:did:1',
-  type: VerificationType.Bls12381G2Key2020,
-  publicKeyBase58: '<publicKeyBase58>',
-  privateKeyBase58: '<privateKeyBase58>',
+  type: VerificationType.Multikey,
+  publicKeyMultibase: '<publicKeyMultibase>',
+  secretKeyMultibase: '<secretKeyMultibase>',
 });
 ```
 
@@ -95,14 +95,13 @@ import { verifyDocument } from '@trustvc/trustvc';
 
 const signedDocument = {
   '@context': [
-    'https://www.w3.org/2018/credentials/v1',
-    'https://w3c-ccg.github.io/citizenship-vocab/contexts/citizenship-v1.jsonld',
-    'https://w3id.org/security/bbs/v1',
-    'https://w3id.org/vc/status-list/2021/v1',
+    'https://www.w3.org/ns/credentials/v2',
+    'https://w3id.org/security/data-integrity/v2',
+    'https://w3c-ccg.github.io/citizenship-vocab/contexts/citizenship-v2.jsonld',
   ],
   credentialStatus: {
     id: 'https://trustvc.github.io/did/credentials/statuslist/1#1',
-    type: 'StatusList2021Entry',
+    type: 'BitstringStatusListEntry',
     statusPurpose: 'revocation',
     statusListIndex: '10',
     statusListCredential: 'https://trustvc.github.io/did/credentials/statuslist/1',
@@ -112,12 +111,13 @@ const signedDocument = {
     birthDate: '2024-04-01T12:19:52Z',
     type: ['PermanentResident', 'Person'],
   },
-  expirationDate: '2029-12-03T12:19:52Z',
+  validUntil: '2029-12-03T12:19:52Z',
   issuer: 'did:web:trustvc.github.io:did:1',
   type: ['VerifiableCredential'],
-  issuanceDate: '2024-04-01T12:19:52Z',
+  validFrom: '2024-04-01T12:19:52Z',
   proof: {
-    type: 'BbsBlsSignature2020',
+    type: 'DataIntegrityProof',
+    cryptosuite: 'ecdsa-sd-2023',
     created: '2024-10-14T04:11:49Z',
     proofPurpose: 'assertionMethod',
     proofValue: '<proofValue>',

@@ -18,13 +18,12 @@ import TabItem from "@theme/TabItem";
 ```json
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
-    "https://w3id.org/security/bbs/v1",
-    "https://w3id.org/vc/status-list/2021/v1",
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/security/data-integrity/v2",
     "https://trustvc.io/context/transferable-records-context.json",
-    "https://trustvc.io/context/render-method-context.json",
+    "https://trustvc.io/context/render-method-context-v2.json",
     "https://trustvc.io/context/attachments-context.json",
-    "https://schemata.openattestation.com/io/tradetrust/bill-of-lading/1.0/bill-of-lading-context.json"
+    "https://trustvc.io/context/bill-of-lading.json"
   ],
   "credentialStatus": {
     "type": "TransferableRecords",
@@ -43,11 +42,9 @@ import TabItem from "@theme/TabItem";
     }
   ],
   "credentialSubject": {
-    "shipper": {
-      "address": {}
-    },
-    "consignee": {},
-    "notifyParty": {},
+    "shipperAddressStreet": "",
+    "consigneeName": "",
+    "notifyPartyName": "",
     "blNumber": "20250107",
     "scac": "20250107"
   }
@@ -62,11 +59,10 @@ The @context field defines the vocabulary and data schema used in the document. 
 
 Key entries in this example:
 
-- https://www.w3.org/2018/credentials/v1: Defines the core Verifiable Credential terms.
-- https://w3id.org/security/bbs/v1: Provides support for BBS+ signature schemes.
-- https://w3id.org/vc/status-list/2021/v1: Enables referencing a status list for credential revocation or suspension.
+- https://www.w3.org/ns/credentials/v2: Defines the core Verifiable Credential terms.
+- https://w3id.org/security/data-integrity/v2: Provides support for Data Integrity proofs and ECDSA-SD-2023 cryptographic suite.
 - https://trustvc.io/context/*: Custom contexts specific to the trustvc framework for handling transferable records and attachments.
-- https://schemata.openattestation.com/.../bill-of-lading-context.json: Defines data for a bill of lading under the TradeTrust framework.
+- https://trustvc.io/context/bill-of-lading.json: Defines data for a bill of lading under the TradeTrust framework.
 
 **2. credentialStatus**
 Describes the status and ownership transferability of the credential.

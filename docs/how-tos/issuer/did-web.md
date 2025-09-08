@@ -34,9 +34,11 @@ When working with TradeTrust documents, the `did:web` method's public key is use
 Before you begin, ensure you have Node.js installed on your system.
 
 <Tabs>
-  <TabItem value="cli" label="Using CLI (Recommended)" default>
+  <TabItem value="cli" label="Using CLI (BLS Only)" default>
 
-    1. Install the CLI globally:
+    > **Note**: The CLI currently only supports BLS keys. For ECDSA keys, use the code approach below.
+
+    1. Install the CLI:
 
     ```bash
     npm install -g @trustvc/w3c-cli
@@ -72,7 +74,7 @@ Before you begin, ensure you have Node.js installed on your system.
 
   </TabItem>
 
-  <TabItem value="code" label="Using Code">
+  <TabItem value="code" label="Using Code (ECDSA Recommended)">
 
     1. Install the package:
 
@@ -83,18 +85,15 @@ Before you begin, ensure you have Node.js installed on your system.
     2. Create a script to generate the DID:
 
     ```typescript
-    import { generateKeyPair, issueDID, VerificationType } from "@trustvc/trustvc/w3c/issuer";
+    import { issuer } from "@trustvc/trustvc";
+
+    const { issueDID, CryptoSuite } = issuer;
 
     const main = async () => {
-      // Generate a key pair
-      const keyPair = await generateKeyPair({
-        type: VerificationType.Bls12381G2Key2020,
-      });
-
       // Generate DID document
       const issuedDidWeb = await issueDID({
         domain: "example.com",
-        ...keyPair,
+        type: CryptoSuite.EcdsaSd2023,
       });
 
       // Access the DID document
@@ -127,13 +126,13 @@ Before you begin, ensure you have Node.js installed on your system.
   "id": "did:web:example.com",
   "verificationMethod": [
     {
-      "type": "Bls12381G2Key2020",
+      "type": "Multikey",
       "id": "did:web:example.com#keys-1",
       "controller": "did:web:example.com",
-      "publicKeyBase58": "..."
+      "publicKeyMultibase": "..."
     }
   ],
-  "@context": ["https://www.w3.org/ns/did/v1", "https://w3id.org/security/suites/bls12381-2020/v1"],
+  "@context": ["https://www.w3.org/ns/did/v1", "https://w3id.org/security/multikey/v1"],
   "authentication": ["did:web:example.com#keys-1"],
   "assertionMethod": ["did:web:example.com#keys-1"],
   "capabilityInvocation": ["did:web:example.com#keys-1"],
@@ -154,7 +153,9 @@ Before adding new keys:
 ### Adding Multiple Keys
 
 <Tabs>
-  <TabItem value="cli" label="Using CLI" default>
+  <TabItem value="cli" label="Using CLI (BLS Only)" default>
+
+    > **Note**: The CLI currently only supports BLS keys. For ECDSA keys, use the code approach below.
 
     1. Generate a new key pair:
     ```bash
@@ -184,7 +185,7 @@ Before adding new keys:
 
   </TabItem>
 
-  <TabItem value="code" label="Using Code">
+  <TabItem value="code" label="Using Code (ECDSA Recommended)">
     1. Install the package:
     ```bash
     npm install @trustvc/trustvc
@@ -192,18 +193,15 @@ Before adding new keys:
 
     2. Create a script to generate and add a new key:
     ```typescript
-    import { generateKeyPair, issueDID, VerificationType } from "@trustvc/trustvc/w3c/issuer";
+    import { issuer } from "@trustvc/trustvc";
+
+    const { issueDID, CryptoSuite } = issuer;
 
     const addNewKey = async () => {
-      // Generate a new key pair
-      const newKeyPair = await generateKeyPair({
-        type: VerificationType.Bls12381G2Key2020,
-      });
-
       // Issue new DID document with additional key
       const updatedDid = await issueDID({
         domain: "example.com",
-        ...newKeyPair,
+        type: CryptoSuite.EcdsaSd2023,
       });
 
       console.log("Updated DID document:", JSON.stringify(updatedDid.wellKnownDid, null, 2));
@@ -227,23 +225,23 @@ After generating the updated DID document, you'll need to deploy it to your web 
   "id": "did:web:example.com",
   "verificationMethod": [
     {
-      "type": "Bls12381G2Key2020",
+      "type": "Multikey",
       "id": "did:web:example.com#keys-1",
       "controller": "did:web:example.com",
-      "publicKeyBase58": "..."
+      "publicKeyMultibase": "zDnaekGZTbQBerwcehBSXLqAg6s55hVEBms1zFy89VHXtJSa9"
     },
     {
-      "type": "Bls12381G2Key2020",
+      "type": "Multikey",
       "id": "did:web:example.com#keys-2",
       "controller": "did:web:example.com",
-      "publicKeyBase58": "..."
+      "publicKeyMultibase": "zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"
     }
   ],
-  "@context": ["https://www.w3.org/ns/did/v1", "https://w3id.org/security/suites/bls12381-2020/v1"],
-  "authentication": ["did:web:example.com#key-1", "did:web:example.com#key-2"],
-  "assertionMethod": ["did:web:example.com#key-1", "did:web:example.com#key-2"],
-  "capabilityInvocation": ["did:web:example.com#key-1", "did:web:example.com#key-2"],
-  "capabilityDelegation": ["did:web:example.com#key-1", "did:web:example.com#key-2"]
+  "@context": ["https://www.w3.org/ns/did/v1", "https://w3id.org/security/multikey/v1"],
+  "authentication": ["did:web:example.com#keys-1", "did:web:example.com#keys-2"],
+  "assertionMethod": ["did:web:example.com#keys-1", "did:web:example.com#keys-2"],
+  "capabilityInvocation": ["did:web:example.com#keys-1", "did:web:example.com#keys-2"],
+  "capabilityDelegation": ["did:web:example.com#keys-1", "did:web:example.com#keys-2"]
 }
 ```
 
