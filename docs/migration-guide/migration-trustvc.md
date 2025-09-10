@@ -1,7 +1,7 @@
 ---
 id: migration-trustvc
-title: Migration to TrustVC
-sidebar_label: Migration to TrustVC
+title: "Migration Guide: TradeTrust to TrustVC SDK"
+sidebar_label: TradeTrust to TrustVC
 ---
 
 This migration guide will help you transition from using the **TradeTrust** libraries (@tradetrust-tt/tt-verify, @tradetrust-tt/tradetrust) to **TrustVC**. In addition, it introduces the new W3C Verifiable Credentials (VC) integration for managing verifiable credentials. This version of **TrustVC** integrates both token-based credentials and W3C VC to provide a unified credential management solution.
