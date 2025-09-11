@@ -244,6 +244,7 @@
     ],
     "Migration / Upgrading": [
       "migration-guide/trustvc",
+      "migration-guide/openattestation-to-trustvc",
       "migration-guide/migration-trustvc",
       "migration-guide/w3c-vc-v2",
       "migration-guide/igp-i",
