@@ -14,7 +14,7 @@ This guide provides comprehensive instructions for migrating **TrustVC library**
 
 The TrustVC library's support for W3C VC Data Model v2.0 introduces significant improvements over v1.1, including:
 
-- **Modern Cryptographic Suites**: ECDSA-SD-2023 with selective disclosure capabilities
+- **Modern Cryptographic Suites**: ECDSA-SD-2023 and BBS-2023 with selective disclosure capabilities
 - **Updated Context URLs**: New v2.0 contexts for enhanced interoperability
 - **Improved Date Fields**: `validFrom`/`validUntil` replacing `issuanceDate`/`expirationDate`
 - **Enhanced Status Lists**: BitstringStatusList replacing StatusList2021
@@ -26,7 +26,7 @@ The TrustVC library's support for W3C VC Data Model v2.0 introduces significant 
 |--------|---------------|---------------|
 | **Context** | `https://www.w3.org/2018/credentials/v1` | `https://www.w3.org/ns/credentials/v2` |
 | **Date Fields** | `issuanceDate`, `expirationDate` | `validFrom`, `validUntil` |
-| **Cryptosuite** | BBS+ (`BbsBlsSignature2020`) | ECDSA-SD-2023 (`ecdsa-sd-2023`) |
+| **Cryptosuite** | BBS+ (`BbsBlsSignature2020`) | ECDSA-SD-2023 (`ecdsa-sd-2023`) or BBS-2023 (`bbs-2023`) |
 | **Proof Type** | `BbsBlsSignature2020` | `DataIntegrityProof` |
 | **Key Format** | BLS12-381 G2 (`privateKeyBase58`) | Multikey (`secretKeyMultibase`) |
 | **Status List** | `StatusList2021Credential` | `BitstringStatusListCredential` |
@@ -67,7 +67,7 @@ console.log(legacyKeyPair);
 // }
 ```
 
-#### v2.0 Key Generation (Modern)
+#### v2.0 Key Generation (Modern) - ECDSA-SD-2023
 ```typescript
 import { issuer } from '@trustvc/trustvc';
 
@@ -87,7 +87,27 @@ console.log(modernKeyPair);
 // }
 ```
 
-> **Important**: After generating new ECDSA-SD-2023 keys, you must update your DID:WEB document to include the new public key. The key format changes from `publicKeyBase58` (BLS12-381) to `publicKeyMultibase` (Multikey).
+#### v2.0 Key Generation (Modern) - BBS-2023
+```typescript
+import { issuer } from '@trustvc/trustvc';
+
+const { generateKeyPair, CryptoSuite } = issuer;
+
+// v2.0 - BBS-2023 with Multikey
+const bbs2023KeyPair = await generateKeyPair({
+  type: CryptoSuite.Bbs2023 // 'bbs-2023'
+});
+
+console.log(bbs2023KeyPair);
+// Output:
+// {
+//   type: "Multikey",
+//   secretKeyMultibase: "z...",
+//   publicKeyMultibase: "z..."
+// }
+```
+
+> **Important**: After generating new ECDSA-SD-2023 or BBS-2023 keys, you must update your DID:WEB document to include the new public key. The key format changes from `publicKeyBase58` (BLS12-381) to `publicKeyMultibase` (Multikey).
 
 #### Sample DID Document Update
 
@@ -186,17 +206,17 @@ const { signed: signedV2 } = await signW3C(credentialV2, modernKeyPair, CryptoSu
 });
 ```
 
-> **Mandatory Pointers**: In ECDSA-SD-2023, mandatory pointers specify which fields must always be disclosed and cannot be selectively hidden. This is useful for ensuring critical information like the credential subject's ID and name are always visible, while other fields like age or GPA can be selectively disclosed. The pointers use JSON Pointer syntax (RFC 6901) to reference specific fields in the credential.
+> **Mandatory Pointers**: In ECDSA-SD-2023 and BBS-2023, mandatory pointers specify which fields must always be disclosed and cannot be selectively hidden. This is useful for ensuring critical information like the credential subject's ID and name are always visible, while other fields like age or GPA can be selectively disclosed. The pointers use JSON Pointer syntax (RFC 6901) to reference specific fields in the credential.
 > 
 > **Default Behavior**: If no mandatory pointers are provided, all fields in the credential become selectively disclosable, meaning the holder can choose to hide any field during presentation. However, certain fields like the credential's `@context`, `type`, `issuer`, and `validFrom`/`validUntil` are typically always disclosed by default as they are essential for credential verification.
 
 ### 4. Selective Disclosure (Derive) Migration
 
-One of the most powerful features of v2.0 is enhanced selective disclosure using ECDSA-SD-2023. Here's how it works and differs from v1.1:
+One of the most powerful features of v2.0 is enhanced selective disclosure using ECDSA-SD-2023 and BBS-2023. Here's how it works and differs from v1.1:
 
-#### Key Differences: BBS+ vs ECDSA-SD-2023
+#### Key Differences: BBS+ vs ECDSA-SD-2023/BBS-2023
 
-| Aspect | v1.1 (BBS+) | v2.0 (ECDSA-SD-2023) |
+| Aspect | v1.1 (BBS+) | v2.0 (ECDSA-SD-2023/BBS-2023) |
 |--------|-------------|----------------------|
 | **Verification** | Can verify original credential directly | **Must derive before verification** |
 | **Performance** | Slower derivation and verification | Faster derivation and verification |
@@ -278,13 +298,13 @@ console.log('Job Application Valid:', jobVerification.verified);
 console.log('Scholarship Application Valid:', scholarshipVerification.verified);
 ```
 
-> **⚠️ Important**: Unlike BBS+ credentials, ECDSA-SD-2023 credentials **must be derived before verification**. You cannot verify the original full credential directly if you want selective disclosure.
+> **⚠️ Important**: Unlike BBS+ credentials, ECDSA-SD-2023 and BBS-2023 credentials **must be derived before verification**. You cannot verify the original full credential directly if you want selective disclosure.
 
 #### Best Practices for Selective Disclosure
 
 1. **Plan Mandatory Pointers Carefully**: Include fields that should always be visible (e.g., subject ID, credential type)
 2. **Use Meaningful Field Selection**: Only reveal fields necessary for the specific use case
-3. **Always Derive Before Verification**: Remember that ECDSA-SD-2023 requires derivation before verification
+3. **Always Derive Before Verification**: Remember that ECDSA-SD-2023 and BBS-2023 require derivation before verification
 4. **Test Different Disclosure Scenarios**: Ensure your selective disclosure works for various use cases
 5. **Document Your Disclosure Policies**: Clearly communicate what fields are mandatory vs. selectable
 
@@ -424,14 +444,14 @@ const credentialWithStatusV2 = {
 
 The `DocumentBuilder` class helps build and manage W3C v2.0 credentials with credential status features.
 
-**Note**: The new DocumentBuilder only supports v2.0 credentials with ECDSA-SD-2023 cryptosuite by default.
+**Note**: The new DocumentBuilder only supports v2.0 credentials with ECDSA-SD-2023 or BBS-2023 cryptosuites, with ECDSA-SD-2023 as the default.
 
 #### Basic Document Builder Usage
 
 ```typescript
 import { DocumentBuilder } from '@trustvc/trustvc';
 
-// DocumentBuilder automatically uses v2.0 context and ECDSA-SD-2023
+// DocumentBuilder automatically uses v2.0 context and ECDSA-SD-2023 (default)
 const document = new DocumentBuilder({
   // Adds a custom vocabulary used to define terms in the `credentialSubject`.
   // Users can define their own context if they have domain-specific fields or custom data structures.
@@ -493,7 +513,7 @@ const signedDocument = await document.sign(modernKeyPair, CryptoSuite.EcdsaSd202
 console.log(signedDocument);
 ```
 
-> **Mandatory Pointers**: In ECDSA-SD-2023, mandatory pointers specify which fields must always be disclosed and cannot be selectively hidden. This is useful for ensuring critical information like the credential subject's ID and name are always visible, while other fields like age or GPA can be selectively disclosed. The pointers use JSON Pointer syntax (RFC 6901) to reference specific fields in the credential.
+> **Mandatory Pointers**: In ECDSA-SD-2023 and BBS-2023, mandatory pointers specify which fields must always be disclosed and cannot be selectively hidden. This is useful for ensuring critical information like the credential subject's ID and name are always visible, while other fields like age or GPA can be selectively disclosed. The pointers use JSON Pointer syntax (RFC 6901) to reference specific fields in the credential.
 > 
 > **Default Behavior**: If no mandatory pointers are provided, all fields in the credential become selectively disclosable, meaning the holder can choose to hide any field during presentation. However, certain fields like the credential's `@context`, `type`, `issuer`, and `validFrom`/`validUntil` are typically always disclosed by default as they are essential for credential verification.
 
@@ -528,7 +548,7 @@ const derivedDocument = await document.derive([
 console.log(derivedDocument);
 
 // Verify the derived credential
-// ECDSA-SD-2023 credentials must be derived before verification
+// ECDSA-SD-2023 and BBS-2023 credentials must be derived before verification
 const isVerified = await document.verify();
 console.log(isVerified); // true or false
 ```
@@ -538,11 +558,11 @@ console.log(isVerified); // true or false
 ### For Developers
 
 - [ ] Update package dependencies to latest versions
-- [ ] Replace BLS12-381 key generation with ECDSA-SD-2023
+- [ ] Replace BLS12-381 key generation with ECDSA-SD-2023 or BBS-2023
 - [ ] Update context URLs from v1 to v2
 - [ ] Change date fields: `issuanceDate` → `validFrom`, `expirationDate` → `validUntil`
 - [ ] Update status list types: `StatusList2021*` → `BitstringStatusList*`
-- [ ] Replace `BbsBlsSignature2020` with `ecdsa-sd-2023` cryptosuite
+- [ ] Replace `BbsBlsSignature2020` with `ecdsa-sd-2023` or `bbs-2023` cryptosuite
 - [ ] Update key format from `privateKeyBase58` to `secretKeyMultibase`
 - [ ] Test selective disclosure functionality
 - [ ] Update verification logic (remove explicit suite specification)
@@ -589,6 +609,7 @@ The TrustVC libraries maintain backward compatibility, allowing you to:
 - [Bitstring Status List Specification](https://www.w3.org/TR/vc-bitstring-status-list/)
 - [Data Integrity Specification](https://www.w3.org/TR/vc-data-integrity/)
 - [ECDSA-SD-2023 Cryptosuite](https://www.w3.org/TR/vc-di-ecdsa/)
+- [BBS-2023 Cryptosuite](https://www.w3.org/TR/vc-di-bbs/#bbs-2023)
 - [TrustVC GitHub Repository](https://github.com/TrustVC/trustvc)
 
 ## Support
