@@ -34,9 +34,81 @@ When working with TradeTrust documents, the `did:web` method's public key is use
 Before you begin, ensure you have Node.js installed on your system.
 
 <Tabs>
-  <TabItem value="cli" label="Using CLI (BLS Only)" default>
+  <TabItem value="ecdsa" label="ECDSA-SD-2023 (Default)" default>
 
-    > **Note**: The CLI currently only supports BLS keys. For ECDSA keys, use the code approach below.
+    1. Install the package:
+
+    ```bash
+    npm install @trustvc/trustvc
+    ```
+
+    2. Create a script to generate the DID:
+
+    ```typescript
+    import { issuer } from "@trustvc/trustvc";
+
+    const { issueDID, CryptoSuite } = issuer;
+
+    const main = async () => {
+      // Generate DID document
+      const issuedDidWeb = await issueDID({
+        domain: "example.com",
+        type: CryptoSuite.EcdsaSd2023,
+      });
+
+      // Access the DID document
+      console.log(JSON.stringify(issuedDidWeb.wellKnownDid, null, 2));
+
+      // Store the key pairs securely
+      console.log("Key pairs:", issuedDidWeb.didKeyPairs);
+    };
+
+    main();
+    ```
+
+    > **Important**: Always securely store the generated key pairs (`didKeyPairs`). They are required for signing Verifiable Credentials.
+
+  </TabItem>
+
+  <TabItem value="bbs2023" label="BBS-2023">
+
+    1. Install the package:
+
+    ```bash
+    npm install @trustvc/trustvc
+    ```
+
+    2. Create a script to generate the DID:
+
+    ```typescript
+    import { issuer } from "@trustvc/trustvc";
+
+    const { issueDID, CryptoSuite } = issuer;
+
+    const main = async () => {
+      // Generate DID document with BBS-2023
+      const issuedDidWeb = await issueDID({
+        domain: "example.com",
+        type: CryptoSuite.Bbs2023,
+      });
+
+      // Access the DID document
+      console.log(JSON.stringify(issuedDidWeb.wellKnownDid, null, 2));
+
+      // Store the key pairs securely
+      console.log("Key pairs:", issuedDidWeb.didKeyPairs);
+    };
+
+    main();
+    ```
+
+    > **Important**: Always securely store the generated key pairs (`didKeyPairs`). They are required for signing Verifiable Credentials.
+
+  </TabItem>
+
+  <TabItem value="cli" label="Using CLI (BLS Only)">
+
+    > **Note**: The CLI currently only supports BLS keys. For ECDSA-SD-2023 or BBS-2023 keys, use the code approach above.
 
     1. Install the CLI:
 
@@ -71,42 +143,6 @@ Before you begin, ensure you have Node.js installed on your system.
     File written successfully to ./wellknown.json
     File written successfully to ./didKeyPairs.json
     ```
-
-  </TabItem>
-
-  <TabItem value="code" label="Using Code (ECDSA Recommended)">
-
-    1. Install the package:
-
-    ```bash
-    npm install @trustvc/trustvc
-    ```
-
-    2. Create a script to generate the DID:
-
-    ```typescript
-    import { issuer } from "@trustvc/trustvc";
-
-    const { issueDID, CryptoSuite } = issuer;
-
-    const main = async () => {
-      // Generate DID document
-      const issuedDidWeb = await issueDID({
-        domain: "example.com",
-        type: CryptoSuite.EcdsaSd2023,
-      });
-
-      // Access the DID document
-      console.log(JSON.stringify(issuedDidWeb.wellKnownDid, null, 2));
-
-      // Store the key pairs securely
-      console.log("Key pairs:", issuedDidWeb.didKeyPairs);
-    };
-
-    main();
-    ```
-
-    > **Important**: Always securely store the generated key pairs (`didKeyPairs`). They are required for signing Verifiable Credentials.
 
   </TabItem>
 </Tabs>
@@ -153,9 +189,65 @@ Before adding new keys:
 ### Adding Multiple Keys
 
 <Tabs>
-  <TabItem value="cli" label="Using CLI (BLS Only)" default>
+  <TabItem value="ecdsa" label="ECDSA-SD-2023 (Default)" default>
+    1. Install the package:
+    ```bash
+    npm install @trustvc/trustvc
+    ```
 
-    > **Note**: The CLI currently only supports BLS keys. For ECDSA keys, use the code approach below.
+    2. Create a script to generate and add a new key:
+    ```typescript
+    import { issuer } from "@trustvc/trustvc";
+
+    const { issueDID, CryptoSuite } = issuer;
+
+    const addNewKey = async () => {
+      // Issue new DID document with additional key
+      const updatedDid = await issueDID({
+        domain: "example.com",
+        type: CryptoSuite.EcdsaSd2023,
+      });
+
+      console.log("Updated DID document:", JSON.stringify(updatedDid.wellKnownDid, null, 2));
+      console.log("New key pair to store:", updatedDid.didKeyPairs);
+    };
+
+    addNewKey();
+    ```
+
+  </TabItem>
+
+  <TabItem value="bbs2023" label="BBS-2023">
+    1. Install the package:
+    ```bash
+    npm install @trustvc/trustvc
+    ```
+
+    2. Create a script to generate and add a new BBS-2023 key:
+    ```typescript
+    import { issuer } from "@trustvc/trustvc";
+
+    const { issueDID, CryptoSuite } = issuer;
+
+    const addNewKey = async () => {
+      // Issue new DID document with additional BBS-2023 key
+      const updatedDid = await issueDID({
+        domain: "example.com",
+        type: CryptoSuite.Bbs2023,
+      });
+
+      console.log("Updated DID document:", JSON.stringify(updatedDid.wellKnownDid, null, 2));
+      console.log("New key pair to store:", updatedDid.didKeyPairs);
+    };
+
+    addNewKey();
+    ```
+
+  </TabItem>
+
+  <TabItem value="cli" label="Using CLI (BLS Only)">
+
+    > **Note**: The CLI currently only supports BLS keys. For ECDSA-SD-2023 or BBS-2023 keys, use the code approach above.
 
     1. Generate a new key pair:
     ```bash
@@ -181,34 +273,6 @@ Before adding new keys:
     ? Please specify a directory path to save the DID token file (optional): .
     File written successfully to ./wellknown.json
     File written successfully to ./didKeyPairs.json
-    ```
-
-  </TabItem>
-
-  <TabItem value="code" label="Using Code (ECDSA Recommended)">
-    1. Install the package:
-    ```bash
-    npm install @trustvc/trustvc
-    ```
-
-    2. Create a script to generate and add a new key:
-    ```typescript
-    import { issuer } from "@trustvc/trustvc";
-
-    const { issueDID, CryptoSuite } = issuer;
-
-    const addNewKey = async () => {
-      // Issue new DID document with additional key
-      const updatedDid = await issueDID({
-        domain: "example.com",
-        type: CryptoSuite.EcdsaSd2023,
-      });
-
-      console.log("Updated DID document:", JSON.stringify(updatedDid.wellKnownDid, null, 2));
-      console.log("New key pair to store:", updatedDid.didKeyPairs);
-    };
-
-    addNewKey();
     ```
 
   </TabItem>

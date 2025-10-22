@@ -12,7 +12,7 @@ This guide demonstrates how to create a complete W3C VC document using TradeTrus
 
 Before proceeding with this tutorial, ensure you have completed the following steps:
 
-1. **Generate ECDSA keypair and host DID:WEB**: Follow the [DID:WEB guide](/docs/how-tos/issuer/did-web/) to generate your ECDSA key pairs and set up DID:WEB hosting.
+1. **Generate keypair and host DID:WEB**: Follow the [DID:WEB guide](/docs/how-tos/issuer/did-web/) to generate your ECDSA-SD-2023 or BBS-2023 key pairs and set up DID:WEB hosting.
 2. **Set up document revocation**: Configure bit string revocation following the [bit string guide](/docs/how-tos/bitstring/).
 3. **Deploy Token Registry**: Deploy a token registry contract for transferable documents using the [token registry deployment guide](/docs/how-tos/deployment#token-registry).
 4. **Document verification setup**: Familiarize yourself with the [document verification process](/docs/how-tos/verifydocument/).
@@ -89,7 +89,10 @@ Update the generated `tsconfig.json` file with the following configuration:
 
 ### 2. Key Pair and Environment Configuration
 
-After completing the [first prerequisite](/docs/how-tos/issuer/did-web/) (generating ECDSA keypair and hosting DID:WEB), you should have **two pieces of information**:
+> **Note**: This tutorial uses ECDSA-SD-2023 as the signing crypto suite, but you can follow the same steps using BBS-2023 keys. The key pair format and document structure remain identical - simply use your BBS-2023 key pair instead.
+
+
+After completing the [first prerequisite](/docs/how-tos/issuer/did-web/) (generating keypair and hosting DID:WEB), you should have **two pieces of information**:
 
 1. **DID Document** - A JSON document that describes your decentralized identifier
 2. **Key Pair** - The cryptographic keys used for signing documents
@@ -308,7 +311,7 @@ Next, we need to sign our document to create a verifiable credential. We do this
 
 The proof object includes:
 - **type**: The signature algorithm used (`DataIntegrityProof`)
-- **cryptosuite**: The cryptographic suite used (`ecdsa-sd-2023`)
+- **cryptosuite**: The cryptographic suite used (default  `ecdsa-sd-2023` or `bbs-2023`)
 - **created**: Timestamp of when the signature was created
 - **proofPurpose**: The purpose of the proof (e.g., `assertionMethod`)
 - **proofValue**: The actual cryptographic signature
@@ -523,7 +526,7 @@ npm run dev
 
 You have successfully created a complete W3C Verifiable Credential document using TradeTrust. The document is now:
 
-- ✅ Digitally signed using ECDSA-SD-2023 signatures
+- ✅ Digitally signed using ECDSA-SD-2023 or BBS-2023 signatures
 - ✅ Minted as a transferable token on the blockchain
 - ✅ Ready for verification and transfer
 - ✅ Configured with proper rendering templates
