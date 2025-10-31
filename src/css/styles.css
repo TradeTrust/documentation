@@ -2,30 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "Gilroy-Light";
-  src: url("https://ui.tradetrust.io/static/fonts/GilroyLight/font.woff2") format("woff2"),
-    url("https://ui.tradetrust.io/static/fonts/GilroyLight/font.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Gilroy-Medium";
-  src: url("https://ui.tradetrust.io/static/fonts/GilroyMedium/font.woff2") format("woff2"),
-    url("https://ui.tradetrust.io/static/fonts/GilroyMedium/font.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Gilroy-Bold";
-  src: url("https://ui.tradetrust.io/static/fonts/GilroyBold/font.woff2") format("woff2"),
-    url("https://ui.tradetrust.io/static/fonts/GilroyBold/font.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Gilroy-ExtraBold";
-  src: url("https://ui.tradetrust.io/static/fonts/GilroyExtraBold/font.woff2") format("woff2"),
-    url("https://ui.tradetrust.io/static/fonts/GilroyExtraBold/font.woff") format("woff");
-}
-
 @layer base {
   body {
     font-size: 16px;
