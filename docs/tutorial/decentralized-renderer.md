@@ -15,7 +15,7 @@ TradeTrust provides a template repository to help you get started quickly: [Trad
 Before starting, ensure you have the following installed:
 
 - [Git](https://git-scm.com/downloads)
-- [Node.js](https://nodejs.org/en/download/) (version 18 or later recommended)
+- [Node.js](https://nodejs.org/en/download/) (version 20 or later recommended)
 - [npm](https://www.npmjs.com/get-npm) (comes with Node.js)
 - A [GitHub account](https://github.com/)
 - A [Netlify account](https://www.netlify.com/) (for deployment- Optional)

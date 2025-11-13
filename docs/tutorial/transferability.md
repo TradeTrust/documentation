@@ -18,7 +18,7 @@ You can continue building from the existing Verifier setup by adding another pag
 
 Before starting, ensure you have the following installed:
 
-- Node.js (version 18 or higher)
+- Node.js (version 20 or higher)
 - npm or yarn
 - A code editor, e.g., Visual Studio Code
 
