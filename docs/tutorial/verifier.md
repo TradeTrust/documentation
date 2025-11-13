@@ -10,7 +10,7 @@ This guide will walk you through setting up a simple React project using TypeScr
 
 Before starting, ensure you have the following installed:
 
-- Node.js (version 18 or higher)
+- Node.js (version 20 or higher)
 
 - npm or yarn
 
