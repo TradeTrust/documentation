@@ -112,7 +112,7 @@ const siteConfig = {
     },
     algolia: {
       appId: "6DNGPTCB04",
-      apiKey: process.env.ALGOLIA_SEARCH_API_KEY || "dummykey",
+      apiKey: process.env.ALGOLIA_SEARCH_API_KEY,
       indexName: "tradetrust",
       algoliaOptions: {},
     },
