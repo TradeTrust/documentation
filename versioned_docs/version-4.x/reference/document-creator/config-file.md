@@ -12,7 +12,7 @@ The configuration file is a JSON file that contains information to configure the
 
 ### Config file structure
 
-AA reference of a configuration file can be found [here](https://github.com/TradeTrust/tradetrust-config/blob/master/build/sepolia/config-v2.json).
+A reference of a configuration file can be found [here](https://github.com/TradeTrust/tradetrust-config/blob/master/build/sepolia/config-v2.json).
 
 Below are examples of a configuration file
 
