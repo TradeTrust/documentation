@@ -21,6 +21,12 @@ The **deploy** function creates a new contract instance by cloning an existing i
 
 ### Installing tradetrust-cli
 
+> **⚠️ DISCLAIMER**
+>
+> The TradeTrust CLI helps developers prototype and test how document issuance and verification work before integrating the TrustVC core into their own systems.
+>
+> It should not be used for production issuance or live document management, as it lacks security, scalability, and operational controls required for real-world environments.
+
 #### Binary
 
 To install the binary, simply download the binary from the [CLI release page](https://github.com/TradeTrust/tradetrust-cli/releases) for your OS.

@@ -4,6 +4,12 @@ title: Migration to TradeTrust CLI v3
 sidebar_label: Migration to TradeTrust CLI v3
 ---
 
+> **⚠️ DISCLAIMER**
+>
+> The TradeTrust CLI helps developers prototype and test how document issuance and verification work before integrating the TrustVC core into their own systems.
+>
+> It should not be used for production issuance or live document management, as it lacks security, scalability, and operational controls required for real-world environments.
+
 ## 1. What’s New?
 
 - The tradetrust CLI now supports **encrypted remarks** for enhanced security when executing commands. This guide explains how to use the updated title-escrow command with encrypted remarks and highlights the changes introduced in this version.
