@@ -9,6 +9,7 @@ sidebar_label: New Features in Token Registry v5
 ## Key Changes in Version 5
 
 - **Remark Field**:
+
   - Supports detailed documentation for transactional actions.
 
 - **Reject Functions**:
@@ -20,6 +21,7 @@ sidebar_label: New Features in Token Registry v5
 - A new, optional **remark** field has been added to all contract operations.
 
 - **Details**:
+
   - Optional: Can be left empty by providing `"0x"`.
   - Limit: Up to **120 characters**.
   - Encryption: Recommended for sensitive remarks.
@@ -31,6 +33,7 @@ sidebar_label: New Features in Token Registry v5
 - Reject functions empower users to decline unwanted changes to ownership or holding roles.
 
 - **Details**:
+
   - Reject Transfer of Ownership (`rejectTransferBeneficiary`)
   - Reject Transfer of Holding (`rejectTransferHolder`)
   - Reject Both Roles (`rejectTransferOwners`)
@@ -41,4 +44,4 @@ sidebar_label: New Features in Token Registry v5
 
 ## Migrating to Token Registry v5
 
-For detailed instructions on migrating to **Token Registry v5**, please refer to the [Migration Guide](migration-tr-v5).
+For detailed instructions on migrating to **Token Registry v5**, please refer to the [Migration Guide](/docs/migration-guide/migration-tr-v5).

@@ -13,10 +13,10 @@ Minting tokens in a secure environment often requires the use of hardware securi
 
 Before proceeding with this tutorial, ensure you have completed the following steps:
 
-1. Understand the [AWS KMS overview](overview)
-2. [Create a key](create-key) in AWS KMS
-3. Obtain [access keys](access-keys) for CLI, SDK, & API access
-4. Familiarize yourself with the [DID signing demo](did-sign-demo)
+1. Understand the [AWS KMS overview](/docs/how-tos/advanced/aws-kms/overview)
+2. [Create a key](/docs/how-tos/advanced/aws-kms/create-key) in AWS KMS
+3. Obtain [access keys](/docs/how-tos/advanced/aws-kms/access-keys) for CLI, SDK, & API access
+4. Familiarize yourself with the [DID signing demo](/docs/how-tos/advanced/did-sign-demo)
 5. Obtain a did key pair for signing the w3c document [Create DID key pair](/docs/tutorial/creator#72-create-a-script-to-generate-a-new-did-and-store-it-in-the-env-file)
 
 ## Tutorial
@@ -32,8 +32,10 @@ npm init -y
 ```
 
 Update the `package.json` file:
+
 > **NOTE:** The AWS KMS library used in this tutorial requires ethers.js v5.
-<br/>
+> <br/>
+
 ```json
 {
   "name": "aws-kms-mint-demo",
@@ -78,7 +80,7 @@ const signer = new AwsKmsSigner(
     region: process.env.AWS_REGION,
     keyId: process.env.AWS_KEY_ID,
   },
-  new ethers.providers.JsonRpcProvider(process.env.RPC_URL)
+  new ethers.providers.JsonRpcProvider(process.env.RPC_URL),
 );
 
 module.exports = { signer };
@@ -92,12 +94,7 @@ Create a `deployRegistry.js` file with the following code:
 
 ```javascript
 // deployRegistry.js - Module for deploying token registry
-const {
-  SUPPORTED_CHAINS,
-  v5ContractAddress,
-  v5Contracts,
-  v5Utils,
-} = require("@trustvc/trustvc");
+const { SUPPORTED_CHAINS, v5ContractAddress, v5Contracts, v5Utils } = require("@trustvc/trustvc");
 const { ethers } = require("ethers");
 
 const deployRegistry = async (signer, chainId) => {
@@ -107,11 +104,7 @@ const deployRegistry = async (signer, chainId) => {
 
   const { TDocDeployer__factory } = v5Contracts;
   const { TokenImplementation, Deployer } = v5ContractAddress;
-  const deployerContract = new ethers.Contract(
-    Deployer[chainId],
-    TDocDeployer__factory.abi,
-    signer
-  );
+  const deployerContract = new ethers.Contract(Deployer[chainId], TDocDeployer__factory.abi, signer);
 
   const initParam = v5Utils.encodeInitParams({
     name: "DemoTokenRegistry",
@@ -124,14 +117,10 @@ const deployRegistry = async (signer, chainId) => {
     const gasFees = await CHAININFO.gasStation();
     console.log("Gas fees:", gasFees);
 
-    tx = await deployerContract.deploy(
-      TokenImplementation[chainId],
-      initParam,
-      {
-        maxFeePerGas: gasFees?.maxFeePerGas ?? ethers.constants.Zero,
-        maxPriorityFeePerGas: gasFees?.maxPriorityFeePerGas ?? ethers.constants.Zero,
-      }
-    );
+    tx = await deployerContract.deploy(TokenImplementation[chainId], initParam, {
+      maxFeePerGas: gasFees?.maxFeePerGas ?? ethers.constants.Zero,
+      maxPriorityFeePerGas: gasFees?.maxPriorityFeePerGas ?? ethers.constants.Zero,
+    });
   } else {
     tx = await deployerContract.deploy(TokenImplementation[chainId], initParam);
   }
@@ -141,7 +130,7 @@ const deployRegistry = async (signer, chainId) => {
   registryAddress = v5Utils.getEventFromReceipt(
     receipt,
     deployerContract.interface.getEventTopic("Deployment"),
-    deployerContract.interface
+    deployerContract.interface,
   ).args.deployed;
 
   console.log("Token registry deployed at address:", registryAddress);
@@ -151,7 +140,7 @@ const deployRegistry = async (signer, chainId) => {
 module.exports = { deployRegistry };
 ```
 
-After creating the deployment module, you can invoke the deployRegistry function with the signer and chain ID to deploy the registry. 
+After creating the deployment module, you can invoke the deployRegistry function with the signer and chain ID to deploy the registry.
 Make sure to take note of the registry address as it will be used for minting tokens.
 
 ### 4. Mint Token
@@ -165,10 +154,9 @@ const { signer } = require("./signer");
 const { ethers } = require("ethers");
 
 const mintToken = async () => {
-    
   const CHAINID = CHAIN_ID.stabilitytestnet;
   const CHAININFO = SUPPORTED_CHAINS[CHAINID];
-  const REGISTRY_ADDRESS = ""; // Replace with your token registry address obtained from previous step 
+  const REGISTRY_ADDRESS = ""; // Replace with your token registry address obtained from previous step
   const owner = ""; // Add the token owner address
   const holder = ""; // Add the token holder address
 
@@ -215,36 +203,31 @@ const mintToken = async () => {
     type: "Multikey",
     controller: "did:web:trustvc.github.io:did:1",
     publicKeyMultibase: "your-public-key",
-    secretKeyMultibase: "your-private-key"
+    secretKeyMultibase: "your-private-key",
   };
-  
+
   const { signed: signedW3CDocument } = await signW3C(document, didKeyPairs);
-  
+
   // Generate a token ID from the signed document
   const tokenId = getTokenId(signedW3CDocument);
-  
 
-  const tokenRegistry = new ethers.Contract(
-    REGISTRY_ADDRESS,
-    v5Contracts.TradeTrustToken__factory.abi,
-    signer
-  );    
+  const tokenRegistry = new ethers.Contract(REGISTRY_ADDRESS, v5Contracts.TradeTrustToken__factory.abi, signer);
 
   const remarks = "Minting token";
-  const encryptedRemarks = remarks && `0x${encrypt(remarks, signedW3CDocument?.id)}` || '0x';
+  const encryptedRemarks = (remarks && `0x${encrypt(remarks, signedW3CDocument?.id)}`) || "0x";
   try {
     await tokenRegistry.callStatic.mint(owner, holder, tokenId, encryptedRemarks);
   } catch (error) {
     console.error("Pre-mint verification failed:", error);
-    throw new Error('Failed to mint token - verification check failed');
+    throw new Error("Failed to mint token - verification check failed");
   }
-  
+
   // Process the actual minting transaction
   let tx;
   if (CHAININFO.gasStation) {
     const gasFees = await CHAININFO.gasStation();
-    console.log('Gas fees:', gasFees);
-    
+    console.log("Gas fees:", gasFees);
+
     tx = await tokenRegistry.mint(owner, holder, tokenId, encryptedRemarks, {
       maxFeePerGas: gasFees?.maxFeePerGas ?? ethers.constants.Zero,
       maxPriorityFeePerGas: gasFees?.maxPriorityFeePerGas ?? ethers.constants.Zero,
@@ -252,11 +235,10 @@ const mintToken = async () => {
   } else {
     tx = await tokenRegistry.mint(owner, holder, tokenId, encryptedRemarks);
   }
-  
+
   // Wait for transaction confirmation
   const receipt = await tx.wait();
   console.log(`Transaction hash: ${receipt?.transactionHash}`);
-  
 };
 ```
 

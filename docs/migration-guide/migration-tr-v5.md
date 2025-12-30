@@ -14,7 +14,7 @@ This migration guide helps you transition from Token Registry v4 to **TrustVC** 
 
 **Token Registry v5**
 
-- Token Registry v5 is the newest version. It allows you to manage token-based credentials and ownership transfers through smart contracts. For more information refer to [here](igp-i).
+- Token Registry v5 is the newest version. It allows you to manage token-based credentials and ownership transfers through smart contracts. For more information refer to [here](/docs/migration-guide/igp-i).
 
 While TrustVC includes Token Registry v5, you may choose to integrate it separately depending on your needs.
 
