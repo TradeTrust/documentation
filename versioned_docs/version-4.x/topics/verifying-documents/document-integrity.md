@@ -75,6 +75,12 @@ Later on, during verification of the document, the same exact steps are performe
 
 Due to the way we compute `targetHash`, TradeTrust allows for one to obfuscate data they don't want to make public, we call this selective redaction. For this we can simply compute the hash of a specific field and add it into the documents. Let's try it with the [CLI](/docs/4.x/tutorial/prerequisites#installation-of-tradetrust-cli) and the document above:
 
+> **⚠️ DISCLAIMER**
+>
+> The TradeTrust CLI helps developers prototype and test how document issuance and verification work before integrating the TrustVC core into their own systems.
+>
+> It should not be used for production issuance or live document management, as it lacks security, scalability, and operational controls required for real-world environments.
+
 ```bash
 tradetrust filter ./path/to/file.json ./output.json name
 ```

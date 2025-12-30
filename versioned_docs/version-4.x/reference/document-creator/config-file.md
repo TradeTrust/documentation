@@ -6,6 +6,10 @@ sidebar_label: Configuration File
 
 The configuration file is a JSON file that contains information to configure the application to suit your business needs.
 
+> **⚠️ DISCLAIMER**
+>
+> Configuration files have been deprecated and are not recommended for production use. Configuration files containing private keys should only be used for demo or testing purposes only.
+
 ### Config file structure
 
 A reference of a configuration file can be found [here](https://github.com/TradeTrust/tradetrust-config/blob/master/build/sepolia/config-v2.json).
