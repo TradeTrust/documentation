@@ -16,7 +16,7 @@ Before proceeding with this tutorial, ensure you have completed the following st
 1. Understand the [AWS KMS overview](/docs/how-tos/advanced/aws-kms/overview)
 2. [Create a key](/docs/how-tos/advanced/aws-kms/create-key) in AWS KMS
 3. Obtain [access keys](/docs/how-tos/advanced/aws-kms/access-keys) for CLI, SDK, & API access
-4. Familiarize yourself with the [DID signing demo](/docs/how-tos/advanced/did-sign-demo)
+4. Familiarize yourself with the [DID signing demo](/docs/how-tos/advanced/aws-kms/did-sign-demo)
 5. Obtain a did key pair for signing the w3c document [Create DID key pair](/docs/tutorial/creator#72-create-a-script-to-generate-a-new-did-and-store-it-in-the-env-file)
 
 ## Tutorial
