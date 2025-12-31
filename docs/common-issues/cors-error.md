@@ -1,11 +1,9 @@
 ---
 id: cors-error
-title: CORS Error when Fetching External Resources
-sidebar_label: CORS Error when Fetching External Resources
+title: CORS Errors on External Resources
+sidebar_label: CORS Errors on External Resources
 keywords: ["cors", "cors error", "Access-Control-Allow-Origin", "cross-origin", "no-cors", "fetch blocked"]
 ---
-
-## CORS Errors on External Resources
 
 When using the web-based verifier such as [ref.tradetrust.io](https://ref.tradetrust.io), the browser will block requests to external resources that do not have Cross-Origin Resource Sharing (CORS) enabled.
 
