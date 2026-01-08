@@ -15,25 +15,26 @@ With **TrustVC**, developers can seamlessly handle both W3C Verifiable Credentia
 **TrustVC** provides dedicated signing functions tailored for both TrustVC W3C VCs and OpenAttestation VDs.
 
 - **OpenAttestation Signing (signOA)**: Enables the signing of OpenAttestation-compliant wrapped documents.
+
 ```ts
-import { wrapOADocument, signOA } from '@trustvc/trustvc';
+import { wrapOADocument, signOA } from "@trustvc/trustvc";
 
 const rawDocument = {
-  '@context': [
-    'https://www.w3.org/ns/credentials/v2',
-    'https://schemata.openattestation.com/com/openattestation/4.0/context.json',
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://schemata.openattestation.com/com/openattestation/4.0/context.json",
   ],
-  type: ['VerifiableCredential', 'OpenAttestationCredential'],
+  type: ["VerifiableCredential", "OpenAttestationCredential"],
   credentialSubject: {
-    id: '0x1234567890123456789012345678901234567890',
-    name: 'John Doe',
-    country: 'SG',
+    id: "0x1234567890123456789012345678901234567890",
+    name: "John Doe",
+    country: "SG",
   },
   issuer: {
-    id: 'did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90',
-    type: 'OpenAttestationIssuer',
-    name: 'Government Technology Agency of Singapore (GovTech)',
-    identityProof: { identityProofType: 'DNS-DID', identifier: 'example.openattestation.com' },
+    id: "did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90",
+    type: "OpenAttestationIssuer",
+    name: "Government Technology Agency of Singapore (GovTech)",
+    identityProof: { identityProofType: "DNS-DID", identifier: "example.openattestation.com" },
   },
 };
 
@@ -42,47 +43,48 @@ const wrappedDocument = await wrapOADocument(rawDocument);
 
 // Sign the wrapped document
 const signedWrappedDocument = await signOA(wrappedDocument, {
-  public: 'did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90#controller',
-  private: '<privateKey>',
+  public: "did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90#controller",
+  private: "<privateKey>",
 });
 ```
 
 - **TrustVC W3C Signing (signW3C)**: Simplifies the signing process for W3C-compliant verifiable credentials using ECDSA-SD-2023 signatures.
+
 ```ts
-import { signW3C, VerificationType } from '@trustvc/trustvc';
+import { signW3C, VerificationType } from "@trustvc/trustvc";
 
 const rawDocument = {
-  '@context': [
-    'https://www.w3.org/ns/credentials/v2',
-    'https://w3id.org/security/data-integrity/v2',
-    'https://w3c-ccg.github.io/citizenship-vocab/contexts/citizenship-v2.jsonld',
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/security/data-integrity/v2",
+    "https://w3c-ccg.github.io/citizenship-vocab/contexts/citizenship-v2.jsonld",
   ],
   credentialStatus: {
-    id: 'https://trustvc.github.io/did/credentials/statuslist/1#1',
-    type: 'BitstringStatusListEntry',
-    statusPurpose: 'revocation',
-    statusListIndex: '10',
-    statusListCredential: 'https://trustvc.github.io/did/credentials/statuslist/1',
+    id: "https://trustvc.github.io/did/credentials/statuslist/1#1",
+    type: "BitstringStatusListEntry",
+    statusPurpose: "revocation",
+    statusListIndex: "10",
+    statusListCredential: "https://trustvc.github.io/did/credentials/statuslist/1",
   },
   credentialSubject: {
-    name: 'TrustVC',
-    birthDate: '2024-04-01T12:19:52Z',
-    type: ['PermanentResident', 'Person'],
+    name: "TrustVC",
+    birthDate: "2024-04-01T12:19:52Z",
+    type: ["PermanentResident", "Person"],
   },
-  validUntil: '2029-12-03T12:19:52Z',
-  issuer: 'did:web:trustvc.github.io:did:1',
-  type: ['VerifiableCredential'],
-  validFrom: '2024-04-01T12:19:52Z',
+  validUntil: "2029-12-03T12:19:52Z",
+  issuer: "did:web:trustvc.github.io:did:1",
+  type: ["VerifiableCredential"],
+  validFrom: "2024-04-01T12:19:52Z",
 };
 
 // Sign the credential
 const signingResult = await signW3C(rawDocument, {
-  '@context': 'https://w3id.org/security/multikey/v1',
-  id: 'did:web:trustvc.github.io:did:1#keys-1',
-  controller: 'did:web:trustvc.github.io:did:1',
+  "@context": "https://w3id.org/security/multikey/v1",
+  id: "did:web:trustvc.github.io:did:1#keys-1",
+  controller: "did:web:trustvc.github.io:did:1",
   type: VerificationType.Multikey,
-  publicKeyMultibase: '<publicKeyMultibase>',
-  secretKeyMultibase: '<secretKeyMultibase>',
+  publicKeyMultibase: "<publicKeyMultibase>",
+  secretKeyMultibase: "<secretKeyMultibase>",
 });
 ```
 
@@ -91,37 +93,37 @@ const signingResult = await signW3C(rawDocument, {
 **TrustVC** simplifies verification with a single function that supports both TrustVC W3C VCs and OpenAttestation VDs.
 
 ```ts
-import { verifyDocument } from '@trustvc/trustvc';
+import { verifyDocument } from "@trustvc/trustvc";
 
 const signedDocument = {
-  '@context': [
-    'https://www.w3.org/ns/credentials/v2',
-    'https://w3id.org/security/data-integrity/v2',
-    'https://w3c-ccg.github.io/citizenship-vocab/contexts/citizenship-v2.jsonld',
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/security/data-integrity/v2",
+    "https://w3c-ccg.github.io/citizenship-vocab/contexts/citizenship-v2.jsonld",
   ],
   credentialStatus: {
-    id: 'https://trustvc.github.io/did/credentials/statuslist/1#1',
-    type: 'BitstringStatusListEntry',
-    statusPurpose: 'revocation',
-    statusListIndex: '10',
-    statusListCredential: 'https://trustvc.github.io/did/credentials/statuslist/1',
+    id: "https://trustvc.github.io/did/credentials/statuslist/1#1",
+    type: "BitstringStatusListEntry",
+    statusPurpose: "revocation",
+    statusListIndex: "10",
+    statusListCredential: "https://trustvc.github.io/did/credentials/statuslist/1",
   },
   credentialSubject: {
-    name: 'TrustVC',
-    birthDate: '2024-04-01T12:19:52Z',
-    type: ['PermanentResident', 'Person'],
+    name: "TrustVC",
+    birthDate: "2024-04-01T12:19:52Z",
+    type: ["PermanentResident", "Person"],
   },
-  validUntil: '2029-12-03T12:19:52Z',
-  issuer: 'did:web:trustvc.github.io:did:1',
-  type: ['VerifiableCredential'],
-  validFrom: '2024-04-01T12:19:52Z',
+  validUntil: "2029-12-03T12:19:52Z",
+  issuer: "did:web:trustvc.github.io:did:1",
+  type: ["VerifiableCredential"],
+  validFrom: "2024-04-01T12:19:52Z",
   proof: {
-    type: 'DataIntegrityProof',
-    cryptosuite: 'ecdsa-sd-2023',
-    created: '2024-10-14T04:11:49Z',
-    proofPurpose: 'assertionMethod',
-    proofValue: '<proofValue>',
-    verificationMethod: 'did:web:trustvc.github.io:did:1#keys-1',
+    type: "DataIntegrityProof",
+    cryptosuite: "ecdsa-sd-2023",
+    created: "2024-10-14T04:11:49Z",
+    proofPurpose: "assertionMethod",
+    proofValue: "<proofValue>",
+    verificationMethod: "did:web:trustvc.github.io:did:1#keys-1",
   },
 };
 
@@ -134,12 +136,14 @@ const resultFragments = await verifyDocument(signedDocument);
 **TrustVC** is designed to work seamlessly with other TradeTrust libraries, extending their functionality and making it easier to integrate decentralized identity solutions. By leveraging existing TradeTrust tools, **TrustVC** enhances its capabilities for signing, verifying, and managing credentials and documents.
 
 - **@trustvc/w3c**:
+
   - Provides advanced features for signing **W3C Verifiable Credentials (VCs)**.
   - Simplifies the management of credential statuses, and ensures smooth integration with the **W3C VC Data Model**.
 
 - **@tradetrust/tradetrust & @tradetrust-tt/tt-verify**:
+
   - Handles **OpenAttestation** document wrapping, signing, and verification.
-  - Ensures compatibility with OpenAttestation-based systems, enabling a smooth transition to verifiable document formats for organizations using legacy solutions. 
+  - Ensures compatibility with OpenAttestation-based systems, enabling a smooth transition to verifiable document formats for organizations using legacy solutions.
 
 - **Token Registry v4 and v5**:
   - Supports the use of token-based credential statuses, ensuring compliance with **IG P&I** standards.
@@ -149,4 +153,4 @@ By integrating these libraries, **TrustVC** brings together a robust set of tool
 
 ## Migrating to TrustVC
 
-For detailed instructions on migrating to **TrustVC**, please refer to the [Migration Guide](migration-trustvc).
+For detailed instructions on migrating to **TrustVC**, please refer to the [Migration Guide](/docs/migration-guide/migration-trustvc).

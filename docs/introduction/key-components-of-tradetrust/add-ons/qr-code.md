@@ -21,17 +21,20 @@ Sample of how the qrcode looks like upon document rendering:
 
 ![QRcode](/docs/introduction/qrcode.png)
 
-> **Note**: For more information on qr code implementation, refer to [Implementing QR Codes](../../../how-tos/implementing-qr-codes).
+> **Note**: For more information on qr code implementation, refer to [Implementing QR Codes](/docs/how-tos/implementing-qr-codes).
 
 ## Why Use QR Codes in Documents
 
 ### 1. Enhanced Accessibility
+
 QR codes enable users to quickly access documents without manually typing URLs, making them more accessible on mobile devices.
 
 ### 2. Seamless Verification
+
 QR codes enable one-scan document verification on any supporting platform. Organizations can implement verification on their own systems while also allowing verification through public services like TradeTrust. This provides flexibility while maintaining consistent verification standards.
 
 ### 3. Integration with Physical Workflows
+
 For industries that still rely on physical documents, QR codes bridge the gap between paper and digital workflows. When integrated into document templates (like in TradeTrust's generic-templates), QR codes are included in the rendered document using components like `DocumentQrCode`. This allows printed documents to maintain a direct link to their digital versions, enabling instant verification through a simple scan even when the document exists in physical form.
 
 ```jsx
