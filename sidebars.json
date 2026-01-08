@@ -71,7 +71,12 @@
       "introduction/legal",
       "introduction/ig-p&i"
     ],
-    "Tutorial": ["tutorial/creator", "tutorial/verifier", "tutorial/transferability", "tutorial/decentralized-renderer"],
+    "Tutorial": [
+      "tutorial/creator",
+      "tutorial/verifier",
+      "tutorial/transferability",
+      "tutorial/decentralized-renderer"
+    ],
     "How Tos": [
       "how-tos/deployment",
       {
@@ -253,6 +258,7 @@
     ],
     "Community": ["community/contributing"],
     "Common Issues & Solutions": [
+      "common-issues/cors-error",
       "common-issues/polygon-mainnet-workaround",
       "common-issues/stability-gasfee-workaround",
       "common-issues/astron-address-whitelist-error"
