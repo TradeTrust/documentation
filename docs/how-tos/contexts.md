@@ -154,6 +154,19 @@ The Bitstring Status List provides a mechanism to represent and manage the revoc
 
 This section explains the usage of custom contexts that we have created, including transferableRecords, renderMethod, and attachments, in the TrustVC framework. These contexts enhance the functionality and flexibility of Verifiable Credentials, enabling tailored solutions for diverse applications.
 
+:::warning CORS Configuration Required for Interoperability
+If you host custom `@context` URLs on your own infrastructure, you **must** configure these specific resources to allow cross-origin requests. This requires setting the `Access-Control-Allow-Origin: *` header on these context files. Without this configuration, external verifiers (like [ref.tradetrust.io](https://ref.tradetrust.io)) will be blocked by the browser's CORS policy and **verification will fail**.
+
+**Why this matters:**
+- This only affects **web-based verifiers** running in browsers (like [ref.tradetrust.io](https://ref.tradetrust.io))
+- Server-side or native app verifiers are not affected by CORS
+- Testing locally or within your own domain won't reveal this issue
+- The error only appears when external web verifiers try to read your context files
+- This is a browser security feature, not a bug in TradeTrust
+
+For detailed instructions on fixing CORS errors, see the [CORS Errors guide](/docs/common-issues/cors-error).
+:::
+
 ### 1. Transferable Records Context (Custom credentialStatus)
 
 #### **URI**  
