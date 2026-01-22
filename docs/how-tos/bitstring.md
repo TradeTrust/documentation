@@ -200,6 +200,20 @@ When managing credential status using a bitstring-based Status List, the list mu
 For the examples above, the Credential Status List is hosted at:
 https://example.com/credentials/status/3
 
+:::warning CORS Configuration Required for Interoperability
+Your hosted Status List **must** have CORS enabled. This requires configuring the status list endpoint to return the `Access-Control-Allow-Origin: *` header. Without this configuration, external verifiers (like [ref.tradetrust.io](https://ref.tradetrust.io)) will be blocked by the browser's CORS policy and **cannot check if credentials are revoked or suspended**.
+
+**Why this matters:**
+- This only affects **web-based verifiers** running in browsers (like [ref.tradetrust.io](https://ref.tradetrust.io))
+- Server-side or native app verifiers are not affected by CORS
+- Testing locally or within your own domain won't reveal this issue
+- The error only appears when external web verifiers try to fetch your status list
+- This is a browser security feature, not a bug in TradeTrust
+- Verification will fail or show warnings if the status cannot be checked
+
+For detailed instructions on configuring CORS for your status list endpoint, see the [CORS Errors guide](/docs/common-issues/cors-error).
+:::
+
 ### How the Credential Status Looks in a Verifiable Credential
 
 Here is an example of how the hosted Credential Status List is referenced in a Verifiable Credential (VC):
