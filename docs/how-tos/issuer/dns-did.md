@@ -1,40 +1,40 @@
 ---
 id: dns-did
-title: Issuer method DID / DNS-DID
-sidebar_label: Issuer method DID / DNS-DID
+title: Issuer method DNS-DID
+sidebar_label: Issuer method DNS-DID
 ---
 
 :::important
 This segment is retained for legacy support for Open Attestation Document. For more information, please refer to v4 docs.
 :::
 
-| Requirement                       | DNS-TXT | DNS-DID | DID     |
-| --------------------------------- | ------- | ------- | ------- |
-| Domain name needed?               | &check; | &check; | &cross; |
-| Smart contract deployment needed? | &check; | &cross; | &cross; |
-| Identifiable issuer?              | &check; | &check; | &cross; |
+| Requirement                       | DNS-TXT | DNS-DID |
+| --------------------------------- | ------- | ------- |
+| Domain name needed?               | &check; | &check; |
+| Smart contract deployment needed? | &check; | &cross; |
+| Identifiable issuer?              | &check; | &check; |
 
 > smart contract deployment is the deployment of either document store smart contract or token registry smart contracts.
 
-Alternatively to DNS-TXT method, as an issuer one can use either `DID` or `DNS-DID` issuer method to verify that they indeed sign over the TradeTrust document.
+Alternatively to DNS-TXT method, as an issuer one can use `DNS-DID` issuer method to verify that they indeed sign over the TradeTrust document.
 
 :::note
 
 Please take note of the document types that supports this method of identifying the issuer.
 
-| Document type        | Support DID / DNS-DID |
-| -------------------- | --------------------- |
-| Verifiable Document  | &check;               |
-| Transferable Records | &cross;               |
+| Document type        | Supports DNS-DID |
+| -------------------- | ---------------- |
+| Verifiable Document  | &check;          |
+| Transferable Records | &cross;          |
 
 Not sure which type of document to use?
-Have a better understanding about our different document types: [verifiable documents](/docs/how-tos/open-attestation/verifiable-documents/overview) and [Transferable Records](/docs/introduction/key-components-of-tradetrust/transferability/overview).
+Have a better understanding about our different document types: [Verifiable Documents](/docs/how-tos/open-attestation/verifiable-documents/overview) and [Transferable Records](/docs/introduction/key-components-of-tradetrust/transferability/overview).
 
 :::
 
 ## Rationale
 
-Decentralized identifiers (DIDs) are a new type of identifier that enables verifiable, decentralized digital identity. DID document associated with DIDs contains a verification method. The owner of a DID can use the private key associated and anyone can verify that the owner control the public key. DID is new, 1.0 specification is recommended in July 2022. One advantage is that this allows our document issuance flow to not rely on the need to write on blockchain, eliminating the need for gas fees. You can read more about DID on [wikipedia](https://en.wikipedia.org/wiki/Decentralized_identifier) or deep dive into [w3c specifications](https://www.w3.org/TR/did-core/).
+Decentralized identifiers (DIDs) are a new type of identifier that enables verifiable, decentralized digital identity. DID document associated with DIDs contains a verification method. The owner of a DID can use the private key associated and anyone can verify that the owner control the public key. DID is new, 1.0 specification is recommended in July 2022. One advantage is that this allows our document issuance flow to not rely on the need to write on blockchain, eliminating the need for gas fees. You can read more about DID on [wikipedia](https://en.wikipedia.org/wiki/Decentralized_identifier) or deep dive into [W3C specifications](https://www.w3.org/TR/did-core/).
 
 ## How it works
 
@@ -95,53 +95,20 @@ Example of a DNS-DID signed document:
 }
 ```
 
-## Hands-on Creating a DNS-DID / DID
+## Hands-on Creating a DNS-DID
 
-Before we start creating the DNS-DID / DID, please take note that this method **does not require** any ethers/matic (cryptocurrency) to begin. Which means if you use this method, your verifiable document that you will generate will be free!
+Before we start creating the DNS-DID, please take note that this method **does not require** any ethers/matic (cryptocurrency) to begin. Which means if you use this method, your verifiable document that you will generate will be free!
 Also, please make sure you have completed the prerequisites listed below.
 
 ### Prerequisites
 
-- An etheruem wallet. (DID)
-- Domain name. (DND-DID)
-- Edit access to your domain's DNS records. (DND-DID)
-
-#### Creation of wallet
-
-- Create a [wallet](/docs/how-tos/open-attestation/prerequisites#wallet-creation).
-
-### Creation of DID
-
-With an etheruem wallet address, you can go to `https://dev.uniresolver.io/1.0/identifiers/did:ethr:<YOUR_WALLET_ADDRESS>`. The returned response is an ethr DID document and it will look something like this:
-
-```json
-{
-  "@context": [
-    "https://www.w3.org/ns/did/v1",
-    "https://w3id.org/security/suites/secp256k1recovery-2020/v2",
-    "https://w3id.org/security/v3-unstable"
-  ],
-  "id": "did:ethr:0xeB68fae40F796d6605d482773c4a7B266da87A0d",
-  "verificationMethod": [
-    {
-      "id": "did:ethr:0xeB68fae40F796d6605d482773c4a7B266da87A0d#controller",
-      "type": "EcdsaSecp256k1RecoveryMethod2020",
-      "controller": "did:ethr:0xeB68fae40F796d6605d482773c4a7B266da87A0d",
-      "blockchainAccountId": "eip155:1:0xeB68fae40F796d6605d482773c4a7B266da87A0d"
-    }
-  ],
-  "authentication": ["did:ethr:0xeB68fae40F796d6605d482773c4a7B266da87A0d#controller"],
-  "assertionMethod": ["did:ethr:0xeB68fae40F796d6605d482773c4a7B266da87A0d#controller"]
-}
-```
-
-This method (DID) do not require you to own a domain name. However, please take note that when verifying a document created from this method, the Issuer will reflect the wallet address which can be cryptic to most users. An example will look like this:
-
-![DID ethr](/docs/introduction/did-ethr.png)
+- A wallet ([How to create a wallet](/docs/how-tos/open-attestation/prerequisites#wallet-creation))
+- Domain name
+- Edit access to your domain's DNS records
 
 ### DNS-DID
 
-This method concept is the same as `DNS-TXT` method but instead of using a document store or a token registry we tie our DID to a custom txt record that we created in a domain name we own. Refer to below on how to implement.
+This method concept is the same as `DNS-TXT` method but instead of using a document store or a token registry, we tie our DID to a custom txt record that we created in a domain name we own. Refer to below on how to implement.
 
 ### How to create DNS-DID Record
 
