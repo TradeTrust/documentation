@@ -16,20 +16,41 @@ After wrapping the documents and obtaining a merkle root, the documents are read
 
 ## Issuing the documents
 
+The TrustVC CLI uses an interactive prompt system that automatically extracts the document store address, merkle root hash, and network from your wrapped document.
+
 ```bash
-tradetrust document-store issue --address 0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b --hash 0x80cc53b77c0539fc383f8d434ac5ffad281f3d64ae5a0e59e9f36f19548e1fff  --network sepolia --encrypted-wallet-path wallet.json
+trustvc document-store issue
 ```
 
-In the example above:
+The CLI will interactively prompt you for:
 
-- `--address` is the document store address, for instance the one created with the [Deploying Document Store](/docs/how-tos/open-attestation/verifiable-documents/dns-txt/deploying-document-store/document-store-cli) guide.
-- `--hash` is the merkle root hash, for instance generated while [Wrapping Documents](/docs/how-tos/open-attestation/verifiable-documents/dns-txt/wrapping-document/wrapping-document-cli)
+1. **Document path**: Path to the wrapped document file (JSON)
+   - The CLI automatically extracts the document store address, merkle root (hash), and network from the document
+   - Verifies the document signature before proceeding
+2. **Wallet selection**: Choose between encrypted wallet, private key file, or environment variable
 
-You will be prompted for the password that you used while creating the wallet. You will see a message after completion of the command:
+Example session:
 
-```text
-✔  success   Document/Document Batch with hash 0x80cc53b77c0539fc383f8d434ac5ffad281f3d64ae5a0e59e9f36f19548e1fff has been issued on 0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b
+```bash
+trustvc document-store issue
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+
+ℹ  info      Issuing 0x80cc53b77c0539fc383f8d434ac5ffad281f3d64ae5a0e59e9f36f19548e1fff to the document store 0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Token with hash 0x80cc53b77c0539fc383f8d434ac5ffad281f3d64ae5a0e59e9f36f19548e1fff has been issued on 0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b
+ℹ  info      Find more details at https://sepolia.etherscan.io/tx/0x...
 ```
+
+**Key Features:**
+
+- **Automatic extraction**: Document store address, merkle root hash, and network are automatically extracted from the wrapped document
+- **Document verification**: The CLI verifies the document signature before issuing
+- **Gas estimation**: Automatic dry run on Ethereum and Polygon networks to estimate gas costs
 
 ## Verifying the documents
 

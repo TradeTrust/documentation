@@ -56,8 +56,23 @@ We will do **endorse change of ownership** first.
 
 What this command does is it sets the states (holder and owner) of the token to a given address, in this case we will endorse the change of ownership to Charlie.
 
-```
-tradetrust title-escrow endorse-change-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --newOwner <CHARLIE_ADDRESS> --newHolder <CHARLIE_ADDRESS> -n sepolia --key <ALICE_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+The TrustVC CLI uses an interactive prompt system:
+
+```bash
+trustvc title-escrow transfer-owner-holder
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Enter the new owner address: <CHARLIE_ADDRESS>
+? Enter the new holder address: <CHARLIE_ADDRESS>
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+? Enter a remark (optional): <REMARK_STRING>
+
+ℹ  info      Connecting to the registry and attempting to endorse the change of owner...
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Transferable record's holder has been successfully endorsed to new owner and holder
 ```
 
 If this transaction is mined and successful, the state of the transferable record will be different.
@@ -88,8 +103,21 @@ We will do **reject change of ownership** now.
 
 What this command does is it sets the states (holder and owner) of the token to it's previous holder and owner address, in this case we will reject the change of ownership back to Alice.
 
-```
-tradetrust title-escrow reject-transfer-owner-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <CHARLIE_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+The TrustVC CLI uses an interactive prompt system:
+
+```bash
+trustvc title-escrow reject-transfer-owner-holder
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+? Enter a remark (optional): <REMARK_STRING>
+
+ℹ  info      Connecting to the registry and attempting to reject the change of owner and holder...
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Transferable record's owner and holder has been successfully rejected to previous owner and holder
 ```
 
 If this transaction is mined and successful, the state of the transferable record will be different.
@@ -123,11 +151,25 @@ What this command does is it just sets the holder state to a new address.
 
 In this case we will set the holder state to `Bob`, owner state remains as `Charlie` address
 
+The TrustVC CLI uses an interactive prompt system:
+
 ```bash
-tradetrust title-escrow change-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --to <TO> -n sepolia --key <CHARLIE_PTE_KEY> --remark <REMARK_STRING>  --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow transfer-holder
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Enter the new holder address: <BOB_ADDRESS>
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+? Enter a remark (optional): <REMARK_STRING>
+
+ℹ  info      Connecting to the registry and attempting to change the holder...
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Transferable record's holder has been successfully changed to holder with address: <BOB_ADDRESS>
 ```
 
-Do take note that the private key supplied should be that of Charlie instead of Alice since Charlie currently holds and owns the token.
+Do take note that the wallet supplied should be that of Charlie instead of Alice since Charlie currently holds and owns the token.
 
 If this command is successful, we will yet again advance the state of the token.
 
@@ -155,11 +197,24 @@ Now we will do the **reject change of holder** command.
 
 What this command does is it just sets the holder state to it's previous holder address.
 
+The TrustVC CLI uses an interactive prompt system:
+
 ```bash
-tradetrust title-escrow reject-transfer-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <BOB_PTE_KEY> --remark <REMARK_STRING>  --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow reject-transfer-holder
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+? Enter a remark (optional): <REMARK_STRING>
+
+ℹ  info      Connecting to the registry and attempting to reject the change of holder...
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Transferable record's holder has been successfully rejected to previous holder
 ```
 
-Do take note that the private key supplied should be that of Bob instead of Charlie since Bob currently holds the token and Charlie owns the token.
+Do take note that the wallet supplied should be that of Bob instead of Charlie since Bob currently holds the token and Charlie owns the token.
 
 If this command is successful, we will yet again advance the state of the token.
 
@@ -190,8 +245,22 @@ In this case we will suggest `Alice` to be the new owner.
 
 Does this lead to any change in state (holder, owner)? The answer is no, not yet.
 
-```
-tradetrust title-escrow nominate-change-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --newOwner <NEW_OWNER_ADDRESS> -n sepolia --key <CHARLIE_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+The TrustVC CLI uses an interactive prompt system:
+
+```bash
+trustvc title-escrow nominate-transfer-owner
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Enter the beneficiary address: <ALICE_ADDRESS>
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+? Enter a remark (optional): <REMARK_STRING>
+
+ℹ  info      Connecting to the registry and attempting to nominate the change of owner...
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Transferable record's holder has been successfully nominated to new owner with address <ALICE_ADDRESS>
 ```
 
 If this action is successful, then an additional action should be present on `Bob`.
@@ -220,8 +289,22 @@ That is what we will do, and we will now perform **endorse transfer of ownership
 
 What the command does is that it allows `Bob` to allow and complete the nominated change of ownership from `Charlie` to `Alice`.
 
-```
-tradetrust title-escrow endorse-transfer-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <BOB_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+The TrustVC CLI uses an interactive prompt system:
+
+```bash
+trustvc title-escrow endorse-transfer-owner
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Enter the new beneficiary address: <ALICE_ADDRESS>
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+? Enter a remark (optional): <REMARK_STRING>
+
+ℹ  info      Connecting to the registry and attempting to endorse the change of owner...
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Transferable record's holder has been successfully endorsed to approved beneficiary at <ALICE_ADDRESS>
 ```
 
 ---
@@ -246,9 +329,21 @@ Now we will do the **reject change of owner** command.
 
 What this command does is it just sets the owner state to it's previous owner address.
 
+The TrustVC CLI uses an interactive prompt system:
+
 ```bash
-tradetrust title-escrow reject-transfer-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <ALICE_PTE_KEY> --remark <REMARK_STRING> --encryp
-tion-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow reject-transfer-owner
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+? Enter a remark (optional): <REMARK_STRING>
+
+ℹ  info      Connecting to the registry and attempting to reject the change of owner...
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Transferable record's owner has been successfully rejected to previous owner
 ```
 
 ---
@@ -273,8 +368,22 @@ If the prev command worked as intended, then the new owner state of the token wi
 
 we will wrap up this demonstration by changing the holder to `Alice` so we will come full circle.
 
+The TrustVC CLI uses an interactive prompt system:
+
 ```bash
-tradetrust title-escrow change-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --to <TO> -n sepolia --key <BOB_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow transfer-holder
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Enter the new holder address: <ALICE_ADDRESS>
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+? Enter a remark (optional): <REMARK_STRING>
+
+ℹ  info      Connecting to the registry and attempting to change the holder...
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Transferable record's holder has been successfully changed to holder with address: <ALICE_ADDRESS>
 ```
 
 ---
@@ -296,7 +405,19 @@ This demonstration does not cover any return to issuer actions that could happen
 Enables the transfer of holdership rights to another party, allowing them to take temporary possession of the asset.
 
 ```bash
-tradetrust title-escrow change-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --to <TO> -n sepolia --key <YOUR_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow transfer-holder
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Enter the new holder address: <NEW_HOLDER_ADDRESS>
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+? Enter a remark (optional): <REMARK_STRING>
+
+ℹ  info      Connecting to the registry and attempting to change the holder...
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Transferable record's holder has been successfully changed to holder with address: <NEW_HOLDER_ADDRESS>
 ```
 
 #### Reject Holdership:
@@ -304,7 +425,18 @@ tradetrust title-escrow change-holder --token-registry <TOKEN_REGISTRY_ADDRESS> 
 Declines a request for holdership transfer, preventing an unauthorized or invalid transaction.
 
 ```bash
-tradetrust title-escrow reject-transfer-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <YOUR_PTE_KEY> --remark <REMARK_STRING>  --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow reject-transfer-holder
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+? Enter a remark (optional): <REMARK_STRING>
+
+ℹ  info      Connecting to the registry and attempting to reject the change of holder...
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Transferable record's holder has been successfully rejected to previous holder
 ```
 
 ### Transfer/Reject of Ownership
@@ -314,7 +446,20 @@ tradetrust title-escrow reject-transfer-holder --token-registry <TOKEN_REGISTRY_
 Facilitates the transfer of ownership rights to a new owner, making them the legitimate and permanent owner of the asset.
 
 ```bash
-tradetrust title-escrow endorse-change-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --newOwner <NEW_OWNER_ADDRESS> --newHolder <NEW_HOLDER_ADDRESS> -n sepolia --key <YOUR_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow transfer-owner-holder
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Enter the new owner address: <NEW_OWNER_ADDRESS>
+? Enter the new holder address: <NEW_HOLDER_ADDRESS>
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+? Enter a remark (optional): <REMARK_STRING>
+
+ℹ  info      Connecting to the registry and attempting to endorse the change of owner...
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Transferable record's holder has been successfully endorsed to new owner and holder
 ```
 
 #### Reject Ownership Transfer:
@@ -322,7 +467,18 @@ tradetrust title-escrow endorse-change-owner --token-registry <TOKEN_REGISTRY_AD
 Prevents a transfer of ownership to an incorrect or unauthorized party.
 
 ```bash
-tradetrust title-escrow reject-transfer-owner-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID>  -n sepolia --key <ALICE_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow reject-transfer-owner-holder
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+? Enter a remark (optional): <REMARK_STRING>
+
+ℹ  info      Connecting to the registry and attempting to reject the change of owner and holder...
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Transferable record's owner and holder has been successfully rejected to previous owner and holder
 ```
 
 ### Nominate Owner
@@ -330,7 +486,19 @@ tradetrust title-escrow reject-transfer-owner-holder --token-registry <TOKEN_REG
 Allows an entity to propose a new owner for the asset, initiating the process for ownership transfer, pending acceptance by the nominated party.
 
 ```bash
-tradetrust title-escrow nominate-change-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --newOwner <NEW_OWNER_ADDRESS> -n sepolia --key <YOUR_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow nominate-transfer-owner
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Enter the beneficiary address: <NEW_OWNER_ADDRESS>
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+? Enter a remark (optional): <REMARK_STRING>
+
+ℹ  info      Connecting to the registry and attempting to nominate the change of owner...
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Transferable record's holder has been successfully nominated to new owner with address <NEW_OWNER_ADDRESS>
 ```
 
 ### Endorse Owner
@@ -338,7 +506,19 @@ tradetrust title-escrow nominate-change-owner --token-registry <TOKEN_REGISTRY_A
 Confirms and approves the proposed ownership, affirming the nominated individual or entity as the rightful new owner.
 
 ```bash
-tradetrust title-escrow endorse-transfer-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --newBeneficiary <NEW_OWNER> -n sepolia --key <YOUR_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow endorse-transfer-owner
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Enter the new beneficiary address: <NEW_OWNER_ADDRESS>
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+? Enter a remark (optional): <REMARK_STRING>
+
+ℹ  info      Connecting to the registry and attempting to endorse the change of owner...
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Transferable record's holder has been successfully endorsed to approved beneficiary at <NEW_OWNER_ADDRESS>
 ```
 
 ### Return to Issuer
@@ -346,7 +526,18 @@ tradetrust title-escrow endorse-transfer-owner --token-registry <TOKEN_REGISTRY_
 Initiates the process of returning the asset to its original issuer (Token Registry), relinquishing all holdership or ownership rights.
 
 ```bash
-tradetrust title-escrow return-to-issuer --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <YOUR_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow return-to-issuer
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+? Enter a remark (optional): <REMARK_STRING>
+
+ℹ  info      Connecting to the registry and attempting to return to issuer...
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Transferable record has been successfully returned to issuer
 ```
 
 ### Accept/Reject Return to Issuer
@@ -356,7 +547,18 @@ tradetrust title-escrow return-to-issuer --token-registry <TOKEN_REGISTRY_ADDRES
 Confirms the receipt of the returned asset by the issuer, reinstating their ownership or custodial rights.
 
 ```bash
-tradetrust title-escrow accept-returned --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <YOUR_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow accept-return-to-issuer
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+? Enter a remark (optional): <REMARK_STRING>
+
+ℹ  info      Connecting to the registry and attempting to accept return to issuer...
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Transferable record's return to issuer has been successfully accepted
 ```
 
 #### Reject Return to Issuer:
@@ -364,5 +566,16 @@ tradetrust title-escrow accept-returned --token-registry <TOKEN_REGISTRY_ADDRESS
 Declines the return of the asset, maintaining the current holdership or ownership status.
 
 ```bash
-tradetrust title-escrow reject-returned --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <YOUR_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow reject-return-to-issuer
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+? Enter a remark (optional): <REMARK_STRING>
+
+ℹ  info      Connecting to the registry and attempting to reject return to issuer...
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Transferable record's return to issuer has been successfully rejected
 ```

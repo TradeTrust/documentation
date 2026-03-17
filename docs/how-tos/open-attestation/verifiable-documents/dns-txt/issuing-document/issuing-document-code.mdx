@@ -15,7 +15,7 @@ import Flow from "../flow.mdx";
 ## Installation
 
 ```sh
-npm install --save @tradetrust-tt/document-store
+npm install --save @trustvc/trustvc
 ```
 
 ---
@@ -26,33 +26,56 @@ To use the package, you will need to provide your own Web3 [provider](https://do
 
 Refer to the [pre-requisite](/docs/how-tos/open-attestation/verifiable-documents/dns-txt/deploying-document-store/document-store-code) on document store deployment.
 
-### Connect to existing document store
-
-```ts
-import { DocumentStoreFactory } from "@tradetrust-tt/document-store";
-import { Wallet, ethers } from "ethers";
-
-const unconnectedWallet = new Wallet("privateKey");
-const provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545"); // Local network
-const wallet = unconnectedWallet.connect(provider);
-const documentStore = DocumentStoreFactory.connect("0x63A223E025256790E88778a01f480eBA77731D04", wallet);
-console.log(`Document Store Name: ${await documentStore.name()}`); // Document Store Name: DemoDocumentStore
-```
-
 ### Issuing on document store
 
+The TrustVC library provides a `documentStoreIssue` function that supports both ethers v5 and v6, and automatically detects the document store type (standard, transferable, or legacy TT document store).
+
 ```ts
-const unconnectedWallet = new Wallet("privateKey");
-const provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545"); // Local network
-const wallet = unconnectedWallet.connect(provider);
+import { documentStoreIssue } from "@trustvc/trustvc";
+import { Wallet, ethers } from "ethers";
 
-const documentStore = DocumentStoreFactory.connect("0x63A223E025256790E88778a01f480eBA77731D04", wallet);
+// Setup wallet and provider
+const wallet = new Wallet("privateKey");
+const provider = new ethers.JsonRpcProvider("https://sepolia.infura.io/v3/YOUR_INFURA_KEY");
+const signer = wallet.connect(provider);
 
-const tx = await documentStore.issue("0x8dcf358a9436bca6654f565e3c5843d91c0052d3a2eff37bbd380038e8a1fa39");
+// Issue a document hash to the document store
+const tx = await documentStoreIssue(
+  "0x63A223E025256790E88778a01f480eBA77731D04", // Document store address
+  "0x8dcf358a9436bca6654f565e3c5843d91c0052d3a2eff37bbd380038e8a1fa39", // Document hash (merkle root)
+  signer,
+  {
+    maxFeePerGas: "50000000000", // Optional: EIP-1559 gas settings
+    maxPriorityFeePerGas: "2000000000",
+  },
+);
+
 const receipt = await tx.wait();
-console.log(`Issue Transaction: ${JSON.stringify(receipt)}`);
+console.log(`Document issued in transaction: ${receipt.hash}`);
+```
 
-const isIssued = await documentStore.isIssued("0x8dcf358a9436bca6654f565e3c5843d91c0052d3a2eff37bbd380038e8a1fa39");
+### Verify document issuance
+
+After issuing, you can verify that the document has been issued:
+
+```ts
+import { DocumentStore__factory } from "@trustvc/trustvc";
+import { Wallet, ethers } from "ethers";
+
+const wallet = new Wallet("privateKey");
+const provider = new ethers.JsonRpcProvider("https://sepolia.infura.io/v3/YOUR_INFURA_KEY");
+const signer = wallet.connect(provider);
+
+// Connect to the document store
+const documentStore = DocumentStore__factory.connect(
+  "0x63A223E025256790E88778a01f480eBA77731D04",
+  signer
+);
+
+// Check if document is issued
+const isIssued = await documentStore.isIssued(
+  "0x8dcf358a9436bca6654f565e3c5843d91c0052d3a2eff37bbd380038e8a1fa39"
+);
 console.log(`Has been Issued: ${isIssued}`); // Has been Issued: true
 
 // Issue Transaction:

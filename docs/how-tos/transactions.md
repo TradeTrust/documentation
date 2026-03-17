@@ -156,41 +156,51 @@ await connectedTitleEscrow.returnToIssuer(remark);
 
 > **⚠️ DISCLAIMER**
 >
-> The TradeTrust CLI helps developers prototype and test how document issuance and verification work before integrating the TrustVC core into their own systems.
+> The TrustVC CLI helps developers prototype and test how document issuance and verification work before integrating the TrustVC core into their own systems.
 >
 > It should not be used for production issuance or live document management, as it lacks security, scalability, and operational controls required for real-world environments.
 
 #### Binary
 
-To install the binary, simply download the binary from the [CLI release page](https://github.com/TradeTrust/tradetrust-cli/releases) for your OS.
+To install the binary, simply download the binary from the [CLI release page](https://github.com/trustvc/trustvc-cli/releases) for your OS.
 
 We are aware that the size of the binaries must be reduced and we have tracked the issue in Github. We hope to find a solution in a near future and any help is welcomed.
 
 #### NPM
 
-Alternatively for Linux or MacOS users, if you have npm installed on your machine, you may install the cli using the following command:
+For Linux or MacOS users, if you have npm installed on your machine, you may install the CLI using the following command:
 
 ```bash
-npm install -g @tradetrust-tt/tradetrust-cli
+npm install -g @trustvc/trustvc-cli
 ```
 
-The above command will install the TradeTrust CLI to your machine. You will need to have node.js installed to be able to run the command.
+The above command will install the TrustVC CLI to your machine. You will need to have node.js installed to be able to run the command.
 
 You can also opt to use npx:
 
 ```bash
-npx -p @tradetrust-tt/tradetrust-cli tradetrust <arguments>
+npx @trustvc/trustvc-cli <arguments>
 ```
 
-Now we will see performing the same transactions via the command line
+Now we will see performing the same transactions via the command line.
+
+> **Note**: All TrustVC CLI commands use an interactive prompt system. The CLI will automatically extract information from your wrapped document and guide you through the required inputs.
 
 ### Mint document to token registry
 
-Mint a hash to a token registry deployed on the blockchain. The tokenId option would be used to indicate the document hash, and the to option to indicate the title escrow address the document is mapped to.
+Mint a hash to a token registry deployed on the blockchain. The CLI automatically extracts the token registry address, token ID, and network from the wrapped document.
 
 ```bash
-tradetrust token-registry mint --network <NETWORK> --address <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --beneficiary <BENEFICIARY> --holder <HOLDER> [options]
+trustvc token-registry mint
 ```
+
+The CLI will interactively prompt you for:
+
+1. **Document path**: Path to the wrapped document file (JSON)
+2. **Beneficiary address**: The initial recipient/owner of the document
+3. **Holder address**: The initial holder of the document
+4. **Wallet selection**: Choose between encrypted wallet, private key file, or environment variable
+5. **Remark** (optional, V5 only): Additional remarks to be encrypted and stored
 
 ### Transfer/Reject of Holdership
 
@@ -199,16 +209,29 @@ tradetrust token-registry mint --network <NETWORK> --address <TOKEN_REGISTRY_ADD
 Enables the transfer of holdership rights to another party, allowing them to take temporary possession of the asset.
 
 ```bash
-tradetrust title-escrow change-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --to <TO> -n sepolia --key <YOUR_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow transfer-holder
 ```
+
+The CLI will interactively prompt you for:
+
+1. **Document path**: Path to the wrapped document file (automatically extracts token registry, token ID, and network)
+2. **New holder address**: The address of the new holder
+3. **Wallet selection**: Choose your wallet type
+4. **Remark** (optional, V5 only): Additional remarks
 
 #### Reject Holdership:
 
 Declines a request for holdership transfer, preventing an unauthorized or invalid transaction.
 
 ```bash
-tradetrust title-escrow reject-transfer-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <YOUR_PTE_KEY> --remark <REMARK_STRING>  --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow reject-transfer-holder
 ```
+
+The CLI will interactively prompt you for:
+
+1. **Document path**: Path to the wrapped document file
+2. **Wallet selection**: Choose your wallet type
+3. **Remark** (optional, V5 only): Additional remarks
 
 ### Transfer/Reject of Ownership
 
@@ -217,40 +240,74 @@ tradetrust title-escrow reject-transfer-holder --token-registry <TOKEN_REGISTRY_
 Facilitates the transfer of ownership rights to a new owner, making them the legitimate and permanent owner of the asset.
 
 ```bash
-tradetrust title-escrow endorse-change-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --newOwner <NEW_OWNER_ADDRESS> --newHolder <NEW_HOLDER_ADDRESS> -n sepolia --key <YOUR_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow transfer-owner-holder
 ```
+
+The CLI will interactively prompt you for:
+
+1. **Document path**: Path to the wrapped document file
+2. **New owner address**: The address of the new beneficiary (owner)
+3. **New holder address**: The address of the new holder
+4. **Wallet selection**: Choose your wallet type
+5. **Remark** (optional, V5 only): Additional remarks
 
 #### Reject Ownership Transfer:
 
 Prevents a transfer of ownership to an incorrect or unauthorized party.
 
 ```bash
-tradetrust title-escrow reject-transfer-owner-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID>  -n sepolia --key <ALICE_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow reject-transfer-owner-holder
 ```
+
+The CLI will interactively prompt you for:
+
+1. **Document path**: Path to the wrapped document file
+2. **Wallet selection**: Choose your wallet type
+3. **Remark** (optional, V5 only): Additional remarks
 
 ### Nominate Owner
 
 Allows an entity to propose a new owner for the asset, initiating the process for ownership transfer, pending acceptance by the nominated party.
 
 ```bash
-tradetrust title-escrow nominate-change-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --newOwner <NEW_OWNER_ADDRESS> -n sepolia --key <YOUR_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow nominate-transfer-owner
 ```
+
+The CLI will interactively prompt you for:
+
+1. **Document path**: Path to the wrapped document file
+2. **New beneficiary address**: The address of the new beneficiary (owner) to nominate
+3. **Wallet selection**: Choose your wallet type
+4. **Remark** (optional, V5 only): Additional remarks
 
 ### Endorse Owner
 
 Confirms and approves the proposed ownership, affirming the nominated individual or entity as the rightful new owner.
 
 ```bash
-tradetrust title-escrow endorse-transfer-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --newBeneficiary <NEW_OWNER> -n sepolia --key <YOUR_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow endorse-transfer-owner
 ```
+
+The CLI will interactively prompt you for:
+
+1. **Document path**: Path to the wrapped document file
+2. **New beneficiary address**: The address of the new beneficiary to endorse
+3. **Wallet selection**: Choose your wallet type
+4. **Remark** (optional, V5 only): Additional remarks
 
 ### Return to Issuer
 
 Initiates the process of returning the asset to its original issuer (Token Registry), relinquishing all holdership or ownership rights.
 
 ```bash
-tradetrust title-escrow return-to-issuer --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <YOUR_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow return-to-issuer
 ```
+
+The CLI will interactively prompt you for:
+
+1. **Document path**: Path to the wrapped document file
+2. **Wallet selection**: Choose your wallet type
+3. **Remark** (optional, V5 only): Additional remarks
 
 ### Accept/Reject Return to Issuer
 
@@ -259,13 +316,25 @@ tradetrust title-escrow return-to-issuer --token-registry <TOKEN_REGISTRY_ADDRES
 Confirms the receipt of the returned asset by the issuer, reinstating their ownership or custodial rights.
 
 ```bash
-tradetrust title-escrow accept-returned --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <YOUR_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow accept-return-to-issuer
 ```
+
+The CLI will interactively prompt you for:
+
+1. **Document path**: Path to the wrapped document file
+2. **Wallet selection**: Choose your wallet type
+3. **Remark** (optional, V5 only): Additional remarks
 
 #### Reject Return to Issuer:
 
 Declines the return of the asset, maintaining the current holdership or ownership status.
 
 ```bash
-tradetrust title-escrow reject-returned --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <YOUR_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow reject-return-to-issuer
 ```
+
+The CLI will interactively prompt you for:
+
+1. **Document path**: Path to the wrapped document file
+2. **Wallet selection**: Choose your wallet type
+3. **Remark** (optional, V5 only): Additional remarks

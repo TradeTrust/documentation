@@ -6,56 +6,83 @@ sidebar_label: Verifying Documents (CLI)
 
 > For the current step, you can either opt to use the [CLI](/docs/introduction/key-components-of-tradetrust/w3c-vc/verifying-documents/verifying-document-cli) or [Code](/docs/introduction/key-components-of-tradetrust/w3c-vc/verifying-documents/verifying-document-code).
 
-This document provides a step-by-step guide on how to verify the authenticity and integrity of a signed Verifiable Credential (VC) using the w3c-cli tool. The verification process ensures that the credential has not been tampered with and validates the issuer’s signature.
+This document provides a step-by-step guide on how to verify the authenticity and integrity of a signed document using the TrustVC CLI tool. The verification process works for both **W3C Verifiable Credentials** and **OpenAttestation documents**, ensuring that the document has not been tampered with and validates the issuer's signature.
 
-Prerequisites:
+## Prerequisites
 
-- Install the w3c-cli tool on your system.
-- Ensure you have the JSON file of the signed Verifiable Credential (e.g., signed_vc.json).
+- Install the TrustVC CLI tool on your system
+- Ensure you have the JSON file of the signed document (e.g., `signed_vc.json`)
 
-### Installation
+## Installation
 
 Install CLI:
 
-> Note Remember to install the cli globally
+> Note: Remember to install the CLI globally
 
 ```bash
-npm install -g @trustvc/w3c-cli
+npm install -g @trustvc/trustvc-cli
 ```
 
-### Verification Process
-
-Open a terminal or command prompt on your system.
+## Verification Process
 
 Run the verify command:
 
 ```bash
-w3c-cli verify
+trustvc verify
 ```
 
-Provide the path to your Verifiable Credential JSON file when prompted:
+The CLI will guide you through an interactive verification process:
 
 ```bash
-? Please enter the path to your verifiable credential JSON file: ./signed_vc.json
+? Please enter the path to your document: ./signed_vc.json
+
+ℹ  info      Verifying W3C document...
+✔  success   DOCUMENT_INTEGRITY: VALID
+✔  success   DOCUMENT_STATUS: VALID
+✔  success   ISSUER_IDENTITY: VALID
 ```
 
-Replace ./signed_vc.json with the path to your credential file if it is located in a different directory.
+### Understanding the Verification Results
 
-`View the verification result:` After running the command, you will receive an output similar to the following:
+The verification process checks three key aspects:
+
+1. **DOCUMENT_INTEGRITY**: Validates that the cryptographic proofs are correct and the document has not been tampered with
+2. **DOCUMENT_STATUS**: Confirms the document's revocation/suspension status (if applicable)
+3. **ISSUER_IDENTITY**: Verifies the issuer's identity and signature
+
+### Possible Verification Statuses
+
+- **✔ VALID**: The verification check passed successfully
+- **⚠ INVALID**: The verification check failed
+- **⚠ ERROR**: An error occurred during verification
+
+### Example: OpenAttestation Document Verification
+
+For OpenAttestation documents, the output will be similar:
 
 ```bash
-Verification result: true
-Credential status verification result: "revocation:false"
+? Please enter the path to your document: ./wrapped_document.json
+
+ℹ  info      Verifying OpenAttestation document...
+✔  success   DOCUMENT_INTEGRITY: VALID
+✔  success   DOCUMENT_STATUS: VALID
+✔  success   ISSUER_IDENTITY: VALID
 ```
 
-Verification result: true indicates that the cryptographic proofs in the credential are valid and the credential has not been altered.
+### Handling Expired or Revoked Documents
 
-Credential status verification result: "revocation:false" confirms that the credential has not been revoked.
+If a document has expired or been revoked, you'll see warnings:
 
-### Notes
+```bash
+⚠  warning   The document credential has expired.
+✔  success   DOCUMENT_INTEGRITY: VALID
+⚠  warning   DOCUMENT_STATUS: INVALID - Document has been revoked.
+✔  success   ISSUER_IDENTITY: VALID
+```
 
-Ensure that the credential file is in the correct JSON format and adheres to the W3C Verifiable Credentials Data Model.
+## Notes
 
-If the verification fails, double-check the file path and the format of the credential JSON file.
-
-If the status verification shows revocation:true, it means the credential has been revoked and is no longer valid.
+- The CLI automatically detects whether the document is a W3C Verifiable Credential or an OpenAttestation document
+- For transferable records or revokable documents, the CLI may automatically detect and use the appropriate blockchain network
+- Ensure that the document file is in the correct JSON format
+- If verification fails, double-check the file path and the format of the document JSON file

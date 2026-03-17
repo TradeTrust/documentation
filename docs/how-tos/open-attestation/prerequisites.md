@@ -8,46 +8,46 @@ Please keep in mind that we have more than one method to achieve our goal and th
 
 In most of our tutorial we will be using:
 
-- Method 1: TradeTrust CLI
+- Method 1: TrustVC CLI
 - Method 2: Code integration (using our library to achieve the same result)
 
-Before we get started, to make sure you have a good experience with the tutorial, you will need to install our TradeTrust CLI.
+Before we get started, to make sure you have a good experience with the tutorial, you will need to install our TrustVC CLI.
 
-### What TradeTrust CLI does
+### What TrustVC CLI does
 
-The [TradeTrust CLI](https://github.com/TradeTrust/tradetrust-cli) is a tool that allows users to run many operation on their machine to get a valid TradeTrust documents. It can be used for both Verifiable Documents and Transferable Records.
+The [TrustVC CLI](https://github.com/TrustVC/trustvc-cli) is a tool that allows users to run many operations on their machine to get valid TrustVC documents. It can be used for both Verifiable Documents and Transferable Records. The CLI uses an interactive prompt system that guides you through each operation step-by-step.
 
-### Installation of TradeTrust CLI
+### Installation of TrustVC CLI
 
 > **⚠️ DISCLAIMER**
 >
-> The TradeTrust CLI helps developers prototype and test how document issuance and verification work before integrating the TrustVC core into their own systems.
+> The TrustVC CLI helps developers prototype and test how document issuance and verification work before integrating the TrustVC core into their own systems.
 >
 > It should not be used for production issuance or live document management, as it lacks security, scalability, and operational controls required for real-world environments.
 
 #### Binary
 
-To install the binary, simply download the binary from the [CLI release page](https://github.com/TradeTrust/tradetrust-cli/releases/) for your OS.
+To install the binary, simply download the binary from the [CLI release page](https://github.com/TrustVC/trustvc-cli/releases/) for your OS.
 
 > We are aware that the size of the binaries must be reduced and we have tracked the issue in [Github](https://github.com/Open-Attestation/open-attestation-cli/issues/68). We hope to find a solution in a near future and any help is welcomed.
 
 #### NPM
 
-Alternatively for Linux or MacOS users, if you have `npm` installed on your machine, you may install the cli using the following command:
+For Linux or MacOS users, if you have `npm` installed on your machine, you may install the CLI using the following command:
 
 ```bash
-npm install -g @tradetrust-tt/tradetrust-cli
+npm install -g @trustvc/trustvc-cli
 ```
 
-The above command will install the TradeTrust CLI to your machine. You will need to have node.js installed to be able to run the command.
+The above command will install the TrustVC CLI to your machine. You will need to have node.js installed to be able to run the command.
 
 You can also opt to use npx:
 
 ```bash
-npx -p @tradetrust-tt/tradetrust-cli tradetrust <arguments>
+npx @trustvc/trustvc-cli <arguments>
 ```
 
-> In all the guides, we will refer to the CLI as `tradetrust` when running a command. That means we will assume the CLI is available in your execution path. If it's not the case, you will to change `tradetrust` by the full path to the executable.
+> In all the guides, we will refer to the CLI as `trustvc` when running a command. That means we will assume the CLI is available in your execution path. If it's not the case, you will need to change `trustvc` to the full path to the executable.
 
 ---
 
@@ -56,24 +56,54 @@ npx -p @tradetrust-tt/tradetrust-cli tradetrust <arguments>
 To check if the setup is working correctly, run the following command:
 
 ```bash
-tradetrust --version
+trustvc --version
 ```
 
-> In the event you need to change the binary name or the path to the binary, makes sure to change the command above accordingly as well as all the commands we will run throughout the guide.
+> In the event you need to change the binary name or the path to the binary, make sure to change the command above accordingly as well as all the commands we will run throughout the guide.
+
+### Interactive Prompt System
+
+The TrustVC CLI uses an interactive prompt system that guides you through each operation. Instead of providing all parameters as command-line flags, the CLI will ask you for the required information step-by-step. This makes it easier to use and reduces the chance of errors.
+
+For example, when deploying a token registry, instead of:
+
+```bash
+# Old style (not used in TrustVC CLI)
+tradetrust deploy token-registry "My Registry" MYR --network sepolia -f key.txt
+```
+
+You simply run:
+
+```bash
+trustvc deploy token-registry
+```
+
+And the CLI will interactively prompt you for:
+
+- Network selection
+- Registry name
+- Registry symbol
+- Deployment type
+- Wallet selection
 
 ## Wallet Creation
 
-Now that the TradeTrust CLI has been installed successfully, the first thing you will need is an [ethereum wallet](https://ethereum.org/en/wallets/).
+Now that the TrustVC CLI has been installed successfully, the first thing you will need is an [ethereum wallet](https://ethereum.org/en/wallets/).
 
-They can be created either by using our TradeTrust CLI or with [ethers.js](https://docs.ethers.org/v5/api/signer/#Wallet) or via [metamask](https://support.metamask.io/hc/en-us/articles/360059952212-MetaMask-is-a-self-custodial-wallet) browser extension.
+They can be created either by using our TrustVC CLI or with [ethers.js](https://docs.ethers.org/v5/api/signer/#Wallet) or via [metamask](https://support.metamask.io/hc/en-us/articles/360059952212-MetaMask-is-a-self-custodial-wallet) browser extension.
 
-### Method 1: Using TradeTrust CLI
+### Method 1: Using TrustVC CLI
 
 The first step that we will need to go through, is the [wallet](/docs/glossary#wallet) creation:
 
 ```bash
-tradetrust wallet create --output-file wallet.json
+trustvc wallet create
 ```
+
+The CLI will interactively prompt you for:
+
+- Output file path (e.g., `wallet.json`)
+- Password to encrypt the wallet
 
 During the creation, you will be prompted for a password. Make sure to remember it for the following steps. You will see a message after completion of the command:
 
@@ -224,4 +254,4 @@ const signerFromMnemonic = Wallet.fromMnemonic("MNEMONIC-HERE");
 signerFromMnemonic.connect(provider);
 ```
 
-Now that you have a basic understand, let us begin our journey to create a TradeTrust document!
+Now that you have a basic understanding, let us begin our journey to create a TrustVC document!

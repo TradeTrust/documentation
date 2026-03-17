@@ -15,7 +15,7 @@ import Flow from "../flow.mdx";
 ## Installation
 
 ```sh
-npm install --save @tradetrust-tt/document-store
+npm install --save @trustvc/trustvc @trustvc/document-store
 ```
 
 ---
@@ -28,36 +28,82 @@ Refer to the [pre-requisite](/docs/how-tos/open-attestation/prerequisites#unders
 
 ### Deploy new document store
 
+The TrustVC library supports both ethers v5 and v6, and provides two types of document stores:
+
+1. **Standard Document Store** (default): For immutable documents that cannot be transferred
+2. **Transferable Document Store**: For documents that can change ownership
+
 ```ts
-import { DocumentStoreFactory } from "@tradetrust-tt/document-store";
-import { TransactionReceipt } from "@ethersproject/abstract-provider";
+import { deployDocumentStore, CHAIN_ID } from "@trustvc/trustvc";
 import { Wallet, ethers } from "ethers";
 
-const unconnectedWallet = new Wallet("privateKey");
-const provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545"); // Local network
-const wallet = unconnectedWallet.connect(provider);
-const walletAddress = await wallet.getAddress();
+// Setup wallet and provider
+const wallet = new Wallet("privateKey");
+const provider = new ethers.JsonRpcProvider("https://sepolia.infura.io/v3/YOUR_INFURA_KEY");
+const signer = wallet.connect(provider);
+const walletAddress = await signer.getAddress();
 
-const factory = new DocumentStoreFactory(wallet);
-const transaction = await factory.deploy("Demo Document Store", walletAddress);
-const transactionReceipt = await transaction.deployTransaction.wait();
-const documentStoreAddress = transactionReceipt.contractAddress;
-console.log(documentStoreAddress); // 0x63A223E025256790E88778a01f480eBA77731D04
+// Deploy standard document store
+const receipt = await deployDocumentStore(
+  "My Document Store",
+  walletAddress,
+  signer,
+  {
+    chainId: CHAIN_ID.SEPOLIA,
+    maxFeePerGas: "50000000000", // Optional: EIP-1559 gas settings
+    maxPriorityFeePerGas: "2000000000"
+  }
+);
+
+console.log(`Document Store deployed at: ${receipt.contractAddress}`);
+// Document Store deployed at: 0x63A223E025256790E88778a01f480eBA77731D04
+```
+
+### Deploy transferable document store
+
+For documents that need to support ownership transfers:
+
+```ts
+import { deployDocumentStore, CHAIN_ID } from "@trustvc/trustvc";
+import { Wallet, ethers } from "ethers";
+
+const wallet = new Wallet("privateKey");
+const provider = new ethers.JsonRpcProvider("https://sepolia.infura.io/v3/YOUR_INFURA_KEY");
+const signer = wallet.connect(provider);
+const walletAddress = await signer.getAddress();
+
+// Deploy transferable document store
+const receipt = await deployDocumentStore(
+  "My Transferable Document Store",
+  walletAddress,
+  signer,
+  {
+    chainId: CHAIN_ID.SEPOLIA,
+    isTransferable: true // Enable transferability
+  }
+);
+
+console.log(`Transferable Document Store deployed at: ${receipt.contractAddress}`);
 ```
 
 ### Connect to existing document store
 
 ```ts
-import { DocumentStoreFactory } from "@tradetrust-tt/document-store";
-import { TransactionReceipt } from "@ethersproject/abstract-provider";
+import { DocumentStore__factory } from "@trustvc/document-store";
 import { Wallet, ethers } from "ethers";
 
-const unconnectedWallet = new Wallet("privateKey");
-const provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545"); // Local network
-const wallet = unconnectedWallet.connect(provider);
+const wallet = new Wallet("privateKey");
+const provider = new ethers.JsonRpcProvider("https://sepolia.infura.io/v3/YOUR_INFURA_KEY");
+const signer = wallet.connect(provider);
 
-const documentStore = DocumentStoreFactory.connect("0x63A223E025256790E88778a01f480eBA77731D04", wallet);
-console.log(`Document Store Name: ${await documentStore.name()}`); // Document Store Name: DemoDocumentStore
+// Connect to existing document store
+const documentStore = DocumentStore__factory.connect(
+  "0x63A223E025256790E88778a01f480eBA77731D04",
+  signer
+);
+
+console.log(`Document Store Name: ${await documentStore.name()}`);
+// Document Store Name: My Document Store
 ```
 
 Congratulations! You have successfully deployed a document store.

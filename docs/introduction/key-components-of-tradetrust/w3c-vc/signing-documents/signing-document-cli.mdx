@@ -23,7 +23,7 @@ Install CLI:
 > Note Remember to install the cli globally
 
 ```bash
-npm install -g @trustvc/w3c-cli
+npm install -g @trustvc/trustvc-cli
 ```
 
 ### Signing
@@ -32,48 +32,32 @@ Run the Command
 Execute the following command in your terminal:
 
 ```bash
-w3c-cli sign
+trustvc w3c w3c-sign
 ```
 
-The tool will prompt you to provide the path to your key pair file.
+The CLI will guide you through an interactive signing process:
 
 ```bash
-? Please enter the path to your key pair JSON file: ./didKeyPairs.json
+? Please enter the path to your Verifiable Credential JSON file: ./vc.json
+? Please enter the path to your did key-pair JSON file: ./didKeyPairs.json
+? Select the encryption algorithm used to generate the key pair:
+  ❯ ECDSA-SD-2023 (Sign credential using ECDSA-SD-2023 suite)
+    BBS-2023 (Sign credential using BBS-2023 suite)
+? Enter a directory to save the signed Verifiable Credential (optional): .
+
+✔  success   Verifiable Credential signed successfully
+✔  success   Signed verifiable credential saved to: ./signed_vc.json
 ```
 
-Next, you will be asked to provide the path to your Verifiable Credential file.
+**Explanation of prompts:**
+- **Verifiable Credential path**: Path to your unsigned VC JSON file
+- **Key-pair path**: Path to your DID key-pair file (generated from `trustvc w3c key-pair-generation`)
+- **Encryption algorithm**: Select the algorithm matching your key-pair (ECDSA-SD-2023 or BBS-2023)
+- **Output directory**: Where to save the signed credential (`.` indicates current directory)
 
-    ```bash
-    ? Please enter the path to your credential JSON file: ./vc.json
-    ```
+The signed credential will be saved as `signed_vc.json` in the specified directory.
 
-Provide the directory path where the signed credential will be saved.
-
-    ```bash
-    ? Please specify a directory path to save your signed verifiable credential: .
-    ```
-    The . indicates the current directory. You can specify a different path if needed.
-
-Once the process is complete, the signed credential will be saved to the specified location.
-
-```bash
-Signed credential saved successfully to ./signed_vc.json
-```
-
-In this example, the signed credential is saved as signed_vc.json in the current directory.
-
-```bash
-$ w3c-cli sign
-? Please enter the path to your key pair JSON file: ./didKeyPairs.json
-? Please enter the path to your credential JSON file: ./vc.json
-? Please specify a directory path to save your signed verifiable credential: .
-Signed credential saved successfully to ./signed_vc.json
-```
-
-The CLI digitally signs a Verifiable Credential using the signCredential function from the w3c-vc repository, ensuring that the credential is tamper-evident and can be trusted by external verifiers.
-
-Commands
-The CLI provides several commands to help users interact with DIDs and Verifiable Credentials:
+The CLI digitally signs a Verifiable Credential using the signW3C function from the @trustvc/trustvc package, ensuring that the credential is tamper-evident and can be trusted by external verifiers.
 
 #### Additional information: Revocation of Verifiable Documents
 

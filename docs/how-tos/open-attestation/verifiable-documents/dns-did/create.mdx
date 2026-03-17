@@ -14,20 +14,29 @@ The creation of an `ethr` DID is identical to the creation of a wallet, as it re
 - Using the [wallet created in the prerequisite step](/docs/how-tos/open-attestation/prerequisites#wallet-creation), we run this command on the CLI to retrieve the private key:
 
   ```bash
-   tradetrust wallet decrypt wallet.json
+  trustvc wallet decrypt
   ```
 
+  The CLI will interactively prompt you for:
+  - **Wallet file path**: Path to your encrypted wallet JSON file (default: `./wallet.json`)
+  - **Wallet password**: Password to decrypt the wallet
+  - **Risk confirmation**: Confirmation that you understand the risks of revealing the private key
+
+  Example session:
+
   ```text
-  ⚠  warning   You are about to reveal the private key of your wallet. Please type the following word into the terminal to prove that you understand the risks: environmental-maroon-scorpion
-  ? ack: environmental-maroon-scorpion
-  ℹ  info      User consented to risks
-  ? Wallet password [hidden]
-  …  awaiting  Decrypting Wallet [====================] [100/100%]
-  ℹ  info      Wallet successfully decrypted
-  ✔  success   Wallet information:
-   - address: 0xaCc51f664D647C9928196c4e33D46fd98FDaA91D
-   - public key: 0x041582ae06ae170b4c5610599c8a5fee37414da84f7e2a3b3c48789199c3202f2c7673f3e32dfead4543247ccb792aa4f54dbd3e701172723434e88f770dd64823
-   - private key 0x7b227ac59116f3eeb2b265422cf3cbfbd244c525961fb297eb52153ec62aa845
+  ? Enter the path to your encrypted wallet JSON file: ./wallet.json
+  ? Enter your wallet password: [hidden]
+  ⚠  warning   ⚠️  You are about to reveal the private key of your wallet.
+  ? Do you understand the risks and want to proceed? Yes
+  ℹ  info      Decrypting wallet...
+
+  ℹ  info      Wallet Address: 0xaCc51f664D647C9928196c4e33D46fd98FDaA91D
+  ℹ  info      Private Key: 0x7b227ac59116f3eeb2b265422cf3cbfbd244c525961fb297eb52153ec62aa845
+  ℹ  info      Mnemonic Phrase: abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about
+
+  ⚠  warning   IMPORTANT: Never share your private key or mnemonic phrase with anyone!
+  ⚠  warning   IMPORTANT: Store this information securely and delete it from your terminal history!
   ```
 
 There are two information to keep very importantly for the next steps:
