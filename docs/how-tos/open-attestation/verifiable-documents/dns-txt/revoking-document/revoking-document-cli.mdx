@@ -34,7 +34,7 @@ The CLI will interactively prompt you for:
    - Verifies the document signature before proceeding
 2. **Wallet selection**: Choose between encrypted wallet, private key file, or environment variable
 
-> **Note**: The hash used for revocation is the `targetHash` field from the wrapped document (found in the `signature` object at the bottom of the file). You can revoke using either the `targetHash` (revokes single document) or `merkleRoot` (revokes entire batch).
+> **Note**: The CLI automatically uses the `targetHash` field from the wrapped document (found in the `signature` object at the bottom of the file) to revoke a single document.
 
 Example session:
 
@@ -74,12 +74,10 @@ If you open the [previously wrapped documents](/docs/how-tos/open-attestation/ve
 - they have a different `targetHash`: it uniquely identifies any document
 - they have the same `merkleRoot`: it uniquely identifies any group of wrapped documents.
 
-When you revoke a document you can use any of those hash, but the result will be different depending on the one used:
+The CLI command shown above automatically uses the `targetHash` to revoke individual documents. To revoke an entire batch of documents using the `merkleRoot`, you need to use the [Code approach](/docs/how-tos/open-attestation/verifiable-documents/dns-txt/revoking-document/revoking-document-code) which allows you to specify the hash manually:
 
-- when using the `targetHash`, only the document will be revoked.
+- when using the `targetHash`, only the individual document will be revoked.
 - when using the `merkleRoot`, all the documents wrapped together (in the same batch) will be revoked.
-
-If you run again the command above, by using the `merkleRoot` of the documents, then all document will be revoked.
 
 ## Misc questions:
 

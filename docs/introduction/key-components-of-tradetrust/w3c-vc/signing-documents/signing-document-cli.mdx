@@ -32,7 +32,7 @@ Run the Command
 Execute the following command in your terminal:
 
 ```bash
-trustvc w3c w3c-sign
+trustvc w3c-sign
 ```
 
 The CLI will guide you through an interactive signing process:
@@ -50,6 +50,7 @@ The CLI will guide you through an interactive signing process:
 ```
 
 **Explanation of prompts:**
+
 - **Verifiable Credential path**: Path to your unsigned VC JSON file
 - **Key-pair path**: Path to your DID key-pair file (generated from `trustvc w3c key-pair-generation`)
 - **Encryption algorithm**: Select the algorithm matching your key-pair (ECDSA-SD-2023 or BBS-2023)

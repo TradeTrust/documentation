@@ -260,7 +260,7 @@ trustvc title-escrow nominate-transfer-owner
 
 ℹ  info      Connecting to the registry and attempting to nominate the change of owner...
 ⠋  awaiting  Waiting for transaction 0x... to be mined
-✔  success   Transferable record's holder has been successfully nominated to new owner with address <ALICE_ADDRESS>
+✔  success   Transferable record's owner has been successfully nominated to new owner with address <ALICE_ADDRESS>
 ```
 
 If this action is successful, then an additional action should be present on `Bob`.
@@ -304,7 +304,7 @@ trustvc title-escrow endorse-transfer-owner
 
 ℹ  info      Connecting to the registry and attempting to endorse the change of owner...
 ⠋  awaiting  Waiting for transaction 0x... to be mined
-✔  success   Transferable record's holder has been successfully endorsed to approved beneficiary at <ALICE_ADDRESS>
+✔  success   Transferable record's owner has been successfully endorsed to approved beneficiary at <ALICE_ADDRESS>
 ```
 
 ---

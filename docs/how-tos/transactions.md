@@ -22,6 +22,8 @@ Below are the available transactions based on your role (Owner/Holder) and the c
 
 To execute these transactions, you can use either the Command Line Interface (CLI) or interact with the smart contract programmatically through code. Below, we provide step-by-step instructions on both methods, starting with the installation process.
 
+> **💡 Want to see a complete example?** Check out the [Title Transfer Example](/docs/introduction/key-components-of-tradetrust/transferability/title-transfer-example) for a step-by-step walkthrough with Alice, Bob, and Charlie demonstrating the full transfer workflow.
+
 ## 1) Using Code
 
 ### Installation

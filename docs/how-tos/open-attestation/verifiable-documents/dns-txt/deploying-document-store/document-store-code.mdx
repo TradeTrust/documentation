@@ -28,7 +28,11 @@ Refer to the [pre-requisite](/docs/how-tos/open-attestation/prerequisites#unders
 
 ### Deploy new document store
 
-The TrustVC library supports both ethers v5 and v6, and provides two types of document stores:
+The TrustVC library supports both ethers v5 and v6.
+
+The examples below use ethers v6 syntax (`ethers.JsonRpcProvider` ). If you are using ethers v5, replace it with `ethers.providers.JsonRpcProvider(...)` .
+
+It also provides two types of document stores:
 
 1. **Standard Document Store** (default): For immutable documents that cannot be transferred
 2. **Transferable Document Store**: For documents that can change ownership
