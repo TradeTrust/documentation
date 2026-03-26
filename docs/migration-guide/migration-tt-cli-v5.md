@@ -1,18 +1,18 @@
 ---
 id: migration-tt-cli-v5
-title: Migration to TradeTrust CLI v3
-sidebar_label: Migration to TradeTrust CLI v3
+title: Migration to TrustVC CLI
+sidebar_label: Migration to TrustVC CLI
 ---
 
 > **⚠️ DISCLAIMER**
 >
-> The TradeTrust CLI helps developers prototype and test how document issuance and verification work before integrating the TrustVC core into their own systems.
+> The TrustVC CLI helps developers prototype and test how document issuance and verification work before integrating the TrustVC core into their own systems.
 >
 > It should not be used for production issuance or live document management, as it lacks security, scalability, and operational controls required for real-world environments.
 
 ## 1. What’s New?
 
-- The tradetrust CLI now supports **encrypted remarks** for enhanced security when executing commands. This guide explains how to use the updated title-escrow command with encrypted remarks and highlights the changes introduced in this version.
+- The TrustVC CLI now supports **encrypted remarks** for enhanced security when executing commands. This guide explains how to use the updated title-escrow command with encrypted remarks and highlights the changes introduced in this version.
 - A new **rejection command** feature has been introduced, allowing a new holder or owner of a document to reject the transfer of the document. This provides an additional layer of control and flexibility for holders and owners to refuse ownership or custodianship if required.
 
 #### a) Key highlights of Remarks feature:
@@ -101,9 +101,17 @@ We will do **endorse change of ownership** first.
 
 What this command does is it sets the states (holder and owner) of the token to a given address, in this case we will endorse the change of ownership to Charlie.
 
+```bash
+trustvc title-escrow endorse-change-owner
 ```
-tradetrust title-escrow endorse-change-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --newOwner <CHARLIE_ADDRESS> --newHolder <CHARLIE_ADDRESS> -n sepolia --key <ALICE_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
-```
+
+The CLI will interactively prompt you for:
+
+1. **Document path**: Path to the wrapped document file
+2. **New owner address**: Charlie's address
+3. **New holder address**: Charlie's address
+4. **Wallet selection**: Choose your wallet type (use Alice's wallet)
+5. **Remark** (optional, V5 only): Additional remarks to be encrypted and stored
 
 If this transaction is mined and successful, the state of the transferable record will be different.
 
@@ -133,9 +141,15 @@ We will do **reject change of ownership** now.
 
 What this command does is it sets the states (holder and owner) of the token to it's previous holder and owner address, in this case we will reject the change of ownership back to Alice.
 
+```bash
+trustvc title-escrow reject-transfer-owner-holder
 ```
-tradetrust title-escrow reject-transfer-owner-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <CHARLIE_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
-```
+
+The CLI will interactively prompt you for:
+
+1. **Document path**: Path to the wrapped document file
+2. **Wallet selection**: Choose your wallet type (use Charlie's wallet)
+3. **Remark** (optional, V5 only): Additional remarks
 
 If this transaction is mined and successful, the state of the transferable record will be different.
 
@@ -169,10 +183,15 @@ What this command does is it just sets the holder state to a new address.
 In this case we will set the holder state to `Bob`, owner state remains as `Charlie` address
 
 ```bash
-tradetrust title-escrow change-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --to <TO> -n sepolia --key <CHARLIE_PTE_KEY> --remark <REMARK_STRING>  --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow transfer-holder
 ```
 
-Do take note that the private key supplied should be that of Charlie instead of Alice since Charlie currently holds and owns the token.
+The CLI will interactively prompt you for:
+
+1. **Document path**: Path to the wrapped document file
+2. **New holder address**: Bob's address
+3. **Wallet selection**: Choose your wallet type (use Charlie's wallet)
+4. **Remark** (optional, V5 only): Additional remarks
 
 If this command is successful, we will yet again advance the state of the token.
 
@@ -201,10 +220,14 @@ Now we will do the **reject change of holder** command.
 What this command does is it just sets the holder state to it's previous holder address.
 
 ```bash
-tradetrust title-escrow reject-transfer-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <BOB_PTE_KEY> --remark <REMARK_STRING>  --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow reject-transfer-holder
 ```
 
-Do take note that the private key supplied should be that of Bob instead of Charlie since Bob currently holds the token and Charlie owns the token.
+The CLI will interactively prompt you for:
+
+1. **Document path**: Path to the wrapped document file
+2. **Wallet selection**: Choose your wallet type (use Bob's wallet)
+3. **Remark** (optional, V5 only): Additional remarks
 
 If this command is successful, we will yet again advance the state of the token.
 
@@ -235,9 +258,16 @@ In this case we will suggest `Alice` to be the new owner.
 
 Does this lead to any change in state (holder, owner)? The answer is no, not yet.
 
+```bash
+trustvc title-escrow nominate-transfer-owner
 ```
-tradetrust title-escrow nominate-change-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --newOwner <NEW_OWNER_ADDRESS> -n sepolia --key <CHARLIE_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
-```
+
+The CLI will interactively prompt you for:
+
+1. **Document path**: Path to the wrapped document file
+2. **New beneficiary address**: Alice's address (the new owner to nominate)
+3. **Wallet selection**: Choose your wallet type (use Charlie's wallet)
+4. **Remark** (optional, V5 only): Additional remarks
 
 If this action is successful, then an additional action should be present on `Bob`.
 
@@ -265,9 +295,16 @@ That is what we will do, and we will now perform **endorse transfer of ownership
 
 What the command does is that it allows `Bob` to allow and complete the nominated change of ownership from `Charlie` to `Alice`.
 
+```bash
+trustvc title-escrow endorse-transfer-owner
 ```
-tradetrust title-escrow endorse-transfer-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <BOB_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
-```
+
+The CLI will interactively prompt you for:
+
+1. **Document path**: Path to the wrapped document file
+2. **New beneficiary address**: Alice's address (to endorse)
+3. **Wallet selection**: Choose your wallet type (use Bob's wallet)
+4. **Remark** (optional, V5 only): Additional remarks
 
 ---
 
@@ -292,9 +329,14 @@ Now we will do the **reject change of owner** command.
 What this command does is it just sets the owner state to it's previous owner address.
 
 ```bash
-tradetrust title-escrow reject-transfer-owner --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> -n sepolia --key <ALICE_PTE_KEY> --remark <REMARK_STRING> --encryp
-tion-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow reject-transfer-owner
 ```
+
+The CLI will interactively prompt you for:
+
+1. **Document path**: Path to the wrapped document file
+2. **Wallet selection**: Choose your wallet type (use Alice's wallet)
+3. **Remark** (optional, V5 only): Additional remarks
 
 ---
 
@@ -319,8 +361,15 @@ If the prev command worked as intended, then the new owner state of the token wi
 we will wrap up this demonstration by changing the holder to `Alice` so we will come full circle.
 
 ```bash
-tradetrust title-escrow change-holder --token-registry <TOKEN_REGISTRY_ADDRESS> --tokenId <TOKEN_ID> --to <TO> -n sepolia --key <BOB_PTE_KEY> --remark <REMARK_STRING> --encryption-key <REMARK_ENCRYPTION_KEY>
+trustvc title-escrow transfer-holder
 ```
+
+The CLI will interactively prompt you for:
+
+1. **Document path**: Path to the wrapped document file
+2. **New holder address**: Alice's address
+3. **Wallet selection**: Choose your wallet type (use Bob's wallet)
+4. **Remark** (optional, V5 only): Additional remarks
 
 ---
 
