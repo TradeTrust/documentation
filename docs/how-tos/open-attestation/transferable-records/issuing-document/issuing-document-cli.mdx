@@ -18,30 +18,42 @@ In this final step, we will mint the transferable record and initialize the firs
 
 You will require the following:
 
-- [token registry address](/docs/how-tos/open-attestation/transferable-records/token-registry/token-registry-cli)
-- [wallet private key file](/docs/how-tos/open-attestation/transferable-records/token-registry/token-registry-cli#creating-the-key-file) (key.txt)
-- [merkle root](/docs/how-tos/open-attestation/transferable-records/wrapping-document/wrapping-document-cli) of the wrapped transferable record
+- [Wrapped transferable record](/docs/how-tos/open-attestation/transferable-records/wrapping-document/wrapping-document-cli) (JSON file from the wrapping step)
+- Wallet with private key (via encrypted wallet file, key file, or environment variable)
 
 ## Minting a Transferable Record
 
-In the example, we will use `0x6FFeD6E6591b808130a9b248fEA32101b5220eca` wallet address as the initial owner and holder. You will need to replace this value with a wallet address you control to be able to perform different actions on the transferable records later.
+The TrustVC CLI uses an interactive prompt system that automatically extracts the token registry address, token ID (merkle root), and network from your wrapped document.
 
 To mint the transferable record, simply run the following command:
 
 ```sh
-tradetrust token-registry mint --address 0x8431012Bc040942B59e3C5bf428221eab0b2f723 --tokenId 0x0d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ea --beneficiary 0x6FFeD6E6591b808130a9b248fEA32101b5220eca --holder 0x6FFeD6E6591b808130a9b248fEA32101b5220eca --remark "This is a test remark" --encryptionKey "testEncryptionKey" --network sepolia -f key.txt
+trustvc token-registry mint
 ```
 
-Note to replace the following values:
+The CLI will interactively prompt you for:
 
-- --address: `0x8431012Bc040942B59e3C5bf428221eab0b2f723` with your token registry contract address
-- --tokenId: `0x0d9839a8034cb783d98bd57bcbaafb4dc3614c4193d2edf8a655c1ec6635b7ea` with your merkle root (with a `0x` prefix)
-- --beneficiary: `0x6FFeD6E6591b808130a9b248fEA32101b5220eca` with your owner wallet addresses
-- --holder: `0x6FFeD6E6591b808130a9b248fEA32101b5220eca` with your holder wallet addresses
-- --remark: `This is a test remark` with your mint remark
-- --encryptionKey: `testEncryptionKey` with your encryption key
+1. **Document path**: Path to your wrapped document file (e.g., `./wrapped-documents/document-1.json`)
+   - The CLI automatically extracts the token registry address, token ID, and network from the document
+   - Verifies the document signature before proceeding
+2. **Beneficiary address**: The initial owner/recipient of the document (e.g., `0x6FFeD6E6591b808130a9b248fEA32101b5220eca`)
+3. **Holder address**: The initial holder of the document (can be the same as beneficiary)
+4. **Wallet selection**: Choose between encrypted wallet, private key file, or environment variable
+5. **Remark** (optional, V5 only): Additional remarks to be encrypted and stored with the token
 
-> Note: remark and encryptionKey are optional.
+Example session:
+
+```sh
+trustvc token-registry mint
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Enter the beneficiary address: 0x6FFeD6E6591b808130a9b248fEA32101b5220eca
+? Enter the holder address: 0x6FFeD6E6591b808130a9b248fEA32101b5220eca
+? Select wallet type: Private Key File
+? Enter the path to the private key file: ./key.txt
+? Enter remarks (optional, press Enter to skip): This is a test remark
+```
 
 Once the document has been minted, you will be able to see an output similar to the following:
 

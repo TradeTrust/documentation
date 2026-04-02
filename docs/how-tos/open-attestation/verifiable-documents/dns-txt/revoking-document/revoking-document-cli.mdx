@@ -21,20 +21,43 @@ After issuing a document, you might want to revoke it for any reason:
 
 ## Revoking a document
 
+The TrustVC CLI uses an interactive prompt system that automatically extracts the document store address, target hash, and network from your wrapped document.
+
 ```bash
-tradetrust document-store revoke --address 0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b --hash 0x1e0c5e93c04032ed6571b31c785b963f0a27776041f35bdcc98cd8dfe073adc0  --network sepolia --encrypted-wallet-path wallet.json
+trustvc document-store revoke
 ```
 
-In the example above:
+The CLI will interactively prompt you for:
 
-- `--address` is the document store address, for instance the one created with the [Deploying Document Store](/docs/how-tos/open-attestation/verifiable-documents/dns-txt/deploying-document-store/document-store-cli) guide.
-- `--hash` is the value of `targetHash` field of one of the [previously wrapped documents](/docs/how-tos/open-attestation/verifiable-documents/dns-txt/wrapping-document/wrapping-document-cli) (open one of the file, head to the bottom and check for the `targetHash` in the `signature` object.
+1. **Document path**: Path to the wrapped document file (JSON)
+   - The CLI automatically extracts the document store address, target hash, and network from the document
+   - Verifies the document signature before proceeding
+2. **Wallet selection**: Choose between encrypted wallet, private key file, or environment variable
 
-You will be prompted for the password that you used while creating the wallet. You will see a message after completion of the command:
+> **Note**: The CLI automatically uses the `targetHash` field from the wrapped document (found in the `signature` object at the bottom of the file) to revoke a single document.
 
-```text
-✔  success   Document/Document Batch with hash 0x1e0c5e93c04032ed6571b31c785b963f0a27776041f35bdcc98cd8dfe073adc0 has been revoked on 0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b
+Example session:
+
+```bash
+trustvc document-store revoke
+
+? Enter the path to the wrapped document: ./wrapped-documents/document-1.json
+ℹ  info      Document signature verified successfully
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+
+ℹ  info      Revoking 0x1e0c5e93c04032ed6571b31c785b963f0a27776041f35bdcc98cd8dfe073adc0 from the document store 0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Token with hash 0x1e0c5e93c04032ed6571b31c785b963f0a27776041f35bdcc98cd8dfe073adc0 has been revoked from 0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b
+ℹ  info      Find more details at https://sepolia.etherscan.io/tx/0x...
 ```
+
+**Key Features:**
+
+- **Automatic extraction**: Document store address, target hash, and network are automatically extracted from the wrapped document
+- **Document verification**: The CLI verifies the document signature before revoking
+- **Gas estimation**: Automatic dry run on Ethereum and Polygon networks to estimate gas costs
 
 ## Verifying the document
 
@@ -51,12 +74,10 @@ If you open the [previously wrapped documents](/docs/how-tos/open-attestation/ve
 - they have a different `targetHash`: it uniquely identifies any document
 - they have the same `merkleRoot`: it uniquely identifies any group of wrapped documents.
 
-When you revoke a document you can use any of those hash, but the result will be different depending on the one used:
+The CLI command shown above automatically uses the `targetHash` to revoke individual documents. To revoke an entire batch of documents using the `merkleRoot`, you need to use the [Code approach](/docs/how-tos/open-attestation/verifiable-documents/dns-txt/revoking-document/revoking-document-code) which allows you to specify the hash manually:
 
-- when using the `targetHash`, only the document will be revoked.
+- when using the `targetHash`, only the individual document will be revoked.
 - when using the `merkleRoot`, all the documents wrapped together (in the same batch) will be revoked.
-
-If you run again the command above, by using the `merkleRoot` of the documents, then all document will be revoked.
 
 ## Misc questions:
 

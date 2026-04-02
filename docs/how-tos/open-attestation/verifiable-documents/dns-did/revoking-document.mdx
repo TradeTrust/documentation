@@ -58,20 +58,27 @@ It's possible to revoke a signed document only if you fulfill certain **prerequi
 <Tabs>
 <TabItem label="CLI" value="cli" default>
 
+The TrustVC CLI uses an interactive prompt system:
+
 ```bash
-tradetrust document-store revoke --address <DOCUMENT_STORE_ADDRESS> --hash <HASH_OF_DOCS>  --network <NETWORK> --encrypted-wallet-path <PATH_OF_WALLET>
+trustvc document-store revoke
+
+? Enter the document store address: <DOCUMENT_STORE_ADDRESS>
+? Enter the hash of the document to revoke: <HASH_OF_DOCS>
+? Select the network: sepolia
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+
+ℹ  info      Connecting to document store at <DOCUMENT_STORE_ADDRESS>
+⠋  awaiting  Waiting for transaction 0x... to be mined
+✔  success   Document/Document Batch with hash 0x1e0c5e93c04032ed6571b31c785b963f0a27776041f35bdcc98cd8dfe073adc0 has been revoked on 0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b
 ```
 
 In the example above:
 
-- `--address` is the document store address, for instance the one created with the [Deploying Document Store](/docs/how-tos/open-attestation/verifiable-documents/dns-did/advanced/document-store/deploying-document-store/document-store-cli) guide.
-- `--hash` is the value of `targetHash` field of one of the [previously wrapped documents](/docs/how-tos/open-attestation/verifiable-documents/dns-did/wrapping-document/wrapping-document-cli) (open one of the file, head to the bottom and check for the `targetHash` in the `signature` object.)
-
-You will be prompted for the password that you used while creating the wallet. You will see a message after completion of the command:
-
-```bash
-✔  success   Document/Document Batch with hash 0x1e0c5e93c04032ed6571b31c785b963f0a27776041f35bdcc98cd8dfe073adc0 has been revoked on 0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b
-```
+- The **document store address** is the address created with the [Deploying Document Store](/docs/how-tos/open-attestation/verifiable-documents/dns-did/advanced/document-store/deploying-document-store/document-store-cli) guide.
+- The **hash** is the value of `targetHash` field of one of the [previously wrapped documents](/docs/how-tos/open-attestation/verifiable-documents/dns-did/wrapping-document/wrapping-document-cli) (open one of the file, head to the bottom and check for the `targetHash` in the `signature` object.)
 
 </TabItem>
 <TabItem label="Code" value="code">

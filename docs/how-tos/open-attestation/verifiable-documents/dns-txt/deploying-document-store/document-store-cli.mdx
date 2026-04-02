@@ -12,29 +12,45 @@ import Flow from "../flow.mdx";
 
 > For the current step, you can either opt to use the [CLI](/docs/how-tos/open-attestation/verifiable-documents/dns-txt/deploying-document-store/document-store-cli) or [Code](/docs/how-tos/open-attestation/verifiable-documents/dns-txt/deploying-document-store/document-store-code).
 
-The document store is a smart contract on the blockchain network that records the issuance and revocation status of TradeTrust documents. In this guide, we will deploy a document store smart contract on the Ethereum blockchain, `sepolia` network, which is a test network that does not require actual [ethers](/docs/glossary#ether) for transactions.
-
-In this guide, we will deploy a document store smart contract on the Ethereum blockchain, `sepolia` network which is a test network that does not require actual ethers for transactions
+The document store is a smart contract on the blockchain network that records the issuance and revocation status of TrustVC documents. In this guide, we will deploy a document store smart contract on the Ethereum blockchain, `sepolia` network, which is a test network that does not require actual [ethers](/docs/glossary#ether) for transactions.
 
 ## Prerequisite
 
-- [TradeTrust CLI](/docs/how-tos/open-attestation/prerequisites#installation-of-tradetrust-cli) installed
+- [TrustVC CLI](/docs/how-tos/open-attestation/prerequisites#installation-of-trustvc-cli) installed
 - Private key to an [Ethereum wallet](/docs/how-tos/open-attestation/prerequisites#wallet-creation) with sufficient ethers
 
-## Deploying via TradeTrust CLI
+## Deploying via TrustVC CLI
+
+The TrustVC CLI uses an interactive prompt system that guides you through the deployment process.
 
 ```bash
-tradetrust deploy document-store "My first document store" --network sepolia --encrypted-wallet-path wallet.json
+trustvc deploy document-store
 ```
 
-You will be prompted for the password that you used while creating the wallet. Once your document store smart contract has been successfully deployed, you will see the success message with the document store address.
+The CLI will interactively prompt you for:
+
+1. **Store name**: Enter the name of the document store (e.g., "My first document store")
+2. **Network selection**: Choose from available networks (e.g., sepolia, polygon-amoy)
+3. **Owner address** (optional): Enter the owner address or press Enter to use the deployer address
+4. **Wallet selection**: Choose between encrypted wallet, private key file, or environment variable
+
+Example session:
+
+```bash
+trustvc deploy document-store
+
+? Enter the name of the document store: My first document store
+? Select a network: sepolia
+? Enter the owner address (optional, press Enter to use deployer address):
+? Select wallet type: Encrypted Wallet JSON
+? Enter the path to your encrypted wallet JSON file: ./wallet.json
+? Enter your wallet password: [hidden]
+```
+
+Once your document store smart contract has been successfully deployed, you will see the success message with the document store address:
 
 ```text
 ℹ  info      Deploying document store My first document store
-? Wallet password [hidden]
-…  awaiting  Decrypting Wallet [====================] [100/100%]
-ℹ  info      Wallet successfully decrypted
-...
 ✔  success   Document store My first document store deployed at 0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b
 ℹ  info      Find more details at https://sepolia.etherscan.io/address/0xBBb55Bd1D709955241CAaCb327A765e2b6D69c8b
 ```

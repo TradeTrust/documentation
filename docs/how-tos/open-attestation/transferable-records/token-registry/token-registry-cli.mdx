@@ -20,32 +20,67 @@ In this guide, we will deploy a token registry smart contract on the Ethereum bl
 
 ## Prerequisite
 
-- [TradeTrust CLI](/docs/how-tos/open-attestation/prerequisites#installation-of-tradetrust-cli) installed
+- [TrustVC CLI](/docs/how-tos/open-attestation/prerequisites#installation-of-trustvc-cli) installed
 - Private key to an [Ethereum wallet](/docs/how-tos/open-attestation/prerequisites#wallet-creation) with sufficient ethers
 
-## Deploying via TradeTrust CLI
+## Deploying via TrustVC CLI
 
-### Creating the key file
+The TrustVC CLI uses an interactive prompt system that guides you through the deployment process. You can provide your wallet credentials via an encrypted wallet file, a private key file, or an environment variable.
+
+### Option 1: Using Environment Variable (Recommended)
+
+Set your private key as an environment variable:
+
+```sh
+export OA_PRIVATE_KEY=<YOUR_PRIVATE_KEY_HEX>
+```
+
+> Do not share your private key with anyone else!
+
+### Option 2: Using a Key File
 
 Create a file `key.txt` with the private key of your Ethereum wallet and save it in your working directory. If you are using Metamask, you may retrieve this key from the extension in [this guide](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key).
 
 Sample `key.txt` file content (replace with your private key):
 
 ```sh
-d8f30c982fc23245a2cc4ec8271edcb4637f539d490ce750cdb5085241ffb41c
+<YOUR_PRIVATE_KEY_HEX>
 ```
 
 > Do not share this file with anyone else!
 
 ### Deploying the token registry
 
-Simply run the following command. You may replace the `<registry-name>` and `<registry-symbol>` with a suitable name and symbol (usually 3 characters).
+Simply run the following command:
 
 ```sh
-tradetrust deploy token-registry "<registry-name>" <registry-symbol> -n sepolia -f key.txt
+trustvc deploy token-registry
 ```
 
-This will deploy the token registry on the `sepolia` network. You should see a similar output when the deployment is successful:
+The CLI will interactively prompt you for:
+
+1. **Network selection**: Choose from available networks (e.g., sepolia, polygon-amoy)
+2. **Registry name**: Enter the name of the token registry (e.g., "My Token Registry")
+3. **Registry symbol**: Enter the symbol of the token registry (usually 3 characters, e.g., "MTR")
+4. **Deployment type**: Choose between standalone or factory deployment (default: factory)
+5. **Wallet selection**: Choose between encrypted wallet, private key file, or environment variable
+
+Example session:
+
+```sh
+trustvc deploy token-registry
+
+? Select a network: sepolia
+? Enter the name of the token registry: My Token Registry
+? Enter the symbol of the token registry: MTR
+? Is this a standalone deployment? No
+? Enter the token registry implementation address (optional, press Enter to use default):
+? Enter the deployer contract address (optional, press Enter to use default):
+? Select wallet type: Private Key File
+? Enter the path to the private key file: ./key.txt
+```
+
+You should see a similar output when the deployment is successful:
 
 ```txt
 ℹ  info      Deploying token registry My Token Registry

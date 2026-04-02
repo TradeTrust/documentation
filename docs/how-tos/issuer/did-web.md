@@ -106,42 +106,54 @@ Before you begin, ensure you have Node.js installed on your system.
 
   </TabItem>
 
-  <TabItem value="cli" label="Using CLI (BLS Only)">
+  <TabItem value="cli" label="Using CLI">
 
-    > **Note**: The CLI currently only supports BLS keys. For ECDSA-SD-2023 or BBS-2023 keys, use the code approach above.
+    > **Note**: The CLI supports both ECDSA-SD-2023 and BBS-2023 key generation.
 
     1. Install the CLI:
 
     ```bash
-    npm install -g @trustvc/w3c-cli
+    npm install -g @trustvc/trustvc-cli
     ```
 
     2. Generate a key pair:
 
     ```bash
-    w3c-cli key-pair
+    trustvc w3c key-pair-generation
     ```
-    Output:
+    
+    You will be prompted to:
     ```
-    ? Please select an encryption algorithm: Bls12381G2Key2020
-    ? Please enter a seed in base58 format (optional):
-    ? Please specify a directory to save your key file (optional): .
-    File written successfully to ./keypair.json
+    ? Select an encryption algorithm for your new key pair:
+      ❯ ECDSA-SD-2023 (Generate KeyPair for ECDSA-SD-2023 suite)
+        BBS-2023 (Generate KeyPair for BBS-2023 suite)
+    
+    ? Enter a seed in base58 format (optional): [only for BBS-2023]
+    ? Enter a directory to save the generated key file (optional): .
+    
+    ✔  success   Generated key pair successfully
+    ℹ  info      Saved to: ./keypair.json
+    
+    ⚠  warning   IMPORTANT: Never share this file publicly - it contains secret keys!
     ```
 
     3. Generate the DID document:
 
     ```bash
-    w3c-cli did
+    trustvc w3c did-web
     ```
-    Output:
+    
+    You will be prompted to:
     ```
-    ? Please enter the path to your key pair JSON file: ./keypair.json
-    ? Please enter your domain for hosting the did-web public key (e.g.,
-    https://example.com/.well-known/did.json): https://example.com/.well-known/did.json
-    ? Please specify a directory path to save the DID token file (optional): .
-    File written successfully to ./wellknown.json
-    File written successfully to ./didKeyPairs.json
+    ? Enter the path to your key pair JSON file: ./keypair.json
+    ? Enter the domain where your did:web public key will be hosted (e.g., https://example.com/.well-known/did.json): https://example.com/.well-known/did.json
+    ? Enter a directory to save the generated DID token file (optional): .
+    
+    ✔  success   Generated DID files successfully
+    ℹ  info      ./wellknown.json → Publish at /.well-known/did.json
+    ℹ  info      ./didKeyPairs.json → Keep private (contains secret keys)
+    
+    ⚠  warning   IMPORTANT: Never share didKeyPairs.json publicly!
     ```
 
   </TabItem>
@@ -245,34 +257,46 @@ Before adding new keys:
 
   </TabItem>
 
-  <TabItem value="cli" label="Using CLI (BLS Only)">
+  <TabItem value="cli" label="Using CLI">
 
-    > **Note**: The CLI currently only supports BLS keys. For ECDSA-SD-2023 or BBS-2023 keys, use the code approach above.
+    > **Note**: The CLI supports both ECDSA-SD-2023 and BBS-2023 key generation.
 
     1. Generate a new key pair:
     ```bash
-    w3c-cli key-pair
+    trustvc w3c key-pair-generation
     ```
-    Output:
+    
+    You will be prompted to:
     ```
-    ? Please select an encryption algorithm: Bls12381G2Key2020
-    ? Please enter a seed in base58 format (optional):
-    ? Please specify a directory to save your key file (optional): .
-    File written successfully to ./keypair.json
+    ? Select an encryption algorithm for your new key pair:
+      ❯ ECDSA-SD-2023 (Generate KeyPair for ECDSA-SD-2023 suite)
+        BBS-2023 (Generate KeyPair for BBS-2023 suite)
+    
+    ? Enter a seed in base58 format (optional): [only for BBS-2023]
+    ? Enter a directory to save the generated key file (optional): .
+    
+    ✔  success   Generated key pair successfully
+    ℹ  info      Saved to: ./keypair.json
+    
+    ⚠  warning   IMPORTANT: Never share this file publicly - it contains secret keys!
     ```
 
     2. Add the new key to your existing `did:web`, providing the same `did:web`:
     ```bash
-    w3c-cli did
+    trustvc w3c did-web
     ```
-    Output:
+    
+    You will be prompted to:
     ```
-    ? Please enter the path to your key pair JSON file: ./keypair.json
-    ? Please enter your domain for hosting the did-web public key (e.g.,
-    https://example.com/.well-known/did.json): https://example.com/.well-known/did.json
-    ? Please specify a directory path to save the DID token file (optional): .
-    File written successfully to ./wellknown.json
-    File written successfully to ./didKeyPairs.json
+    ? Enter the path to your key pair JSON file: ./keypair.json
+    ? Enter the domain where your did:web public key will be hosted (e.g., https://example.com/.well-known/did.json): https://example.com/.well-known/did.json
+    ? Enter a directory to save the generated DID token file (optional): .
+    
+    ✔  success   Generated DID files successfully
+    ℹ  info      ./wellknown.json → Publish at /.well-known/did.json
+    ℹ  info      ./didKeyPairs.json → Keep private (contains secret keys)
+    
+    ⚠  warning   IMPORTANT: Never share didKeyPairs.json publicly!
     ```
 
   </TabItem>
@@ -358,7 +382,7 @@ did:web:<domain-name>:<path>
 
     ```bash
     # Generate DID for a specific path
-    w3c-cli did
+    trustvc w3c did-web
     ```
 
   </TabItem>
