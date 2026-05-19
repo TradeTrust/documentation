@@ -239,53 +239,6 @@ After wrapping, the attachments will be part of the document data with salted va
 ```
 </details>
 
-<details>
-<summary><b>OpenAttestation v3</b></summary>
-
-For OpenAttestation v3 documents, attachments are added at the root level:
-
-```json
-{
-    "version": "https://schema.openattestation.com/3.0/schema.json",
-    "network": {
-        "chain": "FREE",
-        "chainId": "101010"
-    },
-    "credentialSubject": {
-        // Document data goes here
-    },
-    "attachments": [
-        {
-            "data": "JVBERi0xLjQKJdPr6eEKMSAwIG9iago8PC9UaXRsZSAoRXhhbXBsZSBQREYpCi9Qcm9kdWNlciAoT3...",
-            "fileName": "certificate.pdf",
-            "mimeType": "application/pdf"
-        }
-    ],
-    "openAttestationMetadata": {
-        "template": {
-            "type": "EMBEDDED_RENDERER",
-            "name": "CHAFTA_COO",
-            "url": "https://generic-templates.tradetrust.io"
-        },
-        "proof": {
-            "type": "OpenAttestationProofMethod",
-            "method": "DOCUMENT_STORE",
-            "value": "0xA594f6e10564e87888425c7CC3910FE1c800aB0B"
-        },
-        "identityProof": {
-            "type": "DNS-TXT",
-            "identifier": "example.tradetrust.io"
-        }
-    },
-    "issuer": {
-        "id": "https://example.com",
-        "name": "DEMO DOCUMENT STORE",
-        "type": "OpenAttestationIssuer"
-    }
-}
-```
-</details>
-
 ## Handling Attachments in TradeTrust Verification Website
 
 TradeTrust's Verification Website automatically detects and displays attachments in the document viewer. Attachments appear as tabs alongside the main document view, allowing users to switch between the main document and its attachments.

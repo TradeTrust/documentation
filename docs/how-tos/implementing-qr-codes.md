@@ -64,29 +64,6 @@ For OpenAttestation documents, QR codes are implemented in the document's links 
 - In OA v2: via `data.links.self.href`
 
 <details>
-<summary>View OA v3 Example</summary>
-
-```json
-{
-  "version": "https://schema.openattestation.com/3.0/schema.json",
-  "@context": [
-    "https://www.w3.org/2018/credentials/v1",
-    "https://schemata.openattestation.com/com/openattestation/1.0/OpenAttestation.v3.json"
-  ],
-  "credentialSubject": {
-    // Document data
-    "links": {
-      "self": {
-        "href": "https://actions.tradetrust.io?q=%7B%22type%22%3A%22DOCUMENT%22%2C%22payload%22%3A%7B%22uri%22%3A%22https%3A%2F%2Fexample.com%2Fdocuments%2F123%22%2C%22key%22%3A%22abcdef1234567890%22%2C%22permittedActions%22%3A%5B%22STORE%22%5D%2C%22redirect%22%3A%22https%3A%2F%2Ftradetrust.io%2F%22%2C%22chainId%22%3A%22101010%22%7D%7D"
-      }
-    }
-  },
-  // Other document properties
-}
-```
-</details>
-
-<details>
 <summary>View OA v2 Example</summary>
 
 ```json
