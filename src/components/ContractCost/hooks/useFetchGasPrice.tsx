@@ -10,7 +10,7 @@ export enum Chain {
 const gasApi = {
   [Chain.Ethereum]: "https://api.blocknative.com/gasprices/blockprices",
   [Chain.Polygon]: "https://api.blocknative.com/gasprices/blockprices?chainid=137",
-  [Chain.XDC]: "https://rpc.xinfin.network/gasPrice",
+  [Chain.XDC]: "https://xdctraderpc.xinfin.network/",
 };
 
 const parseGasRes = (res: any) => {
