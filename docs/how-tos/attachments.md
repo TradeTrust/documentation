@@ -12,7 +12,6 @@ TradeTrust allows you to attach files directly to your verifiable documents and 
 
 Legacy formats (for reference only):
 - OpenAttestation v2: Attachments are included in the document data before wrapping
-- OpenAttestation v3: Attachments are added at the root level of the document
 
 Attachments enable you to bundle supporting files with your verifiable documents, ensuring that all related information remains together and tamper-evident.
 
@@ -34,12 +33,12 @@ For broad compatibility with TradeTrust, we recommend the following attachment s
 | Field | Type | Description | Required | Notes |
 |-------|------|-------------|----------|-------|
 | `data` | string | Base64-encoded file content | Yes | Must be plain base64 string without data URL prefixes (e.g., `JVBERi0xLjQKJ...`) |
-| `filename` | string | Name of the file | Yes* | Example: "invoice.pdf" (also supports `fileName` in OA v3) |
+| `filename` | string | Name of the file | Yes* | Example: "invoice.pdf" |
 | `mimeType` | string | MIME type of the file | Yes* | Example: "application/pdf" (also supports `type` in OA v2) |
 
 *Required for proper rendering in TradeTrust Verification Website
 
-This structure is preferred for new documents. However, the TradeTrust platform, particularly its decentralized renderer, is designed to be flexible and can parse attachments from older OpenAttestation (OA) v2 and v3 formats as well.
+This structure is preferred for new documents. However, the TradeTrust platform, particularly its decentralized renderer, is designed to be flexible and can parse attachments from the older OpenAttestation (OA) v2 format as well.
 
 ### Important Considerations for Attachments
 
@@ -51,7 +50,7 @@ When working with attachments, keep these points in mind:
 
 ### Renderer Parsing and Legacy Support
 
-The TradeTrust decentralized renderer processes attachments to extract the necessary information for display. It primarily looks for the recommended fields (`data`, `filename`, `mimeType`) but also checks for common variations found in OA v2 and OA v3 documents.
+The TradeTrust decentralized renderer processes attachments to extract the necessary information for display. It primarily looks for the recommended fields (`data`, `filename`, `mimeType`) but also checks for common variations found in OA v2 documents.
 
 The following code snippet from `decentralized-renderer-react-components/src/utils.ts` illustrates how the renderer extracts attachment details:
 
@@ -63,16 +62,16 @@ const attachments = vc.isSignedDocument(document)
       ?.map((s) => s.attachments)
       ?.filter(Boolean)
       ?.flat()
-  : isV2Document(document) || isV3Document(document)
+  : isV2Document(document)
     ? document.attachments
     : [];
 const tabsRenderedFromAttachments = (attachments || ([] as Attachment[]))
   .map((attachment: Attachment, index: number) => {
     return {
       id: `attachment-${index}`,
-      // For filename, it checks for 'fileName' (common in OA v3) then 'filename' (recommended, and OA v2)
+      // For filename, it checks for 'fileName' then 'filename' (recommended, OA v2)
       label: ((attachment as any).fileName ?? (attachment as any)?.filename) || "Unknown filename",
-      // For MIME type, it checks for 'type' (common in OA v2) then 'mimeType' (recommended, and OA v3)
+      // For MIME type, it checks for 'type' (common in OA v2) then 'mimeType' (recommended)
       type: ((attachment as any).type ?? (attachment as any).mimeType) || "Unknown filetype",
       // The 'data' property is used within attachmentToComponent to render the content
       template: attachmentToComponent(attachment, document)!
@@ -83,8 +82,8 @@ const tabsRenderedFromAttachments = (attachments || ([] as Attachment[]))
 
 As shown in the snippet:
 
--   For the attachment's **name/label**, the renderer first looks for a `fileName` property (common in OA v3) and falls back to `filename` (recommended, and also used in OA v2).
--   For the attachment's **type**, it first looks for a `type` property (common in OA v2) and falls back to `mimeType` (recommended, and also used in OA v3).
+-   For the attachment's **name/label**, the renderer first looks for a `fileName` property and falls back to `filename` (recommended, also used in OA v2).
+-   For the attachment's **type**, it first looks for a `type` property (common in OA v2) and falls back to `mimeType` (recommended).
 
 This ensures that documents created with older OpenAttestation schemas remain compatible. While this flexibility is provided, new implementations should adhere to the recommended structure (`data`, `filename`, `mimeType`) for clarity and future-proofing.
 

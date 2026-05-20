@@ -145,13 +145,11 @@ console.log(data);
 
 ```js
 import { utils } from "@govtechsg/open-attestation";
-utils.isWrappedV3Document(document);
+utils.isWrappedV2Document(document);
 ```
 
 - `isWrappedV2Document` type guard for wrapped v2 document
 - `isSignedWrappedV2Document` type guard for signed v2 document
-- `isSignedWrappedV3Document` type guard for signed v3 document
-- `isWrappedV3Document` type guard for wrapped v3 document
 - `diagnose` tool to find out why a document is not a valid open attestation file (wrapped or signed document)
 
 ### Obfuscating data

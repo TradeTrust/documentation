@@ -80,7 +80,7 @@ The template repository comes with two example templates that you can use as ref
 
 1. **`templates/examples/TemplateA`** - Demonstrates:
    - Basic document rendering
-   - Support for both OA (OpenAttestation) V2, V3 and W3C VC document formats
+   - Support for both OA (OpenAttestation) V2 and W3C VC document formats
    - QR code integration with `DocumentQrCode` component
    - Watermark integration with `PrintWatermark` component
    - Error boundary integration with `Wrapper` component
@@ -106,18 +106,15 @@ First, create a new folder for your template and define the data structure.
 <summary>Create a file `src/templates/BillOfLading/types.ts`:</summary>
 
 ```ts
-import { v2, v3, SignedVerifiableCredential } from "@trustvc/trustvc";
+import { v2, SignedVerifiableCredential } from "@trustvc/trustvc";
 import { CredentialSubject } from "@trustvc/trustvc/w3c/vc";
 
 export type BillOfLadingSchemaV2 = v2.OpenAttestationDocument & BillOfLadingDocument;
-export type BillOfLadingSchemaV3 = v3.OpenAttestationDocument & {
-  credentialSubject: BillOfLadingDocument;
-};
 export type BillOfLadingSchemaW3C = SignedVerifiableCredential & {
   credentialSubject: CredentialSubject & BillOfLadingDocument;
 };
 
-export type BillOfLadingSchema = BillOfLadingSchemaV2 | BillOfLadingSchemaV3 | BillOfLadingSchemaW3C;
+export type BillOfLadingSchema = BillOfLadingSchemaV2 | BillOfLadingSchemaW3C;
 
 export interface BillOfLadingDocument {
   scac: string;
@@ -817,7 +814,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BillOfLadingSample } from "../src/templates/BillOfLading/sample";
 import { TemplateASampleV2 } from "../src/templates/examples/TemplateA/sampleV2";
-import { TemplateASampleV3 } from "../src/templates/examples/TemplateA/sampleV3";
 import { App } from "./app";
 import "./main.css";
 
@@ -825,8 +821,7 @@ ReactDOM.render(
   <App
     documents={[
       { name: "Bill of Lading", document: BillOfLadingSample },
-      { name: "Example A v2", document: TemplateASampleV2 },
-      { name: "Example A v3", document: TemplateASampleV3 }
+      { name: "Example A v2", document: TemplateASampleV2 }
     ]}
   />,
   document.getElementById("root")
