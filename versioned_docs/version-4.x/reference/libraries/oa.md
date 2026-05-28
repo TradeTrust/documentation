@@ -28,7 +28,7 @@ npm i @govtechsg/open-attestation
 
 `wrapDocuments` takes in an array of documents and returns the wrapped batch. Each document must be valid regarding the version of the schema used (see below) It computes the Merkle root of the batch and appends it to each document. This Merkle root can be published on the blockchain and queried against to prove the provenance of the document issued this way. Alternatively, the Merkle root may be signed by the document issuer's private key, which may be cryptographically verified using the issuer's public key or Ethereum account.
 
-In the future, this function may accept a second optional parameter to specify the version of open-attestation you want to use. Currently, open-attestation will use schema 2.0. See [Additional Information](#additional-information) for information on using experimental v3.0 documents, which aim to be compatible with the W3C's data model for [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/).
+In the future, this function may accept a second optional parameter to specify the version of open-attestation you want to use. Currently, open-attestation will use schema 2.0.
 
 The `wrapDocument` function is identical but accepts only one document.
 
@@ -145,13 +145,11 @@ console.log(data);
 
 ```js
 import { utils } from "@govtechsg/open-attestation";
-utils.isWrappedV3Document(document);
+utils.isWrappedV2Document(document);
 ```
 
 - `isWrappedV2Document` type guard for wrapped v2 document
 - `isSignedWrappedV2Document` type guard for signed v2 document
-- `isSignedWrappedV3Document` type guard for signed v3 document
-- `isWrappedV3Document` type guard for wrapped v3 document
 - `diagnose` tool to find out why a document is not a valid open attestation file (wrapped or signed document)
 
 ### Obfuscating data
@@ -192,11 +190,5 @@ You can now debug from the `vc-test-suite` folder the way you need it.
 ## Additional information
 
 - Found a bug? Have a question? Want to share an idea? Reach us at our [Github repository](https://github.com/Open-Attestation/open-attestation).
-- We are currently building a new version of the schema, compatible with W3C VC. This is very experimental and whatever is available for v2 documents are also available for v3 documents:
-  - [OA schema v3](https://schema.openattestation.com/3.0/schema.json)
-  - Typings: `import {v3} from "@govtechsg/open-attestation"`.
-  - Type guard: `utils.isWrappedV3Document`.
-  - Wrapping: `__unsafe__use__it__at__your__own__risks__wrapDocument` (future usage: `wrapDocument(document, {version: "open-attestation/3.0"})`
-  - Example docs in `tests/fixtures/v3`
 - There are extra utilities available:
   - Refer to the [utils](https://github.com/Open-Attestation/open-attestation/blob/master/src/shared/utils/utils.ts) component for the full list of utilities.

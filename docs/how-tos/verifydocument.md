@@ -33,7 +33,7 @@ The document to be verified. It can be:
 
 #### 1) Check Document Type
 
-- If the document is an OpenAttestation document (V2 or V3), it uses OpenAttestation verifiers.
+- If the document is an OpenAttestation document (V2), it uses OpenAttestation verifiers.
 - Otherwise, it is treated as a W3C Verifiable Credential, and W3C verification fragments are used.
 
 #### 2) Build the Verification Process

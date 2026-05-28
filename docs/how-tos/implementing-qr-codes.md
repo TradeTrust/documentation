@@ -60,31 +60,7 @@ For W3C Verifiable Credentials, you need to add a `qrCode` property to your cred
 
 For OpenAttestation documents, QR codes are implemented in the document's links property:
 
-- In OA v3: via `credentialSubject.links.self.href`
 - In OA v2: via `data.links.self.href`
-
-<details>
-<summary>View OA v3 Example</summary>
-
-```json
-{
-  "version": "https://schema.openattestation.com/3.0/schema.json",
-  "@context": [
-    "https://www.w3.org/2018/credentials/v1",
-    "https://schemata.openattestation.com/com/openattestation/1.0/OpenAttestation.v3.json"
-  ],
-  "credentialSubject": {
-    // Document data
-    "links": {
-      "self": {
-        "href": "https://actions.tradetrust.io?q=%7B%22type%22%3A%22DOCUMENT%22%2C%22payload%22%3A%7B%22uri%22%3A%22https%3A%2F%2Fexample.com%2Fdocuments%2F123%22%2C%22key%22%3A%22abcdef1234567890%22%2C%22permittedActions%22%3A%5B%22STORE%22%5D%2C%22redirect%22%3A%22https%3A%2F%2Ftradetrust.io%2F%22%2C%22chainId%22%3A%22101010%22%7D%7D"
-      }
-    }
-  },
-  // Other document properties
-}
-```
-</details>
 
 <details>
 <summary>View OA v2 Example</summary>
@@ -186,7 +162,6 @@ When a TradeTrust-compatible document with a QR code is loaded, the TradeTrust w
 
 2. Extracts the QR code URL using the `getQRCodeLink` function, which checks for:
    - `qrCode.uri` in W3C VC documents
-   - `credentialSubject.links.self.href` in OA v3 documents
    - `links.self.href` in OA v2 documents
 
 3. TradeTrust then downloads the document from the specified URI, decrypting it if necessary.
