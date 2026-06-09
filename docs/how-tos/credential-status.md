@@ -57,7 +57,7 @@ const rawDocument = {
   credentialStatus: {
     type: "TransferableRecords",
     tokenNetwork: {
-      chain: "MATIC",
+      chain: "POL",
       chainId: "80002",
     },
     tokenRegistry: "0xH3C2...", // Address of the Token Registry deployed
