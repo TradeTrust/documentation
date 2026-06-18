@@ -178,7 +178,7 @@ For detailed instructions on fixing CORS errors, see the [CORS Errors guide](/do
 "credentialStatus": {
   "type": "TransferableRecords",
   "tokenNetwork": {
-    "chain": "MATIC",
+    "chain": "POL",
     "chainId": "80002"
   },
   "tokenRegistry": "0xH3C2..."
@@ -188,7 +188,7 @@ For detailed instructions on fixing CORS errors, see the [CORS Errors guide](/do
 ####  **Field Details**
 - **`type`**: Defines the status type (TransferableRecords).
 - **`tokenNetwork`**: Specifies the blockchain details:
-- **`chain`**: Blockchain network name (e.g., MATIC).
+- **`chain`**: Blockchain network name (e.g., POL).
 - **`chainId`**: Blockchain ID (e.g., 80002 for Amoy network).
 - **`tokenRegistry`**: Address of the token registry contract.
 

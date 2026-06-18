@@ -87,7 +87,7 @@ Each template requires specific data fields. Below are examples for common templ
   "credentialStatus": {
     "type": "TransferableRecords",
     "tokenNetwork": {
-      "chain": "MATIC",
+      "chain": "POL",
       "chainId": "80002"
     },
     "tokenRegistry": "0x3652efbc80ace560844afc932d2bf8b452a96c6d",
