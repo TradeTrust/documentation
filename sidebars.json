@@ -257,6 +257,11 @@
       "migration-guide/migration-tr-v5",
       "migration-guide/migration-tt-cli-v5"
     ],
+    "Gasless (EIP-7702)": [
+      "eip7702/overview",
+      "eip7702/setup",
+      "eip7702/gasless-operations"
+    ],
     "Community": ["community/contributing"],
     "Common Issues & Solutions": [
       "common-issues/cors-error",
