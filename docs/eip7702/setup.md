@@ -8,6 +8,41 @@ sidebar_label: Setup
 
 This page walks through one-time setup steps: deploying a PlatformPaymaster for your platform, whitelisting users, and building the `smartAccountClient` that all gasless SDK functions accept.
 
+:::caution Beta
+Install the beta release of `@trustvc/trustvc` to access the EIP-7702 gasless functions:
+
+```bash
+npm install @trustvc/trustvc@beta permissionless viem
+```
+
+The gasless API is not available in the `latest` (`2.x`) release.
+:::
+
+## 0. Get a Pimlico API key
+
+Pimlico is the bundler that submits UserOperations on behalf of users. A free account is sufficient for development and testing.
+
+1. Go to [dashboard.pimlico.io](https://dashboard.pimlico.io) and sign up (GitHub or email).
+2. Create a new **API key** from the dashboard.
+3. Add it to your `.env`:
+
+```env
+PIMLICO_API_KEY=your_key_here
+```
+
+The bundler URL is constructed as:
+
+```text
+https://api.pimlico.io/v2/{chainId}/rpc?apikey={PIMLICO_API_KEY}
+```
+
+| Network | chainId |
+| --- | --- |
+| Sepolia | `11155111` |
+| Polygon Amoy | `80002` |
+
+Pimlico's free tier has no credit card requirement and is enough to run through this entire guide.
+
 ## 1. Deploy a PlatformPaymaster
 
 Each platform (issuer) deploys its own `PlatformPaymaster` clone via `PlatformAccountFactory`. The clone is a cheap minimal proxy (~55 k gas) with its own state (owner, daily limit, authorized registries).
