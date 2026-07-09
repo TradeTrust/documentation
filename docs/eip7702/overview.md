@@ -74,7 +74,7 @@ PlatformPaymaster
 The `@trustvc/trustvc` SDK exposes all gasless functions under the `eip7702-functions` namespace. Install it once:
 
 ```bash
-npm install @trustvc/trustvc
+npm install @trustvc/trustvc@beta
 ```
 
 Import any gasless function directly:
