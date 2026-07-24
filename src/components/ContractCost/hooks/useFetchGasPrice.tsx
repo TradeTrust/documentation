@@ -21,11 +21,40 @@ const coinGeckoIds = {
   [Chain.XDC]: "xdce-crowd-sale",
 };
 
+// All hook instances share one batched CoinGecko request (multiple PriceTables
+// mount at once — separate requests per chain trip the free-tier rate limit,
+// whose 429 responses carry no CORS headers and surface as CORS errors).
+const PRICE_CACHE_TTL = 25000;
+const priceUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${Object.values(coinGeckoIds).join(
+  ","
+)}&vs_currencies=usd`;
+let priceCache: { data: any; fetchedAt: number } | null = null;
+let priceInflight: Promise<any> | null = null;
+
+const fetchAllPrices = async () => {
+  if (priceCache && Date.now() - priceCache.fetchedAt < PRICE_CACHE_TTL) {
+    return priceCache.data;
+  }
+  if (!priceInflight) {
+    priceInflight = fetch(priceUrl)
+      .then((req) => {
+        if (!req.ok) throw new Error(`CoinGecko responded ${req.status}`);
+        return req.json();
+      })
+      .then((data) => {
+        priceCache = { data, fetchedAt: Date.now() };
+        return data;
+      })
+      .finally(() => {
+        priceInflight = null;
+      });
+  }
+  return priceInflight;
+};
+
 const fetchPrice = async (chain: Chain) => {
-  const id = coinGeckoIds[chain];
-  const req = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd`);
-  const res = await req.json();
-  return res?.[id]?.usd;
+  const res = await fetchAllPrices();
+  return res?.[coinGeckoIds[chain]]?.usd;
 };
 
 const fetchGasPriceInGwei = async (chain: Chain) => {
