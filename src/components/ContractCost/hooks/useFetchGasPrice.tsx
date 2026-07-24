@@ -7,31 +7,29 @@ export enum Chain {
   XDC = "xdc",
 }
 
-const gasApi = {
-  [Chain.Ethereum]: "https://api.blocknative.com/gasprices/blockprices",
-  [Chain.Polygon]: "https://api.blocknative.com/gasprices/blockprices?chainid=137",
+// Public JSON-RPC endpoints (CORS-enabled) used to read the current gas price on-chain.
+const rpcApi = {
+  [Chain.Ethereum]: "https://ethereum-rpc.publicnode.com",
+  [Chain.Polygon]: "https://polygon-bor-rpc.publicnode.com",
   [Chain.XDC]: "https://rpc.xinfin.network",
 };
 
-const parseGasRes = (res: any) => {
-  const estPrice = res.blockPrices[0].estimatedPrices[0];
-  return estPrice.price ? estPrice.price + estPrice.maxPriorityFeePerGas : 0;
-};
-
-const priceApi = {
-  [Chain.Ethereum]: "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD",
-  [Chain.Polygon]: "https://min-api.cryptocompare.com/data/price?fsym=MATIC&tsyms=USD",
-  [Chain.XDC]: "https://min-api.cryptocompare.com/data/price?fsym=XDC&tsyms=USD",
+// CoinGecko asset ids. Polygon gas is paid in POL (ex-MATIC) since the 2024 migration.
+const coinGeckoIds = {
+  [Chain.Ethereum]: "ethereum",
+  [Chain.Polygon]: "polygon-ecosystem-token",
+  [Chain.XDC]: "xdce-crowd-sale",
 };
 
 const fetchPrice = async (chain: Chain) => {
-  const ethReq = await fetch(priceApi[chain]);
-  const ethRes = await ethReq.json();
-  return ethRes?.USD;
+  const id = coinGeckoIds[chain];
+  const req = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd`);
+  const res = await req.json();
+  return res?.[id]?.usd;
 };
 
-const fetchXDCGasPriceInGwei = async () => {
-  const resp = await fetch(gasApi[Chain.XDC], {
+const fetchGasPriceInGwei = async (chain: Chain) => {
+  const resp = await fetch(rpcApi[chain], {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -48,20 +46,13 @@ const fetchXDCGasPriceInGwei = async () => {
   return gasPriceInWei / 1e9;
 };
 
-const fetchGasInGwei = async (chain: Chain) => {
-  if (chain === Chain.XDC) {
-    return await fetchXDCGasPriceInGwei();
-  }
-  const gweiReq = await fetch(gasApi[chain]);
-  const gweiRes = await gweiReq.json();
-  return parseGasRes(gweiRes);
-};
-
 const fetchGasCostData = async (chain: Chain) => {
   try {
     const price = await fetchPrice(chain);
-    const gwei = await fetchGasInGwei(chain);
-    console.log(`Price: ${price}, Gwei: ${gwei} for ${chain}`);
+    const gwei = await fetchGasPriceInGwei(chain);
+    if (!price || !gwei || Number.isNaN(gwei)) {
+      throw new Error(`Incomplete data for ${chain} (price: ${price}, gwei: ${gwei})`);
+    }
     return { price, gwei };
   } catch (e) {
     console.error(`Error: ${e.message}`);

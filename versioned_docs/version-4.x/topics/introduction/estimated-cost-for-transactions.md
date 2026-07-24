@@ -12,7 +12,7 @@ You should be aware that the estimated gas required can differ slightly dependin
 :::note
 Note that the following estimation is _not_ a comprehensive list of all the costs involved and should be used as a reference only.
 
-The live gas fees and prices on this page are updated every 15s. Data are retrieved from [BlockNative Gas Estimator](https://www.blocknative.com/gas-estimator) and [CryptoCompare](https://www.cryptocompare.com/).
+The live gas fees and prices on this page are updated every 30s. Gas prices are read directly from public blockchain RPC endpoints and token prices are retrieved from [CoinGecko](https://www.coingecko.com/).
 :::
 
 ### Verifiable Documents
