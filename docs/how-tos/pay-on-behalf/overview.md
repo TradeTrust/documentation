@@ -34,40 +34,15 @@ The flow splits into a one-time **admin setup** (done once by the platform) and 
 
 <div style={{display: 'flex', justifyContent: 'center'}}>
 
-```mermaid
-%%{init: {'flowchart': {'subGraphTitleMargin': {'top': 10, 'bottom': 25}}}}%%
-flowchart TD
-    subgraph Admin["`**Admin / Platform - one-time setup**`"]
-        A1["Deploy PlatformPaymaster"] --> A2["Stake paymaster on EntryPoint"]
-        A2 --> A3["Whitelist, delegate user and set daily limit"]
-    end
-
-    style Admin fill:#eef2ff,stroke:#4338ca,color:#1e1b4b,font-size:20px
-```
-
-```mermaid
-%%{init: {'flowchart': {'subGraphTitleMargin': {'top': 10, 'bottom': 25}}}}%%
-flowchart TD
-    subgraph User["`**User - wallet experience**`"]
-        U1["Check if Paymaster is Enabled"] --> U2["Perform an action - mint, transfer, etc."]
-        U2 --> U3["Sign the UserOperation using Metamask - no gas prompt, no ETH needed"]
-    end
-
-    subgraph Contract["`**Contract layer - on-chain**`"]
-        B["Bundler - e.g. Pimlico"] --> E["EntryPoint"]
-        E --> P["PlatformPaymaster validates and sponsors gas"]
-        P --> T["Transaction executes on-chain"]
-    end
-
-    U3 --> B
-    T --> U4["User sees the confirmed action - never paid gas"]
-
-    style User fill:#ecfdf5,stroke:#059669,color:#052e1a,font-size:20px
-    style Contract fill:#fef3c7,stroke:#d97706,color:#78350f,font-size:20px
-```
+<img src="/docs/payOnBehalf/AdminSetup.png" alt="Admin setup" style={{maxWidth: '280px'}} />
 
 </div>
 
+<div style={{display: 'flex', justifyContent: 'center'}}>
+
+![User wallet experience](/docs/payOnBehalf/userWalletExperience.png)
+
+</div>
 In text form, the same flow:
 
 ```

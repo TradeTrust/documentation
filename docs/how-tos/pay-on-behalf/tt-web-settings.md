@@ -37,10 +37,20 @@ Pay on Behalf is one possible way to sponsor a user's transaction costs. The TT-
 
 Once an admin has enabled Pay on Behalf, users of that platform's TT-web instance can check their own eligibility from the same tab:
 
-- The user enters the platform's `PlatformPaymaster` address (provided by the issuer) into the input field on the Pay on Behalf tab.
-- TT-web checks the connected wallet against that paymaster's whitelist and reports back whether the wallet is eligible (whitelisted) for sponsored transactions.
-- If eligible, supported actions (minting, transferring, etc.) prompt the user's wallet for a **signature** (of the UserOperation) instead of the usual gas-payment transaction confirmation — no ETH is required from the user.
-- If not eligible, TT-web surfaces this so the user knows to request access from their platform admin — admins grant eligibility by whitelisting the address via `setUserWhitelist` (see [Setup](./setup)).
-- The one-time EIP-7702 delegation happens transparently as part of the user's first sponsored action.
+1. Once the user drops the document to act on, TT-web checks whether the connected wallet address already has EIP-7702 delegation enabled. If it does, a message appears prompting the user to paste the platform's `PlatformPaymaster` address.
+
+   ![Delegation enabled detection](/docs/payOnBehalf/delegationEnabledDetection.png)
+
+2. The user enters the platform's `PlatformPaymaster` address (provided by the issuer) into the input field on the Pay on Behalf tab.
+3. TT-web checks the connected wallet against that paymaster's whitelist and reports back whether the wallet is eligible (whitelisted) for sponsored transactions.
+
+   ![Paymaster enabled](/docs/payOnBehalf/paymasterEnabled.png)
+
+4. If eligible, supported actions (minting, transferring, etc.) prompt the user's wallet for a **signature** (of the UserOperation) instead of the usual gas-payment transaction confirmation — no ETH is required from the user.
+
+   <img src="/docs/payOnBehalf/metamaskSignatureRequest.png" alt="Metamask signature request" style={{display: 'block', margin: '0 auto', maxWidth: '320px'}} />
+
+5. If not eligible, TT-web surfaces this so the user knows to request access from their platform admin — admins grant eligibility by whitelisting the address via `setUserWhitelist` (see [Setup](./setup)).
+6. If delegation was not already enabled in step 1, the one-time EIP-7702 delegation happens transparently as part of the user's first sponsored action.
 
 See [Overview](./overview) for a diagram of the full admin-setup vs. user-experience flow, and [Operations](./operations) for the underlying SDK calls TT-web makes on the user's behalf.
