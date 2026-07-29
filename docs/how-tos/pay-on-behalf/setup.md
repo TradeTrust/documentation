@@ -6,21 +6,25 @@ sidebar_label: Setup
 
 # Setup
 
-This page walks through one-time setup steps: deploying a PlatformPaymaster for your platform, whitelisting users, and building the `smartAccountClient` that all gasless SDK functions accept.
+This page walks through one-time setup steps: deploying a PlatformPaymaster for your platform, whitelisting users, and building the `smartAccountClient` that all Pay on Behalf SDK functions accept.
 
 :::caution Beta
-Install the beta release of `@trustvc/trustvc` to access the EIP-7702 gasless functions:
+Install the beta release of `@trustvc/trustvc` to access the EIP-7702 Pay on Behalf functions:
 
 ```bash
 npm install @trustvc/trustvc@beta permissionless viem
 ```
 
-The gasless API is not available in the `latest` (`2.x`) release.
+The Pay on Behalf API is not available in the `latest` (`2.x`) release.
 :::
 
-## 0. Get a Pimlico API key
+:::info Token Registry v5 only
+This setup applies to **Token Registry v5 (TR v5)** deployments only.
+:::
 
-Pimlico is the bundler that submits UserOperations on behalf of users. A free account is sufficient for development and testing.
+## 0. Get a bundler API key
+
+A **bundler** submits UserOperations on behalf of users and, together with your `PlatformPaymaster`, is what makes Pay on Behalf work. This guide uses **Pimlico** as a working example — any ERC-4337-compatible bundler that supports EIP-7702 can be used instead. A free account is sufficient for development and testing.
 
 1. Go to [dashboard.pimlico.io](https://dashboard.pimlico.io) and sign up (GitHub or email).
 2. Create a new **API key** from the dashboard.
@@ -133,7 +137,7 @@ await walletClient.writeContract({
 
 ## 3. Whitelist users (admin)
 
-The paymaster owner must whitelist users before they can deploy registries gaslessly. Credits represent how many registry deployments are allowed per user (max 3).
+The paymaster owner must whitelist users before they can deploy registries under Pay on Behalf. Credits represent how many registry deployments are allowed per user (max 3).
 
 ```ts
 import { setUserWhitelist } from '@trustvc/trustvc';
@@ -166,7 +170,7 @@ All admin functions accept an ethers v5/v6 signer or viem `WalletClient` as the 
 
 ## 4. Build a smart account client
 
-All gasless SDK functions take a `smartAccountClient` as their second argument. Build one from the user's delegated EOA using **permissionless** + **Pimlico**:
+All Pay on Behalf SDK functions take a `smartAccountClient` as their second argument. Build one from the user's delegated EOA using **permissionless** + **Pimlico** (or your chosen bundler):
 
 ```ts
 import {
@@ -255,3 +259,7 @@ The first time a user submits a UserOp their EOA is automatically delegated in t
 | `SEPOLIA_RPC_URL` | Sepolia RPC endpoint |
 | `PIMLICO_API_KEY` | Pimlico bundler API key — free tier at [dashboard.pimlico.io](https://dashboard.pimlico.io) |
 | `PAYMASTER_ADDRESS` | Deployed `PlatformPaymaster` clone address |
+
+## Disclaimer
+
+The steps above use **Pimlico** as the bundler/paymaster infrastructure provider because that's what this reference implementation is built and tested against. This is not an endorsement or requirement — any ERC-4337-compatible bundler that supports EIP-7702 can be substituted, and the `smartAccountClient` construction in step 4 is where you'd swap providers.

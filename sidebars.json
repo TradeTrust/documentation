@@ -81,6 +81,16 @@
     "How Tos": [
       "how-tos/deployment",
       {
+        "label": "Pay on Behalf (EIP-7702)",
+        "type": "category",
+        "items": [
+          "how-tos/pay-on-behalf/overview",
+          "how-tos/pay-on-behalf/setup",
+          "how-tos/pay-on-behalf/operations",
+          "how-tos/pay-on-behalf/tt-web-settings"
+        ]
+      },
+      {
         "label": "Decentralized Renderer",
         "type": "category",
         "items": [
@@ -256,11 +266,6 @@
       "migration-guide/igp-i",
       "migration-guide/migration-tr-v5",
       "migration-guide/migration-tt-cli-v5"
-    ],
-    "Gasless (EIP-7702)": [
-      "eip7702/overview",
-      "eip7702/setup",
-      "eip7702/gasless-operations"
     ],
     "Community": ["community/contributing"],
     "Common Issues & Solutions": [

@@ -1,12 +1,16 @@
 ---
-id: gasless-operations
-title: Gasless Operations
-sidebar_label: Gasless Operations
+id: operations
+title: Pay on Behalf Operations
+sidebar_label: Operations
 ---
 
-# Gasless Operations
+# Pay on Behalf Operations
 
 All functions on this page accept a `smartAccountClient` built as described in [Setup](./setup). They return a `Promise<string>` containing the UserOp transaction hash.
+
+:::info Token Registry v5 only
+These operations only work against **Token Registry v5 (TR v5)** contracts.
+:::
 
 :::tip Remarks encryption
 All `remarks` strings are automatically encrypted with the document ID (`options.id`) before being sent on-chain. Pass the document's `id` in the `TransactionOptions` argument whenever remarks are present.
