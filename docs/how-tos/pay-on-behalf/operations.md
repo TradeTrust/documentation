@@ -6,7 +6,7 @@ sidebar_label: Operations
 
 # Pay on Behalf Operations
 
-All functions on this page accept a `smartAccountClient` built as described in [Setup](./setup). They return a `Promise<string>` containing the UserOp transaction hash.
+All functions on this page accept a `smartAccountClient` built as described in [Setup](./setup). They return a `Promise<string>` containing the **UserOperation hash** (`userOpHash`) — this is not a normal on-chain transaction hash, so it can't be looked up with `publicClient.getTransactionReceipt`.
 
 :::info Token Registry v5 only
 These operations only work against **Token Registry v5 (TR v5)** contracts.
@@ -15,6 +15,21 @@ These operations only work against **Token Registry v5 (TR v5)** contracts.
 :::tip Remarks encryption
 All `remarks` strings are automatically encrypted with the document ID (`options.id`) before being sent on-chain. Pass the document's `id` in the `TransactionOptions` argument whenever remarks are present.
 :::
+
+## Getting the receipt
+
+Whenever a section below says "parse it from the receipt," it means the **UserOperation receipt**, fetched from the bundler via `waitForUserOperationReceipt` — not the transaction receipt. The bundler client used to build `smartAccountClient` (see [Setup](./setup)) is decorated with this action:
+
+```ts
+const userOpReceipt = await smartAccountClient.waitForUserOperationReceipt({
+  hash: txHash, // the userOpHash returned by any *Gasless function
+});
+
+// The actual on-chain transaction receipt, containing decodable logs
+const { logs } = userOpReceipt.receipt;
+```
+
+Decode `logs` with the `PlatformPaymaster` ABI to read out emitted events such as `RegistryDeployed` and `TitleEscrowLinked`.
 
 ---
 
@@ -36,7 +51,7 @@ const txHash = await deployTokenRegistryGasless(
 );
 ```
 
-The `RegistryDeployed(user, deployed, creditsLeft)` event is emitted by the paymaster. Parse it from the receipt to get the deployed registry address.
+The `RegistryDeployed(user, deployed, creditsLeft)` event is emitted by the paymaster. Parse it from the [UserOperation receipt](#getting-the-receipt) to get the deployed registry address.
 
 ---
 
@@ -63,7 +78,7 @@ const txHash = await mintGasless(
 );
 ```
 
-The `TitleEscrowLinked(titleEscrow, registry)` event is emitted. Parse it to get the deployed `TitleEscrow` address.
+The `TitleEscrowLinked(titleEscrow, registry)` event is emitted. Parse it from the [UserOperation receipt](#getting-the-receipt) to get the deployed `TitleEscrow` address.
 
 ---
 

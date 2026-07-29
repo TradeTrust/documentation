@@ -46,15 +46,18 @@ The flow splits into a one-time **admin setup** (done once by the platform) and 
 In text form, the same flow:
 
 ```
-User (EOA, no ETH)
+[One-time, separate step] EOA delegates to EIP7702Implementation via a type-4 transaction
+  - User-owned wallet:      user signs the authorization off-chain, platform owner submits it
+  - Platform-managed wallet: platform owner both signs and submits (it holds the key)
+
+User (EOA, no ETH, already delegated)
   │
-  │  1. Sign EIP-7702 authorization → EOA delegates to EIP7702Implementation
-  │  2. Submit UserOperation via a bundler
+  │  1. Submit UserOperation via a bundler
   │
   ▼
 Bundler
   │
-  │  3. Calls EntryPoint → validates against PlatformPaymaster
+  │  2. Calls EntryPoint → validates against PlatformPaymaster
   │
   ▼
 PlatformPaymaster
@@ -127,7 +130,9 @@ Before calling any Pay on Behalf function you need:
 
 1. **A PlatformPaymaster deployed for your platform** — see [Setup](./setup).
 2. **A bundler/paymaster provider API key** — see [Setup](./setup) for a walkthrough using Pimlico as an example.
-3. **The user's EOA delegated** — one-time type-4 transaction (wallet signs an EIP-7702 authorization).
+3. **The user's EOA delegated** — a separate, one-time type-4 transaction, submitted before the user's first sponsored action (not as part of it). Two ways to get there:
+   - **User-owned wallet**: the user's wallet signs an EIP-7702 authorization off-chain, and the **platform owner** submits it on-chain (paying its gas) to delegate the EOA to `EIP7702Implementation`.
+   - **Platform-managed wallet**: the platform owner creates the wallet on the user's behalf and, holding its key, both signs the authorization and submits the delegation itself.
 4. **A built `smartAccountClient`** — the permissionless `SmartAccountClient` wrapping the delegated EOA.
 
 All four are covered in [Setup](./setup). Once set up, jump to [Operations](./operations) for code examples. If you're looking for how this is exposed in the TT-web application's Settings page, see [Pay on Behalf on TT-web](./tt-web-settings).
