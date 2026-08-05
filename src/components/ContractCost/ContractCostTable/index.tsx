@@ -213,7 +213,7 @@ export const PriceTable = (props) => {
         <BoxTag>
           <FiatLabel>{price}</FiatLabel>
         </BoxTag>{" "}
-        for <strong>Ethereum</strong>, MATIC price at USD{" "}
+        for <strong>Ethereum</strong>, POL price at USD{" "}
         <BoxTag>
           <FiatLabel>{maticPrice}</FiatLabel>
         </BoxTag>{" "}
