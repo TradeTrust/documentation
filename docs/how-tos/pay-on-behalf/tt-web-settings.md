@@ -13,7 +13,7 @@ TT-web (the TradeTrust web application) exposes Pay on Behalf configuration thro
 | General           | Application-wide preferences.                                                                                         |
 | Network           | Blockchain network and RPC configuration.                                                                             |
 | Address Resolver  | Configure address resolution for identifying wallet addresses — see [Address Resolver](../advanced/address-resolver). |
-| **Pay on Behalf** | Configure and enable sponsored (gas-free) transactions for your users.                                                |
+| **Pay on Behalf** | Enter a `PlatformPaymaster` address to check eligibility for sponsored (gas-free) transactions.                       |
 
 :::info Token Registry v5 only
 The Pay on Behalf tab only applies to documents issued from **Token Registry v5 (TR v5)** registries. It has no effect on earlier registry versions.
@@ -21,13 +21,9 @@ The Pay on Behalf tab only applies to documents issued from **Token Registry v5 
 
 ## What the Pay on Behalf tab does
 
-This tab lets a platform admin turn on Pay on Behalf for their TT-web deployment without writing any code. It's a UI wrapper around the same underlying setup described in [Setup](./setup):
+Pointing TT-web at a `PlatformPaymaster` is done by entering its address directly into the input field on this tab — see [User experience](#user-experience) below for the full flow.
 
-- Point TT-web at your deployed `PlatformPaymaster` address.
-- Provide the bundler/paymaster infrastructure credentials (for example, a Pimlico API key) used to submit sponsored transactions.
-- Enable or disable Pay on Behalf for the connected registry.
-
-Values entered here should match what you configured on-chain in [Setup](./setup) — the tab does not deploy a `PlatformPaymaster` or whitelist users for you; those steps still happen via the SDK/admin functions described there.
+The address entered here should match what you deployed on-chain in [Setup](./setup) — the tab does not deploy a `PlatformPaymaster` or whitelist users for you; those steps still happen via the SDK/admin functions described there.
 
 :::info Disclaimer
 Pay on Behalf is one possible way to sponsor a user's transaction costs. The TT-web implementation of this tab is built and tested against **Pimlico** as an example bundler/paymaster provider. This is not an endorsement of, or dependency on, Pimlico specifically — any ERC-4337-compatible provider that supports EIP-7702 can be used, as long as it's wired up through the same [Setup](./setup) steps.
