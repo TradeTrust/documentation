@@ -135,7 +135,7 @@ Before calling any Pay on Behalf function you need:
    - **Platform-managed wallet**: the platform owner creates the wallet on the user's behalf and, holding its key, both signs the authorization and submits the delegation itself.
 4. **A built `smartAccountClient`** — the permissionless `SmartAccountClient` wrapping the delegated EOA.
 
-All four are covered in [Setup](./setup). Once set up, jump to [Operations](./operations) for code examples. If you're looking for how this is exposed in the TT-web application's Settings page, see [Pay on Behalf on TT-web](./tt-web-settings).
+All four are covered in [Setup](./setup). Once set up, jump to [Operations](./operations) for code examples. If you're looking for how this is exposed on the TT Verify page, see [Pay on Behalf on TT-web](./tt-web-settings).
 
 ## Disclaimer
 
