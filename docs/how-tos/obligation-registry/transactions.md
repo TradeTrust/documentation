@@ -57,7 +57,7 @@ To execute these transactions, you can use either the Command Line Interface (CL
 ### Installation
 
 ```bash
-npm install --save  @trustvc/trustvc
+npm install --save  @trustvc/trustvc@2.16.0-beta.6
 ```
 
 ---
@@ -66,7 +66,7 @@ npm install --save  @trustvc/trustvc
 
 To use the package, you will need to provide your own Web3 [provider](https://docs.ethers.io/v5/api/providers/api-providers/) or [signer](https://docs.ethers.io/v5/api/signer/#Wallet) (if you are writing to the blockchain).
 
-> Full function reference: [TrustVC SDK README — Obligation Registry (BoE)](https://github.com/TrustVC/trustvc/blob/main/README.md#c-obligation-registry-boe).
+> Full function reference: [TrustVC SDK README — Obligation Registry (BoE)](https://github.com/TrustVC/trustvc/blob/v2.16.0-beta.6/README.md#c-obligation-registry-boe).
 
 ### Mint (Issue) a Document
 
@@ -216,13 +216,13 @@ const status = await getObligationRegistryStatus({ obligationRegistryAddress, to
 ### Installation
 
 ```bash
-npm install -g @trustvc/trustvc-cli
+npm install -g @trustvc/trustvc-cli@1.3.0-beta.4
 ```
 
 You can also opt to use npx:
 
 ```bash
-npx @trustvc/trustvc-cli <arguments>
+npx @trustvc/trustvc-cli@1.3.0-beta.4 <arguments>
 ```
 
 > **Note**: Before minting, set `credentialStatus.obligationRegistry` on your document (not `tokenRegistry`) to your deployed registry address, then sign it with `trustvc w3c-sign`. Mint only accepts a signed document.

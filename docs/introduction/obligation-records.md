@@ -12,9 +12,9 @@ The Obligation Registry is TrustVC's title registry for documents whose lifecycl
 
 It is built on the same [Electronic Transferable Record (ETR)](/docs/how-tos/deployment) foundations as the classic Token Registry / Title Escrow pattern — the same custody model, the same endorsement rules — with one addition: a status field that only the Obligation Registry understands.
 
-> For the full SDK function reference, see the [TrustVC SDK README — Obligation Registry (BoE)](https://github.com/TrustVC/trustvc/blob/main/README.md#c-obligation-registry-boe).
+> For the full SDK function reference, see the [TrustVC SDK README — Obligation Registry (BoE)](https://github.com/TrustVC/trustvc/blob/v2.16.0-beta.6/README.md#c-obligation-registry-boe).
 
-### When to Use It
+## When to Use It
 
 Use the **Obligation Registry** when your document's lifecycle needs the system itself to know:
 
@@ -30,7 +30,7 @@ Keep using the classic **Token Registry / Title Escrow** (ETR) for documents whe
 | Only needs to change ownership/holdership and eventually be surrendered (eBL, Title Deed) | Token Registry + Title Escrow (ETR) |
 | Also needs a holder to formally accept or reject it, and a beneficiary to mark it paid (Bill of Exchange) | **Obligation Registry** |
 
-### Architecture
+## Architecture
 
 The Obligation Registry mirrors the classic ETR architecture contract-for-contract:
 
@@ -43,7 +43,7 @@ The Obligation Registry mirrors the classic ETR architecture contract-for-contra
 
 Just like Title Escrow, every minted document gets its own `ObligationEscrow` contract holding the token in custody between a **beneficiary** and a **holder**. The only thing `ObligationEscrow` adds on top of `TitleEscrow` is a `status` field and the actions that move it.
 
-### Status Lifecycle
+## Status Lifecycle
 
 ![Bill of Exchange status lifecycle — deploy, mint, transfer, accept/reject, discharge](/docs/obligation/boe-event-lifecycle.png)
 
@@ -54,7 +54,7 @@ A document moves through the lifecycle above from the moment it's minted (`statu
 - **Reject** and **Discharge** close the title automatically, in the same transaction — the token is handed back to the registry and burned. There's no separate manual burn step for these two paths.
 - **Return to issuer** is the same escape hatch classic ETR already has: it needs a single wallet holding **both** beneficiary and holder, works at any point while the escrow is active, and doesn't touch `status` at all — the issuer then accepts (burns) or rejects (restores) the return.
 
-### How It Differs from Classic ETR
+## How It Differs from Classic ETR
 
 | Capability | Classic ETR | Obligation Registry |
 | --- | --- | --- |
