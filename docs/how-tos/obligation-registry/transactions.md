@@ -89,10 +89,10 @@ await (
 ).wait();
 ```
 
-### Accept or Reject a Document
+### Accept a Document
 
 ```ts
-import { acceptObligationRegistry, rejectObligationRegistry } from "@trustvc/trustvc";
+import { acceptObligationRegistry } from "@trustvc/trustvc";
 
 // encryptionKeyId here must be the same value used at mint (see above)
 
@@ -105,6 +105,16 @@ await (
     { chainId, id: encryptionKeyId },
   )
 ).wait();
+```
+
+### Reject a Document
+
+This is an alternative to accepting — once a document is `Issued`, the holder calls **either** `accept` **or** `reject`, not both (`reject` auto-closes and burns the title, so there is nothing left to accept afterwards).
+
+```ts
+import { rejectObligationRegistry } from "@trustvc/trustvc";
+
+// encryptionKeyId here must be the same value used at mint (see above)
 
 // Holder rejects — Issued → Rejected (auto-closes and burns)
 await (
@@ -178,12 +188,14 @@ import {
 
 // Dual role (beneficiary == holder) returns the title to the registry
 // encryptionKeyId here must be the same value used at mint (see above)
-await returnToIssuerObligationRegistry(
-  { obligationRegistryAddress, tokenId: "1" },
-  dualRoleSigner,
-  { remarks: "returning to issuer" },
-  { chainId, id: encryptionKeyId },
-);
+await (
+  await returnToIssuerObligationRegistry(
+    { obligationRegistryAddress, tokenId: "1" },
+    dualRoleSigner,
+    { remarks: "returning to issuer" },
+    { chainId, id: encryptionKeyId },
+  )
+).wait();
 
 // Issuer accepts the return (burn) ...
 await acceptReturnedObligationRegistry(/* ... */);
