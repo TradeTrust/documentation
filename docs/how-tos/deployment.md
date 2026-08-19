@@ -1,7 +1,7 @@
 ---
 id: deployment
 title: Deployment
-sidebar_label: Deployment
+sidebar_label: Classic ETR
 ---
 
 #### deploy Function Explanation

@@ -47,6 +47,10 @@ The document to be verified. It can be:
 
 - The verification process is executed asynchronously, and the results are returned as an array of verification fragments.
 
+### Obligation Registry / Bill of Exchange (BoE) Documents
+
+For W3C VCs backed by an on-chain transferable record, `verifyDocument` auto-detects whether `credentialStatus` points at a classic Token Registry (`tokenRegistry`) or an Obligation Registry / Bill of Exchange (`obligationRegistry`) and runs the matching check. Both report as `DOCUMENT_STATUS`, but the fragment `name` differs -- `TransferableRecords` for classic ETR, `ObligationRecords` for BoE -- and the returned `data` carries `tokenRegistry` or `obligationRegistry` respectively. Both checks use the same "minted" semantics (the token's owner is not the zero address), so a BoE document that has been rejected or discharged -- which burns it to a dead address, not the zero address -- still reports `VALID` here, same as a surrendered classic ETR document.
+
 ### Usage Example
 
 ```ts

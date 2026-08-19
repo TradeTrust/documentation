@@ -242,3 +242,26 @@ For detailed instructions on fixing CORS errors, see the [CORS Errors guide](/do
 - **`mimeType`**: The MIME type of the attachment, indicating its format (e.g., application/pdf for PDFs, image/png for PNG images).
 
 This setup provides a straightforward way to include additional data as part of a credential, enhancing its value and usability in various contexts.
+
+### 4. Obligation Records Context
+
+#### **URI**
+[https://trustvc.io/context/obligation-records-context.json](https://trustvc.io/context/obligation-records-context.json) - Extends the same `TransferableRecords` credentialStatus vocabulary with an `obligationRegistry` term, used for documents issued on the **Obligation Registry** (e.g. Bill of Exchange / BoE) instead of the classic Token Registry.
+
+#### **Example Usage**
+
+```json
+"credentialStatus": {
+  "type": "TransferableRecords",
+  "tokenNetwork": {
+    "chain": "Sepolia",
+    "chainId": 11155111
+  },
+  "obligationRegistry": "0x3d98717d536Eb8A6062A50241447f6343e9336A5"
+}
+```
+
+#### **Field Details**
+- **`type`**: Still `TransferableRecords` -- the same credentialStatus type as classic ETR.
+- **`tokenNetwork`**: Same blockchain network details as classic ETR (`chain`, `chainId`).
+- **`obligationRegistry`**: Address of the Obligation Registry contract, used in place of `tokenRegistry` for Obligation Registry / Bill of Exchange documents.

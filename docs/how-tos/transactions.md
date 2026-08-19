@@ -1,7 +1,7 @@
 ---
 id: transactions
 title: Perform Transactions
-sidebar_label: Perform Transactions
+sidebar_label: Classic ETR
 ---
 
 This document includes a Stateflow diagram illustrating the available actions that can be performed on a token ID by the holder and owner on the blockchain. The Title Escrow contract manages and represents token ownership between a beneficiary and a holder. During minting, the Token Registry creates and assigns a Title Escrow as the owner of the token. Actual owners interact with the Title Escrow contract to execute ownership-related operations.
