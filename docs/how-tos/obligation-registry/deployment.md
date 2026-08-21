@@ -10,7 +10,7 @@ Obligation Registry (Bill of Exchange) support is currently in **beta**. APIs, c
 
 > New to the Obligation Registry? See [Obligation Records](/docs/introduction/obligation-records) for when to use it instead of classic ETR, and how its lifecycle differs.
 
-The Obligation Registry contract (`TrustVCToken`) is deployed together with its own `ObligationEscrowFactory` — the same two-contract pattern as a standalone Token Registry deployment, but using the obligation contracts instead of the classic ETR ones.
+The Obligation Registry contract (`TrustVCToken`) is deployed together with its own `ObligationEscrowFactory`, which creates a new `ObligationEscrow` for each minted document.
 
 ## Installing TrustVC CLI
 
@@ -23,7 +23,7 @@ To install the binary, simply download the binary from the [CLI release page](ht
 For Linux or MacOS users, if you have npm installed on your machine, you may install the CLI using the following command:
 
 ```bash
-npm install -g @trustvc/trustvc-cli@1.3.0-beta.4
+npm install -g @trustvc/trustvc-cli@beta
 ```
 
 The above command will install the TrustVC CLI to your machine. You will need to have node.js installed to be able to run the command.
@@ -31,7 +31,7 @@ The above command will install the TrustVC CLI to your machine. You will need to
 You can also opt to use npx:
 
 ```bash
-npx @trustvc/trustvc-cli@1.3.0-beta.4 <arguments>
+npx @trustvc/trustvc-cli@beta <arguments>
 ```
 
 ## Deploying via CLI
@@ -55,7 +55,7 @@ The CLI will interactively prompt you for:
 #### Installation
 
 ```bash
-npm install --save  @trustvc/trustvc@2.16.0-beta.6
+npm install --save  @trustvc/trustvc@beta
 ```
 
 ---
@@ -93,4 +93,4 @@ const token = await (
 await token.waitForDeployment();
 ```
 
-The deployer becomes the default admin — the same role model as `TradeTrustToken`.
+The deployer becomes the default admin of the Obligation Registry.

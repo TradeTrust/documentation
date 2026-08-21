@@ -16,15 +16,15 @@ None of "accepted", "rejected" or "discharged" exist in a plain ownership regist
 
 ### TrustVC Contribution
 
-The Obligation Registry represents this using the same `beneficiary` / `holder` custody model as classic ETR's Title Escrow, plus a `status` field that only the current holder and beneficiary — not just anyone — are allowed to move. This is done through the **ObligationEscrow** smart contract.
+The Obligation Registry represents this with a `beneficiary` / `holder` custody model, plus a `status` field that only the current holder and beneficiary — not just anyone — are allowed to move. This is done through the **ObligationEscrow** smart contract.
 
 ### ObligationEscrow
 
-ObligationEscrow is the Obligation Registry's equivalent of Title Escrow. During minting, the Obligation Registry (`TrustVCToken`) creates and assigns an `ObligationEscrow` as the owner of that token, exactly like Title Escrow does for classic ETR.
+During minting, the Obligation Registry (`TrustVCToken`) creates and assigns an `ObligationEscrow` as the owner of that token, which then holds it in custody on behalf of the beneficiary and holder.
 
 #### Beneficiary and Holder
 
-The **beneficiary** and **holder** fields work exactly like they do in Title Escrow — transfers, nominations, immediate vs. remote endorsement are all unchanged. See [Perform Transactions (ETR)](/docs/how-tos/transactions) if you need a refresher on Owner/Holder mechanics; everything there applies unchanged here.
+The **beneficiary** holds the underlying rights to the document; the **holder** is the party currently in possession. If beneficiary and holder are the same party, that party can transfer the token directly in one transaction (**immediate endorsement**). If they're different parties, the beneficiary prepares a **remote endorsement** — nominating a new beneficiary — which the holder must then execute for it to take effect. The holder alone can transfer holdership without any nomination step.
 
 #### Status
 
@@ -46,7 +46,7 @@ This is the part that's new. Every `ObligationEscrow` also tracks a `status`:
 
 #### Return to Issuer
 
-Return to issuer works exactly like classic ETR: it requires a single wallet holding **both** the current beneficiary and holder roles, and can be called at any point while the escrow is active — it does not require the title to already be Rejected or Discharged, and it does not change `status`.
+Return to issuer requires a single wallet holding **both** the current beneficiary and holder roles, and can be called at any point while the escrow is active — it does not require the title to already be Rejected or Discharged, and it does not change `status`.
 
 ## Executing Transactions on the Obligation Registry
 
@@ -57,7 +57,7 @@ To execute these transactions, you can use either the Command Line Interface (CL
 ### Installation
 
 ```bash
-npm install --save  @trustvc/trustvc@2.16.0-beta.6
+npm install --save  @trustvc/trustvc@beta
 ```
 
 ---
@@ -70,7 +70,7 @@ To use the package, you will need to provide your own Web3 [provider](https://do
 
 ### Mint (Issue) a Document
 
-Minting sets the document's status to **Issued** and creates its `ObligationEscrow`, the same way minting creates a Title Escrow for classic ETR.
+Minting sets the document's status to **Issued** and creates its `ObligationEscrow`, which takes ownership of the newly minted token.
 
 `encryptionKeyId` is whatever key you use to encrypt this remark -- it must be the exact same value later passed as `keyId` to [`fetchEndorsementChain`](/docs/how-tos/fetch-endorsement-chain), or the remark won't decrypt. The `trustvc` CLI always uses the signed document's own `id` for this (see [Fetch Endorsement Chain](/docs/how-tos/fetch-endorsement-chain) for the read side), which is why we set it that way below; calling the SDK directly, you can use any string as long as every write and read for this document use the same one.
 
@@ -146,7 +146,7 @@ await (
 
 ### Transfer of Beneficiary/Holder
 
-Transferring **beneficiary** and **holder** relies on the same methods as classic ETR, with the `ObligationRegistry` suffix:
+Transferring **beneficiary** and **holder** uses the following SDK functions:
 
 ```ts
 import {
@@ -216,13 +216,13 @@ const status = await getObligationRegistryStatus({ obligationRegistryAddress, to
 ### Installation
 
 ```bash
-npm install -g @trustvc/trustvc-cli@1.3.0-beta.4
+npm install -g @trustvc/trustvc-cli@beta
 ```
 
 You can also opt to use npx:
 
 ```bash
-npx @trustvc/trustvc-cli@1.3.0-beta.4 <arguments>
+npx @trustvc/trustvc-cli@beta <arguments>
 ```
 
 > **Note**: Before minting, set `credentialStatus.obligationRegistry` on your document (not `tokenRegistry`) to your deployed registry address, then sign it with `trustvc w3c-sign`. Mint only accepts a signed document.
@@ -256,8 +256,6 @@ trustvc obligation-escrow endorsement-chain
 
 ### Transfers
 
-Mirrors `title-escrow`, on the obligation escrow instead:
-
 ```bash
 trustvc obligation-escrow transfer-holder
 trustvc obligation-escrow nominate-transfer-owner
@@ -284,4 +282,4 @@ trustvc obligation-escrow reject-return-to-issuer
 trustvc verify
 ```
 
-The same `verify` command used for classic ETR documents also verifies Bill of Exchange / obligation documents — it auto-detects which check to run from the document's `credentialStatus`.
+The `trustvc verify` command verifies Bill of Exchange / obligation documents — it auto-detects which check to run from the document's `credentialStatus`.

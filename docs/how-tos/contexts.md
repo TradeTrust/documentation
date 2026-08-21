@@ -245,8 +245,12 @@ This setup provides a straightforward way to include additional data as part of 
 
 ### 4. Obligation Records Context
 
+:::caution Beta
+The Obligation Registry (Bill of Exchange) context below is currently in **beta**. APIs, contract addresses, and behavior may change before the stable release. Use on testnet only and do not rely on this feature in production.
+:::
+
 #### **URI**
-[https://trustvc.io/context/obligation-records-context.json](https://trustvc.io/context/obligation-records-context.json) - Extends the same `TransferableRecords` credentialStatus vocabulary with an `obligationRegistry` term, used for documents issued on the **Obligation Registry** (e.g. Bill of Exchange / BoE) instead of the classic Token Registry.
+[https://trustvc.io/context/obligation-records-context.json](https://trustvc.io/context/obligation-records-context.json) - Defines the `obligationRegistry` term for a document's `credentialStatus`, identifying documents issued on the **Obligation Registry** — TrustVC's registry for documents with an on-chain acceptance/rejection/discharge status (e.g. Bill of Exchange / BoE).
 
 #### **Example Usage**
 
@@ -262,6 +266,6 @@ This setup provides a straightforward way to include additional data as part of 
 ```
 
 #### **Field Details**
-- **`type`**: Still `TransferableRecords` -- the same credentialStatus type as classic ETR.
-- **`tokenNetwork`**: Same blockchain network details as classic ETR (`chain`, `chainId`).
-- **`obligationRegistry`**: Address of the Obligation Registry contract, used in place of `tokenRegistry` for Obligation Registry / Bill of Exchange documents.
+- **`type`**: The literal string `TransferableRecords` — the status-type discriminator used across TrustVC's on-chain registries.
+- **`tokenNetwork`**: Identifies the blockchain network the Obligation Registry contract is deployed on (`chain`, `chainId`).
+- **`obligationRegistry`**: Address of the Obligation Registry contract that issued and tracks this document.

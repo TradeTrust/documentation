@@ -92,6 +92,10 @@ try {
 
 ### Using the CLI
 
+:::caution Beta
+Obligation Registry (Bill of Exchange) support — including the CLI commands below — is currently in **beta**. Install the beta CLI (`npm install -g @trustvc/trustvc-cli@beta`) to use these commands. APIs, contract addresses, and behavior may change before the stable release. Use on testnet only and do not rely on this feature in production. This does not affect classic Token Registry / Title Escrow (V4/V5) endorsement chain lookups, which remain stable.
+:::
+
 For Obligation Registry titles, the `trustvc` CLI also wraps this lookup as a read-only command:
 
 ```bash

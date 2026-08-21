@@ -19,6 +19,7 @@ TradeTrust currently offers the following generic templates:
 | **Electronic Bill of Lading (eBL)** | A digital record of a shipment, serving as a receipt, contract of carriage, and document of title. |
 | **Invoice** | A commercial document issued by a seller to a buyer, detailing the products or services provided, their quantities and agreed prices, and the total amount due. |
 | **Warehouse Receipt** | A document issued by a warehouse operator acknowledging the receipt of goods for storage. |
+| **Bill of Exchange (BoE)** *(Beta)* | A written, unconditional order directing a drawee to pay a fixed sum to a payee — issued via the [Obligation Registry](/docs/introduction/obligation-records) rather than the classic Token Registry. |
 
 These templates are hosted at `https://generic-templates.tradetrust.io` and can be previewed in the [TradeTrust Gallery](https://gallery.tradetrust.io/), other legacy templates can be previewed in the [Generic Templates Storybook](https://storybook.generic-templates.tradetrust.io/).
 
@@ -64,6 +65,7 @@ Replace `BILL_OF_LADING_CARRIER` with the appropriate template name from the fol
 - `BILL_OF_LADING_CARRIER` - Electronic Bill of Lading template
 - `INVOICE` - Invoice template
 - `WAREHOUSE_RECEIPT` - Warehouse Receipt template
+- `BILL_OF_EXCHANGE` - Bill of Exchange template *(Beta — see [Obligation Records](/docs/introduction/obligation-records))*
 
 ### 3. Prepare Your Document Data
 
@@ -119,6 +121,75 @@ Each template requires specific data fields. Below are examples for common templ
   },
   "validUntil": "2025-09-30T15:53:58.112Z",
   "issuer": "did:web:did.trustvc.io",
+}
+```
+
+#### Bill of Exchange
+
+:::caution Beta
+The Bill of Exchange template is currently in **beta**, as is the [Obligation Registry](/docs/introduction/obligation-records) it's issued through. APIs, contract addresses, and behavior may change before the stable release. Use on testnet only and do not rely on this feature in production.
+:::
+
+Unlike the other generic templates, a Bill of Exchange document's `credentialStatus` points at an **Obligation Registry** (`obligationRegistry`) instead of a classic Token Registry (`tokenRegistry`) — see [Obligation Registry Deployment](/docs/how-tos/obligation-registry/deployment) to deploy one.
+
+```json
+{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/security/data-integrity/v2",
+    "https://trustvc.io/context/render-method-context-v2.json",
+    "https://trustvc.io/context/bill-of-exchange.json",
+    "https://trustvc.io/context/obligation-records-context.json"
+  ],
+  "type": [
+    "VerifiableCredential"
+  ],
+  "credentialStatus": {
+    "type": "TransferableRecords",
+    "tokenNetwork": {
+      "chain": "Sepolia",
+      "chainId": 11155111
+    },
+    "obligationRegistry": "0x9aAEfa502D0d975b9eECdBc280704F2D52029d10",
+    "tokenId": "d518e8958af67b90441775e4836feb050240ace87ac086d30496169ea296b32e"
+  },
+  "renderMethod": [
+    {
+      "id": "https://generic-templates.tradetrust.io",
+      "type": "EMBEDDED_RENDERER",
+      "templateName": "BILL_OF_EXCHANGE"
+    }
+  ],
+  "credentialSubject": {
+    "type": [
+      "BillOfExchange"
+    ],
+    "referenceNumber": "BOE-2026-00147",
+    "amountInFigures": "128500.00",
+    "currencyCode": "USD",
+    "amountInWords": "One hundred twenty-eight thousand five hundred United States Dollars only",
+    "placeOfIssue": "Singapore",
+    "dateOfIssue": "2026-07-06",
+    "tenor": "At 90 days sight",
+    "payee": "Meridian Commodities Pte Ltd",
+    "drawnUnder": "Documentary Credit No. LC-DBS-2026-88341",
+    "drawnUnderDate": "2026-06-15",
+    "issuedBy": "DBS Bank Ltd",
+    "drawee": {
+      "name": "Fairview Industries Inc.",
+      "address": "1201 Market Street, Suite 900, Wilmington, DE 19801, USA",
+      "authorisedSignatoryName": "James R. Carter",
+      "signature": "data:image/png;base64,iVBORw0KGgo..."
+    },
+    "drawer": {
+      "name": "Meridian Commodities Pte Ltd",
+      "address": "8 Marina Boulevard, #24-01, Singapore 018981",
+      "authorisedSignatoryName": "Wei Ling Tan",
+      "signature": "data:image/png;base64,iVBORw0KGgo..."
+    }
+  },
+  "validUntil": "2026-12-31T15:53:58.112Z",
+  "issuer": "did:web:did.trustvc.io"
 }
 ```
 

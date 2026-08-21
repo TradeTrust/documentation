@@ -10,10 +10,6 @@ Obligation Registry (Bill of Exchange) support is currently in **beta**. APIs, c
 
 The Obligation Registry is TrustVC's title registry for documents whose lifecycle needs more than "who currently holds it" — it adds a real business **status** on-chain: has the holder accepted the document, rejected it, or has it already been paid off (discharged)? The first document type built on it is the electronic **Bill of Exchange (BoE)**.
 
-It is built on the same [Electronic Transferable Record (ETR)](/docs/how-tos/deployment) foundations as the classic Token Registry / Title Escrow pattern — the same custody model, the same endorsement rules — with one addition: a status field that only the Obligation Registry understands.
-
-> For the full SDK function reference, see the [TrustVC SDK README — Obligation Registry (BoE)](https://github.com/TrustVC/trustvc/blob/v2.16.0-beta.6/README.md#c-obligation-registry-boe).
-
 ## When to Use It
 
 Use the **Obligation Registry** when your document's lifecycle needs the system itself to know:
@@ -32,16 +28,13 @@ Keep using the classic **Token Registry / Title Escrow** (ETR) for documents whe
 
 ## Architecture
 
-The Obligation Registry mirrors the classic ETR architecture contract-for-contract:
+The Obligation Registry is built from three contracts:
 
-| Use case | Registry | Escrow | Factory |
-| --- | --- | --- | --- |
-| eBL / ETR | `TradeTrustToken` | `TitleEscrow` | `TitleEscrowFactory` |
-| BoE / Obligation | `TrustVCToken` | `ObligationEscrow` | `ObligationEscrowFactory` |
-
-![Obligation Registry architecture compared to classic ETR](/docs/obligation/difference.drawio.png)
-
-Just like Title Escrow, every minted document gets its own `ObligationEscrow` contract holding the token in custody between a **beneficiary** and a **holder**. The only thing `ObligationEscrow` adds on top of `TitleEscrow` is a `status` field and the actions that move it.
+| Contract | Role |
+| --- | --- |
+| `TrustVCToken` | The registry contract — an ERC-721 token representing each Bill of Exchange document on-chain. |
+| `ObligationEscrowFactory` | Creates a new `ObligationEscrow` for each minted document. |
+| `ObligationEscrow` | Holds a minted document in custody between a **beneficiary** and a **holder**, and tracks a `status` field together with the actions that move it. |
 
 ## Status Lifecycle
 
@@ -52,19 +45,19 @@ A document moves through the lifecycle above from the moment it's minted (`statu
 - **Accept** / **Reject** can only be called by the **holder**, and only while the **beneficiary and holder are different parties**.
 - **Discharge** can only be called by the **beneficiary**, once the document is **Accepted**.
 - **Reject** and **Discharge** close the title automatically, in the same transaction — the token is handed back to the registry and burned. There's no separate manual burn step for these two paths.
-- **Return to issuer** is the same escape hatch classic ETR already has: it needs a single wallet holding **both** beneficiary and holder, works at any point while the escrow is active, and doesn't touch `status` at all — the issuer then accepts (burns) or rejects (restores) the return.
+- **Return to issuer** is an escape hatch: it needs a single wallet holding **both** beneficiary and holder, works at any point while the escrow is active, and doesn't touch `status` at all — the issuer then accepts (burns) or rejects (restores) the return.
 
-## How It Differs from Classic ETR
+## Capabilities
 
-| Capability | Classic ETR | Obligation Registry |
-| --- | --- | --- |
-| Mint a document | ✅ | ✅ (identical) |
-| Transfer beneficiary / holder (endorsement) | ✅ | ✅ (identical) |
-| Return to issuer (dual role) | ✅ | ✅ (identical) |
-| Pause the registry | ✅ | ✅ (identical) |
-| Holder can **accept** or **reject** the document | ❌ | ✅ new |
-| Beneficiary can **discharge** the document | ❌ | ✅ new |
+The Obligation Registry supports:
 
-Everything else — deploying, minting, endorsing, reading the endorsement chain — works the same way you already know from Token Registry / Title Escrow. The [Deployment](/docs/how-tos/deployment) and [Perform Transaction](/docs/how-tos/transactions) guides walk through each of these for the Obligation Registry specifically.
+- Minting a document
+- Transferring beneficiary / holder (endorsement)
+- Returning a document to the issuer (dual role)
+- Pausing the registry
+- The holder **accepting** or **rejecting** the document
+- The beneficiary **discharging** the document
+
+The [Deployment](/docs/how-tos/obligation-registry/deployment) and [Perform Transaction](/docs/how-tos/obligation-registry/transactions) guides walk through deploying, minting, endorsing, and reading the endorsement chain for the Obligation Registry.
 
 > Obligation Registry is **v5-only** — there is no v4 equivalent, and classic `token-registry` / `title-escrow` commands should not be used for obligation documents (they'll fail extraction, since obligation documents carry `credentialStatus.obligationRegistry` instead of `credentialStatus.tokenRegistry`).
