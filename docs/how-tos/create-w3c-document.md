@@ -328,7 +328,7 @@ export const createW3CDocument = async () => {
 >   templateName: "BILL_OF_EXCHANGE",
 > });
 > document.obligationCredentialStatus({
->   chain: CHAININFO.currency,
+>   chain: CHAININFO.label,
 >   chainId: Number(CHAINID),
 >   obligationRegistry: "<your_obligation_registry_address>",
 >   rpcProviderUrl: RPC_PROVIDER_URL!,
