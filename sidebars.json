@@ -44,6 +44,7 @@
             "items": [
               "introduction/key-components-of-tradetrust/transferability/overview",
               "introduction/key-components-of-tradetrust/transferability/token-registry",
+              "introduction/key-components-of-tradetrust/transferability/obligation-records",
               "introduction/key-components-of-tradetrust/transferability/title-transfer",
               "introduction/key-components-of-tradetrust/transferability/title-transfer-example",
               "introduction/key-components-of-tradetrust/transferability/endorsement-chain",
@@ -69,7 +70,6 @@
           }
         ]
       },
-      "introduction/obligation-records",
       "introduction/legal",
       "introduction/ig-p&i"
     ],

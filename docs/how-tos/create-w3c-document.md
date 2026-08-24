@@ -342,7 +342,7 @@ export const createW3CDocument = async () => {
 >   "obligationRegistry": "<your_obligation_registry_address>"
 > }
 > ```
-> See [Obligation Records](/docs/introduction/obligation-records) for details.
+> See [Obligation Records](/docs/introduction/key-components-of-tradetrust/transferability/obligation-records) for details.
 
 ### 5. Signing the Document
 

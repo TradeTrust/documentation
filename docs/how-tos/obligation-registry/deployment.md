@@ -8,7 +8,7 @@ sidebar_label: Obligation Records
 Obligation Registry (Bill of Exchange) support is currently in **beta**. APIs, contract addresses, and behavior may change before the stable release. Use on testnet only and do not rely on this feature in production.
 :::
 
-> New to the Obligation Registry? See [Obligation Records](/docs/introduction/obligation-records) for when to use it instead of classic ETR, and how its lifecycle differs.
+> New to the Obligation Registry? See [Obligation Records](/docs/introduction/key-components-of-tradetrust/transferability/obligation-records) for when to use it instead of classic ETR, and how its lifecycle differs.
 
 The Obligation Registry contract (`TrustVCToken`) is deployed together with its own `ObligationEscrowFactory`, which creates a new `ObligationEscrow` for each minted document.
 
