@@ -305,7 +305,7 @@ export const createW3CDocument = async () => {
 
 > **Important**: For bitstring revocation, you must host a valid StatusList2021 credential at the specified URL. Using placeholder URLs like `https://example.com` will cause verification errors. Follow the [Bitstring Status List guide](/docs/how-tos/bitstring) to set up proper hosting.
 
-> **Building a Bill of Exchange document instead?** Swap the `@context`, and call `credentialStatus` with a `tokenRegistry`:
+> **Building a Bill of Exchange (Obligation Registry) document instead?** Swap the `@context`, and call the dedicated `obligationCredentialStatus` method instead of `credentialStatus` -- it's a different builder method, not just a field swap:
 > ```json
 > "@context": [
 >   "https://trustvc.io/context/bill-of-exchange.json",
@@ -313,10 +313,10 @@ export const createW3CDocument = async () => {
 > ]
 > ```
 > ```typescript
-> document.credentialStatus({
+> document.obligationCredentialStatus({
 >   chain: CHAININFO.currency,
 >   chainId: Number(CHAINID),
->   tokenRegistry: "<your_token_registry_address>",
+>   obligationRegistry: "<your_obligation_registry_address>",
 >   rpcProviderUrl: RPC_PROVIDER_URL!,
 > });
 > ```
@@ -325,7 +325,7 @@ export const createW3CDocument = async () => {
 > {
 >   "type": "TransferableRecords",
 >   "tokenNetwork": { "chain": "Sepolia", "chainId": 11155111 },
->   "tokenRegistry": "<your_token_registry_address>"
+>   "obligationRegistry": "<your_obligation_registry_address>"
 > }
 > ```
 > See [Obligation Records](/docs/introduction/obligation-records) for details.

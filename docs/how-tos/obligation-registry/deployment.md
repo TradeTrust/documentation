@@ -26,7 +26,7 @@ For Linux or MacOS users, if you have npm installed on your machine, you may ins
 npm install -g @trustvc/trustvc-cli@beta
 ```
 
-The above command will install the TrustVC CLI to your machine. You will need to have node.js installed to be able to run the command.
+The above command will install the TrustVC CLI to your machine. You will need to have Node.js v22.19.5 or later installed to be able to run the command.
 
 You can also opt to use npx:
 
@@ -52,15 +52,17 @@ The CLI will interactively prompt you for:
 
 ## Deploying via Code
 
-#### Installation
+### Installation
 
 ```bash
 npm install --save  @trustvc/trustvc@beta
 ```
 
+This requires Node.js v20.0.0 or later.
+
 ---
 
-#### Usage
+### Usage
 
 To use the package, you will need to provide your own Web3 [provider](https://docs.ethers.io/v5/api/providers/api-providers/) or [signer](https://docs.ethers.io/v5/api/signer/#Wallet) (if you are writing to the blockchain).
 
