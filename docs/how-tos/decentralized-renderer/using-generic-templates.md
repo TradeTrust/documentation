@@ -130,6 +130,8 @@ Each template requires specific data fields. Below are examples for common templ
 The Bill of Exchange template is currently in **beta**, as is the [Obligation Registry](/docs/introduction/key-components-of-tradetrust/transferability/obligation-records) it's issued through. APIs, contract addresses, and behavior may change before the stable release. Use on testnet only and do not rely on this feature in production.
 :::
 
+To create and issue this example, use the **beta CLI on testnet** (`npm install -g @trustvc/trustvc-cli@beta`, then `trustvc w3c-sign` followed by `trustvc obligation-registry mint` — mint only accepts a signed document) — see [Mint document to the Obligation Registry](/docs/how-tos/obligation-registry/transactions#mint-document-to-the-obligation-registry) for the full flow. Do not use the V5 Creator (Mainnet or Testnet) for this example; it only supports the classic Token Registry.
+
 Unlike the other generic templates, a Bill of Exchange document's `credentialStatus` points at an **Obligation Registry** (`obligationRegistry`) instead of a classic Token Registry (`tokenRegistry`) — see [Obligation Registry Deployment](/docs/how-tos/obligation-registry/deployment) to deploy one.
 
 ```json
@@ -195,11 +197,11 @@ Unlike the other generic templates, a Bill of Exchange document's `credentialSta
 
 ### 4. Create and Issue Your Document
 
-You can create and issue sample document using the [TradeTrust Creator (V5 - Mainnet)](https://v5-token-registry.tradetrust.io/creator) / [TradeTrust Creator (V5 - Testnet)](https://v5-token-registry.dev.tradetrust.io/creator).
+For templates other than Bill of Exchange, you can create and issue a sample document using the [TradeTrust Creator (V5 - Mainnet)](https://v5-token-registry.tradetrust.io/creator) / [TradeTrust Creator (V5 - Testnet)](https://v5-token-registry.dev.tradetrust.io/creator).
 
 Alternatively, you can setup your own creator by following the [TradeTrust Creator Tutorial](/docs/tutorial/creator.md).
 
-> **Bill of Exchange documents can't be issued through the Creator above** -- it only supports the classic Token Registry. Mint them on testnet through the beta CLI instead (`npm install -g @trustvc/trustvc-cli@beta`, then `trustvc obligation-registry mint`) -- see [Mint document to the Obligation Registry](/docs/how-tos/obligation-registry/transactions#mint-document-to-the-obligation-registry) for the full flow.
+Bill of Exchange issuance is covered in the [Bill of Exchange](#bill-of-exchange) section above — use the beta CLI on testnet, not the Creator.
 
 ## Limitations of Generic Templates
 

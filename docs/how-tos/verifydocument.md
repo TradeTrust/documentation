@@ -61,6 +61,8 @@ Obligation Registry (Bill of Exchange) support is currently in **beta**. APIs, c
 
 For W3C VCs backed by an Obligation Registry (Bill of Exchange / BoE) title, `verifyDocument` checks `credentialStatus.obligationRegistry`. The check reports as `DOCUMENT_STATUS` with fragment `name` `ObligationRecords`, and the returned `data` carries `obligationRegistry`. The check uses minted semantics: the token's owner is not the zero address. A rejected or discharged Bill of Exchange burns the token to a dead (non-zero) address rather than the zero address, so it still reports `VALID` here.
 
+> **`DOCUMENT_STATUS: VALID` here only confirms the document was minted on the Obligation Registry -- it does not mean the obligation is still active or payable.** Since a rejected or discharged Bill of Exchange satisfies the same minted semantics, `isValid()` from `@trustvc/trustvc` will also return `true` for both. To check whether an obligation is actually outstanding, call [`getObligationRegistryStatus`](/docs/how-tos/obligation-registry/transactions#reading-status) and check its result against the `Rejected` or `Discharged` states.
+
 ### Usage Example
 
 ```ts
