@@ -127,8 +127,8 @@ Every entry in the returned chain shares the same shape (`type`, `transactionHas
 | | Classic ETR (Title Escrow) | Obligation ETR (ObligationEscrow) |
 | --- | --- | --- |
 | Custody events | `INITIAL`, `TRANSFER_BENEFICIARY`, `TRANSFER_HOLDER`, `TRANSFER_OWNERS`, `REJECT_TRANSFER_*` (V5) | Same custody events, unchanged |
-| Return/surrender | `SURRENDERED` / `RETURNED_TO_ISSUER`, `SURRENDER_ACCEPTED` / `RETURN_TO_ISSUER_ACCEPTED`, `SURRENDER_REJECTED` / `RETURN_TO_ISSUER_REJECTED` | Same, plus a `terminationReason` (`ReturnToIssuer`, `Rejected`, or `Discharged`) on the closing row |
-| Status events | Not applicable | `STATUS_ACCEPTED`, `STATUS_REJECTED`, `STATUS_DISCHARGED` (the mint's `StatusInitialized` event is merged into the `INITIAL` row, so it does not appear as a separate entry) |
+| Return/surrender | `SURRENDERED` / `RETURNED_TO_ISSUER`, `SURRENDER_ACCEPTED` / `RETURN_TO_ISSUER_ACCEPTED`, `SURRENDER_REJECTED` / `RETURN_TO_ISSUER_REJECTED` | `RETURNED_TO_ISSUER`, `RETURN_TO_ISSUER_REJECTED`, `RETURN_TO_ISSUER_ACCEPTED` only for an actual return-to-issuer. The closing shred row may include `terminationReason: ReturnToIssuer` |
+| Status events | Not applicable | `STATUS_ACCEPTED`, `STATUS_REJECTED`, `STATUS_DISCHARGED`. Reject and discharge auto-shred in the same transaction — the chain keeps the status type (not `RETURN_TO_ISSUER_ACCEPTED`), with last `owner`/`holder` and optional `terminationReason` (`Rejected` or `Discharged`). The mint's `StatusInitialized` event is merged into the `INITIAL` row |
 
 For a Bill of Exchange VC, pass `credentialStatus.obligationRegistry` (not `tokenRegistry`) as the registry address -- everything else about the call is identical.
 
@@ -161,7 +161,7 @@ For a Bill of Exchange VC, pass `credentialStatus.obligationRegistry` (not `toke
 ]
 ```
 
-**Obligation ETR** -- a Bill of Exchange minted, accepted by the holder, then discharged once paid (illustrative example built from the SDK's type contract -- not a captured live-chain response). `discharge()` emits both `StatusDischarged` and the closing `Shred` event in the same transaction, so `fetchEndorsementChain` merges them into a single `RETURN_TO_ISSUER_ACCEPTED` row -- it carries the discharge remark and a `terminationReason` of `Discharged`, and its `owner`/`holder` are the beneficiary/holder at the moment of closure, not the zero address:
+**Obligation ETR** -- a Bill of Exchange minted, accepted by the holder, then discharged once paid (illustrative example built from the SDK's type contract -- not a captured live-chain response). `discharge()` emits both `StatusDischarged` and the closing `Shred` event in the same transaction; `fetchEndorsementChain` merges them into a single `STATUS_DISCHARGED` row (not `RETURN_TO_ISSUER_ACCEPTED`, which is classic ETR shred only). The row carries the discharge remark, optional `terminationReason` of `Discharged`, and `owner`/`holder` as the beneficiary/holder at the moment of closure, not the zero address. Reject follows the same pattern as `STATUS_REJECTED`.
 
 ```json
 [
@@ -186,7 +186,7 @@ For a Bill of Exchange VC, pass `credentialStatus.obligationRegistry` (not `toke
     "timestamp": 1713782103000
   },
   {
-    "type": "RETURN_TO_ISSUER_ACCEPTED",
+    "type": "STATUS_DISCHARGED",
     "transactionHash": "0xff88591234567890abcdef1234567890abcdef1234567890abcdef1234657135",
     "transactionIndex": 1,
     "blockNumber": 6202088,
