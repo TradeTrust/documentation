@@ -199,7 +199,7 @@ Fields on `drawee` / `drawer` (both optional `BillOfExchangeParty` objects): `na
 
 ### 4. Create and Issue Your Document
 
-For templates other than Bill of Exchange, you can create and issue a sample document using the [TradeTrust Creator (V5 - Mainnet)](https://v5-token-registry.tradetrust.io/creator) / [TradeTrust Creator (V5 - Testnet)](https://v5-token-registry.dev.tradetrust.io/creator).
+For templates other than Bill of Exchange, you can create and issue a sample document using the [TradeTrust Creator (V5 - Mainnet)](https://v5-token-registry.tradetrust.io/creator) or [TradeTrust Creator (V5 - Testnet)](https://v5-token-registry.dev.tradetrust.io/creator).
 
 Alternatively, you can setup your own creator by following the [TradeTrust Creator Tutorial](/docs/tutorial/creator.md).
 
