@@ -195,7 +195,7 @@ Unlike the other generic templates, a Bill of Exchange document's `credentialSta
 }
 ```
 
-Fields on `drawee` / `drawer` (both optional `BillOfExchangeParty` objects): `name`, `address`, `authorisedSignatoryName`, and `signature`. **`signature` must be an inline base64 data URI** (`data:image/png;base64,...`, `image/jpeg`, `image/gif`, `image/webp`, or `image/svg+xml`) — hosted/remote image URLs are rejected by the template for security. The `signature` values above are minimal 1×1 pixel placeholders to keep the example short — substitute your own signature image's data URI.
+Fields on `drawee` / `drawer` (both optional `BillOfExchangeParty` objects): `name`, `address`, `authorisedSignatoryName`, and `signature`. **`signature` must be an inline base64 data URI** (`data:image/png;base64,...`, `data:image/jpeg;base64,...`, `data:image/gif;base64,...`, `data:image/webp;base64,...`, or `data:image/svg+xml;base64,...`) — hosted/remote image URLs are rejected by the template for security. The `signature` values above are minimal 1×1 pixel placeholders to keep the example short — substitute your own signature image's data URI.
 
 ### 4. Create and Issue Your Document
 
