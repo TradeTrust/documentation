@@ -161,7 +161,7 @@ For a Bill of Exchange VC, pass `credentialStatus.obligationRegistry` (not `toke
 ]
 ```
 
-**Obligation ETR** -- a Bill of Exchange minted, accepted by the holder, then discharged once paid (illustrative example built from the SDK's type contract -- not a captured live-chain response). `discharge()` emits both `StatusDischarged` and the closing `Shred` event in the same transaction; `fetchEndorsementChain` merges them into a single `STATUS_DISCHARGED` row (not `RETURN_TO_ISSUER_ACCEPTED`, which is classic ETR shred only). The row carries the discharge remark, optional `terminationReason` of `Discharged`, and `owner`/`holder` as the beneficiary/holder at the moment of closure, not the zero address. Reject follows the same pattern as `STATUS_REJECTED`.
+**Obligation ETR** -- a Bill of Exchange minted, accepted by the holder, then discharged once paid. `discharge()` emits both `StatusDischarged` and the closing `Shred` event in the same transaction; `fetchEndorsementChain` merges them into a single `STATUS_DISCHARGED` row (not `RETURN_TO_ISSUER_ACCEPTED`, which is classic ETR shred only). The row carries the discharge remark, optional `terminationReason` of `Discharged`, and `owner`/`holder` as the beneficiary/holder at the moment of closure, not the zero address. Reject follows the same pattern as `STATUS_REJECTED`.
 
 ```json
 [
