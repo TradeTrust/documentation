@@ -44,6 +44,7 @@
             "items": [
               "introduction/key-components-of-tradetrust/transferability/overview",
               "introduction/key-components-of-tradetrust/transferability/token-registry",
+              "introduction/key-components-of-tradetrust/transferability/obligation-records",
               "introduction/key-components-of-tradetrust/transferability/title-transfer",
               "introduction/key-components-of-tradetrust/transferability/title-transfer-example",
               "introduction/key-components-of-tradetrust/transferability/endorsement-chain",
@@ -79,7 +80,14 @@
       "tutorial/decentralized-renderer"
     ],
     "How Tos": [
-      "how-tos/deployment",
+      {
+        "label": "Deployment",
+        "type": "category",
+        "items": [
+          "how-tos/deployment",
+          "how-tos/obligation-registry/deployment"
+        ]
+      },
       {
         "label": "Pay on Behalf (EIP-7702)",
         "type": "category",
@@ -234,7 +242,14 @@
           }
         ]
       },
-      "how-tos/transactions",
+      {
+        "label": "Perform Transaction",
+        "type": "category",
+        "items": [
+          "how-tos/transactions",
+          "how-tos/obligation-registry/transactions"
+        ]
+      },
       "how-tos/verifydocument",
       "how-tos/fetch-endorsement-chain",
       {

@@ -242,3 +242,30 @@ For detailed instructions on fixing CORS errors, see the [CORS Errors guide](/do
 - **`mimeType`**: The MIME type of the attachment, indicating its format (e.g., application/pdf for PDFs, image/png for PNG images).
 
 This setup provides a straightforward way to include additional data as part of a credential, enhancing its value and usability in various contexts.
+
+### 4. Obligation Records Context
+
+:::caution Beta
+The Obligation Registry (Bill of Exchange) context below is currently in **beta**. APIs, contract addresses, and behavior may change before the stable release. Use on testnet only and do not rely on this feature in production.
+:::
+
+#### **URI**
+[https://trustvc.io/context/obligation-records-context.json](https://trustvc.io/context/obligation-records-context.json) - Defines the `obligationRegistry` term for a document's `credentialStatus`, identifying documents issued on the **Obligation Registry** — TrustVC's registry for documents with an on-chain acceptance/rejection/discharge status (e.g. Bill of Exchange / BoE).
+
+#### **Example Usage**
+
+```json
+"credentialStatus": {
+  "type": "TransferableRecords",
+  "tokenNetwork": {
+    "chain": "Sepolia",
+    "chainId": 11155111
+  },
+  "obligationRegistry": "0x3d98717d536Eb8A6062A50241447f6343e9336A5"
+}
+```
+
+#### **Field Details**
+- **`type`**: The literal string `TransferableRecords` — the status-type discriminator used across TrustVC's on-chain registries.
+- **`tokenNetwork`**: Identifies the blockchain network the Obligation Registry contract is deployed on (`chain`, `chainId`).
+- **`obligationRegistry`**: Address of the Obligation Registry contract that issued and tracks this document.
