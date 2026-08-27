@@ -23,3 +23,12 @@ The blockchain networks listed here are not officially endorsed by IMDA Singapor
 | ASTRON\* | 1338     | astron           | Astron Mainnet    | Astron                                               | L2 Mainnet | Active |
 
 _Note: All networks marked with (\*) in the table above are custom networks. Please follow this [guide](/docs/how-tos/advanced/additional-network-metamask-guide) to add them to your MetaMask and use them with the TradeTrust reference implementation._
+
+### Community Supported Networks
+
+Disclaimer: Community supported networks are not maintained by TradeTrust and up to the discretion of their network provers.
+
+| Chain | Chain Id | Network Name   | Network          | Blockchain                           | Type       | Status |
+| ----- | -------- | -------------- | ---------------- | ------------------------------------ | ---------- | ------ |
+| XRPL  | 1440000  | xrplevm        | XRPL EVM Mainnet | [XRPL EVM](https://www.xrplevm.org/) | L1 Mainnet | Active |
+| XRPL  | 1449000  | xrplevmtestnet | XRPL EVM Testnet | XRPL EVM                             | L1 Testnet | Active |
