@@ -177,6 +177,10 @@ import {
 Rejection must occur as the very next action after being appointed as beneficiary and/or holder. If any other transaction happens first, it counts as implicit acceptance of the appointment.
 :::
 
+:::note
+For holdership specifically, `accept` closes only the *current* holder's reject window for the transfer that appointed them — it does not block rejection for future holders. If that holder then transfers holdership again (`transferHolderObligationRegistry`), the new holder gets a fresh reject window, even if it's the same address that accepted earlier.
+:::
+
 ### Return Document to Issuer
 
 ```ts
