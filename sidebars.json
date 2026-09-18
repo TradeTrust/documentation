@@ -95,6 +95,7 @@
           "how-tos/pay-on-behalf/overview",
           "how-tos/pay-on-behalf/setup",
           "how-tos/pay-on-behalf/operations",
+          "how-tos/pay-on-behalf/cli",
           "how-tos/pay-on-behalf/tt-web-settings"
         ]
       },

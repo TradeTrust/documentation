@@ -55,6 +55,10 @@ Pimlico's free tier has no credit card requirement and is enough to run through 
 
 Each platform (issuer) deploys its own `PlatformPaymaster` clone via `PlatformAccountFactory`. The clone is a cheap minimal proxy (~55 k gas) with its own state (owner, daily limit, authorized registries).
 
+:::info Already deployed infrastructure
+The `EIP7702Implementation`, `PlatformPaymaster` implementation, and `PlatformAccountFactory` are **already deployed** on Sepolia and Amoy — addresses are in the [Overview](./overview). You only need to deploy your own **clone** of the paymaster using the factory. You do **not** re-deploy the shared infrastructure.
+:::
+
 ### Using the SDK
 
 ```ts
@@ -105,39 +109,34 @@ The function also accepts an ethers v5 or v6 signer in place of the viem `Wallet
 
 ## 2. Stake the paymaster on EntryPoint
 
-The paymaster must hold a deposit on the EntryPoint to sponsor UserOps. Stake it once after deployment using a funded EOA:
+The paymaster must hold a stake and a deposit on the EntryPoint before it can sponsor UserOps. Use the SDK's `stakePaymaster` and `fundPaymaster` helpers:
 
 ```ts
-import { parseAbi, parseEther, createWalletClient, http } from 'viem';
-import { sepolia } from 'viem/chains';
+import { stakePaymaster, fundPaymaster } from '@trustvc/trustvc';
+import { parseEther } from 'viem';
 
-const entryPointAbi = parseAbi([
-  'function depositTo(address account) external payable',
-  'function addStake(uint32 unstakeDelaySec) external payable',
-]);
+// Stake ETH on the EntryPoint (required for ERC-4337 paymaster compliance)
+await stakePaymaster(
+  walletClient,       // funded platform owner signer
+  paymasterAddress,   // your deployed PlatformPaymaster clone
+  86400,              // unstake delay in seconds (1 day)
+  parseEther('0.001'), // amount to stake
+);
 
-const ENTRY_POINT = '0x4337084D9E255Ff0702461CF8895CE9E3b5Ff108';
-
-// Deposit ETH to cover gas sponsorship
-await walletClient.writeContract({
-  address: ENTRY_POINT,
-  abi: entryPointAbi,
-  functionName: 'depositTo',
-  args: [paymasterAddress],
-  value: parseEther('0.1'),   // adjust as needed
-});
-
-// Stake for ERC-4337 compliance
-await walletClient.writeContract({
-  address: ENTRY_POINT,
-  abi: entryPointAbi,
-  functionName: 'addStake',
-  args: [86400],              // 1-day unstake delay
-  value: parseEther('0.001'),
-  account: deployer,
-  chain: sepolia,
-});
+// Deposit ETH into the paymaster's gas pool to cover UserOp sponsorship
+await fundPaymaster(
+  walletClient,
+  paymasterAddress,
+  parseEther('0.1'),  // adjust as needed; this is the gas budget
+);
 ```
+
+Both functions accept a viem `WalletClient` or ethers v5/v6 signer and return `Promise<string>` (tx hash).
+
+:::note Stake vs deposit
+- **Stake** (`stakePaymaster`) — ETH locked with the EntryPoint under a time delay. Required for ERC-4337 paymaster compliance. Cannot be withdrawn until the unstake delay elapses.
+- **Deposit** (`fundPaymaster`) — ETH deposited into the paymaster's EntryPoint balance to pay for sponsored gas. Not locked — can be withdrawn at any time.
+:::
 
 ## 3. Whitelist users (admin)
 
@@ -174,37 +173,36 @@ All admin functions accept an ethers v5/v6 signer or viem `WalletClient` as the 
 
 ## 4. Delegate the user's EOA (platform owner)
 
-Delegation is a separate, one-time type-4 transaction — it is **not** bundled into the user's first UserOperation. The EOA must already be delegated to `EIP7702Implementation` before any `*Gasless` function is called for it. There are two ways to get there, depending on who holds the EOA's private key:
+Delegation is a separate, one-time type-4 transaction — it is **not** bundled into the user's first UserOperation. The EOA must already be delegated to `EIP7702Implementation` before any `*Gasless` function is called for it.
 
-**User-owned wallet** — the user's wallet signs the authorization off-chain (no gas), and the platform owner submits it on-chain, paying the gas:
-
-```ts
-// 1. User's wallet signs the authorization (off-chain, no gas)
-const authorization = await userWalletClient.signAuthorization({
-  contractAddress: EIP7702_IMPLEMENTATION_ADDRESS, // see Overview > Deployed addresses
-});
-
-// 2. Platform owner submits it as a type-4 transaction, paying the gas
-const delegationTxHash = await platformOwnerWalletClient.sendTransaction({
-  authorizationList: [authorization],
-  to: userEoaAddress,
-  value: 0n,
-});
-```
-
-**Platform-managed wallet** — if the platform created and holds the key for the user's wallet, the platform owner both signs and submits, since it controls the EOA directly:
+Use the SDK's `delegateUser` function. It handles the EIP-7702 authorization signature and type-4 submission:
 
 ```ts
-const authorization = await platformManagedUserWalletClient.signAuthorization({
-  contractAddress: EIP7702_IMPLEMENTATION_ADDRESS,
-});
+import { delegateUser, gaslessConstants } from '@trustvc/trustvc';
 
-const delegationTxHash = await platformManagedUserWalletClient.sendTransaction({
-  authorizationList: [authorization],
-  to: platformManagedUserWalletClient.account.address,
-  value: 0n,
-});
+const EIP7702_IMPL = gaslessConstants.GASLESS_EIP7702_IMPL_ADDRESS_SEPOLIA;
 ```
+
+There are two cases depending on who holds the user's private key:
+
+**User-owned wallet** — the user's wallet signs the authorization (no gas), and a funded `payerSigner` submits the type-4 transaction and pays the gas:
+
+```ts
+// ownerSigner: user's viem WalletClient (signs, no ETH needed)
+// payerSigner: platform owner's funded WalletClient (submits and pays gas)
+const delegationTxHash = await delegateUser(EIP7702_IMPL, ownerSigner, payerSigner);
+```
+
+**Platform-managed wallet** — the platform owns the key, so `ownerSigner` both signs and submits. Omit `payerSigner`:
+
+```ts
+// ownerSigner is the platform's WalletClient that holds the user's key
+const delegationTxHash = await delegateUser(EIP7702_IMPL, platformManagedUserWalletClient);
+```
+
+:::caution
+`delegateUser` only accepts viem `WalletClient` — not ethers signers. For ethers-based setups, call `signAuthorization` / `sendTransaction` directly with your viem client or use a viem adapter.
+:::
 
 ## 5. Build a smart account client
 
@@ -295,9 +293,34 @@ async function buildSmartAccountClient(ownerAddress: `0x${string}`, paymasterAdd
 
 ## Required environment variables
 
+### Wallets & RPC
+
 | Variable | Description |
 |---|---|
-| `PRIVATE_KEY` | Platform owner private key (pays deployment gas) |
-| `SEPOLIA_RPC_URL` | Sepolia RPC endpoint |
+| `PRIVATE_KEY` | Deployer/gas-payer wallet — pays for deployments, delegation txs, staking |
+| `PRIVATE_KEY2` | Secondary wallet (optional — for testing with a second account) |
+| `OWNER_PRIVATE_KEY` | Platform owner / whitelisted user — signs UserOps, needs no ETH for gasless ops |
+| `SEPOLIA_RPC_URL` | Sepolia RPC endpoint (e.g. Infura, Alchemy) |
+| `AMOY_RPC_URL` | Polygon Amoy RPC endpoint |
 | `PIMLICO_API_KEY` | Pimlico bundler API key — free tier at [dashboard.pimlico.io](https://dashboard.pimlico.io) |
-| `PAYMASTER_ADDRESS` | Deployed `PlatformPaymaster` clone address |
+| `NETWORK` | `sepolia` \| `amoy` — target network for viem/permissionless scripts (default: `sepolia`) |
+| `ENTRY_POINT` | EntryPoint v0.8 address (default: `0x4337084D9E255Ff0702461CF8895CE9E3b5Ff108`, same on all supported chains) |
+
+### Deployed contract addresses (network-scoped)
+
+Deployed contract addresses used by the SDK are available via `gaslessConstants` (see the tip below). If you prefer environment variables, the convention is to suffix the variable name with `_SEPOLIA` or `_AMOY` (e.g. `FACTORY_ADDRESS_SEPOLIA`, `FACTORY_ADDRESS_AMOY`).
+
+| Variable | Description |
+|---|---|
+| `EIP7702_IMPL_ADDRESS_<NETWORK>` | Deployed `EIP7702Implementation` address |
+| `PAYMASTER_IMPLEMENTATION_<NETWORK>` | Deployed `PlatformPaymaster` implementation address |
+| `FACTORY_ADDRESS_<NETWORK>` | Deployed `PlatformAccountFactory` address |
+| `PAYMASTER_ADDRESS_<NETWORK>` | Your platform's deployed paymaster clone address |
+| `TDOC_DEPLOYER_ADDRESS_<NETWORK>` | TrustVC `TDocDeployer` address (pre-deployed infra) |
+| `REGISTRY_ADDRESS_<NETWORK>` | Token registry deployed via `deployTokenRegistryGasless` |
+| `TITLE_ESCROW_ADDRESS_<NETWORK>` | Title escrow address captured after `mintGasless` |
+
+:::tip Using `gaslessConstants`
+All of TrustVC's pre-deployed addresses are also available directly from the SDK via `gaslessConstants` — you don't need to set them in `.env` when using the SDK. See [Overview — Contract addresses via gaslessConstants](./overview#contract-addresses-via-gaslessconstants).
+:::
+

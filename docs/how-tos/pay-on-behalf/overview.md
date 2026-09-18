@@ -124,6 +124,40 @@ import {
 These SDK functions keep the `Gasless` suffix (their actual exported names), even though the feature is presented to platforms and end users as **Pay on Behalf**. The suffix refers to the underlying mechanism; the name doesn't change based on which bundler or paymaster infrastructure you use.
 :::
 
+### Contract addresses via `gaslessConstants`
+
+The SDK also exports a `gaslessConstants` object with all deployed contract addresses, so you don't need to hard-code them:
+
+```ts
+import { gaslessConstants } from "@trustvc/trustvc";
+
+// Sepolia
+gaslessConstants.GASLESS_EIP7702_IMPL_ADDRESS_SEPOLIA
+gaslessConstants.GASLESS_PAYMASTER_IMPL_ADDRESS_SEPOLIA
+gaslessConstants.GASLESS_FACTORY_ADDRESS_SEPOLIA
+gaslessConstants.TDOC_DEPLOYER_ADDRESS_SEPOLIA
+
+// Polygon Amoy
+gaslessConstants.GASLESS_EIP7702_IMPL_ADDRESS_AMOY
+gaslessConstants.GASLESS_PAYMASTER_IMPL_ADDRESS_AMOY
+gaslessConstants.GASLESS_FACTORY_ADDRESS_AMOY
+gaslessConstants.GASLESS_TDOC_DEPLOYER_ADDRESS_AMOY
+
+// Shared (same on all supported chains)
+gaslessConstants.GASLESS_ENTRY_POINT
+```
+
+These are `as const` typed `0x${string}` values — pass them directly to any SDK function or viem/ethers call without casting.
+
+### ABI exports
+
+Contract ABIs are also exported if you need to decode logs or make low-level calls:
+
+```ts
+import { eip7702Abis } from "@trustvc/trustvc";
+// eip7702Abis.PlatformPaymaster, eip7702Abis.EIP7702Implementation, etc.
+```
+
 ## Prerequisites
 
 Before calling any Pay on Behalf function you need:
