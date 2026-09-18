@@ -148,6 +148,7 @@ async function requestJson(
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
   let response;
+  let text;
   try {
     response = await fetch(url, {
       method,
@@ -155,6 +156,7 @@ async function requestJson(
       body: body !== undefined ? JSON.stringify(body) : undefined,
       signal: controller.signal,
     });
+    text = await response.text();
   } catch (err) {
     if (err.name === "AbortError") {
       throw new Error(`Request timed out after ${timeoutMs}ms for ${method} ${url}`);
@@ -164,7 +166,6 @@ async function requestJson(
     clearTimeout(timeout);
   }
 
-  const text = await response.text();
   let json;
   try {
     json = text ? JSON.parse(text) : undefined;
