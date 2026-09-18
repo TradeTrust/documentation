@@ -5,7 +5,7 @@ sidebar_label: Obligation Records
 ---
 
 :::caution Beta
-Obligation Registry (Bill of Exchange) support is currently in **beta**. APIs, contract addresses, and behavior may change before the stable release. Use on testnet only and do not rely on this feature in production.
+Obligation Registry support (including the bill-of-exchange profile) is currently in **beta**. APIs, contract addresses, and behavior may change before the stable release. Use on testnet only and do not rely on this feature in production.
 :::
 
 > New to the Obligation Registry? See [Obligation Records](/docs/introduction/key-components-of-tradetrust/transferability/obligation-records) for when to use it instead of classic ETR, and how its lifecycle differs.
@@ -14,11 +14,11 @@ The Obligation Registry contract (`TrustVCToken`) is deployed together with its 
 
 ## Installing TrustVC CLI
 
-#### Binary
+### Binary
 
 To install the binary, simply download the binary from the [CLI release page](https://github.com/TrustVC/trustvc-cli/releases) for your OS.
 
-#### NPM
+### NPM
 
 For Linux or MacOS users, if you have npm installed on your machine, you may install the CLI using the following command:
 

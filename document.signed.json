@@ -1,0 +1,76 @@
+{
+  "signed": {
+    "@context": [
+      "https://www.w3.org/ns/credentials/v2",
+      "https://w3id.org/security/data-integrity/v2",
+      "https://trustvc.io/context/render-method-context-v2.json",
+      "https://didhost.vercel.app/bill-of-exchange-documentary-credit.json",
+      "https://trustvc.io/context/obligation-records-context.json",
+      "https://trustvc.io/context/qrcode-context.json"
+    ],
+    "renderMethod": [
+      {
+        "type": "EMBEDDED_RENDERER",
+        "templateName": "BILL_OF_EXCHANGE_DOCUMENTARY_CREDIT",
+        "id": "https://deploy-preview-163--generic-templates.netlify.app"
+      }
+    ],
+    "credentialSubject": {
+      "electronicDocumentIdentifier": "urn:uuid:9c2e5a41-3b7d-4c1a-9f6e-2d8b1a4c7e93",
+      "bankLogo": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAiIGhlaWdodD0iNDgiPjxyZWN0IHdpZHRoPSIxNjAiIGhlaWdodD0iNDgiIHJ4PSI2IiBmaWxsPSIjMGYxNzJhIi8+PHRleHQgeD0iODAiIHk9IjMwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZmZmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk1FUklESUFOPC90ZXh0Pjwvc3ZnPg==",
+      "referenceNumber": "BOE-DC-2026-00147",
+      "amountInFigures": "100000.00",
+      "amountInWords": "United States Dollars One Hundred Thousand Only",
+      "currencyCode": "USD",
+      "placeOfIssue": "Singapore",
+      "dateOfIssue": "2026-09-04",
+      "maturityDate": "2026-11-04",
+      "payee": "Meridian Trust Bank Ltd",
+      "drawnUnder": "Pacific Commerce Bank Ltd., Hong Kong",
+      "documentaryCreditNumber": "LC2026/884731",
+      "documentaryCreditDate": "2026-08-15",
+      "indorsement": {
+        "payee": "Meridian Trust Bank Ltd"
+      },
+      "drawee": {
+        "name": "Pacific Commerce Bank Ltd.",
+        "address": "88 Queen's Road Central, Hong Kong",
+        "authorisedSignatoryName": "John Doe",
+        "signature": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNDAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCAyNDAgODAiPjxwYXRoIGQ9Ik0xNSA1MGMxOC0yMiA0MC0zMCA2MC0xOCAyMiAxMyAzOCAyNSA2MCAxOCAyMC02IDM4LTE4IDU4LTI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMxMTEzMTYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHRleHQgeD0iMjAiIHk9IjY4IiBmb250LWZhbWlseT0iQnJ1c2ggU2NyaXB0LCBDZW5zdXIgU2NyaXB0LCBjdXJzaXZlIiBmb250LXNpemU9IjI4IiBmaWxsPSIjMTExMzE2Ij5Kb2huIERvZTwvdGV4dD48L3N2Zz4="
+      },
+      "drawer": {
+        "name": "John Doe Trading Pte Ltd",
+        "address": "8 Marina Boulevard, #24-01, Singapore 018981",
+        "authorisedSignatoryName": "John Doe",
+        "signature": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNDAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCAyNDAgODAiPjxwYXRoIGQ9Ik0xMiA1MmMyMC0yNCA0NC0zMiA2OC0xNiAyNCAxNiA0NCAyOCA2OCAyMCAyMi03IDQyLTE2IDYyLTIyIiBmaWxsPSJub25lIiBzdHJva2U9IiMxYTFhMWEiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHRleHQgeD0iMTgiIHk9IjcwIiBmb250LWZhbWlseT0iQnJ1c2ggU2NyaXB0LCBDZW5zdXIgU2NyaXB0LCBjdXJzaXZlIiBmb250LXNpemU9IjI2IiBmaWxsPSIjMWExYTFhIj5KLiBEb2U8L3RleHQ+PC9zdmc+"
+      }
+    },
+    "type": [
+      "VerifiableCredential"
+    ],
+    "qrCode": {
+      "type": "TrustVCQRCode",
+      "uri": "https://dev.trustvc.io/?q=%7B%22type%22%3A%22DOCUMENT%22%2C%22payload%22%3A%7B%22uri%22%3A%22https%3A%2F%2Fgist.githubusercontent.com%2Fmanishdex25%2Fe4cc566e3e548e237512eef6bf68694c%2Fraw%2Fboe-dc-document.json%22%2C%22chainId%22%3A11155111%7D%7D"
+    },
+    "credentialStatus": {
+      "type": "TransferableRecords",
+      "tokenNetwork": {
+        "chain": "Sepolia",
+        "chainId": 11155111
+      },
+      "obligationRegistry": "0x8f3241a11364f7A5C97c4c6b8E26497cc868623C",
+      "tokenId": "2b2e3e55027370bc77190decebfcf2cf7491719f1ea20d3721939abd4ce80bc0"
+    },
+    "issuer": "did:web:didhost.vercel.app",
+    "validFrom": "2026-09-04T09:00:00Z",
+    "id": "urn:uuid:01a080fb-d0ce-7441-8a6e-37fae2258b21",
+    "proof": {
+      "type": "DataIntegrityProof",
+      "created": "2026-09-08T12:26:21Z",
+      "verificationMethod": "did:web:didhost.vercel.app#keys-1",
+      "cryptosuite": "ecdsa-sd-2023",
+      "proofPurpose": "assertionMethod",
+      "proofValue": "u2V0AhVhAER1bcnYTraOh7dTkPwOutaMZGdFhNt_5LlPLGmp0bn-FLsjgCuXI8rH1fsjcp1XLgXmGAfoqlaDWdzVVRHiDn1gjgCQCCqAYNasLF_e4Jiwl6Vny5qNsdV2alI5e5eUBwT9Jky5YIFwozp2vqCL9Ekti0KrkszcgZAoRr_ISVSr3sSRTot_FmCBYQEb6Ime7KMStsTV7FfvNrEJohpiQFXnBwi7piLJXbiAAs-slr-xSX807U5g77C59qv9kK7bQJ8iiswtT-Mq-f9tYQIwwX6ra9gMP6A3rJzUOcAzyqhIF1uTaQnA0VdEhwLsXktqTefBzCVutZ37ZqRMrJ8MT8QKDltuZIcQTD62zMQNYQMLL85Ma_je0UC05SxLPYGn55X_xeJ-oKRXInAXF2HHt9MKOKnPVnzfmHyL6EfBJF4huoAqBrktBDEhgM6NuLbJYQHZ88bTs-ic5FxFRsdsd57oQj-vioQZjEkppmwMVtVbjNo-qD1QHRHU0FzxNrCbOIQ_ieFlACm_CI9Kibtf7NxVYQG8crO95j_Qw4UT1LAALh3vCdL9XoKxKUKCuY0yS0KWyPVjRBMKTBrOFo93yc3nIKAA0Q4C-ByPflT3uu4fZnQhYQP7KGv_hTuQStiV23Z7j0_isSc0uo8lGPuBS1qpmXsOErBbIGIE4vykdYtACVaCFP6ak5l1GX8Qk5oMyGGk8bKBYQG8dvkZ4oJGuoWc2ZPemQB-hljjRwCG8CjruFjihrEcb_6t92Ydp8NQfvHZViguv5jqjHZqaJYQM9zb5rPMCHZ1YQIkiYPuhuhsbwV9bXGXsYl2N3T2Q3inxwz3kITSe7_4g7ZmD0-4yxMetpcUYn-4qItCRWwfztKMIouLcFjx1CYNYQEjSw9fG-y9KWRfxo0BAp69YF3ZvcIvl8PR2oXQqaV89xuNVjEQQG6FY4Rbmf_h7H_i5b5tVSK3Ztm1mUAv0HTxYQImRQq7zFeafld3G_SrKY7hflkVINCCfDfJrXr1Yj3vKXKliQT7FRani6nJXLzqfVfTZkVk4NTnN-noCCvQxBjVYQMdAZBQaiUh29LqGmSSPBcMl6_I95lSP0hVraNRgRmEOn0wn2-R3PUxJ-UcTGhJkiwY64PWwLwDbXjYf477uZUtYQPNQNdJLtGFmnr0-9o4AqLejt8xEgloQPNTBLwiPmi8e-GOLXkv5dAceSGihaK-rFPKAd7LHhkS3PkWpT7uZF_dYQGtNjjjiutpBep0oNFZhWF0spsSsulzcEiOQbZ7Trm8jsqT0Y2YYoCAHP-htcrfxLEihCFrnBguSpUrdce8nX0FYQKcmxJZt6CCe23AkOcbdgulQiPhLOTI8upRfRiAMbxp-wX9NYTyuIJissyvjHvUi39W_7AoUPAiVlioENPYDfzRYQE0r3Cn7jpFfKjWSLOTzEsunKxOJumSX2PapxjoN94Fv0Scg79vdkcu82PJZuQZOAmiRgAkq-jm5EbUpmFx_9_VYQB3NrQyJraoGlzDFA63P0M9V3Dy2PuspSQnipFB6EAQ8LqYW3-c5aIkSDabBFm55sRejHTBYJRj3-S6SnbrMLt1YQCKBma4qdSplX6lBxQ0rg-vRCj__KS8NcEwF8N-XECDTF-KI8kxIPWckAOKT3zYX2uKfWkw6AMtcGNesfBfpwDBYQHaG7t7FyIfmhnHcGB2zGkoCO_TMMHnmyxcHGKTlAwXA_VLbtiOXnW36hNviXC989lG28TteDXs2t8YDTP5BubtYQLinOQJf2ca_V1832j1HJNIfzDe9c6UQh3BQSFACyigEiPDxK0sj5YEphGHhsfexcOpi4DxHEkd8cpGSYPvtjO9YQJ58BLdur-3zKkn_0Hl95ZgI8uI4sPMqjDITOFFzIpTUSlVS7EWW2O-luvjrN7GhOg-9yLmcK5_AyNg2gQIP5uhYQHSO_WoaFQytEFAVofX4fu502x3z1EBg27f6mH9Je9fDE8NlRJqB0Mp2NIT9Loa1Khnkyej5hoR1yhu72hYZc2lYQGMQojIhdLcwQHQyKvvhJfzszq6WTlspIf1XFKVNYnOppsykQ-uA3CVJc8iwrSOY-RXRcwfcgMVU4w1Y-g2WnWVYQL4quC9F73FUNr4bjoSGH2jtvH3xJE4uvLL5zws-RT2-6lGRFLtK7zWTaxql0Xh5vYat7ziFD_vtkpOGtuBtsLNYQM6rr2rQAAh2UMlIc23g0E05jbGWD-fTGnRMpOYE4o4LphIR38Dqa6oSvTXBFbdx88pfJc3Xf7QtdrGSufdPpUJYQG1PRR-tYspiE3YY8z_gTGAQgGhPKTLNXN_RJAvj37ATi7sQzH7XY2kGoYqQ7TWoZkV8mo1bcPenEIK463ItV0dYQAI8pqq7VavILaUuSpBuRVRoRWbJW7vC8RmflaO-nnQaxbcOHr46cVyE47DjlBCsVcaU3-IVYwLzdWmGgscWZkdYQIi8f_ZqWv996A-dcvJ6j-61XqVMPbJYqiHz9ewx7gTQzkjzX5KBlii0nYjcLHA5JOa1Mb1Nk1KqRO-RYvTrt_hYQPOfv9lS6cmBGWCzLQjehPzzF2081ll74Zb499soJGNvCu6TXVBYzkX1S3oDuBE6UbjDtaaSRYzejYwKCVTQXh9YQPI7Cajd54Ptsw1NeVp_6hTOljnW1XCaPbLA1tAvgVbA8hxd4lNBCGstOD54xafdatjTNHTtVvBJ2EGgJ2HpTOtYQOyl4a8z3L8709r69ISmt8_LTSA7I4BuYCZKbmq8V0RDmzi1S27tGd-GqsebmgFVCFLzUuPR0GbwN0fTdC4tfhdYQK3Ln7w01IjyLTaeO6WhKD2FgLNKjnDScW-ftpNfIFADsYsZwKYvyXqspCC7cTxi9qyA4phO0V8IeWQm5uiBWIlYQIYChRzINySlc-AwaUqmaPB_bmiwMOCH1HxfQ8uR-n-8LfSwNhsYRe4a0egPItmpJEWopu2O-FAqPSwaPoFeRgmDZy9pc3N1ZXJqL3ZhbGlkRnJvbXEvY3JlZGVudGlhbFN0YXR1cw"
+    }
+  }
+}
