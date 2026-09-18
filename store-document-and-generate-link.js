@@ -8,7 +8,8 @@
  * Usage:
  *   node store-document-and-generate-link.js
  *
- * Edit the CONFIG block below — no .env required.
+ * Edit the CONFIG block below. For "oa" mode, set the TT_STORAGE_API_KEY
+ * environment variable — the storage API key is not hardcoded in this file.
  */
 
 const fs = require("fs");
@@ -41,7 +42,8 @@ const CONFIG = {
 
   // --- OA mode (encrypted TradeTrust storage) ---
   storageUrl: "https://tradetrust-functions.netlify.app/.netlify/functions/storage",
-  apiKey: "TTfunctions2022!",
+  // Set via the TT_STORAGE_API_KEY environment variable — do not hardcode here.
+  apiKey: process.env.TT_STORAGE_API_KEY || "",
   uploadDocument: true,
   headers: {
     accept: "application/json, text/plain, */*",
@@ -133,15 +135,34 @@ function getSetCookieHeaders(response) {
   return single ? [single] : [];
 }
 
-async function requestJson(url, { method = "GET", headers = {}, body, cookie } = {}) {
+const DEFAULT_REQUEST_TIMEOUT_MS = 30000;
+
+async function requestJson(
+  url,
+  { method = "GET", headers = {}, body, cookie, timeoutMs = DEFAULT_REQUEST_TIMEOUT_MS } = {}
+) {
   const finalHeaders = { ...headers };
   if (cookie) finalHeaders.Cookie = cookie;
 
-  const response = await fetch(url, {
-    method,
-    headers: finalHeaders,
-    body: body !== undefined ? JSON.stringify(body) : undefined,
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+  let response;
+  try {
+    response = await fetch(url, {
+      method,
+      headers: finalHeaders,
+      body: body !== undefined ? JSON.stringify(body) : undefined,
+      signal: controller.signal,
+    });
+  } catch (err) {
+    if (err.name === "AbortError") {
+      throw new Error(`Request timed out after ${timeoutMs}ms for ${method} ${url}`);
+    }
+    throw err;
+  } finally {
+    clearTimeout(timeout);
+  }
 
   const text = await response.text();
   let json;
@@ -261,7 +282,7 @@ async function runOaMode() {
   } = CONFIG;
 
   if (!apiKey) {
-    throw new Error("CONFIG.apiKey is empty — set it in this file for OA mode.");
+    throw new Error("TT_STORAGE_API_KEY is not set — export it in your environment for OA mode.");
   }
 
   console.log("Mode: oa (encrypted TradeTrust storage — OA documents)\n");

@@ -6,7 +6,7 @@ sidebar_label: Fetch Endorsement Chain
 
 ### Description
 
-This function retrieves the endorsement chain of a token by fetching its transfer history from a **Title Escrow contract**. It supports two versions of the Title Escrow contract (V4 and V5) and processes their respective transfer events. If the contract version is V5, it also decrypts any remarks associated with the transfer events.
+This function retrieves the endorsement chain of a token by fetching its transfer history from its escrow contract. It auto-detects whether the escrow is a classic **Title Escrow** (V4 or V5) or an **Obligation Escrow**, and processes the respective transfer events. If the escrow is V5 or an Obligation Escrow, it also decrypts any remarks associated with the transfer events.
 
 ### Parameters
 
@@ -28,27 +28,27 @@ A Promise `<EndorsementChain>` that resolves to an array of transfer events repr
 - The function checks if tokenRegistry, tokenId, and provider are provided.
 - If any required parameter is missing, it throws an error.
 
-#### 2) Determine Token Registry Version
+#### 2) Determine Escrow Version/Type
 
-- The function checks whether the Token Registry is V4 or V5 using **isTitleEscrowVersion()**.
-- If neither version is detected, it throws an error, as only V4 and V5 are supported.
+- The function checks whether the escrow is Title Escrow V4, Title Escrow V5, or an Obligation Escrow, using **isTitleEscrowVersion()** (backed by `supportsInterface`) — all three are checked, so classic and obligation escrows are auto-detected the same way.
+- If none of the three is detected, it throws an error, as only Token Registry V4/V5 or Obligation Registry is supported.
 
 #### 3) Retrieve Transfer Events
 
-- It fetches the address of the Title Escrow contract for the given token using **getTitleEscrowAddress()**.
-- Depending on the version:
+- It fetches the address of the escrow contract for the given token using **getTitleEscrowAddress()**.
+- Depending on the detected type:
   - For V4:
     - It fetches token transfer logs from the registry.
     - It fetches escrow transfer logs from the V4 contract.
     - The logs are merged using **mergeTransfersV4()**.
-  - For V5:
-    - It fetches escrow transfer logs from the V5 contract.
+  - For V5 or Obligation Escrow:
+    - It fetches escrow transfer logs (the same V5-shaped log fetch is used for both, since an Obligation Escrow's transfer events share the V5 shape).
     - The logs are merged using **mergeTransfersV5()**.
 
 #### 4) Build the Endorsement Chain
 
 - The fetched transfer events are processed into an endorsement chain using **getEndorsementChain()**.
-- If the contract is V5, any remarks attached to the events are decrypted using the provided **keyId** (keyId and tokenId are not same).
+- If the escrow is V5 or an Obligation Escrow, any remarks attached to the events are decrypted using the provided **keyId** (keyId and tokenId are not same).
 
 #### 5) Return the Processed Endorsement Chain
 

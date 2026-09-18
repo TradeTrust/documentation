@@ -14,11 +14,11 @@ The Obligation Registry contract (`TrustVCToken`) is deployed together with its 
 
 ## Installing TrustVC CLI
 
-#### Binary
+### Binary
 
 To install the binary, simply download the binary from the [CLI release page](https://github.com/TrustVC/trustvc-cli/releases) for your OS.
 
-#### NPM
+### NPM
 
 For Linux or MacOS users, if you have npm installed on your machine, you may install the CLI using the following command:
 
