@@ -167,20 +167,20 @@ For a Bill of Exchange VC, pass `credentialStatus.obligationRegistry` (not `toke
 [
   {
     "type": "INITIAL",
-    "transactionHash": "0x2d98ae3908f0edd095a871a0c56dd3c0e1cfd657b53f28f7c01b1cb83bebc28b",
-    "transactionIndex": 5,
-    "blockNumber": 6162747,
-    "owner": "0xCA93690Bb57EEaB273c796a9309246BC0FB93649",
-    "holder": "0xCA93690Bb57EEaB273c796a9309246BC0FB93649",
+    "transactionHash": "0x7a1b2c3d4e5f60718293a4b5c6d7e8f9a0b1c2d3e4f5061728394a5b6c7d8e9f",
+    "transactionIndex": 2,
+    "blockNumber": 6165120,
+    "owner": "0xB1a4567890AbCdEf1234567890aBcDeF12345678",
+    "holder": "0xB1a4567890AbCdEf1234567890aBcDeF12345678",
     "remark": "issued",
-    "timestamp": 1713778879000
+    "timestamp": 1713780500000
   },
   {
     "type": "STATUS_ACCEPTED",
     "transactionHash": "0xd6438cf1a2b3c4d5e6f7890abcdef1234567890abcdef1234567890abccc9360",
     "transactionIndex": 1,
     "blockNumber": 6172000,
-    "owner": "0xCA93690Bb57EEaB273c796a9309246BC0FB93649",
+    "owner": "0xB1a4567890AbCdEf1234567890aBcDeF12345678",
     "holder": "0xd3DD1234567890abcdef1234567890abcdef4749",
     "remark": "accepted",
     "timestamp": 1713782103000
@@ -190,7 +190,7 @@ For a Bill of Exchange VC, pass `credentialStatus.obligationRegistry` (not `toke
     "transactionHash": "0xff88591234567890abcdef1234567890abcdef1234567890abcdef1234657135",
     "transactionIndex": 1,
     "blockNumber": 6202088,
-    "owner": "0xCA93690Bb57EEaB273c796a9309246BC0FB93649",
+    "owner": "0xB1a4567890AbCdEf1234567890aBcDeF12345678",
     "holder": "0xd3DD1234567890abcdef1234567890abcdef4749",
     "remark": "paid in full",
     "timestamp": 1713867129000,
