@@ -160,9 +160,18 @@ Ethers provides multiple Provider class to access the blockchain networks, some 
 We recommend the following providers that provides apis to send transaction into the network:
 
 - [DefaultProvider](https://docs.ethers.org/v5/api/providers/#providers-getDefaultProvider)
+- [AlchemyProvider (Alchemy)](https://docs.alchemy.com/docs/ethers-js-provider) (Recommended)
 - [InfuraProvider (Infura)](https://docs.infura.io/tutorials/ethereum/send-a-transaction/send-a-transaction-2)
-- [AlchemyProvider (Alchemy)](https://docs.alchemy.com/docs/ethers-js-provider)
 - [JsonRpcProvider (Generic)](https://docs.ethers.org/v5/api/providers/jsonrpc-provider/)
+
+:::note Why we recommend Alchemy
+
+Both Infura and Alchemy are fully supported.
+
+For optimal retrieval speed on older documents, we suggest Alchemy. Standard Infura plans cap queries at 10,000 blocks (fetching data in chunks), whereas Alchemy allows querying block 0 to latest in a single request.
+
+Infura Enterprise plans and BOE documents are unaffected by block query limits.
+:::
 
 ```ts
 import { ethers } from "ethers";
@@ -175,13 +184,13 @@ const network = "homestead";
 // API key for that service will be used.
 const provider = ethers.getDefaultProvider(network, {
     etherscan: YOUR_ETHERSCAN_API_KEY,
+    alchemy: YOUR_ALCHEMY_API_KEY,
     infura: YOUR_INFURA_PROJECT_ID,
     // Or if using a project secret:
     // infura: {
     //   projectId: YOUR_INFURA_PROJECT_ID,
     //   projectSecret: YOUR_INFURA_PROJECT_SECRET,
     // },
-    alchemy: YOUR_ALCHEMY_API_KEY,
     pocket: YOUR_POCKET_APPLICATION_KEY
     // Or if using an application secret key:
     // pocket: {
