@@ -8,6 +8,13 @@ sidebar_label: Fetch Endorsement Chain
 
 This function retrieves the endorsement chain of a token by fetching its transfer history from its escrow contract. It auto-detects whether the escrow is a classic **Title Escrow** (V4 or V5) or an **Obligation Escrow**, and processes the respective transfer events. If the escrow is V5 or an Obligation Escrow, it also decrypts any remarks associated with the transfer events.
 
+:::note
+
+Both Infura and Alchemy are fully supported.
+
+We suggest a paid account for your RPC provider. Standard Infura plans cap queries at 10,000 blocks (fetching data in chunks), whereas Alchemy allows querying block 0 to latest in a single request.
+:::
+
 ### Parameters
 
 | Parameter        | Type     | Description                                                 |
