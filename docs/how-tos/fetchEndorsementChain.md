@@ -6,7 +6,11 @@ sidebar_label: Fetch Endorsement Chain
 
 ### Description
 
-This function retrieves the endorsement chain of a token by fetching its transfer history from its escrow contract. It auto-detects whether the escrow is a classic **Title Escrow** (V4 or V5) or an **Obligation Escrow**, and processes the respective transfer events. If the escrow is V5 or an Obligation Escrow, it also decrypts any remarks associated with the transfer events.
+This function retrieves the endorsement chain of a token by querying escrow event logs from its escrow contract. It auto-detects whether the escrow is a classic **Title Escrow** (V4 or V5) or an **Obligation Escrow**, and processes the respective transfer events. If the escrow is V5 or an Obligation Escrow, it also decrypts any remarks associated with the transfer events.
+
+### RPC providers
+
+`fetchEndorsementChain` queries escrow event logs through the `provider` you pass in to reconstruct the endorsement chain. Use a reliable RPC endpoint (for example Infura or Alchemy) so that documents can be scanned efficiently.
 
 :::note
 
