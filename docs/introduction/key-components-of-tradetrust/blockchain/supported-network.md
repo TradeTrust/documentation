@@ -10,23 +10,21 @@ The blockchain networks listed here are not officially endorsed by IMDA Singapor
 
 ### TradeTrust Supported Networks
 
+| Chain    | Chain Id | Network Name     | Network           | Blockchain                                           | Type       | Status |
+| -------- | -------- | ---------------- | ----------------- | ---------------------------------------------------- | ---------- | ------ |
+| ETH      | 1        | ethereum         | Ethereum Mainnet  | [Ethereum](https://ethereum.org/)                    | L1 Mainnet | Active |
+| ETH      | 11155111 | sepolia          | Ethereum Sepolia  | Ethereum                                             | L1 Testnet | Active |
+| POL\*    | 137      | polygon          | Polygon Mainnet   | [Polygon](https://polygon.technology/)               | L2 Mainnet | Active |
+| POL\*    | 80002    | amoy             | Polygon Amoy      | Polygon                                              | L2 Testnet | Active |
+| XDC\*    | 50       | xdc              | XDC Mainnet       | [XDC](https://xdc.org/)                              | L1 Mainnet | Active |
+| XDC\*    | 51       | xdcapothem       | XDC Apothem       | XDC                                                  | L1 Testnet | Active |
+| FREE\*   | 101010   | stability        | Stability Mainnet | [Stability Protocol](https://stabilityprotocol.com/) | -          | Active |
+| FREE\*   | 20180427 | stabilitytestnet | Stability Testnet | Stability Protocol                                   | -          | Active |
+| ASTRON\* | 1338     | astron           | Astron Mainnet    | Astron                                               | L2 Mainnet | Active |
 
-| Chain  | Chain Id | Network Name     | Network           | Blockchain                                           | Type       | Status |
-| ------ | -------- | ---------------- | ----------------- | ---------------------------------------------------- | ---------- | ------ |
-| ETH    | 1        | ethereum         | Ethereum Mainnet  | [Ethereum](https://ethereum.org/)                    | L1 Mainnet | Active |
-| ETH    | 11155111 | sepolia          | Ethereum Sepolia  | Ethereum                                             | L1 Testnet | Active |
-| POL    | 137      | polygon          | Polygon Mainnet   | [Polygon](https://polygon.technology/)               | L2 Mainnet | Active |
-| POL    | 80002    | amoy             | Polygon Amoy      | Polygon                                              | L2 Testnet | Active |
-| XDC    | 50       | xdc              | XDC Mainnet       | [XDC](https://xdc.org/)                              | L1 Mainnet | Active |
-| XDC    | 51       | xdcapothem       | XDC Apothem       | XDC                                                  | L1 Testnet | Active |
-| FREE   | 101010   | stability        | Stability Mainnet | [Stability Protocol](https://stabilityprotocol.com/) | -          | Active |
-| FREE   | 20180427 | stabilitytestnet | Stability Testnet | Stability Protocol                                   | -          | Active |
-| ASTRON | 1338     | astron           | Astron Mainnet    | Astron                                               | L2 Mainnet | Active |
+_Note: All networks marked with (\*) in the table above are custom networks. Please follow this [guide](/docs/how-tos/advanced/additional-network-metamask-guide) to add them to your MetaMask and use them with the TradeTrust reference implementation._
 
-
-*Note: All networks marked with () in the table above are custom networks. Please follow this [guide](/docs/how-tos/advanced/additional-network-metamask-guide) to add them to your MetaMask and use them with the TradeTrust reference implementation.*
-
-#### Community Contribution: XRPL EVM
+### Community Contribution: XRPL EVM
 
 BlockPeer has developed an XRPL EVM implementation to support TradeTrust-enabled electronic trade documents on the XRPL EVM network.
 
@@ -34,10 +32,7 @@ The implementation is available for industry participants and developers to expl
 
 [Explore the implementation →](https://github.com/PDC-Finance/token-registry-community-sandbox)
 
-
 | Chain | Chain Id | Network Name   | Network          | Blockchain                           | Type       | Status |
 | ----- | -------- | -------------- | ---------------- | ------------------------------------ | ---------- | ------ |
 | XRPL  | 1440000  | xrplevm        | XRPL EVM Mainnet | [XRPL EVM](https://www.xrplevm.org/) | L1 Mainnet | Active |
 | XRPL  | 1449000  | xrplevmtestnet | XRPL EVM Testnet | XRPL EVM                             | L1 Testnet | Active |
-
-
