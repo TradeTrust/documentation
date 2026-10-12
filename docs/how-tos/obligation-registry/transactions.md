@@ -5,14 +5,14 @@ sidebar_label: Obligation Records
 ---
 
 :::caution Beta
-Obligation Registry (Bill of Exchange) support is currently in **beta**. APIs, contract addresses, and behavior may change before the stable release. Use on testnet only and do not rely on this feature in production.
+Obligation Registry support (including the bill-of-exchange profile) is currently in **beta**. APIs, contract addresses, and behavior may change before the stable release. Use on testnet only and do not rely on this feature in production.
 :::
 
 ## Background
 
-A Bill of Exchange is a written, unconditional order by one party (the **drawer**) directing another party (the **drawee**) to pay a fixed sum to a payee, either on demand or at a future date. Once the drawee agrees to honour the bill, they are said to have **accepted** it — from that point they are obligated to pay it. If they refuse, they **reject** it. Once the payee has actually been paid, the bill is **discharged**.
+Some documents carry an obligation that changes state over their life, not just an owner that changes hands. The party expected to perform can **accept** the obligation or **reject** it; once it has been satisfied, it is **discharged**. None of "accepted", "rejected" or "discharged" exist in a plain ownership registry; they are a real business status, not just a change of custody. The Obligation Registry adds exactly this status layer on top of the beneficiary/holder custody model.
 
-None of "accepted", "rejected" or "discharged" exist in a plain ownership registry — they are a real business status, not just a change of hands.
+A **bill of exchange** is the canonical example: the drawee accepts (becoming obligated to pay) or rejects the bill, and it is discharged once the payee is paid. This guide uses a bill of exchange to make the actions concrete, but the same mechanics apply to any instrument with an accept/reject/discharge lifecycle.
 
 ### TrustVC Contribution
 
@@ -165,6 +165,13 @@ When the holder is different from the beneficiary, transferring the beneficiary 
 
 ### Reject Transfers of Beneficiary/Holder
 
+:::note
+Don't confuse this with [Reject a Document](#reject-a-document). *Rejecting a
+document* rejects the obligation itself (Issued → Rejected, burns the title).
+*Rejecting a transfer* declines an appointment as beneficiary or holder; the
+token and its status are untouched, custody simply doesn't move to you.
+:::
+
 ```ts
 import {
   rejectTransferBeneficiaryObligationRegistry,
@@ -175,6 +182,10 @@ import {
 
 :::important
 Rejection must occur as the very next action after being appointed as beneficiary and/or holder. If any other transaction happens first, it counts as implicit acceptance of the appointment.
+:::
+
+:::note
+The reject window is **per appointment, not per address.** Any action a newly appointed holder takes other than `rejectTransferHolder…` (including calling `accept` on the obligation) implicitly accepts *their own* appointment and closes *their* reject window only. It has no effect on future holders: if that holder later transfers holdership again (`transferHolderObligationRegistry`), the next holder gets a fresh reject window, even if it's the same address that accepted before.
 :::
 
 ### Return Document to Issuer
@@ -282,4 +293,4 @@ trustvc obligation-escrow reject-return-to-issuer
 trustvc verify
 ```
 
-The `trustvc verify` command verifies Bill of Exchange / obligation documents — it auto-detects which check to run from the document's `credentialStatus`.
+The `trustvc verify` command verifies obligation documents (including bills of exchange). It auto-detects which check to run from the document's `credentialStatus`.

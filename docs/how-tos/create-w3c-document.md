@@ -305,10 +305,10 @@ export const createW3CDocument = async () => {
 
 > **Important**: For bitstring revocation, you must host a valid StatusList2021 credential at the specified URL. Using placeholder URLs like `https://example.com` will cause verification errors. Follow the [Bitstring Status List guide](/docs/how-tos/bitstring) to set up proper hosting.
 
-> **Building a Bill of Exchange (Obligation Registry) document instead?** Swap the `@context`, the `credentialSubject` fields and `renderMethod.templateName` to match the Bill of Exchange vocabulary (the `bill-of-exchange.json` context has no `BillOfLading`-style wrapper term -- its fields sit directly on `credentialSubject`), and call the dedicated `obligationCredentialStatus` method instead of `credentialStatus` -- it's a different builder method, not just a field swap:
+> **Building a Bill of Exchange (Obligation Registry) document instead?** Swap the `@context`, the `credentialSubject` fields and `renderMethod.templateName` to match the Bill of Exchange vocabulary (the `bill-of-exchange-documentary-credit.json` context has no `BillOfLading`-style wrapper term -- its fields sit directly on `credentialSubject`), and call the dedicated `obligationCredentialStatus` method instead of `credentialStatus` -- it's a different builder method, not just a field swap:
 > ```json
 > "@context": [
->   "https://trustvc.io/context/bill-of-exchange.json",
+>   "https://trustvc.io/context/bill-of-exchange-documentary-credit.json",
 >   "https://trustvc.io/context/obligation-records-context.json"
 > ]
 > ```

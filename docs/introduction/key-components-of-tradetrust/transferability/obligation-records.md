@@ -5,7 +5,7 @@ sidebar_label: Obligation Records
 ---
 
 :::caution Beta
-Obligation Registry (Bill of Exchange) support is currently in **beta**. APIs, contract addresses, and behavior may change before the stable release. Use on testnet only and do not rely on this feature in production.
+Obligation Registry support (including the bill-of-exchange profile) is currently in **beta**. APIs, contract addresses, and behavior may change before the stable release. Use on testnet only and do not rely on this feature in production.
 :::
 
 The Obligation Registry is TrustVC's title registry for documents whose lifecycle needs more than "who currently holds it" — it adds a real business **status** on-chain: has the holder accepted the document, rejected it, or has it already been paid off (discharged)? The first document type built on it is the electronic **Bill of Exchange (BoE)**.

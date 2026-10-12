@@ -140,7 +140,7 @@ Unlike the other generic templates, a Bill of Exchange document's `credentialSta
     "https://www.w3.org/ns/credentials/v2",
     "https://w3id.org/security/data-integrity/v2",
     "https://trustvc.io/context/render-method-context-v2.json",
-    "https://trustvc.io/context/bill-of-exchange.json",
+    "https://trustvc.io/context/bill-of-exchange-documentary-credit.json",
     "https://trustvc.io/context/obligation-records-context.json"
   ],
   "type": [
