@@ -1,9 +1,8 @@
 ---
-
-## id: supported-network
-
+id: supported-network
 title: Supported Blockchain & Network
 sidebar_label: Supported Network
+---
 
 :::note
 The blockchain networks listed here are not officially endorsed by IMDA Singapore. Use them at your own discretion.
