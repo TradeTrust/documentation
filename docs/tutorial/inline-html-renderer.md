@@ -435,7 +435,6 @@ Rules worth knowing:
 - Keys are flat property names: `data-field="shipper.name"` looks up a property literally named `shipper.name`, not a nested path.
 - Inside a `data-repeat` clone, `data-field` and `data-field-src` resolve against the array item, not the top-level subject. Nested repeats are not expanded.
 - Only the `<body>` content of `html` is used; anything in the template's own `<head>` is dropped, so styles belong in `css`.
-- Keep the decompressed template under 4 MB (`INLINE_TEMPLATE_MAX_DECOMPRESSED_BYTES`) — `decompressInlineTemplate` enforces this cap while streaming.
 
 ## Security Model
 

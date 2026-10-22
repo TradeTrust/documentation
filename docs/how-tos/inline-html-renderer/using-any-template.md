@@ -123,7 +123,6 @@ Render the unsigned document through a viewer that supports inline templates (se
 
 - **Flat keys only** — `data-field="shipper.name"` looks up a property literally named `shipper.name`, not a nested path. Shape your `credentialSubject` with flat keys the template binds to directly.
 - **No interactivity** — no scripts run, and only `#fragment` links work; nothing else does.
-- **4 MB cap** — the decompressed template (HTML + CSS combined) must stay under `INLINE_TEMPLATE_MAX_DECOMPRESSED_BYTES` (4 MB), enforced while decompressing.
 
 ## See Also
 
