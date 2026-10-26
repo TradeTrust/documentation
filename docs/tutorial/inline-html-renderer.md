@@ -4,6 +4,10 @@ title: Inline HTML Renderer
 sidebar_label: Inline HTML Renderer
 ---
 
+:::caution Beta
+The inline HTML renderer currently ships only on the `@trustvc/trustvc@beta` tag — it is not yet in `latest`. Install with `npm install @trustvc/trustvc@beta`, and expect APIs to change before the stable release.
+:::
+
 This guide walks you through issuing a W3C Verifiable Credential that carries its own HTML and CSS template, and building a viewer that verifies, renders and prints it — entirely offline, with no remote renderer. Along the way you'll see exactly which `@trustvc/trustvc` SDK functions are used at each step: issuance (`compressTemplate`, `DocumentBuilder.inlineTemplate()`), and rendering (`verifyDocument`, `getRenderMethods`, `decompressInlineTemplate`, `renderInlineTemplate`, `printInlineTemplate`).
 
 ## What You'll Learn
@@ -30,84 +34,21 @@ A document usually carries both entries, so older viewers (and newer ones where 
 
 ## Prerequisites
 
-Before starting, ensure you have the following installed:
+Before starting, make sure you have:
 
-- Node.js (version 20 or higher)
-- npm or yarn
-- A code editor, e.g., Visual Studio Code
+- Node.js (version 20 or higher), npm or yarn, and a code editor
+- `@trustvc/trustvc@beta` installed in your project — see the beta note above
+- A signing key pair and a working document issuance flow. This tutorial assumes you can already generate a DID and build/sign a document with `DocumentBuilder` — if you haven't done this yet, follow the [Creator tutorial](/docs/tutorial/creator) first, then come back here with your `didKeyPairs` and `DocumentBuilder` instance ready. We'll focus only on what's specific to the inline renderer: writing a template and attaching it before signing.
 
-## Part 1: Issuing a Document With an Inline Template
+## Part 1: Writing and Attaching an Inline Template
 
-### 1. Create a new project directory
-
-```bash
-mkdir inline-template-demo
-cd inline-template-demo
-```
-
-### 2. Initialize a new Node.js project
-
-```bash
-npm init -y
-```
-
-### 3. Install the required dependencies
-
-```bash
-npm install @trustvc/trustvc
-npm install --save-dev typescript ts-node @types/node
-```
-
-### 4. Set up TypeScript
-
-```bash
-npx tsc --init
-```
-
-Update `tsconfig.json` with the following configurations:
-
-```json
-{
-  "compilerOptions": {
-    ...
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "outDir": "./dist",
-    ...
-  },
-  ...
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
-}
-```
-
-### 5. Generate a signing key
-
-For this demo we sign with a `did:key` — it's self-certifying and needs no hosting, unlike the `did:web` identifier used in the [Creator tutorial](/docs/tutorial/creator). Create `src/issue.ts`:
-
-```ts
-import { issuer } from "@trustvc/trustvc";
-
-const { generateDidKeyPair, CryptoSuite } = issuer;
-
-async function main() {
-  const { did, didKeyPairs } = await generateDidKeyPair(CryptoSuite.EcdsaSd2023);
-  console.log("Issuer DID:", did);
-  // didKeyPairs is the PrivateKeyPair passed to DocumentBuilder.sign() below
-}
-
-main();
-```
-
-### 6. Write the template
+### 1. Write the template
 
 A template is static HTML plus CSS, filled from `credentialSubject` through three binding attributes:
 
 - `data-field="key"` — sets the element's text to `String(subject[key])`
 - `data-field-src="key"` — sets an `<img>`'s `src` attribute (e.g. a `data:` URI logo)
 - `<template data-repeat="key">...</template>` — clones its content once per item of the array `subject[key]`
-
-Add this to `src/issue.ts`, above `main()`:
 
 ```ts
 const html = `
@@ -126,14 +67,13 @@ const css = ".bol { font-family: sans-serif; } .bol h1 { color: navy; }";
 
 No `<script>` tags, event-handler attributes or `javascript:` links will ever run — the template renders inside a sandboxed iframe with no `allow-scripts` (see [Security model](#security-model) below).
 
-### 7. Compress the template
+### 2. Compress the template
 
-The credential's JSON-LD context defines `template` as a plain string term, so only a compressed string passes signing — never the template object. Add to `src/issue.ts`:
+The credential's JSON-LD context defines `template` as a plain string term, so only a compressed string passes signing — never the template object.
 
 ```ts
 import { compressTemplate } from "@trustvc/trustvc";
 
-// ...inside main(), after generating the key pair:
 const compressed = await compressTemplate({
   templateName: "BILL_OF_LADING",
   html,
@@ -145,32 +85,15 @@ console.log("Compressed template:", compressed.slice(0, 12) + "...");
 
 `compressTemplate` returns `base64url(gzip(JSON.stringify({ templateName, html, css })))`. It's the only form issuers should produce; a viewer decompresses it back to an object after verification.
 
-### 8. Build and sign the document
+### 3. Attach it to your document and sign
+
+Call `.inlineTemplate()` on your existing `DocumentBuilder` — the one that already has `credentialSubject()` and, typically, a URL `renderMethod()` fallback set up — then sign as usual:
 
 ```ts
 import { DocumentBuilder } from "@trustvc/trustvc";
 
-// ...inside main(), after compressing the template:
-const builder = new DocumentBuilder({
-  "@context": "https://trustvc.io/context/bill-of-lading.json",
-})
-  .credentialSubject({
-    type: ["BillOfLading"],
-    blNumber: "SGCNM21566325",
-    shipperName: "Shipper Co",
-    packages: [
-      { packagesDescription: "1 container" },
-      { packagesDescription: "2nd container" },
-    ],
-  })
-  // A URL renderMethod entry as the fallback for older viewers and failed renders.
-  .renderMethod({
-    id: "https://generic-templates.tradetrust.io",
-    type: "EMBEDDED_RENDERER",
-    templateName: "BILL_OF_LADING",
-  })
-  // Adds the INLINE_HTML_TEMPLATE entry after the URL entry.
-  .inlineTemplate(compressed);
+// `builder` already has credentialSubject() and renderMethod() set, e.g. from the Creator tutorial.
+builder.inlineTemplate(compressed); // Adds the INLINE_HTML_TEMPLATE entry after the URL entry.
 
 const signed = await builder.sign(didKeyPairs, "ecdsa-sd-2023", {
   // Make /renderMethod mandatory so a holder can't derive a copy that drops the template.
@@ -188,13 +111,7 @@ A few rules worth knowing about `inlineTemplate()`:
 - Both methods throw `Configuration Error: Document is already signed.` once the document is signed.
 - The template is covered by the proof: swapping in a different template, even a validly compressed one, fails verification. Pass `mandatoryPointers: ['/renderMethod']` for selective-disclosure suites (`ecdsa-sd-2023`, `bbs-2023`) — otherwise a holder could derive a copy with the template or the fallback URL stripped out.
 
-### 9. Run it
-
-```bash
-npx ts-node src/issue.ts > signed.json
-```
-
-Inspect `signed.json` — its `renderMethod` array now carries both entries:
+Its `renderMethod` array now carries both entries:
 
 ```json
 "renderMethod": [
@@ -225,7 +142,7 @@ npm init -y
 ### 2. Install required dependencies
 
 ```bash
-npm install react react-dom vite-plugin-node-polyfills @trustvc/trustvc
+npm install react react-dom vite-plugin-node-polyfills @trustvc/trustvc@beta
 npm install --save-dev typescript @vitejs/plugin-react @types/react @types/react-dom vite
 ```
 
@@ -394,11 +311,9 @@ A document with **no** inline entry is untouched by any of this — `getRenderMe
 
 | Function | Used in | Purpose |
 | --- | --- | --- |
-| `issuer.generateDidKeyPair` | Part 1, step 5 | Generates a self-certifying `did:key` signing key pair, no hosting needed |
-| `compressTemplate` | Part 1, step 7 | Compresses `{ templateName, html, css }` into the signable `H4sI...` string |
-| `DocumentBuilder.renderMethod()` | Part 1, step 8 | Adds the URL-based fallback renderer entry |
-| `DocumentBuilder.inlineTemplate()` | Part 1, step 8 | Adds the `INLINE_HTML_TEMPLATE` entry, after the URL entry |
-| `DocumentBuilder.sign()` | Part 1, step 8 | Signs the document; the template is covered by the proof |
+| `compressTemplate` | Part 1, step 2 | Compresses `{ templateName, html, css }` into the signable `H4sI...` string |
+| `DocumentBuilder.inlineTemplate()` | Part 1, step 3 | Adds the `INLINE_HTML_TEMPLATE` entry, after the URL entry |
+| `DocumentBuilder.sign()` | Part 1, step 3 | Signs the document; the template is covered by the proof |
 | `verifyDocument` | Part 2, step 4 | Verifies document integrity, status and issuer identity |
 | `isValid` | Part 2, step 4 | Reduces verification fragments to a single boolean |
 | `getRenderMethods` | Part 2, step 4 | Finds the inline entry and the URL fallback, in either order |

@@ -6,6 +6,10 @@ sidebar_label: Using Any Template
 
 # Using Any Template with the Inline Renderer
 
+:::caution Beta
+The inline HTML renderer currently ships only on the `@trustvc/trustvc@beta` tag — it is not yet in `latest`. Install with `npm install @trustvc/trustvc@beta`, and expect APIs to change before the stable release.
+:::
+
 Unlike the [generic templates](/docs/how-tos/decentralized-renderer/using-generic-templates) hosted at `https://generic-templates.tradetrust.io` — a fixed catalog of predefined document types — the inline renderer has no catalog at all. You write whatever HTML and CSS your document needs, embed it directly in the credential, and the SDK renders exactly that markup. This guide walks through attaching a custom template to any document type.
 
 :::note

@@ -6,6 +6,10 @@ sidebar_label: Overview
 
 # Inline HTML Renderer Overview
 
+:::caution Beta
+The inline HTML renderer currently ships only on the `@trustvc/trustvc@beta` tag — it is not yet in `latest`. Install with `npm install @trustvc/trustvc@beta`, and expect APIs to change before the stable release.
+:::
+
 The inline HTML renderer lets a W3C Verifiable Credential carry its own rendering template — HTML and CSS — directly inside the signed document, instead of pointing at a renderer page hosted elsewhere. A viewer fills that markup against the credential's `credentialSubject` and displays it, entirely offline, with no request to a renderer URL.
 
 ## Key Concepts
