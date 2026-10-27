@@ -39,6 +39,7 @@ Before starting, make sure you have:
 - Node.js (version 20 or higher), npm or yarn, and a code editor
 - `@trustvc/trustvc@beta` installed in your project — see the beta note above
 - A signing key pair and a working document issuance flow. This tutorial assumes you can already generate a DID and build/sign a document with `DocumentBuilder` — if you haven't done this yet, follow the [Creator tutorial](/docs/tutorial/creator) first, then come back here with your `didKeyPairs` and `DocumentBuilder` instance ready. We'll focus only on what's specific to the inline renderer: writing a template and attaching it before signing.
+- A custom `@context` that defines the `credentialSubject` fields your template binds to — see [Using Custom Contexts for "credentialSubject"](/docs/how-tos/credential-subject) if you need to create one.
 
 ## Part 1: Writing and Attaching an Inline Template
 
