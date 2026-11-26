@@ -14,6 +14,12 @@ Pay on Behalf transactions are currently in **beta**. APIs, contract addresses, 
 Pay on Behalf is only supported for **Token Registry v5 (TR v5)** contracts deployed via `TDocDeployer`. It is not available for earlier token registry versions. See the [TR v5 migration guide](../../migration-guide/migration-tr-v5) if you are still on an older registry.
 :::
 
+:::caution Third-Party Service Notice
+The Pay on Behalf feature requires a third-party bundler service to relay sponsored transactions to the blockchain. TradeTrust's reference implementation has been tested with Pimlico; other providers offering equivalent services exist, and the provider can be changed.
+
+Bundler services referenced here are not officially endorsed by IMDA Singapore. Use them at your own discretion. Platforms contract directly with their chosen provider and are solely responsible for assessing its suitability, reliability, pricing, and terms of service.
+:::
+
 TrustVC supports **Pay on Behalf** — letting a platform (issuer) cover trade document transaction costs for its users. Users can deploy token registries, mint documents, and perform all title escrow operations without holding ETH, while gas is sponsored on their behalf by a **PlatformPaymaster**.
 
 Under the hood, this is implemented as a **gasless** transaction flow using [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702) (smart account delegation) and ERC-4337 account abstraction — the "Pay on Behalf" name describes the outcome for the user (the platform pays), while "gasless" describes the underlying mechanism you'll see referenced in code and function names.
@@ -170,7 +176,3 @@ Before calling any Pay on Behalf function you need:
 4. **A built `smartAccountClient`** — the permissionless `SmartAccountClient` wrapping the delegated EOA.
 
 All four are covered in [Setup](./setup). Once set up, jump to [Operations](./operations) for code examples. If you're looking for how this is exposed on the TT Verify page, see [Pay on Behalf on TT-web](./tt-web-settings).
-
-## Disclaimer
-
-Pay on Behalf is one possible way to sponsor a user's transaction costs. This reference implementation uses **EIP-7702 smart account delegation** together with **Pimlico** as an example bundler and paymaster infrastructure provider. Pimlico is referenced here only because it's what this implementation is built and tested against — TrustVC does not require, endorse, or favor Pimlico over any other provider. Any ERC-4337-compatible bundler and paymaster infrastructure that supports EIP-7702 can be substituted.
