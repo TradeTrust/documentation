@@ -12,8 +12,10 @@ Pay on Behalf on TT-web (the TradeTrust web application) lives on the **TT Verif
 Pay on Behalf only applies to documents issued from **Token Registry v5 (TR v5)** registries. It has no effect on earlier registry versions.
 :::
 
-:::info Disclaimer
-Pay on Behalf is one possible way to sponsor a user's transaction costs. The TT-web implementation is built and tested against **Pimlico** as an example bundler/paymaster provider. This is not an endorsement of, or dependency on, Pimlico specifically — any ERC-4337-compatible provider that supports EIP-7702 can be used, as long as it's wired up through the same [Setup](./setup) steps.
+:::caution Third-Party Service Notice
+The Pay on Behalf feature requires a third-party bundler service to relay sponsored transactions to the blockchain. TradeTrust's reference implementation has been tested with Pimlico; other providers offering equivalent services exist, and the provider can be changed.
+
+Bundler services referenced here are not officially endorsed by IMDA Singapore. Use them at your own discretion. Platforms contract directly with their chosen provider and are solely responsible for assessing its suitability, reliability, pricing, and terms of service.
 :::
 
 ## User experience

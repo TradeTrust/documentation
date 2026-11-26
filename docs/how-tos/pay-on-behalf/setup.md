@@ -8,8 +8,10 @@ sidebar_label: Setup
 
 This page walks through one-time setup steps: deploying a PlatformPaymaster for your platform, whitelisting users, and building the `smartAccountClient` that all Pay on Behalf SDK functions accept.
 
-:::info Disclaimer
-The steps below use **Pimlico** as the bundler/paymaster infrastructure provider because that's what this reference implementation is built and tested against. This is not an endorsement or requirement — any ERC-4337-compatible bundler that supports EIP-7702 can be substituted, and the `smartAccountClient` construction in step 5 is where you'd swap providers.
+:::caution Third-Party Service Notice
+The Pay on Behalf feature requires a third-party bundler service to relay sponsored transactions to the blockchain. TradeTrust's reference implementation has been tested with Pimlico; other providers offering equivalent services exist, and the provider can be changed.
+
+Bundler services referenced here are not officially endorsed by IMDA Singapore. Use them at your own discretion. Platforms contract directly with their chosen provider and are solely responsible for assessing its suitability, reliability, pricing, and terms of service.
 :::
 
 :::caution Beta
@@ -207,6 +209,10 @@ const delegationTxHash = await delegateUser(EIP7702_IMPL, platformManagedUserWal
 ## 5. Build a smart account client
 
 All Pay on Behalf SDK functions take a `smartAccountClient` as their second argument. Build one from the user's delegated EOA using **permissionless** + **Pimlico** (or your chosen bundler):
+
+:::tip Changing provider
+Any ERC-4337-compatible bundler and paymaster infrastructure that supports EIP-7702 can be substituted for Pimlico. This `smartAccountClient` construction is the swap point — replace the Pimlico client and bundler URL below with your provider's equivalents; the rest of the Pay on Behalf flow is unchanged.
+:::
 
 ```ts
 import {
