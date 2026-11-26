@@ -96,10 +96,11 @@ const builder = new DocumentBuilder({
     total: "$2,500.00",
   })
   // A URL fallback for older viewers and failed inline renders.
+  // Point it at a renderer you host that serves this custom invoice layout.
   .renderMethod({
-    id: "https://generic-templates.tradetrust.io",
+    id: "https://renderer.example.com",
     type: "EMBEDDED_RENDERER",
-    templateName: "INVOICE",
+    templateName: "CUSTOM_INVOICE",
   })
   .inlineTemplate(compressed);
 
@@ -108,7 +109,9 @@ const signed = await builder.sign(privateKey, "ecdsa-sd-2023", {
 });
 ```
 
-Any document type works the same way: write HTML that matches your `credentialSubject`'s shape, compress it, and call `.inlineTemplate()`. There's no template name to register anywhere — `templateName` is just a label the viewer may display, with no catalog behind it to keep in sync.
+Any document type works the same way: write HTML that matches your `credentialSubject`'s shape, compress it, and call `.inlineTemplate()`. There's no template name to register for the inline entry — the `templateName` passed to `compressTemplate` is just a label the viewer may display, with no catalog behind it to keep in sync.
+
+The fallback entry's `templateName` is different: the renderer at its `id` uses it to look up a template. The two names don't have to match.
 
 ## 3. Keep a Fallback
 
@@ -119,9 +122,18 @@ Always pair the inline entry with a URL `renderMethod` entry, as above. It cover
 
 Documents with no inline entry, or where the inline render fails, behave exactly as they did before this feature existed — the URL entry renders through the existing decentralized renderer.
 
-## 4. Preview Before Signing
+The fallback only shows your document correctly if the renderer at its URL has a template for this document type. A generic catalog template with a similar name, such as the hosted `INVOICE` template, will not render your custom layout or bindings. For a custom document type, real fallback coverage means hosting a [decentralized renderer](/docs/tutorial/decentralized-renderer) that serves an equivalent template.
 
-Render the unsigned document through a viewer that supports inline templates (see the [tutorial's viewer](/docs/tutorial/inline-html-renderer#part-2-verifying-and-rendering-the-document)) before signing, to confirm your bindings match your `credentialSubject` shape. Once signed, the template is covered by the proof — changing it, even to a validly compressed replacement, invalidates the signature.
+## 4. Preview Before Issuing
+
+Check that your bindings match your `credentialSubject` shape before you sign the final document. Once signed, the template is covered by the proof — changing it, even to a validly compressed replacement, invalidates the signature.
+
+The [tutorial's viewer](/docs/tutorial/inline-html-renderer#part-2-verifying-and-rendering-the-document) only renders documents that pass `verifyDocument`, so it can't show an unsigned document. To preview:
+
+1. Sign a test copy of the document with a throwaway test key.
+2. Drop the test copy into the viewer and check that every field, image and repeated row fills in as expected.
+3. Adjust the template or `credentialSubject` and repeat until it's right.
+4. Sign the final document with your real issuer key.
 
 ## Limitations to Keep in Mind
 

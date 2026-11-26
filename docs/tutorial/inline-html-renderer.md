@@ -163,7 +163,11 @@ export default defineConfig({
 
 ### 4. Build the viewer component
 
-Create `src/App.tsx`. It verifies a dropped document, then renders it either through the inline template or a message pointing at the fallback renderer URL:
+Create `src/App.tsx`. It verifies a dropped document, then renders it either through the inline template or a message pointing at the fallback renderer URL. Three details matter here:
+
+- The host `<div>` is always mounted, so it already exists when the first valid document is rendered.
+- The host is cleared at the start of every drop and before showing the fallback message, so a previous document's iframe never lingers.
+- Each drop gets a request ID. If a newer drop arrives while an older one is still parsing, verifying or decompressing, the older one's results are ignored.
 
 ```tsx
 import React, { useCallback, useRef, useState } from "react";
@@ -177,28 +181,36 @@ import {
 } from "@trustvc/trustvc";
 
 const App: React.FC = () => {
-  const [document, setDocument] = useState<unknown>(null);
   const [status, setStatus] = useState<"idle" | "valid" | "invalid">("idle");
   const [useInline, setUseInline] = useState(false);
   const [rendererUrl, setRendererUrl] = useState<string>();
   const hostRef = useRef<HTMLDivElement>(null);
+  // Incremented on every drop, so an older drop's async work can tell it is stale.
+  const requestIdRef = useRef(0);
 
-  const renderDocument = useCallback(async (doc: unknown) => {
+  // The host has no React children, so clearing it directly is safe.
+  const clearHost = () => hostRef.current?.replaceChildren();
+
+  const renderDocument = useCallback(async (doc: unknown, requestId: number) => {
     const { inlineTemplate, renderer } = getRenderMethods(doc);
-    setRendererUrl(renderer?.id);
 
-    if (inlineTemplate && hostRef.current) {
+    if (inlineTemplate) {
       try {
         const decompressed = await decompressInlineTemplate(doc);
-        if (!renderInlineTemplate(decompressed, hostRef.current)) {
+        if (requestId !== requestIdRef.current) return; // a newer drop took over
+        if (!hostRef.current || !renderInlineTemplate(decompressed, hostRef.current)) {
           throw new Error("No renderable INLINE_HTML_TEMPLATE entry");
         }
+        setRendererUrl(renderer?.id);
         setUseInline(true);
         return;
       } catch (e) {
+        if (requestId !== requestIdRef.current) return;
         console.error("Failed to render inline template, falling back to renderer URL", e);
       }
     }
+    clearHost(); // remove any iframe left over before showing the fallback
+    setRendererUrl(renderer?.id);
     setUseInline(false);
   }, []);
 
@@ -207,14 +219,22 @@ const App: React.FC = () => {
     const file = event.dataTransfer.files[0];
     if (!file) return;
 
-    const vc = JSON.parse(await file.text());
-    setDocument(vc);
+    const requestId = ++requestIdRef.current;
+    clearHost();
+    setStatus("idle");
+    setUseInline(false);
+
+    const text = await file.text();
+    if (requestId !== requestIdRef.current) return;
+    const vc = JSON.parse(text);
 
     // No rpc argument needed: this document has no on-chain credentialStatus.
     const fragments = await verifyDocument(vc);
+    if (requestId !== requestIdRef.current) return;
+
     const valid = isValid(fragments);
     setStatus(valid ? "valid" : "invalid");
-    if (valid) await renderDocument(vc);
+    if (valid) await renderDocument(vc, requestId);
   };
 
   const handlePrint = () => {
@@ -229,15 +249,16 @@ const App: React.FC = () => {
       {status === "invalid" && <p style={{ color: "red" }}>Document failed verification.</p>}
 
       {status === "valid" && (
-        <>
-          <button onClick={handlePrint} disabled={!useInline}>
-            Print
-          </button>
-          <div ref={hostRef} data-testid="inline-template-host" />
-          {!useInline && document && (
-            <p>No inline template rendered; fall back to renderer: {rendererUrl ?? "none"}</p>
-          )}
-        </>
+        <button onClick={handlePrint} disabled={!useInline}>
+          Print
+        </button>
+      )}
+
+      {/* Always mounted, so it exists before the first render. */}
+      <div ref={hostRef} data-testid="inline-template-host" />
+
+      {status === "valid" && !useInline && (
+        <p>No inline template rendered; fall back to renderer: {rendererUrl ?? "none"}</p>
       )}
     </div>
   );
